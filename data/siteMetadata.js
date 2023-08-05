@@ -2,21 +2,21 @@
 
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'OpenSats',
-  author: 'OpenSats',
-  headerTitle: 'OpenSats',
+  title: 'Lite.Space',
+  author: 'Lite.Space',
+  headerTitle: 'Lite.Space',
   description:
-    'We help you find and support open-source Bitcoin projects. Helping create a better tomorrow, today.',
+    'We help you find and support open-source Litecoin projects. Helping create a better tomorrow, today.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://opensats.org',
-  siteRepo: 'https://github.com/OpenSats/website/',
+  siteUrl: 'https://Lite.Space',
+  siteRepo: 'https://github.com/IndigoNakamoto/foss-ltc',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter.png',
-  email: 'support@opensats.org',
-  github: 'https://github.com/OpenSats',
-  twitter: 'https://twitter.com/OpenSats',
+  email: 'support@litecoin.org',
+  github: 'https://github.com/IndigoNakamoto/foss-ltc',
+  twitter: 'https://twitter.com/litecoin',
   nostr: 'npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f',
   locale: 'en-US',
   analytics: {
@@ -30,17 +30,17 @@ const siteMetadata = {
     googleAnalyticsId: '', // e.g. UA-000000-2 or G-XXXXXXX
   },
   // newsletter: {
-  //   // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
-  //   // Please add your .env file and modify it according to your selection
-  //   provider: 'buttondown',
+  // // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
+  // // Please add your .env file and modify it according to your selection
+  // provider: 'buttondown',
   // },
   // comments: {
-  //   // If you want to use an analytics provider you have to add it to the
-  //   // content security policy in the `next.config.js` file.
-  //   // Select a provider and use the environment variables associated to it
-  //   // https://vercel.com/docs/environment-variables
-  //   provider: 'giscus', // supported providers: giscus, utterances, disqus
-  //   giscusConfig: {
+  // // If you want to use an analytics provider you have to add it to the
+  // // content security policy in the `next.config.js` file.
+  // // Select a provider and use the environment variables associated to it
+  // // https://vercel.com/docs/environment-variables
+  // provider: 'giscus', // supported providers: giscus, utterances, disqus
+  // giscusConfig: {
   //     // Visit the link below, and follow the steps in the 'configuration' section
   //     // https://giscus.app/
   //     repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
@@ -62,21 +62,21 @@ const siteMetadata = {
   //     themeURL: '',
   //     // This corresponds to the `data-lang="en"` in giscus's configurations
   //     lang: 'en',
-  //   },
+  // },
   // },
   // search: {
-  //   provider: 'kbar', // kbar or algolia
-  //   kbarConfig: {
+  // provider: 'kbar', // kbar or algolia
+  // kbarConfig: {
   //     searchDocumentsPath: 'search.json', // path to load documents to search
-  //   },
-  //   provider: 'algolia',
-  //   algoliaConfig: {
+  // },
+  // provider: 'algolia',
+  // algoliaConfig: {
   //     // The application ID provided by Algolia
   //     appId: 'R2IYF7ETH7',
   //     // Public API key: it is safe to commit it
   //     apiKey: '599cec31baffa4868cae4e79f180729b',
   //     indexName: 'docsearch',
-  //   },
+  // },
   // },
 }
 
