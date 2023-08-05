@@ -109,7 +109,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
           <aside className="bg-light mb-8 flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start">
             <button
               onClick={openPaymentModal}
-              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
+              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-blue-500"
             >
               Donate
             </button>
