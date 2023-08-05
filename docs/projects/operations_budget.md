@@ -1,5 +1,5 @@
 ---
-title: 'OpenSats Operations Budget'
+title: 'Litecoin Foundation Operations Budget'
 summary: 'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.'
 nym: 'OpenSats'
 website: 'https://opensats.org'
