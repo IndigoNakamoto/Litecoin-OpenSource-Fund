@@ -4,122 +4,86 @@ import { CreditItemProps } from './CreditItem'
 
 const Credits = () => {
   // Supporters
-  const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
-  const thebitcoincompanyLogo = '/img/supporters/tbc.png'
-  const unchainedLogo = '/img/supporters/unchained.png'
-  const lianaLogo = '/img/supporters/liana.png'
-  const bottlepayLogo = '/img/supporters/bottlepay.png'
-  const btcPayServerLogo = '/img/supporters/btc-pay-server.png'
-  const duxReserveLogoWithCastlenine =
-    '/img/supporters/castlenine-dux-reserve.jpg'
-  const coinkiteLogo = '/img/supporters/coinkite.png'
-  const gregFossLogo = '/img/supporters/greg-foss.jpg'
-  const jeremyRubinLogo = '/img/supporters/jeremy-rubin.gif'
-  const johnPfefferLogo = '/img/supporters/john-pfeffer.jpg'
-  const ledgerLogo = '/img/supporters/ledger.jpg'
-  const nodlLogo = '/img/supporters/nodl.jpg'
-  const swanBitcoinLogo = '/img/supporters/swan.png'
-  const ten31Logo = '/img/supporters/ten31.jpg'
-  const waffleDog = '/img/supporters/waffledog.jpg'
-  const voltage = '/img/supporters/voltage.png'
-  const zapirte = '/img/supporters/zaprite.png'
+
+  const ryanWrights = '/img/supporters/ryan_wright.jpeg'
+  const shanBelew = '/img/supporters/shan_belew.jpeg'
+  const chief = '/img/supporters/chief.jpeg'
+  const finitemaz = '/img/supporters/finitemaz.jpeg'
+  const lukeWright = '/img/supporters/luke_wright.jpeg'
+  const johnez = '/img/supporters/johnez.png'
+  const anml = '/img/supporters/anml.jpeg'
+  const kyle = '/img/supporters/kyle.jpeg'
+  const cryptofreeze = '/img/supporters/cryptofreeze.png'
+  const SadFrogLTC = '/img/supporters/SadFrogLTC.jpeg'
+  const _CLINTWESTWOOD_ = '/img/supporters/_CLINTWESTWOOD_.jpeg'
+  const ROWEBOT3339 = '/img/supporters/ROWEBOT3339.jpeg'
+  const TheLucifers_Son = '/img/supporters/TheLucifers_Son.jpeg'
 
   const supporters: CreditItemProps[] = [
     {
-      link: 'https://bottlepay.com/',
-      image: bottlepayLogo,
-      nym: 'Bottlepay',
+      link: 'https://twitter.com/ryanwrights',
+      image: ryanWrights,
+      nym: 'Ryan Wright',
     },
     {
-      link: 'https://btcpayserver.org/',
-      image: btcPayServerLogo,
-      nym: 'BTCPay Server',
+      link: 'https://twitter.com/masterbtcltc',
+      image: shanBelew,
+      nym: 'Shan Belew',
     },
     {
-      link: 'https://twitter.com/castlenine_',
-      image: duxReserveLogoWithCastlenine,
-      nym: 'Castlenine',
-      person: true,
+      link: 'https://twitter.com/ChiefLitecoin',
+      image: chief,
+      nym: 'CHIEF',
     },
     {
-      link: 'https://coinkite.com/',
-      image: coinkiteLogo,
-      nym: 'Coinkite',
+      link: 'https://twitter.com/finitemaz',
+      image: finitemaz,
+      nym: 'finitemaz',
     },
     {
-      link: 'https://twitter.com/FossGregfoss',
-      image: gregFossLogo,
-      nym: 'Greg Foss',
-      person: true,
+      link: 'https://twitter.com/lukewrightmain',
+      image: lukeWright,
+      nym: 'Luke Wright',
     },
     {
-      link: 'https://judica.org/',
-      image: jeremyRubinLogo,
-      nym: 'Jeremy Rubin',
-      person: true,
+      link: 'https://twitter.com/johnez_ltc',
+      image: johnez,
+      nym: 'Johnez',
     },
     {
-      link: 'https://twitter.com/jlppfeffer',
-      image: johnPfefferLogo,
-      nym: 'John Pfeffer',
-      person: true,
+      link: 'https://twitter.com/anml_litecoin',
+      image: anml,
+      nym: 'Anml',
     },
     {
-      link: 'https://www.ledger.com/',
-      image: ledgerLogo,
-      nym: 'Ledger',
+      link: 'https://twitter.com/nakamoto_std',
+      image: kyle,
+      nym: 'Kyle',
     },
     {
-      link: 'https://www.nodl.it/',
-      image: nodlLogo,
-      nym: 'nodl',
+      link: 'https://twitter.com/FreezeMatthew',
+      image: cryptofreeze,
+      nym: 'cryptofreeze',
     },
     {
-      link: 'https://www.swanbitcoin.com/',
-      image: swanBitcoinLogo,
-      nym: 'Swan Bitcoin',
+      link: 'https://twitter.com/SadFrogLTC',
+      image: SadFrogLTC,
+      nym: 'SadFrogLTC',
     },
     {
-      link: 'https://ten31.vc/',
-      image: ten31Logo,
-      nym: 'Ten31',
+      link: 'https://twitter.com/_CLINTWESTWOOD_',
+      image: _CLINTWESTWOOD_,
+      nym: 'CLINT WESTWOOD',
     },
     {
-      link: 'https://www.poynerspruill.com/professionals/andy-blair/',
-      image: andrewWBlairLogo,
-      nym: 'Andrew W. Blair',
-      person: true,
+      link: 'https://twitter.com/ROWEBOT3339',
+      image: ROWEBOT3339,
+      nym: 'ROWEBOT',
     },
     {
-      link: 'https://paul.lol',
-      image: waffleDog,
-      nym: 'Paul',
-      person: true,
-    },
-    {
-      link: 'https://voltage.cloud/',
-      image: voltage,
-      nym: 'Voltage',
-    },
-    {
-      link: 'https://zaprite.com',
-      image: zapirte,
-      nym: 'Zaprite',
-    },
-    {
-      link: 'https://unchained.com',
-      image: unchainedLogo,
-      nym: 'Unchained',
-    },
-    {
-      link: 'https://wizardsardine.com/liana/',
-      image: lianaLogo,
-      nym: 'Liana',
-    },
-    {
-      link: 'https://thebitcoincompany.com',
-      image: thebitcoincompanyLogo,
-      nym: 'The Bitcoin Company',
+      link: 'https://twitter.com/TheLucifers_Son',
+      image: TheLucifers_Son,
+      nym: 'Son of Lucifer',
     },
   ]
 
