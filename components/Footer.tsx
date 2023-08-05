@@ -2,6 +2,7 @@ import Link from './Link'
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
 
+
 export default function Footer() {
   return (
     <footer>
@@ -32,7 +33,7 @@ export default function Footer() {
           <Link href="/privacy">Privacy</Link>
         </div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit
+          Litecoin Foundation, Inc. (EIN 88-1262826) is a 501(c)(3) non-profit
           organization.
           <br />
           All gifts and donations are tax-deductible to the full extent of the
