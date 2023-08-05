@@ -90,7 +90,7 @@ export default function Home({
             <div>
               <button
                 onClick={openGeneralFundModal}
-                className="mb-2 mr-2 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
+                className="mb-2 mr-2 block rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-black dark:text-black dark:hover:text-white"
               >
                 Donate to General Fund
               </button>
@@ -98,7 +98,7 @@ export default function Home({
             <div>
               <button
                 onClick={openopsFundModal}
-                className="block rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
+                className="block rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-black dark:hover:text-white"
               >
                 Donate to Operations Budget
               </button>

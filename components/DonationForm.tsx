@@ -7,6 +7,8 @@ import Spinner from './Spinner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
+// TODO: Get SVG to render in component
+import coinLitecoin from '../public/litecoin-svg/Coin full colour.svg'
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
@@ -144,7 +146,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="yes"
               onChange={radioHandler}
               defaultChecked={true}
-              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
             />
             Yes
           </label>
@@ -155,7 +157,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="no"
               name="deductable"
               onChange={radioHandler}
-              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
             />
             No
           </label>
@@ -172,7 +174,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           placeholder={'Satoshi Nakamoto'}
           required={deductable === 'yes'}
           onChange={(e) => setName(e.target.value)}
-          className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
         ></input>
         <h3>
           Email{' '}
@@ -183,7 +185,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <input
           type="email"
           placeholder={`satoshin@gmx.com`}
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           required={deductable === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
@@ -215,7 +217,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               onChange={(e) => {
                 setAmount(e.target.value)
               }}
-              className="mt-1 block w-full w-full rounded-md border-gray-300 !pl-10 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+              className="mt-1 block w-full w-full rounded-md border-gray-300 !pl-10 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               placeholder="Or enter custom amount"
             />
           </div>
@@ -232,11 +234,11 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             <Spinner />
           ) : (
             <FontAwesomeIcon
-              icon={faBitcoin}
+              icon={coinLitecoin}
               className="text-primary h-8 w-8"
             />
           )}
-          <span className="whitespace-nowrap">Donate with Bitcoin</span>
+          <span className="whitespace-nowrap">Donate with Litecoin</span>
         </button>
         <button
           name="stripe"

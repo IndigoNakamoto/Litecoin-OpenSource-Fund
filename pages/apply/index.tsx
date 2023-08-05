@@ -59,7 +59,7 @@ export default function Apply({
         </p>
         <Link
           href="/apply/to-be-listed"
-          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply to be listed on OpenSats.org
         </Link>
@@ -74,7 +74,7 @@ export default function Apply({
         </p>
         <Link
           href="/apply/grant"
-          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply for an OpenSats General Grant
         </Link>
@@ -88,7 +88,7 @@ export default function Apply({
         </p>
         <Link
           href="/apply/lts"
-          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply for an OpenSats LTS Grant
         </Link>

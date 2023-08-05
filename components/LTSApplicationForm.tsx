@@ -74,7 +74,7 @@ export default function ApplicationForm() {
         <small>Feel free to use your nym.</small>
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           placeholder="John Doe"
           {...register('your_name', { required: true })}
         />
@@ -83,7 +83,7 @@ export default function ApplicationForm() {
         Email *
         <input
           type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           placeholder="satoshin@gmx.com"
           {...register('email', { required: true })}
         />
@@ -92,7 +92,7 @@ export default function ApplicationForm() {
         Personal Website, GitHub profile, or other Social Media
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('personal_github')}
         />
       </label>
@@ -103,7 +103,7 @@ export default function ApplicationForm() {
           Bitcoin-related open-source projects.
         </small>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('bios', { required: true })}
         />
       </label>
@@ -116,7 +116,7 @@ export default function ApplicationForm() {
           What do you intend to work on? Please be as specific as possible.
         </small>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('short_description', { required: true })}
         />
       </label>
@@ -128,7 +128,7 @@ export default function ApplicationForm() {
           open-source community?
         </small>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('potential_impact', { required: true })}
         />
       </label>
@@ -140,7 +140,7 @@ export default function ApplicationForm() {
           and how it will be used.
         </small>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('proposed_budget', { required: true })}
         />
       </label>
@@ -150,14 +150,14 @@ export default function ApplicationForm() {
       <label className="block">
         Feel free to share whatever else might be important.
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('anything_else')}
         />
       </label>
       <label className="inline-flex items-center">
         <input
           type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('has_received_funding')}
         />
         <span className="ml-2">
@@ -169,7 +169,7 @@ export default function ApplicationForm() {
         If you receive any other funding, please describe it here:
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('what_funding')}
         />
       </label>
@@ -179,7 +179,7 @@ export default function ApplicationForm() {
       <label className="block">
         In which area will your work have the most impact?
         <select
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('main_focus')}
         >
           <option value="bitcoin">Bitcoin</option>
@@ -197,7 +197,7 @@ export default function ApplicationForm() {
           project.
         </small>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('references', { required: true })}
         />
       </label>
@@ -205,7 +205,7 @@ export default function ApplicationForm() {
       <label className="inline-flex items-center">
         <input
           type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className="rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('free_open_source', { required: true })}
         />
         <span className="ml-2">
