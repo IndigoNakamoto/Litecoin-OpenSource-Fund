@@ -18,7 +18,7 @@ export default function Typing() {
       ],
       typeSpeed: 50,
       loop: true,
-      cursorChar: '_',
+      cursorChar: '▍',
     })
 
     return () => {
