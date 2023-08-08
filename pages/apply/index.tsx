@@ -20,7 +20,7 @@ export default function Apply({
   return (
     <>
       <PageSEO
-        title="Apply to One of Opensats' Grant Programs"
+        title="Apply to One of Lite.Spaces' Grant Programs"
         description="Global. Nym-friendly. Flexible."
       />
       <MDXLayoutRenderer
