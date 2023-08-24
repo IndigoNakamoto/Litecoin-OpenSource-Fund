@@ -8,13 +8,10 @@ export default function Typing() {
     const typed = new Typed(el.current, {
       strings: [
         'Litecoin',
-        'Nakamoto Protocol',
         'Contributors',
         'FOSS',
         'Developers',
-        'Decentralization',
-        'Open-Source Projects',
-        'Lite.Space',
+        'Open-Source',
       ],
       typeSpeed: 50,
       loop: true,
