@@ -5,17 +5,19 @@ import CreditItem, { CreditItemProps } from './CreditItem'
 const Volunteers = () => {
   const lucas = '/img/volunteers/lucas.jpg'
   const gabe = '/img/volunteers/gabe.jpg'
+  const anthony = '/img/advisors/anthony.jpeg'
+  const losh = '/img/advisors/losh.jpeg'
 
   const volunteers: CreditItemProps[] = [
     {
-      link: 'https://nostr.com/npub176mj8c5pa6pxlmm8syv4uhmz0n8934w0pfnfddgawhycqcue69esr3qzt2',
-      image: lucas,
-      nym: 'Lucas Guimaraes',
+      link: 'https://twitter.com/anthonyonchain',
+      image: anthony,
+      nym: 'Anthony Gurrera',
     },
     {
-      link: 'https://nostr.com/npub1p6tshz5f0vgskx6p8prusfud0ksxl78fwh8tj4s08upcrsq50nfq62ax3q',
-      image: gabe,
-      nym: 'Gabe',
+      link: 'https://twitter.com/loshan1212',
+      image: losh,
+      nym: 'Loshan',
     },
   ]
 
