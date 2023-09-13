@@ -1,16 +1,16 @@
 ---
 title: 'Operations Budget'
-summary: 'Contributions to the OpenSats Operations Budget will be used to cover our operating expenses as we continue to facilitate frictionless, tax-deductible donations from the community to the Bitcoin & FOSS ecosystems at a pass-through rate of 100%.'
+summary: 'Contributions to the Litecoin Foundation FOSS Operations Budget will be used to cover our operating expenses as we continue to facilitate frictionless, tax-deductible donations from the community to the Litecoin & FOSS ecosystems at a pass-through rate of 100%.'
 coverImage: '/static/images/projects/opensats_operations.png'
-nym: 'OpenSats'
-twitter: 'opensats'
-website: 'https://opensats.org/'
-git: 'https://github.com/OpenSats'
+nym: 'Litecoin Foundation FOSS Council'
+twitter: 'ltcfoundation'
+website: 'https://litecoin.net/'
+git: 'https://github.com/litecoin-project'
 type: 'Internal Operations'
 zaprite: 'lZo1wcsJ0SQb58XfGC4e'
-bonusUSD: 330000
+bonusUSD: 100
 ---
 
 ## About this project
 
-Open Sats Initiative, Inc., is a 501(c)(3) non-profit corporation (EIN: 863904387) helping to support and maintain a sustainable ecosystem of funding for Bitcoin & complimentary-FOSS projects and contributors. Head over to the About Us page to learn more about the organization and our efforts!
+The Litecoin Foundation is a non-profit organization, registered in Singapore (UEN: 201709179W), whose mission is to advance Litecoin for the good of society, by developing and promoting state-of-the-art blockchain technologies.

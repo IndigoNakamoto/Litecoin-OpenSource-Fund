@@ -1,14 +1,14 @@
 ---
 title: 'General Fund'
-summary: 'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.'
-nym: 'OpenSats'
+summary: 'We help you find and support open-source Litecoin projects - helping create a better tomorrow, today.'
+nym: 'Litecoin Foundation FOSS Council'
 website: 'https://opensats.org'
 coverImage: '/static/images/projects/opensats_logo.png'
 git: 'opensats'
 twitter: 'opensats'
 zaprite: '32WbND8heqmY5wYYnIpa'
 hidden: false
-bonusUSD: 4670000
+bonusUSD: 100000
 ---
 
 The OpenSats General Fund is a pool of money that is used to support
@@ -22,11 +22,11 @@ following criteria:
 - They must be free and open source.
 - They must be of high quality and have the potential to make a significant impact on the Bitcoin ecosystem.
 
-The OpenSats Board of Directors reviews all applications for funding from the
-General Fund. The Board considers the following factors when making funding
+The Litecoi FOSS Council reviews all applications for funding from the
+General Fund. The Council considers the following factors when making funding
 decisions:
 
-- The project's alignment with OpenSats' mission.
+- The project's alignment with Litecoin Foundations mission.
 - The project's feasibility and potential impact.
 - The project's leadership and team.
 - The project's financial need.

@@ -94,7 +94,7 @@ export async function getStaticProps({ params }: { params: any }) {
 }
 
 export function isOpenSatsProject(project: ProjectItem): boolean {
-  return project.nym === 'OpenSats'
+  return project.nym === 'Litecoin Foundation FOSS Council'
 }
 
 export function isNotOpenSatsProject(project: ProjectItem): boolean {
