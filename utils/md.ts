@@ -1,10 +1,11 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
-import {ProjectItem} from "./types";
+import { ProjectItem } from './types'
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
-const FIELDS = ['title',
+const FIELDS = [
+  'title',
   'summary',
   'slug',
   'git',
@@ -16,7 +17,7 @@ const FIELDS = ['title',
   'twitter',
   'personalTwitter',
   'bonusUSD',
-  'hidden'
+  'hidden',
 ]
 
 export function getPostSlugs() {
@@ -28,7 +29,10 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string, includeHidden: boolean = false): ProjectItem {
+export function getPostBySlug(
+  slug: string,
+  includeHidden = false
+): ProjectItem {
   const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
@@ -56,14 +60,16 @@ export function getPostBySlug(slug: string, includeHidden: boolean = false): Pro
   return items
 }
 
-export function getAllPosts() : ProjectItem[] {
+export function getAllPosts(): ProjectItem[] {
   const slugs = getPostSlugs()
   //get all posts & return them but make sure to catch errors from getPostBySlug and filter them out
-  return slugs.map((slug) => {
-    try {
-      return getPostBySlug(slug)
-    } catch {
-      return null
-    }
-  }).filter(a => a != null) as ProjectItem[]
+  return slugs
+    .map((slug) => {
+      try {
+        return getPostBySlug(slug)
+      } catch {
+        return null
+      }
+    })
+    .filter((a) => a != null) as ProjectItem[]
 }
