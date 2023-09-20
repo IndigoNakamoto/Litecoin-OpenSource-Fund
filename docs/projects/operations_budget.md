@@ -6,6 +6,5 @@ website: 'https://opensats.org'
 coverImage: '/heroes/gold.png'
 git: 'opensats'
 twitter: 'opensats'
-zaprite: 'lZo1wcsJ0SQb58XfGC4e'
 hidden: true
 ---

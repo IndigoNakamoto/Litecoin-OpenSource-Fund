@@ -8,7 +8,6 @@ git: 'https://github.com/litecoin-project/litecoin'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
 type: '[Project Type]'
-zaprite: '[Zaprite ID]'
 ---
 
 ## About this project

@@ -6,7 +6,6 @@ website: 'https://opensats.org'
 coverImage: '/static/images/projects/opensats_logo.png'
 git: 'opensats'
 twitter: 'opensats'
-zaprite: '32WbND8heqmY5wYYnIpa'
 hidden: false
 bonusUSD: 100000
 ---

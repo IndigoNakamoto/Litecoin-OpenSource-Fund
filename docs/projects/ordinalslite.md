@@ -8,7 +8,6 @@ git: 'https://github.com/ynohtna92/ord-litecoin'
 twitter: 'OrdinalsLite'
 personalTwitter: 'OrdinalsLite'
 type: '[Project Type]'
-zaprite: '[Zaprite ID]'
 ---
 
 ## About this project

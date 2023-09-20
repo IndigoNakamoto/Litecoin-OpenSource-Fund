@@ -7,7 +7,6 @@ twitter: 'ltcfoundation'
 website: 'https://litecoin.net/'
 git: 'https://github.com/litecoin-project'
 type: 'Internal Operations'
-zaprite: 'lZo1wcsJ0SQb58XfGC4e'
 bonusUSD: 100
 ---
 

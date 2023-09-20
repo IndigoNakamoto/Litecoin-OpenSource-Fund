@@ -8,7 +8,6 @@ git: '[GitHub Repository]'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
 type: '[Project Type]'
-zaprite: '[Zaprite ID]'
 ---
 
 ## About this project

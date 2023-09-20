@@ -8,7 +8,6 @@ git: '[GitHub Repository]'
 twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
 type: '[Project Type]'
-zaprite: '[Zaprite ID]'
 ---
 
 ## About this project
