@@ -1,5 +1,5 @@
+//components/DonationForm.tsx
 import { useEffect, useRef, useState } from 'react'
-import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
 
@@ -16,30 +16,23 @@ config.autoAddCss = false
 type DonationStepsProps = {
   projectNamePretty: string
   projectSlug: string
-  zaprite: string
 }
 const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
   projectSlug,
-  zaprite,
 }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [twitter, setTwitter] = useState('')
 
-  const [deductable, setDeductable] = useState('yes')
+  const [deductable, setDeductable] = useState('no')
   const [amount, setAmount] = useState('')
 
-  const [readyToPayFiat, setReadyToPayFiat] = useState(false)
   const [readyToPayBTC, setReadyToPayBTC] = useState(false)
 
   const [btcPayLoading, setBtcpayLoading] = useState(false)
-  const [fiatLoading, setFiatLoading] = useState(false)
 
   const formRef = useRef<HTMLFormElement | null>(null)
-
-  const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDeductable(event.target.value)
-  }
 
   function handleFiatAmountClick(e: React.MouseEvent, value: string) {
     e.preventDefault()
@@ -47,20 +40,14 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   }
 
   useEffect(() => {
-    let fiatValid = false
     let btcValid: boolean
-    if (amount && typeof parseInt(amount) === 'number') {
-      fiatValid = true
-    }
     if (deductable === 'no' || (name && email)) {
       btcValid = true
     } else {
-      fiatValid = false
       btcValid = false
     }
-    setReadyToPayFiat(fiatValid)
     setReadyToPayBTC(btcValid)
-  }, [deductable, amount, email, name])
+  }, [deductable, amount, twitter, email, name])
 
   async function handleBtcPay() {
     const validity = formRef.current?.checkValidity()
@@ -71,7 +58,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     try {
       const payload = {
         project_slug: projectSlug,
-        zaprite,
       }
 
       if (amount) {
@@ -86,8 +72,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         Object.assign(payload, { name })
       }
 
-      console.log(payload)
-      const data = await fetchPostJSON('/api/btcpay', payload)
+      const data = await fetchPostJSON(`/api/btcpay`, payload)
       if (data.checkoutLink) {
         window.location.assign(data.checkoutLink)
       } else if (data.message) {
@@ -102,33 +87,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     setBtcpayLoading(false)
   }
 
-  async function handleFiat() {
-    const validity = formRef.current?.checkValidity()
-    if (!validity) {
-      return
-    }
-    setFiatLoading(true)
-    try {
-      const data = await fetchPostJSON('/api/stripe_checkout', {
-        amount,
-        project_slug: projectSlug,
-        project_name: projectNamePretty,
-        zaprite,
-        email,
-        name,
-      })
-      console.log({ data })
-      if (data.url) {
-        window.location.assign(data.url)
-      } else {
-        throw new Error('Something went wrong with Stripe checkout.')
-      }
-    } catch (e) {
-      console.error(e)
-    }
-    setFiatLoading(false)
-  }
-
   return (
     <form
       ref={formRef}
@@ -136,33 +94,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
-        <h3>Do you want this donation as tax deductable?</h3>
-        <div className="flex space-x-4 pb-4">
-          <label>
-            <input
-              type="radio"
-              id="yes"
-              name="deductable"
-              value="yes"
-              onChange={radioHandler}
-              defaultChecked={true}
-              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-            />
-            Yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              id="no"
-              value="no"
-              name="deductable"
-              onChange={radioHandler}
-              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-            />
-            No
-          </label>
-        </div>
-
         <h3>
           Name{' '}
           <span className="text-subtle">
@@ -177,6 +108,19 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
         ></input>
         <h3>
+          Twitter{' '}
+          <span className="text-subtle">
+            {deductable === 'yes' ? '(required)' : '(optional)'}
+          </span>
+        </h3>
+        <input
+          type="text"
+          placeholder={'twitter.com/ltcfoundation'}
+          required={deductable === 'yes'}
+          onChange={(e) => setTwitter(e.target.value)}
+          className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+        ></input>
+        <h3>
           Email{' '}
           <span className="text-subtle">
             {deductable === 'yes' ? '(required)' : '(optional)'}
@@ -184,7 +128,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </h3>
         <input
           type="email"
-          placeholder={`satoshin@gmx.com`}
+          placeholder={`support@ltcfoundation.com`}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           required={deductable === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
@@ -196,20 +140,16 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           <h3>How much would you like to donate?</h3>
         </div>
         <div className="flex flex-col gap-2 py-2 sm:flex-row" role="group">
-          {[50, 100, 250, 500].map((value, index) => (
+          {[0.25, 0.5, 1.0, 2.5].map((value, index) => (
             <button
               key={index}
-              className="group"
+              className="w-30 group"
               onClick={(e) => handleFiatAmountClick(e, value?.toString() ?? '')}
             >
-              {value ? `$${value}` : 'Any'}
+              {value ? `${value} LTC` : 'Any'}
             </button>
           ))}
           <div className="relative flex w-full">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              {/* <FontAwesomeIcon icon={faDollarSign} className="w-5 h-5 text-black" /> */}
-              <span className="mb-2 h-5 w-5 font-mono text-xl">{'$'}</span>
-            </div>
             <input
               type="number"
               id="amount"
@@ -239,22 +179,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             />
           )}
           <span className="whitespace-nowrap">Donate with Litecoin</span>
-        </button>
-        <button
-          name="stripe"
-          onClick={handleFiat}
-          className="pay"
-          disabled={!readyToPayFiat || fiatLoading}
-        >
-          {fiatLoading ? (
-            <Spinner />
-          ) : (
-            <FontAwesomeIcon
-              icon={faCreditCard}
-              className="text-primary h-8 w-8"
-            />
-          )}
-          <span className="whitespace-nowrap">Donate with fiat</span>
         </button>
       </div>
     </form>
