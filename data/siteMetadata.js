@@ -16,7 +16,7 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter.png',
   email: 'support@litecoin.org',
   github: 'https://github.com/IndigoNakamoto/foss-ltc',
-  twitter: 'https://twitter.com/litecoin',
+  twitter: 'https://twitter.com/ltcfoundation',
   nostr: 'npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f',
   locale: 'en-US',
   analytics: {
