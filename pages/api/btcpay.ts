@@ -1,7 +1,7 @@
 // pages/api/btcpay.ts
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { CURRENCY, MIN_AMOUNT } from '../../config'
+import config from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq, ProjectItem } from '../../utils/types'
 import { getPostBySlug } from '../../utils/md'
@@ -24,7 +24,7 @@ export default async function handler(
 
     try {
       // Validate the amount that was passed from the client.
-      if (amount != null && amount < MIN_AMOUNT) {
+      if (amount != null && amount < config.MIN_AMOUNT) {
         throw new Error('Invalid amount.')
       }
       if (!project_slug) {
@@ -38,7 +38,7 @@ export default async function handler(
         throw new Error('Invalid project.')
       }
       const reqData = {
-        currency: CURRENCY,
+        currency: config.CURRENCY,
         metadata: {
           orderId: project_slug,
           project_name: project.title,
