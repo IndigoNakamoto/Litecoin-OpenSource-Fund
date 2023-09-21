@@ -5,13 +5,13 @@ import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/image'
 import ProjectList from '../../components/ProjectList'
 import BackToProjects from '../../components/BackToProjects'
-import { ProjectItem, Stats } from '../../utils/types'
+import { ProjectItem, Stats, AddressStats } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
 import ShareButtons from '../../components/ShareButtons'
-import { fetchPostJSON } from '../../utils/api-helpers'
+import { fetchGetJSON } from '../../utils/api-helpers'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -44,43 +44,22 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     twitter,
     content,
     nym,
-    zaprite,
     website,
     personalTwitter,
-    bonusUSD = 0,
   } = project
 
   const [stats, setStats] = useState<Stats>()
-
-  function formatBtc(bitcoin: number) {
-    if (bitcoin > 0.1) {
-      return `₿ ${bitcoin.toFixed(3) || 0.0}`
-    } else {
-      return `${Math.floor(bitcoin * 100000000).toLocaleString()} sats`
-    }
-  }
-
-  function formatUsd(dollars: number): string {
-    if (dollars == 0) {
-      return ''
-    } else if (dollars / 1000000 >= 1) {
-      return `+ $${Math.round(dollars / 1000000)}M`
-    } else if (dollars / 1000 >= 1) {
-      return `+ $${Math.round(dollars / 1000)}k`
-    } else {
-      return `+ $${dollars.toFixed(0)}`
-    }
-  }
+  const [addressStats, setAddressStats] = useState<AddressStats>()
 
   useEffect(() => {
     const fetchData = async () => {
-      setStats(undefined)
-      const data = await fetchPostJSON('/api/info', { zaprite })
-      setStats(data)
+      setAddressStats(undefined)
+      const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
+      setAddressStats(stats)
     }
 
     fetchData().catch(console.error)
-  }, [zaprite])
+  }, [slug])
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -113,19 +92,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             >
               Donate
             </button>
-            {stats && (
+            {addressStats && (
               <div>
                 <h5>Raised</h5>
-                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(
-                  stats.usd.total + bonusUSD
-                )}`}</h4>
+                <h4>{addressStats.funded_txo_sum} LTC</h4>
               </div>
             )}
 
-            {stats && (
+            {addressStats && (
               <div>
                 <h5>Donations</h5>
-                <h4>{stats.btc.donations + stats.usd.donations}</h4>
+                <h4>{addressStats.tx_count}</h4>
               </div>
             )}
           </aside>
