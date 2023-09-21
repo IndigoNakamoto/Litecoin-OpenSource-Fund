@@ -1,6 +1,5 @@
 import ReactModal from 'react-modal'
 import Image from 'next/image'
-import waffledog from '../public/waffledog.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'
@@ -59,7 +58,6 @@ const PaymentModal: React.FC<ModalProps> = ({
       <DonationForm
         projectNamePretty={project.title}
         projectSlug={project.slug}
-        zaprite={project.zaprite}
       />
     </ReactModal>
   )
