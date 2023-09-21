@@ -1,3 +1,4 @@
+// pages/api/btcpay.ts
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
@@ -5,15 +6,21 @@ import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq, ProjectItem } from '../../utils/types'
 import { getPostBySlug } from '../../utils/md'
 
-const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, project_slug, email, name }: PayReq = req.body
-    const REDIRECT = 'http://opensats.org/thankyou'
+    const { amount, project_slug, email, name, twitter }: PayReq = req.body
+    const REDIRECT = 'http://lite.space/thankyou'
+    const username = process.env.BTCPAY_USERNAME
+    const password = process.env.BTCPAY_PASSWORD
+
+    const base64Credentials = Buffer.from(username + ':' + password).toString(
+      'base64'
+    )
+
+    const auth = `Basic ${base64Credentials}`
 
     try {
       // Validate the amount that was passed from the client.
@@ -37,15 +44,15 @@ export default async function handler(
           project_name: project.title,
           buyerName: name || 'anonymous',
           buyerEmail: email || null,
+          buyerTwitter: twitter || null,
           posData: {
             orderId: project_slug,
-            zaprite_campaign: project.zaprite,
+
             project_name: project.title,
             buyerName: name || 'anonymous',
             buyerEmail: email || null,
+            buyerTwitter: twitter || null,
           },
-          zaprite_campaign: project.zaprite,
-          recipient_uuid: ZAPRITE_USER_UUID,
         },
         checkout: { redirectURL: REDIRECT },
       }
@@ -53,13 +60,13 @@ export default async function handler(
       if (amount) {
         Object.assign(reqData, { amount })
       }
+
       const data = await fetchPostJSONAuthed(
-        `${process.env.BTCPAY_URL!}stores/${
-          process.env.BTCPAY_STORE_ID
-        }/invoices`,
-        `token ${process.env.BTCPAY_API_KEY}`,
+        `${process.env.BTCPAY_URL}/stores/${process.env.BTCPAY_STORE_ID}/invoices`,
+        auth,
         reqData
       )
+
       res.status(200).json(data)
     } catch (err) {
       console.log(err)
