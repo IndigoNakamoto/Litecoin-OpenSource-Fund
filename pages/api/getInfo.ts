@@ -35,7 +35,7 @@ export default async function handler(
 
     try {
       const response = await fetchGetJSONAuthed(
-        `${process.env.BTCPAY_URL}/stores/${process.env.BTCPAY_STORE_ID}/invoices?status=Settled`,
+        `${process.env.BTCPAY_URL}/stores/${process.env.BTCPAY_STORE_ID}/invoices?status=Settled&status=Processing`,
         auth
       )
 
