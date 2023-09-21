@@ -21,7 +21,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     twitter,
     personalTwitter,
     nym,
-    zaprite,
   } = project
 
   return (
