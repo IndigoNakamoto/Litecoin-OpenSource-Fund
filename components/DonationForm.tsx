@@ -64,12 +64,16 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         Object.assign(payload, { amount })
       }
 
+      if (name) {
+        Object.assign(payload, { name })
+      }
+
       if (email) {
         Object.assign(payload, { email })
       }
 
-      if (name) {
-        Object.assign(payload, { name })
+      if (twitter) {
+        Object.assign(payload, { twitter })
       }
 
       const data = await fetchPostJSON(`/api/btcpay`, payload)
