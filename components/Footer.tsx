@@ -27,11 +27,11 @@ export default function Footer() {
           <Link href="/privacy">Privacy</Link>
         </div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          Litecoin Foundation, Inc. (EIN 88-1262826) is a 501(c)(3) non-profit
+          Litecoin Foundation, Inc. Singapore (UEN: 201709179W) is a non-profit
           organization.
           <br />
-          All gifts and donations are tax-deductible to the full extent of the
-          law.
+          {/* All gifts and donations are tax-deductible to the full extent of the
+          law. */}
         </div>
         <div className="mb-2 flex space-x-2 text-xs text-gray-500 dark:text-gray-400"></div>
       </div>
