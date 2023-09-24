@@ -67,11 +67,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
   return (
     <>
       <div className="flex flex-col items-center">
-        <div
-          className={
-            'relative h-[15rem] w-full bg-gradient-to-b from-white to-gray-200'
-          }
-        >
+        <div className={'relative h-[15rem] w-full'}>
           <Image
             alt={title}
             src={coverImage}
@@ -117,7 +113,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
               {summary}
             </p>
 
-            <p className="prose max-w-none pb-8 pt-8 dark:prose-dark">
+            <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               by{' '}
               <Link
                 href={`https://twitter.com/${personalTwitter || twitter}`}
@@ -155,9 +151,9 @@ export async function getStaticProps({ params }: { params: any }) {
   const post = getPostBySlug(params.slug)
 
   const projects = getAllPosts()
-
+  console.log('before: ', post.content || 'nothing')
   const content = await markdownToHtml(post.content || '')
-
+  console.log('after: ', content)
   return {
     props: {
       project: {
