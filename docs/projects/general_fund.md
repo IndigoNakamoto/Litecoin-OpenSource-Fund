@@ -1,11 +1,12 @@
 ---
 title: 'General Fund'
+dateAdded: 
 summary: 'We help you find and support open-source Litecoin projects - helping create a better tomorrow, today.'
 nym: 'Litecoin Foundation FOSS Council'
-website: 'https://opensats.org'
+website: 'https://lite.space'
 coverImage: '/static/images/projects/opensats_logo.png'
 git: 'opensats'
-twitter: 'opensats'
+twitter: 'ltcfoundation'
 hidden: false
 bonusUSD: 100000
 ---
