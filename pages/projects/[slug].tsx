@@ -68,8 +68,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     <>
       <div>
         <article className="lg:flex lg:flex-row lg:items-start">
-          <aside className="mb-8 flex min-w-[16rem] gap-4 lg:sticky lg:top-0 lg:flex-col lg:items-start">
-            <div className={'relative h-[18rem] w-full'}>
+          <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-0 lg:flex-col lg:items-start">
+            <div className={'relative h-[18rem] w-full sm:h-[12rem] sm:w-full'}>
               <Image
                 alt={title}
                 src={coverImage}
@@ -78,24 +78,25 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                 objectPosition="50% 50%"
               />
             </div>
-            <div className="pd-4 flex w-full items-center justify-between gap-4">
+            <div className="flex w-full flex-col items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
               {addressStats && (
-                <div>
+                <div className="text-center sm:text-left">
                   <h5>Raised</h5>
-                  <h4>{addressStats.funded_txo_sum} LTC</h4>
+                  <h4>Ł {addressStats.funded_txo_sum} </h4>
                 </div>
               )}
 
               {addressStats && (
-                <div>
+                <div className="text-center sm:text-left">
                   <h5>Donations</h5>
                   <h4>{addressStats.tx_count}</h4>
                 </div>
               )}
             </div>
+
             <button
               onClick={openPaymentModal}
-              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-blue-500"
+              className="block w-full rounded border border-stone-800 bg-stone-800 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-blue-500 sm:px-4 sm:py-2 sm:text-base"
             >
               Donate
             </button>
@@ -111,7 +112,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
               {summary}
             </p>
 
-            <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
+            {/* <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               by{' '}
               <Link
                 href={`https://twitter.com/${personalTwitter || twitter}`}
@@ -119,8 +120,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
               >
                 {nym}
               </Link>
-            </p>
-            <ShareButtons project={project} />
+            </p> */}
+            {/* <ShareButtons project={project} /> */}
             <hr className="mb-8"></hr>
             {content && (
               <div

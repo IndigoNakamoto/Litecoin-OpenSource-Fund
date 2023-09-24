@@ -9,8 +9,8 @@
   .markdown h2 {
     @apply text-2xl font-semibold mb-3 mt-6;
   }
-  .markdown h3 {
-    @apply text-xl font-semibold mb-2 mt-5;
+  .markdown h3,h5 {
+    @apply text-lg font-semibold mb-2 mt-5;
   }
   .markdown p {
     @apply mb-4;
