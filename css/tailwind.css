@@ -2,19 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .markdown h1 {
+    @apply text-3xl font-bold mb-4 mt-8;
+  }
+  .markdown h2 {
+    @apply text-2xl font-semibold mb-3 mt-6;
+  }
+  .markdown h3 {
+    @apply text-xl font-semibold mb-2 mt-5;
+  }
+  .markdown p {
+    @apply mb-4;
+  }
+  .markdown a {
+    @apply text-blue-500 hover:underline;
+  }
+  .markdown blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic my-4;
+  }
+  .markdown ul {
+    @apply list-disc list-inside mb-4;
+  }
+  .markdown ol {
+    @apply list-decimal list-inside mb-4;
+  }
+  .markdown pre {
+    @apply bg-gray-100 p-4 rounded mb-4;
+  }
+  .markdown code {
+    @apply text-sm bg-gray-200 p-1 rounded;
+  }
+}
+
+
+
 .task-list-item::before {
   @apply hidden;
 }
 
 .task-list-item {
   @apply list-none;
-}
-h2 {
-  @apply text-xl mb-4; /* Adds margin-bottom to h2 elements */
-}
-
-p {
-  @apply mb-4; /* Adds margin-bottom to paragraphs */
 }
 
 .footnotes {

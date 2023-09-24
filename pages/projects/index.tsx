@@ -68,12 +68,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <p>
-        Want to see your project here?{' '}
-        <Link href="/apply" className="underline">
-          Apply for your project to be listed.
-        </Link>
-      </p>
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}

@@ -66,44 +66,42 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
   }
   return (
     <>
-      <div className="flex flex-col items-center">
-        <div className={'relative h-[15rem] w-full'}>
-          <Image
-            alt={title}
-            src={coverImage}
-            layout="fill"
-            objectFit="contain"
-            objectPosition="50% 50%"
-          />
-        </div>
+      <div>
+        <article className="lg:flex lg:flex-row lg:items-start">
+          <aside className="mb-8 flex min-w-[16rem] gap-4 lg:sticky lg:top-0 lg:flex-col lg:items-start">
+            <div className={'relative h-[18rem] w-full'}>
+              <Image
+                alt={title}
+                src={coverImage}
+                layout="fill"
+                objectFit="contain"
+                objectPosition="50% 50%"
+              />
+            </div>
+            <div className="pd-4 flex w-full items-center justify-between gap-4">
+              {addressStats && (
+                <div>
+                  <h5>Raised</h5>
+                  <h4>{addressStats.funded_txo_sum} LTC</h4>
+                </div>
+              )}
 
-        <div className="flex w-full p-4 py-8 md:px-8">
-          <BackToProjects />
-        </div>
-        <article className="px-4 pb-8 md:px-8 lg:flex lg:flex-row-reverse lg:items-start">
-          <aside className="bg-light mb-8 flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start">
+              {addressStats && (
+                <div>
+                  <h5>Donations</h5>
+                  <h4>{addressStats.tx_count}</h4>
+                </div>
+              )}
+            </div>
             <button
               onClick={openPaymentModal}
-              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-blue-500"
+              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-blue-500"
             >
               Donate
             </button>
-            {addressStats && (
-              <div>
-                <h5>Raised</h5>
-                <h4>{addressStats.funded_txo_sum} LTC</h4>
-              </div>
-            )}
-
-            {addressStats && (
-              <div>
-                <h5>Donations</h5>
-                <h4>{addressStats.tx_count}</h4>
-              </div>
-            )}
           </aside>
 
-          <div className="max-w-[60ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
+          <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
             <Link href={website} className="no-underline">
               <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
                 {title}
@@ -124,18 +122,16 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             </p>
             <ShareButtons project={project} />
             <hr className="mb-8"></hr>
-            {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
+            {content && (
+              <div
+                className="markdown"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            )}
           </div>
         </article>
       </div>
-      <div className="flex w-full items-center justify-between pb-8">
-        <h1 id="funds">You might also like...</h1>
-      </div>
-      <ProjectList
-        projects={projects}
-        exclude={slug}
-        openPaymentModal={openPaymentModal}
-      />
+
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
@@ -151,9 +147,7 @@ export async function getStaticProps({ params }: { params: any }) {
   const post = getPostBySlug(params.slug)
 
   const projects = getAllPosts()
-  console.log('before: ', post.content || 'nothing')
   const content = await markdownToHtml(post.content || '')
-  console.log('after: ', content)
   return {
     props: {
       project: {
