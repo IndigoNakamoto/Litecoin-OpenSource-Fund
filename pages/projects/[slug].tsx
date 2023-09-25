@@ -52,7 +52,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
 
   // const [stats, setStats] = useState<Stats>()
   const [addressStats, setAddressStats] = useState<AddressStats>()
-  const [twitterUsers, setTwitterUsers] = useState<TwitterUser>()
+  const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
