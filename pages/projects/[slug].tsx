@@ -37,6 +37,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     setModalOpen(true)
   }
 
+  function extractUsername(url) {
+    // This regex will match any string that ends with a forward slash followed by any sequence of non-slash characters.
+    const regex = /\/([^\/]+)$/
+    const match = url.match(regex)
+    return match ? match[1] : url // If the regex matched, return the captured group; otherwise, return the original url.
+  }
+
   const {
     slug,
     title,
@@ -58,17 +65,14 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     const fetchData = async () => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
-      // Note: stats.supporters is an array of strings. Each string is formatted twitter.com/<supporter>
       setAddressStats(stats)
-
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
         const usernames = stats.supporters
-          .map((supporter) => supporter.split('/')[1])
+          .map((supporter) => extractUsername(supporter))
           .join(',')
         const response = await fetch(`/api/twitterUsers?usernames=${usernames}`)
         const twitterUsers = await response.json()
-
         setTwitterUsers(twitterUsers)
       }
     }
