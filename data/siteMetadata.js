@@ -14,10 +14,10 @@ const siteMetadata = {
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter.png',
-  email: 'support@litecoin.org',
-  github: 'https://github.com/IndigoNakamoto/foss-ltc',
+  email: 'support@lite.space',
+  github: 'https://github.com/litecoin-project',
   twitter: 'https://twitter.com/ltcfoundation',
-  nostr: 'npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f',
+
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
