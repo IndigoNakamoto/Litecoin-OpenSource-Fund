@@ -18,6 +18,8 @@ const Credits = () => {
   const _CLINTWESTWOOD_ = '/img/supporters/_CLINTWESTWOOD_.jpeg'
   const ROWEBOT3339 = '/img/supporters/ROWEBOT3339.jpeg'
   const TheLucifers_Son = '/img/supporters/TheLucifers_Son.jpeg'
+  const LoneWolfLite = '/img/supporters/LoneWolfLite.jpeg'
+  const Imajinn_mind = '/img/supporters/Imajinn_mind.jpeg'
 
   const supporters: CreditItemProps[] = [
     {
@@ -84,6 +86,16 @@ const Credits = () => {
       link: 'https://twitter.com/TheLucifers_Son',
       image: TheLucifers_Son,
       nym: 'Son of Lucifer',
+    },
+    {
+      link: 'https://twitter.com/LoneWolfLite',
+      image: LoneWolfLite,
+      nym: 'LoneWolfLite',
+    },
+    {
+      link: 'https://twitter.com/Imajinn_mind',
+      image: Imajinn_mind,
+      nym: 'Imajinn_mind',
     },
   ]
 
