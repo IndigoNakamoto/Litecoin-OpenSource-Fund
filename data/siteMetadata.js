@@ -6,7 +6,7 @@ const siteMetadata = {
   author: 'Lite.Space',
   headerTitle: 'Lite.Space',
   description:
-    'We help you find and support open-source Litecoin projects. Helping create a better tomorrow, today.',
+    'Funding the future of Litecoin, one open-source project at a time.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://Lite.Space',
