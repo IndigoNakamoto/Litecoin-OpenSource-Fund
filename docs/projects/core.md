@@ -34,7 +34,4 @@ Understanding the imperative for scalability, Litecoin Core explores and impleme
 **Developer and Community Engagement**:
 An open-source project at its core, Litecoin Core thrives on the engagement and contributions of its developer community and users. Fostering a collaborative environment enables continuous improvement and innovation on the Litecoin blockchain.
 
-**Cross-platform and Cross-network Compatibility**:
-Litecoin Core is developed to ensure compatibility across various platforms and interoperability with other blockchain networks. This vision aligns with the broader goal of promoting a more interconnected and interoperable blockchain ecosystem.
-
 In conclusion, Litecoin Core is a cornerstone in advancing the robustness, performance, and scalability of the Litecoin network. Through its continuous evolution, it not only enhances the operational efficacy of the Litecoin blockchain but also paves the way for future innovations, making Litecoin a strong contender in the competitive cryptocurrency landscape.
