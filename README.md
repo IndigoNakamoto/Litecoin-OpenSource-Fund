@@ -1,6 +1,6 @@
-# OpenSats.org
+# Lite.Space
 
-This is the codebase behind [OpenSats.org](https://opensats.org).
+This is the codebase behind [Lite.Space](https://Lite.Space).
 
 ## Getting started
 
