@@ -48,3 +48,5 @@ export type TwitterUser = {
   screen_name: string
   profile_image_url_https: string
 }
+
+export type TwitterUsers = [TwitterUser]
