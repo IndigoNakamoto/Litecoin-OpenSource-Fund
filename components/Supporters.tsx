@@ -14,7 +14,7 @@ const Credits = () => {
   const anml = '/img/supporters/anml.jpeg'
   const kyle = '/img/supporters/kyle.jpeg'
   const cryptofreeze = '/img/supporters/cryptofreeze.png'
-  const SadFrogLTC = '/img/supporters/SadFrogLTC.jpeg'
+  const SadFrogLTC = '/img/supporters/sadfrogltc.jpeg'
   const _CLINTWESTWOOD_ = '/img/supporters/_CLINTWESTWOOD_.jpeg'
   const ROWEBOT3339 = '/img/supporters/ROWEBOT3339.jpeg'
   const TheLucifers_Son = '/img/supporters/TheLucifers_Son.jpeg'
