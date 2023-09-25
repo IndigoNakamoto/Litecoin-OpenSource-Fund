@@ -68,7 +68,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     <>
       <div>
         <article className="lg:flex lg:flex-row lg:items-start">
-          <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-0 lg:flex-col lg:items-start">
+          <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
             <div className={'relative h-[18rem] w-full sm:h-[12rem] sm:w-full'}>
               <Image
                 alt={title}
