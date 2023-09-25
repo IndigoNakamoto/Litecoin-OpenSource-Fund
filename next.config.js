@@ -62,6 +62,9 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    images: {
+      domains: ['pbs.twimg.com'], // Add this line
+    },
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
     },
