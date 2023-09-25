@@ -59,7 +59,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Listed Projects</h1>
         </div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">

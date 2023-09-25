@@ -108,21 +108,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                 {title}
               </h1>
             </Link>
-            <p className="prose max-w-none pb-8 pt-8 dark:prose-dark">
+            <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               {summary}
             </p>
-
-            {/* <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
-              by{' '}
-              <Link
-                href={`https://twitter.com/${personalTwitter || twitter}`}
-                passHref
-              >
-                {nym}
-              </Link>
-            </p> */}
-            {/* <ShareButtons project={project} /> */}
-            <hr className="mb-8"></hr>
             {content && (
               <div
                 className="markdown"

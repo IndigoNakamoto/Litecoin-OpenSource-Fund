@@ -30,7 +30,7 @@ export const getStaticProps = async () => {
     .sort(() => 0.5 - Math.random())
 
   const generalFund = getPostBySlug('general_fund', true)
-  const opsFund = getPostBySlug('opensats_operations_budget', true)
+  const opsFund = getPostBySlug('operations_budget', true)
 
   return { props: { posts, projects, generalFund, opsFund } }
 }

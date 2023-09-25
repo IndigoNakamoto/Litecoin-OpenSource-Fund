@@ -1,6 +1,6 @@
 ---
 title: 'Litecoin Mempool Explorer'
-summary: '[Project Summary]'
+summary: 'Our mempool and blockchain explorer for the Litecoin community, focusing on the transaction fee market and multi-layer ecosystem'
 nym: 'Loshan'
 website: 'litecoinspace.org'
 coverImage: '/static/images/projects/litecoin-space.png'

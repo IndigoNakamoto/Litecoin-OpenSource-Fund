@@ -42,7 +42,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
       <figcaption className="space-y-1 p-4">
         <h2 className="font-bold">{title}</h2>
-        <div className="mb-8 text-sm">by {nym}</div>
         <div className="line-clamp-3">{summary}</div>
         <div className="grid grid-cols-2 pt-4">
           <button
