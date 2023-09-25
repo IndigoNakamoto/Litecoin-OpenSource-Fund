@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     try {
-      console.log(req.query)
       res.status(200).json(getPostBySlug(<string>req.query.slug))
     } catch (err) {
       console.log(err)

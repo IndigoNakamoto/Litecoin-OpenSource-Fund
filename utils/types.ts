@@ -40,4 +40,11 @@ export type Stats = {
 export type AddressStats = {
   tx_count: number
   funded_txo_sum: number
+  supporters: Array<string>
+}
+
+export type TwitterUser = {
+  name: string
+  screen_name: string
+  profile_image_url_https: string
 }

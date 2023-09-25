@@ -3,15 +3,17 @@ import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/image'
-import ProjectList from '../../components/ProjectList'
-import BackToProjects from '../../components/BackToProjects'
+// import ProjectList from '../../components/ProjectList'
+// import BackToProjects from '../../components/BackToProjects'
 import { ProjectItem, Stats, AddressStats } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
-import ShareButtons from '../../components/ShareButtons'
+// import ShareButtons from '../../components/ShareButtons'
 import { fetchGetJSON } from '../../utils/api-helpers'
+import TwitterUsers from '../../components/TwitterUsers'
+import { TwitterUser } from '../../utils/types'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -48,14 +50,27 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     personalTwitter,
   } = project
 
-  const [stats, setStats] = useState<Stats>()
+  // const [stats, setStats] = useState<Stats>()
   const [addressStats, setAddressStats] = useState<AddressStats>()
+  const [twitterUsers, setTwitterUsers] = useState<TwitterUser>()
 
   useEffect(() => {
     const fetchData = async () => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
+      // Note: stats.supporters is an array of strings. Each string is formatted twitter.com/<supporter>
       setAddressStats(stats)
+
+      // Fetch Twitter user details
+      if (stats.supporters && stats.supporters.length > 0) {
+        const usernames = stats.supporters
+          .map((supporter) => supporter.split('/')[1])
+          .join(',')
+        const response = await fetch(`/api/twitterUsers?usernames=${usernames}`)
+        const twitterUsers = await response.json()
+
+        setTwitterUsers(twitterUsers)
+      }
     }
 
     fetchData().catch(console.error)
@@ -117,6 +132,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
+            <div className="markdown">
+              <h1>Supporters</h1>
+              {twitterUsers && <TwitterUsers users={twitterUsers} />}
+            </div>
           </div>
         </article>
       </div>

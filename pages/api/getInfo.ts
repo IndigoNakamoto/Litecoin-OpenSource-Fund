@@ -10,6 +10,10 @@ function filterByOrderId(items, targetOrderId) {
   )
 }
 
+function getTwitterSupporters(items) {
+  return items.map((item) => item.metadata.posData.buyerTwitter)
+}
+
 function sumAmounts(items) {
   return items.reduce((acc, item) => acc + Number(item.amount), 0)
 }
@@ -41,10 +45,12 @@ export default async function handler(
 
       const filteredInvoices = filterByOrderId(response, slug)
       const totalAmount = sumAmounts(filteredInvoices)
+      const twitterSupporters = getTwitterSupporters(filteredInvoices)
 
       res.status(200).json({
         funded_txo_sum: totalAmount,
         tx_count: Object.keys(filteredInvoices).length,
+        supporters: twitterSupporters,
       })
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: (err as Error).message })
