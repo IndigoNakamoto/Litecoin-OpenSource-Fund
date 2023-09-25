@@ -1,6 +1,5 @@
 ---
 title: 'General Fund'
-dateAdded: 
 summary: 'We help you find and support open-source Litecoin projects - helping create a better tomorrow, today.'
 nym: 'Litecoin Foundation FOSS Council'
 website: 'https://lite.space'
@@ -8,7 +7,6 @@ coverImage: '/static/images/projects/generalfund-litespace.png'
 git: 'opensats'
 twitter: 'ltcfoundation'
 hidden: false
-bonusUSD: 100000
 ---
 
 # **Catalyzing Open-Source Progress with The General Fund**
