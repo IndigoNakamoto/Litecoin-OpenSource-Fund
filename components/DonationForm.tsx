@@ -158,6 +158,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               type="number"
               id="amount"
               value={amount}
+              inputMode="decimal"
               onChange={(e) => {
                 setAmount(e.target.value)
               }}
