@@ -187,8 +187,8 @@ export default function Home({
             )
           })}
         </ul>
-      </div>
-      {posts.length > MAX_DISPLAY && (
+      </div> */}
+      {/* {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog"
@@ -198,18 +198,18 @@ export default function Home({
             All Posts &rarr;
           </Link>
         </div>
-      )}
-      {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
+      )} */}
+      {/* {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
         </div>
-      )}
+      )} */}
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
         project={selectedProject}
       />
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+      {/* <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-16">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Apply for Funding
