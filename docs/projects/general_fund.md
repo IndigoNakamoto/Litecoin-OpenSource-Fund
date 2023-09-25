@@ -11,46 +11,34 @@ hidden: false
 bonusUSD: 100000
 ---
 
-The OpenSats General Fund is a pool of money that is used to support
-Bitcoin-related free and open source projects and contributors. The fund is made
-up of donations from individuals and organizations.
+# **Catalyzing Open-Source Progress with The General Fund**
 
-Projects that are eligible for funding from the General Fund must meet the
-following criteria:
+Venture with us on a mission to propel open-source Litecoin projects, crafting a financially inclusive tomorrow, today.
 
-- They must be Bitcoin-related.
-- They must be free and open source.
-- They must be of high quality and have the potential to make a significant impact on the Bitcoin ecosystem.
+Managed by the Litecoin Foundation, the General Fund is a specialized pool of resources dedicated to backing Litecoin-related free and open-source projects along with their earnest contributors. This fund thrives on the generosity of altruistic individuals and visionary organizations.
 
-The Litecoi FOSS Council reviews all applications for funding from the
-General Fund. The Council considers the following factors when making funding
-decisions:
+Eligibility for support from the General Fund hinges on the following criteria:
 
-- The project's alignment with Litecoin Foundations mission.
-- The project's feasibility and potential impact.
-- The project's leadership and team.
-- The project's financial need.
+- The project should be Litecoin-centric.
+- It must embrace an open-source ethos.
+- It should exemplify high quality and hold the potential to significantly advance the Litecoin ecosystem.
 
-The OpenSats General Fund has been used to support a wide variety of
-Bitcoin-related projects, including:
+Each funding application to the General Fund undergoes a thorough review by the Litecoin FOSS Council. The evaluation encompasses the following aspects:
 
-- The development of new Bitcoin and Bitcoin-adjacent software.
-- The improvement of existing free and open-source software.
-- Education and outreach about Bitcoin.
-- Research into Bitcoin-related topics.
+- The project's alignment with the Litecoin Foundation's mission.
+- The feasibility and anticipated impact of the project.
+- Leadership and the competency of the team driving the project.
+- The financial need underlying the project.
 
-If you are interested in supporting the OpenSats General Fund, you can donate
-bitcoin or fiat currency to the fund [here](#top).
+The General Fund has been the cornerstone for a wide array of Litecoin-oriented initiatives, covering:
 
----
+- Development of new Litecoin and Litecoin-adjacent software.
+- Augmentation of existing free and open-source software.
+- Education dissemination and community outreach concerning Litecoin.
+- Conducting research on Litecoin-centric topics.
 
-OpenSats is a 501(c)(3) public charity that aims to support and maintain a
-sustainable ecosystem of funding for free and open-source projects and
-contributors, especially Bitcoin related projects and projects which help
-Bitcoin flourish.
+Should the vision of fostering open-source innovation resonate with you, you are warmly invited to extend your support to the General Fund. Contributions of Litecoin or fiat currency are welcome and can be made [here](https://lite.space).
 
-We believe that free and open-source software is essential to the future of the
-internet and the world. It allows people to collaborate and share knowledge,
-without being locked into proprietary software or hardware. This is especially
-important for Bitcoin, which  relies on the open-source development community to
-maintain and improve its software.
+Litecoin Foundation, Inc. Singapore (UEN: 201709179W), operates as a public charity with the pivotal goal of funding Litecoin-related free and open-source projects, inclusive of educational and research endeavors.
+
+Our aspiration is to create a sustainable ecosystem with steady funding to back the contributors to Litecoin and FOSS (free and open-source) tools. To realize this vision, we have unfurled a platform exclusively dedicated to this mission. Donors can explore the Litecoin Foundation web platform [https://lite.space](https://lite.space), where they can either earmark gifts for specific project realms or channel contributions to our general fund.
