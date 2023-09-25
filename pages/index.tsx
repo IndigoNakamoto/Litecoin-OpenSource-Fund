@@ -1,6 +1,7 @@
 import Link from '@/components/Link'
 import { useEffect, useState } from 'react'
 import ProjectList from '../components/ProjectList'
+import ProjectCard from '../components/ProjectCard'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -11,11 +12,10 @@ import { NewsletterForm } from 'pliny/ui/NewsletterForm'
 import { allBlogs } from 'contentlayer/generated'
 import { getAllPosts, getPostBySlug } from '../utils/md'
 import type { Blog } from 'contentlayer/generated'
-import phoenix from '/public/static/images/phoenix.png'
 import { useRouter } from 'next/router'
 import { ProjectItem } from '../utils/types'
 import PaymentModal from '../components/PaymentModal'
-import { isNotOpenSatsProject } from './projects'
+import { isNotOpenSatsProject, isOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
@@ -29,15 +29,20 @@ export const getStaticProps = async () => {
     .filter(isNotOpenSatsProject)
     .sort(() => 0.5 - Math.random())
 
+  const litespacefund = getAllPosts()
+    .filter(isOpenSatsProject)
+    .sort(() => 0.5 - Math.random())
+
   const generalFund = getPostBySlug('general_fund', true)
   const opsFund = getPostBySlug('operations_budget', true)
 
-  return { props: { posts, projects, generalFund, opsFund } }
+  return { props: { posts, projects, litespacefund, generalFund, opsFund } }
 }
 
 export default function Home({
   posts,
   projects,
+  litespacefund,
   generalFund,
   opsFund,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -46,6 +51,8 @@ export default function Home({
   const router = useRouter()
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
+  const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
+  // const [litespacefund, setlitespacefund] = useState<ProjectItem[]>()
 
   function closeModal() {
     setModalOpen(false)
@@ -86,7 +93,11 @@ export default function Home({
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
-          <div className="flex flex-wrap">
+          {/* 
+          TODO: IMPORT LITECOIN DEVELOPMENT CARDS
+          */}
+
+          {/* <div className="flex flex-wrap">
             <div>
               <button
                 onClick={openGeneralFundModal}
@@ -103,8 +114,19 @@ export default function Home({
                 Donate to Operations Budget
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Development Fund
+          </h1>
+        </div>
+        <ProjectList
+          projects={litespacefund}
+          openPaymentModal={openPaymentModal}
+        />
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
