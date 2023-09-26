@@ -4,12 +4,9 @@ import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
 
 // Font Awesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { config } from '@fortawesome/fontawesome-svg-core'
-import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
-// TODO: Get SVG to render in component
-import coinLitecoin from '../public/litecoin-svg/Coin full colour.svg'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/legacy/image'
+
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
@@ -18,7 +15,7 @@ type DonationStepsProps = {
   projectSlug: string
 }
 const DonationSteps: React.FC<DonationStepsProps> = ({
-  projectNamePretty,
+  // projectNamePretty,
   projectSlug,
 }) => {
   const [name, setName] = useState('')
@@ -26,18 +23,14 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [twitter, setTwitter] = useState('')
 
   const [deductable, setDeductable] = useState('no')
-  const [amount, setAmount] = useState('')
+
+  const [isHovered, setIsHovered] = useState(false)
 
   const [readyToPayBTC, setReadyToPayBTC] = useState(false)
 
   const [btcPayLoading, setBtcpayLoading] = useState(false)
 
   const formRef = useRef<HTMLFormElement | null>(null)
-
-  function handleFiatAmountClick(e: React.MouseEvent, value: string) {
-    e.preventDefault()
-    setAmount(value)
-  }
 
   useEffect(() => {
     let btcValid: boolean
@@ -47,7 +40,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       btcValid = false
     }
     setReadyToPayBTC(btcValid)
-  }, [deductable, amount, twitter, email, name])
+  }, [deductable, twitter, email, name])
 
   async function handleBtcPay() {
     const validity = formRef.current?.checkValidity()
@@ -58,10 +51,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     try {
       const payload = {
         project_slug: projectSlug,
-      }
-
-      if (amount) {
-        Object.assign(payload, { amount })
       }
 
       if (name) {
@@ -82,7 +71,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       } else if (data.message) {
         throw new Error(data.message)
       } else {
-        // console.log({ data })
         throw new Error('Something went wrong with BtcPay Server checkout.')
       }
     } catch (e) {
@@ -99,10 +87,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     >
       <section className="flex flex-col gap-1">
         <h3>
-          Name{' '}
-          <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
-          </span>
+          Name <span className="text-subtle">(optional)</span>
         </h3>
         <input
           type="text"
@@ -112,10 +97,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
         ></input>
         <h3>
-          Twitter{' '}
-          <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
-          </span>
+          Twitter <span className="text-subtle">(optional)</span>
         </h3>
         <input
           type="text"
@@ -125,10 +107,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
         ></input>
         <h3>
-          Email{' '}
-          <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
-          </span>
+          Email <span className="text-subtle">(optional)</span>
         </h3>
         <input
           type="email"
@@ -139,48 +118,27 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         ></input>
       </section>
 
-      <section>
-        <div className="flex items-center justify-between">
-          <h3>How much would you like to donate?</h3>
-        </div>
-        <div className="flex flex-col gap-2 py-2 sm:flex-row" role="group">
-          {[0.25, 0.5, 1.0, 2.5].map((value, index) => (
-            <button
-              key={index}
-              className="w-30 group"
-              onClick={(e) => handleFiatAmountClick(e, value?.toString() ?? '')}
-            >
-              {value ? `${value} LTC` : 'Any'}
-            </button>
-          ))}
-          <div className="relative flex w-full">
-            <input
-              type="number"
-              id="amount"
-              value={amount}
-              inputMode="decimal"
-              onChange={(e) => {
-                setAmount(e.target.value)
-              }}
-              className="mt-1 block w-full w-full rounded-md border-gray-300 !pl-10 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              placeholder="Or enter custom amount"
-            />
-          </div>
-        </div>
-      </section>
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-4">
         <button
           name="btcpay"
           onClick={handleBtcPay}
           className="pay"
           disabled={!readyToPayBTC || btcPayLoading}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {btcPayLoading ? (
             <Spinner />
           ) : (
-            <FontAwesomeIcon
-              icon={coinLitecoin}
-              className="text-primary h-8 w-8"
+            <Image
+              src={
+                isHovered
+                  ? '/litecoin-svg/coin-white.svg'
+                  : '/litecoin-svg/coin-blue.svg'
+              }
+              alt="Litecoin"
+              width={32}
+              height={32}
             />
           )}
           <span className="whitespace-nowrap">Donate with Litecoin</span>
