@@ -39,7 +39,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
 
   function extractUsername(url) {
     // This regex will match any string that ends with a forward slash followed by any sequence of non-slash characters.
-    const regex = /\/([^\/]+)$/
+    const regex = /\/([^/]+)$/
     const match = url.match(regex)
     return match ? match[1] : url // If the regex matched, return the captured group; otherwise, return the original url.
   }
