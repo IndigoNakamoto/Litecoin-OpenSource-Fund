@@ -137,8 +137,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
               />
             )}
             <div className="markdown">
-              <h1>Supporters</h1>
-              {twitterUsers && <TwitterUsers users={twitterUsers} />}
+              {twitterUsers.length > 0 ? (
+                <>
+                  <h1>Supporters</h1>
+                  <TwitterUsers users={twitterUsers} />
+                </>
+              ) : null}
             </div>
           </div>
         </article>
