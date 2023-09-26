@@ -82,7 +82,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       } else if (data.message) {
         throw new Error(data.message)
       } else {
-        console.log({ data })
+        // console.log({ data })
         throw new Error('Something went wrong with BtcPay Server checkout.')
       }
     } catch (e) {

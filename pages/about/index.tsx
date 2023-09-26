@@ -21,8 +21,8 @@ export const getStaticProps = async () => {
 export default function About({
   openSats,
   board,
-  ops,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: // ops,
+InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <MDXLayoutRenderer

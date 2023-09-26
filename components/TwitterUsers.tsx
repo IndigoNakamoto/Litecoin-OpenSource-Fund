@@ -1,6 +1,6 @@
 // components/TwitterUsers.tsx
 import Link from './Link'
-import Image from 'next/image' // Import the next/image component
+import Image from 'next/legacy/image' // Import the next/image component
 import Head from 'next/head'
 
 type TwitterUser = {

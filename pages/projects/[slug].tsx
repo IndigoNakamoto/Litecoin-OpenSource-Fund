@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 // import ProjectList from '../../components/ProjectList'
 // import BackToProjects from '../../components/BackToProjects'
-import { ProjectItem, Stats, AddressStats } from '../../utils/types'
+import { ProjectItem, AddressStats } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
@@ -20,7 +20,7 @@ type SingleProjectPageProps = {
   projects: ProjectItem[]
 }
 
-const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
+const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const router = useRouter()
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -49,12 +49,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     title,
     summary,
     coverImage,
-    git,
-    twitter,
+    // git,
+    // twitter,
     content,
-    nym,
+    // nym,
     website,
-    personalTwitter,
+    // personalTwitter,
   } = project
 
   // const [stats, setStats] = useState<Stats>()
@@ -159,7 +159,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
 
 export default Project
 
-export async function getStaticProps({ params }: { params: any }) {
+type ParamsType = {
+  slug: string
+}
+
+export async function getStaticProps({ params }: { params: ParamsType }) {
+  console.log('params: ', params)
   const post = getPostBySlug(params.slug)
 
   const projects = getAllPosts()

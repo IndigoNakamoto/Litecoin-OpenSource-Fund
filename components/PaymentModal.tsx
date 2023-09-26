@@ -1,5 +1,5 @@
 import ReactModal from 'react-modal'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'

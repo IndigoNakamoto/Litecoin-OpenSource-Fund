@@ -1,14 +1,13 @@
-import Link from '@/components/Link'
 import { useEffect, useState } from 'react'
 import ProjectList from '../components/ProjectList'
-import ProjectCard from '../components/ProjectCard'
+
 import { PageSEO } from '@/components/SEO'
-import Tag from '@/components/Tag'
+
 import siteMetadata from '@/data/siteMetadata'
-import { formatDate } from 'pliny/utils/formatDate'
+
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
-import { NewsletterForm } from 'pliny/ui/NewsletterForm'
+
 import { allBlogs } from 'contentlayer/generated'
 import { getAllPosts, getPostBySlug } from '../utils/md'
 import type { Blog } from 'contentlayer/generated'
@@ -18,8 +17,6 @@ import PaymentModal from '../components/PaymentModal'
 import { isNotOpenSatsProject, isOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
-
-const MAX_DISPLAY = 5
 
 export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
@@ -40,10 +37,8 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({
-  posts,
   projects,
   litespacefund,
-  generalFund,
   opsFund,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [modalOpen, setModalOpen] = useState(false)
@@ -51,7 +46,7 @@ export default function Home({
   const router = useRouter()
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
-  const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
+
   // const [litespacefund, setlitespacefund] = useState<ProjectItem[]>()
 
   function closeModal() {
@@ -63,17 +58,9 @@ export default function Home({
     setModalOpen(true)
   }
 
-  function openGeneralFundModal() {
-    openPaymentModal(generalFund)
-  }
-
-  function openopsFundModal() {
-    openPaymentModal(opsFund)
-  }
-
   useEffect(() => {
     if (router.isReady) {
-      console.log(router.query)
+      // console.log(router.query)
       if (router.query.donate === 'ops') {
         openPaymentModal(opsFund)
       }

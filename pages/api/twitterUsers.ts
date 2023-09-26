@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(users)
   } catch (error) {
-    console.log('Failed to fetch Twitter user data:', error.message)
+    // console.log('Failed to fetch Twitter user data:', error.message)
     res.status(500).json({
       error: 'Failed to fetch Twitter user data',
       message: error.message,
