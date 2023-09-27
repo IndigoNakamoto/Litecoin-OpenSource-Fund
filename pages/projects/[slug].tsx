@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { fetchGetJSON } from '../../utils/api-helpers'
 import TwitterUsers from '../../components/TwitterUsers'
 import { TwitterUser } from '../../utils/types'
+import Head from 'next/head'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -85,6 +86,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   }
   return (
     <>
+      <Head>
+        <title>Lite.Space | {slug}</title>
+      </Head>
       <div>
         <article className="lg:flex lg:flex-row lg:items-start">
           <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
@@ -115,7 +119,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <button
               onClick={openPaymentModal}
-              className="block w-full rounded border border-stone-800 bg-stone-800 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-blue-500 sm:px-4 sm:py-2 sm:text-base"
+              className="hover:white block w-full rounded border border-stone-800 bg-stone-800 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-500 dark:bg-white dark:text-black dark:hover:bg-blue-500 sm:px-4 sm:py-2 sm:text-base"
             >
               Donate
             </button>

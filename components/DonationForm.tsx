@@ -116,7 +116,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       <section className="flex flex-col gap-1">
         <div className="mb-4">
           <h3>
-            Name <span className="font-light text-gray-400">(optional)</span>
+            Name <span className="font-light text-gray-400">(Optional)</span>
           </h3>
           <input
             type="text"
@@ -128,7 +128,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3>
-            X <span className="font-light text-gray-400">(optional)</span>{' '}
+            X{' '}
+            <span className="font-light text-gray-400">
+              (Optional: Your profile picture and X account will be shared)
+            </span>{' '}
             {/* Changed Twitter to X */}
           </h3>
           <div className="relative">
@@ -155,7 +158,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3>
-            Email <span className="font-light text-gray-400">(optional)</span>
+            Email <span className="font-light text-gray-400">(Optional)</span>
           </h3>
           <input
             type="email"

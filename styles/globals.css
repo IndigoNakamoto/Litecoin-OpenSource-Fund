@@ -1,3 +1,9 @@
+/* 
+
+This styling is used for components/DonationForm 
+Not used for project cards
+*/
+
 button.small {
   @apply p-1 text-sm bg-white text-black border border-black;
 }
