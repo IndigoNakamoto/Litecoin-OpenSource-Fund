@@ -31,7 +31,7 @@ module.exports = {
         sans: ['Inter', ...fontFamily.sans],
       },
       colors: {
-        primary: colors.green,
+        primary: colors.blue,
         gray: colors.neutral,
         blue: {
           500: '#345D9D',
