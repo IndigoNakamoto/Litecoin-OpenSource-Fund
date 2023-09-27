@@ -11,6 +11,7 @@ export type ProjectItem = {
   personalTwitter?: string
   bonusUSD?: number
   hidden?: boolean
+  type: string
 }
 
 export type PayReq = {

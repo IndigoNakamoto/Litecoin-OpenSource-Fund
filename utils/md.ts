@@ -18,6 +18,7 @@ const FIELDS = [
   'personalTwitter',
   'bonusUSD',
   'hidden',
+  'type',
 ]
 
 export function getPostSlugs() {
