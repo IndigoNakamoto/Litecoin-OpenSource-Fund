@@ -124,10 +124,10 @@ export default function Home({
             Open Bounties
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Explore{' '}
-            <CustomLink href="/bounties" className="underline">
-              Bounty Opportunities
-            </CustomLink>{' '}
+            Explore Bounty Opportunities
+            {/* <CustomLink href="/bounties" className="underline">
+              
+            </CustomLink>{' '} */}
           </p>
         </div>
         <ProjectList projects={bounties} openPaymentModal={openPaymentModal} />
@@ -138,11 +138,8 @@ export default function Home({
             Explore Projects
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Browse through and{' '}
-            <CustomLink href="/projects" className="underline">
-              directly support projects
-            </CustomLink>{' '}
-            selected by the Litecoin Foundation.
+            Browse through and directly support projects selected by the
+            Litecoin Foundation.
           </p>
         </div>
         <ProjectList
