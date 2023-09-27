@@ -18,12 +18,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(
-      projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random())
-    )
+    setSortedProjects(projects.filter(isProject))
     setOpenSatsProjects(
       projects
-        .filter(isOpenSatsProject)
+        .filter(isDevelopment)
         .sort((a, b) => a.title.localeCompare(b.title))
     )
   }, [projects])
@@ -42,9 +40,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Lite.Space | Projects</title>
       </Head>
+      <h1>Explore Projects</h1>
       <section className="flex flex-col items-center p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Litecoin Development Fund</h1>
+          <h2 id="funds">Litecoin Development Fund</h2>
         </div>
         <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
           {openSatsProjects &&
@@ -57,7 +56,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Listed Projects</h1>
+          <h2 id="funds">Listed Projects</h2>
         </div>
         <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {sortedProjects &&
@@ -95,4 +94,15 @@ export function isOpenSatsProject(project: ProjectItem): boolean {
 
 export function isNotOpenSatsProject(project: ProjectItem): boolean {
   return !isOpenSatsProject(project)
+}
+
+export function isBounty(project: ProjectItem): boolean {
+  return project.type === 'Bounty'
+}
+
+export function isDevelopment(project: ProjectItem): boolean {
+  return project.type === 'Development Fund'
+}
+export function isProject(project: ProjectItem): boolean {
+  return project.type === 'Project'
 }
