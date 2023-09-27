@@ -7,6 +7,7 @@ coverImage: '/static/images/projects/generalfund-litespace.png'
 git: 'opensats'
 twitter: 'ltcfoundation'
 hidden: false
+type: 'Development Fund'
 ---
 
 # **Propelling Litecoin Open-Source Ventures with The General Fund**

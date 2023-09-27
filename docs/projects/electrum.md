@@ -1,13 +1,14 @@
 ---
 title: 'Electrum-LTC'
-summary: ' Electrum-LTC Upgrade Initiative: Elevating Litecoin’s Secure Wallet Experience'
+summary: 'Electrum-LTC Upgrade: Bridging to Bitcoin’s 4.4.5 Version for Superior Security and Enhanced Performance in Litecoin Transactions'
 nym: '[Person or Organization Name]'
 website: '[Project Website]'
 coverImage: '/static/images/projects/electrum.png'
 git: '[GitHub Repository]'
 twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
-type: '[Project Type]'
+type: 'Bounty'
+contributor: 'loshan1212'
 ---
 
 # **Advancing Litecoin Ecosystem with Electrum-LTC Wallet Update**

@@ -6,7 +6,8 @@ nym: 'Litecoin Foundation'
 twitter: 'ltcfoundation'
 website: 'https://litecoin.net/'
 git: 'https://github.com/litecoin-project'
-
+type: 'Development Fund'
+contributor: 'indigo_nakamoto'
 ---
 
 ## Objective

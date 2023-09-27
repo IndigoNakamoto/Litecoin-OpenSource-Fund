@@ -7,7 +7,8 @@ coverImage: '/static/images/projects/OrdinalsLite.png'
 git: 'https://github.com/ynohtna92/ord-litecoin'
 twitter: 'OrdinalsLite'
 personalTwitter: 'OrdinalsLite'
-type: '[Project Type]'
+type: 'Project'
+contributor: 'anthonyonchain'
 ---
 
 # **Exploring New Frontiers with Ordinals Lite**

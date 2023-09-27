@@ -7,7 +7,8 @@ coverImage: '/static/images/projects/litecoin-space.png'
 git: '[GitHub Repository]'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
-type: '[Project Type]'
+type: 'Project'
+contributor: 'loshan1212'
 ---
 
 # **Navigating the Transaction Landscape with Litecoin Mempool Explorer**

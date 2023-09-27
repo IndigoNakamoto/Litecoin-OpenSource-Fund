@@ -7,7 +7,8 @@ coverImage: '/static/images/projects/omnilite.svg'
 git: '[GitHub Repository]'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
-type: '[Project Type]'
+type: 'Project'
+contributor: 'loshan1212'
 ---
 
 ## Discover OmniLite

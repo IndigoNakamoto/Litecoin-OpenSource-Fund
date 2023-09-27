@@ -7,7 +7,8 @@ coverImage: '/static/images/projects/MWEB-circle.png'
 git: '[GitHub Repository]'
 twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
-type: '[Project Type]'
+type: 'Project'
+contributor: 'satoshilite, davidBurkett38, ecurrencyhodler'
 ---
 
 # **Enhancing Privacy and Scalability with MimbleWimble Extension Blocks on Litecoin**

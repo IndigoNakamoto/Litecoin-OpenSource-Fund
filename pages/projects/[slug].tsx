@@ -87,7 +87,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   return (
     <>
       <Head>
-        <title>Lite.Space | {slug}</title>
+        <title>{slug} - Lite.Space</title>
       </Head>
       <div>
         <article className="lg:flex lg:flex-row lg:items-start">

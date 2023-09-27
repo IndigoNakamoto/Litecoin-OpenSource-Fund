@@ -7,7 +7,7 @@ coverImage: '/static/images/projects/litecoin-core.png'
 git: 'https://github.com/litecoin-project/litecoin'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
-type: '[Project Type]'
+type: 'Project'
 ---
 
 # **Enhancing Network Robustness and Performance with Litecoin Core**
