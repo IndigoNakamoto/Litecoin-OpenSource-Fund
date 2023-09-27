@@ -14,7 +14,7 @@ import type { Blog } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
 import { ProjectItem } from '../utils/types'
 import PaymentModal from '../components/PaymentModal'
-import { isNotOpenSatsProject, isOpenSatsProject } from './projects'
+import { isBounty, isDevelopment, isProject } from './projects'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
@@ -22,22 +22,25 @@ export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
   const posts = allCoreContent(sortedPosts)
 
-  const projects = getAllPosts()
-    .filter(isNotOpenSatsProject)
+  const litespacefund = getAllPosts().filter(isDevelopment)
+  const bounties = getAllPosts()
+    .filter(isBounty)
     .sort(() => 0.5 - Math.random())
-
-  const litespacefund = getAllPosts()
-    .filter(isOpenSatsProject)
+  const projects = getAllPosts()
+    .filter(isProject)
     .sort(() => 0.5 - Math.random())
 
   const generalFund = getPostBySlug('general_fund', true)
   const opsFund = getPostBySlug('operations_budget', true)
 
-  return { props: { posts, projects, litespacefund, generalFund, opsFund } }
+  return {
+    props: { posts, projects, bounties, litespacefund, generalFund, opsFund },
+  }
 }
 
 export default function Home({
   projects,
+  bounties,
   litespacefund,
   opsFund,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -114,6 +117,20 @@ export default function Home({
           projects={litespacefund}
           openPaymentModal={openPaymentModal}
         />
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Open Bounties
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Explore{' '}
+            <CustomLink href="/bounties" className="underline">
+              Bounty Opportunities
+            </CustomLink>{' '}
+          </p>
+        </div>
+        <ProjectList projects={bounties} openPaymentModal={openPaymentModal} />
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
