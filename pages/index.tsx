@@ -145,7 +145,11 @@ export default function Home({
             selected by the Litecoin Foundation.
           </p>
         </div>
-        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
+        <ProjectList
+          projects={projects}
+          openPaymentModal={openPaymentModal}
+          columns={3}
+        />
       </div>
       {/* <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">

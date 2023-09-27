@@ -9,12 +9,14 @@ type ProjectListProps = {
   header?: string
   exclude?: string
   projects: ProjectItem[]
+  columns?: number
   openPaymentModal: (project: ProjectItem) => void
 }
 const ProjectList: React.FC<ProjectListProps> = ({
   header = 'Explore Projects',
   exclude,
   projects,
+  columns = 2,
   openPaymentModal,
 }) => {
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
@@ -25,9 +27,11 @@ const ProjectList: React.FC<ProjectListProps> = ({
     )
   }, [projects])
 
+  const gridClass = `grid max-w-5xl gap-4 md:grid-cols-${columns}`
+
   return (
     <section className="bg-light items-left flex flex-col">
-      <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+      <ul className={gridClass}>
         {sortedProjects &&
           sortedProjects.slice(0, 6).map((p, i) => (
             <li key={i} className="">
