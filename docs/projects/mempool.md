@@ -2,7 +2,7 @@
 title: 'Litecoin Mempool Explorer'
 summary: 'Our mempool and blockchain explorer for the Litecoin community, focusing on the transaction fee market and multi-layer ecosystem'
 website: 'litecoinspace.org'
-coverImage: '/static/images/projects/litecoin-space.png'
+coverImage: '/static/images/projects/litecoin-space.jpeg'
 type: 'Project'
 contributor: 'loshan1212'
 ---
