@@ -121,16 +121,16 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 objectPosition="50% 50%"
               />
             </div>
-            <div className="flex w-full flex-col items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
+            <div className="flex w-full items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
               {addressStats && (
-                <div className="text-center sm:text-left">
+                <div className="">
                   <h5>Raised</h5>
                   <h4>Ł {addressStats.funded_txo_sum} </h4>
                 </div>
               )}
 
               {addressStats && (
-                <div className="text-center sm:text-left">
+                <div className="">
                   <h5>Donations</h5>
                   <h4>{addressStats.tx_count}</h4>
                 </div>
