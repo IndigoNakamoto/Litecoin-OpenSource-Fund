@@ -63,7 +63,7 @@ module.exports = () => {
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     images: {
-      domains: ['pbs.twimg.com'], // Add this line
+      domains: ['pbs.twimg.com', 'abs.twimg.com'], // Add this line
     },
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
@@ -84,5 +84,5 @@ module.exports = () => {
 
       return config
     },
-  });
+  })
 }

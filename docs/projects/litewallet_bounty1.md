@@ -9,7 +9,7 @@ git: '[GitHub Issue #207](https://github.com/litecoin-foundation/litewallet-ios/
 twitter: '@LiteWalletApp'
 personalTwitter: '@litecoin'
 type: 'Bounty'  # Replace with the appropriate type of the project if known.
-contributor: 'bigkerrytweets'
+contributor: 'SatoshiLite,bigkerrytweets,claudia14083392,Pat_McDermott17,ferencakIvan,josi_kie'
 owner: 'bigkerrytweets'
 ---
 
