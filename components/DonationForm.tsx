@@ -130,7 +130,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           <h3>
             X{' '}
             <span className="font-light text-gray-400">
-              (Optional: Your profile picture and X account will be shared)
+              (Optional: Your profile picture and X account will be publicaly
+              shared)
             </span>{' '}
             {/* Changed Twitter to X */}
           </h3>
