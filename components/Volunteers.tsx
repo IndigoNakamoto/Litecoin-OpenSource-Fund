@@ -10,14 +10,14 @@ const Volunteers = () => {
 
   const volunteers: CreditItemProps[] = [
     {
-      link: 'https://twitter.com/anthonyonchain',
-      image: anthony,
-      nym: 'Anthony Gurrera',
-    },
-    {
       link: 'https://twitter.com/loshan1212',
       image: losh,
       nym: 'Loshan',
+    },
+    {
+      link: 'https://twitter.com/anthonyonchain',
+      image: anthony,
+      nym: 'Anthony Gurrera',
     },
   ]
 

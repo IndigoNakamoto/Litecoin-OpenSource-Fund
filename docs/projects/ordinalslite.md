@@ -9,6 +9,7 @@ twitter: 'OrdinalsLite'
 personalTwitter: 'OrdinalsLite'
 type: 'Project'
 contributor: 'anthonyonchain'
+owner: ''
 ---
 
 # **Exploring New Frontiers with Ordinals Lite**

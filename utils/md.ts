@@ -13,12 +13,12 @@ const FIELDS = [
   'coverImage',
   'nym',
   'website',
-  'zaprite',
   'twitter',
   'personalTwitter',
-  'bonusUSD',
   'hidden',
   'type',
+  'contributor',
+  'owner',
 ]
 
 export function getPostSlugs() {
@@ -50,7 +50,9 @@ export function getPostBySlug(
     if (field === 'content') {
       items[field] = content
     }
-
+    if (field === 'contributor') {
+      items[field] = content
+    }
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field]
     }

@@ -56,30 +56,50 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     // nym,
     website,
     // personalTwitter,
+    contributor,
   } = project
 
   // const [stats, setStats] = useState<Stats>()
   const [addressStats, setAddressStats] = useState<AddressStats>()
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
+  const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
+    []
+  )
 
   useEffect(() => {
     const fetchData = async () => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
+      // console.log('stats.supporters: ', stats.supporters)
+      // console.log('Contributor: ', contributor)
+
       setAddressStats(stats)
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
-        const usernames = stats.supporters
+        const supporters = stats.supporters
           .map((supporter) => extractUsername(supporter))
           .join(',')
-        const response = await fetch(`/api/twitterUsers?usernames=${usernames}`)
+
+        const response = await fetch(
+          `/api/twitterUsers?usernames=${supporters}`
+        )
         const twitterUsers = await response.json()
         setTwitterUsers(twitterUsers)
+      }
+      if (contributor) {
+        const contributorsArray = contributor.split(',')
+        if (contributorsArray.length > 0) {
+          const contributorsResponse = await fetch(
+            `/api/twitterUsers?usernames=${contributor}`
+          )
+          const twitterContributors = await contributorsResponse.json()
+          setTwitterContributors(twitterContributors)
+        }
       }
     }
 
     fetchData().catch(console.error)
-  }, [slug])
+  }, [contributor, slug])
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -140,10 +160,26 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
+
+            <div className="markdown">
+              {twitterContributors.length > 0 ? (
+                <>
+                  <h1>
+                    {twitterContributors.length > 1
+                      ? 'Contributors'
+                      : 'Contributor'}
+                  </h1>
+                  <TwitterUsers users={twitterContributors} />
+                </>
+              ) : null}
+            </div>
+
             <div className="markdown">
               {twitterUsers.length > 0 ? (
                 <>
-                  <h1>Supporters</h1>
+                  <h1>
+                    {twitterUsers.length > 1 ? 'Supporters' : 'Supporter'}
+                  </h1>
                   <TwitterUsers users={twitterUsers} />
                 </>
               ) : null}

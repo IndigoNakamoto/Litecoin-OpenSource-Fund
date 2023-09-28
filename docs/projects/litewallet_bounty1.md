@@ -9,7 +9,8 @@ git: '[GitHub Issue #207](https://github.com/litecoin-foundation/litewallet-ios/
 twitter: '@LiteWalletApp'
 personalTwitter: '@litecoin'
 type: 'Bounty'  # Replace with the appropriate type of the project if known.
-
+contributor: ''
+owner: 'bigkerrytweets'
 ---
 
 ## Embark on a Mission with LiteWallet
@@ -22,13 +23,13 @@ The heart of the matter lies in the display of certain types of addresses within
 
 ### Bounty Objectives:
 
-- **Investigate and Understand**: Scrutinize the existing setup of loafwallet-core and its interaction with LiteWallet-iOS, particularly around Transaction.swift class line 174.
+**- Investigate and Understand**: Scrutinize the existing setup of loafwallet-core and its interaction with LiteWallet-iOS, particularly around Transaction.swift class line 174.
   
-- **Identify and Fix**: Address the exact cause of the UnsafeMutablePointer failure, implement necessary changes to rectify the unwrapping of addresses, ensuring all types of addresses are displayed correctly in the app.
+**- Identify and Fix**: Address the exact cause of the UnsafeMutablePointer failure, implement necessary changes to rectify the unwrapping of addresses, ensuring all types of addresses are displayed correctly in the app.
 
-- **Validation and Verification**: Conduct thorough testing to ensure the problem is resolved with no regression issues, and the rest of the app functions as desired.
+**- Validation and Verification**: Conduct thorough testing to ensure the problem is resolved with no regression issues, and the rest of the app functions as desired.
 
-- **Documentation**: Create clear and comprehensive documentation outlining the changes made, ensuring future developers understand the modifications.
+**- Documentation**: Create clear and comprehensive documentation outlining the changes made, ensuring future developers understand the modifications.
 
 ### Skills and Expertise Required:
 
@@ -39,7 +40,6 @@ The heart of the matter lies in the display of certain types of addresses within
 ### Reward and Recognition:
 
 - (Reward Amount to be decided by the project owner)
-
 - Your contribution will significantly impact the LiteWallet user experience, making a direct positive impression on a global user base.
 
 ### The Road Ahead:

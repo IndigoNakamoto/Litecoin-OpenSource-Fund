@@ -1,17 +1,18 @@
 export type ProjectItem = {
-  slug: string
-  nym: string
-  content?: string
   title: string
   summary: string
+  slug: string
+  git?: string
+  content?: string
   coverImage: string
-  git: string
+  nym?: string
+  website?: string
   twitter?: string
-  website: string
   personalTwitter?: string
-  bonusUSD?: number
   hidden?: boolean
   type: string
+  contributor?: string
+  owner?: string
 }
 
 export type PayReq = {

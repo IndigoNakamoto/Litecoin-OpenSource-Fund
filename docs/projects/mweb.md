@@ -1,14 +1,13 @@
 ---
 title: 'MWEB'
-nym: 'David Burkett'
 summary: 'MWEB improves privacy and scalability on the Litecoin blockchain. It leverages the MimbleWimble protocol to enable confidential transactions, which obscure the amounts being transferred, while also allowing for the pruning of old data from the blockchain, thus improving scalability.'
 website: '[Project Website]'
 coverImage: '/static/images/projects/MWEB-circle.png'
-git: '[GitHub Repository]'
 twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
 type: 'Project'
-contributor: 'satoshilite, davidBurkett38, ecurrencyhodler'
+contributor: 'satoshilite,davidBurkett38,ecurrencyhodler'
+owner: ''
 ---
 
 # **Enhancing Privacy and Scalability with MimbleWimble Extension Blocks on Litecoin**

@@ -9,6 +9,7 @@ twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
 type: 'Bounty'
 contributor: 'loshan1212'
+owner: ''
 ---
 
 # **Advancing Litecoin Ecosystem with Electrum-LTC Wallet Update**

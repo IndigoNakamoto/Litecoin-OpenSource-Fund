@@ -1,14 +1,16 @@
 ---
 title: 'OmniLite'
 summary: 'Extend the capabilities of the Litecoin blockchain with OmniLite, enabling custom token and digital asset creation, decentralized crowdfunding, and more.'
+git: '[GitHub Repository]'
+coverImage: '/static/images/projects/omnilite.svg'
 nym: 'OmniLayer'
 website: 'https://omnilite.org/'
-coverImage: '/static/images/projects/omnilite.svg'
-git: '[GitHub Repository]'
-twitter: 'litecoin'
+twitter: 'ltcfoundation'
 personalTwitter: 'litecoin'
+hidden: false
 type: 'Project'
 contributor: 'loshan1212'
+owner: ''
 ---
 
 ## Discover OmniLite

@@ -8,6 +8,8 @@ git: 'https://github.com/litecoin-project/litecoin'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
 type: 'Project'
+contributor: 'satoshilite,DavidBurkett38,loshan1212,shaolinfry,thrasher_au'
+owner: ''
 ---
 
 # **Enhancing Network Robustness and Performance with Litecoin Core**
