@@ -1,4 +1,4 @@
-//components/DonationForm.tsx
+// components/DonationForm.tsx
 import { useEffect, useRef, useState } from 'react'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
@@ -10,14 +10,13 @@ import Image from 'next/legacy/image'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 const EMAIL_REGEX = /^$|^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-// const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
 const TWITTER_USERNAME_REGEX = /^(?:[a-zA-Z0-9_]+)?$/
 
 type DonationStepsProps = {
   projectNamePretty: string
   projectSlug: string
 }
+
 const DonationSteps: React.FC<DonationStepsProps> = ({
   // projectNamePretty,
   projectSlug,
@@ -60,14 +59,16 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     return true
   }
 
+  // Form validation
+  const validateForm = () => {
+    const isEmailValid = validateEmail(email)
+    const isTwitterValid = validateTwitter(twitter)
+    const isNameOrDeductibleValid = deductable === 'no' || (name && email)
+    return isEmailValid && isTwitterValid && isNameOrDeductibleValid
+  }
+
   useEffect(() => {
-    let btcValid: boolean
-    if (deductable === 'no' || (name && email)) {
-      btcValid = true
-    } else {
-      btcValid = false
-    }
-    setReadyToPayBTC(btcValid)
+    return setReadyToPayBTC(validateForm())
   }, [deductable, twitter, email, name])
 
   async function handleBtcPay() {
