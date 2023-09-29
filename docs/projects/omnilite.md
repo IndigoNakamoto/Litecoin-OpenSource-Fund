@@ -2,7 +2,7 @@
 title: 'OmniLite'
 summary: 'Extend the capabilities of the Litecoin blockchain with OmniLite, enabling custom token and digital asset creation, decentralized crowdfunding, and more.'
 git: '[GitHub Repository]'
-coverImage: '/static/images/projects/omnilite.svg'
+coverImage: '/static/images/projects/omnilite2.png'
 nym: 'OmniLayer'
 website: 'https://omnilite.org/'
 twitter: 'ltcfoundation'
