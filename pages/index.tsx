@@ -134,7 +134,7 @@ export default function Home({
         <ProjectList
           projects={projects}
           openPaymentModal={openPaymentModal}
-          columns={3}
+          columns={2}
         />
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">

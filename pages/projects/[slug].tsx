@@ -112,12 +112,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       <div>
         <article className="lg:flex lg:flex-row lg:items-start">
           <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
-            <div className={'relative h-[18rem] w-full sm:h-[12rem] sm:w-full'}>
+            <div className={'relative h-[16rem] w-full sm:w-full'}>
               <Image
                 alt={title}
                 src={coverImage}
                 layout="fill"
-                objectFit="contain"
+                objectFit="cover"
                 objectPosition="50% 50%"
               />
             </div>
