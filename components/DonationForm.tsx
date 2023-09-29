@@ -63,11 +63,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const validateForm = (): boolean => {
     const isEmailValid = validateEmail(email)
     const isTwitterValid = validateTwitter(twitter)
-<<<<<<< HEAD
-    const isNameOrDeductibleValid = false
-=======
     const isNameOrDeductibleValid = true
->>>>>>> 49f4016 (Add Validation Logic to Disable Button on Error)
     return isEmailValid && isTwitterValid && isNameOrDeductibleValid
   }
 
