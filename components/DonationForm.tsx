@@ -139,10 +139,12 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             <span className="absolute left-2 top-2 text-gray-400">@</span>
             <input
               type="text"
-              placeholder={'username'} // Placeholder changed
+              placeholder={'username'}
               required={deductable === 'yes'}
               onChange={(e) => {
                 setTwitter(e.target.value)
+              }}
+              onBlur={(e) => {
                 validateTwitter(e.target.value)
               }}
               className={` mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
@@ -170,6 +172,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             required={deductable === 'yes'}
             onChange={(e) => {
               setEmail(e.target.value.trim())
+            }}
+            onBlur={(e) => {
               validateEmail(e.target.value)
             }}
           ></input>
