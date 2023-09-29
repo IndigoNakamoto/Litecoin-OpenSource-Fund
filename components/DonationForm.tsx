@@ -40,7 +40,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [twitterError, setTwitterError] = useState('')
 
   // Email validation
-  const validateEmail = (value: string) => {
+  const validateEmail = (value: string): boolean => {
     if (!EMAIL_REGEX.test(value)) {
       setEmailError('Invalid email address')
       return false
@@ -50,7 +50,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   }
 
   // Twitter validation
-  const validateTwitter = (value: string) => {
+  const validateTwitter = (value: string): boolean => {
     if (!TWITTER_USERNAME_REGEX.test(value)) {
       setTwitterError('Invalid username. Only a-z, 0-9 and _ are allowed.')
       return false
@@ -60,10 +60,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   }
 
   // Form validation
-  const validateForm = () => {
+  const validateForm = (): boolean => {
     const isEmailValid = validateEmail(email)
     const isTwitterValid = validateTwitter(twitter)
-    const isNameOrDeductibleValid = deductable === 'no' || (name && email)
+    const isNameOrDeductibleValid = false
     return isEmailValid && isTwitterValid && isNameOrDeductibleValid
   }
 
