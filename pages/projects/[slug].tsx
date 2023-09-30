@@ -9,7 +9,7 @@ import { ProjectItem, AddressStats } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
-import Link from 'next/link'
+// import Link from 'next/link'
 // import ShareButtons from '../../components/ShareButtons'
 import { fetchGetJSON } from '../../utils/api-helpers'
 import TwitterUsers from '../../components/TwitterUsers'
@@ -146,11 +146,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           </aside>
 
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
-            <Link href={website} className="no-underline">
-              <h1 className="pb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-                {title}
-              </h1>
-            </Link>
+            <h1 className="pb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+              {title}
+            </h1>
+
             <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               {summary}
             </p>
