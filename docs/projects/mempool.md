@@ -5,6 +5,7 @@ website: 'litecoinspace.org'
 coverImage: '/static/images/projects/litecoin-space.jpeg'
 type: 'Project'
 contributor: 'loshan1212'
+hashtag: '#Litecoin'
 ---
 
 # **Navigating the Transaction Landscape with Litecoin Mempool Explorer**

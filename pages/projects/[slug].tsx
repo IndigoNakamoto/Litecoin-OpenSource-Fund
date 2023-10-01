@@ -1,3 +1,4 @@
+//pages/projects/[slug].tsx
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
@@ -15,6 +16,7 @@ import { fetchGetJSON } from '../../utils/api-helpers'
 import TwitterUsers from '../../components/TwitterUsers'
 import { TwitterUser } from '../../utils/types'
 import Head from 'next/head'
+import ProjectMenu from '../../components/ProjectMenu'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -65,6 +67,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
+  // Add a state variable for the selected menu item.
+  const [selectedMenuItem, setSelectedMenuItem] = useState('project')
+
+  // Define a handler function for menu item changes.
+  const handleMenuItemChange = (newMenuItem) => {
+    setSelectedMenuItem(newMenuItem)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -111,6 +120,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div>
         <article className="lg:flex lg:flex-row lg:items-start">
+          {/* Aside */}
           <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
             <div className={'relative h-[16rem] w-full sm:w-full'}>
               <Image
@@ -144,7 +154,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               Donate
             </button>
           </aside>
-
+          {/* Body */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
             <h1 className="pb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
@@ -153,14 +163,48 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               {summary}
             </p>
-            {content && (
+            <ProjectMenu onMenuItemChange={handleMenuItemChange} />
+            {/* Use conditional rendering to change the displayed content. */}
+            {selectedMenuItem === 'project' && content && (
               <div
                 className="markdown"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
+            {selectedMenuItem === 'comments' && (
+              <div className="markdown">
+                {/* Render comments content here */}
+              </div>
+            )}
+            {selectedMenuItem === 'community' && (
+              <>
+                <div className="markdown">
+                  {twitterContributors.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterContributors.length > 1
+                          ? 'Contributors'
+                          : 'Contributor'}
+                      </h1>
+                      <TwitterUsers users={twitterContributors} />
+                    </>
+                  ) : null}
+                </div>
 
-            <div className="markdown">
+                <div className="markdown">
+                  {twitterUsers.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterUsers.length > 1 ? 'Supporters' : 'Supporter'}
+                      </h1>
+                      <TwitterUsers users={twitterUsers} />
+                    </>
+                  ) : null}
+                </div>
+              </>
+            )}
+
+            {/* <div className="markdown">
               {twitterContributors.length > 0 ? (
                 <>
                   <h1>
@@ -182,7 +226,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   <TwitterUsers users={twitterUsers} />
                 </>
               ) : null}
-            </div>
+            </div> */}
           </div>
         </article>
       </div>

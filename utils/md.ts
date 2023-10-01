@@ -19,6 +19,7 @@ const FIELDS = [
   'type',
   'contributor',
   'owner',
+  'hashtag',
 ]
 
 export function getPostSlugs() {

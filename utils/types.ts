@@ -13,6 +13,7 @@ export type ProjectItem = {
   type: string
   contributor?: string
   owner?: string
+  hashtag?: string
 }
 
 export type PayReq = {
