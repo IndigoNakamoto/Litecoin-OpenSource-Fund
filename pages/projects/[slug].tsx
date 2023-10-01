@@ -134,15 +134,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <div className="flex w-full items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
               {addressStats && (
                 <div className="">
-                  <h5>Raised</h5>
-                  <h4>Ł {addressStats.funded_txo_sum} </h4>
+                  <h5 className="text-xl font-bold">
+                    Ł {addressStats.funded_txo_sum}{' '}
+                  </h5>
+                  <h4 className="text-sm">Raised</h4>
                 </div>
               )}
 
               {addressStats && (
                 <div className="">
-                  <h5>Donations</h5>
-                  <h4>{addressStats.tx_count}</h4>
+                  <h5 className="text-xl font-bold">{addressStats.tx_count}</h5>
+                  <h4 className="text-sm">Donations</h4>
                 </div>
               )}
             </div>
@@ -167,12 +169,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* Use conditional rendering to change the displayed content. */}
             {selectedMenuItem === 'project' && content && (
               <div
-                className="markdown"
+                className="markdown min-h-[70vh]"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
             {selectedMenuItem === 'comments' && (
-              <div className="markdown">
+              <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
               </div>
             )}
