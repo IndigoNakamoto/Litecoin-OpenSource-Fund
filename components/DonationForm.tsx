@@ -1,7 +1,7 @@
-// components/DonationForm.tsx
 import { useEffect, useRef, useState } from 'react'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 // Font Awesome
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -107,6 +107,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     }
     setBtcpayLoading(false)
   }
+  const { data: session } = useSession()
 
   return (
     <form
@@ -129,34 +130,20 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3>
-            X{' '}
+            Twitter
             <span className="font-light text-gray-400">
-              (Optional: Your profile picture and X account will be publicaly
-              shared)
-            </span>{' '}
-            {/* Changed Twitter to X */}
+              (Optional: Your profile picture and Twitter account will be
+              publicly shared)
+            </span>
           </h3>
-          <div className="relative">
-            <span className="absolute left-2 top-2 text-gray-400">@</span>
-            <input
-              type="text"
-              placeholder={'username'}
-              required={deductable === 'yes'}
-              onChange={(e) => {
-                setTwitter(e.target.value)
-              }}
-              onBlur={(e) => {
-                validateTwitter(e.target.value)
-              }}
-              className={` mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
-                twitterError ? 'border-red-500' : ''
-              }`}
-              style={{ paddingLeft: '24px' }}
-            ></input>
-          </div>
-          {twitterError && (
-            <div className="mt-0">
-              <small className="text-red-500">{twitterError}</small>
+          {!session ? (
+            <button onClick={() => signIn('twitter')}>
+              Sign in with Twitter
+            </button>
+          ) : (
+            <div>
+              Signed in as {session.user.name}
+              <button onClick={() => signOut()}>Sign out</button>
             </div>
           )}
         </div>

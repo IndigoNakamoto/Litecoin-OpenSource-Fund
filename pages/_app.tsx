@@ -8,6 +8,7 @@ import 'styles/globals.css'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { SessionProvider } from 'next-auth/react' // <-- Import here
 
 import siteMetadata from '@/data/siteMetadata'
 import { Analytics } from 'pliny/analytics'
@@ -17,15 +18,20 @@ import LayoutWrapper from '@/components/LayoutWrapper'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
-      <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-      </Head>
-      <Analytics analyticsConfig={siteMetadata.analytics} />
-      <LayoutWrapper>
-        <SearchProvider searchConfig={siteMetadata.search}>
-          <Component {...pageProps} />
-        </SearchProvider>
-      </LayoutWrapper>
+      <SessionProvider session={pageProps.session}>
+        {' '}
+        {/* <-- Wrap your components here */}
+        <Head>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
+        </Head>
+        <Analytics analyticsConfig={siteMetadata.analytics} />
+        <LayoutWrapper>
+          <SearchProvider searchConfig={siteMetadata.search}>
+            <Component {...pageProps} />
+          </SearchProvider>
+        </LayoutWrapper>
+      </SessionProvider>{' '}
+      {/* <-- Close the wrapper here */}
     </ThemeProvider>
   )
 }
