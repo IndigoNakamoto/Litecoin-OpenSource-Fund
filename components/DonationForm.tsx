@@ -137,7 +137,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             </span>
           </h3>
           {!session ? (
-            <button onClick={() => signIn('twitter')}>
+            <button className="font-black" onClick={() => signIn('twitter')}>
               Sign in with Twitter
             </button>
           ) : (

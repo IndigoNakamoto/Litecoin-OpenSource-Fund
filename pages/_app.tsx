@@ -15,10 +15,13 @@ import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
-      <SessionProvider session={pageProps.session}>
+      <SessionProvider session={session}>
         {' '}
         {/* <-- Wrap your components here */}
         <Head>
