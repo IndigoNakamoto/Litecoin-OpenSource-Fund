@@ -151,7 +151,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded border border-stone-800 bg-stone-800 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-500 dark:bg-white dark:text-black dark:hover:bg-blue-500 sm:px-4 sm:py-2 sm:text-base"
+              className="hover:white block w-full rounded border bg-blue-500 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-600 dark:bg-white dark:text-black dark:hover:bg-blue-500 sm:px-4 sm:py-2 sm:text-base"
             >
               Donate
             </button>
@@ -176,6 +176,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {selectedMenuItem === 'comments' && (
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
+                <h1>#UnderConstruction</h1>
+                <h2>#UnderConstruction</h2>
+                <h3>#UnderConstruction</h3>
               </div>
             )}
             {selectedMenuItem === 'community' && (
