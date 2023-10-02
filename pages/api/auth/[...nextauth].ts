@@ -45,18 +45,29 @@ export default NextAuth({
   ],
   callbacks: {
     jwt: async ({ token, profile }) => {
-      console.log('PROFILE in JWT:', profile)
-      if (profile) {
-        const customProfile = profile as CustomProfile // Cast to CustomProfile
-        token.username = customProfile.data.username
+      try {
+        // console.log('PROFILE in JWT:', profile)
+        if (profile) {
+          const customProfile = profile as CustomProfile // Cast to CustomProfile
+          token.username = customProfile.data.username
+          console.log('CustomProfile in JWT: ', customProfile)
+        }
+        return token
+      } catch (error) {
+        console.error('Error in JWT callback:', error)
+        throw new Error('Failed to process JWT token.')
       }
-      return token
     },
     session: async ({ session, token, user }) => {
-      console.log('TOKEN in session: ', token)
-      const customSession = session as CustomSession
-      customSession.user.username = token.username as string // Cast to string to satisfy TypeScript
-      return customSession
+      try {
+        console.log('TOKEN in session: ', token)
+        const customSession = session as CustomSession
+        customSession.user.username = token.username as string // Cast to string to satisfy TypeScript
+        return customSession
+      } catch (error) {
+        console.error('Error in session callback:', error)
+        throw new Error('Failed to update user session.')
+      }
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
