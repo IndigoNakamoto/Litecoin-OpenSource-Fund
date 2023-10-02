@@ -1,3 +1,17 @@
+//utils/types.ts
+import 'next-auth'
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      username: string
+      name: string
+      id: string
+      image: string
+    }
+  }
+}
+
 export type ProjectItem = {
   title: string
   summary: string
