@@ -19,13 +19,15 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
 
   return (
     <nav className="mt-6 border-b border-t border-gray-300 dark:border-gray-700">
-      <ul className="flex space-x-4 text-gray-900 dark:text-gray-100">
+      <ul className="flex space-x-4  dark:text-gray-100">
         <li>
           <button
             onClick={() => handleMenuItemClick('project')}
             className={`${
-              activeItem === 'project' ? 'font-bold' : ''
-            } text-gray-700 text-gray-900 hover:text-black dark:text-gray-100 sm:p-4 md:inline-block`}
+              activeItem === 'project'
+                ? 'font-bold text-blue-500 hover:text-blue-600'
+                : 'text-gray-700 hover:text-blue-600'
+            }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
             Project
           </button>
@@ -34,8 +36,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
           <button
             onClick={() => handleMenuItemClick('comments')}
             className={`${
-              activeItem === 'comments' ? 'font-bold' : ''
-            } text-gray-700 text-gray-900 hover:text-black dark:text-gray-100 sm:p-4 md:inline-block`}
+              activeItem === 'comments'
+                ? 'font-bold text-blue-500 hover:text-blue-600'
+                : 'text-gray-700 hover:text-blue-600'
+            }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
             Comments
           </button>
@@ -44,8 +48,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
           <button
             onClick={() => handleMenuItemClick('community')}
             className={`${
-              activeItem === 'community' ? 'font-bold' : ''
-            } text-gray-700 text-gray-900 hover:text-black dark:text-gray-100 sm:p-4 md:inline-block`}
+              activeItem === 'community'
+                ? 'font-bold text-blue-500 hover:text-blue-600'
+                : 'text-gray-700 hover:text-blue-600'
+            }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
             Community
           </button>

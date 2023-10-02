@@ -13,7 +13,11 @@ button.group {
 }
 
 button.pay {
-  @apply rounded border border-blue-500 bg-transparent font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl rounded-xl flex justify-start gap-4;
+  @apply  border-blue-500 mt-2 bg-transparent font-semibold text-white hover:border-transparent flex-1 min-w-[20rem]  bg-blue-500 hover:bg-blue-600 p-8 text-xl rounded-xl flex justify-start gap-4;
+}
+
+button.twitter {
+  @apply border bg-transparent font-semibold text-blue-500 hover:border-transparent hover:bg-blue-300 hover:text-gray-700 flex-1 ml-2 border-gray-400 bg-white text-sm rounded-lg;
 }
 
 button.pay:disabled {
