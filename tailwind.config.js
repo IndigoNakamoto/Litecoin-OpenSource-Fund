@@ -35,6 +35,7 @@ module.exports = {
         gray: colors.neutral,
         blue: {
           500: '#345D9D',
+          600: '#2e528a',
         },
       },
       typography: (theme) => ({
