@@ -8,7 +8,7 @@ git: 'https://github.com/ynohtna92/ord-litecoin'
 twitter: 'OrdinalsLite'
 personalTwitter: 'OrdinalsLite'
 type: 'Project'
-contributor: 'anthonyonchain'
+contributor: 'anthonyonchain,rodarmor,raphjaph'
 owner: ''
 ---
 
