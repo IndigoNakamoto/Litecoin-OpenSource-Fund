@@ -1,4 +1,5 @@
 // Import the Session type from NextAuth
+//pages/pai/auth/[...nextauth].ts
 import { Session, Profile } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import NextAuth from 'next-auth'
@@ -58,5 +59,6 @@ export default NextAuth({
       return customSession
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
   // other options...
 })
