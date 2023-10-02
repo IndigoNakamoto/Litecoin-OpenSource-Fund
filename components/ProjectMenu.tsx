@@ -32,7 +32,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
             Project
           </button>
         </li>
-        <li>
+        {/* <li>
           <button
             onClick={() => handleMenuItemClick('comments')}
             className={`${
@@ -43,7 +43,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
           >
             Comments
           </button>
-        </li>
+        </li> */}
         <li>
           <button
             onClick={() => handleMenuItemClick('community')}
