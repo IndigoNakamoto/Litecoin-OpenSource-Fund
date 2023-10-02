@@ -162,14 +162,14 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3 className="mb-1">
-            Twitter
-            <span className="text-sm font-light text-gray-600">
-              (Optional: Your Twitter profile will be publically shared)
+            X
+            <span className="ml-1 text-sm font-light text-gray-600">
+              (Optional: Your X profile will be publicly shared)
             </span>
           </h3>
           {!session ? (
             <button className="twitter" onClick={() => signIn('twitter')}>
-              Sign in with Twitter
+              Sign in with X
             </button>
           ) : (
             <div className="flex items-center">
