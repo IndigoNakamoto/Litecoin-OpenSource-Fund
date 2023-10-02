@@ -1,3 +1,4 @@
+//components/DonationForm.tsx
 import { useEffect, useRef, useState } from 'react'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
@@ -108,6 +109,11 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     setBtcpayLoading(false)
   }
   const { data: session } = useSession()
+  useEffect(() => {
+    if (session) {
+      setTwitter(session.user.username)
+    }
+  }, [session])
 
   return (
     <form
@@ -118,11 +124,12 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       <section className="flex flex-col gap-1">
         <div className="mb-4">
           <h3>
-            Name <span className="font-light text-gray-400">(Optional)</span>
+            Name{' '}
+            <span className="text-sm font-light text-gray-600">(Optional)</span>
           </h3>
           <input
             type="text"
-            placeholder={'Satoshi Nakamoto'}
+            placeholder={'Satoshi Lite'}
             required={deductable === 'yes'}
             onChange={(e) => setName(e.target.value)}
             className=" mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
@@ -130,31 +137,13 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3>
-            Twitter
-            <span className="font-light text-gray-400">
-              (Optional: Your profile picture and Twitter account will be
-              publicly shared)
-            </span>
-          </h3>
-          {!session ? (
-            <button className="font-black" onClick={() => signIn('twitter')}>
-              Sign in with Twitter
-            </button>
-          ) : (
-            <div>
-              Signed in as {session.user.name}
-              <button onClick={() => signOut()}>Sign out</button>
-            </div>
-          )}
-        </div>
-        <div className="mb-4">
-          <h3>
-            Email <span className="font-light text-gray-400">(Optional)</span>
+            Email{' '}
+            <span className="text-sm font-light text-gray-600">(Optional)</span>
           </h3>
           <input
             type="email"
-            placeholder={`support@ltcfoundation.com`}
-            className={`mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
+            placeholder={`email@litecoin.net`}
+            className={` mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
               emailError ? 'border-red-500' : ''
             }`}
             required={deductable === 'yes'}
@@ -168,6 +157,36 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           {emailError && (
             <div className="mt-0">
               <small className="text-red-500">{emailError}</small>
+            </div>
+          )}
+        </div>
+        <div className="mb-4">
+          <h3 className="mb-1">
+            Twitter
+            <span className="text-sm font-light text-gray-600">
+              (Optional: Your Twitter profile will be publically shared)
+            </span>
+          </h3>
+          {!session ? (
+            <button className="twitter" onClick={() => signIn('twitter')}>
+              Sign in with Twitter
+            </button>
+          ) : (
+            <div className="flex items-center">
+              <Image
+                src={session.user.image}
+                alt={session.user.name}
+                width={40}
+                height={40}
+                className="h-36 w-36 rounded-full"
+                loading="lazy" // Apply lazy loading
+              />
+              <div className="ml-2 flex items-center">
+                @{session.user.username}
+                <button className="twitter" onClick={() => signOut()}>
+                  Sign out
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -189,7 +208,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               src={
                 isHovered
                   ? '/litecoin-svg/coin-white.svg'
-                  : '/litecoin-svg/coin-blue.svg'
+                  : '/litecoin-svg/coin-white.svg'
               }
               alt="Litecoin"
               width={32}
