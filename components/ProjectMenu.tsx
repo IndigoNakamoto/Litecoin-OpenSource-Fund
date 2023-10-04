@@ -32,7 +32,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
             Project
           </button>
         </li>
-        {/* <li>
+        <li>
           <button
             onClick={() => handleMenuItemClick('comments')}
             className={`${
@@ -41,9 +41,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
                 : 'text-gray-700 hover:text-blue-600'
             }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
-            Comments
+            #Messages
           </button>
-        </li> */}
+        </li>
         <li>
           <button
             onClick={() => handleMenuItemClick('community')}

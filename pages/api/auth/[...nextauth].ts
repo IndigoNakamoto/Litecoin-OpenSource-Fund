@@ -33,7 +33,7 @@ export default NextAuth({
       version: '2.0', // opt-in to Twitter OAuth 2.0
       profile(profile) {
         const { id, name, username, profile_image_url: image } = profile.data
-        console.log('PROFILE: ', profile)
+        // console.log('PROFILE: ', profile)
         return {
           id,
           name,
@@ -50,7 +50,7 @@ export default NextAuth({
         if (profile) {
           const customProfile = profile as CustomProfile // Cast to CustomProfile
           token.username = customProfile.data.username
-          console.log('CustomProfile in JWT: ', customProfile)
+          // console.log('CustomProfile in JWT: ', customProfile)
         }
         return token
       } catch (error) {
@@ -60,7 +60,7 @@ export default NextAuth({
     },
     session: async ({ session, token, user }) => {
       try {
-        console.log('TOKEN in session: ', token)
+        // console.log('TOKEN in session: ', token)
         const customSession = session as CustomSession
         customSession.user.username = token.username as string // Cast to string to satisfy TypeScript
         return customSession

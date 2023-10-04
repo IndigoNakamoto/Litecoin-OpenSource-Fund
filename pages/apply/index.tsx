@@ -33,7 +33,7 @@ export default function Apply({
           nym-friendly.
         </p>
         <p>
-          OpenSats does not discriminate in its grant selection process with
+          Lite.Space does not discriminate in its grant selection process with
           applicants, whether internal or external, because of race, creed,
           color, age, national origin, ancestry, religion, gender, sexual
           orientation, gender identity, disability, genetic information, veteran
@@ -50,46 +50,46 @@ export default function Apply({
           Website Listing
         </h2>
         <p className="mb-8">
-          Any FOSS project that is aligned with the OpenSats mission is free to
-          submit an application to be listed on the OpenSats website. Donors may
+          Any FOSS project that is aligned with the Lite.Space mission is free to
+          submit an application to be listed on the Lite.Space website. Donors may
           recommend their gifts be directed to specific projects on this list.
-          If you are helping Bitcoin and FOSS, please submit an application to
+          If you are helping Litecoin and FOSS, please submit an application to
           be listed on our site.
         </p>
         <Link
           href="/apply/to-be-listed"
           className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
-          Apply to be listed on OpenSats.org
+          Apply to be listed on Lite.Space
         </Link>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           General Grant
         </h2>
         <p className="mb-8">
-          General grants are funded by donations to the OpenSats General Fund
+          General grants are funded by donations to the Lite.Space General Fund
           and will be distributed quarterly by our board. We evaluate and assess
           all applications to make sure grants are awarded to high impact
-          projects in the Bitcoin space.
+          projects in the Litecoin space.
         </p>
         <Link
           href="/apply/grant"
           className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
-          Apply for an OpenSats General Grant
+          Apply for an Lite.Space General Grant
         </Link>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           Long-Term Support
         </h2>
         <p className="mb-8">
           We have a limited number of long-term support grants available for
-          projects that are critical to the Bitcoin ecosystem. These grants are
-          geared towards developers and maintainers of Bitcoin Core and similar.
+          projects that are critical to the Litecoin ecosystem. These grants are
+          geared towards developers and maintainers of Litecoin Core and similar.
         </p>
         <Link
           href="/apply/lts"
           className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
-          Apply for an OpenSats LTS Grant
+          Apply for an Lite.Space LTS Grant
         </Link>
       </PageSection>
     </>
