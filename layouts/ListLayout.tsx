@@ -76,8 +76,12 @@ export default function ListLayout({
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
   const filteredBlogPosts = posts.filter((post) => {
-    const searchContent = post.title + post.summary + post.tags.join(' ')
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
+    const searchContent = (
+      post.title +
+      post.summary +
+      (post.tags?.join(' ') ?? '')
+    ).toLowerCase()
+    return searchContent.includes(searchValue.toLowerCase())
   })
 
   // If initialDisplayPosts exist, display it if no searchValue is specified
@@ -143,7 +147,7 @@ export default function ListLayout({
                         </Link>
                       </h3>
                       <div className="flex flex-wrap">
-                        {tags.map((tag) => (
+                        {tags?.map((tag) => (
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
