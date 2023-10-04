@@ -6,9 +6,14 @@ import { ProjectItem } from '../utils/types'
 
 const ShareButtons: React.FC<{ project: ProjectItem }> = ({ project }) => {
   const { git, twitter, website } = project
+  // Define a default URL (you can replace with your actual URL)
+  const defaultGitUrl = 'https://github.com'
+
+  // Use the default URL if 'git' is undefined
+  const gitUrl = git || defaultGitUrl
   return (
     <div className="mb-4 flex space-x-4">
-      <Link href={git} passHref>
+      <Link href={gitUrl} passHref>
         <FontAwesomeIcon
           icon={faGithub}
           className="hover:text-primary h-[2rem] w-[2rem] cursor-pointer"
