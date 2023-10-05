@@ -22,11 +22,16 @@ export default function Apply({
         title="Apply to One of Lite.Spaces' Grant Programs"
         description="Global. Nym-friendly. Flexible."
       />
-      <MDXLayoutRenderer
-        layout={DEFAULT_LAYOUT}
-        content={apply}
-        MDXComponents={MDXComponents}
-      />
+      {apply ? (
+        <MDXLayoutRenderer
+          layout={DEFAULT_LAYOUT}
+          content={apply}
+          MDXComponents={MDXComponents}
+        />
+      ) : (
+        <h1>Content not found.</h1>
+      )}
+
       <PageSection title="Our Programs" image="/static/images/avatar.png">
         <p>
           All our programs are open to applicants worldwide. We are global and

@@ -27,6 +27,7 @@ export default function App({
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
         </Head>
+        {/* @ts-ignore */}
         <Analytics analyticsConfig={siteMetadata.analytics} />
         <LayoutWrapper>
           {/* @ts-ignore */}

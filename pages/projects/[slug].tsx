@@ -17,6 +17,7 @@ import TwitterUsers from '../../components/TwitterUsers'
 import { TwitterUser } from '../../utils/types'
 import Head from 'next/head'
 import ProjectMenu from '../../components/ProjectMenu'
+// import TwitterFeed from '../../components/TwitterFeed'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -174,12 +175,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               />
             )}
             {selectedMenuItem === 'comments' && (
+              // #MESSAGES SECTION!!
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
-                <h1>#UnderConstruction</h1>
-                <h2>#UnderConstruction</h2>
-                <h3>#UnderConstruction</h3>
+                <h1>#Messages</h1>
+                {/* <TwitterFeed hashtag="MWEB" /> */}
               </div>
+              // END OF MESSAGES SECTION.
             )}
             {selectedMenuItem === 'community' && (
               <>
@@ -208,30 +210,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 </div>
               </>
             )}
-
-            {/* <div className="markdown">
-              {twitterContributors.length > 0 ? (
-                <>
-                  <h1>
-                    {twitterContributors.length > 1
-                      ? 'Contributors'
-                      : 'Contributor'}
-                  </h1>
-                  <TwitterUsers users={twitterContributors} />
-                </>
-              ) : null}
-            </div>
-
-            <div className="markdown">
-              {twitterUsers.length > 0 ? (
-                <>
-                  <h1>
-                    {twitterUsers.length > 1 ? 'Supporters' : 'Supporter'}
-                  </h1>
-                  <TwitterUsers users={twitterUsers} />
-                </>
-              ) : null}
-            </div> */}
           </div>
         </article>
       </div>

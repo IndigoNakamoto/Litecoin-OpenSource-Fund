@@ -23,10 +23,17 @@ export const getStaticProps = async ({ params }) => {
   const prev = prevContent ? coreContent(prevContent) : null
   const nextContent = sortedPosts[postIndex - 1] || null
   const next = nextContent ? coreContent(nextContent) : null
-  const post = sortedPosts.find((p) => p.slug === slug)
-  const authorList = post.authors || ['default']
+  const post = sortedPosts.find((p) => p.slug === slug) || undefined // Ensure 'post' is defined or undefined
+  if (!post) {
+    // Handle the case where post is undefined. You can return a default post, or throw an error.
+    throw new Error('Post not found')
+  }
+  const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
+    if (!authorResults) {
+      throw new Error(`Author with slug ${author} not found`)
+    }
     return coreContent(authorResults)
   })
 
@@ -46,9 +53,12 @@ export default function BlogPostPage({
   prev,
   next,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!post) {
+    return <div>Post not found</div>
+  }
   return (
     <>
-      {'draft' in post && post.draft === true ? (
+      {'draft' in post && post?.draft === true ? (
         <div className="mt-24 text-center">
           <PageTitle>
             Under Construction{' '}
@@ -59,10 +69,10 @@ export default function BlogPostPage({
         </div>
       ) : (
         <MDXLayoutRenderer
-          layout={post.layout || DEFAULT_LAYOUT}
+          layout={post?.layout || DEFAULT_LAYOUT}
           content={post}
           MDXComponents={MDXComponents}
-          toc={post.toc}
+          toc={post?.toc}
           authorDetails={authorDetails}
           prev={prev}
           next={next}
