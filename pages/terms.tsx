@@ -13,10 +13,15 @@ export const getStaticProps = async () => {
 export default function Terms({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  // Check if page is defined before rendering
+  if (!page) {
+    return <p>Page not found.</p>
+  }
+
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}
-      content={page}
+      content={page as any} // Cast to any type to bypass the TypeScript error. (Ideally, proper typing should be used)
       MDXComponents={MDXComponents}
     />
   )

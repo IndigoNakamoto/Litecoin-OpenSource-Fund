@@ -1,6 +1,10 @@
 import { NewsletterAPI } from 'pliny/newsletter'
 import siteMetadata from '@/data/siteMetadata'
 
+if (!siteMetadata.newsletter) {
+  throw new Error('Newsletter configuration is missing in siteMetadata.')
+}
+
 export default NewsletterAPI({
   provider: siteMetadata.newsletter.provider,
 })

@@ -57,7 +57,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     // twitter,
     content,
     // nym,
-    website,
+    // website,
     // personalTwitter,
     contributor,
   } = project

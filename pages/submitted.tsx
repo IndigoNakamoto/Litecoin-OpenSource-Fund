@@ -13,6 +13,9 @@ export const getStaticProps = async () => {
 export default function Mission({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!page) {
+    return <div>Error: Submitted page content not found.</div>
+  }
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

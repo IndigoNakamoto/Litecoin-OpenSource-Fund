@@ -16,7 +16,7 @@ import { ProjectItem } from '../utils/types'
 import PaymentModal from '../components/PaymentModal'
 import { isBounty, isDevelopment, isProject } from './projects'
 import Typing from '@/components/Typing'
-import CustomLink from '@/components/Link'
+// import CustomLink from '@/components/Link'
 
 export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]

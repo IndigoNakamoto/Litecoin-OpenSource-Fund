@@ -13,6 +13,10 @@ export const getStaticProps = async () => {
 export default function FAQ({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!page) {
+    return <div>Error: FAQ page content not found.</div>
+  }
+
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

@@ -7,7 +7,7 @@ import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
-import Link from '@/components/Link'
+// import Link from '@/components/Link'
 import { isBounty } from 'pages/projects'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {

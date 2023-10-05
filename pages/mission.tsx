@@ -1,4 +1,3 @@
-// import { MDXLayoutRenderer } from '@/components/MDXComponents'
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
@@ -14,6 +13,10 @@ export const getStaticProps = async () => {
 export default function Mission({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!page) {
+    return <div>Error: Mission page content not found.</div>
+  }
+
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

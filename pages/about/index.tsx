@@ -4,13 +4,18 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
-import Credits from '@/components/Supporters'
+// import Credits from '@/components/Supporters'
 import Volunteers from '@/components/Volunteers'
 
 const DEFAULT_LAYOUT = 'AuthorLayout'
 
 export const getStaticProps = async () => {
   const openSats = allAuthors.find((p) => p.slug === 'default')
+  if (!openSats) {
+    // Handle the error, e.g., return a default value or throw an error.
+    throw new Error('Default author not found') // Just an example, adjust as per your requirements.
+  }
+
   const board = allAuthors
     .filter((p) => p.board === true)
     .sort(() => Math.random() - 0.5)
@@ -23,6 +28,9 @@ export default function About({
   board,
 }: // ops,
 InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!openSats) {
+    return <div>Author not found</div> // Handle the undefined openSats value.
+  }
   return (
     <>
       <MDXLayoutRenderer

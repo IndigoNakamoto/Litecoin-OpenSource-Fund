@@ -24,7 +24,9 @@ export const getStaticProps = async (context) => {
   const filteredPosts = allCoreContent(
     allBlogs.filter(
       (post) =>
-        post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(tag)
+        post.draft !== true &&
+        post.tags && // <-- Ensure post.tags is defined before proceeding.
+        post.tags.map((t) => kebabCase(t)).includes(tag)
     )
   )
 

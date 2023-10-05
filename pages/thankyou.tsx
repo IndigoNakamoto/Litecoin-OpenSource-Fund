@@ -13,6 +13,9 @@ export const getStaticProps = async () => {
 export default function ThankYou({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!page) {
+    return <div>Error: Thank you page content not found. But, Thank you! </div>
+  }
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

@@ -1,7 +1,7 @@
 // Import the Session type from NextAuth
 //pages/pai/auth/[...nextauth].ts
-import { Session, Profile } from 'next-auth'
-import { JWT } from 'next-auth/jwt'
+import { Session } from 'next-auth'
+// import { JWT } from 'next-auth/jwt'
 import NextAuth from 'next-auth'
 import TwitterProvider from 'next-auth/providers/twitter'
 
@@ -28,8 +28,8 @@ interface CustomProfile {
 export default NextAuth({
   providers: [
     TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
+      clientId: process.env.TWITTER_CLIENT_ID as string,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
       version: '2.0', // opt-in to Twitter OAuth 2.0
       profile(profile) {
         const { id, name, username, profile_image_url: image } = profile.data

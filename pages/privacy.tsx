@@ -13,6 +13,9 @@ export const getStaticProps = async () => {
 export default function Privacy({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!page) {
+    return <div>Error: Privacy page content not found.</div>
+  }
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}
