@@ -26,10 +26,11 @@ InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <MDXLayoutRenderer
-        layout={openSats.layout || DEFAULT_LAYOUT}
+        layout={openSats?.layout || DEFAULT_LAYOUT}
         content={openSats}
         MDXComponents={MDXComponents}
       />
+
       {/* List all members of the board */}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
@@ -44,8 +45,8 @@ InferGetStaticPropsType<typeof getStaticProps>) {
               <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
                 <Link href={`/about/${member.slug}`}>
                   <Image
-                    src={member.avatar}
-                    alt={member.name}
+                    src={member.avatar || ''}
+                    alt={member.name || ''}
                     width={120}
                     height={120}
                     className="h-36 w-36 rounded-full"

@@ -29,6 +29,7 @@ export default function App({
         </Head>
         <Analytics analyticsConfig={siteMetadata.analytics} />
         <LayoutWrapper>
+          {/* @ts-ignore */}
           <SearchProvider searchConfig={siteMetadata.search}>
             <Component {...pageProps} />
           </SearchProvider>

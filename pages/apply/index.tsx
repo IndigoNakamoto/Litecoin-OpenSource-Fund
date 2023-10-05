@@ -50,11 +50,11 @@ export default function Apply({
           Website Listing
         </h2>
         <p className="mb-8">
-          Any FOSS project that is aligned with the Lite.Space mission is free to
-          submit an application to be listed on the Lite.Space website. Donors may
-          recommend their gifts be directed to specific projects on this list.
-          If you are helping Litecoin and FOSS, please submit an application to
-          be listed on our site.
+          Any FOSS project that is aligned with the Lite.Space mission is free
+          to submit an application to be listed on the Lite.Space website.
+          Donors may recommend their gifts be directed to specific projects on
+          this list. If you are helping Litecoin and FOSS, please submit an
+          application to be listed on our site.
         </p>
         <Link
           href="/apply/to-be-listed"
@@ -83,7 +83,8 @@ export default function Apply({
         <p className="mb-8">
           We have a limited number of long-term support grants available for
           projects that are critical to the Litecoin ecosystem. These grants are
-          geared towards developers and maintainers of Litecoin Core and similar.
+          geared towards developers and maintainers of Litecoin Core and
+          similar.
         </p>
         <Link
           href="/apply/lts"
