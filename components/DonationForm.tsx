@@ -125,7 +125,9 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <div className="mb-4">
           <h3>
             Name{' '}
-            <span className="text-sm font-light text-gray-600">(Optional)</span>
+            <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+              (Optional)
+            </span>
           </h3>
           <input
             type="text"
@@ -138,7 +140,9 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <div className="mb-4">
           <h3>
             Email{' '}
-            <span className="text-sm font-light text-gray-600">(Optional)</span>
+            <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+              (Optional)
+            </span>
           </h3>
           <input
             type="email"
@@ -163,8 +167,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <div className="mb-4">
           <h3 className="mb-1">
             X
-            <span className="ml-1 text-sm font-light text-gray-600">
-              (Optional: Your X profile will be publicly shared)
+            <span className="ml-1 text-sm font-light text-gray-600 dark:text-gray-400">
+              (Optional: Your X profile will be publicly shared as a supporter)
             </span>
           </h3>
           {!session ? (
@@ -176,13 +180,18 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               <Image
                 src={session.user.image}
                 alt={session.user.name}
-                width={40}
-                height={40}
-                className="h-36 w-36 rounded-full"
+                width={45}
+                height={45}
+                className="rounded-full"
                 loading="lazy" // Apply lazy loading
               />
               <div className="ml-2 flex items-center">
-                @{session.user.username}
+                <div className="m-0 p-0">
+                  <h4 className="text-md font-bold">{session.user.name}</h4>
+                  <h4 className="text-md font-light text-gray-600 dark:text-gray-400">
+                    @{session.user.username}
+                  </h4>
+                </div>
                 <button className="twitter" onClick={() => signOut()}>
                   Sign out
                 </button>
