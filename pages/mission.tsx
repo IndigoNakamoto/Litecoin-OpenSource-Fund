@@ -1,7 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { MDXComponents } from '@/components/MDXComponents'
+import Image from 'next/image'
 
 const DEFAULT_LAYOUT = 'ListLayout'
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
@@ -21,10 +20,11 @@ export default function Mission({
   return (
     <>
       <div className="absolute inset-x-0 bottom-0 top-24 z-0">
-        <img
+        <Image
           src={FULL_SCREEN_IMAGE}
-          alt="Descriptive alt text"
-          className="h-full w-full object-cover"
+          alt="Mission - Promote the adoption, education & development of Litecoin (LTC)"
+          layout="fill"
+          objectFit="cover"
         />
       </div>
       <div className="absolute inset-x-0 bottom-0 top-[100px] z-10 flex items-center justify-center">
