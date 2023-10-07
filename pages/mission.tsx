@@ -28,12 +28,12 @@ export default function Mission({
           objectFit="cover"
         />
       </div>
-      <div className="z-9 absolute inset-x-0 bottom-0 top-[200px] flex items-center justify-center">
+      <div className="z-9 absolute inset-x-0 bottom-0 top-[250px] flex items-center justify-center">
         <div className="container px-6">
-          <h1 className="text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 lg:text-8xl xl:col-span-2">
+          <h1 className="text-center text-6xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-6xl sm:leading-10 md:text-6xl md:leading-14 lg:text-8xl xl:col-span-2">
             Mission
           </h1>
-          <h2 className="mb-4 text-center  font-bold leading-normal text-gray-100 md:text-4xl lg:text-6xl">
+          <h2 className="mb-4 text-center text-3xl font-bold leading-normal text-gray-100 md:text-4xl lg:text-5xl">
             Promote the adoption, education & development of Litecoin (LTC)
           </h2>
         </div>
