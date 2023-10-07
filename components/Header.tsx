@@ -41,7 +41,7 @@ const Header = () => {
                       router.pathname === link.href
                         ? 'font-bold'
                         : 'text-gray-900'
-                    } hover:text-blue-500 dark:text-gray-100 sm:p-3 md:inline-block`
+                    } hover:text-blue-500 dark:text-gray-100 dark:hover:text-blue-400 sm:p-3 md:inline-block`
               }
             >
               {link.title}

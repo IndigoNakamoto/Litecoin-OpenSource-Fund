@@ -25,8 +25,8 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
             onClick={() => handleMenuItemClick('project')}
             className={`${
               activeItem === 'project'
-                ? 'font-bold text-blue-500 hover:text-blue-600'
-                : 'text-gray-700 hover:text-blue-600'
+                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'text-gray-700 hover:text-blue-600 dark:hover:text-blue-400 '
             }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
             Project
@@ -37,8 +37,8 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
             onClick={() => handleMenuItemClick('comments')}
             className={`${
               activeItem === 'comments'
-                ? 'font-bold text-blue-500 hover:text-blue-600'
-                : 'text-gray-700 hover:text-blue-600'
+                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'text-gray-700 hover:text-blue-600 dark:hover:text-blue-400 '
             }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
             #Messages
@@ -49,8 +49,8 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
             onClick={() => handleMenuItemClick('community')}
             className={`${
               activeItem === 'community'
-                ? 'font-bold text-blue-500 hover:text-blue-600'
-                : 'text-gray-700 hover:text-blue-600'
+                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'text-gray-700 hover:text-blue-600 dark:hover:text-blue-400 '
             }   dark:text-gray-100 sm:p-4 md:inline-block`}
           >
             Community

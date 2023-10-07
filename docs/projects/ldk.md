@@ -27,6 +27,6 @@ Even if Rust isn’t your forte, there are several ways you can contribute to br
 - **Funders**: Support the developers by contributing to the bounty and ongoing development funds.
 - **Advocates**: Help spread the word and keep the momentum going.
 
-## Connect With Us:
+## #Message Us
 
 Open communication is paramount to the success of LDK. For real-time discussions, updates, and feedback, tweet **[@ltcfoundation](https://twitter.com/ltcfoundation)** using the hashtag **#LTCDevKit**. Dive in, share your thoughts, and let’s bring LDK to life together!
