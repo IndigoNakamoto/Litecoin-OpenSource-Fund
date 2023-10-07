@@ -58,7 +58,7 @@ export default function ApplicationForm() {
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('main_focus')}
         >
-          <option value="bitcoin">Litecoin</option>
+          <option value="litecoin">Litecoin</option>
           <option value="lightning">Lightning</option>
           <option value="other">Other</option>
         </select>
