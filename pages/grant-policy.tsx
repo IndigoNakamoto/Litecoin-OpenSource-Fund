@@ -6,10 +6,10 @@ import { MDXComponents } from '@/components/MDXComponents'
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
-  console.log(
-    'allPages: ',
-    allPages.map((page) => page.slug)
-  )
+//   console.log(
+//     'allPages: ',
+//     allPages.map((page) => page.slug)
+//   )
   const page = allPages.find((p) => p.slug === 'grant-policy')
   return { props: { page: page } }
 }

@@ -19,7 +19,7 @@ export default function ApplicationForm() {
 
   const onSubmit = async (data: any) => {
     setLoading(true)
-    console.log(data)
+    // console.log(data)
 
     try {
       // Track application in GitHub
