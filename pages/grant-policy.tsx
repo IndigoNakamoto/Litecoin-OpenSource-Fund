@@ -2,14 +2,15 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
+import React from 'react'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
-//   console.log(
-//     'allPages: ',
-//     allPages.map((page) => page.slug)
-//   )
+  //   console.log(
+  //     'allPages: ',
+  //     allPages.map((page) => page.slug)
+  //   )
   const page = allPages.find((p) => p.slug === 'grant-policy')
   return { props: { page: page } }
 }

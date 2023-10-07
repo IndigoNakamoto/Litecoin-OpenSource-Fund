@@ -5,6 +5,7 @@ import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
 import PageSection from '@/components/PageSection'
+import React from 'react'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 

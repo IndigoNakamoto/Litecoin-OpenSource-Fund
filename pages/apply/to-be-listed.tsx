@@ -1,5 +1,6 @@
 import WebsiteApplicationForm from '@/components/WebsiteApplicationForm'
 import PageSection from '@/components/PageSection'
+import React from 'react'
 // import CustomLink from '@/components/Link'
 
 export default function Apply() {
