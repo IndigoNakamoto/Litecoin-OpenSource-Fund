@@ -1,3 +1,4 @@
+//components/WebsiteApplicationForm.tsx
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -34,21 +35,8 @@ export default function ApplicationForm() {
         // Fail silently
       }
     } finally {
-      // Mail application to us
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', data)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
-        setLoading(false)
-      }
+      router.push('/submitted')
+      setLoading(false)
     }
   }
 

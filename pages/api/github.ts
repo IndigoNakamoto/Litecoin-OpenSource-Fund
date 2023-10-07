@@ -67,7 +67,7 @@ ${req.body.personal_github}
     const mainFocus = `${req.body.main_focus}`.toLowerCase()
     const issueLabels = [mainFocus]
     if (mainFocus === 'lightning') {
-      issueLabels.push('bitcoin') // LN = subset of Bitcoin
+      issueLabels.push('litecoin') // LN = subset of Litecoin
     }
 
     // Tag depending on request for grant and/or request for listing

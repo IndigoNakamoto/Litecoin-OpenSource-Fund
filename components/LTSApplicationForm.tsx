@@ -36,17 +36,17 @@ export default function ApplicationForm() {
     } finally {
       // Mail application to us
       try {
-        const res = await fetchPostJSON('/api/sendgrid', data)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
+        // const res = await fetchPostJSON('/api/sendgrid', data)
+        // if (res.message === 'success') {
+        // } else {
+        //   setFailureReason(res.message)
+        // }
       } catch (e) {
         if (e instanceof Error) {
           setFailureReason(e.message)
         }
       } finally {
+        router.push('/submitted')
         setLoading(false)
       }
     }
@@ -68,6 +68,7 @@ export default function ApplicationForm() {
       <input type="hidden" {...register('LTS', { value: true })} />
 
       <hr />
+      <h1>LTS Application</h1>
       <h2>Who Are You?</h2>
       <label className="block">
         Your Name *<br />
@@ -84,7 +85,7 @@ export default function ApplicationForm() {
         <input
           type="email"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-          placeholder="satoshin@gmx.com"
+          placeholder="satoshi@gmx.com"
           {...register('email', { required: true })}
         />
       </label>
@@ -99,8 +100,8 @@ export default function ApplicationForm() {
       <label className="block">
         Prior Contributions *<br />
         <small>
-          Describe the contributions you've made to Bitcoin Core or other
-          Bitcoin-related open-source projects.
+          Describe the contributions you've made to Litecoin Core or other
+          Litecoin-related open-source projects.
         </small>
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
@@ -124,7 +125,7 @@ export default function ApplicationForm() {
       <label className="block">
         Potential Impact *<br />
         <small>
-          Why is your work important to Bitcoin or the broader free and
+          Why is your work important to Litecoin or the broader free and
           open-source community?
         </small>
         <textarea
@@ -161,7 +162,7 @@ export default function ApplicationForm() {
           {...register('has_received_funding')}
         />
         <span className="ml-2">
-          I plan to receive or am receiving funding outside of OpenSats.
+          I plan to receive or am receiving funding outside of Lite.Space.
         </span>
       </label>
 
@@ -182,9 +183,8 @@ export default function ApplicationForm() {
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('main_focus')}
         >
-          <option value="bitcoin">Bitcoin</option>
+          <option value="litecoin">Litecoin</option>
           <option value="lightning">Lightning</option>
-          <option value="nostr">nostr</option>
           <option value="other">Other</option>
         </select>
       </label>
@@ -192,7 +192,7 @@ export default function ApplicationForm() {
       <label className="block">
         Any References? *<br />
         <small>
-          Please list any references from the Bitcoin community or open-source
+          Please list any references from the Litecoin community or open-source
           space that we could contact for more information on you or your
           project.
         </small>
@@ -215,16 +215,16 @@ export default function ApplicationForm() {
 
       <div className="prose">
         <small>
-          OpenSats may require each recipient to sign a Grant Agreement before
+          Lite.Space may require each recipient to sign a Grant Agreement before
           any funds are disbursed. Using the reports and presentations required
-          by the Grant Agreement, OpenSats will monitor and evaluate the
+          by the Grant Agreement, Lite.Space will monitor and evaluate the
           expenditure of funds on a quarterly basis. Any apparent misuse of
-          grant funds will be promptly investigated. If OpenSats discovers that
-          the funds have been misused, the recipient will be required to return
-          the funds immediately, and be barred from further distributions.
-          OpenSats will maintain the records required by Revenue Ruling 56-304,
-          1956-2 C.B. 306 regarding distribution of charitable funds to
-          individuals.
+          grant funds will be promptly investigated. If Lite.Space discovers
+          that the funds have been misused, the recipient will be required to
+          return the funds immediately, and be barred from further
+          distributions. Lite.Space will maintain the records required by
+          Revenue Ruling 56-304, 1956-2 C.B. 306 regarding distribution of
+          charitable funds to individuals.
         </small>
       </div>
 

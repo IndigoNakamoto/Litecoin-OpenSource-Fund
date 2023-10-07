@@ -19,7 +19,7 @@ export default function ApplicationForm() {
 
   const onSubmit = async (data: any) => {
     setLoading(true)
-    console.log(data)
+    // console.log(data)
 
     try {
       // Track application in GitHub
@@ -34,21 +34,8 @@ export default function ApplicationForm() {
         // Fail silently
       }
     } finally {
-      // Mail application to us
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', data)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
-        setLoading(false)
-      }
+      router.push('/submitted')
+      setLoading(false)
     }
   }
 
@@ -70,9 +57,8 @@ export default function ApplicationForm() {
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           {...register('main_focus')}
         >
-          <option value="bitcoin">Bitcoin</option>
+          <option value="litecoin">Litecoin</option>
           <option value="lightning">Lightning</option>
-          <option value="nostr">nostr</option>
           <option value="other">Other</option>
         </select>
       </label>
@@ -102,7 +88,7 @@ export default function ApplicationForm() {
       <label className="block">
         Potential Impact *<br />
         <small>
-          Why is this project important to Bitcoin or the broader free and
+          Why is this project important to Litecoin or the broader free and
           open-source community?
         </small>
         <textarea
@@ -244,7 +230,7 @@ export default function ApplicationForm() {
         <br />
         <small>
           Please list any prior contributions to other open-source or
-          Bitcoin-related projects.
+          Litecoin-related projects.
         </small>
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
@@ -254,7 +240,7 @@ export default function ApplicationForm() {
       <label className="block">
         References *<br />
         <small>
-          Please list any references from the Bitcoin community or open-source
+          Please list any references from the Litecoin community or open-source
           space that we could contact for more information on you or your
           project.
         </small>
@@ -265,9 +251,9 @@ export default function ApplicationForm() {
       </label>
       <div className="prose">
         <small>
-          Open Sats may require each recipient to sign a Grant Agreement before
+          Lite.space may require each recipient to sign a Grant Agreement before
           any funds are disbursed. Using the reports and presentations required
-          by the Grant Agreement, Open Sats will monitor and evaluate the
+          by the Grant Agreement, Lite.space will monitor and evaluate the
           expenditure of funds on a quarterly basis. Any apparent misuse of
           grant funds will be promptly investigated. If OpenSats discovers that
           the funds have been misused, the recipient will be required to return
