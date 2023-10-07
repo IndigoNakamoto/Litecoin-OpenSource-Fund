@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import Image from '@/components/Image'
 import PageHeading from '@/components/PageHeading'
+import React from 'react'
 
 interface Props {
   children: ReactNode

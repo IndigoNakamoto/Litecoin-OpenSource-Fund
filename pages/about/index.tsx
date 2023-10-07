@@ -6,6 +6,7 @@ import Image from '@/components/Image'
 import Link from '@/components/Link'
 // import Credits from '@/components/Supporters'
 import Volunteers from '@/components/Volunteers'
+import React from 'react'
 
 const DEFAULT_LAYOUT = 'AuthorLayout'
 
