@@ -81,7 +81,7 @@ export default function Apply({
           href="/apply/grant"
           className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
-          Apply for an Lite.Space General Grant
+          Apply for a Lite.Space General Grant
         </Link>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           Long-Term Support
@@ -96,7 +96,7 @@ export default function Apply({
           href="/apply/lts"
           className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 no-underline hover:text-black dark:hover:text-white"
         >
-          Apply for an Lite.Space LTS Grant
+          Apply for a Lite.Space LTS Grant
         </Link>
       </PageSection>
     </>
