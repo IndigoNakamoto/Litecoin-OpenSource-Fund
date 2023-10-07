@@ -169,7 +169,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           <h3 className="mb-1">
             X
             <span className="ml-1 text-sm font-light text-gray-600 dark:text-gray-400">
-              (Optional: Your X profile will be publicly shared as a supporter)
+              (Optional: Your X profile will be publicly shared as a community
+              supporter for this project)
             </span>
           </h3>
           {!session ? (
