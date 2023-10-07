@@ -36,7 +36,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   }
 
   function openPaymentModal() {
-    console.log('opening single project modal...')
+    // console.log('opening single project modal...')
     setSelectedProject(project)
     setModalOpen(true)
   }
@@ -120,7 +120,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         <title>{slug} - Lite.Space</title>
       </Head>
       <div>
-        <article className="lg:flex lg:flex-row lg:items-start">
+        <article className="mt-10 lg:flex lg:flex-row lg:items-start">
           {/* Aside */}
           <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
             <div className={'relative h-[16rem] w-full sm:w-full'}>
