@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
+import React from 'react'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
