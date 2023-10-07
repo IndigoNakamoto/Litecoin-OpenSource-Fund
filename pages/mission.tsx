@@ -28,7 +28,7 @@ export default function Mission({
           objectFit="cover"
         />
       </div>
-      <div className="z-9 absolute inset-x-0 bottom-0 top-[100px] flex items-center justify-center">
+      <div className="z-9 absolute inset-x-0 bottom-0 top-[200px] flex items-center justify-center">
         <div className="container px-6">
           <h1 className="text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 lg:text-8xl xl:col-span-2">
             Mission
