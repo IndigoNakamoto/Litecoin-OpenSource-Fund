@@ -8,6 +8,7 @@ git: 'opensats'
 twitter: 'ltcfoundation'
 hidden: false
 type: 'Development Fund'
+contributor: 'ltcfoundation'
 ---
 
 # **Propelling Litecoin Open-Source Ventures with The General Fund**
