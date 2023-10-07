@@ -18,7 +18,7 @@ const MobileNav = () => {
   }
 
   return (
-    <div className="md:hidden">
+    <div className="z-100 md:hidden">
       <button
         className="ml-1 mr-1 h-8 w-8 rounded py-1"
         aria-label="Toggle Menu"
@@ -38,7 +38,7 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`fixed left-0 top-0 z-10 h-full w-full transform bg-gray-200 opacity-95 duration-300 ease-in-out dark:bg-gray-800 ${
+        className={`RIGHT fixed left-1 top-1 z-10 h-full w-full transform bg-gray-800 opacity-95 duration-300 ease-in-out  ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -67,7 +67,7 @@ const MobileNav = () => {
             <div key={link.title} className="px-12 py-4">
               <Link
                 href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                className="text-2xl font-bold tracking-widest text-gray-100 dark:text-gray-100"
                 onClick={onToggleNav}
               >
                 {link.title}

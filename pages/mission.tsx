@@ -2,11 +2,12 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import Image from 'next/image'
 
-const DEFAULT_LAYOUT = 'ListLayout'
-const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
+// const DEFAULT_LAYOUT = 'ListLayout'
+const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg-lg.jpg'
 
 export const getStaticProps = async () => {
-  const page = allPages.find((p) => p.slug === 'mission')
+  // const page = allPages.find((p) => p.slug === 'mission')
+  const page = true
   return { props: { page: page } }
 }
 
@@ -27,12 +28,12 @@ export default function Mission({
           objectFit="cover"
         />
       </div>
-      <div className="absolute inset-x-0 bottom-0 top-[100px] z-10 flex items-center justify-center">
+      <div className="z-9 absolute inset-x-0 bottom-0 top-[100px] flex items-center justify-center">
         <div className="container px-6">
-          <h1 className="text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
+          <h1 className="text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 lg:text-8xl xl:col-span-2">
             Mission
           </h1>
-          <h2 className="mb-4 text-center text-xl font-bold leading-normal text-gray-100 md:text-5xl">
+          <h2 className="mb-4 text-center  font-bold leading-normal text-gray-100 md:text-4xl lg:text-6xl">
             Promote the adoption, education & development of Litecoin (LTC)
           </h2>
         </div>
