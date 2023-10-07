@@ -38,7 +38,7 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`RIGHT fixed left-1 top-1 z-10 h-full w-full transform bg-gray-800 opacity-95 duration-300 ease-in-out  ${
+        className={`RIGHT fixed left-0 top-0 z-10 h-full w-full transform bg-gray-800 opacity-95 duration-300 ease-in-out  ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -52,7 +52,7 @@ const MobileNav = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="h-8 w-8 text-gray-900 dark:text-gray-100"
+              className="h-8 w-8 text-gray-100"
             >
               <path
                 fillRule="evenodd"
