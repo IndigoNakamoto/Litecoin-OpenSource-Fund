@@ -8,7 +8,7 @@ git: 'https://github.com/litecoin-project/litecoin'
 twitter: 'litecoin'
 personalTwitter: 'litecoin'
 type: 'Project'
-contributor: 'satoshilite,DavidBurkett38,loshan1212,shaolinfry,thrasher_au'
+contributor: 'satoshilite,TheRealXinxi,DavidBurkett38,loshan1212,thrasher_au,shaolinfry'
 owner: ''
 ---
 
