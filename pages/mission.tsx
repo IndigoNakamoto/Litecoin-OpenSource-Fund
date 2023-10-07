@@ -3,7 +3,7 @@ import { allPages } from 'contentlayer/generated'
 import Image from 'next/image'
 
 // const DEFAULT_LAYOUT = 'ListLayout'
-const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg-lg.jpg'
+const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
 
 export const getStaticProps = async () => {
   // const page = allPages.find((p) => p.slug === 'mission')
