@@ -35,8 +35,18 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Bounties - Lite.Space</title>
       </Head>
-      <h1>Open Bounties</h1>
+      <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
+        Bounties
+      </h1>
       <section className="flex flex-col p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
+          <h2
+            id="funds"
+            className="text-lg font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-3xl md:leading-14 xl:col-span-2"
+          >
+            Open Bounties
+          </h2>
+        </div>
         <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
