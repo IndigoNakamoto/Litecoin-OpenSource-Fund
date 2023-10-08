@@ -202,6 +202,26 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           )}
         </div>
       </section>
+      <section className="mb-4 border-t pt-4">
+        <h3 className="text-md mb-2 font-semibold">Donation Information</h3>
+        <p className="mb-2 text-sm">
+          <strong>100% Passthrough:</strong> Yes, our operational costs aren't
+          covered by your donations to projects.
+        </p>
+        <p className="mb-2 text-sm">
+          <strong>Tax Deductibility:</strong> Donations are currently not tax
+          deductible. Lite.space is registered under The Litecoin Foundation in
+          Singapore (UEN: 201709179W). For US citizens considering donations
+          over $5,000, please{' '}
+          <a
+            href="mailto:support@lite.space"
+            className="font-semibold text-blue-600 dark:text-blue-400"
+          >
+            contact us
+          </a>{' '}
+          for more information.
+        </p>
+      </section>
 
       <div className="flex flex-wrap items-center justify-center gap-4">
         <button
