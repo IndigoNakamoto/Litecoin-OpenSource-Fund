@@ -4,7 +4,7 @@ summary: 'A cross-platform library for building Litecoin wallets with ease.'
 website: 'litecoindevkit.org'
 coverImage: '/static/images/projects/ldk.png'
 type: 'Project'
-contributor: 'afilini,notmandatory,danielabrozzoni,evanlinjin,LLFourn'
+contributor: 'afilini,notmandatory,danielabrozzoni,evanlinjin,LLFourn,RajarshiMaitra'
 hashtag: '#Litecoin'
 ---
 
