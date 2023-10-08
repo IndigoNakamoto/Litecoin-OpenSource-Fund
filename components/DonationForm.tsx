@@ -119,7 +119,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   return (
     <form
       ref={formRef}
-      className="flex flex-col gap-4"
+      className="z-10 flex flex-col gap-4"
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
