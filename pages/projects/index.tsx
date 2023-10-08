@@ -16,6 +16,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
   const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
+  const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
     setSortedProjects(projects.filter(isProject))
@@ -24,6 +25,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         .filter(isDevelopment)
         .sort((a, b) => a.title.localeCompare(b.title))
     )
+    setBountyProjects(projects.filter(isBounty))
   }, [projects])
 
   function closeModal() {
@@ -56,6 +58,24 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
+              <li key={i} className="">
+                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              </li>
+            ))}
+        </ul>
+      </section>
+      <section className="flex flex-col p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
+          <h2
+            id="funds"
+            className="text-lg font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-3xl md:leading-14 xl:col-span-2"
+          >
+            Open Bounties
+          </h2>
+        </div>
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+          {bountyProjects &&
+            bountyProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
