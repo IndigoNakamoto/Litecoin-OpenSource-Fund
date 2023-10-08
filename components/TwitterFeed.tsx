@@ -23,7 +23,6 @@ const TwitterFeed = ({ hashtag }) => {
       {tweets ? (
         tweets.map((tweetId) => (
           <div key={tweetId}>
-            <h1>{tweetId}</h1>
             <Tweet id={tweetId} />
           </div>
         ))
