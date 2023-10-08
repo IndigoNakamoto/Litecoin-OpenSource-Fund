@@ -4,7 +4,7 @@ summary: 'Our mempool and blockchain explorer for the Litecoin community, focusi
 website: 'litecoinspace.org'
 coverImage: '/static/images/projects/litecoin-space.jpeg'
 type: 'Project'
-contributor: 'loshan1212,mononautical'
+contributor: 'mononautical,loshan1212'
 hashtag: '#Litecoin'
 ---
 

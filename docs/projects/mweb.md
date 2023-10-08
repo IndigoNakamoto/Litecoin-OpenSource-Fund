@@ -6,7 +6,7 @@ coverImage: '/static/images/projects/MWEB.webp'
 twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
 type: 'Project'
-contributor: 'satoshilite,davidBurkett38,ecurrencyhodler'
+contributor: 'davidBurkett38,satoshilite,ecurrencyhodler'
 owner: ''
 ---
 
