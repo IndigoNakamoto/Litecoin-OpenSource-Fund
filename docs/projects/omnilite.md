@@ -9,7 +9,7 @@ twitter: 'ltcfoundation'
 personalTwitter: 'litecoin'
 hidden: false
 type: 'Project'
-contributor: 'loshan1212'
+contributor: 'Omni_layer,loshan1212'
 owner: ''
 ---
 
