@@ -61,6 +61,7 @@ module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
+    transpilePackages: ['react-tweet'],
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     images: {
       domains: ['pbs.twimg.com', 'abs.twimg.com'], // Add this line
