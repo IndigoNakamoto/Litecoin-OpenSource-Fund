@@ -179,7 +179,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               // #MESSAGES SECTION!!
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
-                <h1>#Messages</h1>
+                <h1>{`${hashtag}`}</h1>
                 <TwitterFeed hashtag={hashtag} />
               </div>
               // END OF MESSAGES SECTION.

@@ -11,7 +11,7 @@ hidden: false
 type: 'Project'
 contributor: 'Omni_layer,loshan1212'
 owner: ''
-hashtag: 'OmniLite'
+hashtag: '#OmniLite'
 ---
 
 ## Discover OmniLite
