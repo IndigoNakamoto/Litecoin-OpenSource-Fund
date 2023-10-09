@@ -9,8 +9,7 @@ twitter: 'litecoin'
 personalTwitter: 'litecoin'
 type: 'Project'
 contributor: 'satoshilite,TheRealXinxi,DavidBurkett38,loshan1212,thrasher_au,shaolinfry'
-hashtag: 'ltcfoundation'
-owner: '#LitecoinCore'
+hashtag: '#LitecoinCore'
 ---
 
 # **Enhancing Network Robustness and Performance with Litecoin Core**
