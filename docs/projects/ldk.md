@@ -5,7 +5,7 @@ website: 'litecoindevkit.org'
 coverImage: '/static/images/projects/ldk.png'
 type: 'Project'
 contributor: 'afilini,notmandatory,danielabrozzoni,evanlinjin,LLFourn,RajarshiMaitra'
-hashtag: '#Litecoin'
+hashtag: '#LTCDevKit'
 ---
 
 # Litecoin Development Kit (LDK)

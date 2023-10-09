@@ -17,7 +17,7 @@ import TwitterUsers from '../../components/TwitterUsers'
 import { TwitterUser } from '../../utils/types'
 import Head from 'next/head'
 import ProjectMenu from '../../components/ProjectMenu'
-// import TwitterFeed from '../../components/TwitterFeed'
+import TwitterFeed from '../../components/TwitterFeed'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -60,6 +60,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     // website,
     // personalTwitter,
     contributor,
+    hashtag,
   } = project
 
   // const [stats, setStats] = useState<Stats>()
@@ -179,7 +180,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
                 <h1>#Messages</h1>
-                {/* <TwitterFeed hashtag="MWEB" /> */}
+                <TwitterFeed hashtag={hashtag} />
               </div>
               // END OF MESSAGES SECTION.
             )}

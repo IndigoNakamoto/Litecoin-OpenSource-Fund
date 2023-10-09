@@ -10,6 +10,7 @@ personalTwitter: 'OrdinalsLite'
 type: 'Project'
 contributor: 'raphjaph,indigo_nakamoto,anthonyonchain,lukewrightmain,jamesscaur,rodarmor'
 owner: ''
+hashtag: '#OrdinalsLite'
 ---
 
 # **Exploring New Frontiers with Ordinals Lite**

@@ -49,13 +49,15 @@
   },
   "include": [
     "next-env.d.ts",
+    "src/**/*",
+    "data/tweets.json",
     "**/*.js",
     "**/*.ts",
     "**/*.tsx",
     ".contentlayer/generated",
     ".contentlayer/generated/**/*.json",
     ".next/types/**/*.ts"
-  ],
+],
   "exclude": [
     "node_modules"
   ]

@@ -8,6 +8,7 @@ personalTwitter: '[Personal Twitter Handle]'
 type: 'Project'
 contributor: 'davidBurkett38,satoshilite,ecurrencyhodler'
 owner: ''
+hashtag: '#MWEB'
 ---
 
 # **Enhancing Privacy and Scalability with MimbleWimble Extension Blocks on Litecoin**

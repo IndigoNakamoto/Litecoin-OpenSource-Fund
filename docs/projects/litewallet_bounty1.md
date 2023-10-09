@@ -11,6 +11,7 @@ personalTwitter: '@litecoin'
 type: 'Bounty'  # Replace with the appropriate type of the project if known.
 contributor: 'SatoshiLite,bigkerrytweets,claudia14083392,Pat_McDermott17,ferencakIvan,josi_kie'
 owner: 'bigkerrytweets'
+hashtag: 'litewallet'
 ---
 
 ## Embark on a Mission with Litewallet
