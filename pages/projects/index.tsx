@@ -42,7 +42,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Lite.Space | Projects</title>
       </Head>
-      <h1 className="mt-10 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
+      <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-5xl md:leading-14">
         Explore Projects
       </h1>
 
