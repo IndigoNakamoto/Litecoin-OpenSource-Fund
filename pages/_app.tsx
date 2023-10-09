@@ -11,7 +11,8 @@ import Head from 'next/head'
 import { SessionProvider } from 'next-auth/react' // <-- Import here
 
 import siteMetadata from '@/data/siteMetadata'
-import { Analytics } from 'pliny/analytics'
+// import { Analytics } from 'pliny/analytics'
+import { Analytics } from '@vercel/analytics/react'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
 
@@ -28,7 +29,7 @@ export default function App({
           <meta content="width=device-width, initial-scale=1" name="viewport" />
         </Head>
         {/* @ts-ignore */}
-        <Analytics analyticsConfig={siteMetadata.analytics} />
+        <Analytics analyticsConfig={...pageProps} />
         <LayoutWrapper>
           {/* @ts-ignore */}
           <SearchProvider searchConfig={siteMetadata.search}>
