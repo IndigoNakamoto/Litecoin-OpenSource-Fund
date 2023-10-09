@@ -21,6 +21,7 @@ export default function Mission({
 
   return (
     <>
+      {/* background */}
       <div className="absolute inset-x-0 bottom-0 top-24 z-0">
         <Image
           src={FULL_SCREEN_IMAGE}
@@ -29,20 +30,21 @@ export default function Mission({
           objectFit="cover"
         />
       </div>
-      <div className="relative inset-x-0 bottom-0 top-[200px] z-10 flex flex-col items-center justify-center  md:absolute md:bottom-20 lg:bottom-24 xl:bottom-32">
+      {/* Content */}
+      <div className="z-1 relative inset-x-0 bottom-0 top-1/4 flex flex-col items-center justify-center md:bottom-20 lg:bottom-24 xl:bottom-32">
         <Image
           src={COIN}
           alt=""
           width={300}
           height={300}
           objectFit="cover"
-          className="mb-36"
+          className="lg:mb-30 mb-10 sm:mb-10 md:mb-20"
         />
         <div className="container px-6">
-          <h1 className="text-center text-6xl font-extrabold leading-9 tracking-tight text-gray-100 sm:text-6xl sm:leading-10 md:text-6xl md:leading-14 lg:text-7xl xl:col-span-2">
+          <h1 className="text-center text-5xl font-extrabold leading-9 tracking-tight text-gray-100 sm:leading-10 md:text-6xl md:leading-14 lg:text-7xl xl:col-span-2">
             Mission
           </h1>
-          <h2 className="mb-4 text-center text-3xl font-bold leading-normal text-gray-100 md:text-4xl lg:text-4xl">
+          <h2 className="mb-4 text-center text-3xl font-bold leading-normal text-gray-100 md:text-4xl lg:text-5xl">
             Promote the adoption, education & development of Litecoin (LTC)
           </h2>
         </div>

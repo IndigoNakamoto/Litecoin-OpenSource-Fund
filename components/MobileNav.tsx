@@ -38,9 +38,10 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`RIGHT fixed left-0 top-0 z-10 h-full w-full transform bg-gray-800 opacity-95 duration-300 ease-in-out  ${
+        className={`fixed left-0 top-0 z-10 h-full w-full transform backdrop-blur-lg duration-300 ease-in-out  ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
+        style={{ backgroundColor: 'rgba(12, 12, 12, 0.65)' }} // Using RGBA to achieve 40% transparency on a dark background
       >
         <div className="flex justify-end">
           <button
