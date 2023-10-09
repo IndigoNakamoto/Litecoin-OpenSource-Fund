@@ -19,7 +19,7 @@ export default function Typing() {
         'Knowledge',
         'Outreach',
       ],
-      typeSpeed: 45,
+      typeSpeed: 68,
       loop: true,
       cursorChar: '▍',
     })
