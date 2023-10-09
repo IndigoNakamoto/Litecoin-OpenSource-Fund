@@ -8,11 +8,10 @@ dotenv.config()
 const fetchTweetsByHashtag = async (hashtag) => {
   const bearerToken =
     'AAAAAAAAAAAAAAAAAAAAAGKzXwEAAAAAepiSSyK3gA4XnuXxuNQkSPMsJyE%3DPrIyeQdG0d7spVUf6tuUMjATZ0y3ElNOwmI8Jc7zMSRvR9jyBV'
-  console.log('bearerToken: ', bearerToken)
 
   const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
   const params = {
-    query: `#${hashtag} -is:retweet`,
+    query: `${hashtag} -is:retweet`,
     'tweet.fields': 'id',
   }
 
@@ -26,18 +25,29 @@ const fetchTweetsByHashtag = async (hashtag) => {
   })
   if (response.statusCode === 200) {
     const tweetsData = response.body
-    console.log(`Full Twitter response for ${hashtag}: ${tweetsData}`)
-    const tweet_ids = tweetsData.data.map((tweet) => tweet.id)
-    return tweet_ids
+    console.log(`Full Twitter response for ${hashtag}:`, tweetsData) // Made a small correction here for better logging
+
+    if (tweetsData && tweetsData.data) {
+      return tweetsData.data.map((tweet) => tweet.id)
+    } else {
+      console.warn(`No tweets found for hashtag: ${hashtag}`)
+      return [] // Return empty array if no tweets are found
+    }
   } else {
-    console.error('Error details:', response.body) // <-- Add this line for more details
+    console.error('Error details:', response.body)
     throw new Error('Failed to fetch tweets')
   }
 }
 
 const main = async () => {
   try {
-    const hashtags = ['mweb', 'litecoinfam', 'paywithlitecoin', 'Ordinals'] // Add your desired hashtags here
+    const hashtags = [
+      'mweb ltc',
+      'litecoinfam',
+      'paywithlitecoin',
+      'ltc ordinal',
+      'LitecoinCore',
+    ] // Add your desired hashtags here
     let tweets = {}
 
     for (let hashtag of hashtags) {
