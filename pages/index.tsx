@@ -31,7 +31,7 @@ export default function Mission({
         />
       </div>
       {/* Content */}
-      <div className="z-1 relative inset-x-0 bottom-0 top-1/2 flex flex-col items-center justify-center lg:top-1/4">
+      <div className="z-1 sm:1/4 relative inset-x-0 bottom-0 top-1/2 flex flex-col items-center justify-center">
         <Image
           src={COIN}
           alt=""
@@ -41,7 +41,7 @@ export default function Mission({
           className="mb-10 w-1/4"
         />
         <div className="container mt-10">
-          <h1 className="text-center text-3xl font-extrabold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
+          <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
             Mission
           </h1>
           <h2 className="mb-4 text-center text-xl font-light leading-normal text-gray-100 md:text-2xl lg:text-3xl">
