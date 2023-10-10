@@ -2,7 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 import { ProjectItem } from './types'
-const postsDirectory = join(process.cwd(), 'docs/projects')
+const postsDirectory = join(process.cwd(), 'data/projects')
 
 const FIELDS = [
   'title',
