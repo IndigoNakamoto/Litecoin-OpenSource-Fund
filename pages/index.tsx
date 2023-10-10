@@ -21,37 +21,39 @@ export default function Mission({
 
   return (
     <>
-      {/* background */}
-      <div className="bottom-30 absolute inset-x-0 bottom-32 top-24 z-0">
+      {/* background image*/}
+      <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black">
         <Image
           src={FULL_SCREEN_IMAGE}
           alt="Mission - Promote the adoption, education & development of Litecoin (LTC)"
           layout="fill"
           objectFit="cover"
         />
-      </div>
-      {/* Content */}
-      <div className="z-1 sm:1/4 relative inset-x-0 bottom-0 top-1/2 flex flex-col items-center justify-center">
-        <Image
-          src={COIN}
-          alt=""
-          width={300}
-          height={300}
-          objectFit="cover"
-          className="mb-10 w-1/4"
-        />
-        <div className="container mt-10">
-          <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
-            Mission
-          </h1>
-          <h2 className="mb-4 text-center text-xl font-light leading-normal text-gray-100 md:text-2xl lg:text-3xl">
-            Empowering individuals and communities globally by advocating for
-            and advancing Litecoin (LTC) through fostering adoption, education,
-            and development, all toward building a decentralized and inclusive
-            financial future.
-          </h2>
+        <div className="z-1 relative inset-x-0 mt-24 flex flex-col items-center justify-center 2xl:mt-28 3xl:mt-28">
+          {/* Litecoin logo */}
+          <Image
+            src={COIN}
+            alt=""
+            width={300}
+            height={300}
+            objectFit="cover"
+            className="w-32 md:w-60 xl:w-80"
+          />
+          {/* Litecoin mission statement */}
+          <div className="container sm:mt-10 md:mt-24">
+            <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
+              Mission
+            </h1>
+            <h2 className="mb-4 text-center text-xl font-light leading-normal text-gray-100 md:text-2xl lg:text-3xl">
+              Empowering individuals and communities globally by advocating for
+              and advancing Litecoin (LTC) through fostering adoption,
+              education, and development, all toward building a decentralized
+              and inclusive financial future.
+            </h2>
+          </div>
         </div>
       </div>
+      {/* Content */}
     </>
   )
 }

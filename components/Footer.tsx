@@ -5,8 +5,8 @@ import SocialIcon from '@/components/social-icons'
 export default function Footer() {
   return (
     <footer>
-      <div className="z-9 mb-4 mt-16 flex flex-col items-center">
-        <div className="mb-3 flex space-x-4">
+      <div className="z-9 flex h-32 flex-col items-center">
+        <div className="my-3 flex space-x-4">
           <SocialIcon
             kind="mail"
             href={`mailto:${siteMetadata.email}`}
@@ -18,7 +18,7 @@ export default function Footer() {
           <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
           <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
         </div>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+        <div className="mb-2 flex space-x-1 text-sm text-gray-500 dark:text-gray-400">
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{siteMetadata.author}</div>
           <div>·</div>
@@ -33,10 +33,7 @@ export default function Footer() {
           Litecoin Foundation, Inc. Singapore (UEN: 201709179W) is a non-profit
           organization.
           <br />
-          {/* All gifts and donations are tax-deductible to the full extent of the
-          law. */}
         </div>
-        <div className="mb-2 flex space-x-2 text-xs text-gray-500 dark:text-gray-400"></div>
       </div>
     </footer>
   )
