@@ -22,7 +22,7 @@ export default function Mission({
   return (
     <>
       {/* background */}
-      <div className="absolute inset-x-0 bottom-0 top-24 z-0">
+      <div className="bottom-30 absolute inset-x-0 bottom-32 top-24 z-0">
         <Image
           src={FULL_SCREEN_IMAGE}
           alt="Mission - Promote the adoption, education & development of Litecoin (LTC)"
@@ -31,21 +31,24 @@ export default function Mission({
         />
       </div>
       {/* Content */}
-      <div className="z-1 relative inset-x-0 bottom-0 top-1/4 flex flex-col items-center justify-center md:bottom-20 lg:bottom-24 xl:bottom-32">
+      <div className="z-1 relative inset-x-0 bottom-0 top-1/2 flex flex-col items-center justify-center lg:top-1/4">
         <Image
           src={COIN}
           alt=""
           width={300}
           height={300}
           objectFit="cover"
-          className="lg:mb-30 mb-10 sm:mb-10 md:mb-20"
+          className="mb-10 w-1/4"
         />
-        <div className="container px-6">
-          <h1 className="text-center text-5xl font-extrabold leading-9 tracking-tight text-gray-100 sm:leading-10 md:text-6xl md:leading-14 lg:text-7xl xl:col-span-2">
+        <div className="container mt-10">
+          <h1 className="text-center text-3xl font-extrabold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
             Mission
           </h1>
-          <h2 className="mb-4 text-center text-3xl font-bold leading-normal text-gray-100 md:text-4xl lg:text-5xl">
-            Promote the adoption, education & development of Litecoin (LTC)
+          <h2 className="mb-4 text-center text-xl font-light leading-normal text-gray-100 md:text-2xl lg:text-3xl">
+            Empowering individuals and communities globally by advocating for
+            and advancing Litecoin (LTC) through fostering adoption, education,
+            and development, all toward building a decentralized and inclusive
+            financial future.
           </h2>
         </div>
       </div>
