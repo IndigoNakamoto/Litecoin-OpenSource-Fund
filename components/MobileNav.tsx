@@ -20,17 +20,23 @@ const MobileNav = () => {
   }
 
   return (
-    <div className="z-100 md:hidden">
-      <button
-        className="ml-1 mr-1 h-8 w-8 rounded py-1"
+    <div className="z-100 ">
+      <div
+        className="ml-1 mr-1 flex items-center rounded-lg bg-blue-500 px-4 py-2 dark:bg-blue-400 "
+        role="button"
+        tabIndex={0}
+        onClick={onToggleNav}
+        onKeyPress={onToggleNav}
         aria-label="Toggle Menu"
       >
-        <span className="mr-2 text-gray-900">MENU</span>
+        <span className="mr-2 font-semibold text-gray-100 dark:text-gray-800">
+          Menu
+        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-8 w-8 text-gray-900"
+          className="h-8 w-8 text-gray-100 dark:text-gray-800"
         >
           <path d="M3 4.5h14v1H3zM3 9.5h14v1H3zM3 14.5h14v1H3z" />
         </svg>
@@ -64,19 +70,87 @@ const MobileNav = () => {
           </button>
           <div></div>
         </div>
-        <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
+        {/* links */}
+        <div className="flex flex-col gap-x-6 ">
+          <nav className="mt-8 h-full">
+            {headerNavLinks.map((link) => (
+              // hover:text-blue-400 is not working
+              <div key={link.title} className="px-12 py-2">
+                <Link
+                  href={link.href}
+                  className="text-3xl font-semibold tracking-widest text-gray-100 hover:text-blue-400 dark:text-gray-100 dark:hover:text-blue-400"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </Link>
+              </div>
+            ))}
+          </nav>
+          <div className="mt-10 flex flex-col">
+            {/* Social Icons */}
+            <div className="flex h-full space-x-12 px-12">
+              <SocialIcon
+                kind="mail"
+                href={`mailto:${siteMetadata.email}`}
+                size={6}
+              />
+              <SocialIcon kind="github" href={siteMetadata.github} size={6} />
+              <SocialIcon
+                kind="facebook"
+                href={siteMetadata.facebook}
+                size={6}
+              />
+              <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
+              <SocialIcon
+                kind="linkedin"
+                href={siteMetadata.linkedin}
+                size={6}
+              />
+              <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
+            </div>
+            {/* Footer */}
+            <div className=" ml-12 mt-12 flex flex-col text-xl text-gray-100 ">
               <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-100 dark:text-gray-100"
+                href="/grant-policy"
+                className="hover:text-blue-400"
                 onClick={onToggleNav}
               >
-                {link.title}
+                Grant Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="hover:text-blue-400"
+                onClick={onToggleNav}
+              >
+                Terms
+              </Link>
+              <Link
+                href="/privacy"
+                className="hover:text-blue-400"
+                onClick={onToggleNav}
+              >
+                Privacy
               </Link>
             </div>
-          ))}
-        </nav>
+            <div className="absolute bottom-10 mt-12 flex flex w-full flex-col items-center justify-center">
+              <div className="lg:text-md mb-2  flex text-sm text-gray-100 dark:text-gray-400 md:space-x-1.5 lg:space-x-2">
+                <div className="flex space-x-0.5">
+                  <div>{`© ${new Date().getFullYear()}`}</div>
+                  <div>{siteMetadata.author}</div>
+                  <div>{`© ${new Date().getFullYear()}`}</div>
+                  <div>OpenSats</div>
+                </div>
+
+                <div className="flex space-x-0.5"></div>
+              </div>
+              <div className="space-x-4 text-center text-xs text-gray-100 dark:text-gray-400">
+                Litecoin Foundation, Inc. Singapore (UEN: 201709179W) is a
+                non-profit organization.
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
