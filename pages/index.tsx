@@ -45,10 +45,10 @@ export default function Mission({
               Mission
             </h1>
             <h2 className="mb-4 text-center text-xl font-light leading-normal text-gray-100 md:text-2xl lg:text-3xl">
-              Empowering individuals and communities globally by advocating for
-              and advancing Litecoin (LTC) through fostering adoption,
-              education, and development, all toward building a decentralized
-              and inclusive financial future.
+              Empower individuals and communities globally by advocating for and
+              advancing Litecoin (LTC) through fostering adoption, education,
+              and development, all toward building a decentralized and inclusive
+              financial future.
             </h2>
           </div>
         </div>
