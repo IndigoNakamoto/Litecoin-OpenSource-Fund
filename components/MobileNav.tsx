@@ -88,7 +88,7 @@ const MobileNav = () => {
           </nav>
           <div className="mt-10 flex flex-col">
             {/* Social Icons */}
-            <div className="flex h-full space-x-12 px-12">
+            <div className="flex h-full space-x-4 px-12">
               <SocialIcon
                 kind="mail"
                 href={`mailto:${siteMetadata.email}`}
