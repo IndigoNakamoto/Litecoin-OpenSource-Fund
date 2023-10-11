@@ -11,7 +11,7 @@ const Header = () => {
   const router = useRouter() // <- Get the router object
 
   return (
-    <header className="z-9 flex items-center justify-between py-6">
+    <header className="z-9 flex items-center justify-between py-6 font-barlow-semi-condensed">
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
