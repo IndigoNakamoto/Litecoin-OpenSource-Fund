@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
+import SocialIcon from '@/components/social-icons-mobile'
+import siteMetadata from '@/data/siteMetadata'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
@@ -18,34 +20,37 @@ const MobileNav = () => {
   }
 
   return (
-    <div className="z-100 md:hidden">
-      <button
-        className="ml-1 mr-1 h-8 w-8 rounded py-1"
-        aria-label="Toggle Menu"
+    <div className="z-100 ">
+      {/* !!! Requestion: I want the hamburger to have thinner bars */}
+      <div
+        className="ml-1 mr-1 flex items-center rounded-lg bg-gray-200 px-4 py-1"
+        role="button"
+        tabIndex="0"
         onClick={onToggleNav}
+        onKeyPress={onToggleNav}
+        aria-label="Toggle Menu"
       >
+        <span className="mr-2 text-gray-900">MENU</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-8 w-8 text-gray-900 dark:text-gray-100"
+          className="h-8 w-8 text-gray-900"
         >
-          <path
-            fillRule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clipRule="evenodd"
-          />
+          <path d="M3 4.5h14v1H3zM3 9.5h14v1H3zM3 14.5h14v1H3z" />
         </svg>
-      </button>
+      </div>
+
       <div
-        className={`fixed left-0 top-0 z-10 h-full w-full transform backdrop-blur-lg duration-300 ease-in-out  ${
-          navShow ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed bottom-2 right-2 top-2 z-10 transform  rounded-xl backdrop-blur-lg duration-200 ease-in xs:w-full sm:w-1/2 md:clear-left md:w-1/3 ${
+          navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
         style={{ backgroundColor: 'rgba(12, 12, 12, 0.65)' }} // Using RGBA to achieve 40% transparency on a dark background
       >
+        {/* x button */}
         <div className="flex justify-end">
           <button
-            className="mr-5 mt-11 h-8 w-8 rounded"
+            className="mr-8 mt-4 h-8 w-8 rounded"
             aria-label="Toggle Menu"
             onClick={onToggleNav}
           >
@@ -62,20 +67,88 @@ const MobileNav = () => {
               />
             </svg>
           </button>
+          <div></div>
         </div>
-        <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
+        {/* links */}
+        <div className="flex flex-col gap-x-6 ">
+          <nav className="mt-8 h-full">
+            {headerNavLinks.map((link) => (
+              <div key={link.title} className="px-12 py-2">
+                <Link
+                  href={link.href}
+                  className="text-3xl font-semibold tracking-widest text-gray-100 hover:text-blue-400 dark:text-gray-100"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </Link>
+              </div>
+            ))}
+          </nav>
+          <div className="mt-10 flex flex-col">
+            {/* Social Icons */}
+            <div className="flex h-full space-x-12 px-12">
+              <SocialIcon
+                kind="mail"
+                href={`mailto:${siteMetadata.email}`}
+                size={6}
+              />
+              <SocialIcon kind="github" href={siteMetadata.github} size={6} />
+              <SocialIcon
+                kind="facebook"
+                href={siteMetadata.facebook}
+                size={6}
+              />
+              <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
+              <SocialIcon
+                kind="linkedin"
+                href={siteMetadata.linkedin}
+                size={6}
+              />
+              <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
+            </div>
+            {/* Footer */}
+            <div className=" ml-12 mt-12 flex flex-col text-xl text-gray-100 ">
               <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-100 dark:text-gray-100"
+                href="/grant-policy"
+                className="hover:text-blue-400"
                 onClick={onToggleNav}
               >
-                {link.title}
+                Grant Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="hover:text-blue-400"
+                onClick={onToggleNav}
+              >
+                Terms
+              </Link>
+              <Link
+                href="/privacy"
+                className="hover:text-blue-400"
+                onClick={onToggleNav}
+              >
+                Privacy
               </Link>
             </div>
-          ))}
-        </nav>
+            <div className="absolute bottom-10 mt-12 flex flex w-full flex-col items-center justify-center">
+              <div className="lg:text-md mb-2  flex text-sm text-gray-100 dark:text-gray-400 md:space-x-1.5 lg:space-x-2">
+                <div className="flex space-x-0.5">
+                  <div>{`© ${new Date().getFullYear()}`}</div>
+                  <div>{siteMetadata.author}</div>
+                  <div>{`© ${new Date().getFullYear()}`}</div>
+                  <div>OpenSats</div>
+                </div>
+
+                <div className="flex space-x-0.5"></div>
+              </div>
+              <div className="space-x-4 text-center text-xs text-gray-100 dark:text-gray-400">
+                Litecoin Foundation, Inc. Singapore (UEN: 201709179W) is a
+                non-profit organization.
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

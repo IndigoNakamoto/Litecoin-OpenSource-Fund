@@ -29,7 +29,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
-        <div className="block">
+        {/* <div className="block">
           {headerNavLinks.map((link) => (
             <Link
               key={link.title}
@@ -47,7 +47,7 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
-        </div>
+        </div> */}
         <ThemeSwitch />
         <MobileNav />
       </div>
