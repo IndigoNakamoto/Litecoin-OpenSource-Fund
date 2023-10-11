@@ -38,6 +38,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Barlow Semi Condensed', 'sans'], // !! Barlow Semi Condensed is not in the project directory. When pushed to vercel, it does not have font to render. How should I include the font?
+        'barlow-semi-condensed': ['Barlow Semi Condensed', 'sans'],
       },
       colors: {
         primary: colors.blue,
