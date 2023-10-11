@@ -119,14 +119,14 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   return (
     <form
       ref={formRef}
-      className="z-10 flex flex-col gap-4"
+      className="z-10 flex flex-col gap-4 font-barlow-semi-condensed"
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
         <div className="mb-4">
           <h3>
             Name{' '}
-            <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+            <span className="text-sm  text-gray-600 dark:text-gray-400">
               (Optional)
             </span>
           </h3>
@@ -141,7 +141,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <div className="mb-4">
           <h3>
             Email{' '}
-            <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+            <span className="text-sm  text-gray-600 dark:text-gray-400">
               (Optional)
             </span>
           </h3>
@@ -168,7 +168,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <div className="mb-4">
           <h3 className="mb-1">
             X
-            <span className="ml-1 text-sm font-light text-gray-600 dark:text-gray-400">
+            <span className="ml-1 text-sm  text-gray-600 dark:text-gray-400">
               (Optional: Your X profile will be publicly shared as a community
               supporter for this project)
             </span>
@@ -189,8 +189,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               />
               <div className="ml-2 flex items-center">
                 <div className="m-0 p-0">
-                  <h4 className="text-md font-bold">{session.user.name}</h4>
-                  <h4 className="text-md font-light text-gray-600 dark:text-gray-400">
+                  <h4 className="text-md font-bold text-gray-700">
+                    {session.user.name}
+                  </h4>
+                  <h4 className="text-md  text-gray-600 dark:text-gray-400">
                     @{session.user.username}
                   </h4>
                 </div>
@@ -202,13 +204,15 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           )}
         </div>
       </section>
-      <section className="mb-4 border-t pt-4">
-        <h3 className="text-md mb-2 font-semibold">Donation Information</h3>
-        <p className="mb-2 text-sm">
+      <section className="border-t pt-4">
+        <h3 className="mb-2 font-semibold text-gray-500 dark:text-gray-300">
+          Donation Information
+        </h3>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
           <strong>100% Passthrough:</strong> Yes, our operational costs aren't
           covered by your donations to projects.
         </p>
-        <p className="mb-2 text-sm">
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
           <strong>Tax Deductibility:</strong> Donations are currently not tax
           deductible. Lite.space is registered under The Litecoin Foundation in
           Singapore (UEN: 201709179W). For US citizens considering donations

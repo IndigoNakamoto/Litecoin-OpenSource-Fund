@@ -44,41 +44,20 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Lite.Space | Projects</title>
       </Head>
-      <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-5xl md:leading-14">
+      {/* TODO: fix h1 h2 xs sm md font sizes... */}
+      <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-4xl sm:leading-10 md:text-7xl md:leading-14"> 
         Explore Projects
       </h1>
       <section className="flex flex-col p-4 md:p-8">
-        <div className="mt-10 divide-y divide-gray-200 dark:divide-gray-700">
-          <div className="space-y-2 pb-2 pt-2 md:space-y-5">
-            <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-5xl md:leading-14">
+        <div className="mt-1 divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="space-y-2 pb-2 pt-0 md:space-y-5">
+            <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
               Supporting <Typing />
             </h1>
 
             <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
               {siteMetadata.description}
             </p>
-            {/* 
-          TODO: IMPORT LITECOIN DEVELOPMENT CARDS
-          */}
-
-            {/* <div className="flex flex-wrap">
-            <div>
-              <button
-                onClick={openGeneralFundModal}
-                className="mb-2 mr-2 block rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-black dark:text-black dark:hover:text-white"
-              >
-                Donate to General Fund
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={openopsFundModal}
-                className="block rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-black dark:hover:text-white"
-              >
-                Donate to Operations Budget
-              </button>
-            </div>
-          </div> */}
           </div>
         </div>
       </section>
