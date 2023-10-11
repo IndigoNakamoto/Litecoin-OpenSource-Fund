@@ -16,6 +16,13 @@ html {
   scrollbar-width: none; /* Firefox */
 }
 
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  src: url('/fonts/BarlowSemiCondensed-Regular.ttf') format('truetype'); /* Adjust the path accordingly */
+  font-weight: 400;
+  font-style: normal;
+}
+
 button.small {
   @apply p-1 text-sm bg-white text-black border border-black;
 }
