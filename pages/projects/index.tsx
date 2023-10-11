@@ -45,7 +45,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <title>Lite.Space | Projects</title>
       </Head>
       {/* TODO: fix h1 h2 xs sm md font sizes... */}
-      <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-4xl sm:leading-10 md:text-7xl md:leading-14"> 
+      <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-4xl sm:leading-10 md:text-7xl md:leading-14">
         Explore Projects
       </h1>
       <section className="flex flex-col p-4 md:p-8">
