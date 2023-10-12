@@ -53,3 +53,5 @@ Take a step towards contributing to a more robust and user-friendly Litewallet. 
 ---
 
 Make sure to specify the reward amount, the deadline for this bounty, and the contact method for applications as per your project requirements.
+
+#LiteWalletTrxBounty

@@ -30,4 +30,4 @@ The seamless integration ensures that every digital asset birthed via OmniLite b
 - **Decentralized Crowdfunding**: Break the bounds with OmniLite's decentralized crowdfunding. Supporters can directly fund by sending litecoins or OmniLite tokens to the project, receiving crowdfunded tokens automatically, all without the intervention of any intermediary.
 - **Innovate with NFTs**: Dive into the realm of NFTs. OmniLite's work-in-progress feature aims to allow users to effortlessly issue and manage non-fungible tokens without veering away from the Litecoin ecosystem.
 
-Ready to shape the future with OmniLite? Explore our [GitHub Repository] and join the revolution.
+#OmniLite
