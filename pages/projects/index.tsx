@@ -61,15 +61,17 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           </div>
         </div>
       </section>
+      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-lg font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-3xl md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:leading-14 xl:col-span-2"
           >
             Open Bounties
           </h2>
         </div>
+
         <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
           {bountyProjects &&
             bountyProjects.map((p, i) => (
@@ -79,11 +81,12 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
+      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-lg font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-3xl md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:leading-14 xl:col-span-2"
           >
             Open-Source Projects
           </h2>
@@ -97,11 +100,12 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
+      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
       <section className="flex flex-col items-center p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-lg font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-3xl md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:leading-14 xl:col-span-2"
           >
             Litecoin Development Fund
           </h2>

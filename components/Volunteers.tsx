@@ -22,7 +22,7 @@ const Volunteers = () => {
   ]
 
   return (
-    <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
+    <div className="col-start-0 col-span-3 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
       {volunteers.map((v, i) => (
         <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
           <Link href={v.link}>

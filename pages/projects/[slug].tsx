@@ -124,7 +124,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         <article className="mt-10 lg:flex lg:flex-row lg:items-start">
           {/* Aside */}
           <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
-            <div className={'relative h-[16rem] w-full sm:w-full'}>
+            {/* !!!!!!!!!!!!!!! RESOLVE: i want the image in the aside to have rounded corners !!!!!!!!!!!!!!!*/}
+            <div className="relative h-[16rem] w-full overflow-hidden rounded-lg sm:w-full">
               <Image
                 alt={title}
                 src={coverImage}
@@ -160,7 +161,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           </aside>
           {/* Body */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
-            <h1 className="pb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
             </h1>
 
@@ -179,7 +180,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               // #MESSAGES SECTION!!
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
-                <h1>{`${hashtag}`}</h1>
+                <h1 className="text-blue-500 dark:text-blue-400">{`${hashtag}`}</h1>
                 <TwitterFeed hashtag={hashtag} />
               </div>
               // END OF MESSAGES SECTION.

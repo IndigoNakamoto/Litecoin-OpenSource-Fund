@@ -26,14 +26,17 @@ export default function AuthorLayout({ children, content }: Props) {
   return (
     <>
       <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-          <div></div>
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
+      <div>
+        <div className="items-start space-y-2 pb-2 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+          {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
+          <h1 className="font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
             About {name}
           </h1>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+          <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
+            {children}
+          </div>
           <div className="flex flex-col items-center space-x-2 pt-8">
             {avatar && ( // Check if avatar is defined
               <Image
@@ -60,9 +63,6 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="github" href={github} />
               <SocialIcon kind="twitter" href={twitter} />
             </div>
-          </div>
-          <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
-            {children}
           </div>
         </div>
       </div>
