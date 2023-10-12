@@ -48,8 +48,8 @@ const Header = () => {
             </Link>
           ))}
         </div> */}
-        {/* <ThemeSwitch />
-        <MobileNav /> */}
+        <ThemeSwitch />
+        <MobileNav />
       </div>
     </header>
   )
