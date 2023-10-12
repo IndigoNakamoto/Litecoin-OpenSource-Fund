@@ -4,19 +4,19 @@
 
 @layer base {
   .markdown h1 {
-    @apply text-3xl font-bold mb-4 mt-8;
+    @apply text-5xl mb-4 mt-8;
   }
   .markdown h2 {
-    @apply text-2xl font-semibold mb-3 mt-6;
+    @apply text-4xl mb-3 mt-6;
   }
   .markdown h3,h5 {
-    @apply text-lg font-semibold mb-2 mt-5;
+    @apply text-2xl mb-2 mt-5;
   }
   .markdown p {
     @apply mb-4;
   }
   .markdown a {
-    @apply text-blue-500 hover:underline;
+    @apply text-blue-400 hover:underline;
   }
   .markdown blockquote {
     @apply border-l-4 border-gray-300 pl-4 italic my-4;
@@ -65,13 +65,13 @@ input:-webkit-autofill:focus {
 
 @layer base {
   h1 {
-    @apply text-2xl;
+    @apply text-3xl;
   }
   h2 {
-    @apply text-xl;
+    @apply text-2xl;
   }
   h3 {
-    @apply text-lg;
+    @apply text-xl;
   }
 }
 

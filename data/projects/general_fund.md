@@ -11,7 +11,7 @@ type: 'Development Fund'
 contributor: 'ltcfoundation'
 ---
 
-# **Propelling Litecoin Open-Source Ventures with The General Fund**
+# Propelling Litecoin Open-Source Ventures with The General Fund
 
 Venture with us on a mission to propel open-source Litecoin projects.
 
