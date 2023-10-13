@@ -29,25 +29,6 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
-        {/* <div className="block">
-          {headerNavLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className={
-                link.isButton
-                  ? 'rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white'
-                  : `mr-[-0.5] hidden p-2 font-medium ${
-                      router.pathname === link.href
-                        ? 'font-bold'
-                        : 'text-gray-900'
-                    } hover:text-blue-500 dark:text-gray-100 dark:hover:text-blue-400 sm:p-3 md:inline-block`
-              }
-            >
-              {link.title}
-            </Link>
-          ))}
-        </div> */}
         <ThemeSwitch />
         <MobileNav />
       </div>

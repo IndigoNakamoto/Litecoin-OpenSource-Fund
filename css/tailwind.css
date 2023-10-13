@@ -4,13 +4,13 @@
 
 @layer base {
   .markdown h1 {
-    @apply text-4xl mb-4 mt-8;
+    @apply text-4xl font-semibold mb-4 mt-8;
   }
   .markdown h2 {
-    @apply text-3xl mb-3 mt-6;
+    @apply text-3xl font-semibold mb-3 mt-6;
   }
-  .markdown h3,h5 {
-    @apply text-2xl mb-2 mt-5;
+    .markdown h3,h5 {
+    @apply text-2xl font-semibold mb-2 mt-5;
   }
   .markdown p {
     @apply mb-4;

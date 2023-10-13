@@ -52,9 +52,9 @@ export default function Apply({
           information that is required to assess and judge the project or
           applicant.
         </p>
-        <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+        <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           Website Listing
-        </h2>
+        </h3>
         <p className="mb-8">
           Any FOSS project that is aligned with the Lite.Space mission is free
           to submit an application to be listed on the Lite.Space website.
@@ -68,9 +68,9 @@ export default function Apply({
         >
           Apply to be listed on Lite.Space
         </Link>
-        <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+        <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           General Grant
-        </h2>
+        </h3>
         <p className="mb-8">
           General grants are funded by donations to the Lite.Space General Fund
           and will be distributed quarterly by our board. We evaluate and assess
@@ -83,9 +83,9 @@ export default function Apply({
         >
           Apply for a Lite.Space General Grant
         </Link>
-        <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+        <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           Long-Term Support
-        </h2>
+        </h3>
         <p className="mb-8">
           We have a limited number of long-term support grants available for
           projects that are critical to the Litecoin ecosystem. These grants are

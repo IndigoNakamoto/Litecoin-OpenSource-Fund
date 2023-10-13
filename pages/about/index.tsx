@@ -50,17 +50,18 @@ InferGetStaticPropsType<typeof getStaticProps>) {
 
       {/* List all members of the board */}
       <div className="">
+        <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
         <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-          <h2 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14 xl:col-span-2">
+          <h2 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
             Council Members
           </h2>
           <div></div>
         </div>
-        <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
+
         <div className="grid items-start space-y-2 xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="col-start-0 col-span-3 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-5 md:gap-x-8">
+          <div className="col-start-0 col-span-3 grid grid-cols-3 space-y-2 sm:gap-x-2 md:grid-cols-5 md:gap-x-8">
             {board.map((member, i) => (
-              <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
+              <div className="items-left flex flex-col space-x-2" key={i}>
                 <Link href={`/about/${member.slug}`}>
                   <Image
                     src={member.avatar || ''}
@@ -77,18 +78,17 @@ InferGetStaticPropsType<typeof getStaticProps>) {
         </div>
       </div>
 
-      <div className="d">
+      <div className="mt-6">
+        <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
         <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
           {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2"> */}
-          <h2 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14 xl:col-span-2">
+          <h2 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
             Advisors
           </h2>
           <div></div>
         </div>
-        <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
-        <div className="grid items-start space-y-2 xl:grid-cols-5 xl:gap-x-8 xl:space-y-0">
-          <Volunteers />
-        </div>
+
+        <Volunteers />
       </div>
     </>
   )

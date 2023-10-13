@@ -3,8 +3,6 @@ import Image from './Image'
 import CreditItem, { CreditItemProps } from './CreditItem'
 
 const Volunteers = () => {
-  const lucas = '/img/volunteers/lucas.jpg'
-  const gabe = '/img/volunteers/gabe.jpg'
   const anthony = '/img/advisors/anthony.jpeg'
   const losh = '/img/advisors/losh.jpeg'
 
@@ -22,21 +20,24 @@ const Volunteers = () => {
   ]
 
   return (
-    <div className="col-start-0 col-span-3 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
-      {volunteers.map((v, i) => (
-        <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
-          <Link href={v.link}>
-            <Image
-              src={v.image}
-              alt={v.nym}
-              title={v.nym}
-              width={120}
-              height={120}
-              className="h-36 w-36 rounded-full"
-            />
-          </Link>
-        </div>
-      ))}
+    <div className="grid items-start space-y-2 xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+      <div className="col-start-0 col-span-3 grid grid-cols-3 space-y-2 sm:gap-x-2 md:grid-cols-5 md:gap-x-8">
+        {volunteers.map((v, i) => (
+          <div className="items-left flex flex-col space-x-2" key={i}>
+            <Link href={v.link}>
+              <Image
+                src={v.image}
+                alt={v.nym}
+                title={v.nym}
+                width={120}
+                height={120}
+                className="h-36 w-36 rounded-full"
+              />
+            </Link>
+          </div>
+        ))}
+      </div>
+      <div></div>
     </div>
   )
 }

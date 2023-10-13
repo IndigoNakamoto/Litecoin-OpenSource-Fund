@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import Image from '@/components/Image'
 import PageHeading from '@/components/PageHeading'
-import React from 'react'
 
 interface Props {
   children: ReactNode
@@ -13,7 +12,10 @@ export default function PageSection({ title, image, children }: Props) {
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
-        <div className="flex hidden flex-col items-center space-x-2 pt-8 xl:block">
+        <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
+          {children}
+        </div>
+        <div className="flex flex-col items-center space-x-2 pl-10 pt-8 xl:block">
           <Image
             src={image}
             alt="avatar"
@@ -21,9 +23,6 @@ export default function PageSection({ title, image, children }: Props) {
             height={210}
             className="h-48 w-48"
           />
-        </div>
-        <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
-          {children}
         </div>
       </PageHeading>
     </div>

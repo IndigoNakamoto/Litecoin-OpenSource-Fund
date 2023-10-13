@@ -66,7 +66,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
           >
             Open Bounties
           </h2>
@@ -86,7 +86,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
           >
             Open-Source Projects
           </h2>
@@ -105,7 +105,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
           >
             Litecoin Development Fund
           </h2>
