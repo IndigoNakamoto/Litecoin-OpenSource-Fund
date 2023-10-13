@@ -4,10 +4,10 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
-import PageSection from '@/components/PageSection'
+import ApplySection from '@/components/ApplySection'
 import React from 'react'
 
-const DEFAULT_LAYOUT = 'PageLayout'
+const DEFAULT_LAYOUT = 'ApplyLayout'
 
 export const getStaticProps = async () => {
   const apply = allPages.find((p) => p.slug === 'apply')
@@ -32,8 +32,8 @@ export default function Apply({
       ) : (
         <h1>Content not found.</h1>
       )}
-
-      <PageSection title="Our Programs" image="/static/images/avatar.png">
+      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
+      <ApplySection title="Our Programs">
         <p>
           All our programs are open to applicants worldwide. We are global and
           nym-friendly.
@@ -98,7 +98,7 @@ export default function Apply({
         >
           Apply for a Lite.Space LTS Grant
         </Link>
-      </PageSection>
+      </ApplySection>
     </>
   )
 }

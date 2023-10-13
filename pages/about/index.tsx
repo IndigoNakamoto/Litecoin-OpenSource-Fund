@@ -17,9 +17,17 @@ export const getStaticProps = async () => {
     throw new Error('Default author not found') // Just an example, adjust as per your requirements.
   }
 
+  const boardOrder = [
+    'charlie_lee',
+    'alan_austin',
+    'jay_milla',
+    'david_schwartz',
+    'indigo_nakamoto',
+  ] // Specify the desired order of board members
   const board = allAuthors
     .filter((p) => p.board === true)
-    .sort(() => Math.random() - 0.5)
+    .sort((a, b) => boardOrder.indexOf(a.slug) - boardOrder.indexOf(b.slug)) // Sort based on the desired order
+
   const ops = allAuthors.filter((p) => p.ops === true)
   return { props: { openSats, board, ops } }
 }

@@ -189,7 +189,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               />
               <div className="ml-2 flex items-center">
                 <div className="m-0 p-0">
-                  <h4 className="text-md font-bold text-gray-700">
+                  <h4 className="text-md font-bold text-gray-600 dark:text-gray-100">
                     {session.user.name}
                   </h4>
                   <h4 className="text-md  text-gray-600 dark:text-gray-400">
