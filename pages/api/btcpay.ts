@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     const { amount, project_slug, email, name, twitter }: PayReq = req.body
-    const REDIRECT = `http://lite.space/projects/${project_slug}?menu=community`
+    const REDIRECT = `${process.env.BASE_URL}/projects/${project_slug}`
     const username = process.env.BTCPAY_USERNAME
     const password = process.env.BTCPAY_PASSWORD
 
