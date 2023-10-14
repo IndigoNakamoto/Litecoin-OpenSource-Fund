@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 type ProjectMenuProps = {
   onMenuItemChange: (menuItem: string) => void
-  activeMenu: string
+  activeMenu: string | null
 }
 
 const ProjectMenu: React.FC<ProjectMenuProps> = ({
