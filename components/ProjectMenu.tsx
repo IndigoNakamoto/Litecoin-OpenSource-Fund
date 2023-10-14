@@ -4,13 +4,14 @@ import { useRouter } from 'next/router'
 
 type ProjectMenuProps = {
   onMenuItemChange: (menuItem: string) => void
+  activeMenu: string
 }
 
-const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
-  const router = useRouter()
-  const { slug } = router.query
-
-  const [activeItem, setActiveItem] = useState('project')
+const ProjectMenu: React.FC<ProjectMenuProps> = ({
+  onMenuItemChange,
+  activeMenu,
+}) => {
+  const [activeItem, setActiveItem] = useState(activeMenu)
 
   const handleMenuItemClick = (menuItem: string) => {
     setActiveItem(menuItem)
@@ -34,9 +35,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({ onMenuItemChange }) => {
         </li>
         <li>
           <button
-            onClick={() => handleMenuItemClick('comments')}
+            onClick={() => handleMenuItemClick('messages')}
             className={`${
-              activeItem === 'comments'
+              activeItem === 'messages'
                 ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   sm:p-4 md:inline-block`}

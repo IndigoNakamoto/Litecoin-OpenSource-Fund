@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     const { amount, project_slug, email, name, twitter }: PayReq = req.body
-    const REDIRECT = 'http://lite.space/thankyou'
+    const REDIRECT = `http://lite.space/projects/${project_slug}?menu=community`
     const username = process.env.BTCPAY_USERNAME
     const password = process.env.BTCPAY_PASSWORD
 
@@ -54,7 +54,7 @@ export default async function handler(
             buyerTwitter: twitter || null,
           },
         },
-        checkout: { redirectURL: REDIRECT },
+        checkout: { redirectURL: REDIRECT, redirectAutomatically: true },
       }
 
       if (amount) {

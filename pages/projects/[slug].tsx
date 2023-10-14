@@ -69,13 +69,40 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
+
+  // I WANT TO BE ABLE TO PASS IN THE STATE FROM THE URL. FOR EXAMPLE, lite.space/projects/[slug]#project or lite.space/projects/[slug]#messages or lite.space/projects/[slug]#community
   // Add a state variable for the selected menu item.
-  const [selectedMenuItem, setSelectedMenuItem] = useState('project')
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null)
 
   // Define a handler function for menu item changes.
   const handleMenuItemChange = (newMenuItem) => {
     setSelectedMenuItem(newMenuItem)
+
+    // Update the URL without causing a page reload
+    const updatedURL = `/projects/${slug}?menu=${newMenuItem}`
+    router.push(updatedURL, undefined, { shallow: true })
   }
+
+  useEffect(() => {
+    // Check for menu query parameter
+    if (router.query.menu) {
+      switch (router.query.menu) {
+        case 'community':
+          setSelectedMenuItem(router.query.menu as string)
+          break
+        case 'messages':
+          setSelectedMenuItem(router.query.menu as string)
+          break
+        case 'project':
+          setSelectedMenuItem(router.query.menu as string)
+          break
+        default:
+          setSelectedMenuItem('project')
+      }
+    } else {
+      setSelectedMenuItem('project')
+    }
+  }, [router.query])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -168,7 +195,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               {summary}
             </p>
-            <ProjectMenu onMenuItemChange={handleMenuItemChange} />
+            {/* Update handleMenuItemChange with URL parameter and vice versa */}
+            <ProjectMenu
+              onMenuItemChange={handleMenuItemChange}
+              activeMenu={selectedMenuItem}
+            />
+
             {/* Use conditional rendering to change the displayed content. */}
             {selectedMenuItem === 'project' && content && (
               <div
@@ -176,7 +208,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
-            {selectedMenuItem === 'comments' && (
+            {selectedMenuItem === 'messages' && (
               // #MESSAGES SECTION!!
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
