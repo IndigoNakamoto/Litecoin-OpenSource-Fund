@@ -62,6 +62,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     // personalTwitter,
     contributor,
     hashtag,
+    socialSummary,
   } = project
 
   // const [stats, setStats] = useState<Stats>()
@@ -214,7 +215,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             >
               Donate
             </button>
-            <SocialMediaShare title={title} summary={summary} />
+            <SocialMediaShare title={title} summary={socialSummary} />
           </aside>
           {/* Body */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">

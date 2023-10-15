@@ -9,7 +9,7 @@ const SocialMediaShare = ({ title, summary }) => {
   const shareLinks = [
     {
       kind: 'twitter',
-      url: `https://twitter.com/intent/tweet?text=${title}%0A%0A${summary}%0A&url=${currentURL}%0A%0A&via=LTCFoundation`,
+      url: `https://twitter.com/intent/tweet?text=${title}%0A%0A${summary}%0A%0A${currentURL}%0A%0A&via=LTCFoundation`,
     },
     {
       kind: 'facebook',

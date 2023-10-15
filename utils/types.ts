@@ -28,6 +28,7 @@ export type ProjectItem = {
   contributor?: string
   owner?: string
   hashtag?: string
+  socialSummary?: string
 }
 
 export type PayReq = {
