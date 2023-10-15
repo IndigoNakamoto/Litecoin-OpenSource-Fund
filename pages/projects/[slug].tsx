@@ -108,16 +108,22 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     const fetchData = async () => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
-      // console.log('stats.supporters: ', stats.supporters)
-      // console.log('Contributor: ', contributor)
+      console.log('stats.supporters: ', stats.supporters)
+      console.log('Contributor: ', contributor)
 
       setAddressStats(stats)
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
         const supporters = stats.supporters
-          .map((supporter) => extractUsername(supporter))
+          .map((supporter) => {
+            if (typeof supporter === 'string' || supporter instanceof String) {
+              return extractUsername(supporter)
+            } else {
+              return 'anonymous'
+            }
+          })
           .join(',')
-
+        console.log(supporters)
         const response = await fetch(
           `/api/twitterUsers?usernames=${supporters}`
         )
