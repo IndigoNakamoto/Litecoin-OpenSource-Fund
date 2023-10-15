@@ -235,7 +235,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
               activeMenu={selectedMenuItem}
-              commentCount={tweetsData[hashtag].length || 0}
+              commentCount={
+                hashtag && tweetsData[hashtag] ? tweetsData[hashtag].length : 0
+              }
               faqCount={0}
               updatesCount={0}
             />
