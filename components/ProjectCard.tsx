@@ -26,7 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <figure className="h-full space-y-4 rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
       <div className="relative h-64 w-full">
-        <Link href={`/projects/${slug}`} passHref>
+        <Link href={`/missions/${slug}`} passHref>
           <div className="relative h-64 w-full">
             <Image
               alt={title}
@@ -51,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             Donate
           </button>
           <Link
-            href={`/projects/${slug}`}
+            href={`/missions/${slug}`}
             passHref
             className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 pt-2 text-center hover:underline"
             aria-label="View Details"

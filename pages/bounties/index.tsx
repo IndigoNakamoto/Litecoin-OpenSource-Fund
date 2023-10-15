@@ -8,7 +8,7 @@ import ProjectCard from '../../components/ProjectCard'
 import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
 // import Link from '@/components/Link'
-import { isBounty } from 'pages/projects'
+import { isBounty } from 'pages/missions'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)

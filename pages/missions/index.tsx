@@ -46,7 +46,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
       {/* TODO: fix h1 h2 xs sm md font sizes... */}
       <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
-        Explore Projects
+        Explore Missions
       </h1>
       <section className="flex flex-col p-4 md:p-8">
         <div className="mt-1 divide-y divide-gray-200 dark:divide-gray-700">

@@ -72,7 +72,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     []
   )
 
-  // I WANT TO BE ABLE TO PASS IN THE STATE FROM THE URL. FOR EXAMPLE, lite.space/projects/[slug]#project or lite.space/projects/[slug]#messages or lite.space/projects/[slug]#community
+  // I WANT TO BE ABLE TO PASS IN THE STATE FROM THE URL. FOR EXAMPLE, lite.space/projects/[slug]#project or lite.space/projects/[slug]#comments or lite.space/projects/[slug]#community
   // Add a state variable for the selected menu item.
   const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null)
 
@@ -81,7 +81,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     setSelectedMenuItem(newMenuItem)
 
     // Update the URL without causing a page reload
-    const updatedURL = `/projects/${slug}?menu=${newMenuItem}`
+    const updatedURL = `/missions/${slug}?menu=${newMenuItem}`
     router.push(updatedURL, undefined, { shallow: true })
   }
 
@@ -92,7 +92,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         case 'community':
           setSelectedMenuItem(router.query.menu as string)
           break
-        case 'messages':
+        case 'comments':
           setSelectedMenuItem(router.query.menu as string)
           break
         case 'project':
@@ -241,14 +241,14 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
-            {selectedMenuItem === 'messages' && (
-              // #MESSAGES SECTION!!
+            {selectedMenuItem === 'comments' && (
+              // #comments SECTION!!
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
                 <h1 className="text-blue-500 dark:text-blue-400">{`${hashtag}`}</h1>
                 <TwitterFeed hashtag={hashtag} />
               </div>
-              // END OF MESSAGES SECTION.
+              // END OF comments SECTION.
             )}
             {selectedMenuItem === 'community' && (
               <>

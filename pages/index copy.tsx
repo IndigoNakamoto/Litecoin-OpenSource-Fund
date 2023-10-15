@@ -14,7 +14,7 @@ import type { Blog } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
 import { ProjectItem } from '../utils/types'
 import PaymentModal from '../components/PaymentModal'
-import { isBounty, isDevelopment, isProject } from './projects'
+import { isBounty, isDevelopment, isProject } from './missions'
 import Typing from '@/components/Typing'
 // import CustomLink from '@/components/Link'
 
