@@ -20,6 +20,7 @@ const FIELDS = [
   'contributor',
   'owner',
   'hashtag',
+  'socialSummary',
 ]
 
 export function getPostSlugs() {
