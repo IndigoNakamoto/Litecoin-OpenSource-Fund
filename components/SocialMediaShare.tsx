@@ -3,12 +3,13 @@ import SocialIcon from './social-icons'
 
 const SocialMediaShare = ({ title, summary }) => {
   const router = useRouter()
-  const currentURL = 'https://www.lite.space' + router.asPath
+  const currentURL = 'http://preview.lite.space' + router.asPath
   console.log('currentURL: ', currentURL)
+
   const shareLinks = [
     {
       kind: 'twitter',
-      url: `http://preview.lite.space/${router.asPath}`,
+      url: `https://twitter.com/intent/tweet?text=${title}%0A%0A${summary}%0A&url=${currentURL}%0A%0A&via=LTCFoundation`,
     },
     {
       kind: 'facebook',
