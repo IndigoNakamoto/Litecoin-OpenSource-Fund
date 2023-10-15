@@ -171,10 +171,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           property="og:image"
           content={`https://www.lite.space${coverImage}`}
         />
-        <meta
-          property="og:url"
-          content={process.env.NEXT_PUBLIC_BASE_URL + router.asPath}
-        />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div>
@@ -191,20 +187,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 objectPosition="50% 50%"
               />
             </div>
+
             <div className="flex w-full items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
+              {addressStats && (
+                <div className="">
+                  <h5 className="text-xl font-bold">{addressStats.tx_count}</h5>
+                  <h4 className="text-sm">Donations</h4>
+                </div>
+              )}
+
               {addressStats && (
                 <div className="">
                   <h5 className="text-xl font-bold">
                     Ł {addressStats.funded_txo_sum}{' '}
                   </h5>
                   <h4 className="text-sm">Raised</h4>
-                </div>
-              )}
-
-              {addressStats && (
-                <div className="">
-                  <h5 className="text-xl font-bold">{addressStats.tx_count}</h5>
-                  <h4 className="text-sm">Donations</h4>
                 </div>
               )}
             </div>
@@ -215,7 +212,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             >
               Donate
             </button>
-            <SocialMediaShare title={title} summary={socialSummary} />
+            <SocialMediaShare
+              className="mt-0 flex space-x-4 px-2  sm:px-4 sm:py-2 "
+              title={title}
+              summary={socialSummary}
+            />
           </aside>
           {/* Body */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">

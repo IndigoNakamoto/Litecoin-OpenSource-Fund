@@ -11,7 +11,7 @@ type: 'Project'
 contributor: 'raphjaph,indigo_nakamoto,anthonyonchain,lukewrightmain,jamesscaur,rodarmor'
 owner: ''
 hashtag: '#OrdinalsLite'
-socialSummary: '🔍 Discover OrdinalsLite: A revolutionary approach to Litecoin asset management! From unique litoshi-based asset tracking to creating rare digital collectibles, we are reshaping the Litecoin ecosystem. Dive deep with our tools, and join the future of blockchain. 🌐 Support & explore: www.OrdinalsLite.com 🚀 @OrdinalsLite 
+socialSummary: '🔍 Discover OrdinalsLite: A revolutionary approach to Litecoin asset management! Dive deep with our tools, and join the future of blockchain. 🌐 Support and explore: www.OrdinalsLite.com 🚀'
 ---
 
 ## Litecoin Asset Management with Ordinals Lite

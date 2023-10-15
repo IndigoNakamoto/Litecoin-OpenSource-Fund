@@ -3,13 +3,11 @@ title: 'MWEB'
 summary: 'MWEB improves privacy and scalability on the Litecoin blockchain. It leverages the MimbleWimble protocol to enable confidential transactions, which obscure the amounts being transferred, while also allowing for the pruning of old data from the blockchain, thus improving scalability.'
 website: '[Project Website]'
 coverImage: '/static/images/projects/MWEB.webp'
-twitter: '[Project Twitter Handle]'
 personalTwitter: '[Personal Twitter Handle]'
 type: 'Project'
 contributor: 'davidBurkett38,satoshilite,ecurrencyhodler'
-owner: ''
 hashtag: '#MWEB'
-socialSummary: '🛡 Elevate Litecoin's privacy & scalability with MWEB! Based on MimbleWimble, it promises confidential transactions & efficient pruning. We need YOUR support for its continued development. Let's fortify Litecoin together! '
+socialSummary: 'MWEB improves privacy and scalability on the Litecoin blockchain. Based on the MimbleWimble protocol, it promises confidential transactions and efficient pruning. We need YOUR support for its continued development.'
 ---
 
 ## Enhancing Litecoin with MimbleWimble Extension Blocks (MWEB)
