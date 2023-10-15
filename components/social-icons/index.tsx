@@ -1,3 +1,4 @@
+//components/social-icons/index.tsx
 import Mail from './mail.svg'
 import Github from './github.svg'
 import Facebook from './facebook.svg'

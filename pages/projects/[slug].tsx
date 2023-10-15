@@ -18,6 +18,7 @@ import { TwitterUser } from '../../utils/types'
 import Head from 'next/head'
 import ProjectMenu from '../../components/ProjectMenu'
 import TwitterFeed from '../../components/TwitterFeed'
+import SocialMediaShare from '../../components/SocialMediaShare'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -152,6 +153,28 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     <>
       <Head>
         <title>{slug} - Lite.Space</title>
+        <title>{slug} - Lite.Space</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={summary} />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@LTCFoundation" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={summary} />
+        {/* <meta name="twitter:creator" content="@LTCFoundation" /> */}
+        <meta
+          name="twitter:image"
+          content={`https://www.lite.space${coverImage}`}
+        />
+        <meta
+          property="og:image"
+          content={`https://www.lite.space${coverImage}`}
+        />
+        <meta
+          property="og:url"
+          content={process.env.NEXT_PUBLIC_BASE_URL + router.asPath}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div>
         <article className="mt-10 lg:flex lg:flex-row lg:items-start">
@@ -191,6 +214,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             >
               Donate
             </button>
+            <SocialMediaShare title={title} summary={summary} />
           </aside>
           {/* Body */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
@@ -201,7 +225,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               {summary}
             </p>
-            {/* Update handleMenuItemChange with URL parameter and vice versa */}
+            {/* AREA TO PUT THE SOCIAL MEDIA LINKS */}
+
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
               activeMenu={selectedMenuItem}
