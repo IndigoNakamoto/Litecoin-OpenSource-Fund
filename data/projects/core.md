@@ -10,6 +10,7 @@ personalTwitter: 'litecoin'
 type: 'Project'
 contributor: 'satoshilite,TheRealXinxi,DavidBurkett38,loshan1212,thrasher_au,shaolinfry'
 hashtag: '#LitecoinCore'
+socialSummary: 'Stand with #LitecoinCore to power a truly decentralized network. Run full nodes, uphold blockchain integrity, and experience enhanced security & privacy! Dive in now'
 ---
 
 ## Litecoin Core: Supporting a Decentralized Litecoin Network

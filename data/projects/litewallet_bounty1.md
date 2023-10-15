@@ -1,5 +1,4 @@
 ---
-
 title: 'Litewallet Bounty: Resolve Core Update Issue'
 summary: 'Enhancing the user experience of Litewallet by tackling a critical issue related to address display in the transaction history.'
 nym: 'Litecoin Foundation'

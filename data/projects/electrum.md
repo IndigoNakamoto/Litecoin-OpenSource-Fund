@@ -1,5 +1,5 @@
 ---
-title: 'Electrum-LTC'
+title: 'Litecoin Bounty: Upgrade Electrum-LTC'
 summary: 'Electrum-LTC Upgrade: Bridging to Bitcoin’s 4.4.5 Version for Superior Security and Enhanced Performance in Litecoin Transactions'
 nym: '[Person or Organization Name]'
 website: '[Project Website]'
@@ -10,6 +10,7 @@ personalTwitter: '[Personal Twitter Handle]'
 type: 'Bounty'
 contributor: 'loshan1212'
 hashtag: '#ElectrumLTC'
+socialSummary: "🚀 Help advance #ElectrumLTC! Let's sync with Bitcoin 4.4.5 for stronger security, swifter transactions, and a user-friendly interface. Be part of the evolution! #LitecoinBounty"
 owner: ''
 ---
 

@@ -9,6 +9,7 @@ type: 'Project'
 contributor: 'davidBurkett38,satoshilite,ecurrencyhodler'
 owner: ''
 hashtag: '#MWEB'
+socialSummary: '🛡 Elevate #Litecoin's privacy & scalability with MWEB! Based on MimbleWimble, it promises confidential transactions & efficient pruning. We need YOUR support for its continued development. Let's fortify Litecoin together! '
 ---
 
 ## Enhancing Litecoin with MimbleWimble Extension Blocks (MWEB)
