@@ -177,51 +177,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div>
-        <article className="mt-10 lg:flex lg:flex-row lg:items-start">
-          {/* Aside */}
-          <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
-            {/* !!!!!!!!!!!!!!! RESOLVE: i want the image in the aside to have rounded corners !!!!!!!!!!!!!!!*/}
-            <div className="relative h-[16rem] w-full overflow-hidden rounded-lg sm:w-full">
-              <Image
-                alt={title}
-                src={coverImage}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="50% 50%"
-              />
-            </div>
-
-            <div className="flex w-full items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
-              {addressStats && (
-                <div className="">
-                  <h5 className="text-xl font-bold">{addressStats.tx_count}</h5>
-                  <h4 className="text-sm">Donations</h4>
-                </div>
-              )}
-
-              {addressStats && (
-                <div className="">
-                  <h5 className="text-xl font-bold">
-                    Ł {addressStats.funded_txo_sum}{' '}
-                  </h5>
-                  <h4 className="text-sm">Raised</h4>
-                </div>
-              )}
-            </div>
-
-            <button
-              onClick={openPaymentModal}
-              className="hover:white block w-full rounded border bg-blue-500 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-600 dark:bg-white dark:text-black dark:hover:bg-blue-500 sm:px-4 sm:py-2 sm:text-base"
-            >
-              Donate
-            </button>
-            <SocialMediaShare
-              className="mt-0 flex space-x-4 px-2  sm:px-4 sm:py-2 "
-              title={title}
-              summary={socialSummary}
-            />
-          </aside>
-          {/* Body */}
+        <article className="mt-10 flex flex-col-reverse lg:flex-row lg:items-start">
+          {/* BODY */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
             <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
@@ -230,7 +187,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
               {summary}
             </p>
-            {/* AREA TO PUT THE SOCIAL MEDIA LINKS */}
 
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
@@ -298,6 +254,48 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
+          {/* Aside */}
+          <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
+            <div className="relative h-[16rem] w-full overflow-hidden rounded-lg sm:w-full">
+              <Image
+                alt={title}
+                src={coverImage}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="50% 50%"
+              />
+            </div>
+
+            <div className="flex w-full items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
+              {addressStats && (
+                <div className="">
+                  <h5 className="text-xl font-bold">{addressStats.tx_count}</h5>
+                  <h4 className="text-sm">Donations</h4>
+                </div>
+              )}
+
+              {addressStats && (
+                <div className="">
+                  <h5 className="text-xl font-bold">
+                    Ł {addressStats.funded_txo_sum}{' '}
+                  </h5>
+                  <h4 className="text-sm">Raised</h4>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={openPaymentModal}
+              className="hover:white block w-full rounded bg-blue-500 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-600 dark:bg-blue-400 dark:text-gray-800 dark:hover:bg-blue-300 sm:px-4 sm:py-2 sm:text-base"
+            >
+              Donate
+            </button>
+            <SocialMediaShare
+              className="mt-0 flex space-x-4 px-2  sm:px-4 sm:py-2 "
+              title={title}
+              summary={socialSummary}
+            />
+          </aside>
         </article>
       </div>
 

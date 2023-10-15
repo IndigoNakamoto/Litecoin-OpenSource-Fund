@@ -21,7 +21,7 @@ const SocialMediaShare = ({ title, summary, className }) => {
 
   return (
     <div className={className}>
-      <p className="font-bold"> Share: </p>
+      <p className="font-semibold text-gray-800 dark:text-gray-200"> Share: </p>
       {shareLinks.map((link) => (
         <SocialIcon key={link.kind} kind={link.kind} href={link.url} size={5} />
       ))}

@@ -26,7 +26,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
 
   return (
     <nav className="mt-6 border-b border-t border-gray-300 dark:border-gray-700">
-      <ul className="flex space-x-4  dark:text-gray-100">
+      <ul
+        className="scroll-snap-type flex space-x-4 overflow-x-auto whitespace-nowrap py-4  dark:text-gray-100"
+        style={{ scrollSnapType: 'x mandatory' }}
+      >
         <li>
           <button
             onClick={() => handleMenuItemClick('mission')}

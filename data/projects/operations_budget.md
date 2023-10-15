@@ -9,7 +9,7 @@ git: 'https://github.com/litecoin-project'
 type: 'Development Fund'
 owner: ''
 contributor: 'ltcfoundation'
-socialSummary: '💡 Help fuel the engine behind Litecoin's growth! Contributions to the Litecoin Foundation FOSS Operations Budget ensure 100% pass-through for community donations, powering the mission and sustaining Litecoin's advancements. Support, trust, transform with us. 🚀 Contribute today! ➡️'
+hashtag: '#Litecoin'
 ---
 
 ## Objective

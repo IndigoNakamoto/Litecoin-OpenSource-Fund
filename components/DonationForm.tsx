@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import X from './social-icons/x.svg'
 
 // Font Awesome
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -167,6 +168,13 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3 className="mb-1">
+            {/* TODO: display X logo */}
+            {/* X
+            <a
+              className={`h-6 w-6 fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400`}
+            >
+              {X}
+            </a> */}
             X
             <span className="ml-1 text-sm  text-gray-600 dark:text-gray-400">
               (Optional: Your X profile will be publicly shared as a community
@@ -175,7 +183,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </h3>
           {!session ? (
             <button className="twitter" onClick={() => signIn('twitter')}>
-              Sign in with X
+              Continue with X
             </button>
           ) : (
             <div className="flex items-center">

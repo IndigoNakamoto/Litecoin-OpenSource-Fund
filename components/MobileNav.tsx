@@ -22,7 +22,7 @@ const MobileNav = () => {
   return (
     <div className="z-100 ">
       <div
-        className="ml-1 mr-1 flex items-center rounded-lg bg-blue-500 px-4 py-1 dark:bg-blue-400 "
+        className="ml-1 mr-1 flex items-center rounded-lg bg-blue-500 px-4 py-1 hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-300"
         role="button"
         tabIndex={0}
         onClick={onToggleNav}

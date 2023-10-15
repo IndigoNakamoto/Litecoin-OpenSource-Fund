@@ -1,17 +1,17 @@
 import siteMetadata from '@/data/siteMetadata'
-import headerNavLinks from '@/data/headerNavLinks'
+// import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import React from 'react'
-import { useRouter } from 'next/router' // <- Import useRouter hook
+// import { useRouter } from 'next/router' // <- Import useRouter hook
 
 const Header = () => {
-  const router = useRouter() // <- Get the router object
+  // const router = useRouter() // <- Get the router object
 
   return (
-    <header className="z-9 flex items-center justify-between py-6 font-barlow-semi-condensed">
+    <header className="z-9 flex items-center justify-between py-6 font-barlow-semi-condensed text-gray-800 dark:text-gray-200">
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
