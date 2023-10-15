@@ -11,6 +11,7 @@ type: 'Bounty'  # Replace with the appropriate type of the project if known.
 contributor: 'SatoshiLite,bigkerrytweets,claudia14083392,Pat_McDermott17,ferencakIvan,josi_kie'
 owner: 'bigkerrytweets'
 hashtag: '#Litewallet'
+socialSummary: '📢 Bounty Alert! Dive into the Litewallet challenge and resolve a core update issue affecting address display in transaction history. Expertise in C, Swift & SQLite? This is your moment! Rewards await. Dive in now! 🔍'
 ---
 
 ## Embark on a Mission with Litewallet

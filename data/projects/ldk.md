@@ -6,7 +6,7 @@ coverImage: '/static/images/projects/ldk.png'
 type: 'Project'
 contributor: 'afilini,notmandatory,danielabrozzoni,evanlinjin,LLFourn,RajarshiMaitra'
 hashtag: '#LTCDevKit'
-socialSummary: '💼 Empower your #Litecoin apps with the Litecoin Development Kit! Build cross-platform wallets effortlessly. Developers, funders, advocates – we need you! Shape the future with #LTCDevKit. Explore now: '
+socialSummary: '💼 Empower your Litecoin apps with the Litecoin Development Kit! Build cross-platform wallets effortlessly. Developers, funders, advocates – we need you! Shape the future with LTCDevKit. Explore now: '
 ---
 
 # Litecoin Development Kit (LDK)

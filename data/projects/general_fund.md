@@ -9,7 +9,7 @@ twitter: 'ltcfoundation'
 hidden: false
 type: 'Development Fund'
 contributor: 'ltcfoundation'
-socialSummary: '🌐 Propel the future of #Litecoin with the General Fund! Join @ltcfoundation in fostering open-source innovation, advancing software, and enlightening the community. Your support reshapes the Litecoin landscape.'
+socialSummary: '🌐 Propel the future of Litecoin with the General Fund! Join @ltcfoundation in fostering open-source innovation, advancing software, and enlightening the community. Your support reshapes the Litecoin landscape.'
 ---
 
 # Propelling Litecoin Open-Source Ventures with The General Fund

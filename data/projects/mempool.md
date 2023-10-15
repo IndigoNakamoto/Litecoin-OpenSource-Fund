@@ -6,7 +6,7 @@ coverImage: '/static/images/projects/litecoin-space.jpeg'
 type: 'Project'
 contributor: 'mononautical,loshan1212'
 hashtag: '#LitecoinSpace'
-socialSummary: '🔍 Dive deep into the #Litecoin network with the Litecoin Mempool Explorer! Explore transactions, grasp fee markets, and uncover the multi-layer ecosystem. Make informed decisions with #LitecoinSpace. Discover now: '
+socialSummary: '🔍 Dive deep into the Litecoin network with the Litecoin Mempool Explorer! Explore transactions, grasp fee markets, and uncover the multi-layer ecosystem. Make informed decisions with LitecoinSpace. Discover now: '
 ---
 
 ## Litecoin Mempool Explorer: A Comprehensive Guide
