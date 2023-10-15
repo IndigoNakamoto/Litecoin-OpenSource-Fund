@@ -1,4 +1,4 @@
-//pages/projects/[slug].tsx
+//pages/missions/[slug].tsx
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
@@ -11,7 +11,6 @@ import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 // import Link from 'next/link'
-// import ShareButtons from '../../components/ShareButtons'
 import { fetchGetJSON } from '../../utils/api-helpers'
 import TwitterUsers from '../../components/TwitterUsers'
 import { TwitterUser } from '../../utils/types'
@@ -19,6 +18,7 @@ import Head from 'next/head'
 import ProjectMenu from '../../components/ProjectMenu'
 import TwitterFeed from '../../components/TwitterFeed'
 import SocialMediaShare from '../../components/SocialMediaShare'
+import tweetsData from '../../data/tweets.json'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -95,6 +95,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         case 'comments':
           setSelectedMenuItem(router.query.menu as string)
           break
+        case 'faq':
+          setSelectedMenuItem(router.query.menu as string)
+          break
+        case 'updates':
+          setSelectedMenuItem(router.query.menu as string)
+          break
         case 'project':
           setSelectedMenuItem(router.query.menu as string)
           break
@@ -110,8 +116,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     const fetchData = async () => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
-      console.log('stats.supporters: ', stats.supporters)
-      console.log('Contributor: ', contributor)
 
       setAddressStats(stats)
       // Fetch Twitter user details
@@ -125,7 +129,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             }
           })
           .join(',')
-        console.log(supporters)
         const response = await fetch(
           `/api/twitterUsers?usernames=${supporters}`
         )
@@ -232,6 +235,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
               activeMenu={selectedMenuItem}
+              commentCount={tweetsData[hashtag].length || 0}
+              faqCount={0}
+              updatesCount={0}
             />
 
             {/* Use conditional rendering to change the displayed content. */}
@@ -246,9 +252,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               <div className="markdown min-h-[70vh]">
                 {/* Render comments content here */}
                 <h1 className="text-blue-500 dark:text-blue-400">{`${hashtag}`}</h1>
-                <TwitterFeed hashtag={hashtag} />
+                <TwitterFeed hashtag={hashtag} tweetsData={tweetsData} />
               </div>
               // END OF comments SECTION.
+            )}
+            {selectedMenuItem === 'faq' && content && (
+              <div
+                className="markdown min-h-[70vh]"
+                // dangerouslySetInnerHTML={{ __html: content }}
+              />
+            )}
+            {selectedMenuItem === 'updates' && content && (
+              <div
+                className="markdown min-h-[70vh]"
+                // dangerouslySetInnerHTML={{ __html: content }}
+              />
             )}
             {selectedMenuItem === 'community' && (
               <>

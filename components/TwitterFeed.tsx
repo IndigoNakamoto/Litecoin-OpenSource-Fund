@@ -1,9 +1,8 @@
 // components/TwitterComments.tsx
 import React, { useEffect, useState } from 'react'
 import { Tweet } from 'react-tweet'
-import tweetsData from '../data/tweets.json'
 
-const TwitterFeed = ({ hashtag }) => {
+const TwitterFeed = ({ hashtag, tweetsData }) => {
   const [tweets, setTweets] = useState<string[] | null>(null) // Explicitly type tweets
 
   useEffect(() => {

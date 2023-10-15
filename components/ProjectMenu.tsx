@@ -5,11 +5,17 @@ import { useRouter } from 'next/router'
 type ProjectMenuProps = {
   onMenuItemChange: (menuItem: string) => void
   activeMenu: string | null
+  commentCount: number | 0
+  faqCount: number | 0
+  updatesCount: number | 0
 }
 
 const ProjectMenu: React.FC<ProjectMenuProps> = ({
   onMenuItemChange,
   activeMenu,
+  commentCount,
+  faqCount,
+  updatesCount,
 }) => {
   const [activeItem, setActiveItem] = useState(activeMenu)
 
@@ -33,40 +39,51 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             Mission
           </button>
         </li>
-        <li>
-          <button
-            onClick={() => handleMenuItemClick('updates')}
-            className={`${
-              activeItem === 'updates'
-                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
-                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   sm:p-4 md:inline-block lg:p-2`}
-          >
-            Updates
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={() => handleMenuItemClick('FAQ')}
-            className={`${
-              activeItem === 'FAQ'
-                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
-                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   sm:p-4 md:inline-block lg:p-2`}
-          >
-            FAQ
-          </button>
-        </li>
-        <li>
+        <li className="relative">
           <button
             onClick={() => handleMenuItemClick('comments')}
             className={`${
               activeItem === 'comments'
-                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
-                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
+                ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }   sm:p-4 md:inline-block lg:p-2`}
           >
             #Comments
+            <span className="top-0px-2 absolute right-0 py-0.5 text-xs text-blue-600 dark:text-blue-400">
+              {commentCount}
+            </span>
+          </button>
+        </li>
+
+        <li className="relative">
+          <button
+            onClick={() => handleMenuItemClick('faq')}
+            className={`${
+              activeItem === 'faq'
+                ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
+            }   sm:p-4 md:inline-block lg:p-2`}
+          >
+            FAQ
+            <span className="top-0px-2 absolute right-0 py-0.5 text-xs text-blue-600 dark:text-blue-400">
+              {faqCount}
+            </span>
+          </button>
+        </li>
+
+        <li className="relative">
+          <button
+            onClick={() => handleMenuItemClick('updates')}
+            className={`${
+              activeItem === 'updates'
+                ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
+            }   sm:p-4 md:inline-block lg:p-2`}
+          >
+            Updates
+            <span className="top-0px-2 absolute right-0 py-0.5 text-xs text-blue-600 dark:text-blue-400">
+              {updatesCount}
+            </span>
           </button>
         </li>
         <li>
