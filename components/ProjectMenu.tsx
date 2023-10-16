@@ -1,6 +1,5 @@
 // components/ProjectMenu.tsx
 import { useState } from 'react'
-import { useRouter } from 'next/router'
 
 type ProjectMenuProps = {
   onMenuItemChange: (menuItem: string) => void
