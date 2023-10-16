@@ -108,8 +108,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     setSelectedMenuItem(newMenuItem)
 
     // Update the URL without causing a page reload
-    const updatedURL = `/missions/${slug}?menu=${newMenuItem}`
-    router.push(updatedURL, undefined, { shallow: true })
+    // const updatedURL = `/missions/${slug}?menu=${newMenuItem}`
+    // router.push(updatedURL, undefined, { shallow: true })
     return newMenuItem
   }
 
