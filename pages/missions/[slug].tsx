@@ -19,6 +19,7 @@ import ProjectMenu from '../../components/ProjectMenu'
 import TwitterFeed from '../../components/TwitterFeed'
 import SocialMediaShare from '../../components/SocialMediaShare'
 import tweetsData from '../../data/tweets.json'
+import { FAQSection } from '@/components/FAQSection'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -49,6 +50,16 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     return match ? match[1] : url // If the regex matched, return the captured group; otherwise, return the original url.
   }
 
+  async function fetchFAQData(slug: string) {
+    try {
+      const faqDataModule = await import(`../../data/projects/faq/${slug}.json`)
+      return faqDataModule.default
+    } catch (error) {
+      console.error('Error fetching FAQ data:', error)
+      return {} // Return an empty object if there's an error (e.g., file doesn't exist)
+    }
+  }
+
   const {
     slug,
     title,
@@ -71,6 +82,22 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
+
+  const [faq, setFaq] = useState<any>({})
+  const [faqCount, setFaqCount] = useState<any>()
+
+  useEffect(() => {
+    async function loadFAQData() {
+      const data = await fetchFAQData(slug)
+      const totalItems = data?.questionsAndAnswers?.reduce((acc, category) => {
+        return acc + category.items.length
+      }, 0)
+      setFaqCount(totalItems)
+      setFaq(data)
+    }
+
+    loadFAQData()
+  }, [slug])
 
   const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
     'mission'
@@ -197,7 +224,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               commentCount={
                 hashtag && tweetsData[hashtag] ? tweetsData[hashtag].length : 0
               }
-              faqCount={0}
+              faqCount={faqCount || 0}
               updatesCount={0}
             />
             {/* ### Mission Section */}
@@ -209,24 +236,20 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             )}
             {/* ### X Comments Section */}
             {selectedMenuItem === 'comments' && (
-              <div className="markdown min-h-[70vh]">
+              <div className="markdown">
                 <h1>{`${hashtag}`}</h1>
                 <TwitterFeed hashtag={hashtag} tweetsData={tweetsData} />
               </div>
             )}
             {/* ### FAQ Section */}
-            {selectedMenuItem === 'faq' && content && (
-              <div
-                className="markdown min-h-[70vh]"
-                // dangerouslySetInnerHTML={{ __html: content }}
-              />
+            {selectedMenuItem === 'faq' && (
+              <div className="markdown">
+                <FAQSection faqCategories={faq.questionsAndAnswers} />
+              </div>
             )}
             {/* ### Updates Section */}
             {selectedMenuItem === 'updates' && content && (
-              <div
-                className="markdown min-h-[70vh]"
-                // dangerouslySetInnerHTML={{ __html: content }}
-              />
+              <div className="markdown"></div>
             )}
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
@@ -289,7 +312,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded bg-blue-500 px-2 py-1 text-sm font-semibold text-white hover:border-transparent hover:bg-blue-600 dark:bg-blue-400 dark:text-gray-800 dark:hover:bg-blue-300 sm:px-4 sm:py-2 sm:text-base"
+              className="hover:white block w-full rounded bg-blue-500 px-2 py-1 text-2xl font-semibold text-white hover:border-transparent hover:bg-blue-600 dark:bg-blue-400 dark:text-gray-800 dark:hover:bg-blue-300 sm:px-4 sm:py-2 "
             >
               Donate
             </button>

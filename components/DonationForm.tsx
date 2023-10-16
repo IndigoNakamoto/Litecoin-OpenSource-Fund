@@ -258,7 +258,9 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               height={32}
             />
           )}
-          <span className="whitespace-nowrap">Donate with Litecoin</span>
+          <span className="whitespace-nowrap text-2xl text-gray-800">
+            Donate with Litecoin
+          </span>
         </button>
       </div>
     </form>

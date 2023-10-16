@@ -52,7 +52,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             }   sm:p-4 md:inline-block lg:p-2`}
           >
             X Comments
-            <span className="top-0px-2 absolute right-0 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
+            <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {commentCount}
             </span>
           </button>
@@ -68,7 +68,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             }   sm:p-4 md:inline-block lg:p-2`}
           >
             FAQ
-            <span className="top-0px-2 absolute right-0 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
+            <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {faqCount}
             </span>
           </button>
@@ -84,7 +84,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             }   sm:p-4 md:inline-block lg:p-2`}
           >
             Updates
-            <span className="top-0px-2 absolute right-0 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
+            <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {updatesCount}
             </span>
           </button>

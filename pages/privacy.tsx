@@ -1,3 +1,4 @@
+//PAGES/PRIVACY.TSX
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
