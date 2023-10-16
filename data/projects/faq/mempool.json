@@ -1,0 +1,37 @@
+{
+    "questionsAndAnswers": [
+        {
+            "category": "litecoinspace.org",
+            "items": [
+                {
+                    "question": "What is a mempool?",
+                    "answer": "A mempool (short for 'memory pool') is the queue of pending and unconfirmed transactions for a cryptocurrency network node. There is no one global mempool: every node on the network maintains its own mempool, so different nodes may hold different transactions in their mempools."
+                },
+                {
+                    "question": "What is a mempool explorer?",
+                    "answer": "A mempool explorer is a tool that enables you to view real-time and historical information about a node's mempool, visualize its transactions, and search and view those transactions. The litecoinspace.org website invented the concept of visualizing a Litecoin node's mempool as projected blocks."
+                },
+                {
+                    "question": "What is a blockchain?",
+                    "answer": "A blockchain is a distributed ledger that records the transactions for a cryptocurrency network. Miners amend the blockchain ledger by mining new blocks."
+                },
+                {
+                    "question": "What is a block explorer?",
+                    "answer": "A block explorer is a tool that enables you to explore real-time and historical information about the blockchain of a cryptocurrency. This includes data related to blocks, transactions, addresses, and more."
+                }, {
+                    "question": "What is mining?",
+                    "answer": "Mining is the process by which unconfirmed transactions in a mempool are confirmed into a block on a blockchain. Miners select unconfirmed transactions from their mempools and arrange them into a block such that they solve a particular math problem."
+                }, {
+                    "question": "What are mining pools?",
+                    "answer": "Mining pools are groups of miners that combine their computational power in order to increase the probability of finding new blocks."
+                }, {
+                    "question": "What are virtual bytes (vB) and weight units (WU)?",
+                    "answer": "Virtual bytes (vB) and weight units (WU) are used to measure the size of transactions and blocks on the Litecoin network."
+                }, {
+                    "question": "What is lit/vB?",
+                    "answer": "The priority of a pending Litecoin Transaction is determined by its feerate, measured in lit/vB."
+                }
+            ]
+        }
+    ]
+}

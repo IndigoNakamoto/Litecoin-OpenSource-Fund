@@ -248,6 +248,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </div>
             )}
             {/* ### Updates Section */}
+            {/* TODO: implement updates section */}
             {selectedMenuItem === 'updates' && content && (
               <div className="markdown"></div>
             )}

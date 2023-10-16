@@ -84,9 +84,6 @@ export default function Home({
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
-          {/* 
-          TODO: IMPORT LITECOIN DEVELOPMENT CARDS
-          */}
 
           {/* <div className="flex flex-wrap">
             <div>

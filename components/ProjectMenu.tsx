@@ -50,7 +50,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }   sm:p-4 md:inline-block lg:p-2`}
           >
-            X Comments
+            Comments
             <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {commentCount}
             </span>

@@ -60,12 +60,12 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="w-full cursor-pointer border border-gray-300 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
+                className="w-full cursor-pointer border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700"
               >
                 {faq.question}
               </button>
               <p
-                className={`pb-8 pl-4 pt-2 text-gray-700 dark:text-gray-300 ${
+                className={`pb-8 pl-4 pt-6 text-gray-700 dark:text-gray-300 ${
                   openIndex &&
                   openIndex.catIndex === catIndex &&
                   openIndex.qIndex === qIndex
@@ -73,6 +73,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     : 'hidden'
                 }`}
               >
+                {/* TODO: answer is in markdown and needs to be styalized */}
                 {faq.answer}
               </p>
             </div>
