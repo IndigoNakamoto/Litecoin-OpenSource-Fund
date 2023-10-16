@@ -72,9 +72,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     []
   )
 
-  // I WANT TO BE ABLE TO PASS IN THE STATE FROM THE URL. FOR EXAMPLE, lite.space/projects/[slug]#project or lite.space/projects/[slug]#comments or lite.space/projects/[slug]#community
-  // Add a state variable for the selected menu item.
-  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null)
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
+    'mission'
+  )
 
   // Define a handler function for menu item changes.
   const handleMenuItemChange = (newMenuItem) => {
@@ -83,6 +83,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     // Update the URL without causing a page reload
     const updatedURL = `/missions/${slug}?menu=${newMenuItem}`
     router.push(updatedURL, undefined, { shallow: true })
+    return newMenuItem
   }
 
   useEffect(() => {
@@ -90,34 +91,35 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     if (router.query.menu) {
       switch (router.query.menu) {
         case 'community':
-          setSelectedMenuItem(router.query.menu as string)
+          setSelectedMenuItem('community')
           break
         case 'comments':
-          setSelectedMenuItem(router.query.menu as string)
+          setSelectedMenuItem('comments')
           break
         case 'faq':
-          setSelectedMenuItem(router.query.menu as string)
+          setSelectedMenuItem('faq')
           break
         case 'updates':
-          setSelectedMenuItem(router.query.menu as string)
+          setSelectedMenuItem('updates')
           break
         case 'project':
-          setSelectedMenuItem(router.query.menu as string)
+          setSelectedMenuItem('mission')
           break
         default:
-          setSelectedMenuItem('project')
+          setSelectedMenuItem('mission')
       }
     } else {
-      setSelectedMenuItem('project')
+      setSelectedMenuItem('mission')
     }
   }, [router.query])
 
   useEffect(() => {
     const fetchData = async () => {
+      // Fetch mission info
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
-
       setAddressStats(stats)
+
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
         const supporters = stats.supporters
@@ -178,8 +180,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div>
         <article className="mt-10 flex flex-col-reverse lg:flex-row lg:items-start">
-          {/* BODY */}
           <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
+            {/* ## PROJECT HEADER */}
             <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
             </h1>
@@ -188,6 +190,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               {summary}
             </p>
 
+            {/* ## PROJECT CONTENT */}
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
               activeMenu={selectedMenuItem}
@@ -197,35 +200,35 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               faqCount={0}
               updatesCount={0}
             />
-
-            {/* Use conditional rendering to change the displayed content. */}
-            {selectedMenuItem === 'project' && content && (
+            {/* ### Mission Section */}
+            {selectedMenuItem === 'mission' && content && (
               <div
                 className="markdown min-h-[70vh]"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
+            {/* ### X Comments Section */}
             {selectedMenuItem === 'comments' && (
-              // #comments SECTION!!
               <div className="markdown min-h-[70vh]">
-                {/* Render comments content here */}
                 <h1>{`${hashtag}`}</h1>
                 <TwitterFeed hashtag={hashtag} tweetsData={tweetsData} />
               </div>
-              // END OF comments SECTION.
             )}
+            {/* ### FAQ Section */}
             {selectedMenuItem === 'faq' && content && (
               <div
                 className="markdown min-h-[70vh]"
                 // dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
+            {/* ### Updates Section */}
             {selectedMenuItem === 'updates' && content && (
               <div
                 className="markdown min-h-[70vh]"
                 // dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
+            {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
               <>
                 <div className="markdown">
@@ -254,7 +257,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          {/* Aside */}
+          {/* ## Project Aside: image, stats, donate button, share on social media */}
           <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:flex-col lg:items-start">
             <div className="relative h-[16rem] w-full overflow-hidden rounded-lg sm:w-full">
               <Image
@@ -315,7 +318,6 @@ type ParamsType = {
 }
 
 export async function getStaticProps({ params }: { params: ParamsType }) {
-  console.log('params: ', params)
   const post = getPostBySlug(params.slug)
 
   const projects = getAllPosts()
