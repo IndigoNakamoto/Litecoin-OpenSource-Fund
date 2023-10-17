@@ -8,9 +8,7 @@ import { FAQSection } from '@/components/FAQSection'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'faq')
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL || ''}/data/faq.json`
-  )
+  const res = await fetch(`${process.env.BASE_URL || ''}/data/faq.json`)
   if (!res.ok) {
     console.error('Failed to fetch FAQ data:', res.statusText)
     return { props: { page: page, faqDataModule: null } }
