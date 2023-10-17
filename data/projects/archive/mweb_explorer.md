@@ -4,7 +4,6 @@ summary: 'MWEB improves privacy and scalability on the Litecoin blockchain. It l
 website: '[Project Website]'
 coverImage: '/static/images/projects/MWEB.webp'
 twitter: '[Project Twitter Handle]'
-personalTwitter: '[Personal Twitter Handle]'
 type: 'Project'
 contributor: ''
 owner: ''

@@ -6,7 +6,6 @@ coverImage: '/static/images/projects/omnilite3.png'
 nym: 'OmniLayer'
 website: 'https://omnilite.org/'
 twitter: 'ltcfoundation'
-personalTwitter: 'litecoin'
 hidden: false
 type: 'Project'
 contributor: 'Omni_layer,loshan1212'

@@ -6,7 +6,6 @@ website: 'www.litewallet.io'
 coverImage: '/static/images/projects/litewallet2.png'
 git: '[GitHub Repository]'
 twitter: '[Project Twitter Handle]'
-personalTwitter: '[Personal Twitter Handle]'
 type: '[Project Type]'
 ---
 

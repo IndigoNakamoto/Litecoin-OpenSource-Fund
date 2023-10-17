@@ -14,7 +14,6 @@ const FIELDS = [
   'nym',
   'website',
   'twitter',
-  'personalTwitter',
   'hidden',
   'type',
   'contributor',

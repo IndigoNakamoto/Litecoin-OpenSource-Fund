@@ -70,7 +70,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     content,
     // nym,
     // website,
-    // personalTwitter,
     contributor,
     hashtag,
     socialSummary,
@@ -250,7 +249,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* ### Updates Section */}
             {/* TODO: implement updates section */}
             {selectedMenuItem === 'updates' && content && (
-              <div className="markdown"></div>
+              <div className="markdown min-h-full"></div>
             )}
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (

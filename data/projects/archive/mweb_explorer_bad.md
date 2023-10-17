@@ -4,7 +4,6 @@ summary: 'The MWEB Explorer is a comprehensive analytics platform providing real
 website: 'MWEBExplorer.com'
 coverImage: '/static/images/projects/MWEB.webp'
 twitter: '[Project Twitter Handle]'
-personalTwitter: '[Personal Twitter Handle]'
 type: 'Project'
 contributor: ''
 owner: ''
