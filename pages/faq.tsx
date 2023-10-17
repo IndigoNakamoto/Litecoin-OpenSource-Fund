@@ -2,12 +2,11 @@
 
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
-
+import faqData from '../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'faq')
-  const { default: faqData } = await import(`../data/pages/faq.json`)
   return { props: { page, faqDataModule: faqData } }
 }
 
