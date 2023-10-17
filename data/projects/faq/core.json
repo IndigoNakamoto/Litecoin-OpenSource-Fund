@@ -60,15 +60,11 @@
         "items": [
           {
             "question": "How does Litecoin Core address privacy?",
-            "answer": "Litecoin Core includes features like CoinJoin and Confidential Transactions to enhance user privacy. These features help obfuscate transaction details and improve privacy on the network."
+            "answer": "Litecoin Core includes features like MWEB to enhance user privacy. MWEB helps obfuscate transaction details and improve privacy on the network."
           },
           {
             "question": "Why is privacy important in cryptocurrencies?",
             "answer": "Privacy is crucial to protect user financial data and transaction details. It ensures that transactions are confidential and not easily traceable, preserving the fungibility of Litecoin."
-          },
-          {
-            "question": "What are the risks of centralization in cryptocurrency?",
-            "answer": "Centralization in cryptocurrency can lead to censorship, control by a small group of entities, and vulnerabilities to attacks. It undermines the principles of decentralization and trustlessness."
           }
         ]
       },

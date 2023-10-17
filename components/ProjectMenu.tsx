@@ -100,6 +100,18 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             Community
           </button>
         </li>
+        <li>
+          <button
+            onClick={() => handleMenuItemClick('resources')}
+            className={`${
+              activeItem === 'resources'
+                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
+            }   md:inline-block`}
+          >
+            Resources
+          </button>
+        </li>
       </ul>
     </nav>
   )
