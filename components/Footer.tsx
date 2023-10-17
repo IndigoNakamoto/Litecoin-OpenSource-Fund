@@ -16,7 +16,7 @@ export default function Footer() {
           <SocialIcon kind="facebook" href={siteMetadata.facebook} size={6} />
           <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
           <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-          <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
+          <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
         </div>
         <div className="lg:text-md mb-2  flex text-sm text-gray-500 dark:text-gray-400 md:space-x-1.5 lg:space-x-2">
           <div className="flex space-x-0.5">

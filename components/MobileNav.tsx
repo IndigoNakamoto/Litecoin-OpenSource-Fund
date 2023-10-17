@@ -106,7 +106,7 @@ const MobileNav = () => {
                 href={siteMetadata.linkedin}
                 size={6}
               />
-              <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
+              <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
             </div>
             {/* Footer */}
             <div className=" ml-12 mt-12 flex flex-col text-xl text-gray-100 ">
