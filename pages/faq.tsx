@@ -4,6 +4,7 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import faqData from '../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
+import { PageSEO } from '@/components/SEO'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'faq')
@@ -19,13 +20,14 @@ export default function FAQ({
   }
 
   return (
-    <div>
+    <>
+      <PageSEO title={`Lite.Space | FAQ`} description={`${page.summary}`} />
       <h1 className="my-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
         FAQ
       </h1>
       <div className="content px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
         <FAQSection faqCategories={faqDataModule.questionsAndAnswers} />
       </div>
-    </div>
+    </>
   )
 }
