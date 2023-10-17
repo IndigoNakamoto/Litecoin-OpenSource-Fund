@@ -184,8 +184,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   return (
     <>
       <Head>
-        <title>{slug} - Lite.Space</title>
-        <title>{slug} - Lite.Space</title>
+        <title>Lite.Space | {slug}</title>
         <meta property="og:title" content={title} />
         <meta property="og:description" content={summary} />
 
