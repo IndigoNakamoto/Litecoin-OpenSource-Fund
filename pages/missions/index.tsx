@@ -49,7 +49,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         Explore Missions
       </h1>
       <section className="flex flex-col p-4 md:p-8">
-        <div className="mt-1 divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="">
           <div className="space-y-2 pb-2 pt-0 md:space-y-5">
             <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
               Supporting <Typing />
@@ -61,7 +61,26 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           </div>
         </div>
       </section>
-      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
+      <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" />
+      <section className="flex flex-col p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
+          <h2
+            id="funds"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
+          >
+            Open-Source Projects
+          </h2>
+        </div>
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+          {sortedProjects &&
+            sortedProjects.map((p, i) => (
+              <li key={i} className="">
+                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              </li>
+            ))}
+        </ul>
+      </section>
+      <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" />
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
@@ -81,26 +100,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
-      <section className="flex flex-col p-4 md:p-8">
-        <div className="flex w-full items-center justify-between pb-8">
-          <h2
-            id="funds"
-            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
-          >
-            Open-Source Projects
-          </h2>
-        </div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
-              <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
-              </li>
-            ))}
-        </ul>
-      </section>
-      <hr className="border-t-2 border-primary-500 dark:border-primary-400" />
+      <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" />
       <section className="flex flex-col items-center p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
