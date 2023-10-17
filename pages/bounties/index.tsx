@@ -1,4 +1,4 @@
-//pages/projects/index.tsx
+//pages/bounties/index.tsx
 
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -35,14 +35,14 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Bounties | Lite.Space</title>
       </Head>
-      <h1 className="mt-10 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
+      <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
         Bounties
       </h1>
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
-            className="text-lg font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-3xl md:leading-14 xl:col-span-2"
+            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
           >
             Open Bounties
           </h2>
