@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ReactMarkdown from 'react-markdown' // Import the ReactMarkdown component
 
 type FAQItem = {
   question: string
@@ -40,7 +41,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
 
   return (
     <div className="">
-      <h3 className="text-4xl text-gray-700 dark:text-gray-300">
+      <h3 className="mb-6 text-4xl text-gray-700 dark:text-gray-300">
         Frequently Asked Questions
       </h3>
       {faqCategories.map((category, catIndex) => (
@@ -64,7 +65,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
               >
                 {faq.question}
               </button>
-              <p
+              <div
                 className={`pb-8 pl-4 pt-6 text-gray-700 dark:text-gray-300 ${
                   openIndex &&
                   openIndex.catIndex === catIndex &&
@@ -73,9 +74,10 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     : 'hidden'
                 }`}
               >
-                {/* TODO: answer is in markdown and needs to be styalized */}
-                {faq.answer}
-              </p>
+                {/* TODO: faq.answer is a string, but needs to be handled like it's markdown */}
+                {/* Use the ReactMarkdown component to render the markdown content */}
+                <ReactMarkdown className="markdown">{faq.answer}</ReactMarkdown>
+              </div>
             </div>
           ))}
         </div>

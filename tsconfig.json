@@ -51,6 +51,7 @@
     "next-env.d.ts",
     "src/**/*",
     "data/tweets.json",
+    "data/pages/faq.json",
     "**/*.js",
     "**/*.ts",
     "**/*.tsx",
