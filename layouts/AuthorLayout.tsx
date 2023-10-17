@@ -26,14 +26,14 @@ export default function AuthorLayout({ children, content }: Props) {
   return (
     <>
       <PageSEO title={`${name} | About `} description={`About me - ${name}`} />
-      <div>
-        <div className="space-y-2 pb-2 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+      <div className="">
+        <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
           {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
           <h1 className="font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
             About {name}
           </h1>
         </div>
-        <div className="space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+        <div className="space-y-2 rounded-xl bg-gradient-to-b from-gray-100 to-white p-4 dark:from-gray-800 dark:to-gray-900 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 ">
           <div className="flex flex-col items-center space-x-2 pt-10">
             {avatar && ( // Check if avatar is defined
               <Image

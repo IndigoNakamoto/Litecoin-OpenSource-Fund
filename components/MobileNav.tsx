@@ -43,7 +43,7 @@ const MobileNav = () => {
       </div>
 
       <div
-        className={`fixed bottom-2 right-2 top-2 z-10 transform  rounded-xl backdrop-blur-lg duration-200 ease-in xs:w-full sm:w-1/2 md:clear-left md:w-1/3 ${
+        className={`fixed bottom-2 right-2 top-2 z-10 ml-4 min-w-[400px] transform rounded-3xl backdrop-blur-3xl duration-200 ease-in xs:w-full sm:w-1/2 md:clear-left md:w-1/3 xl:min-w-[400px] ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
         style={{ backgroundColor: 'rgba(12, 12, 12, 0.65)' }} // Using RGBA to achieve 40% transparency on a dark background
@@ -86,67 +86,69 @@ const MobileNav = () => {
               </div>
             ))}
           </nav>
-          <div className="mt-10 flex flex-col">
-            {/* Social Icons */}
-            <div className="flex h-full space-x-4 px-12">
-              <SocialIcon
-                kind="mail"
-                href={`mailto:${siteMetadata.email}`}
-                size={6}
-              />
-              <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-              <SocialIcon
-                kind="facebook"
-                href={siteMetadata.facebook}
-                size={6}
-              />
-              <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
-              <SocialIcon
-                kind="linkedin"
-                href={siteMetadata.linkedin}
-                size={6}
-              />
-              <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
-            </div>
-            {/* Footer */}
-            <div className=" ml-12 mt-12 flex flex-col text-xl text-gray-100 ">
-              <Link
-                href="/grant-policy"
-                className="hover:text-blue-400"
-                onClick={onToggleNav}
-              >
-                Grant Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="hover:text-blue-400"
-                onClick={onToggleNav}
-              >
-                Terms
-              </Link>
-              <Link
-                href="/privacy"
-                className="hover:text-blue-400"
-                onClick={onToggleNav}
-              >
-                Privacy
-              </Link>
-            </div>
-            <div className="absolute bottom-10 mt-12 flex flex w-full flex-col items-center justify-center">
-              <div className="lg:text-md mb-2  flex text-sm text-gray-100 dark:text-gray-400 md:space-x-1.5 lg:space-x-2">
-                <div className="flex space-x-0.5">
+          <div className="">
+            <div className="absolute bottom-12 mt-12 flex w-full flex-col ">
+              {/* Social Icons */}
+              <div className="flex space-x-4 px-12">
+                <SocialIcon
+                  kind="mail"
+                  href={`mailto:${siteMetadata.email}`}
+                  size={6}
+                />
+                <SocialIcon kind="github" href={siteMetadata.github} size={6} />
+                <SocialIcon
+                  kind="facebook"
+                  href={siteMetadata.facebook}
+                  size={6}
+                />
+                <SocialIcon
+                  kind="youtube"
+                  href={siteMetadata.youtube}
+                  size={6}
+                />
+                <SocialIcon
+                  kind="linkedin"
+                  href={siteMetadata.linkedin}
+                  size={6}
+                />
+                <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
+              </div>
+              {/* Footer */}
+              <div className=" ml-12 mt-12 flex flex-col space-y-2 text-xl text-gray-100 ">
+                <Link
+                  href="/grant-policy"
+                  className="hover:text-blue-400"
+                  onClick={onToggleNav}
+                >
+                  Grant Policy
+                </Link>
+                <Link
+                  href="/terms"
+                  className="hover:text-blue-400"
+                  onClick={onToggleNav}
+                >
+                  Terms
+                </Link>
+                <Link
+                  href="/privacy"
+                  className="hover:text-blue-400"
+                  onClick={onToggleNav}
+                >
+                  Privacy
+                </Link>
+              </div>
+              <div className="ml-12 mt-12 text-xs text-gray-100 dark:text-gray-400">
+                <div className="flex flex-row space-x-1">
                   <div>{`© ${new Date().getFullYear()}`}</div>
                   <div>{siteMetadata.author}</div>
+                  <div>|</div>
                   <div>{`© ${new Date().getFullYear()}`}</div>
                   <div>OpenSats</div>
                 </div>
-
-                <div className="flex space-x-0.5"></div>
               </div>
-              <div className="space-x-4 text-center text-xs text-gray-100 dark:text-gray-400">
+              <div className="ml-12 text-xs text-gray-100 dark:text-gray-400">
                 Litecoin Foundation, Inc. Singapore (UEN: 201709179W) is a
                 non-profit organization.
-                <br />
               </div>
             </div>
           </div>

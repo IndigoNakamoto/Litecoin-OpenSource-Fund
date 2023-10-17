@@ -205,7 +205,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div>
         <article className="mt-10 flex flex-col-reverse lg:flex-row lg:items-start">
-          <div className="content max-w-[100ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
+          <div className="content mr-1 max-w-[100ch] rounded-xl bg-gradient-to-b from-gray-100 to-white p-4 px-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-900 dark:text-gray-300 lg:px-8 ">
             {/* ## PROJECT HEADER */}
             <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}

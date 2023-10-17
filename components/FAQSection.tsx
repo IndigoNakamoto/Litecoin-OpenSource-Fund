@@ -41,7 +41,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
 
   return (
     <div className="">
-      <h3 className="mb-6 text-4xl text-gray-700 dark:text-gray-300">
+      <h3 className="my-6 pt-4 text-4xl text-gray-700 dark:text-gray-300">
         Frequently Asked Questions
       </h3>
       {faqCategories.map((category, catIndex) => (
@@ -61,7 +61,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="w-full cursor-pointer border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+                className="w-full cursor-pointer border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:focus:bg-gray-700"
               >
                 {faq.question}
               </button>

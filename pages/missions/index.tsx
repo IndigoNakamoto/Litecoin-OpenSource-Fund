@@ -44,11 +44,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Lite.Space | Projects</title>
       </Head>
-      {/* TODO: fix h1 h2 xs sm md font sizes... */}
       <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
         Explore Missions
       </h1>
-      <section className="flex flex-col p-4 md:p-8">
+      <section className="bg flex flex-col p-4 md:p-8 ">
         <div className="">
           <div className="space-y-2 pb-2 pt-0 md:space-y-5">
             <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
@@ -61,8 +60,9 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           </div>
         </div>
       </section>
-      <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" />
-      <section className="flex flex-col p-4 md:p-8">
+      {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
+      {/* TODO: I want the section to start with bg-gray-200 and have a gradient to white with rounded corners */}
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-100 to-white p-4 dark:from-gray-800 dark:to-gray-900 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
@@ -80,8 +80,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" />
-      <section className="flex flex-col p-4 md:p-8">
+      {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-100 to-white p-4 dark:from-gray-800 dark:to-gray-900 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"
@@ -100,8 +100,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" />
-      <section className="flex flex-col items-center p-4 md:p-8">
+      {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-100 to-white p-4 dark:from-gray-800 dark:to-gray-900 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h2
             id="funds"

@@ -25,7 +25,7 @@ export default function FAQ({
       <h1 className="my-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
         FAQ
       </h1>
-      <div className="content px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
+      <div className="content rounded-xl bg-gradient-to-b from-gray-100 to-white px-4 leading-relaxed dark:from-gray-800 dark:to-gray-900 dark:text-gray-300 lg:px-8">
         <FAQSection faqCategories={faqDataModule.questionsAndAnswers} />
       </div>
     </>
