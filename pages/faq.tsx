@@ -2,20 +2,13 @@
 
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
-// import faqData from '../data/pages/faq.json'
 
 import { FAQSection } from '@/components/FAQSection'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'faq')
-  const res = await fetch(`${process.env.BASE_URL || ''}/data/faq.json`)
-  if (!res.ok) {
-    console.error('Failed to fetch FAQ data:', res.statusText)
-    return { props: { page: page, faqDataModule: null } }
-  }
-
-  const faqData = await res.json()
-  return { props: { page: page, faqDataModule: faqData } }
+  const { default: faqData } = await import(`../data/pages/faq.json`)
+  return { props: { page, faqDataModule: faqData } }
 }
 
 export default function FAQ({
