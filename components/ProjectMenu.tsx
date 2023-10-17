@@ -36,7 +36,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
               activeItem === 'mission'
                 ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   sm:p-4 md:inline-block lg:p-2`}
+            }   md:inline-block`}
           >
             Mission
           </button>
@@ -48,10 +48,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
               activeItem === 'comments'
                 ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }   sm:p-4 md:inline-block lg:p-2`}
+            }   md:inline-block`}
           >
             Comments
-            <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
+            <span className="absolute top-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {commentCount}
             </span>
           </button>
@@ -64,10 +64,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
               activeItem === 'faq'
                 ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }   sm:p-4 md:inline-block lg:p-2`}
+            }    md:inline-block `}
           >
             FAQ
-            <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
+            <span className="absolute top-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {faqCount}
             </span>
           </button>
@@ -80,10 +80,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
               activeItem === 'updates'
                 ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }   sm:p-4 md:inline-block lg:p-2`}
+            }   md:inline-block`}
           >
             Updates
-            <span className="absolute right-0 top-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
+            <span className="absolute top-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
               {updatesCount}
             </span>
           </button>
@@ -95,7 +95,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
               activeItem === 'community'
                 ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   sm:p-4 md:inline-block lg:p-2`}
+            }   md:inline-block`}
           >
             Community
           </button>
