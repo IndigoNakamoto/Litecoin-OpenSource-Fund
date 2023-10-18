@@ -46,7 +46,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         >
           Open Bounties
         </h2> */}
-        <div className="rounded-xl bg-gradient-to-b from-red-100 to-white p-8 pb-8 dark:from-red-800 dark:to-gray-700">
+        <div className="rounded-xl bg-gradient-to-b from-blue-200 to-blue-300 p-8 pb-8 dark:from-blue-800 dark:to-blue-800">
           <div className="flex w-full items-center justify-between"></div>
           <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
             {sortedProjects &&

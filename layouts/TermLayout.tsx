@@ -18,7 +18,9 @@ export default function PageLayout({ children, content }: Props) {
         <h1 className="mt-[78vh]  font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
           {title}
         </h1>
-        {children}
+        <div className="rounded-xl bg-gradient-to-b from-white to-gray-100 p-4 dark:from-gray-900 dark:to-gray-800">
+          {children}
+        </div>
       </div>
     </>
   )

@@ -46,16 +46,16 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
 
       <section className="mt-4">
-        <div className="rounded-xl bg-gradient-to-b from-blue-100 to-gray-100 p-4 dark:from-blue-500 dark:to-gray-700">
-          <h1 className="mt-2 font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
+        <div className="rounded-xl bg-gradient-to-b from-gray-200 to-gray-200 p-4 dark:from-gray-800 dark:to-gray-800">
+          <h1 className="mt-2 font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-12">
             Explore Missions
           </h1>
-          <div className="space-y-2 pb-0 pt-4 md:space-y-5">
-            <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
+          <div className="space-y-0 pb-0 pt-4 md:space-y-0">
+            <h1 className="ml-4 text-3xl font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
               Supporting <Typing />
             </h1>
 
-            <p className="mb-0 pb-2 text-2xl leading-7 text-gray-700 dark:text-gray-200">
+            <p className="mb-0 ml-4 pb-2 text-2xl leading-7 text-gray-700 dark:text-gray-200">
               {siteMetadata.description}
             </p>
           </div>
@@ -66,10 +66,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
         <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
-          Open-Source Missions
+          Open-Source Project
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-100 to-blue-100 p-8 dark:from-gray-600 dark:to-blue-500">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-blue-200 p-8 dark:from-gray-800 dark:to-blue-800">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {sortedProjects &&
@@ -84,10 +84,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
         <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
-          Bounty Missions
+          Bounty Projects
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-blue-100 to-blue-200 p-8 dark:from-blue-500 dark:to-gray-700">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-blue-300 to-blue-200 p-8 dark:from-blue-800 dark:to-blue-700">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {bountyProjects &&
@@ -100,12 +100,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
       {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-        {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
         <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
-          Development & Ops
+          DevOps
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-blue-200 to-gray-100 p-8 dark:from-gray-600 dark:to-blue-500">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-8 dark:from-gray-700 dark:to-gray-800">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {openSatsProjects &&
