@@ -29,14 +29,14 @@ const MobileNav = () => {
         onKeyPress={onToggleNav}
         aria-label="Toggle Menu"
       >
-        <span className="mr-2 font-semibold text-white dark:text-gray-800">
+        <span className="mr-2 font-semibold text-white dark:text-gray-100">
           Menu
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-8 w-8 text-white dark:text-gray-800"
+          className="h-8 w-8 text-white dark:text-gray-100"
         >
           <path d="M3 4.5h14v1H3zM3 9.5h14v1H3zM3 14.5h14v1H3z" />
         </svg>
