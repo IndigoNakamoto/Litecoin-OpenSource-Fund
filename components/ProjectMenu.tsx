@@ -34,7 +34,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('mission')}
             className={`${
               activeItem === 'mission'
-                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                ? 'font-bold text-blue-500 hover:text-blue-400 dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
@@ -46,7 +46,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('comments')}
             className={`${
               activeItem === 'comments'
-                ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }   md:inline-block`}
           >
@@ -62,7 +62,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('faq')}
             className={`${
               activeItem === 'faq'
-                ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }    md:inline-block `}
           >
@@ -78,7 +78,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('updates')}
             className={`${
               activeItem === 'updates'
-                ? 'relative font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }   md:inline-block`}
           >
@@ -93,7 +93,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('community')}
             className={`${
               activeItem === 'community'
-                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                ? 'font-bold text-blue-500 hover:text-blue-400 dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
@@ -105,7 +105,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('resources')}
             className={`${
               activeItem === 'resources'
-                ? 'font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400'
+                ? 'font-bold text-blue-500 hover:text-blue-400 dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >

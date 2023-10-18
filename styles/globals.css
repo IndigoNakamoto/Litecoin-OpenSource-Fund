@@ -146,7 +146,7 @@ button.group {
 }
 
 button.pay {
-  @apply  dark:border-blue-400 border-blue-500  dark:bg-blue-400 dark:hover:bg-blue-300 mt-2 bg-transparent font-semibold text-gray-100 dark:text-gray-800 hover:border-transparent flex-1 min-w-[20rem]  bg-blue-500 hover:bg-blue-600 p-8 text-xl rounded-xl flex justify-start gap-4;
+  @apply  dark:border-blue-400 border-blue-500  dark:bg-blue-400 dark:hover:bg-blue-300 mt-2 bg-transparent font-semibold text-gray-100 dark:text-gray-100 hover:border-transparent flex-1 min-w-[20rem]  bg-blue-500 hover:bg-blue-400 p-8 text-xl rounded-xl flex justify-start gap-4;
 }
 
 button.twitter {

@@ -47,7 +47,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       <section className="mt-4">
         <div className="rounded-xl bg-gradient-to-b from-gray-200 to-gray-200 p-4 dark:from-gray-800 dark:to-gray-800">
-          <h1 className="mt-2 font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-12">
+          <h1 className="mt-3 font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-12">
             Explore Missions
           </h1>
           <div className="space-y-0 pb-0 pt-4 md:space-y-0">

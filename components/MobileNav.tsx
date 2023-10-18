@@ -22,28 +22,28 @@ const MobileNav = () => {
   return (
     <div className="z-100 ">
       <div
-        className="ml-1 mr-1 flex items-center rounded-lg bg-blue-500 px-4 py-1 hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-300"
+        className="ml-1 mr-1 flex items-center rounded-3xl bg-blue-500 px-4 py-1 hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-300"
         role="button"
         tabIndex={0}
         onClick={onToggleNav}
         onKeyPress={onToggleNav}
         aria-label="Toggle Menu"
       >
-        <span className="mr-2 font-semibold text-gray-100 dark:text-gray-800">
+        <span className="mr-2 font-semibold text-white dark:text-gray-800">
           Menu
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-8 w-8 text-gray-100 dark:text-gray-800"
+          className="h-8 w-8 text-white dark:text-gray-800"
         >
           <path d="M3 4.5h14v1H3zM3 9.5h14v1H3zM3 14.5h14v1H3z" />
         </svg>
       </div>
 
       <div
-        className={`fixed bottom-2 right-2 top-2 z-10 ml-4 min-w-[400px] transform rounded-3xl backdrop-blur-3xl duration-200 ease-in xs:w-full sm:w-1/2 md:clear-left md:w-1/3 xl:min-w-[400px] ${
+        className={`fixed bottom-2 right-2 top-2 z-10 min-w-[400px] transform rounded-3xl backdrop-blur-3xl duration-200 ease-in xs:w-full sm:w-1/2 md:clear-left md:w-1/3 xl:min-w-[400px] ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
         style={{ backgroundColor: 'rgba(12, 12, 12, 0.65)' }} // Using RGBA to achieve 40% transparency on a dark background
@@ -78,7 +78,7 @@ const MobileNav = () => {
               <div key={link.title} className="px-12 py-2">
                 <Link
                   href={link.href}
-                  className="text-3xl font-semibold tracking-widest text-gray-100 hover:text-blue-400 dark:text-gray-100 dark:hover:text-blue-400"
+                  className="text-3xl font-semibold tracking-widest text-gray-100 hover:text-blue-300 dark:text-gray-100 dark:hover:text-blue-300"
                   onClick={onToggleNav}
                 >
                   {link.title}
@@ -117,21 +117,21 @@ const MobileNav = () => {
               <div className=" ml-12 mt-12 flex flex-col space-y-2 text-xl text-gray-100 ">
                 <Link
                   href="/grant-policy"
-                  className="hover:text-blue-400"
+                  className="hover:text-blue-200"
                   onClick={onToggleNav}
                 >
                   Grant Policy
                 </Link>
                 <Link
                   href="/terms"
-                  className="hover:text-blue-400"
+                  className="hover:text-blue-200"
                   onClick={onToggleNav}
                 >
                   Terms
                 </Link>
                 <Link
                   href="/privacy"
-                  className="hover:text-blue-400"
+                  className="hover:text-blue-200"
                   onClick={onToggleNav}
                 >
                   Privacy

@@ -310,7 +310,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded bg-blue-500 px-2 py-1 text-2xl font-semibold text-white hover:border-transparent hover:bg-blue-600 dark:bg-blue-400 dark:text-gray-800 dark:hover:bg-blue-300 sm:px-4 sm:py-2 "
+              className="hover:white block w-full rounded bg-blue-500 px-2 py-1 text-2xl font-semibold text-white hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-800 dark:hover:bg-blue-300 sm:px-4 sm:py-2 "
             >
               Donate
             </button>
