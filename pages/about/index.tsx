@@ -55,7 +55,6 @@ InferGetStaticPropsType<typeof getStaticProps>) {
           <h2 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
             Council Members
           </h2>
-          <div></div>
         </div>
 
         <div className="grid items-start space-y-2 xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">

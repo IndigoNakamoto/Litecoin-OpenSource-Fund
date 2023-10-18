@@ -40,7 +40,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
   }
 
   return (
-    <div className="">
+    <div>
       <h3 className="pt-8 text-4xl text-gray-700 dark:text-gray-300">
         Frequently Asked Questions
       </h3>
