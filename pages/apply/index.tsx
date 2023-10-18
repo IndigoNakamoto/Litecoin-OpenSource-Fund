@@ -32,7 +32,7 @@ export default function Apply({
       ) : (
         <h1>Content not found.</h1>
       )}
-      <hr className="border-t-2 border-primary-200 dark:border-primary-900" />
+      <hr className="border-t-1 border-primary-400" />
       <ApplySection title="Our Programs">
         <p>
           All our programs are open to applicants worldwide. We are global and

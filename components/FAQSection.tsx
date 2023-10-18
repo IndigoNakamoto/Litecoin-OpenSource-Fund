@@ -41,13 +41,13 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
 
   return (
     <div className="">
-      <h3 className="my-6 pt-4 text-4xl text-gray-700 dark:text-gray-300">
+      <h3 className="pt-8 text-4xl text-gray-700 dark:text-gray-300">
         Frequently Asked Questions
       </h3>
       {faqCategories.map((category, catIndex) => (
         <div
           key={catIndex}
-          className="mb-8 border-t border-blue-400 dark:border-blue-400"
+          className="mb-8 border-t border-gray-400 dark:border-gray-700"
         >
           <h4 className="mb-4 mt-4 text-2xl font-medium text-gray-700 dark:text-gray-300">
             {category.category.trim()}

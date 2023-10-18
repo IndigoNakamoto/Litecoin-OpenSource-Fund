@@ -22,10 +22,10 @@ export default function FAQ({
   return (
     <>
       <PageSEO title={`Lite.Space | FAQ`} description={`${page.summary}`} />
-      <h1 className="my-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
+      <h1 className="mt-8 pl-4 font-semibold tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl md:text-7xl">
         FAQ
       </h1>
-      <div className="content rounded-xl bg-gradient-to-b from-gray-100 to-white px-4 leading-relaxed dark:from-gray-800 dark:to-gray-900 dark:text-gray-300 lg:px-8">
+      <div className="rounded-xl bg-gradient-to-b from-gray-200 to-white dark:from-gray-800 dark:to-gray-900 dark:text-gray-300 xs:px-1 md:px-4 lg:px-8">
         <FAQSection faqCategories={faqDataModule.questionsAndAnswers} />
       </div>
     </>

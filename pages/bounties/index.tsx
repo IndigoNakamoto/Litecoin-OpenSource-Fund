@@ -35,26 +35,31 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Bounties | Lite.Space</title>
       </Head>
-      <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
+      <h1 className="mt-10 pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
         Bounties
       </h1>
-      <section className="flex flex-col p-4 md:p-8">
-        <div className="flex w-full items-center justify-between pb-8">
-          <h2
-            id="funds"
-            className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14"
-          >
-            Open Bounties
-          </h2>
+
+      <section className="">
+        {/* <h2
+          id="funds"
+          className="mt-4 pl-4 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl md:text-5xl"
+        >
+          Open Bounties
+        </h2> */}
+        <div className="rounded-xl bg-gradient-to-b from-red-600 to-white p-4 pb-12 dark:from-red-600 dark:to-gray-900">
+          <div className="flex w-full items-center justify-between pb-8"></div>
+          <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+            {sortedProjects &&
+              sortedProjects.map((p, i) => (
+                <li key={i} className="">
+                  <ProjectCard
+                    project={p}
+                    openPaymentModal={openPaymentModal}
+                  />
+                </li>
+              ))}
+          </ul>
         </div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
-              <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
-              </li>
-            ))}
-        </ul>
       </section>
       <PaymentModal
         isOpen={modalOpen}
