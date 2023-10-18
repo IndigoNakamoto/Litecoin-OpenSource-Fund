@@ -63,15 +63,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
       {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
       {/* TODO: I want the section to start with bg-gray-200 and have a gradient to white with rounded corners */}
-      <h2
-        id="funds"
-        className="pl-4 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl md:text-5xl"
-      >
-        Open-Source Projects
-      </h2>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-300 to-white p-4 dark:from-gray-600 dark:to-gray-900">
+      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+        {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
+        <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+          Open-Source Missions
+        </h2>
+      </div>
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-300 to-white p-8 dark:from-gray-600 dark:to-gray-900">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+        <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">
@@ -81,15 +81,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </ul>
       </section>
       {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
-      <h2
-        id="funds"
-        className="pl-4 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl md:text-5xl"
-      >
-        Open Bounties
-      </h2>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-white p-4 dark:from-gray-700 dark:to-gray-900">
+      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+        {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
+        <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+          Bounty Missions
+        </h2>
+      </div>
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-300 to-white p-8 dark:from-gray-600 dark:to-gray-900">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+        <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {bountyProjects &&
             bountyProjects.map((p, i) => (
               <li key={i} className="">
@@ -99,15 +99,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </ul>
       </section>
       {/* <hr className="mx-8 border-t-2 border-primary-200 dark:border-primary-900" /> */}
-      <h2
-        id="funds"
-        className="pl-4 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl md:text-5xl"
-      >
-        Litecoin Development Fund
-      </h2>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-100 to-white p-4 dark:from-gray-800 dark:to-gray-900">
+      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+        {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
+        <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+          Development & Ops
+        </h2>
+      </div>
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-300 to-white p-8 dark:from-gray-600 dark:to-gray-900">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-2">
+        <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {openSatsProjects &&
             openSatsProjects.map((p, i) => (
               <li key={i} className="">
