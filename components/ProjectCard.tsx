@@ -36,7 +36,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="line-clamp-3">{summary}</div>
         <div className="grid grid-cols-2 pt-4">
           <button
-            className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-500 hover:text-white dark:bg-white dark:text-black dark:hover:bg-blue-500"
+            className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-400 hover:text-white dark:bg-white dark:text-black dark:hover:bg-blue-400 hover:dark:text-white"
             onClick={() => openPaymentModal(project)}
           >
             Donate
