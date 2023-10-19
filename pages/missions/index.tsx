@@ -2,6 +2,7 @@
 
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/image' // <-- Import the Image component
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
@@ -46,23 +47,32 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
 
       <section className="mt-4">
-        {/* TODO: Replace the bg-gradient-to-b with image or movie */}
-        {/* Location of image I want to use  = '/static/images/lite-space-bg.jpg' */}
-        <div className="rounded-xl bg-gradient-to-b from-gray-200 to-gray-200 p-4 dark:from-gray-800 dark:to-gray-800">
-          <h1 className="mt-3 font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-12">
-            Explore Missions
-          </h1>
-          <div className="space-y-0 pb-0 pt-4 md:space-y-0">
-            <h1 className="ml-4 text-3xl font-semibold leading-9 tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
-              Supporting <Typing />
+        <div className="relative h-64 overflow-hidden rounded-xl">
+          <Image
+            src="/static/images/hero.jpg"
+            layout="fill"
+            objectFit="cover"
+            alt="Lite.Space Hero Image"
+            priority={true}
+            className="absolute left-0 top-0 z-0 h-full w-full" // added positioning properties
+          />
+          {/* Text content */}
+          <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center bg-black bg-opacity-40 p-4">
+            <h1 className="mt-3 font-semibold leading-9 tracking-tight text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-12">
+              Explore Missions
             </h1>
-
-            <p className="mb-0 ml-4 pb-2 text-2xl leading-7 text-gray-700 dark:text-gray-200">
-              {siteMetadata.description}
-            </p>
+            <div className="space-y-0 pb-0 pt-4 md:space-y-0">
+              <h1 className="ml-4 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
+                Supporting <Typing />
+              </h1>
+              <p className="mb-0 ml-4 pb-2 text-2xl font-medium leading-7 text-gray-100">
+                {siteMetadata.description}
+              </p>
+            </div>
           </div>
         </div>
       </section>
+
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           Open-Source Projects

@@ -26,6 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               objectFit="cover"
               objectPosition="50% 50%"
               className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
+              priority={true}
             />
           </div>
         </Link>

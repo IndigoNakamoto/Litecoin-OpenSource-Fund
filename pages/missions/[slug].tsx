@@ -287,6 +287,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 layout="fill"
                 objectFit="cover"
                 objectPosition="50% 50%"
+                priority={true}
               />
             </div>
 
