@@ -279,8 +279,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             )}
           </div>
           {/* ## Project Aside: image, stats, donate button, share on social media */}
-          <aside className="mb-8 flex min-w-[16rem] flex-col gap-4 lg:sticky lg:top-32 lg:items-start">
-            <div className="relative h-[16rem] w-full overflow-hidden rounded-lg sm:w-full">
+          <aside className="mb-8 flex min-w-[16rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-100 to-gray-100 p-8 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:p-4">
+            <div className="relative h-[20rem] w-full overflow-hidden rounded-lg xl:h-[14rem] ">
               <Image
                 alt={title}
                 src={coverImage}
@@ -290,32 +290,34 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               />
             </div>
 
-            <div className="flex w-full items-start gap-8 p-4 sm:flex-row sm:items-center sm:gap-8">
+            <div className="flex w-full items-start space-x-8 sm:flex-row sm:items-center">
               {addressStats && (
                 <div className="">
-                  <h5 className="text-xl font-bold">{addressStats.tx_count}</h5>
+                  <h5 className="text-3xl font-semibold">
+                    {addressStats.tx_count}
+                  </h5>
                   <h4 className="text-sm">Donations</h4>
                 </div>
               )}
 
               {addressStats && (
                 <div className="">
-                  <h5 className="text-xl font-bold">
+                  <h5 className="text-3xl font-semibold text-gray-800 dark:text-gray-100">
                     Ł {addressStats.funded_txo_sum}{' '}
                   </h5>
-                  <h4 className="text-sm">Raised</h4>
+                  <h4 className="text-sm">Litecoin Raised</h4>
                 </div>
               )}
             </div>
 
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded bg-blue-500 px-2 py-1 text-2xl font-semibold text-white hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300 sm:px-4 sm:py-2 "
+              className="hover:white block w-full rounded bg-blue-500 text-xl  text-white hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300"
             >
-              Donate
+              Support this mission
             </button>
             <SocialMediaShare
-              className="mt-0 flex space-x-4 px-2  sm:px-4 sm:py-2 "
+              className="mt-0 flex space-x-4 "
               title={title}
               summary={socialSummary}
             />
