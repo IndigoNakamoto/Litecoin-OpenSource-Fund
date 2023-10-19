@@ -41,21 +41,6 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             Mission
           </button>
         </li>
-        <li className="relative">
-          <button
-            onClick={() => handleMenuItemClick('comments')}
-            className={`${
-              activeItem === 'comments'
-                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
-                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }   md:inline-block`}
-          >
-            Comments
-            <span className="absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400">
-              {commentCount}
-            </span>
-          </button>
-        </li>
 
         <li className="relative">
           <button
@@ -85,6 +70,21 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             Updates
             <span className="absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400">
               {updatesCount}
+            </span>
+          </button>
+        </li>
+        <li className="relative">
+          <button
+            onClick={() => handleMenuItemClick('comments')}
+            className={`${
+              activeItem === 'comments'
+                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
+            }   md:inline-block`}
+          >
+            Comments
+            <span className="absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+              {commentCount}
             </span>
           </button>
         </li>

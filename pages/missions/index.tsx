@@ -66,7 +66,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         {/* <h1 className="text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2"> */}
         <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
-          Open-Source Project
+          Open-Source Projects
         </h2>
       </div>
       <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-blue-200 p-8 dark:from-gray-800 dark:to-blue-800">
