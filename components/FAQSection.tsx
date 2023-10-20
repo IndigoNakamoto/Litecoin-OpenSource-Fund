@@ -11,6 +11,34 @@ type FAQCategory = {
   items: FAQItem[]
 }
 
+const ChevronRight: React.FC<{ className?: string }> = ({ className }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+)
+
+const ChevronDown: React.FC<{ className?: string }> = ({ className }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+)
+
 export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
   faqCategories,
 }) => {
@@ -61,10 +89,18 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="w-full cursor-pointer border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:focus:bg-gray-700"
+                className="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:focus:bg-gray-700"
               >
-                {faq.question}
+                <span>{faq.question}</span>
+                {openIndex &&
+                openIndex.catIndex === catIndex &&
+                openIndex.qIndex === qIndex ? (
+                  <ChevronDown className="h-5 w-5" />
+                ) : (
+                  <ChevronRight className="h-5 w-5" />
+                )}
               </button>
+
               <div
                 className={`pb-8 pl-4 pt-6 text-gray-700 dark:text-gray-300 ${
                   openIndex &&
