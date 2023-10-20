@@ -48,7 +48,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       <section className="mt-4">
         <div className="relative h-96 overflow-hidden rounded-xl">
-          {/* TODO STYLE: I want the image to expand all the way left, up, and right, keeping it's bottom in the height */}
           <Image
             src="/static/images/hero.jpg"
             layout="fill"
@@ -66,7 +65,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               <h1 className="pb-2 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
                 Supporting <Typing />
               </h1>
-              <p className="mb-0 pt-28 text-2xl font-medium leading-7 text-gray-100">
+              <p className="mb-0 pt-44 text-2xl font-medium leading-7 text-gray-100">
                 {siteMetadata.description}
               </p>
             </div>

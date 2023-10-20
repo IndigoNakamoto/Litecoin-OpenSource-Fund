@@ -210,7 +210,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               {title}
             </h1>
 
-            <p className="prose max-w-none pb-0 pt-0 dark:prose-dark">
+            <p className="prose max-w-none pb-0 pt-0 text-xl font-medium dark:prose-dark">
               {summary}
             </p>
 
