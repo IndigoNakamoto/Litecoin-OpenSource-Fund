@@ -26,7 +26,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   return (
     <nav className="mt-6 border-b border-t border-blue-500 dark:border-blue-400">
       <ul
-        className="scroll-snap-type flex space-x-4 overflow-x-auto whitespace-nowrap py-4  dark:text-gray-100"
+        className="scroll-snap-type flex overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <li>
