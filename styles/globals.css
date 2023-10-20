@@ -16,6 +16,12 @@ html {
   scrollbar-width: none; /* Firefox */
 }
 
+.stickyAside {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0; /* Adjust this value as needed */
+}
+
 @font-face {
   font-family: 'Barlow Semi Condensed';
   src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf') format('truetype');

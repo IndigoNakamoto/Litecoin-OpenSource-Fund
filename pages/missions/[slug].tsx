@@ -245,7 +245,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </div>
             )}
             {/* ### Updates Section */}
-            {/* TODO: implement updates section */}
             {selectedMenuItem === 'updates' && content && (
               <div className="markdown min-h-full"></div>
             )}
@@ -279,7 +278,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             )}
           </div>
           {/* ## Project Aside: image, stats, donate button, share on social media */}
-          <aside className="mb-8 flex min-w-[16rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-100 to-gray-100 p-8 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:p-4">
+          <aside className="stickyAside z-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-100 to-gray-100 p-8 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:p-4">
             <div className="relative h-[20rem] w-full overflow-hidden rounded-lg xl:h-[14rem] ">
               <Image
                 alt={title}
