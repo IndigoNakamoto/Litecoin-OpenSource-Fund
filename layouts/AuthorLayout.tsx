@@ -33,7 +33,7 @@ export default function AuthorLayout({ children, content }: Props) {
             About {name}
           </h1>
         </div>
-        <div className="space-y-2 rounded-xl bg-gradient-to-b from-gray-100 to-white p-4 dark:from-gray-800 dark:to-gray-900 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 ">
+        <div className="space-y-2 rounded-xl bg-gradient-to-b from-gray-200 to-white p-4 dark:from-gray-700 dark:to-gray-900 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 ">
           <div className="flex flex-col items-center space-x-2 pt-10">
             {avatar && ( // Check if avatar is defined
               <Image

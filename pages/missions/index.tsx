@@ -65,7 +65,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               <h1 className="pb-2 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
                 Supporting <Typing />
               </h1>
-              <p className="mb-0 ml-4 pb-2 pt-28 text-2xl font-medium leading-7 text-gray-100">
+              <p className="mb-0 pt-28 text-2xl font-medium leading-7 text-gray-100">
                 {siteMetadata.description}
               </p>
             </div>
@@ -78,7 +78,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           Open-Source Projects
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-blue-200 p-8 dark:from-gray-800 dark:to-blue-800">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-8 dark:from-gray-800 dark:to-gray-700">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {sortedProjects &&
@@ -95,7 +95,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           Bounty Projects
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-blue-300 to-blue-200 p-8 dark:from-blue-800 dark:to-blue-700">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-blue-400 to-blue-200 p-8 dark:from-blue-800 dark:to-blue-600">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {bountyProjects &&
