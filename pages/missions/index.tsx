@@ -47,7 +47,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
 
       <section className="mt-4">
-        <div className="relative h-80 overflow-hidden rounded-xl">
+        <div className="relative h-96 overflow-hidden rounded-xl">
+          {/* TODO STYLE: I want the image to expand all the way left, up, and right, keeping it's bottom in the height */}
           <Image
             src="/static/images/hero.jpg"
             layout="fill"
