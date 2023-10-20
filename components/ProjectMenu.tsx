@@ -34,7 +34,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('mission')}
             className={`${
               activeItem === 'mission'
-                ? 'font-bold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                ? 'font-bold text-blue-500  dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
@@ -47,12 +47,18 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('faq')}
             className={`${
               activeItem === 'faq'
-                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                ? 'relative font-semibold text-blue-500  dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }    md:inline-block `}
           >
             FAQ
-            <span className="absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+            <span
+              className={`${
+                activeItem === 'faq'
+                  ? 'absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400'
+                  : 'absolute right-1 text-xs font-semibold text-blue-600 dark:text-blue-400'
+              }`}
+            >
               {faqCount}
             </span>
           </button>
@@ -63,12 +69,18 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('updates')}
             className={`${
               activeItem === 'updates'
-                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                ? 'relative font-semibold text-blue-500  dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }   md:inline-block`}
           >
             Updates
-            <span className="absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+            <span
+              className={`${
+                activeItem === 'updates'
+                  ? 'absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400'
+                  : 'absolute right-1 text-xs font-semibold text-blue-600 dark:text-blue-400'
+              }`}
+            >
               {updatesCount}
             </span>
           </button>
@@ -78,12 +90,18 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('comments')}
             className={`${
               activeItem === 'comments'
-                ? 'relative font-semibold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                ? 'relative font-semibold text-blue-500  dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
             }   md:inline-block`}
           >
             Comments
-            <span className="absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+            <span
+              className={`${
+                activeItem === 'comments'
+                  ? 'absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400'
+                  : 'absolute right-1 text-xs font-semibold text-blue-600 dark:text-blue-400'
+              }`}
+            >
               {commentCount}
             </span>
           </button>
@@ -93,7 +111,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('community')}
             className={`${
               activeItem === 'community'
-                ? 'font-bold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                ? 'font-bold text-blue-500  dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
@@ -105,7 +123,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('resources')}
             className={`${
               activeItem === 'resources'
-                ? 'font-bold text-blue-500 hover:text-blue-400 dark:text-blue-300'
+                ? 'font-bold text-blue-500  dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
