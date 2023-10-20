@@ -32,9 +32,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         <li>
           <button
             onClick={() => handleMenuItemClick('mission')}
-            className={`${
+            className={`text-lg ${
               activeItem === 'mission'
-                ? 'font-bold text-blue-500  dark:text-blue-300'
+                ? 'font-semibold text-blue-500  dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
@@ -45,7 +45,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         <li className="relative">
           <button
             onClick={() => handleMenuItemClick('faq')}
-            className={`${
+            className={`text-lg ${
               activeItem === 'faq'
                 ? 'relative font-semibold text-blue-500  dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
@@ -67,7 +67,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         <li className="relative">
           <button
             onClick={() => handleMenuItemClick('updates')}
-            className={`${
+            className={`text-lg  ${
               activeItem === 'updates'
                 ? 'relative font-semibold text-blue-500  dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
@@ -88,7 +88,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         <li className="relative">
           <button
             onClick={() => handleMenuItemClick('comments')}
-            className={`${
+            className={`text-lg  ${
               activeItem === 'comments'
                 ? 'relative font-semibold text-blue-500  dark:text-blue-300'
                 : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
@@ -109,9 +109,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         <li>
           <button
             onClick={() => handleMenuItemClick('community')}
-            className={`${
+            className={`text-lg  ${
               activeItem === 'community'
-                ? 'font-bold text-blue-500  dark:text-blue-300'
+                ? 'font-semibold text-blue-500  dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
@@ -121,9 +121,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         <li>
           <button
             onClick={() => handleMenuItemClick('resources')}
-            className={`${
+            className={`text-lg  ${
               activeItem === 'resources'
-                ? 'font-bold text-blue-500  dark:text-blue-300'
+                ? 'font-semibold text-blue-500  dark:text-blue-300'
                 : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
             }   md:inline-block`}
           >
