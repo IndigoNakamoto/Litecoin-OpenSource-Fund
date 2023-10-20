@@ -47,7 +47,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
 
       <section className="mt-4">
-        <div className="relative h-64 overflow-hidden rounded-xl">
+        <div className="relative h-80 overflow-hidden rounded-xl">
           <Image
             src="/static/images/hero.jpg"
             layout="fill"
@@ -62,10 +62,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               Explore Missions
             </h1>
             <div className="space-y-0 pb-0 pt-4 md:space-y-0">
-              <h1 className="ml-4 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
+              <h1 className="pb-2 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
                 Supporting <Typing />
               </h1>
-              <p className="mb-0 ml-4 pb-2 text-2xl font-medium leading-7 text-gray-100">
+              <p className="mb-0 ml-4 pb-2 pt-28 text-2xl font-medium leading-7 text-gray-100">
                 {siteMetadata.description}
               </p>
             </div>
