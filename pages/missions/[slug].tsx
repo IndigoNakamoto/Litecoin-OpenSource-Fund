@@ -231,7 +231,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* ### Mission Section */}
             {selectedMenuItem === 'mission' && content && (
               <div
-                className="markdown min-h-[70vh]"
+                className="markdown"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
@@ -253,18 +253,22 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {selectedMenuItem === 'updates' && content && (
               <div className="markdown min-h-full">
                 <div>
-                  {updates?.map((post, index) => (
-                    <ProjectUpdate
-                      key={index}
-                      title={post.title}
-                      summary={post.summary}
-                      authorTwitterHandle={post.authorTwitterHandle}
-                      date={post.date}
-                      tags={post.tags || []}
-                      content={post.content}
-                      id={post.id}
-                    />
-                  ))}
+                  {updates && updates.length > 0 ? (
+                    updates?.map((post, index) => (
+                      <ProjectUpdate
+                        key={index}
+                        title={post.title}
+                        summary={post.summary}
+                        authorTwitterHandle={post.authorTwitterHandle}
+                        date={post.date}
+                        tags={post.tags || []}
+                        content={post.content}
+                        id={post.id}
+                      />
+                    ))
+                  ) : (
+                    <p>No updates available for this project.</p>
+                  )}
                 </div>
               </div>
             )}
@@ -363,6 +367,8 @@ type ParamsType = {
 export async function getStaticProps({ params }: { params: ParamsType }) {
   const post = getPostBySlug(params.slug)
 
+  // Error occurred prerendering page
+  // Error: ENOENT: no such file or directory, scandir
   const updates = getAllPostUpdates(params.slug) || []
 
   // console.log(updates)
