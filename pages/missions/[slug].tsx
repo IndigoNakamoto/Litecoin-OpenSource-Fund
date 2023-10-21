@@ -21,6 +21,7 @@ import SocialMediaShare from '../../components/SocialMediaShare'
 import tweetsData from '../../data/tweets.json'
 import { FAQSection } from '@/components/FAQSection'
 import ProjectUpdate from '../../components/ProjectUpdate'
+import React from 'react'
 
 type SingleProjectPageProps = {
   project: ProjectItem

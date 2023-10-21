@@ -52,7 +52,6 @@
     "src/**/*",
     "data/tweets.json",
     "data/pages/faq.json",
-    "data/pages/projects/**/updates",
     "**/*.js",
     "**/*.ts",
     "**/*.tsx",
