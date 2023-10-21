@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs, { existsSync } from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 import { ProjectItem, ProjectUpdate } from './types'
@@ -73,7 +73,21 @@ export function getPostBySlug(
   return items
 }
 
-// FIX BUG: ADDITIONAL INFORMATION FOR REFERENCE
+/*
+CRITICAL BUG. WON'T DEPLY ON VERCEL 
+Error occurred prerendering page "/missions/general_fund". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: ENOENT: no such file or directory, scandir '/vercel/path0/data/projects/general_fund/updates/'
+    at Object.readdirSync (node:fs:1527:3)
+    at getAllPostUpdates (/vercel/path0/.next/server/chunks/8914.js:1:8504)
+    at getStaticProps (/vercel/path0/.next/server/pages/missions/[slug].js:1:14054)
+    at /vercel/path0/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:47:4095
+    at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:117:36
+    at NoopContextManager.with (/vercel/path0/node_modules/@opentelemetry/api/build/src/context/NoopContextManager.js:36:24)
+    at ContextAPI.with (/vercel/path0/node_modules/@opentelemetry/api/build/src/api/context.js:71:54)
+    at NoopTracer.startActiveSpan (/vercel/path0/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js:67:28)
+    at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/@opentelemetry/api/build/src/trace/ProxyTracer.js:36:24)
+    at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:106:107
+*/
 export function getAllPostUpdates(slug: string): ProjectUpdate[] {
   const realSlug = slug.replace(/\.md$/, '')
   const postUpdatesDirectory = join(
@@ -134,6 +148,8 @@ export function getAllPostUpdates(slug: string): ProjectUpdate[] {
       }
     }
   })
+
+  
 
   return updatesModified.sort((a, b) => b.id - a.id)
 }
