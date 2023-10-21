@@ -1,13 +1,13 @@
 //layouts/FaqLayout.tsx
 
 import { ReactNode, useState } from 'react'
-import type { Pages } from 'contentlayer/generated'
+// import type { Pages } from 'contentlayer/generated'
 import { PageSEO } from '@/components/SEO'
 import { CoreContent } from 'pliny/utils/contentlayer'
 
 interface Props {
   children: ReactNode
-  content: CoreContent<Pages>
+  content: CoreContent<any>
 }
 
 export function CollapsibleQuestion({
