@@ -1,7 +1,7 @@
 //pages/missions/[slug].tsx
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import { getPostBySlug, getAllPosts } from '../../utils/md'
+import { getPostBySlug, getAllPosts, getAllPostUpdates } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/legacy/image'
 // import ProjectList from '../../components/ProjectList'
@@ -20,6 +20,7 @@ import TwitterFeed from '../../components/TwitterFeed'
 import SocialMediaShare from '../../components/SocialMediaShare'
 import tweetsData from '../../data/tweets.json'
 import { FAQSection } from '@/components/FAQSection'
+import ProjectUpdate from '../../components/ProjectUpdate'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -52,7 +53,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
   async function fetchFAQData(slug: string) {
     try {
-      const faqDataModule = await import(`../../data/projects/faq/${slug}.json`)
+      const faqDataModule = await import(`../../data/projects/${slug}/faq.json`)
       return faqDataModule.default
     } catch (error) {
       console.error('Error fetching FAQ data:', error)
@@ -222,7 +223,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 hashtag && tweetsData[hashtag] ? tweetsData[hashtag].length : 0
               }
               faqCount={faqCount || 0}
-              updatesCount={0}
+              updatesCount={project.updates?.length || 0}
             />
             {/* ### Mission Section */}
             {selectedMenuItem === 'mission' && content && (
@@ -246,8 +247,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             )}
             {/* ### Updates Section */}
             {selectedMenuItem === 'updates' && content && (
-              <div className="markdown min-h-full"></div>
+              <div className="markdown min-h-full">
+                <div>
+                  {project.updates?.map((post, index) => (
+                    <ProjectUpdate
+                      key={index}
+                      title={post.title}
+                      date={post.date}
+                      tags={post.tags || []}
+                      content={post.content}
+                    />
+                  ))}
+                </div>
+              </div>
             )}
+
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
               <>
@@ -277,7 +291,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          {/* TODO: Make the aside sticky so that when scroll, it does not move */}
           <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-100 to-gray-100 p-8 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:sticky xl:p-4">
             <div className="relative h-[20rem] w-full overflow-hidden rounded-lg xl:h-[14rem] ">
               <Image
@@ -343,13 +356,19 @@ type ParamsType = {
 export async function getStaticProps({ params }: { params: ParamsType }) {
   const post = getPostBySlug(params.slug)
 
+  const updates = getAllPostUpdates(params.slug) || []
+
+  // console.log(updates)
+
   const projects = getAllPosts()
+
   const content = await markdownToHtml(post.content || '')
   return {
     props: {
       project: {
         ...post,
         content,
+        updates,
       },
       projects,
     },

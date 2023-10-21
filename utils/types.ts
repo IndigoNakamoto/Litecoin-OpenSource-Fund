@@ -13,21 +13,44 @@ declare module 'next-auth' {
 }
 
 export type ProjectItem = {
+  // Main:
+  slug: string
   title: string
   summary: string
-  slug: string
-  content?: string
+  socialSummary?: string
   coverImage: string
-  hidden?: boolean
-  type: string
+  content?: string
+
+  // Community
   contributor?: string
   hashtag?: string
-  socialSummary?: string
+
+  // Resources:
+  hidden?: boolean
+  type: string
   nym?: string
   website?: string
+  tutorials?: string[]
   git?: string
   twitter?: string
   owner?: string
+  category: 'protocol' | 'bounty' | 'bug-report' | 'other'
+  isRecurring?: boolean
+  recurringAmount?: number
+  bountyAmount?: number
+  bountyStatus?: 'open' | 'in-progress' | 'completed' | 'closed'
+  bugSeverity?: 'low' | 'medium' | 'high' | 'critical'
+  bugStatus?: 'open' | 'in-progress' | 'resolved' | 'closed'
+  expectedCompletion?: Date
+  updates?: ProjectUpdate[]
+}
+
+export type ProjectUpdate = {
+  content: string | undefined
+  title: string
+  summary: string
+  tags?: string[]
+  date: string
 }
 
 export type PayReq = {
