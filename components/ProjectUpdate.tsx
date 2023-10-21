@@ -32,7 +32,7 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
 
   return (
     <div
-      className={`my-8 rounded-lg border border-gray-300 bg-gray-200 p-4 dark:border-gray-600 dark:bg-gray-900 ${thickerBorderClass}`}
+      className={`my-8 rounded-lg border border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-900 ${thickerBorderClass}`}
     >
       <h6 className="text-sm text-gray-500">{`UPDATE #${id}`}</h6>
       <h2 className="text-xl font-semibold">{title}</h2>
