@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Link from '@/components/Link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 interface ProjectUpdateProps {
   title: string
@@ -26,24 +28,27 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
   const [showContent, setShowContent] = useState(false)
 
   // CSS class for the thicker border
-  const thickerBorderClass = showContent ? 'border-gray-200 border-2 ' : ''
+  const thickerBorderClass = showContent ? 'border-blue-400 border-1 ' : ''
 
   return (
     <div
-      className={`my-4 rounded-md border border-gray-300 bg-gray-100 p-4 dark:bg-gray-800 ${thickerBorderClass}`}
+      className={`my-8 rounded-md border border-gray-300 bg-gray-100 p-4 dark:border-gray-600 dark:bg-gray-800 ${thickerBorderClass}`}
     >
       <h6 className="text-sm text-gray-500">{`UPDATE #${id}`}</h6>
-      <h2 className="mb-2 text-xl font-semibold">{title}</h2>
-      {/* Turn into link that directs to twitter.com/AuthorTwitterHandle */}
-      <Link href={`https://www.twitter.com/${authorTwitterHandle}`}>
-        <h6 className="">{`@${authorTwitterHandle}`}</h6>
+      <h2 className="text-xl font-semibold">{title}</h2>
+      <Link
+        className="mt-0"
+        href={`https://www.twitter.com/${authorTwitterHandle}`}
+      >
+        <h6 className="mt-0">{`@${authorTwitterHandle}`}</h6>
       </Link>
-      <h6 className="mb-2 text-gray-600">{date}</h6>
+      <h6 className="mb-4 text-gray-600 dark:text-gray-500">{date}</h6>
+      <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
       <div className="content">
         {summary && <ReactMarkdown>{summary}</ReactMarkdown>}
         {showContent && content && (
           <>
-            <hr className="my-8 border-t border-gray-300" />
+            <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
             <ReactMarkdown>{content}</ReactMarkdown>
           </>
         )}
@@ -58,13 +63,24 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
           </span>
         ))}
       </div>
-      <div className="flex justify-between">
+      {/* Implement: Move button to the right. Add boarder style to button rounded-xl with a chevron pointed to the right with read more and a chevron pointed up with Read less. */}
+      <div className="mt-4 flex justify-end">
         {content && (
           <button
-            className="text-blue-500 hover:underline"
+            className="flex items-center text-blue-500 hover:underline"
             onClick={() => setShowContent(!showContent)}
           >
-            {showContent ? 'Read Less' : 'Read More'}
+            {showContent ? (
+              <>
+                Read Less{' '}
+                <FontAwesomeIcon icon={faChevronUp} className="ml-2" />
+              </>
+            ) : (
+              <>
+                Read More{' '}
+                <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
+              </>
+            )}
           </button>
         )}
       </div>
