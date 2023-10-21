@@ -2,7 +2,7 @@
 title: "Update 1"
 summary: "David Burkett, lead developer of Litecoin's MWEB upgrade, has announced its official release after years of development, reviews, and audits. MWEB is part of Litecoin Core 0.21.2, accompanied by the Taproot upgrade. Quarkslab's review lauds MWEB's privacy enhancements."
 date: "2022-01-31"
-AuthorTwitterHandle: 'lite_hause'
+authorTwitterHandle: 'lite_hause'
 id: 1
 ---
 # Litecoin’s Pivotal MWEB Upgrade is Now Released

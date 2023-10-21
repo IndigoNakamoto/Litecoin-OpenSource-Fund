@@ -1,8 +1,8 @@
 ---
-title: "Update 2"
+title: "Litecoin Development Update: v0.21.2.2 Security Release and Progress on v24"
 summary: "In February and March 2023, we released Litecoin Core v0.21.2.2 with essential security fixes. Additionally, work began on Litecoin Core v24, which will introduce significant features such as PSBTs, P2P support for light clients, view keys, payment proofs, and descriptor wallets, all aimed at enhancing functionality and security. The process is ongoing, with each step undergoing code review, and it's expected to continue into the summer. The new release will align Litecoin with Bitcoin Core and deliver long-awaited MWEB features."
-date: "2022-02-31"
-AuthorTwitterHandle: 'DavidBurkett38'
+date: "2022-04-31"
+authorTwitterHandle: 'DavidBurkett38'
 id: 2
 ---
 

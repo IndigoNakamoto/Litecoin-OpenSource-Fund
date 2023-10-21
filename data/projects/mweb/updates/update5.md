@@ -1,8 +1,8 @@
 ---
-title: "Update 5"
+title: "June 2023 Development Update: MWEB Integration and Wallet Code Challenges"
 summary: "In June 2023, significant progress was made towards the v24 release, including the successful merging of the initial MWEB code into the codebase. However, challenges were encountered, especially with the wallet code, which required extensive merging due to recent Bitcoin wallet code refactoring. The task list outlines ongoing developments, with the goal for July being the implementation of MWEB address support for descriptor wallets."
-date: "2022-05-31"
-AuthorTwitterHandle: 'DavidBurkett38'
+date: "2022-06-31"
+authorTwitterHandle: 'DavidBurkett38'
 id: 5
 ---
 

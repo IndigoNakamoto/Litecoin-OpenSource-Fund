@@ -1,8 +1,8 @@
 ---
-title: "Update 4"
+title: "May 2023 Development Update: MWEB Integration Progress and Descriptor Wallet Exploration"
 summary: "In May 2023, progress continued on the v24 release, with successful integration of Litecoin code changes and resolution of pre-MWEB merge functional tests. Significant strides were made in merging MWEB code, though some wallet-side changes and tests remain. The descriptor wallet code was explored for MWEB support, and a task list for the v24 release was updated."
-date: "2022-04-31"
-AuthorTwitterHandle: 'DavidBurkett38'
+date: "2022-05-31"
+authorTwitterHandle: 'DavidBurkett38'
 id: 4
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "Update 3"
+title: "April 2023 Development Update: Finalizing Litecoin Integration for v24 Release"
 summary: "In April 2023, progress was focused on integrating classic Litecoin code changes into the v24 Bitcoin code for the upcoming release. Most unit tests have been fixed, with just a few functional tests remaining. The task list outlines ongoing development efforts, including merging MWEB code and implementing various features, as the release approaches."
-date: "2022-03-31"
-AuthorTwitterHandle: 'DavidBurkett38'
+date: "2022-04-31"
+authorTwitterHandle: 'DavidBurkett38'
 id: 3
 ---
 

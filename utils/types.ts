@@ -46,11 +46,13 @@ export type ProjectItem = {
 }
 
 export type ProjectUpdate = {
-  content: string | undefined
+  content: string
   title: string
   summary: string
   tags?: string[]
   date: string
+  authorTwitterHandle: string
+  id: number
 }
 
 export type PayReq = {

@@ -1,8 +1,8 @@
 ---
-title: "Update 1"
+title: "December 2022 Development Update: Progress on PSBT for MWEB despite Health Challenges"
 summary: "In December 2022, despite health challenges, progress continued on PSBT development for MWEB. Initial design limitations were addressed, leading to the completion of key tasks. A basic functional test for hardware wallet workflow was also implemented. However, there won't be a January update due to planned time off."
 date: "2022-01-31"
-AuthorTwitterHandle: 'DavidBurkett38'
+authorTwitterHandle: 'DavidBurkett38'
 id: 1
 ---
 

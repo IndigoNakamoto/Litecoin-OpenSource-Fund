@@ -22,7 +22,14 @@ const FIELDS = [
   'socialSummary',
 ]
 
-const UPDATE_FIELDS = ['title', 'date', 'summary', 'tags']
+const UPDATE_FIELDS = [
+  'title',
+  'date',
+  'summary',
+  'tags',
+  'id',
+  'authorTwitterHandle',
+]
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
@@ -66,6 +73,7 @@ export function getPostBySlug(
   return items
 }
 
+// FIX BUG: ADDITIONAL INFORMATION FOR REFERENCE
 export function getAllPostUpdates(slug: string): ProjectUpdate[] {
   const realSlug = slug.replace(/\.md$/, '')
   const postUpdatesDirectory = join(
@@ -75,7 +83,7 @@ export function getAllPostUpdates(slug: string): ProjectUpdate[] {
 
   const updates = fs.readdirSync(postUpdatesDirectory)
 
-  return updates.map((update) => {
+  const updatesModified = updates.map((update) => {
     try {
       const fields = UPDATE_FIELDS
       const realSlug = update.replace(/\.md$/, '')
@@ -83,9 +91,15 @@ export function getAllPostUpdates(slug: string): ProjectUpdate[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
-      const items: any = {}
+      const items: ProjectUpdate = {
+        content: '',
+        title: '',
+        summary: '',
+        date: '',
+        authorTwitterHandle: '',
+        id: 0,
+      }
 
-      // Ensure only the minimal needed data is exposed
       fields.forEach((field) => {
         if (field === 'title') {
           items[field] = realSlug
@@ -99,16 +113,29 @@ export function getAllPostUpdates(slug: string): ProjectUpdate[] {
         if (field === 'content') {
           items[field] = content
         }
+        if (field === 'authorTwitterHandle') {
+          items['authorTwitterHandle'] = data['authorTwitterHandle']
+        }
         if (typeof data[field] !== 'undefined') {
           items[field] = data[field]
         }
         items['content'] = content
+        items['id'] = data['id']
       })
       return items
     } catch {
-      return null
+      return {
+        content: '',
+        title: '',
+        summary: '',
+        date: '',
+        authorTwitterHandle: '',
+        id: 0,
+      }
     }
   })
+
+  return updatesModified.sort((a, b) => b.id - a.id)
 }
 
 export function getAllPosts(): ProjectItem[] {
