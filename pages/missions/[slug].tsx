@@ -227,7 +227,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 hashtag && tweetsData[hashtag] ? tweetsData[hashtag].length : 0
               }
               faqCount={faqCount || 0}
-              updatesCount={updates?.length || 0}
+              updatesCount={(updates && updates?.length - 1) || 0}
             />
             {/* ### Mission Section */}
             {selectedMenuItem === 'mission' && content && (
@@ -254,21 +254,24 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {selectedMenuItem === 'updates' && content && (
               <div className="markdown min-h-full">
                 <div>
-                  {updates && updates.length > 0 ? (
-                    updates?.map((post, index) => (
-                      <ProjectUpdate
-                        key={index}
-                        title={post.title}
-                        summary={post.summary}
-                        authorTwitterHandle={post.authorTwitterHandle}
-                        date={post.date}
-                        tags={post.tags || []}
-                        content={post.content}
-                        id={post.id}
-                      />
-                    ))
+                  {updates &&
+                  updates.filter((post) => post.id > 0).length > 0 ? (
+                    updates
+                      .filter((post) => post.id > 0)
+                      .map((post, index) => (
+                        <ProjectUpdate
+                          key={index}
+                          title={post.title}
+                          summary={post.summary}
+                          authorTwitterHandle={post.authorTwitterHandle}
+                          date={post.date}
+                          tags={post.tags || []}
+                          content={post.content}
+                          id={post.id}
+                        />
+                      ))
                   ) : (
-                    <p>No updates available for this project.</p>
+                    <h1>No updates available for this project.</h1>
                   )}
                 </div>
               </div>
