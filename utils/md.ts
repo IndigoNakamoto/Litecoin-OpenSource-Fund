@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
-import { ProjectItem } from './types'
+import { ProjectItem, ProjectUpdate } from './types'
 const postsDirectory = join(process.cwd(), 'data/projects')
 
 const FIELDS = [
@@ -22,6 +22,8 @@ const FIELDS = [
   'socialSummary',
 ]
 
+const UPDATE_FIELDS = ['title', 'date', 'summary', 'tags']
+
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
 }
@@ -37,7 +39,7 @@ export function getPostBySlug(
 ): ProjectItem {
   const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
-  const fullPath = join(postsDirectory, `${realSlug}.md`)
+  const fullPath = join(postsDirectory, `${realSlug}/${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
@@ -62,6 +64,51 @@ export function getPostBySlug(
     throw new Error('Hidden project')
   }
   return items
+}
+
+export function getAllPostUpdates(slug: string): ProjectUpdate[] {
+  const realSlug = slug.replace(/\.md$/, '')
+  const postUpdatesDirectory = join(
+    process.cwd(),
+    `data/projects/${realSlug}/updates`
+  )
+
+  const updates = fs.readdirSync(postUpdatesDirectory)
+
+  return updates.map((update) => {
+    try {
+      const fields = UPDATE_FIELDS
+      const realSlug = update.replace(/\.md$/, '')
+      const fullPath = join(postUpdatesDirectory, `/${realSlug}.md`)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const { data, content } = matter(fileContents)
+
+      const items: any = {}
+
+      // Ensure only the minimal needed data is exposed
+      fields.forEach((field) => {
+        if (field === 'title') {
+          items[field] = realSlug
+        }
+        if (field === 'summary') {
+          items[field] = content
+        }
+        if (field === 'date') {
+          items[field] = content
+        }
+        if (field === 'content') {
+          items[field] = content
+        }
+        if (typeof data[field] !== 'undefined') {
+          items[field] = data[field]
+        }
+        items['content'] = content
+      })
+      return items
+    } catch {
+      return null
+    }
+  })
 }
 
 export function getAllPosts(): ProjectItem[] {
