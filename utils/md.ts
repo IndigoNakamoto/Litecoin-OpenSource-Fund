@@ -78,7 +78,7 @@ export function getAllPostUpdates(slug: string): ProjectUpdate[] {
   const realSlug = slug.replace(/\.md$/, '')
   const postUpdatesDirectory = join(
     process.cwd(),
-    `data/projects/${realSlug}/updates`
+    `data/projects/${realSlug}/updates/`
   )
 
   const updates = fs.readdirSync(postUpdatesDirectory)
