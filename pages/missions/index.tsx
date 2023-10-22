@@ -46,8 +46,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <title>Lite.Space | Projects</title>
       </Head>
 
-      <section className="mt-4">
-        <div className="relative h-96 overflow-hidden rounded-xl">
+      <section className="mt-3">
+        <div className="relative h-96 overflow-hidden rounded-xl border-2 border-gray-700">
           <Image
             src="/static/images/hero.jpg"
             layout="fill"
@@ -57,7 +57,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             className="absolute left-0 top-0 z-0 h-full w-full" // added positioning properties
           />
           {/* Text content */}
-          <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center bg-black bg-opacity-40 p-4">
+          <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center  bg-black bg-opacity-40 p-4">
             <h1 className="pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
               Explore Missions
             </h1>
