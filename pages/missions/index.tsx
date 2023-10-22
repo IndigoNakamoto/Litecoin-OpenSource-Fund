@@ -58,7 +58,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           />
           {/* Text content */}
           <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center bg-black bg-opacity-40 p-4">
-            <h1 className="pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+            <h1 className="pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
               Explore Missions
             </h1>
             <div className="space-y-0 pb-0 pt-4 md:space-y-0">
