@@ -15,7 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const { slug, title, summary, coverImage, git, twitter, nym } = project
 
   return (
-    <figure className="h-full space-y-4 rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+    <figure className="h-full rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900 sm:space-y-2">
       <div className="relative h-64 w-full">
         <Link href={`/missions/${slug}`} passHref>
           <div className="relative h-64 w-full">

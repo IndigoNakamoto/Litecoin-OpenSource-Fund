@@ -58,14 +58,14 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           />
           {/* Text content */}
           <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center bg-black bg-opacity-40 p-4">
-            <h1 className="mt-3 font-semibold leading-9 tracking-tight text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-12">
+            <h1 className="pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
               Explore Missions
             </h1>
             <div className="space-y-0 pb-0 pt-4 md:space-y-0">
               <h1 className="pb-2 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
                 Supporting <Typing />
               </h1>
-              <p className="mb-0 pt-44 text-2xl font-medium leading-7 text-gray-100">
+              <p className="mb-0 pt-32 text-2xl font-medium leading-7 text-gray-100">
                 {siteMetadata.description}
               </p>
             </div>
@@ -74,11 +74,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
 
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-        <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+        <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           Open-Source Projects
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-8 dark:from-gray-800 dark:to-gray-700">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-700 dark:to-gray-600 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {sortedProjects &&
@@ -91,11 +91,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
 
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-        <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+        <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           Bounty Projects
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-blue-400 to-blue-200 p-8 dark:from-blue-800 dark:to-blue-600">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {bountyProjects &&
@@ -107,11 +107,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </ul>
       </section>
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-        <h2 className="pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-5xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+        <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           DevOps
         </h2>
       </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-8 dark:from-gray-700 dark:to-gray-800">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
           {openSatsProjects &&

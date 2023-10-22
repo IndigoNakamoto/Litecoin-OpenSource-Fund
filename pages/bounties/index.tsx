@@ -35,18 +35,12 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>Bounties | Lite.Space</title>
       </Head>
-      <h1 className="mt-10 pl-4 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
+      <h1 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
         Bounties
       </h1>
 
-      <section className="">
-        {/* <h2
-          id="funds"
-          className="mt-4 pl-4 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl md:text-5xl"
-        >
-          Open Bounties
-        </h2> */}
-        <div className="rounded-xl bg-gradient-to-b from-blue-200 to-blue-300 p-8 pb-8 dark:from-blue-800 dark:to-blue-800">
+      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-700 dark:to-gray-600 md:p-8">
+        <div className="">
           <div className="flex w-full items-center justify-between"></div>
           <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
             {sortedProjects &&

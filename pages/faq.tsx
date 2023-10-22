@@ -20,14 +20,14 @@ export default function FAQ({
   }
 
   return (
-    <>
+    <div className="">
       <PageSEO title={`Lite.Space | FAQ`} description={`${page.summary}`} />
-      <h1 className="pl-4 pt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+      <h1 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
         FAQ
       </h1>
-      <div className="mt-0 rounded-xl bg-gradient-to-b from-gray-200 to-white pt-0 dark:from-gray-800 dark:to-gray-900 dark:text-gray-300 xs:px-1 md:px-4 lg:px-8">
+      <div className="mt-0 rounded-xl bg-gradient-to-b from-gray-200 to-white p-4 dark:from-gray-800 dark:to-gray-900 dark:text-gray-300 xs:px-1 md:px-4 lg:px-8">
         <FAQSection faqCategories={faqDataModule.questionsAndAnswers} />
       </div>
-    </>
+    </div>
   )
 }
