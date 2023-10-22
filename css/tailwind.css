@@ -13,7 +13,7 @@
     @apply text-2xl font-semibold mb-2 mt-5;
   }
   .markdown p {
-    @apply text-lg mb-4;
+    @apply text-lg mb-4 font-light ;
   }
   .markdown a {
     @apply text-blue-500 dark:text-blue-400 hover:underline;
