@@ -9,13 +9,13 @@ interface Props {
 export default function PageHeading({ title, children }: Props) {
   return (
     <div className="">
-      <div className="items-start pb-8 pt-5 md:space-y-5 xl:grid xl:gap-x-8">
+      <div className="pb-8md:space-y-5 items-start xl:grid xl:gap-x-8">
         <div></div>
-        <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
+        <h1 className="pl-4 pt-20 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           {title}
         </h1>
       </div>
-      <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+      <div className="mt-0 rounded-xl bg-gradient-to-b from-gray-200 to-white p-4 dark:from-gray-800 dark:to-gray-700 dark:text-gray-300 xs:px-1 md:px-4 lg:px-8">
         {children}
       </div>
     </div>

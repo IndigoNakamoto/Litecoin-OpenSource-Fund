@@ -16,7 +16,7 @@
     @apply text-lg mb-4 font-light ;
   }
   .markdown a {
-    @apply text-blue-500 dark:text-blue-400 hover:underline;
+    @apply text-blue-500 dark:text-blue-200 hover:underline;
   }
   .markdown blockquote {
     @apply border-l-4 border-gray-300 pl-4 italic my-4;
