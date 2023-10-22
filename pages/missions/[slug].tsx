@@ -209,13 +209,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div>
         <article className="mt-10 flex flex-col-reverse xl:flex-row xl:items-start">
-          <div className="content max-w-max rounded-xl bg-gradient-to-b from-gray-100 to-gray-200 p-4 leading-relaxed text-gray-700 dark:from-gray-800 dark:to-gray-800 dark:text-gray-300 md:px-8 xl:mr-5 xl:max-w-[84ch]">
+          <div className="content max-w-max rounded-xl bg-gradient-to-b from-gray-100 to-gray-200 p-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-700 dark:text-gray-200 md:px-8 xl:mr-5 xl:max-w-[84ch]">
             {/* ## PROJECT HEADER */}
             <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
             </h1>
 
-            <p className="font-regular prose max-w-none pb-0 pt-0 text-xl dark:prose-dark">
+            <p className="prose max-w-none pb-0 pt-0 text-xl font-normal dark:prose-dark">
               {summary}
             </p>
 
@@ -306,7 +306,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-100 to-gray-100 p-4 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:sticky xl:p-4">
+          <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 p-4 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:sticky xl:p-4">
             <div className="relative h-[20rem] w-full overflow-hidden rounded-lg xl:h-[14rem] ">
               <Image
                 alt={title}

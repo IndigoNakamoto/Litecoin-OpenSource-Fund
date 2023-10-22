@@ -118,7 +118,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             Community
           </button>
         </li>
-        <li>
+        {/* <li>
           <button
             onClick={() => handleMenuItemClick('resources')}
             className={`text-lg  ${
@@ -129,7 +129,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
           >
             Resources
           </button>
-        </li>
+        </li> */}
       </ul>
     </nav>
   )
