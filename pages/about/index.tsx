@@ -67,7 +67,7 @@ InferGetStaticPropsType<typeof getStaticProps>) {
                     alt={member.name || ''}
                     width={120}
                     height={120}
-                    className="h-36 w-36 rounded-full"
+                    className="h-36 w-36 rounded-xl"
                   />
                 </Link>
               </div>

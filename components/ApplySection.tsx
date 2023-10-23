@@ -5,13 +5,20 @@ import React from 'react'
 interface Props {
   children: ReactNode
   title: string
+  style?: string
 }
 
-export default function ApplySection({ title, children }: Props) {
+export default function ApplySection({
+  title,
+  children,
+  style = 'markdown',
+}: Props) {
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
-        <div className="markdown max-w-none pb-8 xl:col-span-2">{children}</div>
+        <div className={`${style} max-w-none xs:p-4  xl:col-span-2`}>
+          {children}
+        </div>
       </PageHeading>
     </div>
   )

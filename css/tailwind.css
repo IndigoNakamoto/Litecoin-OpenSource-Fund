@@ -13,10 +13,10 @@
     @apply text-2xl font-semibold mb-2 mt-5;
   }
   .markdown p {
-    @apply text-lg mb-4 font-light ;
+    @apply text-lg mb-4 font-normal ;
   }
   .markdown a {
-    @apply text-blue-500 dark:text-blue-200 hover:underline;
+    @apply text-blue-500 dark:text-blue-400 hover:underline;
   }
   .markdown blockquote {
     @apply border-l-4 border-gray-300 pl-4 italic my-4;
@@ -32,6 +32,45 @@
   }
   .markdown code {
     @apply text-sm bg-gray-200 p-1 rounded;
+  }
+  .markdown button {
+    @apply text-black
+  }
+
+
+
+  .apply h1 {
+    @apply text-4xl font-semibold mb-4 mt-8;
+  }
+  .apply h2 {
+    @apply text-3xl font-semibold mb-3 mt-6;
+  }
+    .apply h3,h5 {
+    @apply text-2xl font-semibold mb-2 mt-5;
+  }
+  .apply p {
+    @apply text-lg mb-4 font-normal ;
+  }
+  .apply a {
+    @apply text-white;
+  }
+  .apply blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic my-4;
+  }
+  .apply ul {
+    @apply list-disc list-inside mb-4;
+  }
+  .apply ol {
+    @apply list-decimal list-inside mb-4;
+  }
+  .apply pre {
+    @apply bg-gray-100 p-4 rounded mb-4;
+  }
+  .apply code {
+    @apply text-sm bg-gray-200 p-1 rounded;
+  }
+  .apply button {
+    @apply text-black
   }
 }
 

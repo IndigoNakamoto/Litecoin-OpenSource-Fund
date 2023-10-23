@@ -3,7 +3,7 @@ import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
 
-const DEFAULT_LAYOUT = 'PageLayout'
+const DEFAULT_LAYOUT = 'ApplyLayout'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'submitted')
@@ -18,7 +18,7 @@ export default function Mission({
   }
   return (
     <MDXLayoutRenderer
-      layout={page.layout || DEFAULT_LAYOUT}
+      layout={'ApplyLayout'}
       content={page}
       MDXComponents={MDXComponents}
     />

@@ -47,7 +47,7 @@ export default function FAQLayout({ children, content }: Props) {
         <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
           {title}
         </h1>
-        <div className="rounded-xl bg-gradient-to-b from-gray-200 to-white dark:from-gray-800 dark:to-gray-900">
+        <div className="rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-700">
           {children}
         </div>
       </div>

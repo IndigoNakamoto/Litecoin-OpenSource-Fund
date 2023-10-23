@@ -11,6 +11,7 @@ import { getAllPosts } from '../../utils/md'
 // import Link from '@/components/Link'
 import Typing from '@/components/Typing'
 import siteMetadata from '@/data/siteMetadata'
+import LitecoinIcon from '@/components/litecoin-icons'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -58,9 +59,19 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           />
           {/* Text content */}
           <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center  bg-black bg-opacity-40 px-4">
-            <h1 className="text-5xl font-semibold leading-9 tracking-tight text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
-              Explore Missions
-            </h1>
+            <div className="flex items-center">
+              {' '}
+              {/* Add this line to create a flex container */}
+              <h1 className="flex-grow text-5xl font-semibold leading-9 tracking-tight text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+                Explore Missions
+              </h1>
+              {/* Position LitecoinIcon next to the h1 */}
+              <div className="mr-32 flex h-full">
+                {' '}
+                {/* Added styles to vertically center and give spacing */}
+                <LitecoinIcon kind="coinWhite" />
+              </div>
+            </div>
             <div className="space-y-0 pb-0 pt-4 md:space-y-0">
               <h1 className="pb-2 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
                 Supporting <Typing />

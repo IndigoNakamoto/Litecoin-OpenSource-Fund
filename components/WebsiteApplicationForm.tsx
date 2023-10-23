@@ -44,7 +44,7 @@ export default function ApplicationForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex max-w-2xl flex-col gap-4 p-4"
+      className="markdown flex max-w-2xl flex-col gap-4 pt-8"
     >
       <input type="hidden" {...register('explore_page', { value: true })} />
 
@@ -227,7 +227,7 @@ export default function ApplicationForm() {
         />
       </label>
 
-      <div className="prose">
+      <div className="markdown">
         <small>
           Lite.Space may require each recipient to sign a Grant Agreement before
           any funds are disbursed. Using the reports and presentations required
