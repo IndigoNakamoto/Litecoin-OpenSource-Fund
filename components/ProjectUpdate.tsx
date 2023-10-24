@@ -67,7 +67,7 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
       <div className="mt-4 flex justify-end">
         {content && (
           <button
-            className="flex items-center text-blue-500 hover:underline"
+            className="flex items-center text-blue-500 hover:underline dark:text-white dark:hover:text-blue-300"
             onClick={() => setShowContent(!showContent)}
           >
             {showContent ? (
