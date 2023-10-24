@@ -12,7 +12,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
 }) => {
-  const { slug, title, summary, coverImage, git, twitter, nym } = project
+  const {
+    slug,
+    title,
+    summary,
+    coverImage,
+    gitRepository,
+    twitterHandle,
+    nym,
+  } = project
 
   return (
     <figure className="h-full rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900 sm:space-y-2">

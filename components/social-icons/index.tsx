@@ -9,9 +9,10 @@ import Nostr from './nostr.svg'
 import X from './x.svg'
 import Reddit from './reddit.svg'
 import Telegram from './telegram.svg'
-import Website from './web-link.svg'
+import Globe from './globe.svg'
 
 // Icons taken from: https://simpleicons.org/
+// and from: https://www.flaticon.com/icon-fonts-most-downloaded
 
 const components = {
   mail: Mail,
@@ -24,7 +25,7 @@ const components = {
   x: X,
   reddit: Reddit,
   telegram: Telegram,
-  website: Website,
+  website: Globe,
 }
 
 const SocialIcon = ({ kind, href, size = 8 }) => {

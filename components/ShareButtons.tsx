@@ -5,12 +5,12 @@ import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
 
 const ShareButtons: React.FC<{ project: ProjectItem }> = ({ project }) => {
-  const { git, twitter, website } = project
+  const { gitRepository, twitterHandle, website } = project
   // Define a default URL (you can replace with your actual URL)
   const defaultGitUrl = 'https://github.com'
 
   // Use the default URL if 'git' is undefined
-  const gitUrl = git || defaultGitUrl
+  const gitUrl = gitRepository || defaultGitUrl
   return (
     <div className="mb-4 flex space-x-4">
       <Link href={gitUrl} passHref>
@@ -19,7 +19,7 @@ const ShareButtons: React.FC<{ project: ProjectItem }> = ({ project }) => {
           className="hover:text-primary h-[2rem] w-[2rem] cursor-pointer"
         />
       </Link>
-      <Link href={`https://twitter.com/${twitter}`} passHref>
+      <Link href={`https://twitter.com/${twitterHandle}`} passHref>
         <FontAwesomeIcon
           icon={faTwitter}
           className="hover:text-primary h-[2rem] w-[2rem] cursor-pointer"
