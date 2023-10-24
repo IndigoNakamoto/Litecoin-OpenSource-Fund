@@ -7,6 +7,9 @@ import Linkedin from './linkedin.svg'
 import Twitter from './twitter.svg'
 import Nostr from './nostr.svg'
 import X from './x.svg'
+import Reddit from './reddit.svg'
+import Telegram from './telegram.svg'
+import Website from './web-link.svg'
 
 // Icons taken from: https://simpleicons.org/
 
@@ -19,6 +22,9 @@ const components = {
   twitter: Twitter,
   nostr: Nostr,
   x: X,
+  reddit: Reddit,
+  telegram: Telegram,
+  website: Website,
 }
 
 const SocialIcon = ({ kind, href, size = 8 }) => {
