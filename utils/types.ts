@@ -12,8 +12,51 @@ declare module 'next-auth' {
   }
 }
 
+// Enums for clarity and cleaner codebase
+export enum ProjectCategory {
+  PROTOCOL = 'protocol',
+  BOUNTY = 'Bounty',
+  PROJECT = 'Project',
+  BUG_REPORT = 'bug-report',
+  OTHER = 'other',
+  DEVELOPMENT = 'Development Fund',
+}
+
+export enum BountyStatus {
+  OPEN = 'open',
+  IN_PROGRESS = 'in-progress',
+  COMPLETED = 'completed',
+  CLOSED = 'closed',
+}
+
+export enum BugSeverity {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+  CRITICAL = 'critical',
+}
+
+export enum BugStatus {
+  OPEN = 'open',
+  IN_PROGRESS = 'in-progress',
+  RESOLVED = 'resolved',
+  CLOSED = 'closed',
+}
+
+export enum RecurringPeriod {
+  WEEKLY = 'weekly',
+  MONTHLY = 'monthly',
+  QUARTERLY = 'quarterly',
+}
+
+export enum FundingStatus {
+  ONGOING = 'ongoing',
+  MET = 'met',
+  FAILED = 'failed',
+}
+
 export type ProjectItem = {
-  // Main:
+  // Main Info
   slug: string
   title: string
   summary: string
@@ -21,28 +64,50 @@ export type ProjectItem = {
   coverImage: string
   content?: string
 
-  // Community
+  // Community Interaction
   contributor?: string
   hashtag?: string
+  comments?: string[]
 
-  // Resources:
+  // Resources and Metadata
   hidden?: boolean
-  type: string
   nym?: string
   website?: string
   tutorials?: string[]
-  git?: string
-  twitter?: string
+  gitRepository?: string // Renamed from 'git' for clarity
+  twitterHandle?: string // Renamed for clarity
+  discordLink?: string
+  telegramLink: string
+  redditLink: string
+  facebookLink: string
   owner?: string
-  category: 'protocol' | 'bounty' | 'bug-report' | 'other'
-  isRecurring?: boolean
-  recurringAmount?: number
-  bountyAmount?: number
-  bountyStatus?: 'open' | 'in-progress' | 'completed' | 'closed'
-  bugSeverity?: 'low' | 'medium' | 'high' | 'critical'
-  bugStatus?: 'open' | 'in-progress' | 'resolved' | 'closed'
+
+  // Categorization and Status
+  type: ProjectCategory
+  bugSeverity?: BugSeverity
+  bugStatus?: BugStatus
+
+  // Timelines
   expectedCompletion?: Date
   updates?: ProjectUpdate[]
+
+  // Funding
+  bountyAmount?: number
+  bountyStatus?: BountyStatus
+  targetFunding?: number // The one-time funding goal
+  fundingDeadline?: Date // Date by which target funding should be met
+  isRecurring: boolean
+  recurringAmountGoal?: number
+  recurringPeriod?: RecurringPeriod
+  recurringStatus?: FundingStatus
+
+  // Technical Details
+  techStack?: string[]
+  dependencies?: string[]
+
+  // Documentation
+  documentationLink?: string
+  APIReference?: string
 }
 
 export type ProjectUpdate = {
