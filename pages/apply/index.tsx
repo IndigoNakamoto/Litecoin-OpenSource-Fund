@@ -23,7 +23,7 @@ export default function Apply({
         title="Apply to One of Lite.Spaces' Grant Programs"
         description="Litecoin Foundation Grants: Apply for Funding & Support Open-Source Projects. Learn criteria, grant types, and get listed on Lite.Space. Enhance the Litecoin ecosystem globally."
       />
-      {apply ? (
+      {/* {apply ? (
         <MDXLayoutRenderer
           layout={DEFAULT_LAYOUT}
           content={apply}
@@ -31,10 +31,39 @@ export default function Apply({
         />
       ) : (
         <h1>Content not found.</h1>
-      )}
+      )} */}
 
-      <ApplySection title="Our Programs" style="apply">
+      <ApplySection title="Apply for a grant" style="apply">
         <div className="my-8">
+          <p>
+            The Litecoin Foundation FOSS Council is always on the lookout for
+            new and innovative projects that align with our mission to support
+            and maintain a sustainable ecosystem of funding for free and
+            open-source projects, particularly those related to Litecoin.
+          </p>
+          <p>
+            If you're working on an open-source project that could use some
+            financial support, we'd love to hear from you. We provide grants to
+            projects that:
+          </p>
+          <ul>
+            <li>
+              Contribute to the development of new Litecoin or Litecoin-adjacent
+              software.
+            </li>
+            <li>
+              Work on improving existing free and open-source software that is
+              important to the Litecoin ecosystem.
+            </li>
+            <li>Promote education and outreach about Litecoin.</li>
+            <li>Conduct research into Litecoin-related topics.</li>
+          </ul>
+          <p>
+            Our goal is to help make Litecoin more accessible, robust, secure,
+            and decentralized, and we believe that supporting open-source
+            projects is one of the best ways to achieve this.
+          </p>
+          <h1>Our Programs</h1>
           <p>All our programs are open to applicants worldwide.</p>
           <p>
             Lite.Space does not discriminate in its grant selection process with
