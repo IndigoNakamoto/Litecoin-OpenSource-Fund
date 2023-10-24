@@ -60,6 +60,11 @@ export default function ApplicationForm() {
         >
           <option value="litecoin">Litecoin</option>
           <option value="lightning">Lightning</option>
+          <option value="mweb">MWEB</option>
+          <option value="ordinals">Ordinals Lite</option>
+          <option value="omnilite">Omni Lite</option>
+          <option value="ldk">Litecoin Dev Kit</option>
+          <option value="education">Education</option>
           <option value="other">Other</option>
         </select>
       </label>
@@ -172,7 +177,7 @@ export default function ApplicationForm() {
         <input
           type="text"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-          placeholder="John Doe"
+          placeholder="Satoshi Nakamoto"
           {...register('your_name', { required: true })}
         />
       </label>
@@ -250,7 +255,7 @@ export default function ApplicationForm() {
           {...register('references', { required: true })}
         />
       </label>
-      <div className="prose">
+      <div className="markdown">
         <small>
           Lite.space may require each recipient to sign a Grant Agreement before
           any funds are disbursed. Using the reports and presentations required

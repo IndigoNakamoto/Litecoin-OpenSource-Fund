@@ -16,7 +16,7 @@ export default function ApplySection({
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
-        <div className={`${style} max-w-none xs:p-4  xl:col-span-2`}>
+        <div className={`${style} max-w-none p-4  xl:col-span-2`}>
           {children}
         </div>
       </PageHeading>
