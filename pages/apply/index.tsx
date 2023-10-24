@@ -62,7 +62,7 @@ export default function Apply({
           </p>
           <Link
             href="/apply/to-be-listed"
-            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-100 dark:bg-blue-500 dark:hover:bg-blue-300"
+            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             Apply to be listed on Lite.Space
           </Link>
@@ -77,7 +77,7 @@ export default function Apply({
           </p>
           <Link
             href="/apply/grant"
-            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-100 dark:bg-blue-500 dark:hover:bg-blue-300"
+            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             Apply for a Lite.Space General Grant
           </Link>
@@ -92,7 +92,7 @@ export default function Apply({
           </p>
           <Link
             href="/apply/lts"
-            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-100 dark:bg-blue-500 dark:hover:bg-blue-300"
+            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             Apply for a Lite.Space LTS Grant
           </Link>

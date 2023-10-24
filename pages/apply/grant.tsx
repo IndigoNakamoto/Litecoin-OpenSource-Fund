@@ -8,7 +8,7 @@ export default function Apply() {
   return (
     <>
       <ApplySection title="Apply for a Grant">
-        <div className="p-4 mt-10 xs:p-2  md:p-4 ">
+        <div className="mt-10 p-4 xs:p-2  md:p-4 ">
           <p>
             The information collected below will be used to vet your grant
             application. Please provide accurate contact information as we may
