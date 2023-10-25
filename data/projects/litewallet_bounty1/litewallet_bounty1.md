@@ -4,8 +4,8 @@ summary: 'Enhancing the user experience of Litewallet by tackling a critical iss
 nym: 'Litecoin Foundation'
 website: 'https://litewallet.org/'
 coverImage: '/static/images/projects/litewallet3.png'
-git: '[GitHub Issue #207](https://github.com/litecoin-foundation/litewallet-ios/pull/211)'
-twitter: '@LitewalletApp'
+gitRepository: 'https://github.com/litecoin-foundation/litewallet-ios/pull/211'
+twitterHandle: 'https://twitter.com/LitewalletApp'
 type: 'Bounty'  # Replace with the appropriate type of the project if known.
 contributor: 'SatoshiLite,bigkerrytweets,claudia14083392,Pat_McDermott17,ferencakIvan,josi_kie'
 owner: 'bigkerrytweets'

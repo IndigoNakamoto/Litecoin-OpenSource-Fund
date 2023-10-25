@@ -2,10 +2,10 @@
 title: 'Litecoin Core'
 summary: 'Litecoin enables instant payments to anyone, anywhere in the world using peer-to-peer technology without a central authority.'
 # nym: '[Person or Organization Name]'
-website: 'https://www.litecoin.org
+website: 'https://www.litecoin.org'
 coverImage: '/static/images/projects/core.png'
 gitRepository: 'https://github.com/litecoin-project/litecoin'
-twitterHandle: 'LitecoinProject'
+twitterHandle: 'https://twitter.com/LitecoinProject'
 telegramLink: 'https://t.me/Litecoin'
 redditLink: 'https://www.reddit.com/r/litecoin'
 type: 'Project'
