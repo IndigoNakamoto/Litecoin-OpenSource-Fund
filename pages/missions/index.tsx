@@ -66,10 +66,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                 Explore Missions
               </h1>
               {/* Position LitecoinIcon next to the h1 */}
-              <div className="mr-32 flex h-full">
+              <div className="flex h-full xs:mr-4 md:mr-20">
                 {' '}
                 {/* Added styles to vertically center and give spacing */}
-                <LitecoinIcon kind="coinWhite" />
+                <LitecoinIcon kind="coinBlueL" />
               </div>
             </div>
             <div className="space-y-0 pb-0 pt-4 md:space-y-0">
