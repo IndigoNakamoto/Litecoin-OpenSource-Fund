@@ -93,7 +93,7 @@ export default function ListLayout({
 
   return (
     <>
-      <div className="mt-4 divide-y divide-gray-200 rounded-xl bg-gradient-to-b from-gray-200 to-stone-200 p-4 dark:divide-gray-700 dark:from-gray-700 dark:to-gray-800 ">
+      <div className="mt-4 divide-y divide-gray-200 rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 p-4 dark:divide-gray-700 dark:from-gray-700 dark:to-gray-800 ">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <div className="relative max-w-lg">
             <label>
