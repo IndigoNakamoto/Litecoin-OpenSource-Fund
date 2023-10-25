@@ -7,7 +7,7 @@ import React from 'react'
 export default function Apply() {
   return (
     <ApplySection title="Lite.Space Long Term Support">
-      <div className="mt-10 p-4 xs:p-2  md:p-4 ">
+      <div className="my-8 mt-10 xs:my-4">
         <p>
           The Litecoin Foundation, Inc. in Singapore operates as a public
           charity with a primary goal of funding Litecoin-centered free and

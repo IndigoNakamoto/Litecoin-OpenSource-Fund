@@ -8,7 +8,7 @@ export default function Apply() {
   return (
     <>
       <ApplySection title="Apply to Be Listed">
-        <div className="mt-10 p-4 xs:p-2  md:p-4 ">
+        <div className="my-8 mt-10 xs:my-4">
           <p className="">
             The information collected below will be used in order to vet your
             project. If approved, Lite.Space will create a project page on our

@@ -34,7 +34,7 @@ export default function Apply({
       )} */}
 
       <ApplySection title="Apply for a grant" style="apply">
-        <div className="my-8">
+        <div className="my-8 xs:my-4">
           <p>
             The Litecoin Foundation FOSS Council is always on the lookout for
             new and innovative projects that align with our mission to support
