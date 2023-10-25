@@ -44,6 +44,9 @@ export default async function handler(
       )
 
       const filteredInvoices = filterByOrderId(response, slug)
+      const donatedCreatedTime = filteredInvoices.map((invoice) => {
+        return { amount: invoice.amount, createdTime: invoice.createdTime }
+      })
       const totalAmount = sumAmounts(filteredInvoices)
       const twitterSupporters = getTwitterSupporters(filteredInvoices)
 
@@ -51,6 +54,7 @@ export default async function handler(
         funded_txo_sum: totalAmount,
         tx_count: Object.keys(filteredInvoices).length,
         supporters: twitterSupporters,
+        donatedCreatedTime: donatedCreatedTime,
       })
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: (err as Error).message })

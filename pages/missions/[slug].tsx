@@ -13,7 +13,14 @@ import PaymentModal from '../../components/PaymentModal'
 // import Link from 'next/link'
 import { fetchGetJSON } from '../../utils/api-helpers'
 import TwitterUsers from '../../components/TwitterUsers'
-import { TwitterUser } from '../../utils/types'
+import {
+  TwitterUser,
+  BountyStatus,
+  BugSeverity,
+  BugStatus,
+  FundingStatus,
+  RecurringPeriod,
+} from '../../utils/types'
 import Head from 'next/head'
 import ProjectMenu from '../../components/ProjectMenu'
 import TwitterFeed from '../../components/TwitterFeed'
@@ -22,6 +29,7 @@ import tweetsData from '../../data/tweets.json'
 import { FAQSection } from '@/components/FAQSection'
 import ProjectUpdate from '../../components/ProjectUpdate'
 import React from 'react'
+import ProjectSocialLinks from '@/components/ProjectSocialLinks'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -63,22 +71,49 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   }
 
   const {
+    // Main Info
     slug,
     title,
     summary,
+    socialSummary,
     coverImage,
-    // git,
-    // twitter,
     content,
-    // nym,
-    // website,
+
+    // Community Interaction
     contributor,
     hashtag,
-    socialSummary,
+
+    // Resources and Metadata
+    website,
+    tutorials,
+    owner,
+
+    //Links
+    twitterHandle,
+    gitRepository,
+    discordLink,
+    telegramLink,
+    facebookLink,
+    redditLink,
+    // Categorization and status
+    type,
+    bugSeverity,
+    bugStatus,
+
+    // Funding
+    bountyAmount,
+    bountyStatus,
+    targetFunding,
+    fundingDeadline,
+    isRecurring,
+    recurringAmountGoal,
+    recurringPeriod,
+
+    // Timelines
+    expectedCompletion,
     updates,
   } = project
 
-  // const [stats, setStats] = useState<Stats>()
   const [addressStats, setAddressStats] = useState<AddressStats>()
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
@@ -142,12 +177,41 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     }
   }, [router.query])
 
+  /* 
+    INPUT: 
+    - ?isRecurring:Project that is recurring
+    - recurringAmount?: number
+    - startDate = 1st 
+    - currentDate 
+    - monthEndDate 
+    - donatedCreatedTime = [{amount,createdTime},...]
+
+    OUTPUT:
+    - currentTotalAmount
+    - currentPercentComplete
+    
+    */
+
   useEffect(() => {
     const fetchData = async () => {
       // Fetch mission info
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
       setAddressStats(stats)
+
+      // TO IMPLEMENT
+      if (stats.donatedCreatedTime && stats.donatedCreatedTime.length > 0) {
+        /* 
+        if isRecurring then
+          startDate = 1, and get currentDate, monthEndDate
+          calculate days remaining in the month
+          get array of donations and their createdTime between startDate and currentDate
+          currentPeriodAmountTotal = from array of objects sum amounts - [{amount,createdTime},...]
+
+          return {recurringAmountGoal, currentPeriodAmountTotal, timeRemaining}
+            
+        */
+      }
 
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
@@ -218,6 +282,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <p className="prose max-w-none pb-0 pt-0 text-xl font-normal dark:prose-dark">
               {summary}
             </p>
+            <div className="pt-4">
+              <ProjectSocialLinks
+                website={website}
+                gitRepository={gitRepository}
+                twitterHandle={twitterHandle}
+                discordLink={discordLink}
+                telegramLink={telegramLink}
+                facebookLink={facebookLink}
+                redditLink={redditLink}
+              />
+            </div>
 
             {/* ## PROJECT CONTENT */}
             <ProjectMenu
@@ -235,8 +310,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 className="markdown"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
+
+              /*
+              TODO Add Dropdown Tutorials
+                <div class="tutorials-dropdown">
+                    <i class="tutorial-icon"></i>
+                    Tutorials
+                    <ul>
+                        <li><a href="TUTORIAL_LINK_1" target="_blank">Tutorial 1</a></li>
+                        <li><a href="TUTORIAL_LINK_2" target="_blank">Tutorial 2</a></li>
+                        <!-- ... -->
+                    </ul>
+                </div>
+              */
             )}
-            {/* ### X Comments Section */}
+            {/* ### Comments Section */}
             {selectedMenuItem === 'comments' && (
               <div className="markdown">
                 <h1>{`${hashtag}`}</h1>
@@ -250,7 +338,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </div>
             )}
             {/* ### Updates Section */}
-            {/* FIX BUG: ID IS NOT BEING SORTED FROM HIGHEST TO LOWEST */}
             {selectedMenuItem === 'updates' && content && (
               <div className="markdown min-h-full">
                 <div>
@@ -328,6 +415,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 </div>
               )}
 
+              {/* Refactor for one time or recurring  */}
               {addressStats && (
                 <div className="">
                   <h5 className="text-3xl font-semibold text-gray-800 dark:text-gray-100">
@@ -336,6 +424,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   <h4 className="text-sm">Litecoin Raised</h4>
                 </div>
               )}
+
+              {/* Days to go */}
             </div>
 
             <button
