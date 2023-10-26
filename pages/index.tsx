@@ -22,7 +22,7 @@ export default function Mission({
   return (
     <>
       {/* background image*/}
-      <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black">
+      <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black p-8 xs:p-4">
         <Image
           src={FULL_SCREEN_IMAGE}
           alt="Mission - Promote the adoption, education & development of Litecoin (LTC)"

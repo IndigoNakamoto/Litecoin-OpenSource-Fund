@@ -156,7 +156,7 @@ button.pay {
 }
 
 button.twitter {
-  @apply border bg-transparent font-semibold text-blue-500 hover:border-transparent hover:bg-blue-300 hover:text-gray-700 flex-1 ml-2 border-gray-400 bg-white text-sm rounded-lg;
+  @apply border bg-transparent font-semibold text-blue-500 hover:border-transparent hover:bg-blue-300 hover:text-white flex-1 ml-2 border-gray-400 bg-white text-sm rounded-lg;
 }
 
 button.pay:disabled {
