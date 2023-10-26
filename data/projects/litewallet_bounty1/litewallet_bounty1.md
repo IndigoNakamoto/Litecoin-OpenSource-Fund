@@ -2,7 +2,7 @@
 title: 'Litewallet Bounty: Resolve Core Update Issue'
 summary: 'Enhancing the user experience of Litewallet by tackling a critical issue related to address display in the transaction history.'
 nym: 'Litecoin Foundation'
-website: 'https://litewallet.org/'
+website: 'https://litewallet.io/'
 coverImage: '/static/images/projects/litewallet3.png'
 gitRepository: 'https://github.com/litecoin-foundation/litewallet-ios/pull/211'
 twitterHandle: 'https://twitter.com/LitewalletApp'
