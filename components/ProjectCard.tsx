@@ -40,10 +40,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </Link>
       </div>
 
-      <figcaption className="space-y-1 p-4">
-        <h2 className="font-bold">{title}</h2>
-        <div className="line-clamp-3">{summary}</div>
+      <figcaption className="flex h-max flex-col justify-between p-4">
+        <div className="h-28 ">
+          <h2 className="font-bold">{title}</h2>
+          <div className="line-clamp-3 ">{summary}</div>
+        </div>
         <div className="grid grid-cols-2 pt-4">
+          {' '}
           <button
             className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-400 hover:text-white dark:bg-white dark:text-black dark:hover:bg-blue-400 hover:dark:text-white"
             onClick={() => openPaymentModal(project)}

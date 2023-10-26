@@ -1,5 +1,5 @@
 ---
-title: 'Litecoin Bounty: Upgrade Electrum-LTC'
+title: 'Bounty: Upgrade Electrum-LTC'
 summary: 'Electrum-LTC Upgrade: Bridging to Bitcoin’s 4.4.5 Version for Superior Security and Enhanced Performance in Litecoin Transactions'
 nym: '[Person or Organization Name]'
 website: '[Project Website]'
