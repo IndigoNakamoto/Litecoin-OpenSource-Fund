@@ -253,7 +253,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   return (
     <>
       <Head>
-        <title>Lite.Space | {slug}</title>
+        <title>Lite.Space | {title}</title>
         <meta property="og:title" content={title} />
         <meta property="og:description" content={summary} />
         <meta name="twitter:card" content="summary" />
