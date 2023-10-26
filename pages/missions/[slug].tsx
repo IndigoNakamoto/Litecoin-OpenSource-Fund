@@ -430,7 +430,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded bg-blue-500 text-xl  text-white hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300"
+              className="hover:white block w-full rounded bg-blue-500 text-xl text-white transition-colors  duration-200 hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300"
             >
               Support this mission
             </button>

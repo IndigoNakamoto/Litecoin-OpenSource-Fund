@@ -89,7 +89,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition hover:bg-gray-200 focus:bg-gray-200 focus:outline-none dark:border-gray-800 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:focus:bg-gray-700"
+                className="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition duration-300 hover:bg-white focus:border-gray-400 focus:bg-white focus:outline-none dark:border-gray-800 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:focus:bg-gray-700"
               >
                 <span>{faq.question}</span>
                 {openIndex &&

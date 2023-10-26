@@ -48,7 +48,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="grid grid-cols-2 pt-4">
           {' '}
           <button
-            className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-blue-400 hover:text-white dark:bg-white dark:text-black dark:hover:bg-blue-400 hover:dark:text-white"
+            className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white transition-colors duration-300 hover:border-transparent  hover:bg-blue-400 hover:text-white dark:bg-white dark:text-black dark:hover:bg-blue-400 hover:dark:text-white"
             onClick={() => openPaymentModal(project)}
           >
             Donate

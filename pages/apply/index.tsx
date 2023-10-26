@@ -33,7 +33,7 @@ export default function Apply({
         <h1>Content not found.</h1>
       )} */}
 
-      <ApplySection title="Apply for a grant" style="apply">
+      <ApplySection title="Apply for a Grant" style="apply">
         <div className="my-8 xs:my-4">
           <p>
             The Litecoin Foundation FOSS Council is always on the lookout for

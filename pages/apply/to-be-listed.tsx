@@ -7,7 +7,7 @@ import React from 'react'
 export default function Apply() {
   return (
     <>
-      <ApplySection title="Apply to Be Listed">
+      <ApplySection title="Apply to be Listed">
         <div className="my-8 mt-10 xs:my-4">
           <p className="">
             The information collected below will be used in order to vet your
