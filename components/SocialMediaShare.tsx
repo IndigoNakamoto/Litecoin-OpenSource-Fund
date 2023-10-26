@@ -3,8 +3,7 @@ import SocialIcon from './social-icons'
 
 const SocialMediaShare = ({ title, summary, className }) => {
   const router = useRouter()
-  const currentURL = 'http://preview.lite.space' + router.asPath
-  // console.log('currentURL: ', currentURL)
+  const currentURL = process.env.BASE_URL + router.asPath
 
   const encodedText = encodeURIComponent(summary)
   const shareLinks = [
