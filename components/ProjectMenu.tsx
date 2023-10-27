@@ -1,4 +1,3 @@
-// components/ProjectMenu.tsx
 import { useState } from 'react'
 
 type ProjectMenuProps = {
@@ -26,30 +25,30 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   return (
     <nav className="mt-6 border-b border-t border-blue-500 dark:border-blue-400">
       <ul
-        className="scroll-snap-type flex overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
+        className="scroll-snap-type flex space-x-1 overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
         style={{ scrollSnapType: 'x mandatory' }}
       >
-        <li>
+        <li className="group flex h-10 items-center justify-center rounded-lg">
           <button
             onClick={() => handleMenuItemClick('mission')}
             className={`text-lg ${
               activeItem === 'mission'
-                ? 'font-semibold text-blue-500  dark:text-blue-300'
-                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   md:inline-block`}
+                ? 'font-semibold text-blue-500 dark:text-blue-300'
+                : 'text-gray-700 dark:text-gray-100'
+            } transform-gpu transition-transform hover:scale-105`}
           >
             Mission
           </button>
         </li>
 
-        <li className="relative">
+        <li className="group relative flex h-10 items-center justify-center rounded-lg pr-1">
           <button
             onClick={() => handleMenuItemClick('faq')}
             className={`text-lg ${
               activeItem === 'faq'
-                ? 'relative font-semibold text-blue-500  dark:text-blue-300'
-                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }    md:inline-block `}
+                ? 'relative font-semibold text-blue-500 dark:text-blue-300'
+                : 'relative text-gray-700 dark:text-gray-100'
+            } transform-gpu transition-transform hover:scale-105`}
           >
             FAQ
             <span
@@ -64,14 +63,14 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
           </button>
         </li>
 
-        <li className="relative">
+        <li className="group relative flex h-10 items-center justify-center rounded-lg pr-1">
           <button
             onClick={() => handleMenuItemClick('updates')}
             className={`text-lg  ${
               activeItem === 'updates'
-                ? 'relative font-semibold text-blue-500  dark:text-blue-300'
-                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }   md:inline-block`}
+                ? 'relative font-semibold text-blue-500 dark:text-blue-300'
+                : 'relative text-gray-700 dark:text-gray-100'
+            } transform-gpu transition-transform hover:scale-105`}
           >
             Updates
             <span
@@ -85,14 +84,14 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             </span>
           </button>
         </li>
-        <li className="relative">
+        <li className="group relative flex h-10 items-center justify-center rounded-lg pr-1">
           <button
             onClick={() => handleMenuItemClick('comments')}
             className={`text-lg  ${
               activeItem === 'comments'
-                ? 'relative font-semibold text-blue-500  dark:text-blue-300'
-                : 'relative text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400'
-            }   md:inline-block`}
+                ? 'relative font-semibold text-blue-500 dark:text-blue-300'
+                : 'relative text-gray-700 dark:text-gray-100'
+            } transform-gpu transition-transform hover:scale-105`}
           >
             Comments
             <span
@@ -106,14 +105,14 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             </span>
           </button>
         </li>
-        <li>
+        <li className="group flex h-10 items-center justify-center rounded-lg">
           <button
             onClick={() => handleMenuItemClick('community')}
             className={`text-lg  ${
               activeItem === 'community'
-                ? 'font-semibold text-blue-500  dark:text-blue-300'
-                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   md:inline-block`}
+                ? 'font-semibold text-blue-500 dark:text-blue-300'
+                : 'text-gray-700 dark:text-gray-100'
+            } transform-gpu transition-transform hover:scale-105`}
           >
             Community
           </button>
@@ -123,9 +122,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             onClick={() => handleMenuItemClick('resources')}
             className={`text-lg  ${
               activeItem === 'resources'
-                ? 'font-semibold text-blue-500  dark:text-blue-300'
-                : 'text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400 '
-            }   md:inline-block`}
+                ? 'font-semibold text-blue-500 dark:text-blue-300'
+                : 'text-gray-700 dark:text-gray-100'
+            } transition-transform transform-gpu hover:scale-105`}
           >
             Resources
           </button>
