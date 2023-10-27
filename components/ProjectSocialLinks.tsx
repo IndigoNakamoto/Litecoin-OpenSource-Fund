@@ -41,7 +41,7 @@ const ProjectSocialLinks = ({
   ]
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-1">
       <p className="font-semibold text-gray-800 dark:text-gray-200"> LINKS: </p>
       {projectLinks.map((link) => (
         <SocialIcon key={link.kind} kind={link.kind} href={link.url} size={5} />

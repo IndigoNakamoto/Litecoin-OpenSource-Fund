@@ -48,7 +48,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
 
       <section className="mt-16">
-        <div className="relative h-96 overflow-hidden rounded-xl border-2 border-gray-700">
+        <div className="relative h-96 overflow-hidden rounded-xl border-2 dark:border-gray-700">
           <Image
             src="/static/images/hero.jpg"
             layout="fill"

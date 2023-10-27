@@ -435,7 +435,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               Support this mission
             </button>
             <SocialMediaShare
-              className="mt-0 flex space-x-4 "
+              className="mt-0 flex space-x-1"
               title={title}
               summary={socialSummary}
             />
