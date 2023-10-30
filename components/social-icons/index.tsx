@@ -38,6 +38,8 @@ const SocialIcon = ({ kind, href, size = 8 }) => {
 
   const SocialSvg = components[kind]
 
+  const padding = 8
+
   return (
     <a
       className="text-sm text-gray-500 transition hover:text-gray-600"
@@ -46,9 +48,11 @@ const SocialIcon = ({ kind, href, size = 8 }) => {
       href={href}
     >
       <span className="sr-only">{kind}</span>
-      <div className="group flex h-8 w-8 items-center justify-center rounded-lg transition-colors duration-200 hover:border hover:bg-white">
+      <div
+        className={`group flex h-${padding} w-${padding} items-center justify-center rounded-lg transition-colors duration-200 hover:border hover:bg-white`}
+      >
         <SocialSvg
-          className={`h-${size} w-${size} fill-current text-gray-700 transition-colors duration-200 group-hover:text-blue-300 dark:text-gray-200`}
+          className={` fill-current h-${6} w-${6} text-gray-700 transition-colors duration-200 group-hover:text-blue-300 dark:text-gray-200`}
         />
       </div>
     </a>

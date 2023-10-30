@@ -41,7 +41,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       <figcaption className="flex h-max flex-col justify-between p-4">
-        <div className="h-28 ">
+        <div className="h-32 ">
           <h2 className="font-bold">{title}</h2>
           <div className="line-clamp-3 ">{summary}</div>
         </div>
