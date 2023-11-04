@@ -2,10 +2,8 @@
 title: 'General Fund'
 summary: 'The General Fund by the Litecoin Foundation is the hub for open-source Litecoin ventures. With a focus on quality and innovation, it invites supporters to join its mission in reshaping the Litecoin landscape.'
 nym: 'Litecoin Foundation'
-website: 'https://lite.space'
 coverImage: '/static/images/projects/generalfund2.png'
-git: 'opensats'
-twitter: 'ltcfoundation'
+twitterHandle: 'https://www.twitter.com/ltcfoundation'
 hidden: false
 type: 'Development Fund'
 contributor: 'ltcfoundation'
