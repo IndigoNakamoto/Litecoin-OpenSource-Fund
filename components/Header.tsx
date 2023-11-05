@@ -11,12 +11,12 @@ const Header = () => {
   // const router = useRouter() // <- Get the router object
 
   return (
-    <header className="z-9 flex items-center justify-between py-0 font-barlow-semi-condensed text-gray-800 dark:text-gray-200">
-      <div className="pt-2">
+    <header className="z-9 flex items-center justify-between py-6 font-barlow-semi-condensed text-gray-800 dark:text-gray-200">
+      <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
-          <div className="flex h-20 items-center">
+          <div className="flex h-12 items-center ">
             <div className="mr-1">
-              <Logo className="" />
+              <Logo className="h-10" />
             </div>
 
             <div className="text-2xl font-semibold sm:block">
