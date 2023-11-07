@@ -73,7 +73,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               </div>
             </div>
             <div className="space-y-0 pb-0 pt-4 md:space-y-0">
-              <h1 className="pb-2 text-3xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-5xl sm:leading-10 md:text-5xl md:leading-14">
+              <h1 className="pb-2 text-2xl font-semibold leading-9 tracking-tight text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 xs:text-3xl">
                 Supporting <Typing />
               </h1>
               <p className="mb-0 pt-32 text-2xl font-medium leading-7 text-gray-100">
