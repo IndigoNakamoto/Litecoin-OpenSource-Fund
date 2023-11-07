@@ -29,7 +29,7 @@ export default function Mission({
           layout="fill"
           objectFit="cover"
         />
-        <div className="z-1 relative inset-x-0 mt-24 flex flex-col items-center justify-center 2xl:mt-28 3xl:mt-28">
+        <div className="z-1 relative inset-x-0 mt-24 flex flex-col items-center justify-center 2xl:mt-28 3xl:mt-28 short:mt-12">
           {/* Litecoin logo */}
           <Image
             src={COIN}
