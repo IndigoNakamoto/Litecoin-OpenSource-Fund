@@ -6,7 +6,7 @@ import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/legacy/image'
 // import ProjectList from '../../components/ProjectList'
 // import BackToProjects from '../../components/BackToProjects'
-import { ProjectItem, AddressStats } from '../../utils/types'
+import { ProjectItem, AddressStats, Donation } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
@@ -199,37 +199,116 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
       setAddressStats(stats)
 
-      // TO IMPLEMENT
-      if (stats.donatedCreatedTime && stats.donatedCreatedTime.length > 0) {
-        /* 
-        if isRecurring then
-          startDate = 1, and get currentDate, monthEndDate
-          calculate days remaining in the month
-          get array of donations and their createdTime between startDate and currentDate
-          currentPeriodAmountTotal = from array of objects sum amounts - [{amount,createdTime},...]
+      // if (
+      //   stats.donatedCreatedTime &&
+      //   stats.donatedCreatedTime.length > 0 &&
+      //   isRecurring &&
+      //   recurringAmountGoal
+      // ) {
+      //   const donatedCreatedTime: Donation[] = stats.donatedCreatedTime
+      //   // Calculate time remaining based on RecurringPeriod
+      //   let timeRemaining = 0
+      //   switch (recurringPeriod) {
+      //     case RecurringPeriod.WEEKLY:
+      //       timeRemaining = 7 * 24 - new Date().getHours() // 7 days in a week
+      //       break
+      //     case RecurringPeriod.MONTHLY:
+      //       timeRemaining =
+      //         new Date(
+      //           new Date().getFullYear(),
+      //           new Date().getMonth() + 1,
+      //           1
+      //         ).getTime() - new Date().getTime() // Time remaining until the start of next month
+      //       break
+      //     case RecurringPeriod.QUARTERLY:
+      //       // You can customize this calculation based on your definition of a quarter
+      //       break
+      //     default:
+      //       timeRemaining = 0
+      //   }
 
-          return {recurringAmountGoal, currentPeriodAmountTotal, timeRemaining}
-            
-        */
-      }
+      //   // Filter donations for the current period based on RecurringPeriod
+      //   const currentDate = new Date()
+      //   const currentMonthLastDate = new Date(
+      //     currentDate.getFullYear(),
+      //     currentDate.getMonth() + 1,
+      //     0
+      //   )
+      //   const currentQuarterEndDate = new Date(
+      //     currentDate.getFullYear(),
+      //     (currentDate.getMonth() + 3) % 12,
+      //     1
+      //   )
 
-      // Fetch Twitter user details
-      if (stats.supporters && stats.supporters.length > 0) {
-        const supporters = stats.supporters
-          .map((supporter) => {
-            if (typeof supporter === 'string' || supporter instanceof String) {
-              return extractUsername(supporter)
-            } else {
-              return 'anonymous'
-            }
-          })
-          .join(',')
-        const response = await fetch(
-          `/api/twitterUsers?usernames=${supporters}`
-        )
-        const twitterUsers = await response.json()
-        setTwitterUsers(twitterUsers)
-      }
+      //   let currentPeriodDonations: Donation[] = []
+      //   switch (recurringPeriod) {
+      //     case RecurringPeriod.WEEKLY:
+      //       currentPeriodDonations = stats.donatedCreatedTime.filter(
+      //         (donation) => {
+      //           const donationDate = new Date(donation.createdTime)
+      //           return (
+      //             donationDate >= currentDate &&
+      //             donationDate <= currentMonthLastDate
+      //           )
+      //         }
+      //       )
+      //       break
+      //     case RecurringPeriod.MONTHLY:
+      //       currentPeriodDonations = stats.donatedCreatedTime.filter(
+      //         (donation) => {
+      //           const donationDate = new Date(donation.createdTime)
+      //           return (
+      //             donationDate >= currentDate &&
+      //             donationDate <= currentMonthLastDate
+      //           )
+      //         }
+      //       )
+      //       break
+      //     case RecurringPeriod.QUARTERLY:
+      //       currentPeriodDonations = stats.donatedCreatedTime.filter(
+      //         (donation) => {
+      //           const donationDate = new Date(donation.createdTime)
+      //           return (
+      //             donationDate >= currentDate &&
+      //             donationDate <= currentQuarterEndDate
+      //           )
+      //         }
+      //       )
+      //       break
+      //     default:
+      //       currentPeriodDonations = []
+      //   }
+
+      //   console.log('Donations:', stats.donatedCreatedTime)
+      //   console.log('Current Date:', currentDate)
+      //   console.log('Current Month Last Date:', currentMonthLastDate)
+      //   console.log('Current Quarter End Date:', currentQuarterEndDate)
+      //   console.log('Current Period Donations:', currentPeriodDonations)
+
+      //   // Calculate the total amount donated in the current period
+      //   const currentPeriodAmountTotal = currentPeriodDonations.reduce(
+      //     (total, donation) => {
+      //       return total + donation.amount
+      //     },
+      //     0
+      //   )
+
+      //   // Calculate the total number of donations for the current period
+      //   const currentPeriodDonationCount = currentPeriodDonations.length
+
+      //   // Calculate the percentage of the goal reached
+      //   const currentPercentComplete =
+      //     (currentPeriodAmountTotal / recurringAmountGoal) * 100
+
+      //   console.log('Time Remaining:', timeRemaining)
+      //   console.log('Current Period Amount Total:', currentPeriodAmountTotal)
+      //   console.log('Current Percent Complete:', currentPercentComplete)
+      //   console.log(
+      //     'Current Period Donation Count:',
+      //     currentPeriodDonationCount
+      //   )
+      // }
+
       if (contributor) {
         const contributorsArray = contributor.split(',')
         if (contributorsArray.length > 0) {
@@ -273,12 +352,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div>
         <article className="mt-10 flex flex-col-reverse xl:flex-row xl:items-start">
-          <div className="content rounded-xl bg-gradient-to-b from-gray-100 to-gray-200 p-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-700 dark:text-gray-200 md:px-8 xl:mr-5 xl:w-[84ch]">
+          <div className="content rounded-xl bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-200 p-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-700 dark:text-gray-200 md:px-8 xl:mr-5 xl:w-[84ch]">
             {/* ## PROJECT HEADER */}
             <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
             </h1>
-
             <p className="prose max-w-none pb-0 pt-0 text-xl font-normal dark:prose-dark">
               {summary}
             </p>
@@ -310,19 +388,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 className="markdown"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
-
-              /*
-              TODO Add Dropdown Tutorials
-                <div class="tutorials-dropdown">
-                    <i class="tutorial-icon"></i>
-                    Tutorials
-                    <ul>
-                        <li><a href="TUTORIAL_LINK_1" target="_blank">Tutorial 1</a></li>
-                        <li><a href="TUTORIAL_LINK_2" target="_blank">Tutorial 2</a></li>
-                        <!-- ... -->
-                    </ul>
-                </div>
-              */
             )}
             {/* ### Comments Section */}
             {selectedMenuItem === 'comments' && (
@@ -393,7 +458,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 p-4 dark:from-gray-800 dark:to-gray-700 xs:p-4 md:p-8 lg:items-start xl:sticky xl:p-4">
+          <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-gray-100 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 md:p-8 lg:items-start xl:sticky xl:p-4 xs:p-4">
             <div className="relative h-[20rem] w-full overflow-hidden rounded-lg xl:h-[14rem] ">
               <Image
                 alt={title}
@@ -460,12 +525,7 @@ type ParamsType = {
 
 export async function getStaticProps({ params }: { params: ParamsType }) {
   const post = getPostBySlug(params.slug)
-
-  // Error occurred prerendering page
-  // Error: ENOENT: no such file or directory, scandir
   const updates = getAllPostUpdates(params.slug) || []
-
-  // console.log(updates)
 
   const projects = getAllPosts()
 

@@ -156,4 +156,9 @@ export type TwitterUser = {
   profile_image_url_https: string
 }
 
+export type Donation = {
+  amount: number
+  createdTime: number
+}
+
 export type TwitterUsers = [TwitterUser]
