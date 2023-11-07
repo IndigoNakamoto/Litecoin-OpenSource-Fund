@@ -1,4 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons'
 
 type ProjectMenuProps = {
   onMenuItemChange: (menuItem: string) => void
@@ -16,6 +21,37 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   updatesCount,
 }) => {
   const [activeItem, setActiveItem] = useState(activeMenu)
+  const [showLeftChevron, setShowLeftChevron] = useState(false)
+  const [showRightChevron, setShowRightChevron] = useState(true) // Assuming there's overflow initially
+  const menuRef = useRef<HTMLUListElement>(null)
+
+  useEffect(() => {
+    const checkForOverflow = () => {
+      if (menuRef.current) {
+        const { scrollWidth, clientWidth, scrollLeft } = menuRef.current
+        setShowLeftChevron(scrollLeft > 0)
+        setShowRightChevron(scrollLeft < scrollWidth - clientWidth)
+      }
+    }
+
+    // Initial check
+    checkForOverflow()
+
+    // Add event listener
+    menuRef.current?.addEventListener('scroll', checkForOverflow)
+
+    // Cleanup
+    return () =>
+      menuRef.current?.removeEventListener('scroll', checkForOverflow)
+  }, [])
+
+  const scrollMenu = (direction: 'left' | 'right') => {
+    if (menuRef.current) {
+      const { clientWidth } = menuRef.current
+      const scrollAmount = direction === 'left' ? -clientWidth : clientWidth
+      menuRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+    }
+  }
 
   const handleMenuItemClick = (menuItem: string) => {
     setActiveItem(menuItem)
@@ -23,9 +59,20 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   }
 
   return (
-    <nav className="mt-6 border-b border-t border-blue-500 dark:border-blue-400">
+    // need to make responsive for when li elements are not in view for narrow devices like mobile. We have tailwind setup with at 530px wide, "activeItem === 'community'" starts to be clipped. I want a way to indicate to users that you can scroll right with maybe a large chevron button.
+    <nav className="relative mt-6 flex items-center justify-between border-b border-t border-blue-500 dark:border-blue-400">
+      {showLeftChevron && (
+        <button
+          className="z-10 p-2 text-blue-600"
+          onClick={() => scrollMenu('left')}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+        </button>
+      )}
+
       <ul
-        className="scroll-snap-type flex space-x-1 overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
+        ref={menuRef}
+        className="flex space-x-1 overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <li className="group flex h-10 items-center justify-center rounded-lg">
@@ -130,6 +177,14 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
           </button>
         </li> */}
       </ul>
+      {showRightChevron && (
+        <button
+          className="absolute right-0 z-10 p-2 text-blue-600"
+          onClick={() => scrollMenu('right')}
+        >
+          <FontAwesomeIcon icon={faChevronRight} size="2x" />
+        </button>
+      )}
     </nav>
   )
 }
