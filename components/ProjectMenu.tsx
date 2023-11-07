@@ -90,8 +90,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                     : 'text-gray-700 dark:text-gray-100'
                 }`}
               >
-                {item.charAt(0).toUpperCase() + item.slice(1)}{' '}
-                {/* Capitalize the first letter */}
+                {item === 'faq'
+                  ? 'FAQ'
+                  : item.charAt(0).toUpperCase() + item.slice(1)}{' '}
+                {/* Display "FAQ" in uppercase */}
                 {item === 'faq' && (
                   <span
                     className={`absolute right-1 text-xs ${
