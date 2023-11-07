@@ -59,8 +59,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   }
 
   return (
-    // need to make responsive for when li elements are not in view for narrow devices like mobile. We have tailwind setup with at 530px wide, "activeItem === 'community'" starts to be clipped. I want a way to indicate to users that you can scroll right with maybe a large chevron button.
-    <nav className="relative mt-6 flex items-center justify-between border-b border-t border-blue-500 dark:border-blue-400">
+    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-blue-500 dark:border-blue-500">
       {showLeftChevron && (
         <button
           className="z-10 p-2 text-blue-600"
@@ -75,108 +74,62 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         className="flex space-x-1 overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
         style={{ scrollSnapType: 'x mandatory' }}
       >
-        <li className="group flex h-10 items-center justify-center rounded-lg">
-          <button
-            onClick={() => handleMenuItemClick('mission')}
-            className={`text-lg ${
-              activeItem === 'mission'
-                ? 'font-semibold text-blue-500 dark:text-blue-300'
-                : 'text-gray-700 dark:text-gray-100'
-            } transform-gpu transition-transform hover:scale-105`}
+        {/* Wrap the button in a div for each li */}
+        {['mission', 'faq', 'updates', 'comments', 'community'].map((item) => (
+          <li
+            className="group flex h-16 items-center justify-center rounded-lg"
+            key={item}
           >
-            Mission
-          </button>
-        </li>
-
-        <li className="group relative flex h-10 items-center justify-center rounded-lg pr-1">
-          <button
-            onClick={() => handleMenuItemClick('faq')}
-            className={`text-lg ${
-              activeItem === 'faq'
-                ? 'relative font-semibold text-blue-500 dark:text-blue-300'
-                : 'relative text-gray-700 dark:text-gray-100'
-            } transform-gpu transition-transform hover:scale-105`}
-          >
-            FAQ
-            <span
-              className={`${
-                activeItem === 'faq'
-                  ? 'absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400'
-                  : 'absolute right-1 text-xs font-semibold text-blue-600 dark:text-blue-400'
-              }`}
-            >
-              {faqCount}
-            </span>
-          </button>
-        </li>
-
-        <li className="group relative flex h-10 items-center justify-center rounded-lg pr-1">
-          <button
-            onClick={() => handleMenuItemClick('updates')}
-            className={`text-lg  ${
-              activeItem === 'updates'
-                ? 'relative font-semibold text-blue-500 dark:text-blue-300'
-                : 'relative text-gray-700 dark:text-gray-100'
-            } transform-gpu transition-transform hover:scale-105`}
-          >
-            Updates
-            <span
-              className={`${
-                activeItem === 'updates'
-                  ? 'absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400'
-                  : 'absolute right-1 text-xs font-semibold text-blue-600 dark:text-blue-400'
-              }`}
-            >
-              {updatesCount}
-            </span>
-          </button>
-        </li>
-        <li className="group relative flex h-10 items-center justify-center rounded-lg pr-1">
-          <button
-            onClick={() => handleMenuItemClick('comments')}
-            className={`text-lg  ${
-              activeItem === 'comments'
-                ? 'relative font-semibold text-blue-500 dark:text-blue-300'
-                : 'relative text-gray-700 dark:text-gray-100'
-            } transform-gpu transition-transform hover:scale-105`}
-          >
-            Comments
-            <span
-              className={`${
-                activeItem === 'comments'
-                  ? 'absolute right-1 text-xs font-bold text-blue-600 dark:text-blue-400'
-                  : 'absolute right-1 text-xs font-semibold text-blue-600 dark:text-blue-400'
-              }`}
-            >
-              {commentCount}
-            </span>
-          </button>
-        </li>
-        <li className="group flex h-10 items-center justify-center rounded-lg">
-          <button
-            onClick={() => handleMenuItemClick('community')}
-            className={`text-lg  ${
-              activeItem === 'community'
-                ? 'font-semibold text-blue-500 dark:text-blue-300'
-                : 'text-gray-700 dark:text-gray-100'
-            } transform-gpu transition-transform hover:scale-105`}
-          >
-            Community
-          </button>
-        </li>
-        {/* <li>
-          <button
-            onClick={() => handleMenuItemClick('resources')}
-            className={`text-lg  ${
-              activeItem === 'resources'
-                ? 'font-semibold text-blue-500 dark:text-blue-300'
-                : 'text-gray-700 dark:text-gray-100'
-            } transition-transform transform-gpu hover:scale-105`}
-          >
-            Resources
-          </button>
-        </li> */}
+            <div className="transform-gpu overflow-hidden rounded-xl transition duration-200 hover:bg-white dark:hover:bg-gray-800">
+              <button
+                onClick={() => handleMenuItemClick(item)}
+                className={`text-lg ${
+                  activeItem === item
+                    ? 'font-semibold text-blue-500 dark:text-blue-300'
+                    : 'text-gray-700 dark:text-gray-100'
+                }`}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}{' '}
+                {/* Capitalize the first letter */}
+                {item === 'faq' && (
+                  <span
+                    className={`absolute right-1 text-xs ${
+                      activeItem === 'faq'
+                        ? 'font-bold text-blue-600 dark:text-blue-400'
+                        : 'font-semibold text-blue-600 dark:text-blue-400'
+                    }`}
+                  >
+                    {faqCount}
+                  </span>
+                )}
+                {item === 'updates' && (
+                  <span
+                    className={`absolute right-1 text-xs ${
+                      activeItem === 'updates'
+                        ? 'font-bold text-blue-600 dark:text-blue-400'
+                        : 'font-semibold text-blue-600 dark:text-blue-400'
+                    }`}
+                  >
+                    {updatesCount}
+                  </span>
+                )}
+                {item === 'comments' && (
+                  <span
+                    className={`absolute right-1 text-xs ${
+                      activeItem === 'comments'
+                        ? 'font-bold text-blue-600 dark:text-blue-400'
+                        : 'font-semibold text-blue-600 dark:text-blue-400'
+                    }`}
+                  >
+                    {commentCount}
+                  </span>
+                )}
+              </button>
+            </div>
+          </li>
+        ))}
       </ul>
+
       {showRightChevron && (
         <button
           className="absolute right-0 z-10 p-2 text-blue-600"
