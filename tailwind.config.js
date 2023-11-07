@@ -26,6 +26,7 @@ module.exports = {
         xl: '1280px',
         '2xl': '1536px',
         '3xl': '2000px',
+        short: { raw: '(max-height: 740px)' },
       },
       spacing: {
         '9/16': '56.25%',

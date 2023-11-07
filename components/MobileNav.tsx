@@ -4,6 +4,8 @@ import headerNavLinks from '@/data/headerNavLinks'
 import SocialIcon from '@/components/social-icons-mobile'
 import siteMetadata from '@/data/siteMetadata'
 
+// The LINKS, SOCIAL ICONS, and FOOTER overlap on devices with height 667px, but looks fine on devices with height 896px. height 740px it's starting to look cramped.
+
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
 
@@ -43,7 +45,7 @@ const MobileNav = () => {
       </div>
 
       <div
-        className={`fixed bottom-2 right-2 top-2 z-10 min-w-[400px] transform rounded-3xl backdrop-blur-3xl duration-200 ease-in xs:w-full sm:w-1/2 md:clear-left md:w-1/3 xl:min-w-[400px] ${
+        className={`fixed bottom-2 right-0 top-2 z-10 min-w-full transform rounded-3xl backdrop-blur-3xl duration-200 ease-in sm:w-1/2 md:clear-left md:w-1/3 md:min-w-[450px] ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
         style={{ backgroundColor: 'rgba(12, 12, 12, 0.65)' }} // Using RGBA to achieve 40% transparency on a dark background
@@ -70,12 +72,11 @@ const MobileNav = () => {
           </button>
           <div></div>
         </div>
-        {/* links */}
+        {/* LINKS */}
         <div className="flex flex-col gap-x-6 ">
           <nav className="mt-8 h-full">
             {headerNavLinks.map((link) => (
-              // hover:text-blue-400 is not working
-              <div key={link.title} className="px-12 py-2">
+              <div key={link.title} className="px-12 py-2 short:py-0.5">
                 <Link
                   href={link.href}
                   className="text-3xl font-semibold tracking-widest text-gray-100 hover:text-blue-300 dark:text-gray-100 dark:hover:text-blue-300 "
@@ -88,7 +89,8 @@ const MobileNav = () => {
           </nav>
           <div className="">
             <div className="absolute bottom-12 mt-12 flex w-full flex-col ">
-              {/* Social Icons */}
+              {/* SOCIAL ICONS */}
+
               <div className="flex space-x-4 px-12">
                 <SocialIcon
                   kind="mail"
@@ -113,8 +115,10 @@ const MobileNav = () => {
                 />
                 <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
               </div>
-              {/* Footer */}
-              <div className=" ml-12 mt-12 flex flex-col space-y-2 text-xl text-gray-100 ">
+
+              {/* FOOTER */}
+
+              <div className=" ml-12 mt-12 flex flex-col space-y-2 text-xl text-gray-100 short:space-y-0 ">
                 <Link
                   href="/grant-policy"
                   className="hover:text-blue-200"
