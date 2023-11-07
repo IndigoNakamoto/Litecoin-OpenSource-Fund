@@ -26,9 +26,11 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   const menuRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
+    const menuElement = menuRef.current
+
     const checkForOverflow = () => {
-      if (menuRef.current) {
-        const { scrollWidth, clientWidth, scrollLeft } = menuRef.current
+      if (menuElement) {
+        const { scrollWidth, clientWidth, scrollLeft } = menuElement
         setShowLeftChevron(scrollLeft > 0)
         setShowRightChevron(scrollLeft < scrollWidth - clientWidth)
       }
@@ -38,11 +40,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
     checkForOverflow()
 
     // Add event listener
-    menuRef.current?.addEventListener('scroll', checkForOverflow)
+    menuElement?.addEventListener('scroll', checkForOverflow)
 
     // Cleanup
-    return () =>
-      menuRef.current?.removeEventListener('scroll', checkForOverflow)
+    return () => menuElement?.removeEventListener('scroll', checkForOverflow)
   }, [])
 
   const scrollMenu = (direction: 'left' | 'right') => {
@@ -71,7 +72,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
 
       <ul
         ref={menuRef}
-        className="flex space-x-1 overflow-x-auto whitespace-nowrap py-2 dark:text-gray-100"
+        className="overflow-x:overlay flex space-x-2 overflow-x-auto whitespace-nowrap dark:text-gray-100"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {/* Wrap the button in a div for each li */}
