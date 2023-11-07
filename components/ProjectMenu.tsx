@@ -72,7 +72,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
 
       <ul
         ref={menuRef}
-        className="overflow-x:overlay flex space-x-2 overflow-x-auto whitespace-nowrap dark:text-gray-100"
+        className="overflow-x:overlay flex space-x-2 overflow-x-auto whitespace-nowrap py-4 dark:text-gray-100"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {/* Wrap the button in a div for each li */}

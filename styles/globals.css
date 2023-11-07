@@ -10,6 +10,16 @@ Not used for project cards
   background: transparent; /* Optional: make scrollbar invisible */
 }
 
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+ul {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 /* Hide scrollbar for IE, Edge, and Firefox */
 html {
   -ms-overflow-style: none; /* IE and Edge */
@@ -24,116 +34,131 @@ html {
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf')
+    format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Italic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Italic.ttf')
+    format('truetype');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Thin.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Thin.ttf')
+    format('truetype');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-ThinItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-ThinItalic.ttf')
+    format('truetype');
   font-weight: 100;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Light.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Light.ttf')
+    format('truetype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-LightItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-LightItalic.ttf')
+    format('truetype');
   font-weight: 300;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Medium.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Medium.ttf')
+    format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-MediumItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-MediumItalic.ttf')
+    format('truetype');
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-SemiBold.ttf')
+    format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-SemiBoldItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-SemiBoldItalic.ttf')
+    format('truetype');
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Bold.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Bold.ttf')
+    format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-BoldItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-BoldItalic.ttf')
+    format('truetype');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-ExtraBold.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-ExtraBold.ttf')
+    format('truetype');
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-ExtraBoldItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-ExtraBoldItalic.ttf')
+    format('truetype');
   font-weight: 800;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Black.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Black.ttf')
+    format('truetype');
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Semi Condensed';
-  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-BlackItalic.ttf') format('truetype');
+  src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-BlackItalic.ttf')
+    format('truetype');
   font-weight: 900;
   font-style: italic;
 }
-
 
 :root {
   --font-barlow-semi-condensed: 'BarlowSemiCondensed', sans-serif;
@@ -144,23 +169,23 @@ body {
 }
 
 button.small {
-  @apply p-1 text-sm bg-white text-black border border-black;
+  @apply border border-black bg-white p-1 text-sm text-black;
 }
 
 button.group {
-  @apply p-2 text-sm bg-white text-black border border-black;
+  @apply border border-black bg-white p-2 text-sm text-black;
 }
 
 button.pay {
-  @apply  dark:border-blue-400 border-blue-500  dark:bg-blue-400 dark:hover:bg-blue-300 mt-2 bg-transparent font-semibold text-gray-100 dark:text-gray-100 hover:border-transparent flex-1 min-w-[20rem]  bg-blue-500 hover:bg-blue-400 p-8 text-xl rounded-xl flex justify-start gap-4;
+  @apply mt-2 flex  min-w-[20rem] flex-1 justify-start gap-4 rounded-xl border-blue-500 bg-blue-500 bg-transparent p-8 text-xl  font-semibold text-gray-100 hover:border-transparent hover:bg-blue-400 dark:border-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300;
 }
 
 button.twitter {
-  @apply border bg-transparent font-semibold text-blue-500 hover:border-transparent hover:bg-blue-300 hover:text-white flex-1 ml-2 border-gray-400 bg-white text-sm rounded-lg;
+  @apply ml-2 flex-1 rounded-lg border border-gray-400 bg-transparent bg-white text-sm font-semibold text-blue-500 hover:border-transparent hover:bg-blue-300 hover:text-white;
 }
 
 button.pay:disabled {
-  @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
+  @apply border-gray-400 bg-gray-100 text-gray-400 hover:shadow-none;
 }
 
 input[type='checkbox'] {
