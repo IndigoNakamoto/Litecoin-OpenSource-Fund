@@ -44,7 +44,7 @@ export default function FAQLayout({ children, content }: Props) {
     <>
       <PageSEO title={`Lite.Space | ${title}`} description={`${summary}`} />
       <div className="prose max-w-none pb-8 dark:prose-dark xl:col-span-2 ">
-        <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 xs:text-6xl sm:leading-10 md:text-7xl md:leading-14">
+        <h1 className="mt-10 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xs:text-6xl">
           {title}
         </h1>
         <div className="rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-700">
