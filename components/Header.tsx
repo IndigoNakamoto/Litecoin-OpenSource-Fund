@@ -19,10 +19,10 @@ const Header = () => {
               <Logo className="h-10" />
             </div>
 
-            <div className="text-2xl font-semibold sm:block">
+            <div className="m-0 p-0 text-xl font-semibold sm:block">
               <span style={{ display: 'block' }}>Lite</span>
               <span
-                className="text-blue-500"
+                className="p-0 text-blue-500"
                 style={{ display: 'block', marginTop: '-0.4em' }}
               >
                 .Space
