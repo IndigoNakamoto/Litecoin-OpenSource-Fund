@@ -342,11 +342,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         {/* <meta name="twitter:creator" content="@LTCFoundation" /> */}
         <meta
           name="twitter:image"
-          content={`https://www.lite.space${coverImage}`}
+          content={`https://www.Lite.Space${coverImage}`}
         />
         <meta
           property="og:image"
-          content={`https://www.lite.space${coverImage}`}
+          content={`https://www.Lite.Space${coverImage}`}
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
