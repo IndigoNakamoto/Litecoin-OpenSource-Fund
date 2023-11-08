@@ -27,28 +27,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     >(cacheKey)
 
     if (!users) {
-      // If not cached, make a request to the Twitter API using POST
-      console.log('No cached data found, calling Twitter API using POST')
-      const endpoint = 'https://api.twitter.com/1.1/users/lookup.json'
+      // If not cached, make a request to the Twitter API using GET
+      console.log('No cached data found, calling Twitter API using GET')
+      const endpoint = `https://api.twitter.com/2/users/by?usernames=${usernamesStr}&user.fields=profile_image_url`
 
-      const response = await axios.post(
-        endpoint,
-        {
-          screen_name: usernamesStr, // Send the data in the request body
+      const response = await axios.get(endpoint, {
+        headers: {
+          Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
-            'Content-Type': 'application/x-www-form-urlencoded', // Set the content type for POST
-          },
-        }
-      )
+      })
 
       // Map the response data to the desired format
-      users = response.data.map((obj) => ({
+      users = response.data.data.map((obj) => ({
         name: obj.name,
-        screen_name: obj.screen_name,
-        profile_image_url_https: obj.profile_image_url_https,
+        screen_name: obj.username,
+        profile_image_url_https: obj.profile_image_url,
       }))
 
       console.log('Caching the new data from Twitter API')
