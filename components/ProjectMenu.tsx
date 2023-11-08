@@ -96,10 +96,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 {/* Display "FAQ" in uppercase */}
                 {item === 'faq' && (
                   <span
-                    className={`absolute right-1 text-xs ${
+                    className={`absolute right-1.5 text-xs ${
                       activeItem === 'faq'
                         ? 'font-bold text-blue-600 dark:text-blue-400'
-                        : 'font-semibold text-blue-600 dark:text-blue-400'
+                        : 'font-semibold'
                     }`}
                   >
                     {faqCount}
@@ -107,10 +107,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 )}
                 {item === 'updates' && (
                   <span
-                    className={`absolute right-1 text-xs ${
+                    className={`absolute right-1.5 text-xs ${
                       activeItem === 'updates'
                         ? 'font-bold text-blue-600 dark:text-blue-400'
-                        : 'font-semibold text-blue-600 dark:text-blue-400'
+                        : 'font-semibold'
                     }`}
                   >
                     {updatesCount}
@@ -118,10 +118,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 )}
                 {item === 'comments' && (
                   <span
-                    className={`absolute right-1 text-xs ${
+                    className={`absolute right-1.5 text-xs ${
                       activeItem === 'comments'
                         ? 'font-bold text-blue-600 dark:text-blue-400'
-                        : 'font-semibold text-blue-600 dark:text-blue-400'
+                        : 'font-semibold'
                     }`}
                   >
                     {commentCount}
