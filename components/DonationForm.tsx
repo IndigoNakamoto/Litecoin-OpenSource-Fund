@@ -239,7 +239,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <button
           name="btcpay"
           onClick={handleBtcPay}
-          className="pay transition-colors duration-200 "
+          className="pay transition-colors duration-200"
           disabled={!readyToPayBTC || btcPayLoading}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
