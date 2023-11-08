@@ -59,11 +59,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Return the users, either from cache or fresh from the Twitter API
     res.status(200).json(users)
   } catch (error) {
-    console.error('ERROR: ', error.message)
-    // console.error(error)
-    res.status(error.statusCode).json({
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error('Error data:', error.response.data)
+      console.error('Error status:', error.response.status)
+      console.error('Error headers:', error.response.headers)
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('Error request:', error.request)
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error('Error message:', error.message)
+    }
+    console.error('Error config:', error.config)
+
+    res.status(500).json({
       error: 'Failed to fetch Twitter user data',
       message: error.message,
+      details: error.response?.data || error.request || error.message,
     })
   }
 }
