@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import Image from 'next/image'
+import { PageSEO } from '@/components/SEO'
 
 // const DEFAULT_LAYOUT = 'ListLayout'
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
@@ -21,6 +22,10 @@ export default function Mission({
 
   return (
     <>
+      <PageSEO
+        title={`Lite.Space`}
+        description="Lite.Space - Empower individuals and communities globally by advocating for and advancing Litecoin (LTC) through fostering adoption, education, and development, all toward building a decentralized and inclusive financial future."
+      />
       {/* background image*/}
       <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black p-8 xs:p-4">
         <Image
