@@ -337,8 +337,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         const twitterUsers = await response.json()
         setTwitterUsers(twitterUsers)
       }
-
-      // TODO Get list of users from updates, setTwitterUpdaters
     }
 
     fetchData().catch(console.error)

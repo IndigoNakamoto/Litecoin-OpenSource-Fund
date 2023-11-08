@@ -9,7 +9,6 @@ import Image from './Image'
 import CustomLink from './Link'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
-  // TODO: Why .default?
   const Layout = require(`../layouts/${layout}`).default
   return <Layout content={content} {...rest} />
 }

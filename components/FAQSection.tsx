@@ -110,8 +110,6 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     : 'hidden'
                 }`}
               >
-                {/* TODO: faq.answer is a string, but needs to be handled like it's markdown */}
-                {/* Use the ReactMarkdown component to render the markdown content */}
                 <ReactMarkdown className="markdown">{faq.answer}</ReactMarkdown>
               </div>
             </div>
