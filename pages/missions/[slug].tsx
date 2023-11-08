@@ -320,6 +320,24 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         }
       }
 
+      // Fetch Twitter user details
+      if (stats.supporters && stats.supporters.length > 0) {
+        const supporters = stats.supporters
+          .map((supporter) => {
+            if (typeof supporter === 'string' || supporter instanceof String) {
+              return extractUsername(supporter)
+            } else {
+              return 'anonymous'
+            }
+          })
+          .join(',')
+        const response = await fetch(
+          `/api/twitterUsers?usernames=${supporters}`
+        )
+        const twitterUsers = await response.json()
+        setTwitterUsers(twitterUsers)
+      }
+
       // TODO Get list of users from updates, setTwitterUpdaters
     }
 
