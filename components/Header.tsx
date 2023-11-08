@@ -15,15 +15,15 @@ const Header = () => {
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex h-12 items-center ">
-            <div className="mr-1">
-              <Logo className="h-10" />
+            <div className="">
+              <Logo className="mr-2 h-14" />
             </div>
 
-            <div className="m-0 p-0 text-xl font-semibold sm:block">
+            <div className="text-2xl font-semibold sm:block">
               <span style={{ display: 'block' }}>Lite</span>
               <span
-                className="p-0 text-blue-500"
-                style={{ display: 'block', marginTop: '-0.4em' }}
+                className=" text-blue-500"
+                style={{ display: 'block', marginTop: '-0.35em' }}
               >
                 .Space
               </span>
