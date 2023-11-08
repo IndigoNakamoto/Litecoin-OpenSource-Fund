@@ -63,7 +63,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
     <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-blue-500 dark:border-blue-500">
       {showLeftChevron && (
         <button
-          className="z-10 p-2 text-blue-600"
+          className="z-10 rounded-lg bg-white bg-opacity-50 p-1 text-blue-600"
           onClick={() => scrollMenu('left')}
         >
           <FontAwesomeIcon icon={faChevronLeft} size="2x" />
@@ -135,7 +135,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
 
       {showRightChevron && (
         <button
-          className="absolute right-0 z-10 p-2 text-blue-600"
+          className="z-10 rounded-lg bg-white bg-opacity-50 p-1 text-blue-600"
           onClick={() => scrollMenu('right')}
         >
           <FontAwesomeIcon icon={faChevronRight} size="2x" />
