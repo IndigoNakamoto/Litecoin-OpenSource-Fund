@@ -69,6 +69,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               <div className="flex h-full md:mr-20 xs:mr-4">
                 {' '}
                 {/* Added styles to vertically center and give spacing */}
+                {/* TODO: LitecoinIcon not rendering */}
                 <LitecoinIcon kind="coinBlueL" />
               </div>
             </div>
