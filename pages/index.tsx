@@ -24,7 +24,7 @@ export default function Mission({
     <>
       <PageSEO
         title={`Lite.Space`}
-        description="Lite.Space - Empower individuals and communities globally by advocating for and advancing Litecoin (LTC) through fostering adoption, education, and development, all toward building a decentralized and inclusive financial future."
+        description="Litespace: Crowdfunding Litecoin Innovation, One Bounty at a Time."
       />
       {/* background image*/}
       <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black p-8 xs:p-4">
