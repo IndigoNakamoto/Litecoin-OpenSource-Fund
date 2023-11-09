@@ -2,7 +2,7 @@
 title: 'Ordinals Lite'
 summary: 'Ord is an index, block explorer, and command-line wallet that allows a user to store data onto a litoshi. It is experimental software with no warranty. '
 nym: 'Anthony Gurrera'
-website: 'https://www.OrdinalsLite.com'
+website: 'https://OrdinalsLite.com'
 coverImage: '/static/images/projects/OrdinalsLite3.png'
 gitRepository: 'https://github.com/ynohtna92/ord-litecoin'
 twitterHandle: 'https://twitter.com/OrdinalsLite'
