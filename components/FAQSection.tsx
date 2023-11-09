@@ -69,7 +69,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
 
   return (
     <div>
-      <h6 className="py-8 text-4xl text-gray-700 dark:text-gray-300">
+      <h6 className="py-8 text-4xl font-semibold text-black dark:text-gray-300">
         Frequently Asked Questions
       </h6>
       {faqCategories.map((category, catIndex) => (
