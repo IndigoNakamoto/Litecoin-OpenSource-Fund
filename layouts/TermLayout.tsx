@@ -15,7 +15,7 @@ export default function PageLayout({ children, content }: Props) {
     <>
       <PageSEO title={`Lite.Space | ${title}`} description={`${summary}`} />
       <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
-        <h1 className="mt-[78vh]  font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xs:text-6xl">
+        <h1 className="mt-14 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xs:text-6xl">
           {title}
         </h1>
         <div className="rounded-xl bg-gradient-to-b from-white to-gray-100 p-4 dark:from-gray-900 dark:to-gray-800">

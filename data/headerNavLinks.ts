@@ -4,7 +4,7 @@ const headerNavLinks = [
   { href: '/about', title: 'About' },
   { href: '/bounties', title: 'Bounties' },
   { href: '/faq', title: 'FAQ' },
-  { href: '/blog', title: 'Blog' },
+  // { href: '/blog', title: 'Blog' },
   { href: '/apply', title: 'Apply', isButton: true },
 ]
 
