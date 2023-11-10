@@ -14,11 +14,11 @@ export default function PageLayout({ children, content }: Props) {
   return (
     <>
       <PageSEO title={`Lite.Space | ${title}`} description={`${summary}`} />
-      <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
-        <h1 className="mt-14 font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xs:text-6xl">
+      <div className="max-w-full">
+        <h1 className="pl-4 pt-20 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           {title}
         </h1>
-        <div className="rounded-xl bg-gradient-to-b from-white to-gray-100 p-4 dark:from-gray-900 dark:to-gray-800">
+        <div className="prose mt-0 max-w-none rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 p-4 dark:prose-dark  dark:from-gray-700 dark:to-gray-800">
           {children}
         </div>
       </div>

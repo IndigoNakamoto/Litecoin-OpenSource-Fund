@@ -5,7 +5,7 @@ const siteMetadata = {
   title: 'Lite.Space',
   author: 'Lite.Space',
   headerTitle: 'Lite.Space',
-  description: 'Crowdfunding Litecoin Innovation, One Bounty at a Time.',
+  description: 'Crowdfunding Litecoin Projects, One Bounty at a Time.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://Lite.Space',

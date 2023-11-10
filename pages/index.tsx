@@ -24,7 +24,7 @@ export default function Mission({
     <>
       <PageSEO
         title={`Lite.Space`}
-        description="Litespace: Crowdfunding Litecoin Innovation, One Bounty at a Time."
+        description="Litespace: Crowdfunding Litecoin Projects, One Bounty at a Time."
       />
       {/* background image*/}
       <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black p-8 xs:p-4">
