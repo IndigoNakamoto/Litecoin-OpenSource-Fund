@@ -15,9 +15,9 @@ type TwitterUsersProps = {
 
 const TwitterUsers: React.FC<TwitterUsersProps> = ({ users }) => {
   return (
-    <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
+    <div className="col-span-2 col-start-2 grid grid-cols-3 space-y-2 sm:gap-x-2 md:grid-cols-5 md:gap-x-8">
       {users.map((user, index) => (
-        <div className="items-left flex flex-col space-x-2 pt-8" key={index}>
+        <div className="items-left flex flex-col space-x-1 pt-2" key={index}>
           {index < 3 && ( // Preload first three images (if critical)
             <Head>
               <link
@@ -34,9 +34,9 @@ const TwitterUsers: React.FC<TwitterUsersProps> = ({ users }) => {
             <Image
               src={user.profile_image_url_https.replace('_normal', '')}
               alt={user.name}
-              width={120}
-              height={120}
-              className="h-36 w-36 rounded-full"
+              width={100}
+              height={100}
+              className="rounded-full"
               loading="lazy" // Apply lazy loading
             />
           </Link>
