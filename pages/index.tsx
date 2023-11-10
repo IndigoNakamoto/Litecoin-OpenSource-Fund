@@ -47,13 +47,12 @@ export default function Mission({
           {/* Litecoin mission statement */}
           <div className="container sm:mt-10 md:mt-24">
             <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
-              Mission
+              Lite.Space
             </h1>
-            <h2 className="mb-4 text-center text-xl font-light leading-normal text-gray-100 md:text-2xl lg:text-3xl">
-              Empower individuals and communities globally by advocating for and
-              advancing Litecoin (LTC) through fostering adoption, education,
-              and development, all toward building a decentralized and inclusive
-              financial future.
+            <h2 className="mb-4 text-center text-xl leading-normal text-gray-100 md:text-2xl lg:text-3xl">
+              Our portal to bring together developers and community members to
+              accelerate ideas and development in the Litecoin ecosystem.
+              Crowdfunding Litecoin projects, one bounty at a time.
             </h2>
           </div>
         </div>
