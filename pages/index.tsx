@@ -42,7 +42,7 @@ export default function Mission({
             width={300}
             height={300}
             objectFit="cover"
-            className="w-32 md:w-60 xl:w-80 short:w-32 medium:w-52"
+            className="w-32 md:w-60 xl:w-80 short:w-20 medium:w-36"
           />
           {/* Litecoin mission statement */}
           <div className="container sm:mt-10 md:mt-24">
