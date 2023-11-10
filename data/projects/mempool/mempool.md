@@ -1,7 +1,7 @@
 ---
 title: 'Litecoin Mempool Explorer'
 summary: 'Our mempool and blockchain explorer for the Litecoin community, focusing on the transaction fee market and multi-layer ecosystem'
-website: 'https://www.litecoinspace.org'
+website: 'https://litecoinspace.org'
 gitRepository: 'https://github.com/litecoin-foundation/ltcspace'
 coverImage: '/static/images/projects/litecoin-space.jpeg'
 type: 'Project'
@@ -12,7 +12,7 @@ socialSummary: '🔍 Dive deep into the Litecoin network with the Litecoin Mempo
 
 ## Litecoin Mempool Explorer: A Comprehensive Guide
 
-[LitecoinSpace.org](https://LitecoinSpace.org) has successfully adapted the Mempool Space code from Bitcoin for Litecoin users. This state-of-the-art platform offers an in-depth view of Litecoin's mempool and blockchain, designed specifically for the growing Litecoin community. 
+[LitecoinSpace.org](https://LitecoinSpace.org) has successfully adapted the Mempool Space code from Bitcoin for Litecoin users. This state-of-the-art platform offers an in-depth view of Litecoin's mempool and blockchain, designed specifically for the growing Litecoin community.
 
 Here are the standout features of the Litecoin Mempool Explorer:
 
