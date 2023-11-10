@@ -24,7 +24,10 @@ const Volunteers = () => {
       <div className="col-start-0 col-span-3 grid grid-cols-3 space-y-2 sm:gap-x-2 md:grid-cols-5 md:gap-x-8">
         {volunteers.map((v, i) => (
           <div className="items-left flex flex-col space-x-2" key={i}>
-            <Link href={v.link}>
+            <Link
+              href={v.link}
+              className=" transition-transform duration-200 ease-in-out hover:scale-105"
+            >
               <Image
                 src={v.image}
                 alt={v.nym}
