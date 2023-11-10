@@ -44,7 +44,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   return (
     <>
       <Head>
-        <title>Lite.Space | Projects</title>
+        <title>Lite.Space | Explore</title>
       </Head>
 
       <section className="mt-8">

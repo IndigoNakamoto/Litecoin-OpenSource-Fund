@@ -1,12 +1,17 @@
 import WebsiteApplicationForm from '@/components/WebsiteApplicationForm'
 // import PageSection from '@/components/PageSection'
 import ApplySection from '@/components/ApplySection'
+import { PageSEO } from '@/components/SEO'
 import React from 'react'
 // import CustomLink from '@/components/Link'
 
 export default function Apply() {
   return (
     <>
+      <PageSEO
+        title="Lite.Space | FOSS Listing"
+        description="Litecoin Foundation Grants: Apply for Funding & Support Open-Source Projects. Learn criteria, grant types, and get listed on Lite.Space. Enhance the Litecoin ecosystem globally."
+      />
       <ApplySection title="Apply to be Listed">
         <div className="my-8 mt-10 xs:my-4">
           <p className="">

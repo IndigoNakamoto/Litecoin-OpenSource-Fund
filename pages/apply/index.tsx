@@ -20,7 +20,7 @@ export default function Apply({
   return (
     <>
       <PageSEO
-        title="Apply to One of Lite.Spaces' Grant Programs"
+        title="Lite.Space | Apply"
         description="Litecoin Foundation Grants: Apply for Funding & Support Open-Source Projects. Learn criteria, grant types, and get listed on Lite.Space. Enhance the Litecoin ecosystem globally."
       />
       {/* {apply ? (

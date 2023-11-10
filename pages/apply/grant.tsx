@@ -2,11 +2,16 @@ import GrantApplicationForm from '@/components/GrantApplicationForm'
 import ApplySection from '@/components/ApplySection'
 import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
+import { PageSEO } from '@/components/SEO'
 import React from 'react'
 
 export default function Apply() {
   return (
     <>
+      <PageSEO
+        title="Lite.Space | General Grant"
+        description="Litecoin Foundation Grants: Apply for Funding & Support Open-Source Projects. Learn criteria, grant types, and get listed on Lite.Space. Enhance the Litecoin ecosystem globally."
+      />
       <ApplySection title="Apply for a Grant">
         <div className="my-8 mt-10 xs:my-4">
           <p>
