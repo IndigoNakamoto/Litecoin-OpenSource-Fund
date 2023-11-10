@@ -27,7 +27,10 @@ const TwitterUsers: React.FC<TwitterUsersProps> = ({ users }) => {
               />
             </Head>
           )}
-          <Link href={`https://twitter.com/${user.screen_name}`}>
+          <Link
+            href={`https://twitter.com/${user.screen_name}`}
+            className=" transition-transform duration-200 ease-in-out hover:scale-105"
+          >
             <Image
               src={user.profile_image_url_https.replace('_normal', '')}
               alt={user.name}
