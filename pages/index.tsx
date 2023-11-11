@@ -2,6 +2,7 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import Image from 'next/image'
 import { PageSEO } from '@/components/SEO'
+import CompletedProjects from '@/components/CompletedProjects'
 
 // const DEFAULT_LAYOUT = 'ListLayout'
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
@@ -24,17 +25,17 @@ export default function Mission({
     <>
       <PageSEO
         title={`Lite.Space`}
-        description="Litespace: Crowdfunding Litecoin Projects, One Bounty at a Time."
+        description="Crowdfunding Litecoin Projects, One Bounty at a Time."
       />
       {/* background image*/}
-      <div className="absolute inset-x-0 bottom-32 top-24 z-0 bg-black p-8 xs:p-4">
+      <div className="absolute inset-x-0 top-24 z-0 bg-black p-8 xs:p-4">
         <Image
           src={FULL_SCREEN_IMAGE}
           alt="Mission - Promote the adoption, education & development of Litecoin (LTC)"
           layout="fill"
           objectFit="cover"
         />
-        <div className="z-1 relative inset-x-0 mt-24 flex flex-col items-center justify-center 2xl:mt-28 3xl:mt-28 short:mt-12">
+        <div className="z-1 relative inset-x-0 flex flex-col items-center justify-center 2xl:mt-28 3xl:mt-28 short:mt-12">
           {/* Litecoin logo */}
           <Image
             src={COIN}
@@ -54,6 +55,12 @@ export default function Mission({
               accelerate ideas and development in the Litecoin ecosystem.
               Crowdfunding Litecoin projects, one bounty at a time.
             </h2>
+            <div
+              className="z-1 mt-32 rounded-3xl backdrop-blur-2xl"
+              style={{ backgroundColor: 'rgba(12, 12, 12, 0.35)' }}
+            >
+              <CompletedProjects />
+            </div>
           </div>
         </div>
       </div>

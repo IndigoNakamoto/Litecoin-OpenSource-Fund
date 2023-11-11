@@ -33,7 +33,7 @@ export default function BlogPage({
   return (
     <>
       <PageSEO
-        title={`Blog - ${siteMetadata.author}`}
+        title={`${siteMetadata.author} | Blog `}
         description={siteMetadata.description}
       />
       <ListLayout

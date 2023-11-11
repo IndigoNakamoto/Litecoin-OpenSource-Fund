@@ -18,7 +18,7 @@ export default function Footer() {
           <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
           <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
         </div>
-        <div className="lg:text-md mb-2  flex text-sm text-gray-500 dark:text-gray-400 md:space-x-1.5 lg:space-x-2">
+        <div className="lg:text-md flex text-sm text-gray-500 dark:text-gray-400 md:space-x-1.5 lg:space-x-2">
           <div className="flex space-x-0.5">
             <div>{`© ${new Date().getFullYear()}`}</div>
             <div>{siteMetadata.author}</div>
@@ -33,7 +33,7 @@ export default function Footer() {
           <div>-</div>
           <Link href="/privacy">Privacy</Link>
         </div>
-        <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
+        <div className="text-center text-xs text-gray-500 dark:text-gray-400">
           Litecoin Foundation, Inc. Singapore (UEN: 201709179W) is a non-profit
           organization.
           <br />
