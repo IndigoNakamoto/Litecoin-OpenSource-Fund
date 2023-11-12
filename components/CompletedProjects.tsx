@@ -19,7 +19,7 @@ function CompletedProjects() {
   return (
     <div className="flex flex-col p-6 text-gray-800">
       <div className="mx-auto flex flex-col items-center">
-        <h1 className="mb-2 text-4xl font-semibold text-gray-800 dark:text-white">
+        <h1 className="mb-2 text-5xl font-semibold text-gray-800 dark:text-white">
           We help advance
         </h1>
         <h1 className="text-4xl font-semibold text-gray-800">
