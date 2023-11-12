@@ -123,6 +123,24 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [faq, setFaq] = useState<any>({})
   const [faqCount, setFaqCount] = useState<any>()
 
+  function formatLits(value) {
+    if (Number(value) === 0) {
+      return '0'
+    }
+    if (value % 1 === 0) {
+      return value.toString()
+    }
+    // Convert the number to a string and ensure it has at least 9 digits after the decimal
+    let formattedValue = Number(value).toFixed(9)
+
+    // Replace the dots with spaces and remove any leading zeros
+    formattedValue = formattedValue
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+      .replace(/^0+/, '')
+
+    return formattedValue
+  }
+
   useEffect(() => {
     async function loadFAQData() {
       const data = await fetchFAQData(slug)
@@ -500,7 +518,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               {addressStats && (
                 <div className="">
                   <h5 className="text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                    Ł {addressStats.funded_txo_sum}{' '}
+                    Ł {formatLits(addressStats.funded_txo_sum)}{' '}
                   </h5>
                   <h4 className="text-sm">Litecoin Raised</h4>
                 </div>
