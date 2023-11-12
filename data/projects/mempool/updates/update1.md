@@ -10,13 +10,11 @@ id: 1
 
 ## Hello Litecoin Community,
 
-Today, I am thrilled to announce the successful port of [@mempool](https://twitter.com/mempool) from Bitcoin to Litecoin. This project has been brought to life thanks to an incredible collective effort by our community members.
+We am thrilled to announce the successful port of [@mempool](https://twitter.com/mempool) from Bitcoin to Litecoin. This project has been brought to life thanks to an incredible collective effort by our community members.
 
 ### Acknowledgements
 
 First, we would like to acknowledge the extraordinary work done by [@loshan1212](https://twitter.com/loshan1212). His expertise as a Litecoin core developer was invaluable in successfully porting the code. We are immensely grateful for his hard work, dedication, and enthusiasm for this project.
-
-We are also thrilled to announce that [@LTCFoundation](https://twitter.com/LTCFoundation) has kindly stepped forward to cover the ongoing maintenance costs of this valuable tool. Their continuous support and dedication to the Litecoin community are invaluable, and we are grateful for their commitment.
 
 ### Community Support
 
@@ -41,5 +39,3 @@ Your commitment has been instrumental in making this port a reality. This succes
 Now, we look forward to providing a better experience for all users of Litecoin with the enhanced functionality that [LitecoinSpace.org](http://LitecoinSpace.org) brings. This is more than just a tool; it's a milestone on our journey to making Litecoin more accessible and easier for everyone.
 
 Thank you all once again for making this possible. Together, we are building a stronger and more vibrant Litecoin community.
-
-🚀🚀🚀
