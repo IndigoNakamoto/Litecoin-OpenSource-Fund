@@ -39,7 +39,7 @@ function CompletedProjects() {
         <p className="pt-2 text-2xl text-gray-600 dark:text-gray-400">
           Unite. Fund. Innovate. - The Litecoin Development Portal
         </p>
-        <button className="mb-10 mt-8 w-40 rounded-full bg-blue-500 px-4 py-2 font-semibold hover:bg-blue-400 ">
+        <button className="mb-10 mt-8 w-40 rounded-full bg-blue-500 px-4 py-2 font-semibold transition duration-300 hover:bg-blue-400">
           <Link href="/missions"> Explore More</Link>
         </button>
       </div>
@@ -55,7 +55,7 @@ function CompletedProjects() {
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
-                  className="transform rounded-xl transition duration-500 ease-in-out hover:scale-105"
+                  className="transform rounded-xl transition duration-300 ease-in-out hover:scale-105"
                 />
 
                 <h2 className="image-title absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-0 text-4xl font-semibold text-white opacity-0 transition-opacity duration-300 ease-in-out hover:bg-opacity-80 hover:opacity-100">
