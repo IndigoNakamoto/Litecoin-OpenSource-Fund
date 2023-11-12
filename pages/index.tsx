@@ -1,17 +1,13 @@
 import { InferGetStaticPropsType } from 'next'
-import { allPages } from 'contentlayer/generated'
 import Image from 'next/image'
 import { PageSEO } from '@/components/SEO'
 import CompletedProjects from '@/components/CompletedProjects'
-import CustomLink from '@/components/Link'
 import Link from 'next/link'
 
-// const DEFAULT_LAYOUT = 'ListLayout'
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
 const COIN = '/litecoin-svg/L-white.png'
 
 export const getStaticProps = async () => {
-  // const page = allPages.find((p) => p.slug === 'mission')
   const page = true
   return { props: { page: page } }
 }
@@ -30,9 +26,7 @@ export default function Mission({
         description="Crowdfunding Litecoin Projects, One Open-Source Project at a Time."
       />
       {/* background image*/}
-      <div className="absolute inset-x-0 top-[6rem] z-0 bg-black ">
-        {' '}
-        {/* Adjusted top value here */}
+      <div className="absolute inset-x-0 top-[6rem] z-0 bg-black">
         <div style={{ position: 'relative', height: '89vh' }}>
           <Image
             src={FULL_SCREEN_IMAGE}
@@ -40,11 +34,11 @@ export default function Mission({
             layout="fill"
             objectFit="cover"
           />
-          <div className="z-1 relative inset-x-0 flex flex-col items-center justify-center ">
+          <div className="z-1 relative inset-x-0 flex flex-col items-center justify-center">
             {/* Litecoin logo */}
             <Image
               src={COIN}
-              alt=""
+              alt="Litecoin Logo"
               width={300}
               height={300}
               objectFit="cover"
@@ -52,7 +46,7 @@ export default function Mission({
             />
             {/* Litecoin mission statement */}
             <div className="container sm:mt-10 md:mt-24">
-              <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl xl:col-span-2">
+              <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl">
                 Lite.Space
               </h1>
               <h2 className="mb-4 text-center text-xl leading-normal text-gray-100 md:text-2xl lg:text-3xl">
@@ -70,7 +64,7 @@ export default function Mission({
       </div>
       {/* Apply for Funding section */}
       <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white to-gray-50 p-4 pb-10 pt-10 dark:divide-gray-700 dark:from-gray-900 dark:to-gray-800">
-        <div className="space-y-2 pb-8 md:space-y-5 ">
+        <div className="space-y-2 pb-8 md:space-y-5">
           <h1 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white md:text-4xl lg:text-7xl">
             Apply for Funding
           </h1>
