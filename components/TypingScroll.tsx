@@ -79,7 +79,7 @@ export default function TypingScroll() {
         className="mx-auto flex flex-col items-center"
         style={{
           transform: `translateY(${-50 * currentIndex}px)`,
-          transition: 'transform 0.4s ease',
+          transition: 'transform 1s ease',
         }}
       >
         {extendedWords.map((word, index) => (
