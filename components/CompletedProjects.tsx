@@ -30,7 +30,7 @@ function CompletedProjects() {
         <h2 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white lg:text-7xl">
           We Help Advance
         </h2>
-        <h3 className="text-3xl font-semibold text-gray-800 lg:text-5xl">
+        <h3 className="text-3xl font-semibold text-gray-800 lg:text-4xl">
           <TypingScroll />
         </h3>
         <p className="pt-2 text-2xl text-gray-600 dark:text-gray-400">
