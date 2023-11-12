@@ -1,18 +1,30 @@
+import React from 'react'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { MDXComponents } from '@/components/MDXComponents'
 import ApplySection from '@/components/ApplySection'
-import React from 'react'
-
-const DEFAULT_LAYOUT = 'ApplyLayout'
 
 export const getStaticProps = async () => {
   const apply = allPages.find((p) => p.slug === 'apply')
   return { props: { apply } }
 }
+
+// Reusable Component for Grant Section
+const GrantSection = ({ title, description, link, linkText }) => (
+  <>
+    <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+      {title}
+    </h3>
+    <p className="mb-8">{description}</p>
+    <Link
+      href={link}
+      className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
+    >
+      {linkText}
+    </Link>
+  </>
+)
 
 export default function Apply({
   apply,
@@ -23,6 +35,7 @@ export default function Apply({
         title="Lite.Space | Apply"
         description="Litecoin Foundation Grants: Apply for Funding & Support Open-Source Projects. Learn criteria, grant types, and get listed on Lite.Space. Enhance the Litecoin ecosystem globally."
       />
+
       {/* {apply ? (
         <MDXLayoutRenderer
           layout={DEFAULT_LAYOUT}
@@ -51,45 +64,24 @@ export default function Apply({
 
           <h1>Programs</h1>
 
-          <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-            Lite.Space Website Listing
-          </h3>
-          <p className="mb-8">
-            Apply to feature your project on our website, attracting potential
-            donor support.
-          </p>
-          <Link
-            href="/apply/to-be-listed"
-            className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
-          >
-            List Your FOSS Project with Lite.Space
-          </Link>
-          <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-            General Grants
-          </h3>
-          <p className="mb-8">
-            Quarterly grants from the Lite.Space General Fund, supporting
-            impactful Litecoin ecosystem projects.
-          </p>
-          <Link
-            href="/apply/grant"
-            className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
-          >
-            Apply for a Lite.Space General Grant
-          </Link>
-          <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-            Long-Term Support Grants
-          </h3>
-          <p className="mb-8">
-            Dedicated to vital Litecoin framework projects, focusing on ongoing
-            development and maintenance.
-          </p>
-          <Link
-            href="/apply/lts"
-            className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
-          >
-            Apply for a Long-Term Support Grant from Lite.Space
-          </Link>
+          <GrantSection
+            title="Lite.Space Website Listing"
+            description="Apply to feature your project on our website, attracting potential donor support."
+            link="/apply/to-be-listed"
+            linkText="List Your FOSS Project with Lite.Space"
+          />
+          <GrantSection
+            title="General Grants"
+            description="Quarterly grants from the Lite.Space General Fund, supporting impactful Litecoin ecosystem projects."
+            link="/apply/grant"
+            linkText="Apply for a Lite.Space General Grant"
+          />
+          <GrantSection
+            title="Long-Term Support Grants"
+            description="Dedicated to vital Litecoin framework projects, focusing on ongoing development and maintenance."
+            link="/apply/lts"
+            linkText="Apply for a Long-Term Support Grant from Lite.Space"
+          />
         </div>
       </ApplySection>
     </>
