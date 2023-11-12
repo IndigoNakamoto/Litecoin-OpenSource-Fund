@@ -25,7 +25,7 @@ const images = [
 
 function CompletedProjects() {
   return (
-    <div className="flex flex-col pb-20 pt-40  text-gray-800">
+    <div className="flex flex-col  pt-40  text-gray-800">
       <div className="mx-auto flex flex-col items-center">
         <h1 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white md:text-4xl lg:text-7xl">
           We Help Advance
