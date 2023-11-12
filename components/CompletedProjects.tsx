@@ -27,10 +27,10 @@ function CompletedProjects() {
   return (
     <section className="flex flex-col pt-40 text-gray-800">
       <div className="mx-auto flex flex-col items-center">
-        <h2 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white md:text-4xl lg:text-7xl">
+        <h2 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white lg:text-7xl">
           We Help Advance
         </h2>
-        <h3 className="text-4xl font-semibold text-gray-800">
+        <h3 className="text-3xl font-semibold text-gray-800 lg:text-5xl">
           <TypingScroll />
         </h3>
         <p className="pt-2 text-2xl text-gray-600 dark:text-gray-400">

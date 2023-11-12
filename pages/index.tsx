@@ -65,7 +65,7 @@ export default function Mission({
       {/* Apply for Funding section */}
       <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white to-gray-50 p-4 pb-10 pt-10 dark:divide-gray-700 dark:from-gray-900 dark:to-gray-800">
         <div className="space-y-2 pb-8 md:space-y-5">
-          <h1 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white md:text-4xl lg:text-7xl">
+          <h1 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white lg:text-7xl">
             Apply for Funding
           </h1>
           <p className="py-4 text-2xl leading-7 text-gray-600 dark:text-gray-400">
