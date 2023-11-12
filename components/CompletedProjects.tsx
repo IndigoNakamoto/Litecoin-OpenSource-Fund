@@ -19,6 +19,9 @@ const images = [
     src: 'OrdinalsLite3.png',
     href: '/missions/ordinalslite',
   },
+  { title: 'MWEB', src: 'MWEB.webp', href: '/missions/mweb' },
+  { title: 'Litecoin Dev Kit', src: 'ldk.png', href: '/missions/ldk' },
+  { title: 'Omni Lite', src: 'omnilite3.png', href: '/missions/omnilite' },
 
   // ...other images
 ]
