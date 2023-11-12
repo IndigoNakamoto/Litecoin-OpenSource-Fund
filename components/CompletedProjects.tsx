@@ -44,7 +44,7 @@ function CompletedProjects() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {images.map((image) => (
           <div key={image.title} className="relative h-48">
             <Link href={image.href}>
