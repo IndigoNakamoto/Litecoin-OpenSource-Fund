@@ -14,22 +14,59 @@ export default function TypingScroll() {
     'Knowledge',
     'Education',
     'Community',
+    'Outreach', // end
+    'Growth',
+    'Research',
+    'Contributors',
+    'Hard Money',
+    'Partnerships',
+    'Open-Source',
+    'Developers',
+    'Decentralization',
+    'Collaboration',
+    'Knowledge',
+    'Education',
+    'Community',
+    'Outreach',
+    'Growth',
+    'Research',
+    'Contributors',
+    'Hard Money',
+    'Partnerships',
+    'Open-Source',
+    'Developers',
+    'Decentralization',
+    'Collaboration',
+    'Knowledge',
+    'Education',
+    'Community',
+    'Outreach',
+    'Growth',
+    'Research',
+    'Contributors',
+    'Hard Money',
+    'Partnerships',
+    'Open-Source',
+    'Developers',
+    'Decentralization',
+    'Collaboration',
+    'Knowledge',
+    'Education',
+    'Community',
     'Outreach',
   ]
 
-  // Duplicate the words array
-  const doubledWords = [...words, ...words]
+  // Extend the list by adding the first few words to the end
+  // This helps create a smooth transition when looping back to the start
+  const extendedWords = [...words, ...words.slice(0, 2)]
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => {
-        // Reset to 0 when reaching the end of the first list
-        if (prevIndex === words.length - 1) {
-          return 0
-        }
-        return prevIndex + 1
+        // Increment index or reset to 0 when reaching the end of the extended list
+        return prevIndex < extendedWords.length - 1 ? prevIndex + 1 : 0
       })
     }, 2000)
 
@@ -42,11 +79,15 @@ export default function TypingScroll() {
         className="mx-auto flex flex-col items-center"
         style={{
           transform: `translateY(${-50 * currentIndex}px)`,
-          transition: currentIndex === 0 ? 'none' : 'transform 0.4s ease',
+          transition: 'transform 0.4s ease',
         }}
       >
-        {doubledWords.map((word, index) => (
-          <div key={index} style={{ lineHeight: '50px' }}>
+        {extendedWords.map((word, index) => (
+          <div
+            key={index}
+            style={{ lineHeight: '50px' }}
+            className="dark:text-white"
+          >
             {word}
           </div>
         ))}
