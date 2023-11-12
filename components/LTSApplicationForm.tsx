@@ -26,29 +26,17 @@ export default function ApplicationForm() {
       // Track application in GitHub
       const res = await fetchPostJSON('/api/github', data)
       if (res.message === 'success') {
-        console.info('Application tracked') // Succeed silently
-      } else {
-        // Fail silently
-      }
-    } catch (e) {
-      if (e instanceof Error) {
-        // Fail silently
-      }
-    } finally {
-      // Mail application to us
-      try {
-        // const res = await fetchPostJSON('/api/sendgrid', data)
-        // if (res.message === 'success') {
-        // } else {
-        //   setFailureReason(res.message)
-        // }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
         router.push('/submitted')
         setLoading(false)
+      } else {
+        setFailureReason('Submission failed. Please try again.')
+      }
+    } catch (e) {
+      // Handle errors from the fetch operation
+      if (e instanceof Error) {
+        setFailureReason(`Error: ${e.message}`)
+      } else {
+        setFailureReason('An unknown error occurred.')
       }
     }
   }

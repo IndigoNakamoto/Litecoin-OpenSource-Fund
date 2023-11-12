@@ -26,17 +26,18 @@ export default function ApplicationForm() {
       // Track application in GitHub
       const res = await fetchPostJSON('/api/github', data)
       if (res.message === 'success') {
-        console.info('Application tracked') // Succeed silently
+        router.push('/submitted')
+        setLoading(false)
       } else {
-        // Fail silently
+        setFailureReason('Submission failed. Please try again.')
       }
     } catch (e) {
+      // Handle errors from the fetch operation
       if (e instanceof Error) {
-        // Fail silently
+        setFailureReason(`Error: ${e.message}`)
+      } else {
+        setFailureReason('An unknown error occurred.')
       }
-    } finally {
-      router.push('/submitted')
-      setLoading(false)
     }
   }
 
