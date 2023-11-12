@@ -47,15 +47,15 @@ export default function Apply({
       )} */}
 
       <ApplySection title="Apply for a Grant" style="apply">
-        <div className="my-8 xs:my-4">
-          <p>
+        <div className="my-8 xs:my-4 ">
+          <p className="text-xl">
             The Litecoin Foundation Lite.Space Council offers grants for
             innovative open-source projects that enhance the Litecoin ecosystem.
             Projects that develop new Litecoin software, improve existing FOSS
             relevant to Litecoin, promote Litecoin education and outreach, or
             conduct Litecoin-related research are eligible.
           </p>
-          <p>
+          <p className="text-xl">
             We aim to foster a more accessible, robust, secure, and
             decentralized Litecoin network through these grants. Applications
             should be clear, concise, and provide detailed yet brief
