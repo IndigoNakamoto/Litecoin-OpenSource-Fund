@@ -17,7 +17,7 @@ const images = [
   {
     title: 'Ordinals Lite',
     src: 'OrdinalsLite3.png',
-    href: '/missions/OrdinalsLite',
+    href: '/missions/ordinalslite',
   },
 
   // ...other images
