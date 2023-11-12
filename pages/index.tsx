@@ -3,6 +3,8 @@ import { allPages } from 'contentlayer/generated'
 import Image from 'next/image'
 import { PageSEO } from '@/components/SEO'
 import CompletedProjects from '@/components/CompletedProjects'
+import CustomLink from '@/components/Link'
+import Link from 'next/link'
 
 // const DEFAULT_LAYOUT = 'ListLayout'
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
@@ -62,8 +64,24 @@ export default function Mission({
           </div>
         </div>
       </div>
-      <div className="z-1 mt-[calc(90vh)]">
+      <div className="z-1 mt-[calc(90vh)] pb-32">
         <CompletedProjects />
+      </div>
+      {/* Apply for Funding section */}
+      <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-gray-50 p-4 pb-10 pt-10 dark:divide-gray-700 dark:bg-gray-800">
+        <div className="space-y-2 pb-8 md:space-y-5 ">
+          <h1 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white md:text-4xl lg:text-7xl">
+            Apply for Funding
+          </h1>
+          <p className="text-2xl leading-7 text-gray-600 dark:text-gray-400">
+            We are looking to support talented individuals and teams who share
+            our commitment to decentralized open-source solutions and the future
+            of Litecoin.
+          </p>
+          <button className="mb-10 mt-8 w-60 rounded-full bg-blue-500 px-4 py-2 font-semibold hover:bg-blue-400 ">
+            <Link href="/apply">Apply for Funding</Link>
+          </button>
+        </div>
       </div>
     </>
   )
