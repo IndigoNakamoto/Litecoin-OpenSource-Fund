@@ -64,7 +64,7 @@
         },
         {
           "question": "What historical event is associated with an exotic litoshi?",
-          "answer": "An example of an exotic litoshi is the last litoshi that will ever be mined, 2099999997689999°, which is associated with the end of bitcoin mining."
+          "answer": "An example of an exotic litoshi is the last litoshi that will ever be mined, 2099999997689999°, which is associated with the end of Litecoin mining."
         }
       ]
     },
@@ -73,7 +73,7 @@
       "items": [
         {
           "question": "What are inscriptions in the context of ordinals?",
-          "answer": "Inscriptions are a feature that allows litoshis to be inscribed with arbitrary content, creating bitcoin-native digital artifacts, often referred to as NFTs."
+          "answer": "Inscriptions are a feature that allows litoshis to be inscribed with arbitrary content, creating Litecoin-native digital artifacts, often referred to as NFTs."
         },
         {
           "question": "How are inscriptions created?",
@@ -132,7 +132,7 @@
         },
         {
           "question": "Are there any limitations to recursion in inscriptions?",
-          "answer": "The depth of recursion may be limited by practical considerations and transaction size limits on the Bitcoin network."
+          "answer": "The depth of recursion may be limited by practical considerations and transaction size limits on the Litecoin network."
         }
       ]
     },
