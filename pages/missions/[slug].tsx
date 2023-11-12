@@ -124,21 +124,33 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [faqCount, setFaqCount] = useState<any>()
 
   function formatLits(value) {
-    if (Number(value) === 0) {
+    const num = Number(value)
+
+    // Check if the value is zero
+    if (num === 0) {
       return '0'
     }
-    if (value % 1 === 0) {
-      return value.toString()
+
+    // Split the number into whole and fractional parts
+    let [whole, fraction] = num.toFixed(8).split('.')
+    whole += ''
+    // Check if the fractional part is all zeros
+    if (fraction && /^0+$/.test(fraction)) {
+      return whole
     }
-    // Convert the number to a string and ensure it has at least 9 digits after the decimal
-    let formattedValue = Number(value).toFixed(9)
 
-    // Replace the dots with spaces and remove any leading zeros
-    formattedValue = formattedValue
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-      .replace(/^0+/, '')
+    // Format the fractional part with spaces
+    if (fraction) {
+      fraction =
+        fraction.slice(0, 2) +
+        ' ' +
+        fraction.slice(2, 5) +
+        ' ' +
+        fraction.slice(5)
+    }
 
-    return formattedValue
+    // Combine the whole and fractional parts
+    return fraction ? `${whole}.${fraction}` : whole
   }
 
   useEffect(() => {
