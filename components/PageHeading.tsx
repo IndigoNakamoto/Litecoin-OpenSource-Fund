@@ -15,7 +15,7 @@ export default function PageHeading({ title, children }: Props) {
           {title}
         </h1>
       </div>
-      <div className="mt-0 rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-700 dark:text-gray-300 md:px-4 lg:px-8 xs:px-4">
+      <div className="mt-0 rounded-xl bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 dark:text-gray-300 md:px-4 lg:px-8 xs:px-4">
         {children}
       </div>
     </div>
