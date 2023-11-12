@@ -27,7 +27,7 @@ export default function Mission({
     <>
       <PageSEO
         title={`Lite.Space`}
-        description="Crowdfunding Litecoin Projects, One Bounty at a Time."
+        description="Crowdfunding Litecoin Projects, One Open-Source Project at a Time."
       />
       {/* background image*/}
       <div className="absolute inset-x-0 top-[6rem] z-0 bg-black ">
@@ -58,7 +58,8 @@ export default function Mission({
               <h2 className="mb-4 text-center text-xl leading-normal text-gray-100 md:text-2xl lg:text-3xl">
                 Our portal to bring together developers and community members to
                 accelerate ideas and development in the Litecoin ecosystem.
-                Crowdfunding Litecoin projects, one bounty at a time.
+                Crowdfunding Litecoin Projects, One Open-Source Project at a
+                Time.
               </h2>
             </div>
           </div>
