@@ -73,9 +73,11 @@ export default function Mission({
             our commitment to decentralized open-source solutions and the future
             of Litecoin.
           </p>
-          <button className="w-48 rounded-full bg-blue-500 py-2 font-semibold transition duration-300 hover:bg-blue-400">
-            <Link href="/apply">Apply for Funding</Link>
-          </button>
+          <Link href="/apply">
+            <button className="w-48 rounded-full bg-blue-500 py-2 font-semibold transition duration-300 hover:bg-blue-400">
+              Apply for Funding
+            </button>
+          </Link>
         </div>
       </div>
     </>
