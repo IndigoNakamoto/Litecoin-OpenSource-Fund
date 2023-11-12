@@ -36,56 +36,27 @@ export default function Apply({
       <ApplySection title="Apply for a Grant" style="apply">
         <div className="my-8 xs:my-4">
           <p>
-            The Litecoin Foundation FOSS Council is always on the lookout for
-            new and innovative projects that align with our mission to support
-            and maintain a sustainable ecosystem of funding for free and
-            open-source projects, particularly those related to Litecoin.
+            The Litecoin Foundation Lite.space Council offers grants for
+            innovative open-source projects that enhance the Litecoin ecosystem.
+            Projects that develop new Litecoin software, improve existing FOSS
+            relevant to Litecoin, promote Litecoin education and outreach, or
+            conduct Litecoin-related research are eligible.
           </p>
           <p>
-            If you're working on an open-source project that could use some
-            financial support, we'd love to hear from you. We provide grants to
-            projects that:
+            We aim to foster a more accessible, robust, secure, and
+            decentralized Litecoin network through these grants. Applications
+            should be clear, concise, and provide detailed yet brief
+            information.
           </p>
-          <ul>
-            <li>
-              Contribute to the development of new Litecoin or Litecoin-adjacent
-              software.
-            </li>
-            <li>
-              Work on improving existing free and open-source software that is
-              important to the Litecoin ecosystem.
-            </li>
-            <li>Promote education and outreach about Litecoin.</li>
-            <li>Conduct research into Litecoin-related topics.</li>
-          </ul>
-          <p>
-            Our goal is to help make Litecoin more accessible, robust, secure,
-            and decentralized, and we believe that supporting open-source
-            projects is one of the best ways to achieve this.
-          </p>
-          <h1>Our Programs</h1>
-          <p>
-            At Lite.Space, we are dedicated to ensuring a fair and unbiased
-            grant selection process. We stand firmly against discrimination of
-            any kind, be it based on race, creed, color, age, origin, ancestry,
-            religion, gender, sexual preference, gender identity, disability,
-            genetic background, veteran status, military service, or any other
-            protected category by law.
-          </p>
-          <p>
-            Applications must be clear, detailed, and brief. The ideal
-            submission is a one-page document that thoroughly presents all the
-            necessary details for a complete and informed evaluation.
-          </p>
+
+          <h1>Programs</h1>
+
           <h3 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-            Explore - Website Listing
+            Lite.Space Website Listing
           </h3>
           <p className="mb-8">
-            FOSS projects that align with the Lite.Space ethos are encouraged to
-            apply for a spot on our website. Donors can allocate their
-            contributions to specific projects listed. If your initiative
-            advances Litecoin and FOSS, we invite you to apply for visibility on
-            our platform.
+            Apply to feature your project on our website, attracting potential
+            donor support.
           </p>
           <Link
             href="/apply/to-be-listed"
@@ -97,10 +68,8 @@ export default function Apply({
             General Grants
           </h3>
           <p className="mb-8">
-            The Lite.Space General Fund, replenished by generous donations,
-            disburses grants on a quarterly basis. Our board meticulously
-            reviews each application to award funds to the most impactful
-            initiatives that propel the Litecoin ecosystem forward.
+            Quarterly grants from the Lite.Space General Fund, supporting
+            impactful Litecoin ecosystem projects.
           </p>
           <Link
             href="/apply/grant"
@@ -112,10 +81,8 @@ export default function Apply({
             Long-Term Support Grants
           </h3>
           <p className="mb-8">
-            For projects vital to the Litecoin framework, we offer a limited
-            series of long-term support grants. These are specifically designed
-            for the stewards of Litecoin Core and affiliated projects, ensuring
-            ongoing development and maintenance.
+            Dedicated to vital Litecoin framework projects, focusing on ongoing
+            development and maintenance.
           </p>
           <Link
             href="/apply/lts"
