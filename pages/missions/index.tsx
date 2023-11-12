@@ -6,7 +6,7 @@ import Image from 'next/image' // <-- Import the Image component
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
-import { ProjectItem, ProjectCategory } from '../../utils/types'
+import { ProjectItem, ProjectCategory, BountyStatus } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
 // import Link from '@/components/Link'
 import Typing from '@/components/Typing'
@@ -164,7 +164,18 @@ export function isNotOpenSatsProject(project: ProjectItem): boolean {
 }
 
 export function isBounty(project: ProjectItem): boolean {
-  return project.type === ProjectCategory.BOUNTY
+  return (
+    project.type === ProjectCategory.BOUNTY &&
+    project.bountyStatus === BountyStatus.OPEN
+  )
+}
+
+export function isCompletedBounty(project: ProjectItem): boolean {
+  return project.bountyStatus === BountyStatus.CLOSED
+}
+
+export function isOpenBounty(project: ProjectItem): boolean {
+  return project.bountyStatus === BountyStatus.OPEN
 }
 
 export function isDevelopment(project: ProjectItem): boolean {

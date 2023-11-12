@@ -6,10 +6,11 @@ website: 'https://litewallet.io/'
 coverImage: '/static/images/projects/litewallet3.png'
 gitRepository: 'https://github.com/litecoin-foundation/litewallet-ios/pull/211'
 twitterHandle: 'https://twitter.com/LitewalletApp'
-type: 'Bounty'  # Replace with the appropriate type of the project if known.
+type: 'Bounty' # Replace with the appropriate type of the project if known.
 contributor: 'SatoshiLite,bigkerrytweets,claudia14083392,Pat_McDermott17,ferencakIvan,josi_kie'
 owner: 'bigkerrytweets'
 hashtag: '#Litewallet'
+bountyStatus: 'open'
 socialSummary: '📢 Bounty Alert! Dive into the Litewallet challenge and resolve a core update issue affecting address display in transaction history. Expertise in C, Swift, and SQLite? This is your moment! Rewards await. Dive in now! 🔍'
 ---
 
@@ -24,7 +25,7 @@ The heart of the matter lies in the display of certain types of addresses within
 ### Bounty Objectives:
 
 **- Investigate and Understand**: Scrutinize the existing setup of loafwallet-core and its interaction with Litewallet-iOS, particularly around Transaction.swift class line 174.
-  
+
 **- Identify and Fix**: Address the exact cause of the UnsafeMutablePointer failure, implement necessary changes to rectify the unwrapping of addresses, ensuring all types of addresses are displayed correctly in the app.
 
 **- Validation and Verification**: Conduct thorough testing to ensure the problem is resolved with no regression issues, and the rest of the app functions as desired.
@@ -39,7 +40,7 @@ The heart of the matter lies in the display of certain types of addresses within
 
 ### Reward and Recognition:
 
-- You will be rewarded from the LTC donated to the bounty. 
+- You will be rewarded from the LTC donated to the bounty.
 - First successful submission wins the bounty
 - Your contribution will significantly impact the Litewallet user experience, making a direct positive impression on a global user base.
 

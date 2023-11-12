@@ -6,6 +6,7 @@ website: 'https://electrum-ltc.org/'
 coverImage: '/static/images/projects/electrum2.png'
 gitRepository: 'https://github.com/pooler/electrum-ltc'
 type: 'Bounty'
+bountyStatus: 'open'
 contributor: 'loshan1212'
 hashtag: '#ElectrumLTC'
 socialSummary: "🚀 Help advance ElectrumLTC! Let's sync with Bitcoin 4.4.5 for stronger security, swifter transactions, and a user-friendly interface. Be part of the evolution! LitecoinBounty"
