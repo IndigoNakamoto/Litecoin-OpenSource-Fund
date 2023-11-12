@@ -36,7 +36,7 @@ export default function Apply({
       <ApplySection title="Apply for a Grant" style="apply">
         <div className="my-8 xs:my-4">
           <p>
-            The Litecoin Foundation Lite.space Council offers grants for
+            The Litecoin Foundation Lite.Space Council offers grants for
             innovative open-source projects that enhance the Litecoin ecosystem.
             Projects that develop new Litecoin software, improve existing FOSS
             relevant to Litecoin, promote Litecoin education and outreach, or
@@ -60,7 +60,7 @@ export default function Apply({
           </p>
           <Link
             href="/apply/to-be-listed"
-            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
           >
             List Your FOSS Project with Lite.Space
           </Link>
@@ -73,7 +73,7 @@ export default function Apply({
           </p>
           <Link
             href="/apply/grant"
-            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
           >
             Apply for a Lite.Space General Grant
           </Link>
@@ -86,7 +86,7 @@ export default function Apply({
           </p>
           <Link
             href="/apply/lts"
-            className="rounded  bg-blue-500 px-4 py-2 font-semibold no-underline hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="rounded-full bg-blue-500 px-4 py-2 font-semibold no-underline transition duration-300 hover:bg-blue-400"
           >
             Apply for a Long-Term Support Grant from Lite.Space
           </Link>
