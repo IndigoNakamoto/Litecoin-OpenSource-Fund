@@ -63,18 +63,18 @@ export default function Mission({
         <CompletedProjects />
       </div>
       {/* Apply for Funding section */}
-      <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white to-gray-50 p-4 pb-10 pt-10 dark:divide-gray-700 dark:from-gray-900 dark:to-gray-800">
+      <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-500 to-blue-300 p-4 pb-10 pt-10 dark:divide-gray-700 dark:from-gray-900 dark:to-gray-800">
         <div className="space-y-2 pb-8 md:space-y-5">
-          <h1 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white lg:text-7xl">
+          <h1 className="text-5xl font-semibold tracking-tight text-white dark:text-white lg:text-7xl">
             Apply for Funding
           </h1>
-          <p className="py-4 text-2xl leading-7 text-gray-600 dark:text-gray-400">
+          <p className="py-4 text-2xl leading-7 text-white dark:text-gray-400">
             We are looking to support talented individuals and teams who share
             our commitment to decentralized open-source solutions and the future
             of Litecoin.
           </p>
           <Link href="/apply">
-            <button className="w-48 rounded-full bg-blue-500 py-2 font-semibold transition duration-300 hover:bg-blue-400">
+            <button className="w-48 rounded-full bg-white py-2 font-semibold text-blue-500 transition duration-300 hover:bg-gray-200">
               Apply for Funding
             </button>
           </Link>
