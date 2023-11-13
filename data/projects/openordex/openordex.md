@@ -1,30 +1,41 @@
 ---
-title: 'OrdinalsLite.Market'
-summary: 'OrdinalsLiteMarket is an open source zero-fee trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
+title: 'Port OpenOrdEx to OrdinalsLite.Market'
+summary: 'OpenOrdEx, an open source zero-fee trustless Bitcoin NFT marketplace based on Partially Signed Bitcoin Transactions.'
 nym: 'James Scaur'
-coverImage: '/static/images/projects/ordinalslite-market.jpeg'
+coverImage: '/static/images/projects/ordinalslite-market.png'
 gitRepository: 'https://github.com/litecoinlabs/market'
 twitterHandle: 'https://twitter.com/OrdinalsLiteMkt'
+website: 'https://ordinalslite.market'
 type: 'Bounty'
-contributor: 'jamesscaur,orenyomtov'
+contributor: 'jamesscaur,orenyomtov,LitecoinLabs'
 owner: ''
 bountyStatus: 'closed'
 hashtag: '#OrdinalsLiteMarket'
-socialSummary: 'OrdinalsLiteMarket is an open source zero-fee trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
+socialSummary: 'Port OpenOrdEx, an open source zero-fee trustless Bitcoin NFT marketplace based on Partially Signed Bitcoin Transactions.'
 ---
 
 # OrdinalsLite.Market - Litecoin Ordinals Decentralized Exchange
 
-OrdinalsLite.Market is an open source zero-fee trustless Litecoin NFT marketplace based on partially signed litecoin transactions.
+**OrdinalsLite.Market** revolutionizes the world of Litecoin NFTs by offering a decentralized, open-source marketplace with no transaction fees. Leveraging the power of Partially Signed Litecoin Transactions (PSLTs), it enables a secure and trustless environment for trading Litecoin NFTs.
 
-## How it works
+## How It Works - A Trustless Trading Experience
 
-The seller creates a partially signed litecoin transaction (PSLT) specifying the price of the ordinal. The buyer can then sign the PSLT and broadcast it to the network.
+**Sellers:**
 
-## How to add your collection
+1. **Create a PSLT**: Specify your NFT's price by creating a partially signed Litecoin transaction. This transaction includes the terms of the sale but awaits completion by a buyer.
 
-All inscriptions can be viewed directly via their inscription number or ID.
+**Buyers:**
 
-In addition, the homepage features collections in a random order. The collection data is taken from the litecoinlabs/collections repo.
+1. **Sign & Complete**: Once you've found an NFT you wish to purchase, complete the transaction by signing it. This action confirms the terms set by the seller.
+2. **Broadcast to Network**: After signing, broadcast the transaction to the Litecoin network. This step finalizes the purchase and transfers ownership of the NFT.
 
-In order to have your collection listed, create a pull request on the litecoinlabs/collections repo.
+## Adding Your Collection - Be Part of the Marketplace
+
+1. **Visibility of Inscriptions**: Each NFT, or inscription, is uniquely identifiable via its inscription number or ID. This feature ensures easy access and visibility for buyers.
+2. **Featured Collections**: Our homepage showcases a variety of collections, displayed in random order, giving equal visibility to all creators.
+3. **Contribute Your Collection**:
+   - **Prepare Your Collection**: Ensure your collection meets our guidelines and standards.
+   - **Submit a Pull Request**: Visit the `litecoinlabs/collections` repository on GitHub. Submit a pull request with your collection's details for review.
+   - **Await Approval**: Our team will review your submission. Once approved, your collection will be featured on OrdinalsLite.Market.
+
+Join us in pioneering the next wave of NFT trading on Litecoin's blockchain. For more information, updates, and community discussions, follow our [Twitter](https://twitter.com/OrdinalsLiteMkt) and visit our [website](https://ordinalslite.market). Let's build a vibrant marketplace together!
