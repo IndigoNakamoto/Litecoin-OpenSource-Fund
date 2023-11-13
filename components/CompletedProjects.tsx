@@ -21,6 +21,12 @@ const images = [
   { title: 'MWEB', src: 'MWEB.webp', href: '/missions/mweb' },
   { title: 'Litecoin Dev Kit', src: 'ldk.png', href: '/missions/ldk' },
   { title: 'Omni Lite', src: 'omnilite3.png', href: '/missions/omnilite' },
+  { title: 'Litescribe', src: 'litescribe3.png', href: '/missions/unisat' },
+  {
+    title: 'OrdinalsLite.Market',
+    src: 'ordinalslite-market.png',
+    href: '/missions/openordex',
+  },
 ]
 
 function CompletedProjects() {
