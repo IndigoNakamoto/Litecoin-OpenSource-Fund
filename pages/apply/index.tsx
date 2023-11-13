@@ -68,7 +68,7 @@ export default function Apply({
             title="Lite.Space Website Listing"
             description="Apply to feature your project on our website, attracting potential donor support."
             link="/apply/to-be-listed"
-            linkText="List Your FOSS Project with Lite.Space"
+            linkText="List Your Project with Lite.Space"
           />
           <GrantSection
             title="General Grants"
@@ -80,7 +80,7 @@ export default function Apply({
             title="Long-Term Support Grants"
             description="Dedicated to vital Litecoin framework projects, focusing on ongoing development and maintenance."
             link="/apply/lts"
-            linkText="Apply for a Long-Term Support Grant from Lite.Space"
+            linkText="Apply for a LTS Grant from Lite.Space"
           />
         </div>
       </ApplySection>
