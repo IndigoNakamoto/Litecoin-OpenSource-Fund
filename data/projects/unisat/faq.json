@@ -1,44 +1,57 @@
 {
   "questionsAndAnswers": [
     {
-      "category": "Bounty Details",
+      "category": "General",
       "items": [
         {
-          "question": "What is the purpose of this bounty?",
-          "answer": "The purpose of this bounty is to resolve a critical issue related to address display in the transaction history of Litewallet, an iOS crypto wallet powered by the Litecoin Foundation. The issue involves certain types of addresses not being displayed correctly due to a bug concerning UnsafeMutablePointer."
+          "question": "What is Litescribe Wallet?",
+          "answer": "Litescribe Wallet is a zero-fee, trustless NFT wallet and marketplace browser extension for the Litecoin blockchain, enabling users to easily create and trade Litecoin-native digital artifacts."
         },
         {
-          "question": "What is the main problem this bounty aims to address?",
-          "answer": "The main problem is the incorrect display of certain types of addresses within the transaction history. Regular addresses are shown as expected, but others with ltc1, M, or ltc1 prefixes are not visible. The suspected cause is related to changes in how UnsafeMutablePointers are handled."
+          "question": "How does Litescribe Wallet integrate with the Litecoin blockchain?",
+          "answer": "Litescribe Wallet uses the Ordinal Protocol to inscribe data onto the Litecoin blockchain, ensuring secure, fast, and efficient NFT transactions without requiring full node operation."
         },
         {
-          "question": "What are the key objectives of this bounty?",
-          "answer": "The key objectives of this bounty include investigating and understanding the issue, identifying and fixing the root cause of the UnsafeMutablePointer failure, conducting thorough testing to ensure the problem is resolved with no regression issues, and creating clear and comprehensive documentation outlining the changes made."
+          "question": "Is Litescribe Wallet user-friendly?",
+          "answer": "Yes, Litescribe Wallet is designed to be user-friendly and accessible, functioning as a non-custodial browser extension that's easy for everyone to use."
         },
         {
-          "question": "What skills and expertise are required to participate?",
-          "answer": "Participants should have proficiency in C, Swift, and SQLite, familiarity with the loafwallet-core library, and experience in iOS app development."
+          "question": "What are the fees associated with using Litescribe?",
+          "answer": "The base fees for using Litescribe's inscription service are set to 610,000 sats per inscription. These fees support the ongoing development of the service."
         },
         {
-          "question": "How will participants be rewarded?",
-          "answer": "Participants will be rewarded from the LTC (Litecoin) donated to the bounty. The first successful submission that resolves the issue will win the bounty."
-        },
-        {
-          "question": "Where can I find more details and submit my application?",
-          "answer": "You can find more details about the bounty and submit your application by reviewing [GitHub Issue #207](https://github.com/litecoin-foundation/litewallet-ios/pull/211). Be sure to check the project's specific contact email or application portal for submission."
+          "question": "How can I get support for my Litescribe order?",
+          "answer": "For support with your Litescribe order, you can send the order number and your payment transaction hash to support@litescribe.io for assistance."
         }
       ]
     },
     {
-      "category": "Timeline and Contact",
+      "category": "Technical",
       "items": [
         {
-          "question": "What is the deadline for this bounty?",
-          "answer": "The deadline for this bounty is not specified in this document. Please refer to [GitHub Issue #207](https://github.com/litecoin-foundation/litewallet-ios/pull/211) or the project's official communication channels for the most up-to-date information on the deadline."
+          "question": "What are Ordinals?",
+          "answer": "Ordinals are individual litoshis on the Litecoin blockchain that have been inscribed with arbitrary content, creating unique, durable, and secure digital artifacts."
         },
         {
-          "question": "How can I contact the project team for inquiries or application submission?",
-          "answer": "To contact the project team for inquiries or to submit your application, please refer to the contact email or application portal provided in [GitHub Issue #207](https://github.com/litecoin-foundation/litewallet-ios/pull/211) or the project's official communication channels."
+          "question": "What is Coin Control in Litescribe?",
+          "answer": "Coin Control is a feature in Litescribe that allows users to select specific inputs for the inscription process, preventing the accidental overwriting of existing inscriptions."
+        },
+        {
+          "question": "How do I start using Litescribe?",
+          "answer": "To use Litescribe, you need a Litecoin wallet with LTC balance. Upload your content on the inscribe page, input your destination address, and pay the displayed amount. After blockchain confirmations, you'll receive your inscription."
+        }
+      ]
+    },
+    {
+      "category": "Community",
+      "items": [
+        {
+          "question": "How can I contribute to the Litescribe project?",
+          "answer": "You can contribute to Litescribe by using its services, providing feedback, contributing to its development, or spreading the word about the project."
+        },
+        {
+          "question": "What makes Litescribe Wallet a game-changer?",
+          "answer": "Litescribe Wallet's innovative approach to NFT marketplaces on Litecoin, user-friendly design, and commitment to continual development make it a game-changer in the blockchain space."
         }
       ]
     }
