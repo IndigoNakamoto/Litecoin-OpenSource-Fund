@@ -1,6 +1,6 @@
 ---
 title: 'Litescribe Wallet'
-summary: 'Litescribe Wallet is a zero-fee, trustless NFT wallet and marketplace extension for the Litecoin blockchain, enabling easy creation and trade of Litecoin-native digital artifacts without requiring a full node. It is user-friendly and continuously developed through reinvested fees, promoting the growth of Litecoin NFTs.'
+summary: 'Litescribe Wallet is a trustless NFT wallet and marketplace extension for the Litecoin blockchain, enabling easy creation and trade of Litecoin-native digital artifacts without requiring a full node. It is user-friendly and continuously developed through reinvested fees, promoting the growth of Litecoin NFTs.'
 coverImage: '/static/images/projects/litescribe3.png'
 gitRepository: 'https://github.com/LiteVerseHoldings/extension-ltc'
 twitterHandle: 'https://twitter.com/litescribe_io'
@@ -8,12 +8,12 @@ website: 'https://litescribe.io/'
 type: 'Project'
 contributor: 'anthonyonchain,litescribe_io,unisat_wallet'
 hashtag: '#Litescribe'
-socialSummary: 'OrdinalsLiteMarket is an open source zero-fee trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
+socialSummary: 'OrdinalsLiteMarket is an open source trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
 ---
 
 ## Litescribe Wallet: A New Era in Litecoin NFT Marketplace
 
-The Litescribe Wallet, a refined version of the UniSat Wallet, marks a significant milestone in the Litecoin ecosystem. It introduces a novel, zero-fee NFT marketplace, expanding the boundaries of digital artifact trading on the Litecoin blockchain.
+The Litescribe Wallet, a refined version of the UniSat Wallet, marks a significant milestone in the Litecoin ecosystem. It introduces a novel NFT marketplace, expanding the boundaries of digital artifact trading on the Litecoin blockchain.
 
 ### Breaking Ground with Litescribe Wallet:
 
