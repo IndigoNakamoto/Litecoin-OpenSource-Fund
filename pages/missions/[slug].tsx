@@ -447,9 +447,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <div className="flex w-full flex-col items-start">
               {!isRecurring && (
-                <div className="mt-5 flex w-full flex-col">
+                <div className="flex w-full flex-col">
                   {addressStats && (
-                    <div>
+                    <div className="">
                       <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(addressStats.funded_txo_sum)}{' '}
                       </h4>
@@ -457,32 +457,36 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     </div>
                   )}
                   {addressStats && (
-                    <div>
-                      <h4 className="mt-5 text-3xl font-semibold text-blue-500">
+                    <div className="mt-4">
+                      <h4 className="text-3xl font-semibold text-blue-500">
                         {addressStats.tx_count || '0'}
                       </h4>
-                      <h4>donations</h4>
+                      <h4>supporters</h4>
                     </div>
                   )}
                 </div>
               )}
 
               {isRecurring && (
-                <div className="mt-5 w-full rounded-lg  text-gray-800">
+                <div className="w-full rounded-lg  text-gray-800">
                   <div className="flex w-full flex-col">
-                    <h4 className="text-3xl font-semibold text-blue-500">
-                      Ł {formatLits(monthlyTotal)}
-                    </h4>
-                    <h4>donated of Ł{recurringAmountGoal} monthly goal</h4>
+                    <div>
+                      <div>
+                        <h4 className="text-3xl font-semibold text-blue-500">
+                          Ł {formatLits(monthlyTotal)}
+                        </h4>
+                        <h4>donated of Ł{recurringAmountGoal} monthly goal</h4>
+                      </div>
+                    </div>
                     <div className="flex flex-row">
-                      {/* <div className="flex flex-col">
-                        <h4 className="mt-5 text-3xl font-semibold text-blue-500">
+                      <div className="flex flex-col">
+                        <h4 className="mt-4 text-3xl font-semibold text-blue-500">
                           {monthlyDonorCount}
                         </h4>
                         <h4>supporters</h4>
-                      </div> */}
-                      <div className="flex flex-col">
-                        <h4 className="mt-5 text-3xl font-semibold text-blue-500">
+                      </div>
+                      <div className="ml-8 flex flex-col">
+                        <h4 className="mt-4 text-3xl font-semibold text-blue-500">
                           {timeLeftInMonth}
                         </h4>
                         <h4>days to go</h4>
