@@ -244,7 +244,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           return donationDate >= startOfMonth && donationDate <= endOfMonth
         })
 
-        setMonthlyDonorCount(monthlyDonations.length())
+        setMonthlyDonorCount(monthlyDonations.length)
         const monthlyTotal = monthlyDonations.reduce(
           (total, donation) => total + Number(donation.amount),
           0
