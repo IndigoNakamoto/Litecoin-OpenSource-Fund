@@ -123,8 +123,16 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [faq, setFaq] = useState<any>({})
   const [faqCount, setFaqCount] = useState<any>()
 
+  const [monthlyTotal, setMonthlyTotal] = useState(0)
+  const [percentGoalCompleted, setPercentGoalCompleted] = useState(0)
+  const [timeLeftInMonth, setTimeLeftInMonth] = useState(0)
+
   function formatLits(value) {
     const num = Number(value)
+
+    if (isNaN(value) || value === '' || value === null) {
+      return '0'
+    }
 
     // Check if the value is zero
     if (num === 0) {
@@ -229,115 +237,60 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
       setAddressStats(stats)
 
-      // if (
-      //   stats.donatedCreatedTime &&
-      //   stats.donatedCreatedTime.length > 0 &&
-      //   isRecurring &&
-      //   recurringAmountGoal
-      // ) {
-      //   const donatedCreatedTime: Donation[] = stats.donatedCreatedTime
-      //   // Calculate time remaining based on RecurringPeriod
-      //   let timeRemaining = 0
-      //   switch (recurringPeriod) {
-      //     case RecurringPeriod.WEEKLY:
-      //       timeRemaining = 7 * 24 - new Date().getHours() // 7 days in a week
-      //       break
-      //     case RecurringPeriod.MONTHLY:
-      //       timeRemaining =
-      //         new Date(
-      //           new Date().getFullYear(),
-      //           new Date().getMonth() + 1,
-      //           1
-      //         ).getTime() - new Date().getTime() // Time remaining until the start of next month
-      //       break
-      //     case RecurringPeriod.QUARTERLY:
-      //       // You can customize this calculation based on your definition of a quarter
-      //       break
-      //     default:
-      //       timeRemaining = 0
-      //   }
+      // New logic for monthly goal calculation
+      if (isRecurring && recurringAmountGoal) {
+        const currentDate = new Date()
+        const startOfMonth = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          1
+        )
+        const endOfMonth = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() + 1,
+          0
+        )
 
-      //   // Filter donations for the current period based on RecurringPeriod
-      //   const currentDate = new Date()
-      //   const currentMonthLastDate = new Date(
-      //     currentDate.getFullYear(),
-      //     currentDate.getMonth() + 1,
-      //     0
-      //   )
-      //   const currentQuarterEndDate = new Date(
-      //     currentDate.getFullYear(),
-      //     (currentDate.getMonth() + 3) % 12,
-      //     1
-      //   )
+        console.log('startOfMonth:', startOfMonth)
+        console.log('endOfMonth:', endOfMonth)
 
-      //   let currentPeriodDonations: Donation[] = []
-      //   switch (recurringPeriod) {
-      //     case RecurringPeriod.WEEKLY:
-      //       currentPeriodDonations = stats.donatedCreatedTime.filter(
-      //         (donation) => {
-      //           const donationDate = new Date(donation.createdTime)
-      //           return (
-      //             donationDate >= currentDate &&
-      //             donationDate <= currentMonthLastDate
-      //           )
-      //         }
-      //       )
-      //       break
-      //     case RecurringPeriod.MONTHLY:
-      //       currentPeriodDonations = stats.donatedCreatedTime.filter(
-      //         (donation) => {
-      //           const donationDate = new Date(donation.createdTime)
-      //           return (
-      //             donationDate >= currentDate &&
-      //             donationDate <= currentMonthLastDate
-      //           )
-      //         }
-      //       )
-      //       break
-      //     case RecurringPeriod.QUARTERLY:
-      //       currentPeriodDonations = stats.donatedCreatedTime.filter(
-      //         (donation) => {
-      //           const donationDate = new Date(donation.createdTime)
-      //           return (
-      //             donationDate >= currentDate &&
-      //             donationDate <= currentQuarterEndDate
-      //           )
-      //         }
-      //       )
-      //       break
-      //     default:
-      //       currentPeriodDonations = []
-      //   }
+        // Log the donations and stats for debugging
+        console.log('Monthly Donations:')
+        stats.donatedCreatedTime.forEach((donation) => {
+          // Convert donation createdTime to milliseconds by multiplying by 1000
+          const donationDate = new Date(donation.createdTime * 1000)
+          console.log(donation)
+          console.log('Donation Date:', donationDate)
+        })
+        console.log('Stats (before update):', stats)
 
-      //   console.log('Donations:', stats.donatedCreatedTime)
-      //   console.log('Current Date:', currentDate)
-      //   console.log('Current Month Last Date:', currentMonthLastDate)
-      //   console.log('Current Quarter End Date:', currentQuarterEndDate)
-      //   console.log('Current Period Donations:', currentPeriodDonations)
+        // Filter donations
+        const monthlyDonations = stats.donatedCreatedTime.filter((donation) => {
+          // Convert donation createdTime to milliseconds by multiplying by 1000
+          const donationDate = new Date(donation.createdTime * 1000)
+          return donationDate >= startOfMonth && donationDate <= endOfMonth
+        })
 
-      //   // Calculate the total amount donated in the current period
-      //   const currentPeriodAmountTotal = currentPeriodDonations.reduce(
-      //     (total, donation) => {
-      //       return total + donation.amount
-      //     },
-      //     0
-      //   )
+        // Log monthlyDonations for debugging
+        console.log('Monthly Donations (filtered):')
+        monthlyDonations.forEach((donation) => console.log(donation))
+        console.log('Stats:', stats)
 
-      //   // Calculate the total number of donations for the current period
-      //   const currentPeriodDonationCount = currentPeriodDonations.length
+        const monthlyTotal = monthlyDonations.reduce(
+          (total, donation) => total + donation.amount,
+          0
+        )
+        const percentGoalCompleted = (monthlyTotal / recurringAmountGoal) * 100
 
-      //   // Calculate the percentage of the goal reached
-      //   const currentPercentComplete =
-      //     (currentPeriodAmountTotal / recurringAmountGoal) * 100
+        // Set state for monthly total and percent completed
+        setMonthlyTotal(monthlyTotal)
+        setPercentGoalCompleted(percentGoalCompleted)
 
-      //   console.log('Time Remaining:', timeRemaining)
-      //   console.log('Current Period Amount Total:', currentPeriodAmountTotal)
-      //   console.log('Current Percent Complete:', currentPercentComplete)
-      //   console.log(
-      //     'Current Period Donation Count:',
-      //     currentPeriodDonationCount
-      //   )
-      // }
+        // Calculating time left in the month
+        const timeLeft = endOfMonth.getTime() - currentDate.getTime()
+        const daysLeft = Math.ceil(timeLeft / (1000 * 3600 * 24))
+        setTimeLeftInMonth(daysLeft)
+      }
 
       if (contributor) {
         const contributorsArray = contributor.split(',')
@@ -516,27 +469,49 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               />
             </div>
 
-            <div className="flex w-full items-start space-x-8 sm:flex-row sm:items-center">
-              {addressStats && (
-                <div className="">
-                  <h5 className="text-3xl font-semibold">
-                    {addressStats.tx_count}
-                  </h5>
-                  <h4 className="text-sm">Donations</h4>
+            <div className="flex w-full flex-col items-start">
+              <div className="flex w-full items-start space-x-8 sm:flex-row sm:items-center">
+                {addressStats && (
+                  <div>
+                    <h5 className="text-3xl font-semibold">
+                      {addressStats.tx_count || '0'}
+                    </h5>
+                    <h4 className="text-sm">Donations</h4>
+                  </div>
+                )}
+
+                {addressStats && (
+                  <div>
+                    <h5 className="text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                      Ł {formatLits(addressStats.funded_txo_sum)}{' '}
+                    </h5>
+                    <h4 className="text-sm">Litecoin Raised</h4>
+                  </div>
+                )}
+              </div>
+
+              {isRecurring && (
+                <div className="flex w-full items-start space-x-8 sm:flex-row sm:items-center">
+                  <div>
+                    <h5 className="text-3xl font-semibold">
+                      Ł {formatLits(monthlyTotal)}
+                    </h5>
+                    <h4 className="text-sm">Raised This Month</h4>
+                  </div>
+                  <div>
+                    <h5 className="text-3xl font-semibold">
+                      {Math.round(percentGoalCompleted)}%
+                    </h5>
+                    <h4 className="text-sm">Goal Completed</h4>
+                  </div>
+                  <div>
+                    <h5 className="text-3xl font-semibold">
+                      {timeLeftInMonth} Days
+                    </h5>
+                    <h4 className="text-sm">Left in Month</h4>
+                  </div>
                 </div>
               )}
-
-              {/* Refactor for one time or recurring  */}
-              {addressStats && (
-                <div className="">
-                  <h5 className="text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                    Ł {formatLits(addressStats.funded_txo_sum)}{' '}
-                  </h5>
-                  <h4 className="text-sm">Litecoin Raised</h4>
-                </div>
-              )}
-
-              {/* Days to go */}
             </div>
 
             <button

@@ -7,13 +7,13 @@ contributor: 'davidBurkett38,satoshilite,ecurrencyhodler'
 hashtag: '#MWEB'
 socialSummary: 'MWEB improves privacy and scalability on the Litecoin blockchain. Based on the MimbleWimble protocol, it promises confidential transactions and efficient pruning. We need YOUR support for its continued development.'
 
-website:  'https://wenmweb.com/'
+website: 'https://wenmweb.com/'
 gitRepository: 'https://github.com/litecoin-project/litecoin'
 twitterHandle: 'https://twitter.com/ltcfoundation'
 redditLink: 'https://www.reddit.com/r/litecoin'
 telegramLink: ''
 isRecurring: true
-recurringAmountGoal: 4000
+recurringAmountGoal: 53
 recurringPeriod: 'monthly'
 recurringStatus: 'ongoing'
 ---
