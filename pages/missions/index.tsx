@@ -18,13 +18,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
-  const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
-  const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
+  const [openSourceProjects, setOpenSourceProjects] = useState<ProjectItem[]>()
+  const [DevOpsProjects, setDevOpsProjects] = useState<ProjectItem[]>()
   const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(projects.filter(isProject))
-    setOpenSatsProjects(
+    setOpenSourceProjects(
+      projects.filter(isProject).sort((a, b) => a.title.localeCompare(b.title))
+    )
+    setDevOpsProjects(
       projects
         .filter(isDevelopment)
         .sort((a, b) => a.title.localeCompare(b.title))
@@ -93,8 +95,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-700 dark:to-gray-600 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
+          {openSourceProjects &&
+            openSourceProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
@@ -126,8 +128,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
         <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
-          {openSatsProjects &&
-            openSatsProjects.map((p, i) => (
+          {DevOpsProjects &&
+            DevOpsProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
