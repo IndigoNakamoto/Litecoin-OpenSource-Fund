@@ -64,9 +64,9 @@ function CompletedProjects() {
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
-                  className="transform rounded-xl transition duration-300 ease-in-out hover:scale-105"
+                  className="rounded-xl transition duration-300"
                 />
-                <h4 className="image-title absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-0 text-4xl font-semibold text-white opacity-0 transition-opacity duration-300 ease-in-out hover:bg-opacity-80 hover:opacity-100">
+                <h4 className="image-title absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-0 text-2xl font-semibold text-white opacity-0 transition-opacity duration-300 ease-in-out hover:bg-opacity-50 hover:opacity-100 hover:backdrop-blur-xl ">
                   {image.title}
                 </h4>
               </div>
