@@ -60,7 +60,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   }
 
   return (
-    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-blue-500 dark:border-blue-500">
+    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-gray-300 dark:border-gray-600">
       {showLeftChevron && (
         <button
           className="z-10 rounded-lg bg-white bg-opacity-50 p-1 text-blue-600"
@@ -96,7 +96,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 {/* Display "FAQ" in uppercase */}
                 {item === 'faq' && (
                   <span
-                    className={`absolute right-1.5 text-xs ${
+                    className={`absolute  text-xs ${
                       activeItem === 'faq'
                         ? 'font-bold text-blue-600 dark:text-blue-400'
                         : 'font-semibold'
@@ -107,7 +107,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 )}
                 {item === 'updates' && (
                   <span
-                    className={`absolute right-1.5 text-xs ${
+                    className={`absolute text-xs ${
                       activeItem === 'updates'
                         ? 'font-bold text-blue-600 dark:text-blue-400'
                         : 'font-semibold'
@@ -118,7 +118,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                 )}
                 {item === 'comments' && (
                   <span
-                    className={`absolute right-1.5 text-xs ${
+                    className={`absolute text-xs ${
                       activeItem === 'comments'
                         ? 'font-bold text-blue-600 dark:text-blue-400'
                         : 'font-semibold'
