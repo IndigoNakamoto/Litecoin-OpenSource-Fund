@@ -274,17 +274,24 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
-        const supporters = stats.supporters
-          .map((supporter) => {
-            if (typeof supporter === 'string' || supporter instanceof String) {
-              return extractUsername(supporter)
-            } else {
-              return 'anonymous'
-            }
-          })
-          .join(',')
+        const supporters = stats.supporters.map((supporter) => {
+          if (typeof supporter === 'string' || supporter instanceof String) {
+            return extractUsername(supporter)
+          } else {
+            return 'anonymous'
+          }
+        })
+
+        // Convert the array to a Set to remove duplicates
+        const uniqueSupportersSet = new Set(supporters)
+
+        // Convert the Set back to an array (if needed)
+        const uniqueSupportersArray = Array.from(uniqueSupportersSet)
+
+        // If you want to join the unique supporters into a comma-separated string
+        const uniqueSupportersString = uniqueSupportersArray.join(',')
         const response = await fetch(
-          `/api/twitterUsers?usernames=${supporters}`
+          `/api/twitterUsers?usernames=${uniqueSupportersString}`
         )
         const twitterUsers = await response.json()
         setTwitterUsers(twitterUsers)
