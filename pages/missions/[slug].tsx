@@ -475,13 +475,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     </h4>
                     <h4>donated of Ł{recurringAmountGoal} monthly goal</h4>
                     <div className="flex flex-row">
-                      <div className="flex flex-col">
+                      {/* <div className="flex flex-col">
                         <h4 className="mt-5 text-3xl font-semibold text-blue-500">
                           {monthlyDonorCount}
                         </h4>
                         <h4>supporters</h4>
-                      </div>
-                      <div className="flex flex-col pl-8">
+                      </div> */}
+                      <div className="flex flex-col">
                         <h4 className="mt-5 text-3xl font-semibold text-blue-500">
                           {timeLeftInMonth}
                         </h4>
