@@ -124,6 +124,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [faqCount, setFaqCount] = useState<any>()
 
   const [monthlyTotal, setMonthlyTotal] = useState(0)
+  const [monthlyDonorCount, setMonthlyDonorCount] = useState(0)
   const [percentGoalCompleted, setPercentGoalCompleted] = useState(0)
   const [timeLeftInMonth, setTimeLeftInMonth] = useState(0)
 
@@ -215,21 +216,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     }
   }, [router.query])
 
-  /* 
-    INPUT: 
-    - ?isRecurring:Project that is recurring
-    - recurringAmount?: number
-    - startDate = 1st 
-    - currentDate 
-    - monthEndDate 
-    - donatedCreatedTime = [{amount,createdTime},...]
-
-    OUTPUT:
-    - currentTotalAmount
-    - currentPercentComplete
-    
-    */
-
   useEffect(() => {
     const fetchData = async () => {
       // Fetch mission info
@@ -258,6 +244,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           return donationDate >= startOfMonth && donationDate <= endOfMonth
         })
 
+        setMonthlyDonorCount(monthlyDonations.length())
         const monthlyTotal = monthlyDonations.reduce(
           (total, donation) => total + Number(donation.amount),
           0
@@ -452,51 +439,47 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             </div>
 
             <div className="flex w-full flex-col items-start">
-              <div className="flex w-full items-start space-x-8 sm:flex-row sm:items-center">
-                {addressStats && (
-                  <div>
-                    <h5 className="text-3xl font-semibold">
-                      {addressStats.tx_count || '0'}
-                    </h5>
-                    <h4 className="text-sm">Donations</h4>
-                  </div>
-                )}
-
-                {addressStats && (
-                  <div>
-                    <h5 className="text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                      Ł {formatLits(addressStats.funded_txo_sum)}{' '}
-                    </h5>
-                    <h4 className="text-sm">Litecoin Raised</h4>
-                  </div>
-                )}
-              </div>
+              {!isRecurring && (
+                <div className="mt-5 flex w-full flex-col">
+                  {addressStats && (
+                    <div>
+                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-gray-100">
+                        Ł {formatLits(addressStats.funded_txo_sum)}{' '}
+                      </h4>
+                      <h4>Litecoin raised</h4>
+                    </div>
+                  )}
+                  {addressStats && (
+                    <div>
+                      <h4 className="mt-5 text-3xl font-semibold text-blue-500">
+                        {addressStats.tx_count || '0'}
+                      </h4>
+                      <h4>donations</h4>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {isRecurring && (
-                <div className="mt-4 w-full rounded-lg bg-white p-2 text-gray-800">
-                  <div className="font-medium ">
-                    <h4>
-                      Monthly Goal:
-                      <span className="font-medium">
-                        {'  '}Ł{recurringAmountGoal}
-                      </span>{' '}
+                <div className="mt-5 w-full rounded-lg  text-gray-800">
+                  <div className="flex w-full flex-col">
+                    <h4 className="text-3xl font-semibold text-blue-500">
+                      Ł {formatLits(monthlyTotal)}
                     </h4>
-                  </div>
-                  <div className="flex w-full flex-row space-x-8">
-                    <div>
-                      <h4 className="text-sm font-semibold text-blue-500">
-                        Ł {formatLits(monthlyTotal)} raised
-                      </h4>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-blue-500">
-                        {Math.round(percentGoalCompleted)}% funded
-                      </h4>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-blue-500">
-                        {timeLeftInMonth} days to go
-                      </h4>
+                    <h4>donated of Ł{recurringAmountGoal} monthly goal</h4>
+                    <div className="flex flex-row">
+                      <div className="flex flex-col">
+                        <h4 className="mt-5 text-3xl font-semibold text-blue-500">
+                          {monthlyDonorCount}
+                        </h4>
+                        <h4>supporters</h4>
+                      </div>
+                      <div className="flex flex-col pl-8">
+                        <h4 className="mt-5 text-3xl font-semibold text-blue-500">
+                          {timeLeftInMonth}
+                        </h4>
+                        <h4>days to go</h4>
+                      </div>
                     </div>
                   </div>
                 </div>
