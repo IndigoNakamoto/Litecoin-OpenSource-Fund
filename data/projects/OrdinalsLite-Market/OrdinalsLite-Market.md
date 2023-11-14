@@ -1,22 +1,21 @@
 ---
-title: 'Port OpenOrdEx to OrdinalsLite.Market'
-summary: 'OpenOrdEx, an open source zero-fee trustless Bitcoin NFT marketplace based on Partially Signed Bitcoin Transactions.'
+title: 'OrdinalsLite.Market'
+summary: OrdinalsLite.Market is an open-source, trustless Ordinal Lite NFT marketplace based on Partially Signed Litecoin Transactions.'
 nym: 'James Scaur'
 coverImage: '/static/images/projects/ordinalslite-market.png'
 gitRepository: 'https://github.com/litecoinlabs/market'
 twitterHandle: 'https://twitter.com/OrdinalsLiteMkt'
 website: 'https://ordinalslite.market'
-type: 'Bounty'
+type: 'Project'
 contributor: 'jamesscaur,orenyomtov,LitecoinLabs'
 owner: ''
-bountyStatus: 'closed'
 hashtag: '#OrdinalsLiteMarket'
-socialSummary: 'Port OpenOrdEx, an open source zero-fee trustless Bitcoin NFT marketplace based on Partially Signed Bitcoin Transactions.'
+socialSummary: 'OrdinalsLite.Market is an open-source, trustless Ordinal Lite NFT marketplace based on Partially Signed Litecoin Transactions.'
 ---
 
 # OrdinalsLite.Market - Litecoin Ordinals Decentralized Exchange
 
-**OrdinalsLite.Market** revolutionizes the world of Litecoin NFTs by offering a decentralized, open-source marketplace with no transaction fees. Leveraging the power of Partially Signed Litecoin Transactions (PSLTs), it enables a secure and trustless environment for trading Litecoin NFTs.
+**OrdinalsLite.Market** revolutionizes the world of Litecoin NFTs by offering a decentralized, open-source marketplace. Leveraging the power of Partially Signed Litecoin Transactions (PSLTs), it enables a secure and trustless environment for trading Litecoin NFTs.
 
 ## How It Works - A Trustless Trading Experience
 
