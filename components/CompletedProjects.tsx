@@ -25,7 +25,7 @@ const images = [
   {
     title: 'OrdinalsLite.Market',
     src: 'ordinalslite-market.png',
-    href: '/missions/openordex',
+    href: '/missions/OrdinalsLite-Market',
   },
 ]
 
