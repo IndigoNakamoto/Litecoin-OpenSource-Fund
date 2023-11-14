@@ -327,7 +327,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div>
         <article className="mt-10 flex flex-col-reverse xl:flex-row xl:items-start">
-          <div className="content rounded-xl bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-200 p-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-700 dark:text-gray-200 md:px-8 xl:mr-5 xl:w-[84ch]">
+          <div className="content rounded-xl bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-200 p-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-700 dark:text-gray-200  xl:mr-5 xl:w-[84ch]">
             {/* ## PROJECT HEADER */}
             <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
@@ -433,7 +433,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-gray-100 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 md:p-8 lg:items-start xl:sticky xl:p-4 xs:p-4">
+          <aside className="top-0 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-gray-100 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 lg:items-start xl:sticky ">
             <div className="relative h-[20rem] w-full overflow-hidden rounded-lg xl:h-[14rem] ">
               <Image
                 alt={title}
