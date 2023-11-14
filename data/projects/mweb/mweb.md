@@ -13,7 +13,7 @@ twitterHandle: 'https://twitter.com/ltcfoundation'
 redditLink: 'https://www.reddit.com/r/litecoin'
 telegramLink: ''
 isRecurring: true
-recurringAmountGoal: 53
+recurringAmountGoal: 100
 recurringPeriod: 'monthly'
 recurringStatus: 'ongoing'
 ---

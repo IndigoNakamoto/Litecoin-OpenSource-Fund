@@ -251,19 +251,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           0
         )
 
-        console.log('startOfMonth:', startOfMonth)
-        console.log('endOfMonth:', endOfMonth)
-
-        // Log the donations and stats for debugging
-        console.log('Monthly Donations:')
-        stats.donatedCreatedTime.forEach((donation) => {
-          // Convert donation createdTime to milliseconds by multiplying by 1000
-          const donationDate = new Date(donation.createdTime * 1000)
-          console.log(donation)
-          console.log('Donation Date:', donationDate)
-        })
-        console.log('Stats (before update):', stats)
-
         // Filter donations
         const monthlyDonations = stats.donatedCreatedTime.filter((donation) => {
           // Convert donation createdTime to milliseconds by multiplying by 1000
@@ -271,13 +258,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
           return donationDate >= startOfMonth && donationDate <= endOfMonth
         })
 
-        // Log monthlyDonations for debugging
-        console.log('Monthly Donations (filtered):')
-        monthlyDonations.forEach((donation) => console.log(donation))
-        console.log('Stats:', stats)
-
         const monthlyTotal = monthlyDonations.reduce(
-          (total, donation) => total + donation.amount,
+          (total, donation) => total + Number(donation.amount),
           0
         )
         const percentGoalCompleted = (monthlyTotal / recurringAmountGoal) * 100
@@ -491,24 +473,31 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </div>
 
               {isRecurring && (
-                <div className="flex w-full items-start space-x-8 sm:flex-row sm:items-center">
-                  <div>
-                    <h5 className="text-3xl font-semibold">
-                      Ł {formatLits(monthlyTotal)}
-                    </h5>
-                    <h4 className="text-sm">Raised This Month</h4>
+                <div className="mt-4 w-full rounded-lg bg-white p-2 text-gray-800">
+                  <div className="font-medium ">
+                    <h4>
+                      Monthly Goal:
+                      <span className="font-medium">
+                        {'  '}Ł{recurringAmountGoal}
+                      </span>{' '}
+                    </h4>
                   </div>
-                  <div>
-                    <h5 className="text-3xl font-semibold">
-                      {Math.round(percentGoalCompleted)}%
-                    </h5>
-                    <h4 className="text-sm">Goal Completed</h4>
-                  </div>
-                  <div>
-                    <h5 className="text-3xl font-semibold">
-                      {timeLeftInMonth} Days
-                    </h5>
-                    <h4 className="text-sm">Left in Month</h4>
+                  <div className="flex w-full flex-row space-x-8">
+                    <div>
+                      <h4 className="text-sm font-semibold text-blue-500">
+                        Ł {formatLits(monthlyTotal)} raised
+                      </h4>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-blue-500">
+                        {Math.round(percentGoalCompleted)}% funded
+                      </h4>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-blue-500">
+                        {timeLeftInMonth} days to go
+                      </h4>
+                    </div>
                   </div>
                 </div>
               )}
@@ -516,7 +505,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded bg-blue-500 text-xl text-white transition-colors  duration-200 hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300"
+              className="hover:white block w-full rounded-lg bg-blue-500 text-xl text-white transition-colors  duration-200 hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300"
             >
               Support this mission
             </button>
