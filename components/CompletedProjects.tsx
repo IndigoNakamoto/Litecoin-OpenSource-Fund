@@ -25,7 +25,7 @@ const images = [
     href: '/missions/litecoin_dev_kit',
   },
   { title: 'Omni Lite', src: 'omnilite3.png', href: '/missions/omnilite' },
-  { title: 'Litescribe', src: 'litescribe3.png', href: '/missions/unisat' },
+  { title: 'Litescribe', src: 'litescribe3.png', href: '/missions/litescribe' },
   {
     title: 'OrdinalsLite.Market',
     src: 'ordinalslite-market.png',
