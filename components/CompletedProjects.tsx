@@ -19,7 +19,11 @@ const images = [
     href: '/missions/ordinals_lite',
   },
   { title: 'MWEB', src: 'MWEB.webp', href: '/missions/mweb' },
-  { title: 'Litecoin Dev Kit', src: 'ldk.png', href: '/missions/ldk' },
+  {
+    title: 'Litecoin Dev Kit',
+    src: 'ldk.png',
+    href: '/missions/litecoin_dev_kit',
+  },
   { title: 'Omni Lite', src: 'omnilite3.png', href: '/missions/omnilite' },
   { title: 'Litescribe', src: 'litescribe3.png', href: '/missions/unisat' },
   {
