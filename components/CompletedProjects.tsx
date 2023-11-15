@@ -27,6 +27,16 @@ const images = [
     src: 'ordinalslite-market.png',
     href: '/missions/OrdinalsLite-Market',
   },
+  {
+    title: 'Litewallet',
+    src: 'litewallet.png',
+    href: '/missions/litewallet',
+  },
+  {
+    title: 'Electrum-LTC',
+    src: 'electrum.png',
+    href: '/missions/electrum',
+  },
 ]
 
 function CompletedProjects() {

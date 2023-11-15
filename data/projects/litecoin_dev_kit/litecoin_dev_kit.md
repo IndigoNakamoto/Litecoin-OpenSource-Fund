@@ -23,10 +23,10 @@ The **Litecoin Development Kit (LDK)** is an ambitious initiative to bring the p
 - **LDK FFI**: As we're targeting cross-platform compatibility, we are also working on foreign language bindings for the LDK. This is currently experimental but holds promise for broadening the LDK's application reach.
 - **LDK Documentation**: Comprehensive, open-source documentation to assist developers in making the most out of the LDK.
 
-
 ## Contribute to the Development
 
 Even if Rust isn’t your forte, there are several ways you can contribute to bringing LDK to life:
+
 - **Developers**: If you're skilled in Rust, we need your expertise in porting and maintaining BDK for Litecoin.
 - **Funders**: Support the developers by contributing to the bounty and ongoing development funds.
 - **Advocates**: Help spread the word and keep the momentum going.

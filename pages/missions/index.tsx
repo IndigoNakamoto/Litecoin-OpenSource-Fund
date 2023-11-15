@@ -94,7 +94,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </div>
       <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-700 dark:to-gray-600 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
+        <ul className="grid max-w-5xl gap-8 md:grid-cols-3">
           {openSourceProjects &&
             openSourceProjects.map((p, i) => (
               <li key={i} className="">
@@ -104,7 +104,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </ul>
       </section>
 
-      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+      {/* <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           Bounty Projects
         </h2>
@@ -119,7 +119,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               </li>
             ))}
         </ul>
-      </section>
+      </section> */}
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           DevOps
