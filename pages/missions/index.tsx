@@ -23,9 +23,41 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
+    // setOpenSourceProjects(
+    //   projects.filter(isProject).sort((a, b) => a.title.localeCompare(b.title))
+    // )
+
+    const desiredOrder = [
+      'Litecoin Core',
+      'MWEB',
+      'Ordinals Lite',
+      'Litecoin Development Kit',
+      'Litecoin Mempool Explorer',
+    ] // everything else in order by title
+
     setOpenSourceProjects(
-      projects.filter(isProject).sort((a, b) => a.title.localeCompare(b.title))
+      projects.filter(isProject).sort((a, b) => {
+        const indexA = desiredOrder.indexOf(a.title)
+        const indexB = desiredOrder.indexOf(b.title)
+
+        // If both titles are in the desired order array, compare their positions.
+        if (indexA !== -1 && indexB !== -1) {
+          return indexA - indexB
+        }
+
+        // If only one of the titles is in the desired order array, prioritize it.
+        if (indexA !== -1) {
+          return -1
+        }
+        if (indexB !== -1) {
+          return 1
+        }
+
+        // If neither title is in the desired order array, sort them alphabetically.
+        return a.title.localeCompare(b.title)
+      })
     )
+
     setDevOpsProjects(
       projects
         .filter(isDevelopment)
@@ -104,7 +136,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </ul>
       </section>
 
-      {/* <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           Bounty Projects
         </h2>
@@ -119,7 +151,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               </li>
             ))}
         </ul>
-      </section> */}
+      </section>
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           DevOps
