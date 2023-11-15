@@ -137,7 +137,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </ul>
       </section>
 
-      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
+      {/* <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           Bounty Projects
         </h2>
@@ -152,7 +152,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               </li>
             ))}
         </ul>
-      </section>
+      </section> */}
       <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
           DevOps
