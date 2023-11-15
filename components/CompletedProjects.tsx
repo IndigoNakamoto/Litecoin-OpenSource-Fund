@@ -11,12 +11,12 @@ const images = [
   {
     title: 'Litecoin Space',
     src: 'litecoin-space.jpeg',
-    href: '/missions/mempool',
+    href: '/missions/litecoin_space_mempool',
   },
   {
     title: 'Ordinals Lite',
     src: 'OrdinalsLite3.png',
-    href: '/missions/ordinalslite',
+    href: '/missions/ordinals_lite',
   },
   { title: 'MWEB', src: 'MWEB.webp', href: '/missions/mweb' },
   { title: 'Litecoin Dev Kit', src: 'ldk.png', href: '/missions/ldk' },
@@ -25,7 +25,7 @@ const images = [
   {
     title: 'OrdinalsLite.Market',
     src: 'ordinalslite-market.png',
-    href: '/missions/OrdinalsLite-Market',
+    href: '/missions/ordinals_lite_market',
   },
   {
     title: 'Litewallet',
