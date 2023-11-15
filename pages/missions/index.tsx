@@ -31,6 +31,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       'Litecoin Core',
       'MWEB',
       'Ordinals Lite',
+      'Litewallet',
       'Litecoin Development Kit',
       'Litecoin Mempool Explorer',
     ] // everything else in order by title
