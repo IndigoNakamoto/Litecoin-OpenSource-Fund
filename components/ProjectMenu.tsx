@@ -81,54 +81,65 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             className="group flex h-16 items-center justify-center rounded-lg"
             key={item}
           >
-            <div className="transform-gpu overflow-hidden rounded-xl transition duration-200 hover:bg-white dark:hover:bg-gray-800">
-              <button
-                onClick={() => handleMenuItemClick(item)}
-                className={`text-lg ${
-                  activeItem === item
-                    ? 'font-semibold text-blue-500 dark:text-blue-300'
-                    : 'text-gray-700 dark:text-gray-100'
-                }`}
-              >
-                {item === 'faq'
-                  ? 'FAQ'
-                  : item.charAt(0).toUpperCase() + item.slice(1)}{' '}
-                {/* Display "FAQ" in uppercase */}
-                {item === 'faq' && (
-                  <span
-                    className={`absolute  text-xs ${
-                      activeItem === 'faq'
-                        ? 'font-bold text-blue-600 dark:text-blue-400'
-                        : 'font-semibold'
-                    }`}
-                  >
-                    {faqCount}
-                  </span>
-                )}
-                {item === 'updates' && (
-                  <span
-                    className={`absolute text-xs ${
-                      activeItem === 'updates'
-                        ? 'font-bold text-blue-600 dark:text-blue-400'
-                        : 'font-semibold'
-                    }`}
-                  >
-                    {updatesCount}
-                  </span>
-                )}
-                {item === 'comments' && (
-                  <span
-                    className={`absolute text-xs ${
-                      activeItem === 'comments'
-                        ? 'font-bold text-blue-600 dark:text-blue-400'
-                        : 'font-semibold'
-                    }`}
-                  >
-                    {commentCount}
-                  </span>
-                )}
-              </button>
-            </div>
+            {item === 'faq' && faqCount === 1 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
+              updatesCount === 0 ? null : item === 'comments' && // Hide the entire button for "Updates" when updatesCount is 0
+              commentCount === 0 ? null : ( // Hide the entire button for "Comments" when commentCount is 0
+              <div className="transform-gpu overflow-hidden rounded-xl transition duration-200 hover:bg-white dark:hover:bg-gray-800">
+                <button
+                  onClick={() => handleMenuItemClick(item)}
+                  className={`text-lg ${
+                    activeItem === item
+                      ? 'font-semibold text-blue-500 dark:text-blue-300'
+                      : 'text-gray-700 dark:text-gray-100'
+                  }`}
+                >
+                  {item === 'faq'
+                    ? 'FAQ'
+                    : item === 'updates'
+                    ? 'Updates'
+                    : item === 'comments'
+                    ? 'Comments'
+                    : item.charAt(0).toUpperCase() + item.slice(1)}{' '}
+                  {/* Display "FAQ," "Updates," and "Comments" in uppercase */}
+                  {item === 'faq' &&
+                    faqCount > 1 && ( // Conditionally render the span if faqCount > 1
+                      <span
+                        className={`absolute text-xs ${
+                          activeItem === 'faq'
+                            ? 'font-bold text-blue-600 dark:text-blue-400'
+                            : 'font-semibold'
+                        }`}
+                      >
+                        {faqCount}
+                      </span>
+                    )}
+                  {item === 'updates' &&
+                    updatesCount > 0 && ( // Conditionally render the span if updatesCount > 0
+                      <span
+                        className={`absolute text-xs ${
+                          activeItem === 'updates'
+                            ? 'font-bold text-blue-600 dark:text-blue-400'
+                            : 'font-semibold'
+                        }`}
+                      >
+                        {updatesCount}
+                      </span>
+                    )}
+                  {item === 'comments' &&
+                    commentCount > 0 && ( // Conditionally render the span if commentCount > 0
+                      <span
+                        className={`absolute text-xs ${
+                          activeItem === 'comments'
+                            ? 'font-bold text-blue-600 dark:text-blue-400'
+                            : 'font-semibold'
+                        }`}
+                      >
+                        {commentCount}
+                      </span>
+                    )}
+                </button>
+              </div>
+            )}
           </li>
         ))}
       </ul>
