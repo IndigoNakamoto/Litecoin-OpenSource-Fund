@@ -1,5 +1,5 @@
 import { InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { PageSEO } from '@/components/SEO'
 import CompletedProjects from '@/components/CompletedProjects'
 import Link from 'next/link'

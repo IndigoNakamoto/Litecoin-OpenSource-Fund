@@ -2,7 +2,7 @@
 
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image' // <-- Import the Image component
+import Image from 'next/legacy/image' // <-- Import the Image component
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'

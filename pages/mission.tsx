@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 
 // const DEFAULT_LAYOUT = 'ListLayout'
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
