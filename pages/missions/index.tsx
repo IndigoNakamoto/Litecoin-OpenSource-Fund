@@ -90,7 +90,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             objectFit="cover"
             alt="Lite.Space Hero Image"
             priority={true}
-            className="absolute left-0 top-0 z-0 h-full w-full" // added positioning properties
+            className="absolute left-0 top-0 z-0 h-full w-full"
           />
           {/* Text content */}
           <div className="z-1 absolute left-0 top-0 flex h-full w-full flex-col justify-center  bg-black bg-opacity-40 px-4">
@@ -127,7 +127,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </div>
       <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-700 dark:to-gray-600 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-8 md:grid-cols-3">
+        <ul className="grid max-w-5xl gap-8 lg:grid-cols-2 xl:grid-cols-3">
           {openSourceProjects &&
             openSourceProjects.map((p, i) => (
               <li key={i} className="">
