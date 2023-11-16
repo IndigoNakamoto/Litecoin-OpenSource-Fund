@@ -8,7 +8,7 @@ website: 'https://litescribe.io/'
 gitRepository: 'https://github.com/LiteVerseHoldings/extension-ltc'
 twitterHandle: 'https://twitter.com/litescribe_io'
 type: 'Bounty'
-contributor: ''
+contributor: 'anthonyonchain'
 hashtag: '#Litescribe'
 bountyStatus: 'completed'
 ---
