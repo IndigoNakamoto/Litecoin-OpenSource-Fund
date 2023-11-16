@@ -13,4 +13,4 @@ bountyStatus: 'completed'
 
 # Litecoin Ordinals Decentralized Exchange
 
-OpenOrdEx offering a decentralized, open-source marketplace. Leveraging the power of Partially Signed Litecoin Transactions (PSLTs), it enables a secure and trustless environment for trading Litecoin NFTs.
+OpenOrdEx offering a decentralized, open-source Ordinals marketplace. Leveraging the power of Partially Signed Bitcoin Transactions (PSBTs), it enables a secure and trustless environment for trading Bitcoin Ordinal NFTs.
