@@ -26,11 +26,11 @@ const images = [
   },
   { title: 'Omni Lite', src: 'omnilite3.png', href: '/missions/omnilite' },
   { title: 'Litescribe', src: 'litescribe3.png', href: '/missions/litescribe' },
-  {
-    title: 'OrdinalsLite.Market',
-    src: 'ordinalslite-market.png',
-    href: '/missions/ordinals_lite_market',
-  },
+  // {
+  //   title: 'OrdinalsLite.Market',
+  //   src: 'ordinalslite-market.png',
+  //   href: '/missions/ordinals_lite_market',
+  // },
   {
     title: 'Litewallet',
     src: 'litewallet.png',
