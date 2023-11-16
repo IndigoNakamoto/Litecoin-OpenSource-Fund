@@ -1,16 +1,16 @@
 ---
-title: 'OrdinalsLite.Market'
-summary: OrdinalsLite.Market is an open-source, trustless Ordinal Lite NFT marketplace based on Partially Signed Litecoin Transactions.'
-nym: 'James Scaur'
+title: 'Bounty: Port OpenOrdEx to Litecoin'
+summary: 'OpenOrdex is an open source zero-fee trustless Bitcoin NFT marketplace based on partially signed bitcoin transactions'
+socialSummary: 'OpenOrdex is an open source zero-fee trustless Bitcoin NFT marketplace based on partially signed bitcoin transactions'
 coverImage: '/static/images/projects/ordinalslite-market.png'
+
+website: ''
 gitRepository: 'https://github.com/litecoinlabs/market'
 twitterHandle: 'https://twitter.com/OrdinalsLiteMkt'
-website: ''
-type: 'Project'
-contributor: 'jamesscaur,orenyomtov,LitecoinLabs'
-owner: ''
+type: 'Bounty'
+contributor: 'jamesscaur'
 hashtag: '#OrdinalsLiteMarket'
-socialSummary: 'OrdinalsLite.Market is an open-source, trustless Ordinal Lite NFT marketplace based on Partially Signed Litecoin Transactions.'
+bountyStatus: 'completed'
 ---
 
 # OrdinalsLite.Market - Litecoin Ordinals Decentralized Exchange

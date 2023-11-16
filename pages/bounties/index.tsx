@@ -59,7 +59,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           </ul>
         </div>
       </section>
-      {/* <h1 className="pl-4 pt-20 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
+      <h1 className="pl-4 pt-20 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
         Completed Bounties
       </h1>
 
@@ -73,12 +73,13 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                   <ProjectCard
                     project={p}
                     openPaymentModal={openPaymentModal}
+                    showButton={false}
                   />
                 </li>
               ))}
           </ul>
         </div>
-      </section> */}
+      </section>
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}

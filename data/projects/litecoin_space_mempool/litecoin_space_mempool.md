@@ -1,5 +1,5 @@
 ---
-title: 'Litecoin Mempool Explorer'
+title: 'Litecoin Space Mempool Explorer'
 summary: 'Our mempool and blockchain explorer for the Litecoin community, focusing on the transaction fee market and multi-layer ecosystem'
 website: 'https://litecoinspace.org'
 gitRepository: 'https://github.com/litecoin-foundation/ltcspace'

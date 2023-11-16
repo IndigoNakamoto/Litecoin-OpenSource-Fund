@@ -206,7 +206,7 @@ export function isBounty(project: ProjectItem): boolean {
 }
 
 export function isCompletedBounty(project: ProjectItem): boolean {
-  return project.bountyStatus === BountyStatus.CLOSED
+  return project.bountyStatus === BountyStatus.COMPLETED
 }
 
 export function isOpenBounty(project: ProjectItem): boolean {

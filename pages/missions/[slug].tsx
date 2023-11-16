@@ -30,6 +30,7 @@ import { FAQSection } from '@/components/FAQSection'
 import ProjectUpdate from '../../components/ProjectUpdate'
 import React from 'react'
 import ProjectSocialLinks from '@/components/ProjectSocialLinks'
+import { isCompletedBounty } from '.'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -499,11 +500,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               )}
             </div>
 
+            {/* TODO: if bountyStatus == 'completed', then disable button */}
             <button
               onClick={openPaymentModal}
-              className="hover:white block w-full rounded-lg bg-blue-500 text-xl text-white transition-colors  duration-200 hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300"
+              className={`hover:white block w-full rounded-lg bg-blue-500 text-xl text-white transition-colors  duration-200 hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300 ${
+                bountyStatus === 'completed' ? 'disabled' : ''
+              }`}
+              disabled={bountyStatus === 'completed'}
             >
-              Support this mission
+              {bountyStatus === 'completed'
+                ? 'Mission Completed'
+                : 'Support this mission'}
             </button>
             <SocialMediaShare
               className="mt-0 flex space-x-1"
