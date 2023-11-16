@@ -36,14 +36,15 @@ export default function Mission({
           />
           <div className="z-1 relative inset-x-0 flex flex-col items-center justify-center">
             {/* Litecoin logo */}
-            <Image
-              src={COIN}
-              alt="Litecoin Logo"
-              width={300}
-              height={300}
-              objectFit="cover"
-              className="mt-32 w-32 md:w-60 xl:w-80 short:w-20 medium:w-36"
-            />
+            <div className="mt-32 w-32 md:w-60 xl:w-80 short:w-20 medium:w-36">
+              <Image
+                src={COIN}
+                alt="Litecoin Logo"
+                width={300}
+                height={300}
+                objectFit="cover"
+              />
+            </div>
             {/* Litecoin mission statement */}
             <div className="container p-4 sm:mt-10 md:mt-24">
               <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl">
