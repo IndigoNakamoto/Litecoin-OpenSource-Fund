@@ -9,6 +9,7 @@ type: 'Project'
 contributor: 'anthonyonchain,litescribe_io,unisat_wallet'
 hashtag: '#Litescribe'
 socialSummary: 'OrdinalsLiteMarket is an open source trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
+slug: 'litescribe'
 ---
 
 ## Litescribe Wallet: A New Era in Litecoin NFT Marketplace

@@ -9,6 +9,7 @@ contributor: 'SatoshiLite,bigkerrytweets,claudia14083392,Pat_McDermott17,ferenca
 type: 'Project'
 hashtag: '#Litewallet'
 socialSummary: 'Litewallet is the official Litecoin mobile wallet, backed by the Litecoin Foundation, offering a simple and secure way to manage Litecoin assets.'
+slug: 'litewallet'
 ---
 
 ## Welcome to Litewallet

@@ -3,7 +3,7 @@ title: 'Bounty: Port Unisat to Litecoin (Litescribe Wallet)'
 summary: 'Litescribe Wallet is a trustless NFT wallet and marketplace extension for the Litecoin blockchain, enabling easy creation and trade of Litecoin-native digital artifacts without requiring a full node. It is user-friendly and continuously developed through reinvested fees, promoting the growth of Litecoin NFTs.'
 socialSummary: 'OrdinalsLiteMarket is an open source trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
 coverImage: '/static/images/projects/litescribe3.png'
-
+slug: 'bounty_port_unisat'
 website: 'https://litescribe.io/'
 gitRepository: 'https://github.com/LiteVerseHoldings/extension-ltc'
 twitterHandle: 'https://twitter.com/litescribe_io'

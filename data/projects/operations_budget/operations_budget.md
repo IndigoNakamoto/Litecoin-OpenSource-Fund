@@ -8,6 +8,7 @@ type: 'Development Fund'
 owner: ''
 contributor: 'ltcfoundation'
 hashtag: '#Litecoin'
+slug: 'operations_budget'
 ---
 
 ## Objective

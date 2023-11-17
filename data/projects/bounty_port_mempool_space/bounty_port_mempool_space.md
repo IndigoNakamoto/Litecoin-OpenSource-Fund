@@ -3,7 +3,7 @@ title: 'Bounty: Port Mempool.Space to Litecoin (Litecoin Space)'
 summary: 'A successful port of Mempool.Space to Litecoin, made possible by the Litecoin community.'
 socialSummary: 'Exciting news! Mempool.Space is now available for Litecoin users thanks to the dedicated community support.'
 coverImage: '/static/images/projects/litecoin-space.jpeg'
-
+slug: 'bounty_port_mempool_space'
 website: 'https://litecoinspace.org'
 gitRepository: 'https://github.com/litecoin-foundation/ltcspace'
 type: 'Bounty'

@@ -3,7 +3,7 @@ title: 'Bounty: Port OpenOrdEx to Litecoin'
 summary: 'OpenOrdex is an open source zero-fee trustless Bitcoin NFT marketplace based on partially signed bitcoin transactions'
 socialSummary: 'OpenOrdex is an open source zero-fee trustless Bitcoin NFT marketplace based on partially signed bitcoin transactions'
 coverImage: '/static/images/projects/ordinalslite-market.png'
-
+slug: 'bounty_port_openordex'
 website: ''
 gitRepository: 'https://github.com/litecoinlabs/market'
 type: 'Bounty'

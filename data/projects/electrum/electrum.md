@@ -9,6 +9,7 @@ contributor: 'loshan1212'
 hashtag: '#ElectrumLTC'
 socialSummary: 'Experience the future of Litecoin wallets with Electrum-LTC. Our wallet offers top-notch security, efficient transactions, and a user-friendly interface. Join us on our journey to enhance the Litecoin experience!'
 owner: ''
+slug: 'electrum'
 ---
 
 # Electrum-LTC: The Secure Litecoin Wallet

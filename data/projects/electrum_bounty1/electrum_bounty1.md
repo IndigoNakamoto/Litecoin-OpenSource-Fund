@@ -11,6 +11,7 @@ contributor: 'loshan1212'
 hashtag: '#ElectrumLTC'
 socialSummary: "🚀 Help advance ElectrumLTC! Let's sync with Bitcoin 4.4.5 for stronger security, swifter transactions, and a user-friendly interface. Be part of the evolution! LitecoinBounty"
 owner: ''
+slug: 'electrum_bounty_1'
 ---
 
 # Advancing the Electrum-LTC Wallet: Aligning with Bitcoin 4.4.5

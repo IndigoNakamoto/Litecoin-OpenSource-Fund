@@ -12,6 +12,7 @@ owner: 'bigkerrytweets'
 hashtag: '#Litewallet'
 bountyStatus: 'open'
 socialSummary: '📢 Bounty Alert! Dive into the Litewallet challenge and resolve a core update issue affecting address display in transaction history. Expertise in C, Swift, and SQLite? This is your moment! Rewards await. Dive in now! 🔍'
+slug: 'litewallet_bounty1'
 ---
 
 ## Embark on a Mission with Litewallet

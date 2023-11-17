@@ -11,6 +11,7 @@ contributor: 'anthonyonchain,raphjaph,rodarmor'
 owner: ''
 hashtag: '#OrdinalsLite'
 socialSummary: '🔍 Discover OrdinalsLite: A revolutionary approach to Litecoin asset management! Dive deep with our tools, and join the future of blockchain. 🌐 Support and explore: www.OrdinalsLite.com 🚀'
+slug: 'ordinals_lite'
 ---
 
 ## Litecoin Asset Management with Ordinals Lite

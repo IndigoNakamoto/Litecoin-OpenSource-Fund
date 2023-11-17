@@ -16,6 +16,7 @@ isRecurring: true
 recurringAmountGoal: 100
 recurringPeriod: 'monthly'
 recurringStatus: 'ongoing'
+slug: 'mweb'
 ---
 
 ## Enhancing Litecoin with MimbleWimble Extension Blocks (MWEB)

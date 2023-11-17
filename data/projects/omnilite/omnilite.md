@@ -13,6 +13,7 @@ contributor: 'Omni_layer,loshan1212'
 owner: ''
 hashtag: '#OmniLite'
 socialSummary: 'Revolutionize the Litecoin experience! Create tokens, launch decentralized crowdfunds, and even craft NFTs. All on the trusted Litecoin blockchain. Learn more ➡️ '
+slug: 'omnilite'
 ---
 
 ## Discover OmniLite
