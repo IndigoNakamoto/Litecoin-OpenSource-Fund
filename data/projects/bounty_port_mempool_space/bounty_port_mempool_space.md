@@ -18,7 +18,7 @@ The Litecoin community rallied together to achieve an exciting milestone - the s
 
 ## Community Support
 
-The #LitecoinFam and other members of the Litecoin community quickly recognized the importance of this project. Indigo later increased the bounty to a substantial 17.5 $LTC, showing the community's commitment to making this endeavor a success. Contributions poured in from various community members, including:
+The #LitecoinFam and other members of the Litecoin community quickly recognized the importance of this project the bounty increased to a substantial 17.5 $LTC, showing the community's commitment to making this endeavor a success. Contributions poured in from various community members, including:
 
 - @indigo_nakamoto
 - @lukewrightmain
