@@ -4,15 +4,16 @@ import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts, getAllPostUpdates } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/legacy/image'
-// import ProjectList from '../../components/ProjectList'
-// import BackToProjects from '../../components/BackToProjects'
+// import ProjectList from '@/components/ProjectList'
+// import BackToProjects from '@/components/BackToProjects'
 import { ProjectItem, AddressStats, Donation } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
-import PaymentModal from '../../components/PaymentModal'
+import PaymentModal from '@/components/PaymentModal'
+import ThankYouModal from '@/components/ThankYouModal'
 // import Link from 'next/link'
 import { fetchGetJSON } from '../../utils/api-helpers'
-import TwitterUsers from '../../components/TwitterUsers'
+import TwitterUsers from '@/components/TwitterUsers'
 import {
   TwitterUser,
   BountyStatus,
@@ -22,12 +23,12 @@ import {
   RecurringPeriod,
 } from '../../utils/types'
 import Head from 'next/head'
-import ProjectMenu from '../../components/ProjectMenu'
-import TwitterFeed from '../../components/TwitterFeed'
-import SocialMediaShare from '../../components/SocialMediaShare'
+import ProjectMenu from '@/components/ProjectMenu'
+import TwitterFeed from '@/components/TwitterFeed'
+import SocialMediaShare from '@/components/SocialMediaShare'
 import tweetsData from '../../data/tweets.json'
 import { FAQSection } from '@/components/FAQSection'
-import ProjectUpdate from '../../components/ProjectUpdate'
+import ProjectUpdate from '@/components/ProjectUpdate'
 import React from 'react'
 import ProjectSocialLinks from '@/components/ProjectSocialLinks'
 import { isCompletedBounty } from '.'
@@ -41,18 +42,55 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const router = useRouter()
 
   const [modalOpen, setModalOpen] = useState(false)
+  const [isThankYouModalOpen, setThankYouModalOpen] = useState(false)
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
   function closeModal() {
     setModalOpen(false)
+    setThankYouModalOpen(false)
+    // Check if the 'thankyou' query parameter exists
+    if (router.query.thankyou || router.query.name) {
+      // Create a shallow copy of the current URL's query parameters
+      const newQuery = { ...router.query }
+      // Remove the query parameters
+      delete newQuery.thankyou
+      delete newQuery.name
+
+      // Update the URL with the modified query parameters without reloading the page
+      router.push(
+        {
+          pathname: router.pathname,
+          query: newQuery,
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
   }
 
   function openPaymentModal() {
-    // console.log('opening single project modal...')
     setSelectedProject(project)
     setModalOpen(true)
   }
+
+  function openThankYouModal() {
+    setSelectedProject(project)
+    setThankYouModalOpen(true)
+  }
+
+  useEffect(() => {
+    if (router.query.thankyou === 'true') {
+      openThankYouModal()
+    }
+  })
+
+  // useEffect hook to watch for URL changes
+  useEffect(() => {
+    // Check if the thankyou query param exists and is 'true'
+    const isThankYou = router.query.thankyou === 'true'
+    setThankYouModalOpen(isThankYou)
+  }, [router.query.thankyou]) // Depend on thankyou query param
 
   function extractUsername(url) {
     // This regex will match any string that ends with a forward slash followed by any sequence of non-slash characters.
@@ -523,6 +561,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
       <PaymentModal
         isOpen={modalOpen}
+        onRequestClose={closeModal}
+        project={selectedProject}
+      />
+      <ThankYouModal
+        isOpen={isThankYouModalOpen}
         onRequestClose={closeModal}
         project={selectedProject}
       />

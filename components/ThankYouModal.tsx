@@ -1,0 +1,103 @@
+import ReactModal from 'react-modal'
+import Image from 'next/legacy/image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
+import { ProjectItem } from '../utils/types'
+import { useSession } from 'next-auth/react' // Import useSession
+import { useRouter } from 'next/router' // Import useRouter
+import SocialIcon from './social-icons'
+
+type ModalProps = {
+  isOpen: boolean
+  onRequestClose: () => void
+  project: ProjectItem | undefined
+}
+
+const ThankYouModal: React.FC<ModalProps> = ({
+  isOpen,
+  onRequestClose,
+  project,
+}) => {
+  const { data: session } = useSession() // Access session data
+  const router = useRouter() // Access router
+
+  if (!project) {
+    return <div />
+  }
+
+  const getCleanImageUrl = (url) => {
+    return url.replace('_normal', '')
+  }
+
+  const focusStyle = {
+    outline: 'none',
+  }
+  // Construct the message for sharing
+  const shareMessage = encodeURIComponent(
+    `I've just donated to ${project.title}!\n\nJoin me in supporting this amazing project: https://www.lite.space/missions/${project.slug}.\n\n${project.hashtag}`
+  )
+
+  // URLs for sharing on social media
+  const twitterShareUrl = `https://twitter.com/intent/tweet?text=${shareMessage}`
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+    `https://www.lite.space/missions/${project.slug}`
+  )}&quote=${shareMessage}`
+
+  const userName = ', ' + router.query.name || ', ' + session?.user?.name || ''
+
+  return (
+    <ReactModal
+      isOpen={isOpen}
+      style={{ content: focusStyle }}
+      onRequestClose={onRequestClose}
+      className="max-h-full w-11/12 overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:m-8 sm:w-9/12 sm:rounded-xl 2xl:w-5/12"
+      overlayClassName="inset-0 fixed backdrop-blur-3xl  flex items-center justify-center transform duration-400 ease-in"
+      appElement={
+        typeof window === 'undefined'
+          ? undefined
+          : document?.getElementById('root') || undefined
+      }
+    >
+      <div className="relative -mb-12 flex justify-end">
+        <FontAwesomeIcon
+          icon={faClose}
+          className="hover:text-primary h-[2rem] w-[2rem] cursor-pointer"
+          onClick={onRequestClose}
+        />
+      </div>
+      <div className="items-center space-y-4 py-4">
+        <div className="">
+          <div className="flex flex-col items-center justify-center">
+            {session?.user?.image && (
+              <Image
+                src={getCleanImageUrl(session.user.image)}
+                alt={session.user.name}
+                width={96}
+                height={96}
+                className="rounded-full"
+                loading="lazy" // Apply lazy loading
+              />
+            )}
+            <h1 className="font-regular text-center font-sans text-4xl">
+              Thank You for Your Support{userName}!
+            </h1>
+            <div>
+              <p className="mt-4 text-center">
+                Your donation to {project.title} makes a big difference. It
+                helps the contributors maintain and improve {project.title},
+                keeping Litecoin at the forefront of cryptocurrency.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-center gap-4 py-4">
+        SHARE:
+        <SocialIcon kind="twitter" href={twitterShareUrl} size={8} />
+        <SocialIcon kind="facebook" href={facebookShareUrl} size={8} />
+      </div>
+    </ReactModal>
+  )
+}
+
+export default ThankYouModal

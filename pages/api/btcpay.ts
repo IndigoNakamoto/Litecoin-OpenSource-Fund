@@ -12,7 +12,11 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     const { amount, project_slug, email, name, twitter }: PayReq = req.body
-    const REDIRECT = `${process.env.BASE_URL}/missions/${project_slug}?menu=community`
+    let REDIRECT = `${process.env.BASE_URL}/missions/${project_slug}?menu=community&thankyou=true`
+    // Append 'name' and 'twitter' to the redirect URL if they exist
+    if (name) {
+      REDIRECT += `&name=${encodeURIComponent(name)}`
+    }
     const username = process.env.BTCPAY_USERNAME
     const password = process.env.BTCPAY_PASSWORD
 
