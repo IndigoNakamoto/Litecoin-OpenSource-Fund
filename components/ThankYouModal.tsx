@@ -43,7 +43,13 @@ const ThankYouModal: React.FC<ModalProps> = ({
     `https://www.lite.space/missions/${project.slug}`
   )}&quote=${shareMessage}`
 
-  const userName = ', ' + router.query.name || ', ' + session?.user?.name || ''
+  let userName = ''
+  if (router.query.name !== undefined) {
+    userName += `, ${router.query.name}`
+  }
+  if (session?.user?.name !== undefined) {
+    userName += `, ${session?.user?.name}`
+  }
 
   return (
     <ReactModal
