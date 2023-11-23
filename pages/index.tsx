@@ -61,7 +61,7 @@ export default function Mission({
         </div>
       </div>
       <div className="z-1 mt-[calc(90vh)] pb-32">
-        <CompletedProjects />
+        {/* <CompletedProjects /> */}
       </div>
       {/* Apply for Funding section */}
       <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-500 to-blue-300 p-4 pb-10 pt-10 dark:divide-gray-700">
