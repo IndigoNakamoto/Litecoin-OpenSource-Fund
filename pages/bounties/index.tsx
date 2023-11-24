@@ -9,6 +9,7 @@ import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
 // import Link from '@/components/Link'
 import { isBounty, isCompletedBounty } from 'pages/missions'
+import { PageSEO } from '@/components/SEO'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -36,9 +37,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   return (
     <>
-      <Head>
-        <title>Bounties | Lite.Space</title>
-      </Head>
+      <PageSEO
+        title={`Lite.Space | Bounties`}
+        description={`Explore top Open-Source Litecoin bounties on Lite.Space! Dive into a diverse range of open-source projects and contribute to the Litecoin ecosystem.`}
+      />
       <h1 className="pl-4 pt-20 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
         Bounties
       </h1>
