@@ -34,7 +34,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
   }
   // Construct the message for sharing
   const shareMessage = encodeURIComponent(
-    `I've just donated to ${project.title}!\n\nJoin me in supporting this amazing project: https://www.lite.space/missions/${project.slug}.\n\n${project.hashtag}`
+    `I've just donated to ${project.title}!\n\nJoin me in supporting this amazing project: https://www.lite.space/missions/${project.slug}.\n\n${project.hashtag}\n\n#LiteSpace @LTCFoundation`
   )
 
   // URLs for sharing on social media
