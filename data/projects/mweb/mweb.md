@@ -27,7 +27,7 @@ MWEB, inspired by the Mimblewimble protocol, enhances Litecoin by achieving two 
 
 **Scalability Improvement:** MWEB addresses blockchain scalability by efficiently pruning old transaction data, reducing blockchain size, and ensuring a more scalable network.
 
-Mimble Wimble Extension Blocks work alongside the main blockchain, accommodating confidential transactions and pruning, while maintaining compatibility with existing wallets and services. This enhances interoperability and security without compromising Litecoin's robustness.
+Mimblewimble Extension Blocks work alongside the main blockchain, accommodating confidential transactions and pruning, while maintaining compatibility with existing wallets and services. This enhances interoperability and security without compromising Litecoin's robustness.
 
 By leveraging Mimblewimble, MWEB strengthens Litecoin's privacy and scalability, advancing its overall efficiency and security.
 
