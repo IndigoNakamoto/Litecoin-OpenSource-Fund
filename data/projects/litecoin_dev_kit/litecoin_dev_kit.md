@@ -2,7 +2,7 @@
 title: 'Litecoin Development Kit'
 summary: 'A cross-platform library for building Litecoin wallets with ease.'
 # website: 'https://www.bitcoindevkit.org'
-coverImage: '/static/images/projects/ldk.png'
+coverImage: '/static/images/projects/ldk3.png'
 # twitterHandle: 'https://twitter.com/bitcoindevkit'
 gitRepository: 'https://github.com/LitecoinDevKit'
 type: 'Project'
