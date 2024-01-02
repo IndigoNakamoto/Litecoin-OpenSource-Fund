@@ -41,6 +41,11 @@ const images = [
     src: 'electrum.png',
     href: '/missions/electrum',
   },
+  {
+    title: 'Stackwallet',
+    src: 'stackwallet.png',
+    href: '/missions/electrum',
+  },
 ]
 
 function CompletedProjects() {
