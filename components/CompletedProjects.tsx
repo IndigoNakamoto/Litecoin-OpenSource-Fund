@@ -44,7 +44,7 @@ const images = [
   {
     title: 'Stackwallet',
     src: 'stackwallet.png',
-    href: '/missions/electrum',
+    href: '/missions/stackwallet',
   },
 ]
 
