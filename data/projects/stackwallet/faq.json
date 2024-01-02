@@ -20,6 +20,10 @@
           "answer": "Yes. While Stack Wallet Backup simplifies the restoration process, writing down your recovery key ensures access to your funds in case of unexpected technical issues."
         },
         {
+          "question": "How can I get my coin of choice onto Stack Wallet?",
+          "answer": "Contact Stack Wallet on their social media accounts to discuss bringing your project to Stack Wallet. They're happy to engage with you and your community."
+        },
+        {
           "question": "How do I restore my wallet?",
           "answer": "Restoring your wallet is easy. Select 'Add New' on your My Stack page, choose the currency, and opt for 'Restore Wallet.' Enter your preferred name and the complete seed phrase saved for the wallet to see it back in your Stack."
         }
