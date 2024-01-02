@@ -9,7 +9,7 @@ twitterHandle: 'stack_wallet'
 type: 'Project'
 slug: 'stackwallet'
 contributor: 'stack_wallet'
-hashtag: '#Stackwallet'
+hashtag: '#stackwallet'
 ---
 
 # Support Stack Wallet Development
