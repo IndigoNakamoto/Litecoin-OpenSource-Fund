@@ -66,6 +66,7 @@ export default function ApplicationForm() {
           <option value="omnilite">Omni Lite</option>
           <option value="ldk">Litecoin Dev Kit</option>
           <option value="education">Education</option>
+          <option value="litewallet">Litewallet</option>
           <option value="other">Other</option>
         </select>
       </label>
