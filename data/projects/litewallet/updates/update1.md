@@ -30,11 +30,7 @@ The issue is the standard of UnsafeUnmutablePointers has changed over the few ye
 Correct Addresses:
 ![test-addresses](https://github.com/litecoin-foundation/litewallet-ios/assets/2899463/f50cd2d6-9ef2-48df-a0b4-9e0b65ab0edf)
 
-## Bounty Distribution
-
-Thanks for the bounty _21Ł_ Thanks to the Lite.Space and Indigo Nakamoto. Please visit [Lite.Space](https://www.lite.space/missions/litewallet) to learn more about other bounties!
-
-**Note on Distribution:**
+### Bounty Distribution
 
 - Lead Developer: 75% (Amount: 15.75Ł) twitter.com/bigkerrytweets
 - PR Code Review: 20% (Amount: 4.2Ł) twitter.com/josi_kie
