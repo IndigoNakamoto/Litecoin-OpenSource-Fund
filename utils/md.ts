@@ -28,6 +28,7 @@ const FIELDS = [
   'recurringAmountGoal',
   'recurringPeriod',
   'recurringStatus',
+  'totalPaid',
 ]
 
 const UPDATE_FIELDS = [

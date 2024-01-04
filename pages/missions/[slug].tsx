@@ -109,6 +109,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     }
   }
 
+  // Markdown Project Data
   const {
     // Main Info
     slug,
@@ -147,6 +148,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     isRecurring,
     recurringAmountGoal,
     recurringPeriod,
+    totalPaid,
 
     // Timelines
     expectedCompletion,
@@ -201,6 +203,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     return fraction ? `${whole}.${fraction}` : whole
   }
 
+  // load faq
   useEffect(() => {
     async function loadFAQData() {
       const data = await fetchFAQData(slug)
@@ -228,8 +231,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     return newMenuItem
   }
 
+  // Check for menu query parameter
   useEffect(() => {
-    // Check for menu query parameter
     if (router.query.menu) {
       switch (router.query.menu) {
         case 'community':
@@ -255,6 +258,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     }
   }, [router.query])
 
+  // get donations, contributors, and supporters
   useEffect(() => {
     const fetchData = async () => {
       // Fetch mission info
@@ -442,7 +446,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 </div>
               </div>
             )}
-
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
               <>
@@ -490,13 +493,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   {addressStats && (
                     <div className="">
                       <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
-                        Ł {formatLits(addressStats.funded_txo_sum)}{' '}
+                        Ł {formatLits(addressStats.funded_txo_sum)}
                       </h4>
                       <h4 className="dark:text-gray-100">Litecoin raised</h4>
                     </div>
                   )}
                   {addressStats && (
-                    <div className="mt-4">
+                    <div className="mt-2">
+                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                        Ł {formatLits(totalPaid)}
+                      </h4>
+                      <h4 className="dark:text-gray-100">Litecoin paid</h4>
+                    </div>
+                  )}
+                  {addressStats && (
+                    <div className="mt-2">
                       <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                         {addressStats.tx_count || '0'}
                       </h4>

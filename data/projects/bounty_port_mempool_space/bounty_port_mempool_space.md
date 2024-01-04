@@ -10,6 +10,7 @@ type: 'Bounty'
 contributor: 'loshan1212'
 hashtag: '#LitecoinSpace'
 bountyStatus: 'completed'
+totalPaid: 17.5
 ---
 
 ## Bringing Mempool.Space to Litecoin

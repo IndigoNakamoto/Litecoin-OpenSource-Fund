@@ -11,6 +11,7 @@ slug: 'bounty_port_ordinals'
 contributor: 'anthonyonchain'
 hashtag: '#OrdinalsLite'
 bountyStatus: 'completed'
+totalPaid: 22
 ---
 
 # Ordinals Lite: Ported to Litecoin - A Success Story!

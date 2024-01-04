@@ -11,6 +11,7 @@ type: 'Bounty'
 contributor: 'anthonyonchain'
 hashtag: '#Litescribe'
 bountyStatus: 'completed'
+totalPaid: 18
 ---
 
 ## Litescribe Wallet: A New Era in Litecoin NFT Marketplace

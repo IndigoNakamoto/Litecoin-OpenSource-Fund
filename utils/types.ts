@@ -100,6 +100,7 @@ export type ProjectItem = {
   recurringAmountGoal?: number
   recurringPeriod?: RecurringPeriod
   recurringStatus?: FundingStatus
+  totalPaid?: number | undefined
 
   // Technical Details
   techStack?: string[]
