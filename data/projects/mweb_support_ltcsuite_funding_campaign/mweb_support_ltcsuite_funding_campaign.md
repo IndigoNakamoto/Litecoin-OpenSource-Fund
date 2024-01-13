@@ -5,7 +5,7 @@ socialSummary: 'Contribute to the MWEB Support in ltcsuite Funding Campaign and 
 coverImage: '/static/images/projects/ltcsuite.png'
 gitRepository: 'https://github.com/ltcsuite'
 type: 'Project'
-contributor: ''
+contributor: 'hectorchu'
 slug: 'mweb_support_ltcsuite_funding_campaign'
 bountyStatus: 'open'
 ---
