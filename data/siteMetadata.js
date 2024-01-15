@@ -17,7 +17,7 @@ const siteMetadata = {
   email: 'support@lite.space',
   github: 'https://github.com/litecoin-project',
   twitter: 'https://twitter.com/ltcfoundation',
-
+  reddit: 'https://reddit.com/r/litecoin',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the

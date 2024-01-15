@@ -113,6 +113,7 @@ const MobileNav = () => {
                   href={siteMetadata.linkedin}
                   size={6}
                 />
+                <SocialIcon kind="reddit" href={siteMetadata.reddit} size={6} />
                 <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
               </div>
 
