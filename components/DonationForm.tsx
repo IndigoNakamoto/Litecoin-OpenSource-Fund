@@ -12,7 +12,7 @@ import Image from 'next/legacy/image'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import React from 'react'
 config.autoAddCss = false
-const EMAIL_REGEX = /^$|^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+const EMAIL_REGEX = /^$|^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$/
 const TWITTER_USERNAME_REGEX = /^(?:[a-zA-Z0-9_]+)?$/
 
 type DonationStepsProps = {
