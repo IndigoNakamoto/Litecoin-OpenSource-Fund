@@ -29,3 +29,7 @@ If you start the website (either in development or production mode), you can acc
 PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request on [github.com/OpenSats/website/pulls](github.com/OpenSats/website/pulls).
 
 Thanks for supporting OpenSats!
+
+## Clear community twitter image cache
+
+search and uncomment //&clearCache=true

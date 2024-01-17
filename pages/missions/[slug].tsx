@@ -308,7 +308,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         const contributorsArray = contributor.split(',')
         if (contributorsArray.length > 0) {
           const contributorsResponse = await fetch(
-            `/api/twitterUsers?usernames=${contributor}`
+            `/api/twitterUsers?usernames=${contributor}` //&clearCache=true
           )
           const twitterContributors = await contributorsResponse.json()
           setTwitterContributors(twitterContributors)
@@ -334,7 +334,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         // If you want to join the unique supporters into a comma-separated string
         const uniqueSupportersString = uniqueSupportersArray.join(',')
         const response = await fetch(
-          `/api/twitterUsers?usernames=${uniqueSupportersString}`
+          `/api/twitterUsers?usernames=${uniqueSupportersString}` //&clearCache=true
         )
         const twitterUsers = await response.json()
         setTwitterUsers(twitterUsers)
