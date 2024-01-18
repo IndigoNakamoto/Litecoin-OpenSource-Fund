@@ -6,10 +6,11 @@ gitRepository: 'https://github.com/LiteVerseHoldings/extension-ltc'
 twitterHandle: 'https://twitter.com/litescribe_io'
 website: 'https://litescribe.io/'
 type: 'Project'
-contributor: 'anthonyonchain,litescribe_io,unisat_wallet'
+contributor: 'anthonyonchain,AllSageMan,litescribe_io,unisat_wallet'
 hashtag: '#Litescribe'
 socialSummary: 'OrdinalsLiteMarket is an open source trustless Litecoin NFT marketplace based on partially signed litecoin transactions'
 slug: 'litescribe'
+totalPaid: 18
 ---
 
 ## Litescribe Wallet: A New Era in Litecoin NFT Marketplace
