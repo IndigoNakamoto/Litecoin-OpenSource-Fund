@@ -6,7 +6,7 @@ nym: 'Litecoin Foundation'
 twitterHandle: 'https://www.twitter.com/ltcfoundation'
 type: 'Development Fund'
 owner: ''
-contributor: 'ltcfoundation'
+contributor: 'indigo_nakamoto'
 hashtag: '#Litecoin'
 slug: 'operations_budget'
 ---
