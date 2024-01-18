@@ -12,7 +12,8 @@ import Image from 'next/legacy/image'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import React from 'react'
 config.autoAddCss = false
-const EMAIL_REGEX = /^$|^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$/
+// const EMAIL_REGEX = /^$|^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$/
+const EMAIL_REGEX = /^$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 const TWITTER_USERNAME_REGEX = /^(?:[a-zA-Z0-9_]+)?$/
 
 type DonationStepsProps = {
@@ -148,7 +149,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </h3>
           <input
             type="email"
-            placeholder={`email@litecoin.net`}
+            placeholder={`donate@litecoin.net`}
             className={` mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
               emailError ? 'border-red-500' : ''
             }`}
