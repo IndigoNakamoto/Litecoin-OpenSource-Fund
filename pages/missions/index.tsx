@@ -28,6 +28,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     // )
 
     const desiredOrder = [
+      'General Fund',
       'Litecoin Core',
       'MWEB',
       'Ordinals Lite',
@@ -160,7 +161,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </div>
       <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-800 dark:to-gray-700 md:p-8">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-8 md:grid-cols-2">
+        <ul className="grid max-w-5xl gap-8 md:grid-cols-1">
           {DevOpsProjects &&
             DevOpsProjects.map((p, i) => (
               <li key={i} className="">

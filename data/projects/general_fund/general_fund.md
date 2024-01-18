@@ -5,7 +5,7 @@ nym: 'Litecoin Foundation'
 coverImage: '/static/images/projects/generalfund2.png'
 twitterHandle: 'https://www.twitter.com/ltcfoundation'
 hidden: false
-type: 'Development Fund'
+type: 'Project'
 contributor: 'ltcfoundation'
 socialSummary: '🌐 Propel the future of Litecoin with the General Fund! Join @ltcfoundation in fostering open-source innovation, advancing software, and enlightening the community. Your support reshapes the Litecoin landscape.'
 slug: 'general_fund'
