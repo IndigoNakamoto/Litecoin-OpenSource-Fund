@@ -5,7 +5,7 @@ socialSummary: 'Contribute to the MWEB Support in ltcsuite Funding Campaign and 
 coverImage: '/static/images/projects/MWEB_ltcsuite.png'
 type: 'Project'
 contributorsLitecoin: 'hectorchu'
-advocates: 'ltcfoundation,litespace_,loshan1212'
+advocates: 'ltcfoundation,loshan1212'
 hashtag: '#LTCDev'
 gitRepository: 'https://github.com/ltcsuite'
 telegramLink: 'https://t.me/MWEB_Testnet'

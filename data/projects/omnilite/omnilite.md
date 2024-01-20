@@ -11,7 +11,7 @@ hidden: false
 type: 'Project'
 contributorsBitcoin: 'Omni_layer,OmniLabOfficial'
 contributorsLitecoin: 'loshan1212'
-advocates: 'OmniClub2013'
+advocates: 'ltcfoundation,OmniClub2013'
 owner: ''
 hashtag: '#OmniLite'
 socialSummary: 'Revolutionize the Litecoin experience! Create tokens, launch decentralized crowdfunds, and even craft NFTs. All on the trusted Litecoin blockchain. Learn more ➡️ '

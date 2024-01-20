@@ -4,6 +4,7 @@ summary: 'MWEB improves privacy and scalability on the Litecoin blockchain. It l
 coverImage: '/static/images/projects/MWEB.webp'
 type: 'Project'
 contributorsLitecoin: 'davidBurkett38,satoshilite,ecurrencyhodler'
+advocates: 'ltcfoundation'
 hashtag: '#MWEB'
 socialSummary: 'MWEB improves privacy and scalability on the Litecoin blockchain. Based on the Mimblewimble protocol, it promises confidential transactions and efficient pruning. We need YOUR support for its continued development.'
 website: 'https://wenmweb.com/'
