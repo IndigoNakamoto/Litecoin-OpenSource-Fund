@@ -491,7 +491,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
               <>
-                {/* <div className="markdown">
+                <div className="markdown">
                   {twitterContributors.length > 0 ? (
                     <>
                       <h1>
@@ -502,7 +502,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       <TwitterUsers users={twitterContributors} />
                     </>
                   ) : null}
-                </div> */}
+                </div>
                 <div className="markdown">
                   {twitterContributorsLitecoin.length > 0 ? (
                     <>
