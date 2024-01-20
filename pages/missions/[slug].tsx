@@ -491,7 +491,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
               <>
-                <div className="markdown">
+                {/* <div className="markdown">
                   {twitterContributors.length > 0 ? (
                     <>
                       <h1>
@@ -500,6 +500,40 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                           : 'Contributor'}
                       </h1>
                       <TwitterUsers users={twitterContributors} />
+                    </>
+                  ) : null}
+                </div> */}
+                <div className="markdown">
+                  {twitterContributorsLitecoin.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterContributorsLitecoin.length > 1
+                          ? 'Litecoin Contributors'
+                          : 'Litecoin Contributor'}
+                      </h1>
+                      <TwitterUsers users={twitterContributorsLitecoin} />
+                    </>
+                  ) : null}
+                </div>
+                <div className="markdown">
+                  {twitterContributorsBitcoin.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterContributorsBitcoin.length > 1
+                          ? 'Bitcoin Contributors'
+                          : 'Bitcoin Contributor'}
+                      </h1>
+                      <TwitterUsers users={twitterContributorsBitcoin} />
+                    </>
+                  ) : null}
+                </div>
+                <div className="markdown">
+                  {twitterAdvocates.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterAdvocates.length > 1 ? 'Advocates' : 'Advocate'}
+                      </h1>
+                      <TwitterUsers users={twitterAdvocates} />
                     </>
                   ) : null}
                 </div>
