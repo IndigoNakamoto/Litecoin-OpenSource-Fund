@@ -66,6 +66,9 @@ export type ProjectItem = {
 
   // Community Interaction
   contributor?: string
+  contributorsBitcoin?: string
+  contributorsLitecoin?: string
+  advocates?: string
   hashtag?: string
   comments?: string[]
 

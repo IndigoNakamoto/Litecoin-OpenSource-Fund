@@ -121,6 +121,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
     // Community Interaction
     contributor,
+    contributorsBitcoin,
+    contributorsLitecoin,
+    advocates,
     hashtag,
 
     // Resources and Metadata
@@ -160,6 +163,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
+  const [twitterContributorsBitcoin, setTwitterContributorsBitcoin] = useState<
+    TwitterUser[]
+  >([])
+  const [twitterContributorsLitecoin, setTwitterContributorsLitecoin] =
+    useState<TwitterUser[]>([])
+  const [twitterAdvocates, setTwitterAdvocates] = useState<TwitterUser[]>([])
 
   const [faq, setFaq] = useState<any>({})
   const [faqCount, setFaqCount] = useState<any>()
@@ -315,6 +324,39 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         }
       }
 
+      if (contributorsBitcoin) {
+        const contributorsArray = contributorsBitcoin.split(',')
+        if (contributorsArray.length > 0) {
+          const contributorsResponse = await fetch(
+            `/api/twitterUsers?usernames=${contributorsBitcoin}` //&clearCache=true
+          )
+          const twitterContributorsBitcoin = await contributorsResponse.json()
+          setTwitterContributorsBitcoin(twitterContributorsBitcoin)
+        }
+      }
+
+      if (contributorsLitecoin) {
+        const contributorsArray = contributorsLitecoin.split(',')
+        if (contributorsArray.length > 0) {
+          const contributorsResponse = await fetch(
+            `/api/twitterUsers?usernames=${contributorsLitecoin}` //&clearCache=true
+          )
+          const twitterContributorsLitecoin = await contributorsResponse.json()
+          setTwitterContributorsLitecoin(twitterContributorsLitecoin)
+        }
+      }
+
+      if (advocates) {
+        const contributorsArray = advocates.split(',')
+        if (contributorsArray.length > 0) {
+          const contributorsResponse = await fetch(
+            `/api/twitterUsers?usernames=${advocates}` //&clearCache=true
+          )
+          const twitterAdvocates = await contributorsResponse.json()
+          setTwitterAdvocates(twitterAdvocates)
+        }
+      }
+
       // Fetch Twitter user details
       if (stats.supporters && stats.supporters.length > 0) {
         const supporters = stats.supporters.map((supporter) => {
@@ -449,7 +491,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* ### Community Section */}
             {selectedMenuItem === 'community' && (
               <>
-                <div className="markdown">
+                {/* <div className="markdown">
                   {twitterContributors.length > 0 ? (
                     <>
                       <h1>
@@ -458,6 +500,40 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                           : 'Contributor'}
                       </h1>
                       <TwitterUsers users={twitterContributors} />
+                    </>
+                  ) : null}
+                </div> */}
+                <div className="markdown">
+                  {twitterContributorsLitecoin.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterContributorsLitecoin.length > 1
+                          ? 'Litecoin Contributors'
+                          : 'Litecoin Contributor'}
+                      </h1>
+                      <TwitterUsers users={twitterContributorsLitecoin} />
+                    </>
+                  ) : null}
+                </div>
+                <div className="markdown">
+                  {twitterContributorsBitcoin.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterContributorsBitcoin.length > 1
+                          ? 'Bitcoin Contributors'
+                          : 'Bitcoin Contributor'}
+                      </h1>
+                      <TwitterUsers users={twitterContributorsBitcoin} />
+                    </>
+                  ) : null}
+                </div>
+                <div className="markdown">
+                  {twitterAdvocates.length > 0 ? (
+                    <>
+                      <h1>
+                        {twitterAdvocates.length > 1 ? 'Advocates' : 'Advocate'}
+                      </h1>
+                      <TwitterUsers users={twitterAdvocates} />
                     </>
                   ) : null}
                 </div>

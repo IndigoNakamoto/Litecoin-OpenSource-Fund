@@ -21,6 +21,9 @@ const FIELDS = [
   'hidden',
   'type',
   'contributor',
+  'contributorsBitcoin',
+  'contributorsLitecoin',
+  'advocates',
   'owner',
   'hashtag',
   'socialSummary',
@@ -74,6 +77,15 @@ export function getPostBySlug(
       items[field] = content
     }
     if (field === 'contributor') {
+      items[field] = content
+    }
+    if (field === 'contributorsBitcoin') {
+      items[field] = content
+    }
+    if (field === 'contributorsLitecoin') {
+      items[field] = content
+    }
+    if (field === 'advocates') {
       items[field] = content
     }
     if (typeof data[field] !== 'undefined') {
