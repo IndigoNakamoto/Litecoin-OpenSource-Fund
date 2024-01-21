@@ -12,6 +12,7 @@ contributorsLitecoin: 'anthonyonchain'
 advocates: 'ltcfoundation,indigo_nakamoto,lukewrightmain'
 owner: ''
 hashtag: '#OrdinalsLite'
+discordLink: 'https://ordlite.com/'
 socialSummary: '🔍 Discover OrdinalsLite: A revolutionary approach to Litecoin asset management! Dive deep with our tools, and join the future of blockchain. 🌐 Support and explore: www.OrdinalsLite.com 🚀'
 slug: 'ordinals_lite'
 totalPaid: 22

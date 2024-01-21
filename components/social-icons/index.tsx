@@ -10,6 +10,7 @@ import X from './x.svg'
 import Reddit from './reddit.svg'
 import Telegram from './telegram.svg'
 import Globe from './globe.svg'
+import Discord from './discord.svg'
 
 // Icons taken from: https://simpleicons.org/
 // and from: https://www.flaticon.com/icon-fonts-most-downloaded
@@ -17,6 +18,7 @@ import Globe from './globe.svg'
 const components = {
   mail: Mail,
   github: Github,
+  discord: Discord,
   facebook: Facebook,
   youtube: Youtube,
   linkedin: Linkedin,
