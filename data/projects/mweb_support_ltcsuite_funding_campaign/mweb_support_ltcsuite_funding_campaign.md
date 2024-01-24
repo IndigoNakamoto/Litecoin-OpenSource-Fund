@@ -17,11 +17,7 @@ bountyStatus: 'open'
 
 ## Summary
 
-We invite financial donors and advocates to join our effort in supporting the integration of MimbleWimble Extension Block (MWEB) in ltcsuite. Hector Chu has initiated the development, presenting a prototype code integrating ltcsuite with LW. Your contributions will play a crucial role in advancing this project and enhancing Litecoin functionality. Moreover, this implementation will serve as a reference for MWEB light client support, benefiting third-party wallet developers.
-
-## Current Status
-
-As of January 4, 2024, Hector Chu has submitted the prototype code for integrating ltcsuite with LW. The iOS version is in progress, and efforts are being made to fix dependencies for the Android version. MWEB support is not yet included in ltcsuite but is a crucial step in the development process.
+We invite financial donors and advocates to join our effort in supporting the integration of MimbleWimble Extension Block (MWEB) in ltcsuite. Hector Chu has initiated the development, presenting a prototype code integrating ltcsuite with LW. Your contributions will play a crucial role in supporting this project. Moreover, this implementation will serve as a reference for MWEB light client support, benefiting third-party wallet developers.
 
 ## Reference Implementation for MWEB Light Client Mode
 
