@@ -17,7 +17,7 @@ bountyStatus: 'open'
 
 ## Summary
 
-We invite financial donors and advocates to join our effort in supporting the integration of MimbleWimble Extension Block (MWEB) in ltcsuite. Hector Chu has initiated the development, presenting a prototype code integrating ltcsuite with LW. Your contributions will play a crucial role in supporting this project. Moreover, this implementation will serve as a reference for MWEB light client support, benefiting third-party wallet developers.
+We invite financial donors and advocates to join our effort in supporting the integration of MimbleWimble Extension Block (MWEB) in ltcsuite. Hector Chu has initiated the development. Moreover, this implementation will serve as a reference for MWEB light client support, benefiting third-party wallet developers.
 
 ## Reference Implementation for MWEB Light Client Mode
 
