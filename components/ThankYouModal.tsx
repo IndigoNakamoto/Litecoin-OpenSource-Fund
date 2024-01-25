@@ -98,7 +98,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="font-semi flex w-min gap-4 rounded-xl bg-blue-100 p-2 px-6 font-semibold dark:bg-blue-800">
+        <div className="font-semi flex w-min gap-4 rounded-xl bg-blue-100 p-2 px-6 font-semibold dark:bg-blue-900">
           SHARE:
           <SocialIcon kind="twitter" href={twitterShareUrl} size={8} />
           <SocialIcon kind="facebook" href={facebookShareUrl} size={8} />
