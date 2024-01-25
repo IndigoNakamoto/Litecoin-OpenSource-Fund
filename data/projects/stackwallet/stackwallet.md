@@ -5,7 +5,11 @@ socialSummary: 'Stack Wallet is a completely open-source multicoin wallet. It fo
 coverImage: '/static/images/projects/stackwallet.png'
 website: 'https://stackwallet.com/'
 gitRepository: 'https://github.com/cypherstack/stack_wallet'
-twitterHandle: 'stack_wallet'
+twitterHandle: 'https://twitter.com/stack_wallet'
+discordLink: 'https://discord.gg/mRPZuXx3At'
+telegramLink: 'https://t.me/stackwallet'
+redditLink: 'https://www.reddit.com/r/stackwallet/'
+
 type: 'Project'
 slug: 'stackwallet'
 contributor: 'stack_wallet'
