@@ -56,8 +56,8 @@ const ThankYouModal: React.FC<ModalProps> = ({
       isOpen={isOpen}
       style={{ content: focusStyle }}
       onRequestClose={onRequestClose}
-      className="max-h-full w-11/12 overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:m-8 sm:w-9/12 sm:rounded-xl 2xl:w-5/12"
-      overlayClassName="inset-0 fixed backdrop-blur-3xl  flex items-center justify-center transform duration-400 ease-in"
+      className="max-h-full max-w-sm overflow-y-auto rounded-3xl bg-white p-8 shadow-2xl dark:bg-stone-800 sm:m-8 md:max-w-xl"
+      overlayClassName="inset-0 fixed backdrop-blur-xl  flex items-center justify-center transform duration-400 ease-in"
       appElement={
         typeof window === 'undefined'
           ? undefined
@@ -73,7 +73,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
       </div>
       <div className="items-center space-y-4 py-4">
         <div className="">
-          <div className="flex flex-col items-center justify-center">
+          <div className="mt-4 flex flex-col items-center justify-center">
             {session?.user?.image && (
               <Image
                 src={getCleanImageUrl(session.user.image)}
@@ -88,7 +88,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
               Thank You for Your Support{userName}!
             </h1>
             <div>
-              <p className="mt-4 text-center">
+              <p className="mx-16 mt-4 text-center">
                 Your donation to {project.title} makes a big difference. It
                 helps the contributors maintain and improve {project.title},
                 keeping Litecoin at the forefront of cryptocurrency.
@@ -97,10 +97,12 @@ const ThankYouModal: React.FC<ModalProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex justify-center gap-4 py-4">
-        SHARE:
-        <SocialIcon kind="twitter" href={twitterShareUrl} size={8} />
-        <SocialIcon kind="facebook" href={facebookShareUrl} size={8} />
+      <div className="flex justify-center">
+        <div className="flex w-min gap-4 rounded-xl bg-blue-100 p-2 dark:bg-blue-800">
+          SHARE:
+          <SocialIcon kind="twitter" href={twitterShareUrl} size={8} />
+          <SocialIcon kind="facebook" href={facebookShareUrl} size={8} />
+        </div>
       </div>
     </ReactModal>
   )
