@@ -1,7 +1,7 @@
 ---
 title: 'Stackwallet'
 summary: 'Advancing Litecoin with top-tier privacy features, optimized coin control for ordinals, and a commitment to user-friendly experiences. '
-socialSummary: 'Support @Stack_Wallet on Lite.Space: A fully open-source multi-coin wallet revolutionizing the Litecoin experience. Advancing Litecoin with top-tier privacy features, optimized coin control for ordinals, and a commitment to user-friendly experiences. #LTCDev'
+socialSummary: 'Support @Stack_Wallet: A fully open-source multi-coin wallet revolutionizing the Litecoin experience. Advancing Litecoin with top-tier privacy features, optimized coin control for ordinals, and a commitment to user-friendly experiences. #LTCDev'
 coverImage: '/static/images/projects/stackwallet.png'
 website: 'https://stackwallet.com/'
 gitRepository: 'https://github.com/cypherstack/stack_wallet'
