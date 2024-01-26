@@ -664,7 +664,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 : 'Support this mission'}
             </button>
             <SocialMediaShare
-              className="mt-0 flex space-x-1 rounded-xl bg-blue-100 p-2 px-6 dark:bg-blue-900"
+              className="mt-0 flex w-min  space-x-1 rounded-xl bg-blue-100 p-2 px-6 dark:bg-blue-900"
               title={title}
               summary={socialSummary}
             />
