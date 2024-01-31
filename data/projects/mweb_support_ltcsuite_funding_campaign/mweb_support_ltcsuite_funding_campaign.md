@@ -1,6 +1,6 @@
 ---
 title: 'MWEB Support in ltcsuite Funding Campaign'
-summary: 'Join us in supporting the integration of MimbleWimble in ltcsuite for fungible Litecoin functionality and as a reference implementation for MWEB light client mode.'
+summary: 'Join us in supporting the integration of Mimblewimble in ltcsuite for fungible Litecoin functionality and as a reference implementation for MWEB light client mode.'
 socialSummary: 'Contribute to the MWEB Support in ltcsuite Funding Campaign and be a part of shaping the future of Litecoin development. This implementation will serve as a reference for MWEB light client support.'
 coverImage: '/static/images/projects/MWEB_ltcsuite.png'
 type: 'Project'
@@ -17,7 +17,7 @@ bountyStatus: 'open'
 
 ## Summary
 
-We invite financial donors and advocates to join our effort in supporting the integration of MimbleWimble Extension Block (MWEB) in ltcsuite. Hector Chu has initiated the development. Moreover, this implementation will serve as a reference for MWEB light client support, benefiting third-party wallet developers.
+We invite financial donors and advocates to join our effort in supporting the integration of Mimblewimble Extension Block (MWEB) in ltcsuite. Hector Chu has initiated the development. Moreover, this implementation will serve as a reference for MWEB light client support, benefiting third-party wallet developers.
 
 ## Reference Implementation for MWEB Light Client Mode
 
