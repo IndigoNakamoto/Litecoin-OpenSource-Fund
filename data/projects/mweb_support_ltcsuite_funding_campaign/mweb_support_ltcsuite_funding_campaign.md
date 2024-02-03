@@ -11,6 +11,7 @@ gitRepository: 'https://github.com/hectorchu/neutrino'
 telegramLink: 'https://t.me/MWEB_Testnet'
 slug: 'mweb_support_ltcsuite_funding_campaign'
 bountyStatus: 'open'
+totalPaid: 20
 ---
 
 # MWEB Support in ltcsuite Funding Campaign
