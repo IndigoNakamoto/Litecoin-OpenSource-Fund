@@ -226,47 +226,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     loadFAQData()
   }, [slug])
 
-  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
-    'mission'
-  )
-
-  // Define a handler function for menu item changes.
-  const handleMenuItemChange = (newMenuItem) => {
-    setSelectedMenuItem(newMenuItem)
-
-    // Update the URL without causing a page reload
-    // const updatedURL = `/missions/${slug}?menu=${newMenuItem}`
-    // router.push(updatedURL, undefined, { shallow: true })
-    return newMenuItem
-  }
-
-  // Check for menu query parameter
-  useEffect(() => {
-    if (router.query.menu) {
-      switch (router.query.menu) {
-        case 'community':
-          setSelectedMenuItem('community')
-          break
-        case 'comments':
-          setSelectedMenuItem('comments')
-          break
-        case 'faq':
-          setSelectedMenuItem('faq')
-          break
-        case 'updates':
-          setSelectedMenuItem('updates')
-          break
-        case 'project':
-          setSelectedMenuItem('mission')
-          break
-        default:
-          setSelectedMenuItem('mission')
-      }
-    } else {
-      setSelectedMenuItem('mission')
-    }
-  }, [router.query])
-
   // get donations, contributors, and supporters
   useEffect(() => {
     const fetchData = async () => {
@@ -386,6 +345,84 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     fetchData().catch(console.error)
   }, [contributor, slug])
 
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
+    'mission'
+  )
+
+  const [selectedUpdateId, setSelectedUpdateId] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (selectedUpdateId) {
+      const element = document.getElementById(`update-${selectedUpdateId}`)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+  }, [selectedUpdateId])
+
+  useEffect(() => {
+    // Function to handle global clicks
+    const handleGlobalClick = (event) => {
+      // Logic to check if the click is outside of an update component
+      let isOutside = true
+      updates.forEach((post) => {
+        // Assuming each ProjectUpdate or its wrapper div has an id `update-${post.id}`
+        const element = document.getElementById(`update-${post.id}`)
+        if (element && element.contains(event.target)) {
+          isOutside = false
+        }
+      })
+
+      // If the click is outside of all ProjectUpdate components, reset selectedUpdateId
+      if (isOutside) {
+        setSelectedUpdateId(null)
+      }
+    }
+
+    // Add the global click listener
+    document.addEventListener('click', handleGlobalClick)
+
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener('click', handleGlobalClick)
+    }
+  }, [updates]) // Depend on updates, if they change, the effect will re-run
+
+  // Define a handler function for menu item changes.
+  const handleMenuItemChange = (newMenuItem, updateId = null) => {
+    setSelectedMenuItem(newMenuItem)
+
+    const updatedURL = updateId
+      ? `/missions/${slug}?menu=${newMenuItem}&updateId=${updateId}`
+      : `/missions/${slug}?menu=${newMenuItem}`
+
+    router.push(updatedURL, undefined, { shallow: true })
+  }
+
+  // Check for menu query parameter
+  useEffect(() => {
+    const menu = router.query.menu
+    const updateId = router.query.updateId
+
+    // If `menu` is an array, take the first item; otherwise, use `menu` directly.
+    const selectedMenu = Array.isArray(menu) ? menu[0] : menu
+
+    if (selectedMenu) {
+      setSelectedMenuItem(selectedMenu)
+    } else {
+      setSelectedMenuItem('mission')
+    }
+
+    if (updateId) {
+      // Assuming `setSelectedUpdateId` can handle a number correctly.
+      setSelectedUpdateId(Number(updateId))
+      if (selectedMenu !== 'updates') {
+        // Navigate to updates if not already there
+        handleMenuItemChange('updates')
+      }
+    }
+  }, [router.query])
+
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
@@ -433,6 +470,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             </div>
 
             {/* ## PROJECT CONTENT */}
+
+            {/* ##Updates Section */}
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
               activeMenu={selectedMenuItem}
@@ -471,16 +510,18 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     updates
                       .filter((post) => post.id > 0)
                       .map((post, index) => (
-                        <ProjectUpdate
-                          key={index}
-                          title={post.title}
-                          summary={post.summary}
-                          authorTwitterHandle={post.authorTwitterHandle}
-                          date={post.date}
-                          tags={post.tags || []}
-                          content={post.content}
-                          id={post.id}
-                        />
+                        <div key={index} id={`update-${post.id}`}>
+                          <ProjectUpdate
+                            title={post.title}
+                            summary={post.summary}
+                            authorTwitterHandle={post.authorTwitterHandle}
+                            date={post.date}
+                            tags={post.tags || []}
+                            content={post.content}
+                            id={post.id}
+                            highlight={selectedUpdateId === post.id}
+                          />
+                        </div>
                       ))
                   ) : (
                     <h1>No updates available for this project.</h1>

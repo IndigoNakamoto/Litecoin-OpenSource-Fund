@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // components/ProjectUpdate.tsx
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Link from '@/components/Link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,11 +10,12 @@ import { faChevronRight, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 interface ProjectUpdateProps {
   title: string
   date: string
-  content?: string // Make content property optional
+  content?: string
   tags: string[]
   summary: string
   authorTwitterHandle: string
   id: number
+  highlight?: boolean
 }
 
 const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
@@ -23,18 +26,69 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
   id,
   tags = [],
   authorTwitterHandle,
+  highlight = false,
 }) => {
-  // State to track whether the content is shown or hidden
   const [showContent, setShowContent] = useState(false)
+  const [isCopied, setIsCopied] = useState(false)
+  // Use useRef to reference the component's DOM node
+  const projectUpdateRef = useRef<HTMLDivElement>(null)
 
-  // CSS class for the thicker border
-  const thickerBorderClass = showContent ? 'border-blue-400 border-1 ' : ''
+  const handleCopyLink = () => {
+    const updateUrl = `${window.location.origin}${window.location.pathname}?updateId=${id}`
+    navigator.clipboard
+      .writeText(updateUrl)
+      .then(() => {
+        setIsCopied(true)
+        setTimeout(() => setIsCopied(false), 2000)
+      })
+      .catch((err) => console.error('Failed to copy the link: ', err))
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleCopyLink()
+    }
+  }
+
+  // Function to detect clicks outside the component
+  const handleClickOutside = (event) => {
+    if (
+      projectUpdateRef.current &&
+      !projectUpdateRef.current.contains(event.target)
+    ) {
+      // If the click is outside the component, set highlight to false
+      // You might need to lift state up or use a context if highlight is a prop
+      console.log('Click outside')
+    }
+  }
+
+  useEffect(() => {
+    // Add event listener when the component mounts
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      // Remove event listener when the component unmounts
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  const thickerBorderClass =
+    showContent || highlight ? 'border-2 border-blue-200' : ''
 
   return (
+    // Add ref to the div to reference it in handleClickOutside
     <div
-      className={`my-8 rounded-lg border border-gray-300 bg-white p-4 dark:border-gray-600 dark:bg-gray-900 ${thickerBorderClass}`}
+      ref={projectUpdateRef}
+      className={`my-8 rounded-lg border bg-white p-4 dark:border-gray-600 dark:bg-gray-900 ${thickerBorderClass}`}
     >
-      <h6 className="text-sm text-gray-500">{`UPDATE #${id}`}</h6>
+      <h6
+        className="cursor-pointer text-sm text-gray-500"
+        onClick={handleCopyLink}
+        tabIndex="0"
+        onKeyDown={handleKeyPress}
+      >
+        {isCopied ? 'Copied!' : `UPDATE #${id}`}{' '}
+        {/* Conditionally render text based on isCopied */}
+      </h6>
       <h2 className="text-xl font-semibold">{title}</h2>
       <Link
         className="mt-0"
