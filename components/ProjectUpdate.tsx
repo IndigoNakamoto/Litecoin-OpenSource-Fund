@@ -72,21 +72,23 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
   }, [])
 
   const thickerBorderClass =
-    showContent || highlight ? 'border-2 border-blue-200' : ''
+    showContent || highlight
+      ? 'border-2 border-blue-200 dark:border-blue-600'
+      : ''
 
   return (
     // Add ref to the div to reference it in handleClickOutside
     <div
       ref={projectUpdateRef}
-      className={`my-8 rounded-lg border bg-white p-4 dark:border-gray-600 dark:bg-gray-900 ${thickerBorderClass}`}
+      className={`my-8 rounded-lg border bg-white p-4 dark:bg-gray-900 ${thickerBorderClass}`}
     >
       <h6
-        className="cursor-pointer text-sm text-gray-500"
+        className="cursor-pointer text-sm text-gray-500 hover:text-blue-500 hover:underline"
         onClick={handleCopyLink}
         tabIndex={0}
         onKeyDown={handleKeyPress}
       >
-        {isCopied ? 'Copied!' : `UPDATE #${id}`}{' '}
+        {isCopied ? 'Link Copied!' : `UPDATE #${id}`}{' '}
         {/* Conditionally render text based on isCopied */}
       </h6>
       <h2 className="text-xl font-semibold">{title}</h2>
@@ -120,20 +122,17 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
       {/* Implement: Move button to the right. Add boarder style to button rounded-xl with a chevron pointed to the right with read more and a chevron pointed up with Read less. */}
       <div className="mt-4 flex justify-end">
         {content && (
-          <button
-            className="flex items-center text-blue-500 hover:underline dark:text-white dark:hover:text-blue-300"
-            onClick={() => setShowContent(!showContent)}
-          >
+          <button onClick={() => setShowContent(!showContent)}>
             {showContent ? (
-              <>
+              <div className="flex items-center hover:text-blue-500 hover:underline dark:text-white dark:hover:text-blue-300">
                 Read Less{' '}
                 <FontAwesomeIcon icon={faChevronUp} className="ml-2" />
-              </>
+              </div>
             ) : (
-              <>
+              <div className="flex items-center hover:text-blue-500 hover:underline dark:text-white dark:hover:text-blue-300">
                 Read More{' '}
                 <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
-              </>
+              </div>
             )}
           </button>
         )}
