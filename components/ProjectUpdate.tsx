@@ -83,7 +83,7 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
       <h6
         className="cursor-pointer text-sm text-gray-500"
         onClick={handleCopyLink}
-        tabIndex="0"
+        tabIndex={0}
         onKeyDown={handleKeyPress}
       >
         {isCopied ? 'Copied!' : `UPDATE #${id}`}{' '}

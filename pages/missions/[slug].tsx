@@ -363,19 +363,22 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   useEffect(() => {
     // Function to handle global clicks
     const handleGlobalClick = (event) => {
-      // Logic to check if the click is outside of an update component
-      let isOutside = true
-      updates.forEach((post) => {
-        // Assuming each ProjectUpdate or its wrapper div has an id `update-${post.id}`
-        const element = document.getElementById(`update-${post.id}`)
-        if (element && element.contains(event.target)) {
-          isOutside = false
-        }
-      })
+      // Only proceed if updates is defined
+      if (updates) {
+        // Logic to check if the click is outside of an update component
+        let isOutside = true
+        updates.forEach((post) => {
+          // Assuming each ProjectUpdate or its wrapper div has an id `update-${post.id}`
+          const element = document.getElementById(`update-${post.id}`)
+          if (element && element.contains(event.target)) {
+            isOutside = false
+          }
+        })
 
-      // If the click is outside of all ProjectUpdate components, reset selectedUpdateId
-      if (isOutside) {
-        setSelectedUpdateId(null)
+        // If the click is outside of all ProjectUpdate components, reset selectedUpdateId
+        if (isOutside) {
+          setSelectedUpdateId(null)
+        }
       }
     }
 
