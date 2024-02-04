@@ -1,5 +1,5 @@
 ---
-title: 'Update 2: Cake Wallet is interested in ltcsuite with MWEB'
+title: 'Update 2: Cake Wallet and Stack Wallet are interested in adding MWEB using ltcsuite'
 summary: 'Update 2: Cake Wallet is interested in ltcsuite with MWEB'
 date: '2024-01-28'
 authorTwitterHandle: 'ltcfoundation'
