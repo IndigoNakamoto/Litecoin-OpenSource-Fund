@@ -20,7 +20,7 @@ As we continue to push forward with integrating Mimblewimble Extension Block (MW
 
 ## Council Decisions and Funding
 
-The project's council has sent 20 LTC of the 60.11 LTC raised to Hector for his contributions thus far, acknowledging the extensive work completed and the milestones reached. This decision underscores our commitment to rewarding hard work and progress, ensuring that the development continues at a steady pace.
+The project's council has sent 20.21058290 LTC of the 60.11 LTC raised to Hector for his contributions thus far, acknowledging the extensive work completed and the milestones reached. This decision underscores our commitment to rewarding hard work and progress, ensuring that the development continues at a steady pace.
 
 ## How You Can Help
 
