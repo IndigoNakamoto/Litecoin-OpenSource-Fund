@@ -633,7 +633,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                         {addressStats.tx_count || '0'}
                       </h4>
-                      <h4 className="dark:text-gray-100">supporters</h4>
+                      <h4 className="dark:text-gray-100">donations</h4>
                     </div>
                   )}
                 </div>
