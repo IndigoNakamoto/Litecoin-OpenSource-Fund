@@ -218,8 +218,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           Donation Information
         </h3>
         <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
-          <strong>100% Passthrough:</strong> Yes, our operational costs aren't
-          covered by your donations to projects.
+          <strong>15% service fee:</strong> A 15% service fee to enhance our
+          operational capability.
         </p>
         <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
           <strong>Tax Deductibility:</strong> Donations are currently not tax

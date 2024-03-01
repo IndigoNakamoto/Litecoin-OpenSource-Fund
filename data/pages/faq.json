@@ -26,7 +26,7 @@
         },
         {
           "question": "What percentage of my donation directly supports projects?",
-          "answer": "100% of donations to the general fund and specific open-source projects go to grant recipients."
+          "answer": "85% of donations to the general fund and specific open-source projects go to grant recipients, the other 15% fund the operations of Lite.Space."
         },
         {
           "question": "In what form are grants distributed?",
@@ -48,10 +48,6 @@
         {
           "question": "Can you elaborate on your Council?",
           "answer": "Our Council comprises five members. Standard decisions are made by a simple majority (3-2), whereas council-specific changes necessitate a 4-1 majority. We publicly announce new Council members."
-        },
-        {
-          "question": "Is Lite.Space truly 100% passthrough?",
-          "answer": "Absolutely. Our operational costs, such as legal and accounting services, are separate from project donations."
         },
         {
           "question": "When do you announce funding opportunities?",
