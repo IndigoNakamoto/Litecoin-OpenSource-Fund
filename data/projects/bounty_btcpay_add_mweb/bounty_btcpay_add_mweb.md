@@ -2,14 +2,15 @@
 title: 'Add MWEB Support on BTCPay for Litecoin'
 summary: 'Raise funds to incentivize a developer to add MWEB (Mimblewimble) support on BTCPay for Litecoin.'
 socialSummary: 'Help fund the integration of MWEB support on BTCPay for Litecoin!'
-coverImage: '/static/images/projects/IMAGE.png'
+coverImage: '/static/images/projects/MWEB_BTCPay_Litecoin.jpeg'
 website: ''
 gitRepository: 'https://github.com/btcpayserver'
 twitterHandle: 'ltcfoundation'
 type: 'Bounty'
 slug: 'bounty_btcpay_add_mweb'
 contributor: ''
-hashtag: '#'
+hashtag: '#LTCDev #BTCPayMWEB'
+telegramLink: 'https://t.me/MWEB_Testnet'
 bountyStatus: 'open'
 ---
 
