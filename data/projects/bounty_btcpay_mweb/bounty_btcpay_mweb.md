@@ -9,7 +9,7 @@ twitterHandle: 'ltcfoundation'
 type: 'Bounty'
 slug: 'bounty_btcpay_mweb'
 contributor: ''
-hashtag: '#LTCDev #BTCPayMWEB'
+hashtag: '#LTCDev'
 telegramLink: 'https://t.me/MWEB_Testnet'
 bountyStatus: 'open'
 ---
