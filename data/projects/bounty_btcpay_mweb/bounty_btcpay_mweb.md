@@ -1,6 +1,6 @@
 ---
 title: 'Add MWEB Support on BTCPay for Litecoin'
-summary: 'Raise funds to incentivize a developer (or team) to add MWEB (Mimblewimble) support on BTCPay for Litecoin.'
+summary: 'Join us in supporting the addition of MWEB Support on BTCPay for Litecoin'
 socialSummary: '#LTCDev: Join us in supporting the addition of MWEB Support on BTCPay for Litecoin'
 coverImage: '/static/images/projects/MWEB_BTCPay_Litecoin.jpeg'
 website: ''
