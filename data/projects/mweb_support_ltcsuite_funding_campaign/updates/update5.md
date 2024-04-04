@@ -18,7 +18,7 @@ By participating in the Newborn beta testing, users contribute directly to fine-
 
 ## Join the Beta Testing
 
-We invite all interested parties to join the MWEB development telegram group and actively participate in the beta testing of MWEB for mobile devices. Your feedback and experiences are invaluable to the refinement process and will be crucial in successfully integrating MWEB into the Litecoin infrastructure. [Join the MWEB development telegram](https://t.me/MWEB_Testnet/1) to help beta test MWEB for mobile devices:
+We invite all interested parties to join the MWEB development telegram group and actively participate in the beta testing of MWEB for mobile devices. Your feedback and experiences are invaluable to the refinement process and will be crucial in successfully integrating MWEB into the Litecoin infrastructure. [Join the MWEB development telegram](https://t.me/MWEB_Testnet/1) to help beta test MWEB for mobile devices.
 
 ## Supporting the Future of Litecoin
 
