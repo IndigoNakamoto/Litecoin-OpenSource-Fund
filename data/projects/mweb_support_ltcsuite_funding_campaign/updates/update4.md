@@ -2,7 +2,7 @@
 title: 'Update 4: MWEB Support in ltcsuite Funding Campaign'
 summary: 'Exciting progress on MWEB integration into ltcsuite, highlighting technical advancements and our community's crucial support.'
 date: '2024-03-08'
-authorTwitterHandle: '@ltcfoundation'
+authorTwitterHandle: 'ltcfoundation'
 id: 4
 ---
 
