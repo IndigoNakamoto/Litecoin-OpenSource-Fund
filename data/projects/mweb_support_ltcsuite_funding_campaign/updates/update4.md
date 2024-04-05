@@ -1,6 +1,6 @@
 ---
 title: 'Update 4: MWEB Support in ltcsuite Funding Campaign'
-summary: 'Exciting progress on MWEB integration into ltcsuite, highlighting technical advancements and our community's crucial support.'
+summary: "Exciting progress on MWEB integration into ltcsuite, highlighting technical advancements and our community's crucial support."
 date: '2024-03-08'
 authorTwitterHandle: 'ltcfoundation'
 id: 4
@@ -28,5 +28,3 @@ As we continue to push the boundaries of privacy and scalability within the Lite
 - Hector Chu's dedication to integrating MWEB into ltcsuite not only paves the way for Litewallet's adoption of MWEB on iOS and Android but also offers a roadmap for other wallets to follow suit or use as a reference. This collaborative spirit is at the heart of our community's ethos and, emphasizing the importance of shared progress and open-source development.
 
 Stay tuned for more updates.
-
----
