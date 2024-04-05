@@ -12,7 +12,7 @@ The release of the Newborn marks a pivotal moment in Litecoin's ongoing developm
 
 ## How Newborn and MWEB Elevate Litecoin
 
-Newborn leverages ltcsuite, a robust Litecoin backend, enabling MWEB payments and bringing a new layer of privacy and scalability to Litecoin. The integration of MWEB through ltcsuite demonstrates Litecoin's adaptability and innovation and underlines the network's dedication to maintaining its position at the forefront of cryptocurrency advancements.
+Newborn leverages LTCSuite, a robust Litecoin backend, enabling MWEB payments and bringing a new layer of privacy and scalability to Litecoin. The integration of MWEB through LTCSuite demonstrates Litecoin's adaptability and innovation and underlines the network's dedication to maintaining its position at the forefront of cryptocurrency advancements.
 
 By participating in the Newborn beta testing, users contribute directly to fine-tuning and optimizing MWEB's implementation, ensuring a smooth and reliable transition to broader adoption. This collaborative effort embodies the community-driven ethos of Litecoin and its ecosystem.
 
@@ -22,11 +22,11 @@ We invite all interested parties to join the MWEB development telegram group and
 
 ## Supporting the Future of Litecoin
 
-In parallel with the Newborn beta testing, the MWEB Support in ltcsuite Funding Campaign is in full swing. Spearheaded by notable contributors such as Hector Chu and supported by the Litecoin Foundation, this campaign aims to fund the integration of MWEB into ltcsuite. This initiative paves the way for enhanced privacy and efficiency on the Litecoin network and serves as a reference implementation for MWEB light client support, benefiting third-party wallet developers.
+In parallel with the Newborn beta testing, the MWEB Support in LTCSuite Funding Campaign is in full swing. Spearheaded by notable contributors such as Hector Chu and supported by the Litecoin Foundation, this campaign aims to fund the integration of MWEB into LTCSuite. This initiative paves the way for enhanced privacy and efficiency on the Litecoin network and serves as a reference implementation for MWEB light client support, benefiting third-party wallet developers.
 
-As part of our commitment to transparency and the success of this project, we are pleased to announce that Hector Chu has been paid 16 LTC for his invaluable contributions to the development. This payment reflects our appreciation for his efforts and our significant progress towards integrating MWEB with ltcsuite.
+As part of our commitment to transparency and the success of this project, we are pleased to announce that Hector Chu has been paid 16 LTC for his invaluable contributions to the development. This payment reflects our appreciation for his efforts and our significant progress towards integrating MWEB with LTCSuite.
 
-We are excited to report that the development of MWEB for ltcsuite is functionally complete. All that remains is code review and then merge. We have engaged two third parties for review, one of whom is familiar with the ltcsuite codebase. Our goal is to complete this by the end of the month.
+We are excited to report that the development of MWEB for LTCSuite is functionally complete. All that remains is code review and then merge. We have engaged two third parties for review, one of whom is familiar with the LTCSuite codebase. Our goal is to complete this by the end of the month.
 
 ## Expanding MWEB Support to Third-Party Wallets
 
