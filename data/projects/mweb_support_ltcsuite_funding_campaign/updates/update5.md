@@ -1,7 +1,7 @@
 ---
 title: 'Update 5: Newborn Litewallet testing MWEB is live for iOS and Android'
 summary: 'Newborn (Beta version of Litewallet with MWEB support) is available for testing on iOS and Android.'
-date: '2024-04-.4'
+date: '2024-04-4'
 authorTwitterHandle: 'ltcfoundation'
 id: 5
 ---
