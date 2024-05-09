@@ -10,8 +10,8 @@ hashtag: '#LTCDev'
 gitRepository: 'https://github.com/hectorchu/neutrino'
 telegramLink: 'https://t.me/MWEB_Testnet'
 slug: 'mweb_support_ltcsuite_funding_campaign'
-bountyStatus: 'open'
-totalPaid: 59.21058699
+bountyStatus: 'completed'
+totalPaid: 77.33428268
 ---
 
 # MWEB Support in LTCSuite Funding Campaign
