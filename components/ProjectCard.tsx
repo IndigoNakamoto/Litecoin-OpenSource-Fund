@@ -11,7 +11,6 @@ export type ProjectCardProps = {
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
-  showButton = true, // Set the default value to true
 }) => {
   const {
     slug,
@@ -22,6 +21,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     twitterHandle,
     nym,
   } = project
+
+  const showButton = project.bountyStatus !== 'completed'
 
   return (
     <figure className="h-full rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900 sm:space-y-2">
