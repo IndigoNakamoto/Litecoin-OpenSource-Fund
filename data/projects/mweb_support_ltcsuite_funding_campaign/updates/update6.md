@@ -18,13 +18,13 @@ This achievement marks a significant step forward for Litecoin, empowering users
 
 We extend our deepest gratitude to Hector Chu for his exceptional dedication and expertise in spearheading the MWEB integration process. His tireless efforts have been instrumental in bringing this vision to life, and his commitment to advancing Litecoin's capabilities is truly commendable.  
 
-In recognition of his invaluable contributions, the final payment of 18.12369569 LTC has been sent to Hector, marking the successful completion of the MWEB integration for LTCSuite. You can explore his incredible work on this integration here: https://github.com/hectorchu/neutrino
+In recognition of his invaluable contributions, the final payment of 18.12369569 LTC has been sent to Hector, marking the successful completion of the MWEB integration for LTCSuite. You can explore his incredible work on this integration here: https://github.com/ltcsuite
 
 ## Expanding MWEB Horizons: Electrum-LTC Joins the Privacy Movement
 
-Not only has Hector completed the MWEB integration for LTCSuite, but he has also extended his expertise to Electrum-LTC. This popular Litecoin wallet now boasts MWEB functionality, further broadening the reach and accessibility of private transactions for Litecoin users.  
+Not only has Hector completed the MWEB integration for LTCSuite, but he has also extended his expertise to an Alpha version of Electrum-LTC. This popular Litecoin wallet now boasts MWEB functionality, further broadening the reach and accessibility of private transactions for Litecoin users.  
 
-You can explore Hector's remarkable work on integrating MWEB into Electrum-LTC here: https://github.com/hectorchu/electrum-ltc/releases/tag/release-3
+You can explore Hector's remarkable work on integrating MWEB into Electrum-LTC (Alpha) here: https://github.com/hectorchu/electrum-ltc/releases/tag/release-3
 
 ## Community Support: The Backbone of Our Success
 
