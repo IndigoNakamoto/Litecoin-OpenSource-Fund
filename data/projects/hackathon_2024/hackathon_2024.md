@@ -2,7 +2,7 @@
 title: 'Litecoin Hackathon 2024'
 summary: 'Empowering Innovation in the Litecoin Ecosystem'
 socialSummary: 'Join us for the Litecoin Hackathon 2024 and build the future of Litecoin!'
-coverImage: '/static/images/projects/IMAGE.png'
+coverImage: '/static/images/projects/hackathon2024.webp'
 website: ''
 gitRepository: ''
 twitterHandle: ''
@@ -38,6 +38,8 @@ Your contribution to the Litecoin Hackathon 2024 will directly fund:
 ## Sponsorship Opportunities
 
 We offer a range of sponsorship tiers to suit different levels of support, each with unique benefits and recognition opportunities. Contact us to learn more about how you can become a sponsor and align your brand with the future of Litecoin.
+
+**Interested in aligning your brand with the future of Litecoin?**  [Contact us to discuss sponsorship details](LINK TO GOOGLE FORM).
 
 ## Individual Contributions
 
