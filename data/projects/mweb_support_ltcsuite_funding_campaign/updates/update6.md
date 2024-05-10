@@ -29,7 +29,9 @@ You can explore Hector's remarkable work on integrating MWEB into Electrum-LTC (
 ## mwebd: A Powerful Tool for MWEB Integration
 To facilitate seamless integration of MWEB into various applications, we're excited to highlight mwebd. This innovative RPC server empowers developers to effortlessly incorporate MWEB functionalities into their projects. Acting as a modern library solution, mwebd streamlines the development process and accelerates the adoption of MWEB across the Litecoin ecosystem.
 
-Electrum-LTC leverages the capabilities of mwebd, showcasing its effectiveness and versatility.
+Electrum-LTC leverages the capabilities of mwebd, showcasing its effectiveness and versatility. 
+
+Developers can view the mwebd code here: https://github.com/ltcmweb/mwebd
 
 ## Community Support: The Backbone of Our Success
 
