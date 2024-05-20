@@ -11,7 +11,7 @@ slug: 'bounty_btcpay_mweb'
 contributor: ''
 hashtag: '#LTCDev'
 telegramLink: 'https://t.me/MWEB_Testnet'
-bountyStatus: 'open'
+bountyStatus: 'completed'
 ---
 
 # Add MWEB Support on BTCPay for Litecoin
