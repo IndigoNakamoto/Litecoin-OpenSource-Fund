@@ -276,7 +276,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         const contributorsArray = contributor.split(',')
         if (contributorsArray.length > 0) {
           const contributorsResponse = await fetch(
-            `/api/twitterUsers?usernames=${contributor}` //&clearCache=true
+            `/api/twitterUsers?usernames=${contributor}&clearCache=true` //
           )
           const twitterContributors = await contributorsResponse.json()
           setTwitterContributors(twitterContributors)
@@ -287,7 +287,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         const contributorsArray = contributorsBitcoin.split(',')
         if (contributorsArray.length > 0) {
           const contributorsResponse = await fetch(
-            `/api/twitterUsers?usernames=${contributorsBitcoin}` //&clearCache=true
+            `/api/twitterUsers?usernames=${contributorsBitcoin}&clearCache=true` //
           )
           const twitterContributorsBitcoin = await contributorsResponse.json()
           setTwitterContributorsBitcoin(twitterContributorsBitcoin)
@@ -298,7 +298,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         const contributorsArray = contributorsLitecoin.split(',')
         if (contributorsArray.length > 0) {
           const contributorsResponse = await fetch(
-            `/api/twitterUsers?usernames=${contributorsLitecoin}` //&clearCache=true
+            `/api/twitterUsers?usernames=${contributorsLitecoin}&clearCache=true` //
           )
           const twitterContributorsLitecoin = await contributorsResponse.json()
           setTwitterContributorsLitecoin(twitterContributorsLitecoin)
@@ -309,7 +309,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         const contributorsArray = advocates.split(',')
         if (contributorsArray.length > 0) {
           const contributorsResponse = await fetch(
-            `/api/twitterUsers?usernames=${advocates}` //&clearCache=true
+            `/api/twitterUsers?usernames=${advocates}&clearCache=true` //
           )
           const twitterAdvocates = await contributorsResponse.json()
           setTwitterAdvocates(twitterAdvocates)
@@ -335,7 +335,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         // If you want to join the unique supporters into a comma-separated string
         const uniqueSupportersString = uniqueSupportersArray.join(',')
         const response = await fetch(
-          `/api/twitterUsers?usernames=${uniqueSupportersString}` //&clearCache=true
+          `/api/twitterUsers?usernames=${uniqueSupportersString}&clearCache=true` //
         )
         const twitterUsers = await response.json()
         setTwitterUsers(twitterUsers)
