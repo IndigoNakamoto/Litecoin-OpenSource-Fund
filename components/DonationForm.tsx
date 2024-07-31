@@ -4,6 +4,7 @@ import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import X from './social-icons/x.svg'
+import Link from './Link'
 
 // Font Awesome
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -169,14 +170,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3 className="mb-1">
-            {/* TODO: display X logo */}
-            {/* X
-            <a
-              className={`h-6 w-6 fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400`}
-            >
-              {X}
-            </a> */}
-            X
+            {/* TODO: display X logo */}X
             <span className="ml-1 text-sm  text-gray-600 dark:text-gray-400">
               (Optional: Your X profile will be publicly shared as a community
               supporter for this project)
@@ -213,8 +207,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           )}
         </div>
       </section>
-      <section className="border-t pt-4">
-        <h3 className="mb-2 font-semibold text-gray-500 dark:text-gray-300">
+      {/* <section className="border-t pt-4"> */}
+      {/* <h3 className="mb-2 font-semibold text-gray-500 dark:text-gray-300">
           Donation Information
         </h3>
         <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
@@ -233,8 +227,9 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             contact us
           </a>{' '}
           for more information.
-        </p>
-      </section>
+        </p> */}
+
+      {/* </section> */}
 
       <div className="flex flex-wrap items-center justify-center gap-4">
         <button
@@ -264,6 +259,17 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </span>
         </button>
       </div>
+      <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
+        By donating, you agree to the{' '}
+        <Link href="/terms" className="text-blue-300">
+          Terms of Service
+        </Link>{' '}
+        and{' '}
+        <Link href="/privacy" className="text-blue-300">
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </form>
   )
 }
