@@ -69,7 +69,7 @@ Explore the potential of integrating Bitcoin and Litecoin, creating a more robus
 
 - **Task:** Create a project that envisions the future of Bitcoin and Litecoin, exploring how they can work together to address challenges or unlock new possibilities.
 - **Initial Reward:** $500 per completed project
-- **Number of Initial Rewards:** 5 (totaling $2,500)
+- **Number of Initial Rewards:** 3 (totaling $1,500)
 - **Additional Rewards:** Depending on additional funds raised and allocation.
 
 ### Prize Distribution:
@@ -79,16 +79,6 @@ The initial prize pool is $8,000 USD. We are aiming to raise $50,000 USD through
 #### **First Come, First Serve Challenge Prizes:**
 
 Prizes will be awarded on a first-come, first-served basis until the prize pool is depleted. Each team can win up to two challenges. Prizes will be distributed at the end of the hackathon after the final submission and demonstration.
-
-#### **Judge's Discretionary Bonus:**
-
-The Judge's Discretionary Bonus is designed to reward outstanding projects that demonstrate exceptional innovation, integration, or potential impact. Judges will allocate additional funds from the crowdfunding campaign to deserving projects, based on the following judging criteria:
-
-- **Technical Innovation (30%):** Originality, complexity, feasibility.
-- **Litecoin Integration (30%):** Utilization of features, contribution to the ecosystem, and potential for adoption.
-- **Potential Impact (25%):** Real-world applicability, scalability, community impact.
-- **User Experience (10%):** Ease of use, documentation, and presentation.
-- **Presentation (5%):** Clarity, engagement, professionalism.
 
 ### Review Process
 
@@ -100,8 +90,12 @@ Teams will submit an initial project proposal during the hackathon, providing ev
 - **Project Completion:** The project should be functional and meet the criteria of the chosen challenge.
 - **Code Review (Optional):** The code can be shared with the organizers for verification, although this is not mandatory for prize eligibility.
 
-#### **The review process will include a verification step:**
+### Judge's Discretionary Bonus:
 
-- **Video Review:** Verify that the video demonstration accurately reflects the project's functionality.
-- **Code Review (Optional):** If code is provided, review it for quality and alignment with Litecoin integration.
-- **Submission Timestamp:** Verify the accuracy of the submission timestamp to ensure the "first-come, first-served" principle is upheld.
+The Judge's Discretionary Bonus is designed to reward outstanding projects that demonstrate exceptional innovation, integration, or potential impact. Judges will allocate additional funds from the crowdfunding campaign to deserving projects, based on the following judging criteria:
+
+- **Technical Innovation (30%):** Originality, complexity, feasibility.
+- **Litecoin Integration (30%):** Utilization of features, contribution to the ecosystem, and potential for adoption.
+- **Potential Impact (25%):** Real-world applicability, scalability, community impact.
+- **User Experience (10%):** Ease of use, documentation, and presentation.
+- **Presentation (5%):** Clarity, engagement, professionalism.
