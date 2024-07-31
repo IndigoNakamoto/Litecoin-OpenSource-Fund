@@ -46,7 +46,7 @@ Explore the potential of integrating Bitcoin and Litecoin, creating a more robus
 
 #### **Challenge 1: Bitcoin + Litecoin: A Unified Ecosystem:**
 
-- **Task:** Develop a project that seamlessly integrates Bitcoin and Litecoin functionality, exploring cross-chain transactions, interoperability, shared features, or building a hybrid application that leverages both platforms.
+- **Task:** Develop a project that seamlessly integrates Bitcoin and Litecoin functionality, exploring cross-chain transactions, interoperability, shared features, or building a hybrid application that leverages both blockchains.
 - **Initial Reward:** $500 per completed project
 - **Number of Initial Rewards:** 5 (totaling $2,500)
 - **Additional Rewards:** Depending on additional funds raised and allocation.
