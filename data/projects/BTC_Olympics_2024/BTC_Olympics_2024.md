@@ -12,7 +12,7 @@ contributor: 'btcstartuplab,btc_albert,btc_Lyu,btc_trist,0xNorby'
 contributorsLitecoin: 'satoshilite,AlanGAustin,anthonyonchain,DavidBurkett38,DaddyCool1991,indigo_nakamoto,Loshan1212,lukewrightmain,ecurrencyhodler,TheVladCostea'
 advocates: ''
 slug: 'BTC_Olympics_2024'
-hashtag: '#LitecoinHackathon2024'
+hashtag: '#BTCOlympics2024'
 bountyStatus: 'open'
 ---
 
