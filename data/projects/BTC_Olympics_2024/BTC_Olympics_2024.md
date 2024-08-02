@@ -1,7 +1,7 @@
 ---
 title: 'Litecoin Track at the Bitcoin Olympics 2024'
-summary: 'Empowering the Future of Litecoin within the Bitcoin Ecosystem #BitcoinOlympics'
-socialSummary: 'Empowering the Future of Litecoin within the Bitcoin Ecosystem #BitcoinOlympics'
+summary: 'Help us reach a $50,000 prize pool for developers building innovative Litecoin solutions! #BitcoinOlympics'
+socialSummary: 'Help us reach a $50,000 prize pool for developers building innovative Litecoin solutions! #BitcoinOlympics'
 coverImage: '/static/images/projects/BTColympics.png'
 website: 'https://btcolympics.org'
 gitRepository: ''
@@ -16,15 +16,19 @@ hashtag: '#BitcoinOlympics'
 bountyStatus: 'open'
 ---
 
-## Litecoin Track at the Bitcoin Olympics 2024
+## Build on Litecoin at the Bitcoin Olympics 2024!
 
-**Empowering the Future of Litecoin within the Bitcoin Ecosystem**
+**Help us reach a $50,000 prize pool for developers building innovative Litecoin solutions!**
 
-The Litecoin Foundation is excited to participate in the Bitcoin Olympics 2024 as part of the Agnostic Prize Pool! We encourage developers to build innovative solutions that leverage Litecoin's unique features and integrate seamlessly with the broader Bitcoin ecosystem.
+The Litecoin Foundation invites you to participate in the Bitcoin Olympics 2024. Build projects that leverage Litecoin's unique features and integrate with the Bitcoin ecosystem for a chance to win!
 
-**Why Participate in the Litecoin Track?**
+**Triple Your Impact: Donate to the Litecoin Track!**
 
-- **Unlock New Possibilities:** Explore cross-chain interoperability, privacy, scalability, and more using Litecoin.
+We've already secured $8,000! Now, every 1 LTC donated becomes 3 LTC thanks to matching donations from Charlie Lee and Galal Doss! Help us reach our $50,000 USD fundraising goal (in LTC equivalent)!
+
+**Why Build on Litecoin?**
+
+- **Unlock New Possibilities:** Explore cross-chain interoperability, privacy, scalability, and more.
 - **Attract a New Generation of Developers:** Inspire and grow the talent pool working on Litecoin and blockchain technology.
 - **Drive Litecoin Adoption:** Showcase the power and versatility of Litecoin through real-world projects.
 
@@ -32,12 +36,17 @@ The Litecoin Foundation is excited to participate in the Bitcoin Olympics 2024 a
 
 - Build a project that integrates Litecoin and demonstrates cross-chain transactions or interoperability with other blockchains, particularly Bitcoin.
 - Focus on innovative solutions that leverage Litecoin's strengths and have the potential for significant impact on the broader blockchain ecosystem.
-- Adhere to the official Bitcoin Olympics rules, including team size limitations, eligibility requirements, and the use of new code created within the specified timeframe.
+- Adhere to the official Bitcoin Olympics rules.
 
-**Prizes:**
+**Prize Structure:**
 
-- The Litecoin Track is part of the Agnostic Prize Pool, which means your project will be competing with projects built for other blockchains.
-- The total prize pool and individual rewards will be determined based on the overall funding raised for the Agnostic Prize Pool.
+- **Total Initial Prize Pool:** $8,000 USD (additional funds to be raised through crowdfunding and sponsorships)
+- **Individual Rewards:** $1,000 minimum per winning project. The more donations we receive, the number of rewards and the larger the individual rewards could be!
+
+**Criteria for Eligibility:**
+
+- Projects must integrate Litecoin.
+- Demonstrated cross-chain transactions or interoperability.
 
 **Judging Criteria:**
 
@@ -47,8 +56,12 @@ The Litecoin Foundation is excited to participate in the Bitcoin Olympics 2024 a
 - **User Experience (10%):** Ease of use, documentation, and presentation.
 - **Presentation (5%):** Clarity, engagement, professionalism.
 
-**Eligibility:**
-Please refer to the official Bitcoin Olympics rules for a complete list of eligibility requirements and restricted countries.
+## Key Dates:
 
-**Support the Litecoin Track:**
-Share this event and consider donating to the Prize Pool to further incentivize development and innovation within the Litecoin ecosystem.
+- **Hackathon Starts:** August 1st, 2024
+- **Last Day to Submit:** August 27th, 2024
+- **Post-Hackathon Show:** September 9th, 2024
+
+For eligibility and rules, visit the official Bitcoin Olympics website ([https://btcolympics.org](https://btcolympics.org)).
+
+Support the future of Litecoin! Donate and share this event today!
