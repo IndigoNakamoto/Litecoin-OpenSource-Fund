@@ -38,7 +38,7 @@ We've already secured $8,000! Now, every 1 LTC donated becomes 3 LTC thanks to m
 - Focus on innovative solutions that leverage Litecoin's strengths and have the potential for significant impact on the broader blockchain ecosystem.
 - Adhere to the official Bitcoin Olympics rules.
 
-**Prize Structure:**
+## Prize Structure:
 
 - **Total Initial Prize Pool:** $8,000 USD (additional funds to be raised through crowdfunding and sponsorships)
 - **Individual Rewards:** $1,000 minimum per winning project. The more donations we receive, the number of rewards and the larger the individual rewards could be!
