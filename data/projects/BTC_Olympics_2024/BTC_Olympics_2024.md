@@ -24,7 +24,7 @@ The Litecoin Foundation invites you to participate in the Bitcoin Olympics 2024.
 
 **Triple Your Impact: Donate to the Litecoin Track!**
 
-We've already secured $8,000! Now, every 1 LTC donated becomes 3 LTC thanks to matching donations from Charlie Lee and Galal Doss! Help us reach our $50,000 USD fundraising goal (in LTC equivalent)!
+We've already secured $8,000! Now, every 1 LTC donated becomes 3 LTC thanks to matching donations from Charlie Lee (Up to $50k) and Galal Doss! Help us reach our $50,000 USD fundraising goal (in LTC equivalent)!
 
 **Why Build on Litecoin?**
 
