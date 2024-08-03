@@ -41,7 +41,7 @@ We've already secured $8,000! Now, every 1 LTC donated becomes 3 LTC thanks to m
 ## Prize Structure:
 
 - **Total Initial Prize Pool:** $8,000 USD (additional funds to be raised through crowdfunding and sponsorships)
-- **Individual Rewards:** $1,000 minimum per winning project. The more donations we receive, the number of rewards and the larger the individual rewards could be!
+- **Individual Rewards:** Each prize will be capped at $1,000 per team. If there are more teams than prizes available, rewards will be based on the judges’ scores. Any additional prize money could be allocated at the judges’ discretion and/or evenly divided among the teams.
 
 **Criteria for Eligibility:**
 
