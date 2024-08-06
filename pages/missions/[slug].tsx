@@ -618,7 +618,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             </div>
 
             <div className="flex w-full flex-col items-start">
-              {addressStats && !isMatching && (
+              {addressStats && !isMatching && !isRecurring && (
                 <div className="flex w-full flex-col">
                   <div className="">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
