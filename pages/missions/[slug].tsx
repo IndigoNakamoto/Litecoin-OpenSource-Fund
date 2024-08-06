@@ -149,6 +149,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     targetFunding,
     fundingDeadline,
     isRecurring,
+    isMatching,
+    matchingMultiplier,
     recurringAmountGoal,
     recurringPeriod,
     totalPaid,
@@ -160,6 +162,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
   const [addressStats, setAddressStats] = useState<AddressStats>()
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
+  const [matchingTotal, setMatchingTotal] = useState(0)
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
@@ -233,6 +236,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
       setAddressStats(stats)
+
+      // New logic for matching goal calculation
+      if (isMatching && matchingMultiplier !== undefined) {
+        const matchingTotal =
+          stats.donatedAmount * matchingMultiplier - stats.donatedAmount
+        setMatchingTotal(matchingTotal) // returns  matchingTotal
+      }
 
       // New logic for monthly goal calculation
       if (isRecurring && recurringAmountGoal) {
@@ -608,34 +618,61 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             </div>
 
             <div className="flex w-full flex-col items-start">
-              {!isRecurring && (
+              {addressStats && !isMatching && (
                 <div className="flex w-full flex-col">
-                  {addressStats && (
-                    <div className="">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
-                        Ł {formatLits(addressStats.funded_txo_sum)}
-                      </h4>
-                      <h4 className="dark:text-gray-100">Litecoin raised</h4>
-                    </div>
-                  )}
-                  {addressStats && (
-                    <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
-                        Ł {formatLits(totalPaid)}
-                      </h4>
-                      <h4 className="dark:text-gray-100">
-                        Litecoin paid to contributors
-                      </h4>
-                    </div>
-                  )}
-                  {addressStats && (
-                    <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
-                        {addressStats.tx_count || '0'}
-                      </h4>
-                      <h4 className="dark:text-gray-100">donations</h4>
-                    </div>
-                  )}
+                  <div className="">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(addressStats.funded_txo_sum)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">Litecoin raised</h4>
+                  </div>
+
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(totalPaid)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">
+                      Litecoin paid to contributors
+                    </h4>
+                  </div>
+
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      {addressStats.tx_count || '0'}
+                    </h4>
+                    <h4 className="dark:text-gray-100">donations</h4>
+                  </div>
+                </div>
+              )}
+              {addressStats && isMatching && (
+                <div className="flex w-full flex-col">
+                  <div className="">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(addressStats.funded_txo_sum)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">Litecoin raised</h4>
+                  </div>
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(matchingTotal)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">matchingTotal</h4>
+                  </div>
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(totalPaid)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">
+                      Prizes awarded to Bitcoin Olypmics 2024 participants
+                    </h4>
+                  </div>
+
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      {addressStats.tx_count || '0'}
+                    </h4>
+                    <h4 className="dark:text-gray-100">donations</h4>
+                  </div>
                 </div>
               )}
 
@@ -695,7 +732,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               )}
             </div>
 
-            {/* TODO: if bountyStatus == 'completed', then disable button */}
             <button
               onClick={openPaymentModal}
               className={`hover:white block w-full rounded-lg bg-blue-500 text-xl text-white transition-colors  duration-200 hover:border-transparent hover:bg-blue-400 dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300 ${

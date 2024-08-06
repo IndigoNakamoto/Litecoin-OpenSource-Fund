@@ -100,6 +100,9 @@ export type ProjectItem = {
   targetFunding?: number // The one-time funding goal
   fundingDeadline?: Date // Date by which target funding should be met
   isRecurring: boolean
+  matchingTotal?: number
+  isMatching?: boolean
+  matchingMultiplier?: number
   recurringAmountGoal?: number
   recurringPeriod?: RecurringPeriod
   recurringStatus?: FundingStatus
