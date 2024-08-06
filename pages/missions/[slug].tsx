@@ -666,7 +666,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       Ł{' '}
                       {formatLits(addressStats.funded_txo_sum + matchingTotal)}{' '}
-                      + $8,000 Intial Prize
+                      + $8,000
                     </h4>
                     <h4 className="dark:text-gray-100">Total Prize pool</h4>
                   </div>
