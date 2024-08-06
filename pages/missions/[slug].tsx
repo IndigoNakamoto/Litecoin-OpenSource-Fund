@@ -650,13 +650,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       Ł {formatLits(addressStats.funded_txo_sum)}
                     </h4>
-                    <h4 className="dark:text-gray-100">Litecoin raised</h4>
+                    <h4 className="dark:text-gray-100">
+                      The Litecoin Community Raised Prize
+                    </h4>
                   </div>
                   <div className="mt-2">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       Ł {formatLits(matchingTotal)}
                     </h4>
-                    <h4 className="dark:text-gray-100">matchingTotal</h4>
+                    <h4 className="dark:text-gray-100">
+                      Prizes Matched by Charlie Lee & Galal Doss
+                    </h4>
                   </div>
                   <div className="mt-2">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
@@ -666,7 +670,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       Prizes awarded to Bitcoin Olypmics 2024 participants
                     </h4>
                   </div>
-
                   <div className="mt-2">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       {addressStats.tx_count || '0'}
