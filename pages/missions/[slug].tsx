@@ -238,9 +238,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       setAddressStats(stats)
 
       // New logic for matching goal calculation
-      if (isMatching && matchingMultiplier !== undefined) {
+      if (isMatching && typeof matchingMultiplier === 'number') {
         const matchingTotal =
-          stats.donatedAmount * matchingMultiplier - stats.donatedAmount
+          stats.funded_txo_sum * matchingMultiplier - stats.funded_txo_sum
         setMatchingTotal(matchingTotal) // returns  matchingTotal
       }
 
