@@ -2,7 +2,7 @@
 title: 'Virtual Private Money (VPM)'
 summary: 'Empowering financial freedom and privacy through confidential transactions using Litecoin MWEB. Donate to support open-source development!'
 socialSummary: 'Take back your financial privacy with VPM! Built on Litecoin, VPM provides easy-to-use, confidential transactions. Donate now to support open source development! #VPM #Litecoin #Privacy #Crowdfunding'
-coverImage: '/static/images/projects/BTColympics.png'
+coverImage: '/static/images/projects/MWEB-circle2.png'
 website: 'https://vpm.run'
 gitRepository: ''
 twitterHandle: 'https://twitter.com/ltcfoundation'
