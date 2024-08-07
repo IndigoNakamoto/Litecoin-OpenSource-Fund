@@ -15,6 +15,9 @@ function getTwitterSupporters(items) {
 }
 
 function sumAmounts(items) {
+  // TODO: Fix amount for overpaid invoices
+  console.log('sumAmounts for these items (Todo: Fix amount for overpaid):')
+  items.forEach((item) => console.log(item))
   return items.reduce((acc, item) => acc + Number(item.amount), 0)
 }
 
