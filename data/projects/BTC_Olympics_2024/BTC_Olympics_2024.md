@@ -16,6 +16,7 @@ matchingMultiplier: 3
 slug: 'BTC_Olympics_2024'
 hashtag: '#BitcoinOlympics'
 bountyStatus: 'open'
+isBitcoinOlympics2024: true
 ---
 
 ## Build on Litecoin at the Bitcoin Olympics 2024!

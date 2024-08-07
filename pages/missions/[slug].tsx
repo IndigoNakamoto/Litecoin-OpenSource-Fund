@@ -149,6 +149,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     targetFunding,
     fundingDeadline,
     isRecurring,
+    isBitcoinOlympics2024,
     isMatching,
     matchingMultiplier,
     recurringAmountGoal,
@@ -238,7 +239,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       setAddressStats(stats)
 
       // New logic for matching goal calculation
-      if (isMatching && typeof matchingMultiplier === 'number') {
+      if (
+        isMatching &&
+        typeof matchingMultiplier === 'number' &&
+        isBitcoinOlympics2024
+      ) {
         const matchingTotal =
           stats.funded_txo_sum * matchingMultiplier - stats.funded_txo_sum
         setMatchingTotal(matchingTotal) // returns  matchingTotal
@@ -546,11 +551,23 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {selectedMenuItem === 'community' && (
               <>
                 <div className="markdown">
-                  {twitterContributors.length > 0 ? (
+                  {twitterContributors.length > 0 && !isBitcoinOlympics2024 ? (
                     <>
                       <h1>
                         {twitterContributors.length > 1
                           ? 'Contributors'
+                          : 'Contributor'}
+                      </h1>
+                      <TwitterUsers users={twitterContributors} />
+                    </>
+                  ) : null}
+                </div>
+                <div className="markdown">
+                  {twitterContributors.length > 0 && isBitcoinOlympics2024 ? (
+                    <>
+                      <h1>
+                        {twitterContributors.length > 1
+                          ? 'BTC Startup Labs'
                           : 'Contributor'}
                       </h1>
                       <TwitterUsers users={twitterContributors} />
@@ -644,7 +661,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   </div>
                 </div>
               )}
-              {addressStats && isMatching && (
+              {addressStats && isMatching && isBitcoinOlympics2024 && (
                 <div className="flex w-full flex-col">
                   <div className="">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">

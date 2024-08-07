@@ -34,6 +34,7 @@ const FIELDS = [
   'isRecurring',
   'matchingTotal',
   'isMatching',
+  'isBitcoinOlympics2024',
   'matchingMultiplier',
   'recurringAmountGoal',
   'recurringPeriod',

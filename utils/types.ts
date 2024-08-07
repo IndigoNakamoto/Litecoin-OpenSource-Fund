@@ -102,6 +102,7 @@ export type ProjectItem = {
   isRecurring: boolean
   matchingTotal?: number
   isMatching?: boolean
+  isBitcoinOlympics2024?: boolean
   matchingMultiplier?: number
   recurringAmountGoal?: number
   recurringPeriod?: RecurringPeriod
