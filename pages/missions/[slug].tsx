@@ -641,7 +641,23 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       Ł {formatLits(addressStats.funded_txo_sum)}
                     </h4>
-                    <h4 className="dark:text-gray-100">Litecoin raised</h4>
+                    <h4 className="dark:text-gray-100">Litecoin Raised</h4>
+                  </div>
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(matchingTotal)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">
+                      Donations Matched by Charlie Lee
+                    </h4>
+                  </div>
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(0)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">
+                      15% Service Fee Collected
+                    </h4>
                   </div>
 
                   <div className="mt-2">
@@ -649,7 +665,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       Ł {formatLits(totalPaid)}
                     </h4>
                     <h4 className="dark:text-gray-100">
-                      Litecoin paid to contributors
+                      Litecoin Paid to Contributors
                     </h4>
                   </div>
 
@@ -695,6 +711,15 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       Awarded to Bitcoin Olypmics 2024 Participants
                     </h4>
                   </div>
+                  <div className="mt-2">
+                    <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      Ł {formatLits(service_fee)}
+                    </h4>
+                    <h4 className="dark:text-gray-100">
+                      15% Service Fee Collected
+                    </h4>
+                  </div>
+
                   <div className="mt-2">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       {addressStats.tx_count || '0'}
