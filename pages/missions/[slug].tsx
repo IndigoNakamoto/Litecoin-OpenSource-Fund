@@ -675,7 +675,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       Ł {formatLits(totalPaid)}
                     </h4>
                     <h4 className="dark:text-gray-100">
-                      Prizes awarded to Bitcoin Olypmics 2024 participants
+                      Awarded to Bitcoin Olypmics 2024 Participants
                     </h4>
                   </div>
                   <div className="mt-2">
