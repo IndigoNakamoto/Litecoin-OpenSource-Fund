@@ -25,7 +25,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const showButton = project.bountyStatus !== 'completed'
 
   return (
-    <figure className="h-full rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900 sm:space-y-2">
+    <figure className="h-full rounded-xl border border-stone-200 bg-[#EEEEEE] dark:border-stone-800 dark:bg-stone-900 sm:space-y-2">
+      {/* TODO: Change from card to 2 columns for xl */}
       <div className="relative h-64 w-full">
         <Link href={`/missions/${slug}`} passHref>
           <div className="relative h-64 w-full">
@@ -41,30 +42,33 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </Link>
       </div>
-
       <figcaption className="flex h-max flex-col justify-between p-4">
         <div className="h-32 ">
-          <h2 className="font-bold">{title}</h2>
-          <div className="line-clamp-3 ">{summary}</div>
-        </div>
-        <div className="grid grid-cols-2 pt-4">
-          <button
-            className={`rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white transition-colors duration-300 hover:border-transparent  hover:bg-blue-400 hover:text-white dark:bg-white dark:text-black dark:hover:bg-blue-400 hover:dark:text-white ${
-              !showButton ? 'cursor-not-allowed opacity-50' : ''
-            }`}
-            onClick={() => openPaymentModal(project)}
-            disabled={!showButton}
+          <h2
+            className="font-space-grotesk text-[30px] font-semibold leading-[32px] tracking-[-0.5px] text-[#222222]"
+            style={{
+              wordSpacing: '0px',
+              textTransform: 'none',
+              textDecoration: 'none',
+              transform: 'scaleX(1.2)', // Slight horizontal scaling
+              transformOrigin: 'left center',
+            }}
           >
-            Donate
-          </button>
-          <div className="pt-2 text-center">
+            {title}
+          </h2>
+          <div className="font-space-grotesk pt-4 text-[16px] font-normal">
+            {summary}
+          </div>
+        </div>
+        <div className="pt-4">
+          <div className="pt-2 text-left">
             <Link
               href={`/missions/${slug}`}
               passHref
               className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 hover:underline"
-              aria-label="View Details"
+              aria-label="FIND OUT MORE"
             >
-              View Details &rarr;
+              FIND OUT MORE &rarr;
             </Link>
           </div>
         </div>
