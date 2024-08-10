@@ -117,6 +117,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     summary,
     socialSummary,
     coverImage,
+    // TODO: Fix design where the Markdown Content isn't being rendered well
     content,
 
     // Community Interaction
@@ -150,6 +151,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     fundingDeadline,
     isRecurring,
     isBitcoinOlympics2024,
+    serviceFeesCollected,
     isMatching,
     matchingMultiplier,
     recurringAmountGoal,
@@ -164,6 +166,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [addressStats, setAddressStats] = useState<AddressStats>()
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
   const [matchingTotal, setMatchingTotal] = useState(0)
+  const [serviceFeeCollected, setServiceFeesCollected] =
+    useState(serviceFeesCollected)
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
@@ -237,7 +241,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
       setAddressStats(stats)
-
+      setServiceFeesCollected(serviceFeesCollected)
       // New logic for matching goal calculation
       if (
         isMatching &&
@@ -635,7 +639,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             </div>
 
             <div className="flex w-full flex-col items-start">
-              {addressStats && !isMatching && !isRecurring && (
+              {addressStats && !isBitcoinOlympics2024 && !isRecurring && (
                 <div className="flex w-full flex-col">
                   <div className="">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
@@ -651,9 +655,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       Donations Matched by Charlie Lee
                     </h4>
                   </div>
+                  {/* TODO: Debug why for btc olympics it's not showing 2.123 LTC service fee collected */}
                   <div className="mt-2">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
-                      Ł {formatLits(0)}
+                      Ł {formatLits(serviceFeeCollected)}
                     </h4>
                     <h4 className="dark:text-gray-100">
                       15% Service Fee Collected
@@ -673,7 +678,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       {addressStats.tx_count || '0'}
                     </h4>
-                    <h4 className="dark:text-gray-100">donations</h4>
+                    <h4 className="dark:text-gray-100">Donations</h4>
                   </div>
                 </div>
               )}
@@ -713,7 +718,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   </div>
                   <div className="mt-2">
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
-                      Ł {formatLits(service_fee)}
+                      Ł {formatLits(0)}
                     </h4>
                     <h4 className="dark:text-gray-100">
                       15% Service Fee Collected
@@ -724,7 +729,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                     <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
                       {addressStats.tx_count || '0'}
                     </h4>
-                    <h4 className="dark:text-gray-100">donations</h4>
+                    <h4 className="dark:text-gray-100">Donations</h4>
                   </div>
                 </div>
               )}

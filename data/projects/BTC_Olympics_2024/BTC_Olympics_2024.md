@@ -17,6 +17,7 @@ slug: 'BTC_Olympics_2024'
 hashtag: '#BitcoinOlympics'
 bountyStatus: 'open'
 isBitcoinOlympics2024: true
+serviceFeesCollected: 2.123
 ---
 
 ## Build on Litecoin at the Bitcoin Olympics 2024!
@@ -34,6 +35,11 @@ We've already secured $8,000! Now, every 1 LTC donated becomes 3 LTC thanks to m
 - **Unlock New Possibilities:** Explore cross-chain interoperability, privacy, scalability, and more.
 - **Attract a New Generation of Developers:** Inspire and grow the talent pool working on Litecoin and blockchain technology.
 - **Drive Litecoin Adoption:** Showcase the power and versatility of Litecoin through real-world projects.
+- **Enhance Bitcoin:** Litecoin's unique features can enhance Bitcoin projects, providing benefits such as:
+  - Faster transaction speeds and lower fees.
+  - Enhanced privacy using MWEB.
+  - Innovative Layer 2 scaling solutions.
+  - A robust and established network for experimentation.
 
 **How to Participate:**
 

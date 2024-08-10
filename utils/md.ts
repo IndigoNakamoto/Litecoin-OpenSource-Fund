@@ -31,6 +31,7 @@ const FIELDS = [
   'bountyStatus',
   'targetFunding',
   'fundingDeadline',
+  'serviceFeesCollected',
   'isRecurring',
   'matchingTotal',
   'isMatching',
