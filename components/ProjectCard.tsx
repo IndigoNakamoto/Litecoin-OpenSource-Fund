@@ -5,12 +5,13 @@ import { ProjectItem } from '../utils/types'
 export type ProjectCardProps = {
   project: ProjectItem
   openPaymentModal: (project: ProjectItem) => void
-  showButton?: boolean // Make showButton optional with a default value
+  bgColor: string // Accept bgColor as a prop
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
+  bgColor,
 }) => {
   const {
     slug,
@@ -25,54 +26,54 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const showButton = project.bountyStatus !== 'completed'
 
   return (
-    <figure className="h-full rounded-xl border border-stone-200 bg-[#EEEEEE] dark:border-stone-800 dark:bg-stone-900 sm:space-y-2">
-      {/* TODO: Change from card to 2 columns for xl */}
-      <div className="relative h-64 w-full">
-        <Link href={`/missions/${slug}`} passHref>
-          <div className="relative h-64 w-full">
-            <Image
-              alt={title}
-              src={coverImage}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="50% 50%"
-              className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
-              priority={true}
-            />
-          </div>
-        </Link>
-      </div>
-      <figcaption className="flex h-max flex-col justify-between p-4">
-        <div className="h-32 ">
-          <h2
-            className="font-space-grotesk text-[30px] font-semibold leading-[32px] tracking-[-0.5px] text-[#222222]"
-            style={{
-              wordSpacing: '0px',
-              textTransform: 'none',
-              textDecoration: 'none',
-              transform: 'scaleX(1.2)', // Slight horizontal scaling
-              transformOrigin: 'left center',
-            }}
-          >
+    <figure
+      className={`flex h-full flex-col justify-between rounded-3xl p-14 ${bgColor} dark:border-stone-800 dark:bg-stone-900 sm:space-y-2`}
+    >
+      {/* Wrap both the image and figcaption in a container with padding */}
+      <Link href={`/missions/${slug}`} passHref>
+        <div className="relative max-h-max min-h-[150px] w-[40%] min-w-[150px]">
+          {/* Set width equal to height */}
+          <Image
+            alt={title}
+            src={coverImage}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="50% 50%"
+            className="cursor-pointer rounded-xl"
+            priority={true}
+          />
+        </div>
+      </Link>
+      <figcaption className="flex flex-grow flex-col justify-between pt-8">
+        <div className="h-32 sm:h-auto">
+          <h2 className="font-space-grotesk text-[30px] font-semibold leading-[32px] tracking-wide text-[#333333]">
             {title}
           </h2>
-          <div className="font-space-grotesk pt-4 text-[16px] font-normal">
+          <div
+            className="font-space-grotesk pt-4 text-[16px] font-medium tracking-wide text-[#333333] "
+            style={{
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 4, // Limits to 4 lines
+            }}
+          >
             {summary}
           </div>
         </div>
-        <div className="pt-4">
-          <div className="pt-2 text-left">
-            <Link
-              href={`/missions/${slug}`}
-              passHref
-              className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 hover:underline"
-              aria-label="FIND OUT MORE"
-            >
-              FIND OUT MORE &rarr;
-            </Link>
-          </div>
-        </div>
       </figcaption>
+      <div className="pt-12">
+        <div className="mt-auto text-left">
+          <Link
+            href={`/missions/${slug}`}
+            passHref
+            className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 font-bold tracking-wider text-[#7e7e7e] underline"
+            aria-label="FIND OUT MORE"
+          >
+            FIND OUT MORE &rarr;
+          </Link>
+        </div>
+      </div>
     </figure>
   )
 }

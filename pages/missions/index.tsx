@@ -1,16 +1,10 @@
-//pages/projects/index.tsx
-
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/legacy/image' // <-- Import the Image component
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { ProjectItem, ProjectCategory, BountyStatus } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
-// import Link from '@/components/Link'
-import Typing from '@/components/Typing'
-import siteMetadata from '@/data/siteMetadata'
 import LitecoinIcon from '@/components/litecoin-icons'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
@@ -23,10 +17,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    // setOpenSourceProjects(
-    //   projects.filter(isProject).sort((a, b) => a.title.localeCompare(b.title))
-    // )
-
     const desiredOrder = [
       'General Fund',
       'Litecoin Core',
@@ -35,19 +25,17 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       'Litewallet',
       'Litecoin Development Kit',
       'Litecoin Mempool Explorer',
-    ] // everything else in order by title
+    ]
 
     setOpenSourceProjects(
       projects.filter(isProject).sort((a, b) => {
         const indexA = desiredOrder.indexOf(a.title)
         const indexB = desiredOrder.indexOf(b.title)
 
-        // If both titles are in the desired order array, compare their positions.
         if (indexA !== -1 && indexB !== -1) {
           return indexA - indexB
         }
 
-        // If only one of the titles is in the desired order array, prioritize it.
         if (indexA !== -1) {
           return -1
         }
@@ -55,7 +43,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           return 1
         }
 
-        // If neither title is in the desired order array, sort them alphabetically.
         return a.title.localeCompare(b.title)
       })
     )
@@ -77,24 +64,24 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     setModalOpen(true)
   }
 
+  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]', 'bg-[#f3ccc4]']
+
   return (
     <>
       <Head>
-        <title>Lite.Space | Explore</title>
+        <title>Projects</title>
       </Head>
-
-      <div className="space-y-2 pb-0 pt-10 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
-        <h2 className="pl-4 pt-10 text-5xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:leading-10 md:text-7xl md:leading-14 xl:col-span-2">
-          Open-Source Projects
-        </h2>
-      </div>
-      <section className="flex flex-col rounded-3xl bg-gradient-to-b from-gray-200 to-gray-300 p-4 dark:from-gray-700 dark:to-gray-600 md:p-8">
+      <section className="flex flex-col rounded-3xl">
         <div className="flex w-full items-center justify-between"></div>
-        <ul className="grid max-w-5xl gap-8">
+        <ul className="grid max-w-full gap-6 md:grid-cols-2">
           {openSourceProjects &&
             openSourceProjects.map((p, i) => (
-              <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              <li key={i}>
+                <ProjectCard
+                  project={p}
+                  openPaymentModal={openPaymentModal}
+                  bgColor={bgColors[i % bgColors.length]}
+                />
               </li>
             ))}
         </ul>
