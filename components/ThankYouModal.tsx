@@ -56,7 +56,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
       isOpen={isOpen}
       style={{ content: focusStyle }}
       onRequestClose={onRequestClose}
-      className="max-h-full max-w-sm overflow-y-auto rounded-3xl bg-white p-8 shadow-2xl dark:bg-stone-800 sm:m-8 md:max-w-xl"
+      className="max-h-full max-w-sm overflow-y-auto rounded-3xl bg-white p-8 shadow-2xl  sm:m-8 md:max-w-xl"
       overlayClassName="inset-0 fixed backdrop-blur-xl  flex items-center justify-center transform duration-400 ease-in"
       appElement={
         typeof window === 'undefined'
@@ -98,7 +98,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="font-semi flex w-min gap-4 rounded-xl bg-blue-100 p-2 px-6 font-semibold dark:bg-blue-900">
+        <div className="font-semi flex w-min gap-4 rounded-xl bg-blue-100 p-2 px-6 font-semibold ">
           SHARE:
           <SocialIcon kind="twitter" href={twitterShareUrl} size={8} />
           <SocialIcon kind="facebook" href={facebookShareUrl} size={8} />
