@@ -250,7 +250,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
           {/* Right Column: FAQ Section */}
           <div className="w-full md:w-2/3">
-            <div className="mt-8 w-full rounded-xl bg-gradient-to-r from-gray-100 to-gray-300 p-4 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 dark:text-gray-300 md:mt-0 md:px-4 lg:px-8">
+            <div className="mt-8 w-full rounded-xl bg-gradient-to-r from-gray-100 to-gray-300 p-4 md:mt-0 md:px-4 lg:px-8">
               <FAQSection faqCategories={faqData.questionsAndAnswers} />
             </div>
           </div>

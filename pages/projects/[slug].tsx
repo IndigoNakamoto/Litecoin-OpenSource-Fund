@@ -471,12 +471,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       </Head>
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-none items-center bg-white bg-cover bg-center pb-8">
         <article className="relative mx-auto mt-32 flex w-[1300px] max-w-[90%] flex-col-reverse lg:flex-row lg:items-start">
-          <div className="content w-full rounded-xl bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-50 p-4 leading-relaxed text-gray-800 dark:from-gray-800 dark:to-gray-800  dark:text-gray-200 lg:mr-5">
+          <div className="content w-full rounded-xl bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-50 p-4 leading-relaxed text-gray-800 lg:mr-5">
             {/* ## PROJECT HEADER */}
-            <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
             </h1>
-            <p className="prose max-w-none pb-0 pt-0 text-xl font-normal dark:prose-dark">
+            <p className="prose max-w-none pb-0 pt-0 text-xl font-normal ">
               {summary}
             </p>
             <div className="pt-4">
@@ -492,7 +492,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             </div>
             <div className="pt-4">
               <SocialMediaShare
-                className="mt-0 flex w-min  space-x-1 rounded-xl bg-blue-100 p-2 px-6 dark:bg-blue-900"
+                className="mt-0 flex w-min  space-x-1 rounded-xl bg-blue-100 p-2 px-6 "
                 title={title}
                 summary={socialSummary}
               />
@@ -633,7 +633,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-gray-100 to-gray-50 p-4 dark:from-gray-800 dark:to-gray-800 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
+          <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-gray-100 to-gray-50 p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
             {/* Div image */}
             <div className="relative max-h-max min-h-[10rem] min-w-[150px] max-w-[300px] rounded-lg  lg:m-4 lg:w-1/3">
               <Image
@@ -653,96 +653,86 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 {addressStats && !isBitcoinOlympics2024 && !isRecurring && (
                   <div className="flex w-full flex-col">
                     <div className="">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(addressStats.funded_txo_sum)}
                       </h4>
-                      <h4 className="dark:text-gray-100">Litecoin Raised</h4>
+                      <h4 className="">Litecoin Raised</h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(matchingTotal)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
-                        Donations Matched by Charlie Lee
-                      </h4>
+                      <h4 className="">Donations Matched by Charlie Lee</h4>
                     </div>
                     {/* TODO: Debug why for btc olympics it's not showing 2.123 LTC service fee collected */}
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(serviceFeeCollected)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
-                        15% Service Fee Collected
-                      </h4>
+                      <h4 className="">15% Service Fee Collected</h4>
                     </div>
 
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(totalPaid)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
-                        Litecoin Paid to Contributors
-                      </h4>
+                      <h4 className="">Litecoin Paid to Contributors</h4>
                     </div>
 
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         {addressStats.tx_count || '0'}
                       </h4>
-                      <h4 className="dark:text-gray-100">Donations</h4>
+                      <h4 className="">Donations</h4>
                     </div>
                   </div>
                 )}
                 {addressStats && isMatching && isBitcoinOlympics2024 && (
                   <div className="flex w-full flex-col">
                     <div className="">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(addressStats.funded_txo_sum)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
-                        The Litecoin Community Raised Prize
-                      </h4>
+                      <h4 className="">The Litecoin Community Raised Prize</h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(matchingTotal)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
+                      <h4 className="">
                         Prizes Matched by Charlie Lee & Galal Doss
                       </h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł{' '}
                         {formatLits(
                           addressStats.funded_txo_sum + matchingTotal
                         )}{' '}
                         + $8,000
                       </h4>
-                      <h4 className="dark:text-gray-100">Total Prize pool</h4>
+                      <h4 className="">Total Prize pool</h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(totalPaid)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
+                      <h4 className="">
                         Awarded to Bitcoin Olypmics 2024 Participants
                       </h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(0)}
                       </h4>
-                      <h4 className="dark:text-gray-100">
-                        15% Service Fee Collected
-                      </h4>
+                      <h4 className="">15% Service Fee Collected</h4>
                     </div>
 
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                      <h4 className="text-3xl font-semibold text-blue-500 ">
                         {addressStats.tx_count || '0'}
                       </h4>
-                      <h4 className="dark:text-gray-100">Donations</h4>
+                      <h4 className="">Donations</h4>
                     </div>
                   </div>
                 )}
@@ -754,20 +744,18 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                         <h2>Total Donations:</h2>
                         {addressStats && (
                           <div className="">
-                            <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                            <h4 className="text-3xl font-semibold text-blue-500 ">
                               Ł {formatLits(addressStats.funded_txo_sum)}{' '}
                             </h4>
-                            <h4 className="dark:text-gray-100">
-                              Litecoin raised
-                            </h4>
+                            <h4 className="">Litecoin raised</h4>
                           </div>
                         )}
                         {addressStats && (
                           <div className="mt-4">
-                            <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                            <h4 className="text-3xl font-semibold text-blue-500 ">
                               {addressStats.tx_count || '0'}
                             </h4>
-                            <h4 className="dark:text-gray-100">supporters</h4>
+                            <h4 className="">supporters</h4>
                           </div>
                         )}
                       </div>
@@ -775,26 +763,26 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                         <h2>Monthly Goal:</h2>
                         <div>
                           <div>
-                            <h4 className="text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                            <h4 className="text-3xl font-semibold text-blue-500 ">
                               Ł {formatLits(monthlyTotal)}
                             </h4>
-                            <h4 className="dark:text-gray-100">
+                            <h4 className="">
                               donated of Ł{recurringAmountGoal} monthly goal
                             </h4>
                           </div>
                         </div>
                         <div className="flex flex-row">
                           <div className="flex flex-col">
-                            <h4 className="mt-4 text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                            <h4 className="mt-4 text-3xl font-semibold text-blue-500 ">
                               {monthlyDonorCount}
                             </h4>
-                            <h4 className="dark:text-gray-100">supporters</h4>
+                            <h4 className="">supporters</h4>
                           </div>
                           <div className="ml-8 flex flex-col">
-                            <h4 className="mt-4 text-3xl font-semibold text-blue-500 dark:text-blue-400">
+                            <h4 className="mt-4 text-3xl font-semibold text-blue-500 ">
                               {timeLeftInMonth}
                             </h4>
-                            <h4 className="dark:text-gray-100">days to go</h4>
+                            <h4 className="">days to go</h4>
                           </div>
                         </div>
                       </div>
@@ -805,7 +793,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
               <button
                 onClick={openPaymentModal}
-                className={`hover:white block  w-full rounded-lg bg-[#f3ccc4] text-xl font-semibold text-[#333333] transition-colors  duration-200 hover:border-transparent hover:bg-[#f3ccc2] dark:bg-blue-400 dark:text-gray-100 dark:hover:bg-blue-300 ${
+                className={`hover:white block  w-full rounded-lg bg-[#f3ccc4] text-xl font-semibold text-[#333333] transition-colors  duration-200 hover:border-transparent hover:bg-[#f3ccc2] ${
                   bountyStatus === 'completed' ? 'disabled' : ''
                 }`}
                 disabled={bountyStatus === 'completed'}
