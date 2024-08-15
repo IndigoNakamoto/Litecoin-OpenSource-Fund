@@ -51,10 +51,10 @@ const SocialIcon = ({ kind, href, size = 8 }) => {
     >
       <span className="sr-only">{kind}</span>
       <div
-        className={`group flex h-${padding} w-${padding} items-center justify-center rounded-lg transition-colors duration-200 hover:bg-white dark:hover:bg-gray-800`}
+        className={`group flex h-${padding} w-${padding} items-center justify-center rounded-lg transition-colors duration-200 hover:bg-white `}
       >
         <SocialSvg
-          className={` fill-current h-${8} w-${8} text-gray-700 transition-colors duration-200 group-hover:text-blue-300 dark:text-gray-200`}
+          className={` fill-current h-${8} w-${8} text-gray-700 transition-colors duration-200 group-hover:text-blue-300 `}
         />
       </div>
     </a>
