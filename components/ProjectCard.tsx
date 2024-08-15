@@ -27,7 +27,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <figure
-      className={`flex h-full flex-col justify-between rounded-3xl p-14 ${bgColor} dark:border-stone-800 dark:bg-stone-900 sm:space-y-2`}
+      className={`flex h-full flex-col justify-between rounded-3xl p-14 ${bgColor} sm:space-y-2`}
     >
       {/* Wrap both the image and figcaption in a container with padding */}
       <Link href={`/projects/${slug}`} passHref>
@@ -67,7 +67,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Link
             href={`/projects/${slug}`}
             passHref
-            className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 font-bold tracking-wider text-[#7e7e7e] underline"
+            className="text-secondary-500 hover:text-secondary-600 font-bold tracking-wider text-[#7e7e7e] underline"
             aria-label="FIND OUT MORE"
           >
             FIND OUT MORE &rarr;
