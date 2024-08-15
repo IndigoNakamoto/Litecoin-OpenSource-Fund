@@ -24,7 +24,7 @@ const PaymentModal: React.FC<ModalProps> = ({
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="max-h-full w-11/12 overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:m-8 sm:w-9/12 sm:rounded-xl 2xl:w-5/12"
+      className="max-h-full w-11/12 overflow-y-auto bg-white p-8 shadow-xl  sm:m-8 sm:w-9/12 sm:rounded-xl 2xl:w-5/12"
       overlayClassName="inset-0 fixed backdrop-blur-3xl  flex items-center justify-center transform duration-400 ease-in"
       appElement={
         typeof window === 'undefined'

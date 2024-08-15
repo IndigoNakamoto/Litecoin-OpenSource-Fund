@@ -14,7 +14,7 @@ export default function ApplySection({
   style = 'markdown',
 }: Props) {
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+    <div className="divide-y divide-gray-200">
       <PageHeading title={title}>
         <div className={`${style} max-w-none p-4  xl:col-span-2`}>
           {children}

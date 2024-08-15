@@ -80,7 +80,7 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
     // Add ref to the div to reference it in handleClickOutside
     <div
       ref={projectUpdateRef}
-      className={`my-8 rounded-lg border bg-white p-4 dark:bg-gray-900 ${thickerBorderClass}`}
+      className={`my-8 rounded-lg border bg-white p-4  ${thickerBorderClass}`}
     >
       <h6
         className="cursor-pointer text-sm text-gray-500 hover:text-blue-500 hover:underline"
@@ -98,13 +98,13 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
       >
         <h6 className="mt-0">{`@${authorTwitterHandle}`}</h6>
       </Link>
-      <h6 className="mb-4 text-gray-600 dark:text-gray-500">{date}</h6>
-      <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
+      <h6 className="mb-4 text-gray-600 ">{date}</h6>
+      <hr className="my-4 border-t border-gray-300 " />
       <div className="content">
         {summary && <ReactMarkdown>{summary}</ReactMarkdown>}
         {showContent && content && (
           <>
-            <hr className="my-4 border-t border-gray-300 dark:border-gray-700" />
+            <hr className="my-4 border-t border-gray-300 " />
             <ReactMarkdown>{content}</ReactMarkdown>
           </>
         )}
@@ -124,12 +124,12 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
         {content && (
           <button onClick={() => setShowContent(!showContent)}>
             {showContent ? (
-              <div className="flex items-center hover:text-blue-500 hover:underline dark:text-white dark:hover:text-blue-300">
+              <div className="flex items-center hover:text-blue-500 hover:underline ">
                 Read Less{' '}
                 <FontAwesomeIcon icon={faChevronUp} className="ml-2" />
               </div>
             ) : (
-              <div className="flex items-center hover:text-blue-500 hover:underline dark:text-white dark:hover:text-blue-300">
+              <div className="flex items-center hover:text-blue-500 hover:underline ">
                 Read More{' '}
                 <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
               </div>

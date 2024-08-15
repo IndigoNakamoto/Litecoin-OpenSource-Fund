@@ -128,10 +128,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       <section className="flex flex-col gap-1">
         <div className="mb-4">
           <h3>
-            Name{' '}
-            <span className="text-sm  text-gray-600 dark:text-gray-400">
-              (Optional)
-            </span>
+            Name <span className="text-sm  text-gray-600 ">(Optional)</span>
           </h3>
           <input
             type="text"
@@ -143,10 +140,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </div>
         <div className="mb-4">
           <h3>
-            Email{' '}
-            <span className="text-sm  text-gray-600 dark:text-gray-400">
-              (Optional)
-            </span>
+            Email <span className="text-sm  text-gray-600 ">(Optional)</span>
           </h3>
           <input
             type="email"
@@ -171,7 +165,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <div className="mb-4">
           <h3 className="mb-1">
             {/* TODO: display X logo */}X
-            <span className="ml-1 text-sm  text-gray-600 dark:text-gray-400">
+            <span className="ml-1 text-sm  text-gray-600 ">
               (Optional: Your X profile will be publicly shared as a community
               supporter for this project)
             </span>
@@ -192,10 +186,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               />
               <div className="ml-2 flex items-center">
                 <div className="m-0 p-0">
-                  <h4 className="text-md font-bold text-gray-600 dark:text-gray-100">
+                  <h4 className="text-md font-bold text-gray-600 ">
                     {session.user.name}
                   </h4>
-                  <h4 className="text-md  text-gray-600 dark:text-gray-400">
+                  <h4 className="text-md  text-gray-600 ">
                     @{session.user.username}
                   </h4>
                 </div>
@@ -259,7 +253,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </span>
         </button>
       </div>
-      <p className="mb-2 text-sm text-gray-500 dark:text-gray-300">
+      <p className="mb-2 text-sm text-gray-500 ">
         By donating, you agree to the{' '}
         <Link href="/terms" className="text-blue-300">
           Terms of Service

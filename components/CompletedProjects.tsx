@@ -46,13 +46,13 @@ function CompletedProjects() {
   return (
     <section className="flex flex-col pt-40 text-gray-800">
       <div className="mx-auto flex flex-col items-center text-center">
-        <h2 className="text-5xl font-semibold tracking-tight text-gray-800 dark:text-white lg:text-7xl">
+        <h2 className="text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
           We Help Advance
         </h2>
         <h3 className="text-3xl font-semibold text-gray-800 lg:text-4xl">
           <TypingScroll />
         </h3>
-        <p className="pt-2 text-2xl text-gray-600 dark:text-gray-400">
+        <p className="pt-2 text-2xl text-gray-600 ">
           Unite. Fund. Innovate. - The Litecoin Development Portal
         </p>
         <Link

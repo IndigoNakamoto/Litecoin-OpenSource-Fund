@@ -70,8 +70,8 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
   return (
     <div>
       {faqCategories.map((category, catIndex) => (
-        <div key={catIndex} className=" border-gray-400 dark:border-gray-700">
-          <h4 className="mb-4 mt-4 text-2xl font-medium text-gray-700 dark:text-gray-300">
+        <div key={catIndex} className=" border-gray-400 ">
+          <h4 className="mb-4 mt-4 text-2xl font-medium text-gray-700 ">
             {category.category.trim()}
           </h4>
           {category.items.map((faq, qIndex) => (
@@ -96,7 +96,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
               </button>
 
               <div
-                className={`pb-8 pl-4 pt-6 text-gray-700 dark:text-gray-300 ${
+                className={`pb-8 pl-4 pt-6 text-gray-700  ${
                   openIndex &&
                   openIndex.catIndex === catIndex &&
                   openIndex.qIndex === qIndex
