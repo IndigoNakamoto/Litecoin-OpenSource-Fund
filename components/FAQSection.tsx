@@ -69,14 +69,8 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
 
   return (
     <div>
-      <h6 className="py-8 text-4xl font-semibold text-black dark:text-gray-300">
-        Frequently Asked Questions
-      </h6>
       {faqCategories.map((category, catIndex) => (
-        <div
-          key={catIndex}
-          className="mb-8 border-t border-gray-400 dark:border-gray-700"
-        >
+        <div key={catIndex} className=" border-gray-400 dark:border-gray-700">
           <h4 className="mb-4 mt-4 text-2xl font-medium text-gray-700 dark:text-gray-300">
             {category.category.trim()}
           </h4>
@@ -89,7 +83,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition duration-300 hover:bg-white focus:border-gray-400 focus:bg-white focus:outline-none dark:border-gray-800 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:focus:bg-gray-700"
+                className="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition duration-300 hover:bg-white focus:border-gray-400 focus:bg-white focus:outline-none "
               >
                 <span>{faq.question}</span>
                 {openIndex &&

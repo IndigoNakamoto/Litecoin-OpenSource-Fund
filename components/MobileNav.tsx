@@ -24,21 +24,18 @@ const MobileNav = () => {
   return (
     <div className="z-100 ">
       <div
-        className="ml-1 mr-1 flex items-center rounded-3xl bg-blue-500 px-4 py-1 transition-colors duration-300 hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-300"
+        className="flex items-center transition-colors duration-300"
         role="button"
         tabIndex={0}
         onClick={onToggleNav}
         onKeyPress={onToggleNav}
         aria-label="Toggle Menu"
       >
-        <span className="mr-2 font-semibold text-white dark:text-gray-100">
-          Menu
-        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-8 w-8 text-white dark:text-gray-100"
+          className="h-12 text-white dark:text-gray-100"
         >
           <path d="M3 4.5h14v1H3zM3 9.5h14v1H3zM3 14.5h14v1H3z" />
         </svg>

@@ -42,7 +42,7 @@ class MyDocument extends Document {
           />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         </Head>
-        <body className="bg-[#333333] text-black antialiased dark:bg-gray-900 dark:text-white">
+        <body className="bg-[#333333] bg-[#333333] text-black antialiased dark:text-black">
           <Main />
           <NextScript />
         </body>

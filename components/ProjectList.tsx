@@ -35,7 +35,11 @@ const ProjectList: React.FC<ProjectListProps> = ({
         {sortedProjects &&
           sortedProjects.slice(0, 6).map((p, i) => (
             <li key={i} className="">
-              <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              <ProjectCard
+                project={p}
+                openPaymentModal={openPaymentModal}
+                bgColor={''}
+              />
             </li>
           ))}
       </ul>

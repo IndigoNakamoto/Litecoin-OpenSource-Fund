@@ -1,5 +1,5 @@
 // @ts-check
-const { fontFamily } = require('tailwindcss/defaultTheme')
+// const { fontFamily } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
 // ../node_modules/pliny/dist/**/*.mjs is needed for monorepo setup
@@ -38,8 +38,26 @@ module.exports = {
         13: '3.25rem',
         14: '3.5rem',
       },
+      // fontFamily: {
+      //   sans: ['Barlow Semi Condensed', 'sans'], // !! Barlow Semi Condensed is not in the project directory. When pushed to vercel, it does not have font to render. How should I include the font?
+      //   'barlow-semi-condensed': ['Barlow Semi Condensed', 'sans'],
+      // },
       fontFamily: {
-        sans: ['Barlow Semi Condensed', 'sans'], // !! Barlow Semi Condensed is not in the project directory. When pushed to vercel, it does not have font to render. How should I include the font?
+        'space-grotesk': ['"Space Grotesk"', 'sans-serif'],
+        sans: [
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Oxygen',
+          'Ubuntu',
+          'Cantarell',
+          'Fira Sans',
+          'Droid Sans',
+          'Helvetica Neue',
+          'sans-serif',
+        ],
         'barlow-semi-condensed': ['Barlow Semi Condensed', 'sans'],
       },
       colors: {

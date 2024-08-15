@@ -191,3 +191,36 @@ button.pay:disabled {
 input[type='checkbox'] {
   @apply mr-2;
 }
+
+/* This styling is for the Header */
+
+/* Dropdown transition classes */
+.dropdown-enter {
+  opacity: 0;
+  transform: scaleY(0.9);
+  max-height: 0;
+  overflow: hidden;
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: scaleY(1);
+  max-height: 300px; /* Adjust based on content */
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out,
+    max-height 300ms ease-in-out;
+}
+
+.dropdown-exit {
+  opacity: 1;
+  transform: scaleY(1);
+  max-height: 300px; /* Adjust based on content */
+  overflow: hidden;
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transform: scaleY(0.9);
+  max-height: 0;
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out,
+    max-height 300ms ease-in-out;
+}

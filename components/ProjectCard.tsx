@@ -10,7 +10,7 @@ export type ProjectCardProps = {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
-  openPaymentModal,
+  // openPaymentModal,
   bgColor,
 }) => {
   const {
@@ -18,19 +18,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     title,
     summary,
     coverImage,
-    gitRepository,
-    twitterHandle,
-    nym,
+    // gitRepository,
+    // twitterHandle,
+    // nym,
   } = project
 
-  const showButton = project.bountyStatus !== 'completed'
+  // const showButton = project.bountyStatus !== 'completed'
 
   return (
     <figure
       className={`flex h-full flex-col justify-between rounded-3xl p-14 ${bgColor} dark:border-stone-800 dark:bg-stone-900 sm:space-y-2`}
     >
       {/* Wrap both the image and figcaption in a container with padding */}
-      <Link href={`/missions/${slug}`} passHref>
+      <Link href={`/projects/${slug}`} passHref>
         <div className="relative max-h-max min-h-[150px] w-[40%] min-w-[150px]">
           {/* Set width equal to height */}
           <Image
@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {title}
           </h2>
           <div
-            className="font-space-grotesk pt-4 text-[16px] font-medium tracking-wide text-[#333333] "
+            className="pt-4 font-space-grotesk text-[16px] font-medium tracking-wide text-[#333333] "
             style={{
               overflow: 'hidden',
               display: '-webkit-box',
@@ -65,7 +65,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="pt-12">
         <div className="mt-auto text-left">
           <Link
-            href={`/missions/${slug}`}
+            href={`/projects/${slug}`}
             passHref
             className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 font-bold tracking-wider text-[#7e7e7e] underline"
             aria-label="FIND OUT MORE"

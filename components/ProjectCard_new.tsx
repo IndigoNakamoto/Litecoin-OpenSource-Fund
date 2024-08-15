@@ -10,22 +10,21 @@ export type ProjectCardProps = {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
-  openPaymentModal,
+  // openPaymentModal,
 }) => {
   const {
     slug,
     title,
     summary,
     coverImage,
-    gitRepository,
-    twitterHandle,
-    nym,
+    // gitRepository,
+    // twitterHandle,
+    // nym,
   } = project
 
-  const showButton = project.bountyStatus !== 'completed'
+  // const showButton = project.bountyStatus !== 'completed'
 
   return (
-    // TODO: Column 1 max width should be fixed to the square ratio for the image, column 2 should fill the rest of the width
     <figure className="lga:flex lga:flex-row lga:px-[12px] lga:py-[85px] h-full rounded-3xl border border-stone-200 bg-[#EEEEEE] px-10 py-10 dark:border-stone-800 dark:bg-stone-900">
       {/* Image container: column by default, row on small screens */}
       <div className="lga:m-auto lga:pb-0 lga:pl-20 relative w-1/3 pb-8 ">
@@ -51,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* Flex-1 allows it to fill the remaining space */}
         <div className="lga:p-4 max-w-[620px]">
           <h2
-            className="font-space-grotesk mb-[20px] mt-[10px] text-[30px] font-medium leading-[32px] tracking-[-0.5px] text-[#222222]"
+            className="mb-[20px] mt-[10px] font-space-grotesk text-[30px] font-medium leading-[32px] tracking-[-0.5px] text-[#222222]"
             style={{
               wordSpacing: '0px',
               textTransform: 'none',
