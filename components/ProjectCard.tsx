@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {title}
           </h2>
           <p
-            className="pt-4 text-[16px] font-medium tracking-wide text-[#333333] "
+            className="pt-4 text-[15px] font-medium  text-[#333333] "
             style={{
               overflow: 'hidden',
               display: '-webkit-box',
