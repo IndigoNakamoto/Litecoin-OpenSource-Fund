@@ -133,19 +133,19 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         }}
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
-          <div className="py-20 lg:w-1/2 lg:py-60">
+          <div className="lg:py-30 py-20 lg:w-1/2">
             {/* Column 1 */}
             <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
               Litecoin Projects
             </h1>
-            <p className="max-w-prose pt-6 text-[19px]">
+            <p className="w-11/12 pt-6 text-[19px]">
               The Litecoin Foundation is dedicated to consistently improving the
               Litecoin network, whilst supporting the development of exciting
               projects on the Litecoin blockchain. Below are a handful of
               initiatives that demonstrate Litecoin's commitment to innovation
               and improving the experience of its users.
             </p>
-            <div className="my-8 flex max-w-[508px] flex-col gap-4">
+            <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
               <div className="text-md rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
                 <p className="text-white">DONATE NOW</p>
               </div>
