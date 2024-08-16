@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown' // Import the ReactMarkdown component
 
 type FAQItem = {
@@ -42,7 +42,6 @@ const ChevronDown: React.FC<{ className?: string }> = ({ className }) => (
 export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
   faqCategories,
 }) => {
-  // Changing the state to hold both category and question indices
   const [openIndex, setOpenIndex] = useState<{
     catIndex: number
     qIndex: number
@@ -59,6 +58,15 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
       setOpenIndex({ catIndex, qIndex })
     }
   }
+
+  const getMaxHeight = (catIndex: number, qIndex: number) => {
+    return openIndex &&
+      openIndex.catIndex === catIndex &&
+      openIndex.qIndex === qIndex
+      ? 'max-h-[1000px]' // Adjust this value as needed
+      : 'max-h-0'
+  }
+
   if (!faqCategories || faqCategories.length === 0) {
     return (
       <div className="">
@@ -70,8 +78,8 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
   return (
     <div>
       {faqCategories.map((category, catIndex) => (
-        <div key={catIndex} className=" border-gray-400 ">
-          <h4 className="mb-4 mt-4 text-2xl font-medium text-gray-700 ">
+        <div key={catIndex} className="">
+          <h4 className="mb-4 text-2xl font-medium text-gray-700 ">
             {category.category.trim()}
           </h4>
           {category.items.map((faq, qIndex) => (
@@ -83,7 +91,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="flex w-full cursor-pointer items-center justify-between border border-gray-300 bg-gray-100 p-4 text-left text-gray-700 transition duration-300 hover:bg-white focus:border-gray-400 focus:bg-white focus:outline-none "
+                className="flex w-full cursor-pointer items-center justify-between rounded-none border border-[#222222] bg-[#222222] p-4 text-left font-space-grotesk text-xl font-semibold text-[#c6d3d6]  focus:border-[#222222]  focus:outline-none "
               >
                 <span>{faq.question}</span>
                 {openIndex &&
@@ -96,15 +104,22 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
               </button>
 
               <div
-                className={`pb-8 pl-4 pt-6 text-gray-700  ${
-                  openIndex &&
-                  openIndex.catIndex === catIndex &&
-                  openIndex.qIndex === qIndex
-                    ? 'block'
-                    : 'hidden'
-                }`}
+                className={`overflow-hidden border border-[#222222] border-b-black bg-white transition-all duration-700  ${getMaxHeight(
+                  catIndex,
+                  qIndex
+                )}`}
               >
-                <ReactMarkdown className="markdown">{faq.answer}</ReactMarkdown>
+                <div
+                  className="p-6 text-gray-700"
+                  style={{
+                    fontFamily:
+                      'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+                  }}
+                >
+                  <ReactMarkdown className="markdown">
+                    {faq.answer}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
           ))}
