@@ -180,27 +180,34 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* OPEN SOURCE PROJECTS */}
       <section
-        className="relative left-1/2 right-1/2 my-20 -ml-[50vw] -mr-[50vw] w-screen max-w-none  bg-[#333333] bg-cover bg-center"
+        className="relative left-1/2 right-1/2 my-20 -ml-[50vw] -mr-[50vw] w-screen max-w-none bg-[#333333] bg-cover bg-center"
         style={{
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         }}
       >
-        <div className="m-auto  flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-white">
             Open-Source Projects
           </h1>
           <ul className="grid max-w-full gap-6 md:grid-cols-2 xl:grid-cols-3">
             {openSourceProjects &&
-              openSourceProjects.map((p, i) => (
-                <li key={i}>
-                  <ProjectCard
-                    project={p}
-                    openPaymentModal={openPaymentModal}
-                    bgColor={bgColors[i % bgColors.length]}
-                  />
-                </li>
-              ))}
+              openSourceProjects.map((p, i) => {
+                const isThreeCols = openSourceProjects.length >= 3
+                const bgColor = isThreeCols
+                  ? bgColors[i % 2] // Use only the first two colors if grid-cols-3
+                  : bgColors[i % bgColors.length] // Use all colors otherwise
+
+                return (
+                  <li key={i}>
+                    <ProjectCard
+                      project={p}
+                      openPaymentModal={openPaymentModal}
+                      bgColor={bgColor}
+                    />
+                  </li>
+                )
+              })}
           </ul>
         </div>
       </section>
