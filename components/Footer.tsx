@@ -12,8 +12,8 @@ export default function Footer() {
         {/* background */}
         <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[334px] w-screen max-w-none bg-[#222222] bg-cover bg-center">
           {/* Overlay on top */}
-          <div className="mx-auto w-[1300px] max-w-[90%]">
-            <div className="flex justify-between space-x-20 text-[#c6d3d6]">
+          <div className="mx-auto min-w-max max-w-[90%]">
+            <div className="flex flex-col justify-between space-x-20 text-[#c6d3d6]">
               <Image
                 src="/static/images/design/Group 5.svg"
                 alt="Black Logo"
@@ -25,11 +25,8 @@ export default function Footer() {
                 }}
                 className="mt-16"
               />
-              {/* 
-              TODO: MAKE THIS ROW RESPONSIVE
-              TODO: FIX LOCATION OF ELEMENTS
-              
-              */}
+              {/*
+               */}
               <div className=" mt-16 w-full">
                 <h1 className="font-space-grotesk text-[16px] font-bold">
                   ADDRESS
