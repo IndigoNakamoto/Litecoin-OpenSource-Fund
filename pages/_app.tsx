@@ -117,7 +117,7 @@ export default function App({
         {/* @ts-ignore */}
         <Analytics analyticsConfig={...pageProps} />
         <LayoutWrapper>
-          <div className={barlowSemiCondensed.className}>
+          <div>
             {/* @ts-ignore */}
             <SearchProvider searchConfig={siteMetadata.search}>
               <Component {...pageProps} />
