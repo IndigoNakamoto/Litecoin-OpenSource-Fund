@@ -49,8 +49,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <h2 className="font-space-grotesk text-[30px] font-semibold leading-[32px] tracking-wide text-[#333333]">
             {title}
           </h2>
-          <div
-            className="pt-4 font-space-grotesk text-[16px] font-medium tracking-wide text-[#333333] "
+          <p
+            className="pt-4 text-[16px] font-medium tracking-wide text-[#333333] "
             style={{
               overflow: 'hidden',
               display: '-webkit-box',
@@ -59,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             }}
           >
             {summary}
-          </div>
+          </p>
         </div>
       </figcaption>
       <div className="pt-12">
