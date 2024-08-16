@@ -125,15 +125,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* Hero section */}
       <section
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[60vh] w-screen max-w-none bg-cover bg-center"
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex max-h-fit min-h-[62vh] w-screen max-w-none items-center bg-cover bg-center"
         style={{
           backgroundImage: "url('/static/images/design/Mask-Group-19.webp')",
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         }}
       >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center justify-between gap-y-40  pt-40 lg:flex-row lg:items-center lg:pt-10 ">
-          <div className=" py-20 lg:py-40 ">
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
+          <div className="py-20 lg:w-1/2 lg:py-60">
             {/* Column 1 */}
             <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
               Litecoin Projects
@@ -146,21 +146,21 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               and improving the experience of its users.
             </p>
             <div className="my-8 flex max-w-[508px] flex-col gap-4">
-              <div className="text-md rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium ">
+              <div className="text-md rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
                 <p className="text-white">DONATE NOW</p>
               </div>
               <div className="flex w-full flex-row justify-center gap-2">
-                <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium ">
+                <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
                   <p className="text-white">VIEW PROJECTS</p>
                 </div>
-                <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium ">
+                <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
                   <p className="text-white">VIEW BOUNTIES</p>
                 </div>
               </div>
             </div>
           </div>
           {/* Column 2 */}
-          <div className="relative w-1/2   pt-40 lg:w-[full] lg:pb-0 lg:pl-20 lg:pt-0">
+          <div className="w-7/12 pt-80 lg:w-1/2 lg:pb-0 lg:pl-20 lg:pt-0">
             <div className="relative flex items-center justify-center">
               <img
                 src="/static/images/design/outline-litecoin-spinner-inner.svg"
@@ -171,7 +171,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                 src="/static/images/design/outline-litecoin-spinner-outer.svg"
                 alt="Litecoin Spinner Outer"
                 ref={outerSpinnerRef}
-                className="absolute w-[full] lg:w-[full]"
+                className="absolute w-full lg:w-full"
               />
             </div>
           </div>

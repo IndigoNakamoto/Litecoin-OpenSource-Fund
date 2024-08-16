@@ -249,7 +249,7 @@ const Header = () => {
                   color: fontColor,
                   letterSpacing: '-0.2px',
                   fontSize: `${scaledFontSize}px`,
-                  marginRight: `${scaledMargin + 5}px`,
+                  marginRight: `${scaledMargin + 2.5}px`,
                 }}
               >
                 <Link href="/projects">Projects</Link>
