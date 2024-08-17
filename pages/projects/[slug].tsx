@@ -469,34 +469,22 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-none items-center bg-white bg-cover bg-center pb-8">
-        <article className="relative mx-auto mt-32 flex w-[1300px] max-w-[90%] flex-col-reverse lg:flex-row lg:items-start">
-          <div className="content w-full rounded-xl bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-50 p-4 leading-relaxed text-gray-800 lg:mr-5">
+      <div
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-none items-center bg-white bg-cover bg-center pb-8"
+        style={{
+          fontFamily:
+            'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+        }}
+      >
+        <article className="relative mx-auto mt-32 flex min-h-screen w-[1300px] max-w-[90%] flex-col-reverse pb-16 lg:flex-row lg:items-start">
+          <div className="content w-full leading-relaxed text-gray-800 lg:mr-5">
             {/* ## PROJECT HEADER */}
-            <h1 className="pb-4 text-3xl font-semibold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            <h1 className="pb-4 font-space-grotesk text-3xl font-semibold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
               {title}
             </h1>
-            <p className="prose max-w-none pb-0 pt-0 text-xl font-normal ">
+            <p className="prose max-w-none pb-0 pt-0 text-lg font-medium ">
               {summary}
             </p>
-            <div className="pt-4">
-              <ProjectSocialLinks
-                website={website}
-                gitRepository={gitRepository}
-                twitterHandle={twitterHandle}
-                discordLink={discordLink}
-                telegramLink={telegramLink}
-                facebookLink={facebookLink}
-                redditLink={redditLink}
-              />
-            </div>
-            <div className="pt-4">
-              <SocialMediaShare
-                className="mt-0 flex w-min  space-x-1 rounded-xl bg-blue-100 p-2 px-6 "
-                title={title}
-                summary={socialSummary}
-              />
-            </div>
 
             {/* ## PROJECT CONTENT */}
 
@@ -512,10 +500,33 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             />
             {/* ### Mission Section */}
             {selectedMenuItem === 'mission' && content && (
-              <div
-                className="markdown"
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
+              <div>
+                {/* Refactor <ICON> - <USERNAME> || <LINK> */}
+                <div className="w-full bg-[#c6d3d6]">
+                  <div className="pt-4">
+                    <ProjectSocialLinks
+                      website={website}
+                      gitRepository={gitRepository}
+                      twitterHandle={twitterHandle}
+                      discordLink={discordLink}
+                      telegramLink={telegramLink}
+                      facebookLink={facebookLink}
+                      redditLink={redditLink}
+                    />
+                  </div>
+                  <div className=" pt-4">
+                    <SocialMediaShare
+                      className="mt-0 flex w-full  space-x-1 rounded-xl p-2 px-6 "
+                      title={title}
+                      summary={socialSummary}
+                    />
+                  </div>
+                </div>
+                <div
+                  className="markdown"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              </div>
             )}
             {/* ### Comments Section */}
             {selectedMenuItem === 'comments' && (
@@ -527,7 +538,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             {/* ### FAQ Section */}
             {selectedMenuItem === 'faq' && (
               <div className="markdown">
-                <FAQSection faqCategories={faq.questionsAndAnswers} />
+                <FAQSection
+                  faqCategories={faq.questionsAndAnswers}
+                  bg={'#c6d3d6'}
+                />
               </div>
             )}
             {/* ### Updates Section */}
@@ -633,106 +647,116 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-xl bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-gray-100 to-gray-50 p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
+          <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#EEEEEE] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
             {/* Div image */}
-            <div className="relative max-h-max min-h-[10rem] min-w-[150px] max-w-[300px] rounded-lg  lg:m-4 lg:w-1/3">
+            <div className="relative max-h-max min-h-[10rem] min-w-[150px] max-w-[300px]  lg:m-4 lg:w-1/3">
               <Image
                 alt={title}
                 src={coverImage}
                 layout="fill"
                 objectFit="cover"
                 objectPosition="50% 50%"
-                className="rounded-xl"
+                className=""
                 priority={true}
               />
             </div>
 
             {/* Div everything else */}
-            <div className="flex w-full flex-col items-start lg:w-full lg:text-left">
+            <div className="flex w-full flex-col">
               <div>
                 {addressStats && !isBitcoinOlympics2024 && !isRecurring && (
                   <div className="flex w-full flex-col">
                     <div className="">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(addressStats.funded_txo_sum)}
                       </h4>
-                      <h4 className="">Litecoin Raised</h4>
+                      <h4 className="font-space-grotesk">Litecoin Raised</h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(matchingTotal)}
                       </h4>
-                      <h4 className="">Donations Matched by Charlie Lee</h4>
+                      <h4 className="font-space-grotesk">
+                        Donations Matched by Charlie Lee
+                      </h4>
                     </div>
                     {/* TODO: Debug why for btc olympics it's not showing 2.123 LTC service fee collected */}
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(serviceFeeCollected)}
                       </h4>
-                      <h4 className="">15% Service Fee Collected</h4>
+                      <h4 className="font-space-grotesk">
+                        15% Service Fee Collected
+                      </h4>
                     </div>
 
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(totalPaid)}
                       </h4>
-                      <h4 className="">Litecoin Paid to Contributors</h4>
+                      <h4 className="font-space-grotesk">
+                        Litecoin Paid to Contributors
+                      </h4>
                     </div>
 
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         {addressStats.tx_count || '0'}
                       </h4>
-                      <h4 className="">Donations</h4>
+                      <h4 className="font-space-grotesk">Donations</h4>
                     </div>
                   </div>
                 )}
                 {addressStats && isMatching && isBitcoinOlympics2024 && (
                   <div className="flex w-full flex-col">
                     <div className="">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(addressStats.funded_txo_sum)}
                       </h4>
-                      <h4 className="">The Litecoin Community Raised Prize</h4>
+                      <h4 className="font-space-grotesk">
+                        The Litecoin Community Raised Prize
+                      </h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(matchingTotal)}
                       </h4>
-                      <h4 className="">
+                      <h4 className="font-space-grotesk">
                         Prizes Matched by Charlie Lee & Galal Doss
                       </h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł{' '}
                         {formatLits(
                           addressStats.funded_txo_sum + matchingTotal
                         )}{' '}
                         + $8,000
                       </h4>
-                      <h4 className="">Total Prize pool</h4>
+                      <h4 className="font-space-grotesk">Total Prize pool</h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(totalPaid)}
                       </h4>
-                      <h4 className="">
+                      <h4 className="font-space-grotesk">
                         Awarded to Bitcoin Olypmics 2024 Participants
                       </h4>
                     </div>
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         Ł {formatLits(0)}
                       </h4>
-                      <h4 className="">15% Service Fee Collected</h4>
+                      <h4 className="font-space-grotesk">
+                        15% Service Fee Collected
+                      </h4>
                     </div>
 
                     <div className="mt-2">
-                      <h4 className="text-3xl font-semibold text-blue-500 ">
+                      <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                         {addressStats.tx_count || '0'}
                       </h4>
-                      <h4 className="">Donations</h4>
+                      <h4 className="font-space-grotesk">Donations</h4>
                     </div>
                   </div>
                 )}
@@ -744,18 +768,20 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                         <h2>Total Donations:</h2>
                         {addressStats && (
                           <div className="">
-                            <h4 className="text-3xl font-semibold text-blue-500 ">
+                            <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                               Ł {formatLits(addressStats.funded_txo_sum)}{' '}
                             </h4>
-                            <h4 className="">Litecoin raised</h4>
+                            <h4 className="font-space-grotesk">
+                              Litecoin raised
+                            </h4>
                           </div>
                         )}
                         {addressStats && (
                           <div className="mt-4">
-                            <h4 className="text-3xl font-semibold text-blue-500 ">
+                            <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                               {addressStats.tx_count || '0'}
                             </h4>
-                            <h4 className="">supporters</h4>
+                            <h4 className="font-space-grotesk">Supporters</h4>
                           </div>
                         )}
                       </div>
@@ -763,26 +789,26 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                         <h2>Monthly Goal:</h2>
                         <div>
                           <div>
-                            <h4 className="text-3xl font-semibold text-blue-500 ">
+                            <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
                               Ł {formatLits(monthlyTotal)}
                             </h4>
-                            <h4 className="">
-                              donated of Ł{recurringAmountGoal} monthly goal
+                            <h4 className="font-space-grotesk">
+                              Donated of Ł{recurringAmountGoal} monthly goal
                             </h4>
                           </div>
                         </div>
                         <div className="flex flex-row">
                           <div className="flex flex-col">
-                            <h4 className="mt-4 text-3xl font-semibold text-blue-500 ">
+                            <h4 className="mt-4 font-space-grotesk text-3xl font-semibold text-blue-500 ">
                               {monthlyDonorCount}
                             </h4>
-                            <h4 className="">supporters</h4>
+                            <h4 className="font-space-grotesk">Supporters</h4>
                           </div>
                           <div className="ml-8 flex flex-col">
-                            <h4 className="mt-4 text-3xl font-semibold text-blue-500 ">
+                            <h4 className="mt-4 font-space-grotesk text-3xl font-semibold text-blue-500 ">
                               {timeLeftInMonth}
                             </h4>
-                            <h4 className="">days to go</h4>
+                            <h4 className="font-space-grotesk">Days to go</h4>
                           </div>
                         </div>
                       </div>
@@ -791,17 +817,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 )}
               </div>
 
-              <button
-                onClick={openPaymentModal}
-                className={`hover:white block  w-full rounded-lg bg-[#f3ccc4] text-xl font-semibold text-[#333333] transition-colors  duration-200 hover:border-transparent hover:bg-[#f3ccc2] ${
-                  bountyStatus === 'completed' ? 'disabled' : ''
-                }`}
-                disabled={bountyStatus === 'completed'}
-              >
-                {bountyStatus === 'completed'
-                  ? 'PROJECT COMPLETE'
-                  : 'SUPPORT THE PROJECT'}
-              </button>
+              <div className="pr-0 lg:pr-8">
+                <button
+                  onClick={openPaymentModal}
+                  className={`block w-full rounded-none bg-[#f3ccc4] font-space-grotesk text-xl font-semibold text-[#333333] transition-colors duration-200  hover:border-transparent hover:bg-[#f3ccc2] ${
+                    bountyStatus === 'completed' ? 'disabled' : ''
+                  }`}
+                  disabled={bountyStatus === 'completed'}
+                >
+                  {bountyStatus === 'completed' ? 'PROJECT COMPLETE' : 'DONATE'}
+                </button>
+              </div>
             </div>
           </aside>
         </article>

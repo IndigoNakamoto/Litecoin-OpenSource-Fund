@@ -73,14 +73,14 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
 
   const thickerBorderClass =
     showContent || highlight
-      ? 'border-2 border-blue-200 dark:border-blue-600'
+      ? 'border-2 border-blue-200 dark:border-[#c6d3d6]'
       : ''
 
   return (
     // Add ref to the div to reference it in handleClickOutside
     <div
       ref={projectUpdateRef}
-      className={`my-8 rounded-lg border bg-white p-4  ${thickerBorderClass}`}
+      className={`my-8 border border-[#eeeeee] bg-white p-4  ${thickerBorderClass}`}
     >
       <h6
         className="cursor-pointer text-sm text-gray-500 hover:text-blue-500 hover:underline"
@@ -129,7 +129,7 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
                 <FontAwesomeIcon icon={faChevronUp} className="ml-2" />
               </div>
             ) : (
-              <div className="flex items-center hover:text-blue-500 hover:underline ">
+              <div className="flex items-center hover:text-[#333333] hover:underline ">
                 Read More{' '}
                 <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
               </div>
