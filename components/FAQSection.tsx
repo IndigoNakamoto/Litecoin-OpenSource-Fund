@@ -14,7 +14,7 @@ type FAQCategory = {
 const PlusIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
     <div
-      className={`transform transition-transform duration-300 ${
+      className={`transform transition-transform duration-700 ${
         isOpen ? 'rotate-[315deg]' : 'rotate-0'
       }`}
     >
