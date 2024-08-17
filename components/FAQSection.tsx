@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown' // Import the ReactMarkdown component
 
 type FAQItem = {
@@ -10,6 +10,8 @@ type FAQCategory = {
   category: string
   items: FAQItem[]
 }
+
+type BG = string
 
 const PlusIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
@@ -34,9 +36,10 @@ const PlusIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   )
 }
 
-export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
-  faqCategories,
-}) => {
+export const FAQSection: React.FC<{
+  faqCategories: FAQCategory[]
+  bg?: BG
+}> = ({ faqCategories, bg = '#222222' }) => {
   const [openIndex, setOpenIndex] = useState<{
     catIndex: number
     qIndex: number
@@ -91,7 +94,8 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                     handleToggle(catIndex, qIndex)
                   }
                 }}
-                className="flex w-full cursor-pointer items-center justify-between rounded-none border border-[#222222] bg-[#222222] p-6 text-left font-space-grotesk text-xl font-semibold text-[#c6d3d6]  focus:border-[#222222]  focus:outline-none "
+                style={{ backgroundColor: bg }}
+                className="flex w-full cursor-pointer items-center justify-between rounded-none p-6 text-left font-space-grotesk text-xl font-semibold text-[#c6d3d6] focus:border-[#222222] focus:outline-none"
               >
                 <span>{faq.question}</span>
                 <PlusIcon
@@ -104,7 +108,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
               </button>
 
               <div
-                className={`overflow-hidden border border-[#222222] border-b-black bg-white transition-all duration-700 ${getMaxHeight(
+                className={`overflow-hidden border border-[#222222]  bg-white transition-all duration-700 ${getMaxHeight(
                   catIndex,
                   qIndex
                 )}`}
