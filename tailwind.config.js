@@ -17,6 +17,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      rotate: {
+        135: '135deg',
+        315: '315deg',
+      },
       screens: {
         xs: '500px',
         sm: '640px',

@@ -13,6 +13,27 @@ import React, { useEffect, useState, useRef } from 'react'
 
 // TODO: Fix scroll bar. Return to default
 
+function useIsLgScreen() {
+  const [isLgScreen, setIsLgScreen] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+
+    const handleResize = () => {
+      setIsLgScreen(mediaQuery.matches)
+    }
+
+    handleResize() // Set initial value
+    mediaQuery.addEventListener('change', handleResize)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleResize)
+    }
+  }, [])
+
+  return isLgScreen
+}
+
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
@@ -23,6 +44,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const outerSpinnerRef = useRef(null)
   const innerSpinnerRef = useRef(null)
+  const isLgScreen = useIsLgScreen()
 
   useEffect(() => {
     let previousScrollY = window.scrollY
@@ -267,9 +289,20 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         }}
       >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col flex-col md:justify-between lg:flex-row">
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col md:justify-between lg:flex-row">
           {/* Left Column: Static h1 */}
-          <div className="sticky lg:top-32 lg:w-1/3 lg:pr-8">
+          <div
+            className="w-full pb-8 lg:w-5/12"
+            style={
+              isLgScreen
+                ? {
+                    position: 'sticky',
+                    top: '6rem', // Adjust this value as needed
+                    alignSelf: 'start',
+                  }
+                : {}
+            }
+          >
             <h1 className="font-space-grotesk text-4xl text-[41px] font-semibold leading-[50px] text-black">
               Frequently Asked Questions:
             </h1>
