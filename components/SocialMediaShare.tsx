@@ -8,6 +8,10 @@ const SocialMediaShare = ({ title, summary, className }) => {
   const encodedText = encodeURIComponent(summary)
   const shareLinks = [
     {
+      kind: 'website', //TODO: Change icon to chainlink
+      url: currentURL, //TODO: Copy to clipboard and notify user of copy
+    },
+    {
       kind: 'x',
       url: `https://twitter.com/intent/tweet?text=${encodedText}%0A%0A&url=${currentURL}%0A%0A&via=LTCFoundation`,
     },
@@ -20,7 +24,7 @@ const SocialMediaShare = ({ title, summary, className }) => {
 
   return (
     <div className={className}>
-      <p className="font-semibold text-gray-800 "> SHARE: </p>
+      <p className="font-semibold  text-gray-800"> SHARE: </p>
       {shareLinks.map((link) => (
         <SocialIcon key={link.kind} kind={link.kind} href={link.url} size={5} />
       ))}
