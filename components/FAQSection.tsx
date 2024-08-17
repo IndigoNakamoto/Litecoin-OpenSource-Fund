@@ -96,7 +96,7 @@ export const FAQSection: React.FC<{ faqCategories: FAQCategory[] }> = ({
                 <span>{faq.question}</span>
                 <PlusIcon
                   isOpen={
-                    openIndex &&
+                    openIndex !== null &&
                     openIndex.catIndex === catIndex &&
                     openIndex.qIndex === qIndex
                   }
