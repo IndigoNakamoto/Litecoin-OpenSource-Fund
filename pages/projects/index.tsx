@@ -139,15 +139,22 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]', 'bg-[#f3ccc4]']
 
   return (
-    <>
+    <div className="w-screen">
       <Head>
         <title>Projects</title>
       </Head>
       <VerticalSocialIcons />
 
-      {/* Hero section */}
+      {/* Hero section 
+      TODO: 
+      - View projects button scrolls down to projects ssection
+      - View bounties button scrolls down to bounties section
+      - Donate now button opens the donate modal to the general donations project. 
+      
+      */}
+
       <section
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex max-h-fit min-h-[62vh] w-screen items-center bg-cover bg-center"
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center lg:py-24"
         style={{
           backgroundImage: "url('/static/images/design/Mask-Group-19.webp')",
           fontFamily:
@@ -169,13 +176,16 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             </p>
             <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
               <div className="text-md rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
+                {/* TOD: Turn to button */}
                 <p className="text-white">DONATE NOW</p>
               </div>
               <div className="flex w-full flex-row justify-center gap-2">
                 <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
+                  {/* TOD: Turn to button */}
                   <p className="text-white">VIEW PROJECTS</p>
                 </div>
                 <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
+                  {/* TOD: Turn to button */}
                   <p className="text-white">VIEW BOUNTIES</p>
                 </div>
               </div>
@@ -202,7 +212,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* OPEN SOURCE PROJECTS */}
       <section
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-20 flex max-h-fit min-h-[62vh] w-screen items-center bg-cover bg-center"
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-20 flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center"
         style={{
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
@@ -234,7 +244,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </div>
       </section>
 
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-screen bg-[#C5D3D6] bg-cover bg-center">
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         {/* TODO: APPLY SECTION */}
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
           <div className="flex h-4/6 min-h-fit w-full justify-center border border-[#222222] ">
@@ -245,13 +255,13 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </div>
       </section>
 
-      {/* OPEN BOUNTY PROJECTS */}
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-white  bg-cover bg-center pb-20">
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
+      {/* BOUNTIES SECTION */}
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white  bg-cover bg-center pb-20">
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center ">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
             Open Bounties
           </h1>
-          <ul className="grid max-w-full">
+          <ul className="w-[100%]">
             {bountyProjects &&
               bountyProjects.map((p, i) => (
                 <li key={i}>
@@ -283,7 +293,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* FAQ SECTION */}
       <section
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#C5D3D6] bg-cover bg-center py-20 pt-16"
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-[#C5D3D6] bg-cover bg-center py-20 pt-16"
         style={{
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
@@ -292,7 +302,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col md:justify-between lg:flex-row">
           {/* Left Column: Static h1 */}
           <div
-            className="w-full pb-8 lg:w-5/12"
+            className="w-full pb-8 xl:w-[40%]"
             style={
               isLgScreen
                 ? {
@@ -312,7 +322,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           </div>
 
           {/* Right Column: FAQ Section */}
-          <div className="w-full md:w-2/3">
+          <div className="w-full xl:w-[60%]">
             <div className="rounded-x mt-8 w-full md:mt-0">
               <FAQSection faqCategories={faqData.questionsAndAnswers} />
             </div>
@@ -321,7 +331,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
 
       {/* TODO: CONTRIBUTORS SECTION */}
-      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-screen  bg-[#F3CBC4] bg-cover bg-center">
+      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full  bg-[#F3CBC4] bg-cover bg-center">
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] items-center justify-center p-8">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-black">
             Contributors
@@ -330,7 +340,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section> */}
 
       {/* TODO: SUPPORTERS SECTION */}
-      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-screen bg-white bg-cover bg-center">
+      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-white bg-cover bg-center">
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] items-center justify-center p-8">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-black">
             Supporters
@@ -343,7 +353,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         onRequestClose={closeModal}
         project={selectedProject}
       />
-    </>
+    </div>
   )
 }
 
