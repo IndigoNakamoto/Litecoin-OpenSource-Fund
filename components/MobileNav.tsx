@@ -161,26 +161,14 @@ const MobileNav = () => {
                 <SocialIcon
                   kind="mail"
                   href={`mailto:${siteMetadata.email}`}
-                  size={6}
+                  // size={6}
                 />
-                <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-                <SocialIcon
-                  kind="facebook"
-                  href={siteMetadata.facebook}
-                  size={6}
-                />
-                <SocialIcon
-                  kind="youtube"
-                  href={siteMetadata.youtube}
-                  size={6}
-                />
-                <SocialIcon
-                  kind="linkedin"
-                  href={siteMetadata.linkedin}
-                  size={6}
-                />
-                <SocialIcon kind="reddit" href={siteMetadata.reddit} size={6} />
-                <SocialIcon kind="x" href={siteMetadata.twitter} size={6} />
+                <SocialIcon kind="github" href={siteMetadata.github} />
+                <SocialIcon kind="facebook" href={siteMetadata.facebook} />
+                <SocialIcon kind="youtube" href={siteMetadata.youtube} />
+                <SocialIcon kind="linkedin" href={siteMetadata.linkedin} />
+                <SocialIcon kind="reddit" href={siteMetadata.reddit} />
+                <SocialIcon kind="x" href={siteMetadata.twitter} />
               </div>
 
               {/* FOOTER */}
