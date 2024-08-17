@@ -14,7 +14,7 @@ const TwitterFeed = ({ hashtag, tweetsData }) => {
     <div>
       {tweets ? (
         tweets.map((tweetId) => (
-          <div key={tweetId}>
+          <div key={tweetId} data-theme="light">
             <Tweet id={tweetId} />
           </div>
         ))
