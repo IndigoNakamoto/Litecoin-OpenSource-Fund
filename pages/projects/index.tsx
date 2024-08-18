@@ -85,6 +85,28 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     }
   }, [])
 
+  // Create refs for the projects and bounties sections
+  const projectsRef = useRef<HTMLDivElement>(null)
+  const bountiesRef = useRef<HTMLDivElement>(null)
+  // Scroll handler for "VIEW PROJECTS"
+  const scrollToProjects = () => {
+    const yOffset = -64 // Offset by the height of the sticky menu
+    const yPosition =
+      (projectsRef.current?.getBoundingClientRect().top ?? 0) +
+      window.scrollY +
+      yOffset
+    window.scrollTo({ top: yPosition, behavior: 'smooth' })
+  }
+
+  const scrollToBounties = () => {
+    const yOffset = -64 // Offset by the height of the sticky menu
+    const yPosition =
+      (bountiesRef.current?.getBoundingClientRect().top ?? 0) +
+      window.scrollY +
+      yOffset
+    window.scrollTo({ top: yPosition, behavior: 'smooth' })
+  }
+
   function closeModal() {
     setModalOpen(false)
   }
@@ -147,10 +169,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* Hero section 
       TODO: 
-      - View projects button scrolls down to projects ssection
-      - View bounties button scrolls down to bounties section
       - Donate now button opens the donate modal to the general donations project. 
-      
       */}
 
       <section
@@ -163,7 +182,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
           <div className="lg:py-30 py-20 lg:w-1/2">
-            {/* Column 1 */}
             <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
               Litecoin Projects
             </h1>
@@ -176,22 +194,24 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             </p>
             <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
               <div className="text-md rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
-                {/* TOD: Turn to button */}
                 <p className="text-white">DONATE NOW</p>
               </div>
               <div className="flex w-full flex-row justify-center gap-2">
-                <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
-                  {/* TOD: Turn to button */}
-                  <p className="text-white">VIEW PROJECTS</p>
-                </div>
-                <div className="text-md w-full rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
-                  {/* TOD: Turn to button */}
-                  <p className="text-white">VIEW BOUNTIES</p>
-                </div>
+                <button
+                  className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
+                  onClick={scrollToProjects}
+                >
+                  <span className="text-white">VIEW PROJECTS</span>
+                </button>
+                <button
+                  className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
+                  onClick={scrollToBounties} // Add onClick handler
+                >
+                  <span className="text-white">VIEW BOUNTIES</span>
+                </button>
               </div>
             </div>
           </div>
-          {/* Column 2 */}
           <div className="w-7/12 pt-80 lg:w-1/2 lg:pb-0 lg:pl-20 lg:pt-0">
             <div className="relative flex items-center justify-center">
               <img
@@ -212,6 +232,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* OPEN SOURCE PROJECTS */}
       <section
+        ref={projectsRef} // Attach ref to the projects section
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-20 flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center"
         style={{
           fontFamily:
@@ -256,8 +277,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
 
       {/* BOUNTIES SECTION */}
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white  bg-cover bg-center pb-20">
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center ">
+      <section
+        ref={bountiesRef} // Attach ref to the bounties section
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
+      >
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
             Open Bounties
           </h1>

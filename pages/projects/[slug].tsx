@@ -765,7 +765,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   <div className="w-full rounded-lg  text-gray-800">
                     <div className="flex w-full flex-row lg:flex-col">
                       <div>
-                        <h2>Total Donations:</h2>
+                        <h2 className="font-space-grotesk ">
+                          Total Donations:
+                        </h2>
                         {addressStats && (
                           <div className="">
                             <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
@@ -786,7 +788,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                         )}
                       </div>
                       <div className="pl-16 lg:pl-0 lg:pt-4">
-                        <h2>Monthly Goal:</h2>
+                        <h2 className="font-space-grotesk ">Monthly Goal:</h2>
                         <div>
                           <div>
                             <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
@@ -820,7 +822,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               <div className="pr-0 lg:pr-8">
                 <button
                   onClick={openPaymentModal}
-                  className={`block w-full rounded-none bg-[#f3ccc4] font-space-grotesk text-xl font-semibold text-[#333333] transition-colors duration-200  hover:border-transparent hover:bg-[#f3ccc2] ${
+                  className={`block w-full rounded-none rounded-xl bg-[#f3ccc4] font-space-grotesk text-xl font-semibold text-[#333333] transition-colors duration-200  hover:border-transparent hover:bg-[#f3ccc2] ${
                     bountyStatus === 'completed' ? 'disabled' : ''
                   }`}
                   disabled={bountyStatus === 'completed'}
