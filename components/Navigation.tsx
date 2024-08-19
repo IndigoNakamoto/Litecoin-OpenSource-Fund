@@ -88,14 +88,23 @@ const Navigation = () => {
   const initialHeight = 92
 
   const bgOpacity = Math.min(scrollPosition / maxScrollHeight, 1)
+
+  const baseHeaderHeight = isMobile ? initialHeight - 10 : initialHeight
+  const minHeaderHeight = isMobile ? minHeight - 10 : minHeight
+
   const headerHeight = Math.max(
-    initialHeight -
-      (scrollPosition / maxScrollHeight) * (initialHeight - minHeight),
-    minHeight
+    baseHeaderHeight -
+      (scrollPosition / maxScrollHeight) * (baseHeaderHeight - minHeaderHeight),
+    minHeaderHeight
   )
+
+  const baseLogoSize = isMobile ? 67 - 7 : 70.2 // 16px is 1rem
+  const minLogoSize = isMobile ? 67 - 16 : 60 // Adjust the minimum size for mobile as well
+
   const logoSize = Math.max(
-    70.2 - (scrollPosition / maxScrollHeight) * (70.2 - 60),
-    60
+    baseLogoSize -
+      (scrollPosition / maxScrollHeight) * (baseLogoSize - minLogoSize),
+    minLogoSize
   )
 
   const baseFontSize = 16
@@ -128,6 +137,7 @@ const Navigation = () => {
   const fontColor = interpolateColor('#222222', '#C6D3D6', bgOpacity)
   const dropdownBgColor = interpolateColor('#c6d3d6', '#222222', bgOpacity)
   const dropdownTextColor = interpolateColor('#222222', '#C6D3D6', bgOpacity)
+  const hamburgerColor = interpolateColor('#222222', '#ffffff', bgOpacity)
 
   return (
     <>
@@ -144,7 +154,7 @@ const Navigation = () => {
           <div className="relative flex h-full items-center pb-1">
             <Link href="/" aria-label={siteMetadata.headerTitle}>
               <div
-                className="relative mt-[3px]"
+                className="relative mt-[0px]"
                 style={{
                   height: `${logoSize}px`,
                   width: `${logoSize}px`,
@@ -172,9 +182,12 @@ const Navigation = () => {
           </div>
           <nav>
             {isMobile ? (
+              // Hamburger menu. TODO: Modify color with scroll position between #222222 and #C5D3D6
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
-                className={`nav-toggle ${navShow ? 'open' : ''}`} // Conditionally add 'open' class
+                className={`nav-toggle mr-[-5px] mt-[-10px]  ${
+                  navShow ? 'open' : ''
+                }`} // Conditionally add 'open' class
                 onClick={onToggleNav}
                 onKeyPress={onToggleNav}
                 aria-label="menu"
@@ -406,34 +419,14 @@ const Navigation = () => {
       </header>
 
       {/* Mobile Nav */}
+      {/* TODO: Modify bg color with scroll position between #C5D3D6 and #222222*/}
       <div
         className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-32  duration-300 ease-in  md:clear-left  ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
       >
-        {/* x button */}
-        {/* <div className="flex justify-end">
-          <button
-            className="mr-8 mt-4 h-8 w-8 rounded"
-            aria-label="Toggle Menu"
-            onClick={onToggleNav}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="h-8 w-8 text-gray-100"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        </div> */}
-
         {/* LINKS */}
+        {/* Use Litecoin and The Foundation are dropdown menu items like in the regular menu bar */}
         <div className="flex flex-col gap-x-6 ">
           <nav className="mt-8 h-full">
             {[
@@ -446,10 +439,10 @@ const Navigation = () => {
               'Shop',
               'Explorer',
             ].map((item) => (
-              <div key={item} className="px-12 py-2 short:py-0.5">
+              <div key={item} className="px-10 py-2 pt-2 short:py-0.5">
                 <Link
                   href={item.replace(/\s+/g, '-').toLowerCase()}
-                  className="text-3xl font-semibold tracking-widest text-[#222222] hover:text-blue-300  "
+                  className="font-space-grotesk text-[2.75rem] font-semibold  text-[#222222] hover:text-blue-300  "
                   onClick={onToggleNav}
                 >
                   {item}
@@ -474,19 +467,19 @@ const Navigation = () => {
           </div>
         </div>
       </div>
-      <style jsx>{`
+      <style>{`
         .nav-toggle {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           height: 28px;
-          width: 44px;
+          width: 45px;
         }
 
         .nav-toggle .bar {
           height: 4px;
           width: 100%;
-          background-color: black;
+          background-color: ${hamburgerColor};
           transition: all 300ms ease-in-out;
         }
 
