@@ -270,7 +270,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
           <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] ">
             <h1 className="m-auto font-space-grotesk text-4xl text-[41px] font-medium leading-[32px]  text-black">
-              Submit Project
+              Submit a Project
             </h1>
             <p className="m-auto max-w-3xl text-lg  text-[#222222] ">
               We are looking to support talented individuals and teams who share
@@ -278,8 +278,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               future of Litecoin.
             </p>
             <Link href="/projects/submit" className="m-auto">
-              <button className="w-48 rounded-full bg-white py-2 font-semibold text-blue-500 transition duration-300 hover:bg-gray-200">
-                Apply for Funding
+              <button className="w-48 rounded-none border border-[#222222] py-2 font-semibold text-[#222222]">
+                Submit Project
               </button>
             </Link>
           </div>

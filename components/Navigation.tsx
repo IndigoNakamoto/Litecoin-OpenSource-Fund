@@ -467,7 +467,7 @@ const Navigation = () => {
           </div>
         </div>
       </div>
-      <style>{`
+      <style jsx>{`
         .nav-toggle {
           display: flex;
           flex-direction: column;
