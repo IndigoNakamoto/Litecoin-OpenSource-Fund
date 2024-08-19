@@ -1,0 +1,326 @@
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { fetchPostJSON } from '../utils/api-helpers'
+import FormButton from '@/components/FormButton'
+import React from 'react'
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+  Typography,
+} from '@material-tailwind/react'
+
+export default function ProjectSubmissionForm() {
+  const [loading, setLoading] = useState(false)
+  const [openSource, setOpenSource] = useState('no')
+  const [receivedFunding, setReceivedFunding] = useState('no')
+  const [isLeadContributor, setIsLeadContributor] = useState('no')
+  const router = useRouter()
+  const {
+    watch,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const [failureReason, setFailureReason] = useState<string>()
+
+  const onSubmit = async (data: any) => {
+    setLoading(true)
+
+    try {
+      const res = await fetchPostJSON('/api/github', {
+        ...data,
+        open_source: openSource === 'yes',
+      })
+      if (res.message === 'success') {
+        router.push('/submitted')
+        setLoading(false)
+      } else {
+        setFailureReason('Submission failed. Please try again.')
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        setFailureReason(`Error: ${e.message}`)
+      } else {
+        setFailureReason('An unknown error occurred.')
+      }
+    }
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex max-w-2xl flex-col gap-4"
+    >
+      <input type="hidden" {...register('general_fund', { value: true })} />
+
+      <h2>Project Overview</h2>
+
+      <label className="block" htmlFor="project_name">
+        Project Name <span className="text-red-500">*</span>
+        <input
+          id="project_name"
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('project_name', { required: true })}
+        />
+      </label>
+
+      <label className="block">
+        Project Description <span className="text-red-500">*</span>
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('project_description', { required: true })}
+        />
+      </label>
+
+      <label className="block">
+        Main Focus <span className="text-red-500">*</span>
+        <select
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('main_focus', { required: true })}
+        >
+          <option value="litecoin">Litecoin</option>
+          <option value="lightning">Lightning</option>
+          <option value="mweb">MWEB</option>
+          <option value="ordinals">Ordinals Lite</option>
+          <option value="omnilite">Omni Lite</option>
+          <option value="ldk">Litecoin Dev Kit</option>
+          <option value="education">Education</option>
+          <option value="litewallet">Litewallet</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label className="block">
+        Potential Impact <span className="text-red-500">*</span>
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('potential_impact', { required: true })}
+        />
+      </label>
+
+      <label className="block">
+        Project Repository
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('project_repository')}
+        />
+      </label>
+
+      <label className="block">
+        Social Media Links (X, GitHub, LinkedIn, Facebook, Telegram)
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('social_media_links')}
+        />
+      </label>
+
+      <label htmlFor="is_open_source" className="block">
+        Is the project open-source? <span className="text-red-500">*</span>
+      </label>
+      <Tabs
+        id="is_open_source"
+        value={openSource}
+        className="mt-1"
+        aria-labelledby="is_open_source"
+      >
+        <TabsHeader className="bg-gray-100">
+          <Tab value="yes" onClick={() => setOpenSource('yes')}>
+            Yes
+          </Tab>
+          <Tab value="no" onClick={() => setOpenSource('no')}>
+            No
+          </Tab>
+        </TabsHeader>
+        <TabsBody
+          animate={{
+            initial: {
+              x: openSource === 'yes' ? 400 : -400,
+            },
+            mount: {
+              x: 0,
+            },
+            unmount: {
+              x: openSource === 'yes' ? 400 : -400,
+            },
+          }}
+        >
+          <TabPanel value="yes">
+            <Typography variant="small" color="blue-gray" className="mt-2">
+              The project is open-source and available to the community.
+            </Typography>
+          </TabPanel>
+          <TabPanel value="no">
+            <Typography variant="small" color="blue-gray" className="mt-2">
+              The project is not open-source.
+            </Typography>
+          </TabPanel>
+        </TabsBody>
+      </Tabs>
+
+      <h2>Project Budget</h2>
+
+      <label className="block">
+        Proposed Budget <span className="text-red-500">*</span>
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('proposed_budget', { required: true })}
+        />
+      </label>
+
+      <label htmlFor="received_funding" className="block">
+        Has this project received any prior funding?
+      </label>
+      <Tabs
+        id="received_funding"
+        value={receivedFunding}
+        className="mt-1"
+        aria-labelledby="received_funding"
+      >
+        <TabsHeader className="bg-gray-100">
+          <Tab value="yes" onClick={() => setReceivedFunding('yes')}>
+            Yes
+          </Tab>
+          <Tab value="no" onClick={() => setReceivedFunding('no')}>
+            No
+          </Tab>
+        </TabsHeader>
+        <TabsBody>
+          <TabPanel value="yes">
+            <Typography variant="small" color="blue-gray" className="mt-2">
+              The project has received prior funding.
+            </Typography>
+          </TabPanel>
+          <TabPanel value="no">
+            <Typography variant="small" color="blue-gray" className="mt-2">
+              The project has not received prior funding.
+            </Typography>
+          </TabPanel>
+        </TabsBody>
+      </Tabs>
+
+      <label className="block">
+        If so, please describe
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('prior_funding_details')}
+        />
+      </label>
+
+      <h2>Applicant Information</h2>
+
+      <label className="block">
+        Your Name <span className="text-red-500">*</span>
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('your_name', { required: true })}
+        />
+      </label>
+
+      <label className="block">
+        Email <span className="text-red-500">*</span>
+        <input
+          type="email"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('email', { required: true })}
+        />
+      </label>
+
+      <label htmlFor="lead_contributor" className="block">
+        Are you the Project Lead / Lead Contributor?
+      </label>
+      <Tabs
+        id="lead_contributor"
+        value={isLeadContributor}
+        className="mt-1"
+        aria-labelledby="lead_contributor"
+      >
+        <TabsHeader className="bg-gray-100">
+          <Tab value="yes" onClick={() => setIsLeadContributor('yes')}>
+            Yes
+          </Tab>
+          <Tab value="no" onClick={() => setIsLeadContributor('no')}>
+            No
+          </Tab>
+        </TabsHeader>
+        <TabsBody>
+          <TabPanel value="yes">
+            <Typography variant="small" color="blue-gray" className="mt-2">
+              You are the Project Lead / Lead Contributor.
+            </Typography>
+          </TabPanel>
+          <TabPanel value="no">
+            <Typography variant="small" color="blue-gray" className="mt-2">
+              You are not the Project Lead / Lead Contributor.
+            </Typography>
+          </TabPanel>
+        </TabsBody>
+      </Tabs>
+
+      <label className="block">
+        If someone else, please list the project's Lead Contributor or
+        Maintainer
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('other_lead')}
+        />
+      </label>
+
+      <label className="block">
+        Personal Github (or similar, if applicable)
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('personal_github')}
+        />
+      </label>
+
+      <label className="block">
+        Other Contact Details
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('other_contact_details')}
+        />
+      </label>
+
+      <label className="block">
+        Prior Contributions
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('prior_contributions')}
+        />
+      </label>
+
+      <label className="block">
+        References <span className="text-red-500">*</span>
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          {...register('references', { required: true })}
+        />
+      </label>
+
+      <FormButton
+        variant={openSource === 'yes' ? 'enabled' : 'disabled'}
+        type="submit"
+        disabled={loading}
+      >
+        Submit Project
+      </FormButton>
+
+      {!!failureReason && (
+        <p className="rounded bg-red-500 p-4 text-white">
+          Something went wrong! {failureReason}
+        </p>
+      )}
+    </form>
+  )
+}

@@ -10,7 +10,7 @@ import VerticalSocialIcons from '@/components/VerticalSocialIcons'
 import faqData from '../../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
 import React, { useEffect, useState, useRef } from 'react'
-
+import Link from 'next/link'
 // TODO: Fix scroll bar. Return to default
 
 function useIsLgScreen() {
@@ -268,10 +268,20 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         {/* TODO: SUBMIT SECTION */}
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
-          <div className="flex h-4/6 min-h-fit w-full justify-center border border-[#222222] ">
-            <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-black">
+          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] ">
+            <h1 className="m-auto font-space-grotesk text-4xl text-[41px] font-medium leading-[32px]  text-black">
               Submit Project
             </h1>
+            <p className="m-auto max-w-3xl text-lg  text-[#222222] ">
+              We are looking to support talented individuals and teams who share
+              our commitment to decentralized open-source solutions and the
+              future of Litecoin.
+            </p>
+            <Link href="/projects/submit" className="m-auto">
+              <button className="w-48 rounded-full bg-white py-2 font-semibold text-blue-500 transition duration-300 hover:bg-gray-200">
+                Apply for Funding
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -282,7 +292,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
+          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px]  text-black">
             Open Bounties
           </h1>
           <ul className="w-[100%]">

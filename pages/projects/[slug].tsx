@@ -6,8 +6,8 @@ import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/legacy/image'
 // import ProjectList from '@/components/ProjectList'
 // import BackToProjects from '@/components/BackToProjects'
-import { ProjectItem, AddressStats } from '../../utils/types' //, Donation
-import { NextPage } from 'next/types'
+import { ProjectItem, AddressStats } from '../../utils/types' // , Donation
+import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import PaymentModal from '@/components/PaymentModal'
 import ThankYouModal from '@/components/ThankYouModal'

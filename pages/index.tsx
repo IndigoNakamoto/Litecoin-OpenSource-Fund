@@ -69,7 +69,7 @@ export default function Mission({
           <h1 className="text-5xl font-semibold tracking-tight text-white lg:text-7xl">
             Apply for Funding
           </h1>
-          <p className="py-4 text-2xl leading-7 text-white ">
+          <p className="py-4 text-xl leading-7 text-[#222222] ">
             We are looking to support talented individuals and teams who share
             our commitment to decentralized open-source solutions and the future
             of Litecoin.
