@@ -41,7 +41,7 @@ const MobileNav = () => {
       </div>
 
       <div
-        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6]  duration-300 ease-in  md:clear-left md:w-1/3 md:min-w-[450px] ${
+        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6]  duration-300 ease-in  md:clear-left  ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
       >
