@@ -3,19 +3,12 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
-import {
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
-} from '@material-tailwind/react'
 
 export default function ProjectSubmissionForm() {
   const [loading, setLoading] = useState(false)
-  const [openSource, setOpenSource] = useState('no')
-  const [receivedFunding, setReceivedFunding] = useState('no')
-  const [isLeadContributor, setIsLeadContributor] = useState('no')
+  const [openSource, setOpenSource] = useState('null')
+  const [receivedFunding, setReceivedFunding] = useState('null')
+  const [isLeadContributor, setIsLeadContributor] = useState('null')
   const router = useRouter()
   const {
     register,
@@ -146,32 +139,52 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      <p className="">
+      <p className="mb-2">
         Is the project open-source? <span className="text-red-500">*</span>
       </p>
-      <Tabs value={openSource}>
-        <TabsHeader className="bg-gray-100">
-          {['yes', 'no'].map((value) => (
-            <Tab
-              key={value}
-              value={value}
-              onClick={() => setOpenSource(value)}
-              className="text-black"
-            >
-              {value === 'yes' ? 'Yes' : 'No'}
-            </Tab>
-          ))}
-        </TabsHeader>
-        <TabsBody>
-          {['yes', 'no'].map((value) => (
-            <TabPanel key={value} value={value} className="mt-2 text-black">
-              {value === 'yes'
-                ? 'The project is open-source and available to the community.'
-                : 'The project is not open-source.'}
-            </TabPanel>
-          ))}
-        </TabsBody>
-      </Tabs>
+      <div className="w-full">
+        <div className="flex w-full space-x-4 rounded-lg bg-gray-100 p-1">
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              openSource === 'yes'
+                ? 'bg-[#C5D3D6] text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setOpenSource('yes')}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              openSource === 'no'
+                ? 'bg-gray-300 text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setOpenSource('no')}
+          >
+            No
+          </button>
+        </div>
+        <div className="ml-4 mt-4 text-sm">
+          {openSource === 'null' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              Select Yes or No
+            </div>
+          )}
+          {openSource === 'yes' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              This project is open-source for the public.
+            </div>
+          )}
+          {openSource === 'no' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              This project is not open-source.
+            </div>
+          )}
+        </div>
+      </div>
 
       <h2 className="text-xl font-semibold">Project Budget</h2>
 
@@ -184,29 +197,49 @@ export default function ProjectSubmissionForm() {
       </label>
 
       <p className="">Has this project received any prior funding?</p>
-      <Tabs value={receivedFunding}>
-        <TabsHeader className="bg-gray-100">
-          {['yes', 'no'].map((value) => (
-            <Tab
-              key={value}
-              value={value}
-              onClick={() => setReceivedFunding(value)}
-              className="text-black"
-            >
-              {value === 'yes' ? 'Yes' : 'No'}
-            </Tab>
-          ))}
-        </TabsHeader>
-        <TabsBody>
-          {['yes', 'no'].map((value) => (
-            <TabPanel key={value} value={value} className="mt-2 text-black">
-              {value === 'yes'
-                ? 'The project has received prior funding.'
-                : 'The project has not received prior funding.'}
-            </TabPanel>
-          ))}
-        </TabsBody>
-      </Tabs>
+      <div className="w-full">
+        <div className="flex w-full space-x-4 rounded-lg bg-gray-100 p-1">
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              receivedFunding === 'yes'
+                ? 'bg-[#C5D3D6] text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setReceivedFunding('yes')}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              receivedFunding === 'no'
+                ? 'bg-gray-300 text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setReceivedFunding('no')}
+          >
+            No
+          </button>
+        </div>
+        <div className="ml-4 mt-4 text-sm">
+          {receivedFunding === 'null' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              Select Yes or No
+            </div>
+          )}
+          {receivedFunding === 'yes' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              This project has not received prior funding
+            </div>
+          )}
+          {receivedFunding === 'no' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              This project has received prior funding
+            </div>
+          )}
+        </div>
+      </div>
 
       <label className="block">
         If so, please describe
@@ -238,29 +271,49 @@ export default function ProjectSubmissionForm() {
       </label>
 
       <p className="">Are you the Project Lead / Lead Contributor?</p>
-      <Tabs value={isLeadContributor}>
-        <TabsHeader className="bg-gray-100">
-          {['yes', 'no'].map((value) => (
-            <Tab
-              key={value}
-              value={value}
-              onClick={() => setIsLeadContributor(value)}
-              className="text-black"
-            >
-              {value === 'yes' ? 'Yes' : 'No'}
-            </Tab>
-          ))}
-        </TabsHeader>
-        <TabsBody>
-          {['yes', 'no'].map((value) => (
-            <TabPanel key={value} value={value} className="mt-2 text-black">
-              {value === 'yes'
-                ? 'You are the Project Lead / Lead Contributor.'
-                : 'You are not the Project Lead / Lead Contributor.'}
-            </TabPanel>
-          ))}
-        </TabsBody>
-      </Tabs>
+      <div className="w-full">
+        <div className="flex w-full space-x-4 rounded-lg bg-gray-100 p-1">
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              isLeadContributor === 'yes'
+                ? 'bg-[#C5D3D6] text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setIsLeadContributor('yes')}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              isLeadContributor === 'no'
+                ? 'bg-gray-300 text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setIsLeadContributor('no')}
+          >
+            No
+          </button>
+        </div>
+        <div className="ml-4 mt-4 text-sm">
+          {isLeadContributor === 'null' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              Select Yes or No
+            </div>
+          )}
+          {isLeadContributor === 'yes' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              I am the lead contributor
+            </div>
+          )}
+          {isLeadContributor === 'no' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              I am not the lead contributor
+            </div>
+          )}
+        </div>
+      </div>
 
       <label className="block">
         If someone else, please list the project's Lead Contributor or
