@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 // import type { Pages } from 'contentlayer/generated'
 import { PageSEO } from '@/components/SEO'
-import ApplySection from '@/components/ApplySection'
+import SubmittedSection from '@/components/SubmittedSection'
 import { CoreContent } from 'pliny/utils/contentlayer'
 
 interface Props {
@@ -9,13 +9,13 @@ interface Props {
   content: CoreContent<any>
 }
 
-export default function ApplyLayout({ children, content }: Props) {
+export default function SubmittedLayout({ children, content }: Props) {
   const { title = '', summary = '' } = content
 
   return (
     <>
       <PageSEO title={`Litecoin | ${title}`} description={`${summary}`} />
-      <ApplySection title={title}>{children}</ApplySection>
+      <SubmittedSection title={title}>{children}</SubmittedSection>
     </>
   )
 }

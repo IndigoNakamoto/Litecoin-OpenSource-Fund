@@ -13,7 +13,7 @@ export default function Apply() {
         description="Submit your project to Litecoin.com for community crowdfunding and support. Join the Litecoin ecosystem and get your project listed today."
       />
       <ApplySection title="Submit a Project">
-        <div className="my-auto mt-10 max-w-4xl space-y-8 xs:my-4">
+        <div className="my-auto mt-10 max-w-2xl space-y-8 xs:my-4">
           <p>
             Have a project that can benefit the Litecoin community? Use the form
             below to submit your project for consideration. Once approved, your

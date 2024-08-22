@@ -20,10 +20,9 @@ export default function ProjectSubmissionForm() {
   const [isLeadContributor, setIsLeadContributor] = useState('no')
   const router = useRouter()
   const {
-    watch,
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm()
 
   const [failureReason, setFailureReason] = useState<string>()
@@ -31,13 +30,38 @@ export default function ProjectSubmissionForm() {
   const onSubmit = async (data: any) => {
     setLoading(true)
 
-    try {
-      const res = await fetchPostJSON('/api/github', {
-        ...data,
+    // Restructure the form data
+    const structuredData = {
+      project_overview: {
+        project_name: data.project_name,
+        project_description: data.project_description,
+        main_focus: data.main_focus,
+        potential_impact: data.potential_impact,
+        project_repository: data.project_repository,
+        social_media_links: data.social_media_links,
         open_source: openSource === 'yes',
-      })
+      },
+      project_budget: {
+        proposed_budget: data.proposed_budget,
+        received_funding: receivedFunding === 'yes',
+        prior_funding_details: data.prior_funding_details,
+      },
+      applicant_information: {
+        your_name: data.your_name,
+        email: data.email,
+        is_lead_contributor: isLeadContributor === 'yes',
+        other_lead: data.other_lead,
+        personal_github: data.personal_github,
+        other_contact_details: data.other_contact_details,
+        prior_contributions: data.prior_contributions,
+        references: data.references,
+      },
+    }
+
+    try {
+      const res = await fetchPostJSON('/api/github', structuredData)
       if (res.message === 'success') {
-        router.push('/submitted')
+        router.push('/projects/submitted')
         setLoading(false)
       } else {
         setFailureReason('Submission failed. Please try again.')
@@ -51,12 +75,14 @@ export default function ProjectSubmissionForm() {
     }
   }
 
+  const buttonVariant = isValid && isDirty ? 'enabled' : 'disabled'
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex max-w-2xl flex-col gap-4"
     >
-      <input type="hidden" {...register('general_fund', { value: true })} />
+      <input type="hidden" {...register('project', { value: true })} />
 
       <h2>Project Overview</h2>
 
@@ -65,7 +91,7 @@ export default function ProjectSubmissionForm() {
         <input
           id="project_name"
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('project_name', { required: true })}
         />
       </label>
@@ -73,7 +99,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Project Description <span className="text-red-500">*</span>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('project_description', { required: true })}
         />
       </label>
@@ -81,7 +107,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Main Focus <span className="text-red-500">*</span>
         <select
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('main_focus', { required: true })}
         >
           <option value="litecoin">Litecoin</option>
@@ -99,7 +125,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Potential Impact <span className="text-red-500">*</span>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('potential_impact', { required: true })}
         />
       </label>
@@ -108,7 +134,7 @@ export default function ProjectSubmissionForm() {
         Project Repository
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('project_repository')}
         />
       </label>
@@ -116,12 +142,12 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Social Media Links (X, GitHub, LinkedIn, Facebook, Telegram)
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('social_media_links')}
         />
       </label>
 
-      {/* <label htmlFor="is_open_source" className="block">
+      <label htmlFor="is_open_source" className="block">
         Is the project open-source? <span className="text-red-500">*</span>
       </label>
       <Tabs
@@ -138,19 +164,7 @@ export default function ProjectSubmissionForm() {
             No
           </Tab>
         </TabsHeader>
-        <TabsBody
-          animate={{
-            initial: {
-              x: openSource === 'yes' ? 400 : -400,
-            },
-            mount: {
-              x: 0,
-            },
-            unmount: {
-              x: openSource === 'yes' ? 400 : -400,
-            },
-          }}
-        >
+        <TabsBody>
           <TabPanel value="yes">
             <Typography variant="small" color="blue-gray" className="mt-2">
               The project is open-source and available to the community.
@@ -162,14 +176,14 @@ export default function ProjectSubmissionForm() {
             </Typography>
           </TabPanel>
         </TabsBody>
-      </Tabs> */}
+      </Tabs>
 
       <h2>Project Budget</h2>
 
       <label className="block">
         Proposed Budget <span className="text-red-500">*</span>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('proposed_budget', { required: true })}
         />
       </label>
@@ -177,7 +191,7 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="received_funding" className="block">
         Has this project received any prior funding?
       </label>
-      {/* <Tabs
+      <Tabs
         id="received_funding"
         value={receivedFunding}
         className="mt-1"
@@ -203,13 +217,13 @@ export default function ProjectSubmissionForm() {
             </Typography>
           </TabPanel>
         </TabsBody>
-      </Tabs> */}
+      </Tabs>
 
       <label className="block">
         If so, please describe
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('prior_funding_details')}
         />
       </label>
@@ -220,7 +234,7 @@ export default function ProjectSubmissionForm() {
         Your Name <span className="text-red-500">*</span>
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('your_name', { required: true })}
         />
       </label>
@@ -229,7 +243,7 @@ export default function ProjectSubmissionForm() {
         Email <span className="text-red-500">*</span>
         <input
           type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('email', { required: true })}
         />
       </label>
@@ -237,7 +251,7 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="lead_contributor" className="block">
         Are you the Project Lead / Lead Contributor?
       </label>
-      {/* <Tabs
+      <Tabs
         id="lead_contributor"
         value={isLeadContributor}
         className="mt-1"
@@ -263,14 +277,14 @@ export default function ProjectSubmissionForm() {
             </Typography>
           </TabPanel>
         </TabsBody>
-      </Tabs> */}
+      </Tabs>
 
       <label className="block">
         If someone else, please list the project's Lead Contributor or
         Maintainer
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('other_lead')}
         />
       </label>
@@ -279,7 +293,7 @@ export default function ProjectSubmissionForm() {
         Personal Github (or similar, if applicable)
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('personal_github')}
         />
       </label>
@@ -287,7 +301,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Other Contact Details
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('other_contact_details')}
         />
       </label>
@@ -295,7 +309,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Prior Contributions
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('prior_contributions')}
         />
       </label>
@@ -303,13 +317,16 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         References <span className="text-red-500">*</span>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('references', { required: true })}
         />
       </label>
 
+      {/* TODO: Fix disabled enabled styles */}
       <FormButton
-        variant={openSource === 'yes' ? 'enabled' : 'disabled'}
+        variant={
+          buttonVariant === 'enabled' ? 'enabledSpecific' : buttonVariant
+        }
         type="submit"
         disabled={loading}
       >

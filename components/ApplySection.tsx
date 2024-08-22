@@ -15,8 +15,8 @@ export default function ApplySection({
 }: Props) {
   return (
     <div className="bg-white">
-      <div className=" m-auto my-auto w-[1300px] max-w-[90%] bg-white py-32">
-        <h1 className="markdown m-auto items-center font-space-grotesk text-4xl font-semibold">
+      <div className="m-auto my-auto min-h-screen max-w-2xl bg-white py-32">
+        <h1 className="markdown m-auto items-center py-4 font-space-grotesk text-4xl font-semibold">
           {title}
         </h1>
         {children}
