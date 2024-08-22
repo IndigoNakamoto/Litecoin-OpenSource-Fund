@@ -3,60 +3,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
-import React, { memo } from 'react'
 import {
   Tabs,
   TabsHeader,
   TabsBody,
   Tab,
   TabPanel,
-  Typography,
 } from '@material-tailwind/react'
-
-// Memoize the Tabs component to prevent unnecessary re-renders
-const MemoizedTabs = memo(function TabsComponent({
-  id,
-  ariaLabelledBy,
-  value,
-  setValue,
-  descriptions,
-}: {
-  id: string
-  ariaLabelledBy: string
-  value: string
-  setValue: (value: string) => void
-  descriptions: { yes: string; no: string }
-}) {
-  return (
-    <Tabs
-      id={id}
-      value={value}
-      className="mt-1"
-      aria-labelledby={ariaLabelledBy}
-    >
-      <TabsHeader className="bg-gray-100">
-        <Tab value="yes" onClick={() => setValue('yes')}>
-          Yes
-        </Tab>
-        <Tab value="no" onClick={() => setValue('no')}>
-          No
-        </Tab>
-      </TabsHeader>
-      <TabsBody>
-        <TabPanel value="yes">
-          <Typography variant="small" color="blue-gray" className="mt-2">
-            {descriptions.yes}
-          </Typography>
-        </TabPanel>
-        <TabPanel value="no">
-          <Typography variant="small" color="blue-gray" className="mt-2">
-            {descriptions.no}
-          </Typography>
-        </TabPanel>
-      </TabsBody>
-    </Tabs>
-  )
-})
 
 export default function ProjectSubmissionForm() {
   const [loading, setLoading] = useState(false)
@@ -75,7 +28,6 @@ export default function ProjectSubmissionForm() {
   const onSubmit = async (data: any) => {
     setLoading(true)
 
-    // Restructure the form data
     const structuredData = {
       project_overview: {
         project_name: data.project_name,
@@ -114,11 +66,11 @@ export default function ProjectSubmissionForm() {
     } catch (e) {
       if (e instanceof Error) {
         setFailureReason(`Error: ${e.message}`)
-        console.error('Error submitting project:', e.message) // Log the error
+        console.error('Error submitting project:', e.message)
       } else {
         setFailureReason('An unknown error occurred.')
       }
-      setLoading(false) // Ensure loading state is reset
+      setLoading(false)
     }
   }
 
@@ -131,7 +83,7 @@ export default function ProjectSubmissionForm() {
     >
       <input type="hidden" {...register('project', { value: true })} />
 
-      <h2>Project Overview</h2>
+      <h2 className="text-xl font-semibold">Project Overview</h2>
 
       <label className="block" htmlFor="project_name">
         Project Name <span className="text-red-500">*</span>
@@ -194,21 +146,34 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      <label htmlFor="is_open_source" className="block">
+      <p className="">
         Is the project open-source? <span className="text-red-500">*</span>
-      </label>
-      <MemoizedTabs
-        id="is_open_source"
-        ariaLabelledBy="is_open_source"
-        value={openSource}
-        setValue={setOpenSource}
-        descriptions={{
-          yes: 'The project is open-source and available to the community.',
-          no: 'The project is not open-source.',
-        }}
-      />
+      </p>
+      <Tabs value={openSource}>
+        <TabsHeader className="bg-gray-100">
+          {['yes', 'no'].map((value) => (
+            <Tab
+              key={value}
+              value={value}
+              onClick={() => setOpenSource(value)}
+              className="text-black"
+            >
+              {value === 'yes' ? 'Yes' : 'No'}
+            </Tab>
+          ))}
+        </TabsHeader>
+        <TabsBody>
+          {['yes', 'no'].map((value) => (
+            <TabPanel key={value} value={value} className="mt-2 text-black">
+              {value === 'yes'
+                ? 'The project is open-source and available to the community.'
+                : 'The project is not open-source.'}
+            </TabPanel>
+          ))}
+        </TabsBody>
+      </Tabs>
 
-      <h2>Project Budget</h2>
+      <h2 className="text-xl font-semibold">Project Budget</h2>
 
       <label className="block">
         Proposed Budget <span className="text-red-500">*</span>
@@ -218,19 +183,30 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      <label htmlFor="received_funding" className="block">
-        Has this project received any prior funding?
-      </label>
-      <MemoizedTabs
-        id="received_funding"
-        ariaLabelledBy="received_funding"
-        value={receivedFunding}
-        setValue={setReceivedFunding}
-        descriptions={{
-          yes: 'The project has received prior funding.',
-          no: 'The project has not received prior funding.',
-        }}
-      />
+      <p className="">Has this project received any prior funding?</p>
+      <Tabs value={receivedFunding}>
+        <TabsHeader className="bg-gray-100">
+          {['yes', 'no'].map((value) => (
+            <Tab
+              key={value}
+              value={value}
+              onClick={() => setReceivedFunding(value)}
+              className="text-black"
+            >
+              {value === 'yes' ? 'Yes' : 'No'}
+            </Tab>
+          ))}
+        </TabsHeader>
+        <TabsBody>
+          {['yes', 'no'].map((value) => (
+            <TabPanel key={value} value={value} className="mt-2 text-black">
+              {value === 'yes'
+                ? 'The project has received prior funding.'
+                : 'The project has not received prior funding.'}
+            </TabPanel>
+          ))}
+        </TabsBody>
+      </Tabs>
 
       <label className="block">
         If so, please describe
@@ -241,7 +217,7 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      <h2>Applicant Information</h2>
+      <h2 className="text-xl font-semibold">Applicant Information</h2>
 
       <label className="block">
         Your Name <span className="text-red-500">*</span>
@@ -261,19 +237,30 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      <label htmlFor="lead_contributor" className="block">
-        Are you the Project Lead / Lead Contributor?
-      </label>
-      <MemoizedTabs
-        id="lead_contributor"
-        ariaLabelledBy="lead_contributor"
-        value={isLeadContributor}
-        setValue={setIsLeadContributor}
-        descriptions={{
-          yes: 'You are the Project Lead / Lead Contributor.',
-          no: 'You are not the Project Lead / Lead Contributor.',
-        }}
-      />
+      <p className="">Are you the Project Lead / Lead Contributor?</p>
+      <Tabs value={isLeadContributor}>
+        <TabsHeader className="bg-gray-100">
+          {['yes', 'no'].map((value) => (
+            <Tab
+              key={value}
+              value={value}
+              onClick={() => setIsLeadContributor(value)}
+              className="text-black"
+            >
+              {value === 'yes' ? 'Yes' : 'No'}
+            </Tab>
+          ))}
+        </TabsHeader>
+        <TabsBody>
+          {['yes', 'no'].map((value) => (
+            <TabPanel key={value} value={value} className="mt-2 text-black">
+              {value === 'yes'
+                ? 'You are the Project Lead / Lead Contributor.'
+                : 'You are not the Project Lead / Lead Contributor.'}
+            </TabPanel>
+          ))}
+        </TabsBody>
+      </Tabs>
 
       <label className="block">
         If someone else, please list the project's Lead Contributor or
@@ -318,7 +305,6 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      {/* TODO: Fix disabled enabled styles */}
       <FormButton
         variant={
           buttonVariant === 'enabled' ? 'enabledSpecific' : buttonVariant
