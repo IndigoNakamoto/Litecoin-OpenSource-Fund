@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
-import React from 'react'
+import React, { memo } from 'react'
 import {
   Tabs,
   TabsHeader,
@@ -12,6 +12,51 @@ import {
   TabPanel,
   Typography,
 } from '@material-tailwind/react'
+
+// Memoize the Tabs component to prevent unnecessary re-renders
+const MemoizedTabs = memo(function TabsComponent({
+  id,
+  ariaLabelledBy,
+  value,
+  setValue,
+  descriptions,
+}: {
+  id: string
+  ariaLabelledBy: string
+  value: string
+  setValue: (value: string) => void
+  descriptions: { yes: string; no: string }
+}) {
+  return (
+    <Tabs
+      id={id}
+      value={value}
+      className="mt-1"
+      aria-labelledby={ariaLabelledBy}
+    >
+      <TabsHeader className="bg-gray-100">
+        <Tab value="yes" onClick={() => setValue('yes')}>
+          Yes
+        </Tab>
+        <Tab value="no" onClick={() => setValue('no')}>
+          No
+        </Tab>
+      </TabsHeader>
+      <TabsBody>
+        <TabPanel value="yes">
+          <Typography variant="small" color="blue-gray" className="mt-2">
+            {descriptions.yes}
+          </Typography>
+        </TabPanel>
+        <TabPanel value="no">
+          <Typography variant="small" color="blue-gray" className="mt-2">
+            {descriptions.no}
+          </Typography>
+        </TabPanel>
+      </TabsBody>
+    </Tabs>
+  )
+})
 
 export default function ProjectSubmissionForm() {
   const [loading, setLoading] = useState(false)
@@ -152,33 +197,16 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="is_open_source" className="block">
         Is the project open-source? <span className="text-red-500">*</span>
       </label>
-      {/* <Tabs
+      <MemoizedTabs
         id="is_open_source"
+        ariaLabelledBy="is_open_source"
         value={openSource}
-        className="mt-1"
-        aria-labelledby="is_open_source"
-      >
-        <TabsHeader className="bg-gray-100">
-          <Tab value="yes" onClick={() => setOpenSource('yes')}>
-            Yes
-          </Tab>
-          <Tab value="no" onClick={() => setOpenSource('no')}>
-            No
-          </Tab>
-        </TabsHeader>
-        <TabsBody>
-          <TabPanel value="yes">
-            <Typography variant="small" color="blue-gray" className="mt-2">
-              The project is open-source and available to the community.
-            </Typography>
-          </TabPanel>
-          <TabPanel value="no">
-            <Typography variant="small" color="blue-gray" className="mt-2">
-              The project is not open-source.
-            </Typography>
-          </TabPanel>
-        </TabsBody>
-      </Tabs> */}
+        setValue={setOpenSource}
+        descriptions={{
+          yes: 'The project is open-source and available to the community.',
+          no: 'The project is not open-source.',
+        }}
+      />
 
       <h2>Project Budget</h2>
 
@@ -193,33 +221,16 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="received_funding" className="block">
         Has this project received any prior funding?
       </label>
-      {/* <Tabs
+      <MemoizedTabs
         id="received_funding"
+        ariaLabelledBy="received_funding"
         value={receivedFunding}
-        className="mt-1"
-        aria-labelledby="received_funding"
-      >
-        <TabsHeader className="bg-gray-100">
-          <Tab value="yes" onClick={() => setReceivedFunding('yes')}>
-            Yes
-          </Tab>
-          <Tab value="no" onClick={() => setReceivedFunding('no')}>
-            No
-          </Tab>
-        </TabsHeader>
-        <TabsBody>
-          <TabPanel value="yes">
-            <Typography variant="small" color="blue-gray" className="mt-2">
-              The project has received prior funding.
-            </Typography>
-          </TabPanel>
-          <TabPanel value="no">
-            <Typography variant="small" color="blue-gray" className="mt-2">
-              The project has not received prior funding.
-            </Typography>
-          </TabPanel>
-        </TabsBody>
-      </Tabs> */}
+        setValue={setReceivedFunding}
+        descriptions={{
+          yes: 'The project has received prior funding.',
+          no: 'The project has not received prior funding.',
+        }}
+      />
 
       <label className="block">
         If so, please describe
@@ -253,33 +264,16 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="lead_contributor" className="block">
         Are you the Project Lead / Lead Contributor?
       </label>
-      {/* <Tabs
+      <MemoizedTabs
         id="lead_contributor"
+        ariaLabelledBy="lead_contributor"
         value={isLeadContributor}
-        className="mt-1"
-        aria-labelledby="lead_contributor"
-      >
-        <TabsHeader className="bg-gray-100">
-          <Tab value="yes" onClick={() => setIsLeadContributor('yes')}>
-            Yes
-          </Tab>
-          <Tab value="no" onClick={() => setIsLeadContributor('no')}>
-            No
-          </Tab>
-        </TabsHeader>
-        <TabsBody>
-          <TabPanel value="yes">
-            <Typography variant="small" color="blue-gray" className="mt-2">
-              You are the Project Lead / Lead Contributor.
-            </Typography>
-          </TabPanel>
-          <TabPanel value="no">
-            <Typography variant="small" color="blue-gray" className="mt-2">
-              You are not the Project Lead / Lead Contributor.
-            </Typography>
-          </TabPanel>
-        </TabsBody>
-      </Tabs> */}
+        setValue={setIsLeadContributor}
+        descriptions={{
+          yes: 'You are the Project Lead / Lead Contributor.',
+          no: 'You are not the Project Lead / Lead Contributor.',
+        }}
+      />
 
       <label className="block">
         If someone else, please list the project's Lead Contributor or
