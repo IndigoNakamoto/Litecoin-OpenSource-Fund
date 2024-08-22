@@ -1,7 +1,7 @@
 import ProjectSubmissionForm from '@/components/ProjectSubmissionForm'
 import ApplySection from '@/components/ApplySection'
-import Link from '@/components/Link'
-import CustomLink from '@/components/Link'
+// import Link from '@/components/Link'
+// import CustomLink from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import React from 'react'
 

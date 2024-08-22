@@ -121,7 +121,7 @@ export default function ProjectSubmissionForm() {
         />
       </label>
 
-      <label htmlFor="is_open_source" className="block">
+      {/* <label htmlFor="is_open_source" className="block">
         Is the project open-source? <span className="text-red-500">*</span>
       </label>
       <Tabs
@@ -162,7 +162,7 @@ export default function ProjectSubmissionForm() {
             </Typography>
           </TabPanel>
         </TabsBody>
-      </Tabs>
+      </Tabs> */}
 
       <h2>Project Budget</h2>
 
@@ -177,7 +177,7 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="received_funding" className="block">
         Has this project received any prior funding?
       </label>
-      <Tabs
+      {/* <Tabs
         id="received_funding"
         value={receivedFunding}
         className="mt-1"
@@ -203,7 +203,7 @@ export default function ProjectSubmissionForm() {
             </Typography>
           </TabPanel>
         </TabsBody>
-      </Tabs>
+      </Tabs> */}
 
       <label className="block">
         If so, please describe
@@ -237,7 +237,7 @@ export default function ProjectSubmissionForm() {
       <label htmlFor="lead_contributor" className="block">
         Are you the Project Lead / Lead Contributor?
       </label>
-      <Tabs
+      {/* <Tabs
         id="lead_contributor"
         value={isLeadContributor}
         className="mt-1"
@@ -263,7 +263,7 @@ export default function ProjectSubmissionForm() {
             </Typography>
           </TabPanel>
         </TabsBody>
-      </Tabs>
+      </Tabs> */}
 
       <label className="block">
         If someone else, please list the project's Lead Contributor or
