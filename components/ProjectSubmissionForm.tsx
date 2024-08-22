@@ -69,9 +69,11 @@ export default function ProjectSubmissionForm() {
     } catch (e) {
       if (e instanceof Error) {
         setFailureReason(`Error: ${e.message}`)
+        console.error('Error submitting project:', e.message) // Log the error
       } else {
         setFailureReason('An unknown error occurred.')
       }
+      setLoading(false) // Ensure loading state is reset
     }
   }
 
