@@ -230,12 +230,12 @@ export default function ProjectSubmissionForm() {
           )}
           {receivedFunding === 'yes' && (
             <div className="opacity-100 transition-opacity duration-300">
-              This project has not received prior funding
+              This project has received prior funding
             </div>
           )}
           {receivedFunding === 'no' && (
             <div className="opacity-100 transition-opacity duration-300">
-              This project has received prior funding
+              This project has not received prior funding
             </div>
           )}
         </div>
