@@ -29,7 +29,9 @@ export default function ProjectSubmissionForm() {
         potential_impact: data.potential_impact,
         project_repository: data.project_repository,
         social_media_links: data.social_media_links,
-        open_source: openSource === 'yes',
+        open_source: openSource, // Send the openSource state directly
+        open_source_license: data.open_source_license, // Include license
+        partially_open_source: data.partially_open_source, // Include explanation
       },
       project_budget: {
         proposed_budget: data.proposed_budget,
@@ -102,14 +104,17 @@ export default function ProjectSubmissionForm() {
           className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('main_focus', { required: true })}
         >
-          <option value="litecoin">Litecoin</option>
-          <option value="lightning">Lightning</option>
-          <option value="mweb">MWEB</option>
+          <option value="litecoin">Litecoin Core</option>
+          <option value="meta">Meta Protocols (Eg. Ordinals/Omni)</option>
           <option value="ordinals">Ordinals Lite</option>
-          <option value="omnilite">Omni Lite</option>
-          <option value="ldk">Litecoin Dev Kit</option>
-          <option value="education">Education</option>
-          <option value="litewallet">Litewallet</option>
+          <option value="omni">Omni Layer</option>
+          <option value="tools">Tooling(Eg. LDK/LTCSuite)</option>
+          <option value="ldk">Litecoin Dev Kit (Rust)</option>
+          <option value="ltcsuite">LTC Suite (Go)</option>
+          <option value="lightning">Lightning Network</option>
+          <option value="atomicswaps">Atomic Swaps</option>
+          <option value="education">Education/Guides</option>
+          <option value="wallet">Wallets</option>
           <option value="other">Other</option>
         </select>
       </label>
@@ -132,18 +137,19 @@ export default function ProjectSubmissionForm() {
       </label>
 
       <label className="block">
-        Social Media Links (X, GitHub, LinkedIn, Facebook, Telegram)
+        Social Media Links (X, GitHub, LinkedIn, Facebook, Telegram){' '}
+        <span className="text-red-500">*</span>
         <textarea
           className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
-          {...register('social_media_links')}
+          {...register('social_media_links', { required: true })}
         />
       </label>
 
       <p className="mb-2">
-        Is the project open-source? <span className="text-red-500">*</span>
+        Is your project open-source? <span className="text-red-500">*</span>
       </p>
       <div className="w-full">
-        <div className="flex w-full space-x-4 rounded-lg bg-gray-100 p-1">
+        <div className="flex w-full space-x-4 border border-gray-300 bg-gray-100 p-1">
           <button
             type="button"
             className={`flex-grow rounded-lg px-4 py-2 shadow ${
@@ -166,21 +172,53 @@ export default function ProjectSubmissionForm() {
           >
             No
           </button>
+          <button
+            type="button"
+            className={`flex-grow rounded-lg px-4 py-2 shadow ${
+              openSource === 'partially'
+                ? 'bg-[#C5D3D6] text-[#222222] shadow-md'
+                : 'bg-white text-[#222222] shadow-md'
+            }`}
+            onClick={() => setOpenSource('partially')}
+          >
+            Partially
+          </button>
         </div>
         <div className="ml-4 mt-4 text-sm">
           {openSource === 'null' && (
             <div className="opacity-100 transition-opacity duration-300">
-              Select Yes or No
+              Select Yes, No, or Partially.
             </div>
           )}
           {openSource === 'yes' && (
             <div className="opacity-100 transition-opacity duration-300">
-              This project is open-source for the public.
+              <label className="block">
+                Please provide the open-source license used (e.g., MIT, GPL,
+                Apache 2.0).
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+                  {...register('open_source_license')}
+                />
+              </label>
             </div>
           )}
           {openSource === 'no' && (
             <div className="opacity-100 transition-opacity duration-300">
               This project is not open-source.
+            </div>
+          )}
+          {openSource === 'partially' && (
+            <div className="opacity-100 transition-opacity duration-300">
+              <label className="block">
+                Please briefly explain which parts of your project are
+                open-source and which are not. Also, provide the open-source
+                license used for the open-source parts.
+                <textarea
+                  className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+                  {...register('partially_open_source')}
+                />
+              </label>
             </div>
           )}
         </div>
@@ -198,7 +236,7 @@ export default function ProjectSubmissionForm() {
 
       <p className="">Has this project received any prior funding?</p>
       <div className="w-full">
-        <div className="flex w-full space-x-4 rounded-lg bg-gray-100 p-1">
+        <div className="flex w-full space-x-4 border border-gray-300 bg-gray-100  p-1">
           <button
             type="button"
             className={`flex-grow rounded-lg px-4 py-2 shadow ${
@@ -229,26 +267,26 @@ export default function ProjectSubmissionForm() {
             </div>
           )}
           {receivedFunding === 'yes' && (
-            <div className="opacity-100 transition-opacity duration-300">
-              This project has received prior funding
+            <div>
+              <div className="opacity-100 transition-opacity duration-300">
+                This project has received prior funding. Please describe:
+              </div>
+              <label className="block">
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+                  {...register('prior_funding_details')}
+                />
+              </label>
             </div>
           )}
           {receivedFunding === 'no' && (
             <div className="opacity-100 transition-opacity duration-300">
-              This project has not received prior funding
+              This project has not received prior funding.
             </div>
           )}
         </div>
       </div>
-
-      <label className="block">
-        If so, please describe
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
-          {...register('prior_funding_details')}
-        />
-      </label>
 
       <h2 className="text-xl font-semibold">Applicant Information</h2>
 
@@ -272,7 +310,7 @@ export default function ProjectSubmissionForm() {
 
       <p className="">Are you the Project Lead / Lead Contributor?</p>
       <div className="w-full">
-        <div className="flex w-full space-x-4 rounded-lg bg-gray-100 p-1">
+        <div className="flex w-full space-x-4 border border-gray-300 bg-gray-100  p-1">
           <button
             type="button"
             className={`flex-grow rounded-lg px-4 py-2 shadow ${
@@ -304,26 +342,23 @@ export default function ProjectSubmissionForm() {
           )}
           {isLeadContributor === 'yes' && (
             <div className="opacity-100 transition-opacity duration-300">
-              I am the lead contributor
+              I am the lead contributor.
             </div>
           )}
           {isLeadContributor === 'no' && (
-            <div className="opacity-100 transition-opacity duration-300">
-              I am not the lead contributor
+            <div>
+              <label className="block">
+                Who is the project lead?
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+                  {...register('other_lead')}
+                />
+              </label>
             </div>
           )}
         </div>
       </div>
-
-      <label className="block">
-        If someone else, please list the project's Lead Contributor or
-        Maintainer
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
-          {...register('other_lead')}
-        />
-      </label>
 
       <label className="block">
         Personal Github (or similar, if applicable)

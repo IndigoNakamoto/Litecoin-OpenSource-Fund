@@ -28,7 +28,9 @@ export default async function handler(
         potential_impact = 'No impact information provided',
         project_repository = 'No repository provided',
         social_media_links = '',
-        open_source = true,
+        open_source = 'null', // Changed default to 'null'
+        open_source_license = '', // Added open_source_license
+        partially_open_source = '', // Added partially_open_source
       },
       project_budget: {
         proposed_budget = 'No budget provided',
@@ -68,7 +70,18 @@ export default async function handler(
 
 **Social Media Links:** ${social_media_links}
 
-**Open Source:** ${open_source ? 'Yes' : 'No'}
+**Open Source:** ${
+      open_source === 'yes' ? 'Yes' : open_source === 'no' ? 'No' : 'Partially'
+    }
+
+${
+  open_source === 'yes' ? `**Open Source License:** ${open_source_license}` : ''
+}
+${
+  open_source === 'partially'
+    ? `**Partially Open Source:** ${partially_open_source}`
+    : ''
+}
 
 ## Project Budget
 
@@ -106,7 +119,7 @@ export default async function handler(
 
     // Additional tags based on yes/no answers
     if (received_funding) issueLabels.push('prior funding')
-    if (!open_source) issueLabels.push('not FLOSS')
+    if (open_source === 'no') issueLabels.push('not FLOSS')
     if (!is_lead_contributor) issueLabels.push('surrogate')
 
     try {
