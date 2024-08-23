@@ -268,7 +268,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         {/* TODO: SUBMIT SECTION */}
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
-          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] ">
+          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-16">
             <h1 className="m-auto font-space-grotesk text-4xl text-[41px] font-medium leading-[32px]  text-black">
               Submit a Project
             </h1>
