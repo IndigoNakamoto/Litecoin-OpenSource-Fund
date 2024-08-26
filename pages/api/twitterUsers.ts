@@ -19,9 +19,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const cacheKey = `twitterUsers:${usernamesStr}`
 
   try {
-    //clearCache
-    // eslint-disable-next-line no-constant-condition
-    if (true) {
+    //clearCache // eslint-disable-next-line no-constant-condition
+    if (clearCache) {
       // Clear cache logic
       console.log(`Clearing cache for key: ${cacheKey}`)
       await kv.del(cacheKey)
