@@ -1,13 +1,16 @@
-// navigation.tsx
 import siteMetadata from '@/data/siteMetadata'
 import Link from './Link'
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import SocialIcon from '@/components/social-icons-mobile'
+import HorizontalSocialIcons from './HorizontalSocialIcons'
 
 const Navigation = () => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const [dropdownOpen, setDropdownOpen] = useState({
+    useLitecoin: false,
+    theFoundation: false,
+  })
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState({
     useLitecoin: false,
     theFoundation: false,
   })
@@ -40,6 +43,13 @@ const Navigation = () => {
     setDropdownOpen((prev) => ({
       useLitecoin: menu === 'useLitecoin' ? !prev.useLitecoin : false,
       theFoundation: menu === 'theFoundation' ? !prev.theFoundation : false,
+    }))
+  }
+
+  const toggleMobileDropdown = (menu) => {
+    setMobileDropdownOpen((prevState) => ({
+      ...prevState,
+      [menu]: !prevState[menu], // Toggle the specific dropdown
     }))
   }
 
@@ -187,7 +197,7 @@ const Navigation = () => {
               <a
                 className={`nav-toggle mr-[-5px] mt-[-10px]  ${
                   navShow ? 'open' : ''
-                }`} // Conditionally add 'open' class
+                }`}
                 onClick={onToggleNav}
                 onKeyPress={onToggleNav}
                 aria-label="menu"
@@ -201,7 +211,7 @@ const Navigation = () => {
             ) : (
               <ul className="flex flex-row">
                 <li
-                  className="text-md relative m-[1rem] flex cursor-pointer items-center font-[500]"
+                  className="text-md relative flex cursor-pointer items-center font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.15px',
@@ -421,14 +431,13 @@ const Navigation = () => {
       {/* Mobile Nav */}
       {/* TODO: Modify bg color with scroll position between #C5D3D6 and #222222*/}
       <div
-        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-32  duration-300 ease-in  md:clear-left  ${
+        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-20  duration-300 ease-in  md:clear-left  ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
       >
         {/* LINKS */}
-        {/* Use Litecoin and The Foundation are dropdown menu items like in the regular menu bar */}
-        <div className="flex flex-col gap-x-6 ">
-          <nav className="mt-8 h-full">
+        <div className="flex flex-col gap-x-6">
+          <nav className="mt-8 h-full ">
             {[
               'Use Litecoin',
               'Learn',
@@ -440,31 +449,100 @@ const Navigation = () => {
               'Explorer',
             ].map((item) => (
               <div key={item} className="px-10 py-2 pt-2 short:py-0.5">
-                <Link
-                  href={item.replace(/\s+/g, '-').toLowerCase()}
-                  className="font-space-grotesk text-[2.75rem] font-semibold  text-[#222222] hover:text-blue-300  "
-                  onClick={onToggleNav}
-                >
-                  {item}
-                </Link>
+                {item === 'Use Litecoin' || item === 'The Foundation' ? (
+                  <>
+                    <button
+                      onClick={() =>
+                        toggleMobileDropdown(
+                          item.replace(' ', '').toLowerCase()
+                        )
+                      }
+                      className="font-space-roc m-0 flex w-full items-center justify-between pl-0 pr-0 text-left text-[2.75rem] font-semibold text-[#222222]"
+                    >
+                      {item}
+                      {/*Mobile SVG chevon will now flip up and down */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-10 w-10"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        style={{
+                          transform: `translateY(-0.5px) ${
+                            mobileDropdownOpen[
+                              item.replace(' ', '').toLowerCase()
+                            ]
+                              ? 'rotate(180deg)'
+                              : ''
+                          }`,
+                        }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={3.25}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {mobileDropdownOpen[item.replace(' ', '').toLowerCase()] ? (
+                      <ul className="pl-12 text-[2.75rem] font-medium text-[#222222]">
+                        {item === 'Use Litecoin' ? (
+                          <>
+                            <li className="py-1">
+                              <Link href="/use-litecoin/buy">Buy</Link>
+                            </li>
+                            <li className="py-1">
+                              <Link href="/use-litecoin/spend">Spend</Link>
+                            </li>
+                            <li className="py-1">
+                              <Link href="/use-litecoin/store">Store</Link>
+                            </li>
+                            <li className="py-1">
+                              <Link href="/use-litecoin/business">
+                                Business
+                              </Link>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li className="py-1">
+                              <Link href="/the-foundation/about">About</Link>
+                            </li>
+                            <li className="py-1">
+                              <Link href="/the-foundation/resources">
+                                Resources
+                              </Link>
+                            </li>
+                            <li className="py-1">
+                              <Link href="/the-foundation/financials">
+                                Financials
+                              </Link>
+                            </li>
+                            <li className="py-1">
+                              <Link href="/the-foundation/contact">
+                                Contact
+                              </Link>
+                            </li>
+                          </>
+                        )}
+                      </ul>
+                    ) : null}
+                  </>
+                ) : (
+                  <Link
+                    href={`/${item.toLowerCase()}`}
+                    className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.75rem] font-semibold  text-[#222222]"
+                    onClick={onToggleNav}
+                  >
+                    {item}
+                  </Link>
+                )}
               </div>
             ))}
           </nav>
 
-          <div className="">
-            <div className="absolute bottom-12 mt-12 flex w-full flex-col ">
-              {/* SOCIAL ICONS */}
-              <div className="flex space-x-4 px-12 text-[#222222]">
-                <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} />
-                <SocialIcon kind="github" href={siteMetadata.github} />
-                <SocialIcon kind="facebook" href={siteMetadata.facebook} />
-                <SocialIcon kind="youtube" href={siteMetadata.youtube} />
-                <SocialIcon kind="linkedin" href={siteMetadata.linkedin} />
-                <SocialIcon kind="reddit" href={siteMetadata.reddit} />
-                <SocialIcon kind="x" href={siteMetadata.twitter} />
-              </div>
-            </div>
-          </div>
+          <HorizontalSocialIcons />
         </div>
       </div>
       <style jsx>{`
@@ -503,6 +581,27 @@ const Navigation = () => {
           transform: rotate(-45deg) translateY(4px); /* Shift down 3 pixels */
           transform-origin: bottom left;
           width: 44px;
+        }
+
+        /* Dropdown fade-in and fade-out animations */
+        .dropdown-enter-active,
+        .dropdown-exit-active {
+          transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+        }
+
+        .dropdown-enter-active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .dropdown-exit-active {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        /* Ensure instant flip for SVG icons */
+        svg {
+          transition: none; /* Remove transition to make the flip instant */
         }
       `}</style>
     </>
