@@ -64,7 +64,12 @@ module.exports = () => {
     transpilePackages: ['react-tweet'],
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     images: {
-      domains: ['pbs.twimg.com', 'abs.twimg.com'], // Add this line
+      domains: [
+        'pbs.twimg.com',
+        'abs.twimg.com',
+        'static.tgb-preprod.com',
+        'static.tgbwidget.com',
+      ], // Add this line
     },
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
