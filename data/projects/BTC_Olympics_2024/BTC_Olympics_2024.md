@@ -15,7 +15,7 @@ isMatching: true
 matchingMultiplier: 3
 slug: 'BTC_Olympics_2024'
 hashtag: '#BitcoinOlympics'
-bountyStatus: 'open'
+bountyStatus: 'completed'
 isBitcoinOlympics2024: true
 ---
 
