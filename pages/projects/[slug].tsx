@@ -526,6 +526,81 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   className="markdown"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
+                {/* Community Section*/}
+                <>
+                  <div className="markdown">
+                    {twitterContributors.length > 0 &&
+                    !isBitcoinOlympics2024 ? (
+                      <>
+                        <h3>
+                          {twitterContributors.length > 1
+                            ? 'Contributors'
+                            : 'Contributor'}
+                        </h3>
+                        <TwitterUsers users={twitterContributors} />
+                      </>
+                    ) : null}
+                  </div>
+                  <div className="markdown">
+                    {twitterContributors.length > 0 && isBitcoinOlympics2024 ? (
+                      <>
+                        <h3>
+                          {twitterContributors.length > 1
+                            ? 'BTC Startup Labs'
+                            : 'Contributor'}
+                        </h3>
+                        <TwitterUsers users={twitterContributors} />
+                      </>
+                    ) : null}
+                  </div>
+
+                  <div className="markdown">
+                    {twitterContributorsLitecoin.length > 0 ? (
+                      <>
+                        <h3>
+                          {twitterContributorsLitecoin.length > 1
+                            ? 'Litecoin Contributors'
+                            : 'Litecoin Contributor'}
+                        </h3>
+                        <TwitterUsers users={twitterContributorsLitecoin} />
+                      </>
+                    ) : null}
+                  </div>
+                  <div className="markdown">
+                    {twitterContributorsBitcoin.length > 0 ? (
+                      <>
+                        <h3>
+                          {twitterContributorsBitcoin.length > 1
+                            ? 'Bitcoin Contributors'
+                            : 'Bitcoin Contributor'}
+                        </h3>
+                        <TwitterUsers users={twitterContributorsBitcoin} />
+                      </>
+                    ) : null}
+                  </div>
+                  <div className="markdown">
+                    {twitterAdvocates.length > 0 ? (
+                      <>
+                        <h3>
+                          {twitterAdvocates.length > 1
+                            ? 'Advocates'
+                            : 'Advocate'}
+                        </h3>
+                        <TwitterUsers users={twitterAdvocates} />
+                      </>
+                    ) : null}
+                  </div>
+                  <div className="markdown">
+                    {twitterUsers.length > 0 ? (
+                      <>
+                        <h3>
+                          {twitterUsers.length > 1 ? 'Supporters' : 'Supporter'}
+                        </h3>
+                        <TwitterUsers users={twitterUsers} />
+                      </>
+                    ) : null}
+                  </div>
+                </>
               </div>
             )}
             {/* ### Comments Section */}
@@ -765,8 +840,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                   <div className="w-full rounded-lg  text-gray-800">
                     <div className="flex w-full flex-row lg:flex-col">
                       <div>
-                        <h2 className="font-space-grotesk ">
-                          Total Donations:
+                        <h2 className="font-space-grotesk font-semibold ">
+                          Total Donations
                         </h2>
                         {addressStats && (
                           <div className="">
@@ -788,7 +863,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                         )}
                       </div>
                       <div className="pl-16 lg:pl-0 lg:pt-4">
-                        <h2 className="font-space-grotesk ">Monthly Goal:</h2>
+                        <h2 className="font-space-grotesk font-semibold ">
+                          Monthly Goal
+                        </h2>
                         <div>
                           <div>
                             <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500 ">
@@ -819,15 +896,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                 )}
               </div>
 
-              <div className="pr-0 lg:pr-8">
+              <div className="pb-4 pr-0 pt-8 lg:pr-8">
                 <button
                   onClick={openPaymentModal}
-                  className={`block w-full rounded-none rounded-xl bg-[#f3ccc4] font-space-grotesk text-xl font-semibold text-[#333333] transition-colors duration-200  hover:border-transparent hover:bg-[#f3ccc2] ${
+                  className={`block w-full rounded-none rounded-xl bg-[#222222] font-space-grotesk text-xl font-semibold text-[white] transition-colors duration-200  hover:border-transparent hover:bg-[#363636] ${
                     bountyStatus === 'completed' ? 'disabled' : ''
                   }`}
                   disabled={bountyStatus === 'completed'}
                 >
-                  {bountyStatus === 'completed' ? 'PROJECT COMPLETE' : 'DONATE'}
+                  {bountyStatus === 'completed'
+                    ? 'Project Completed'
+                    : 'Donate'}
                 </button>
               </div>
             </div>
