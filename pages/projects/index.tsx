@@ -11,6 +11,7 @@ import faqData from '../../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
 import React, { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import TypingScroll from '@/components/TypingScroll'
 // TODO: Fix scroll bar. Return to default
 
 function useIsLgScreen() {
@@ -262,6 +263,20 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                 )
               })}
           </ul>
+        </div>
+      </section>
+
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[300px] w-full bg-white bg-cover bg-center">
+        <div className="flex h-full flex-col items-center justify-center text-center">
+          <h2 className="text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
+            We Help Advance
+          </h2>
+          <h3 className="font-space-grotesk text-3xl font-semibold text-gray-800 lg:text-4xl">
+            <TypingScroll />
+          </h3>
+          <p className="pt-2 font-space-grotesk text-2xl text-gray-600">
+            Unite. Fund. Advance. - The Litecoin Project Development Portal
+          </p>
         </div>
       </section>
 
