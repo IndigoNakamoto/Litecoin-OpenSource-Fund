@@ -60,7 +60,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   }
 
   return (
-    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-gray-300 ">
+    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-gray-300  ">
       {showLeftChevron && (
         <button
           className="z-10 rounded-lg bg-white bg-opacity-50 p-1 text-blue-600"
@@ -75,10 +75,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         className="overflow-x:overlay flex space-x-2 overflow-x-auto whitespace-nowrap py-4 "
         style={{ scrollSnapType: 'x mandatory' }}
       >
-        {/* Wrap the button in a div for each li */}
-        {['mission', 'faq', 'updates', 'comments', 'community'].map((item) => (
+        {/* Wrap the button in a div for each li. TODO: Decide to add community back 'community' */}
+        {['mission', 'faq', 'updates', 'comments'].map((item) => (
           <li
-            className="group flex h-16 items-center justify-center rounded-lg"
+            className="group flex h-16 items-center justify-center rounded-lg font-space-grotesk"
             key={item}
           >
             {item === 'faq' && faqCount === 1 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
@@ -89,7 +89,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                   onClick={() => handleMenuItemClick(item)}
                   className={`text-lg ${
                     activeItem === item
-                      ? 'font-semibold text-blue-500 '
+                      ? 'font-semibold text-[#222222] '
                       : 'text-gray-700 '
                   }`}
                 >
@@ -106,7 +106,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'faq'
-                            ? 'font-bold text-blue-600 '
+                            ? 'font-bold text-[#222222] '
                             : 'font-semibold'
                         }`}
                       >
