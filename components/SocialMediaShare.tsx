@@ -1,15 +1,32 @@
+// components/SocialMediaShare.js
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import SocialIcon from './social-icons'
+import Notification from './Notification'
 
 const SocialMediaShare = ({ title, summary, className }) => {
   const router = useRouter()
-  const currentURL = `https://www.lite.space` + router.asPath
-
+  const currentURL = `https://redesign.lite.space` + router.asPath
   const encodedText = encodeURIComponent(summary)
+
+  const [notification, setNotification] = useState('')
+
+  // Function to copy text to clipboard and show notification
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setNotification('Link copied to clipboard!')
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+      setNotification('Failed to copy the link. Please try again.')
+    }
+  }
+
   const shareLinks = [
     {
-      kind: 'website', //TODO: Change icon to chainlink
-      url: currentURL, //TODO: Copy to clipboard and notify user of copy
+      kind: 'link',
+      url: currentURL,
+      action: () => copyToClipboard(currentURL), // Copy to clipboard and notify user
     },
     {
       kind: 'x',
@@ -19,15 +36,33 @@ const SocialMediaShare = ({ title, summary, className }) => {
       kind: 'facebook',
       url: `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`,
     },
-    // { kind: 'link', url: currentURL },
   ]
 
   return (
     <div className={className}>
-      <p className="font-semibold  text-gray-800"> SHARE: </p>
+      <p className="font-semibold text-gray-800">SHARE:</p>
       {shareLinks.map((link) => (
-        <SocialIcon key={link.kind} kind={link.kind} href={link.url} size={5} />
+        <SocialIcon
+          key={link.kind}
+          kind={link.kind}
+          href={link.url}
+          size={5}
+          onClick={
+            link.action
+              ? (e) => {
+                  e.preventDefault()
+                  link.action()
+                }
+              : undefined
+          }
+        />
       ))}
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification('')}
+        />
+      )}
     </div>
   )
 }
