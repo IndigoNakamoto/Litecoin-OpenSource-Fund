@@ -77,7 +77,8 @@ const ResponseListCurrenciesExample = {
       name: 'Polygon',
       code: 'MATIC',
       imageUrl:
-        'https://static.tgb-preprod.com/currency_images%2Ff953733b-12dc-4f01-842d-afdf3a227e0e.png',
+        'https://static.tgbwidget.com/currency_images/a5061f25-4070-4d3e-8cdf-91b79d1b787e.png',
+      isErc20: true,
       minDonation: 0.1,
       network: 'polygon',
     },
@@ -100,7 +101,7 @@ export default function PaymentModalCryptoOption({
   const [showDropdown, setShowDropdown] = useState(false)
 
   useEffect(() => {
-    const initialCurrency = 'Litecoin'
+    // const initialCurrency = 'Litecoin'
     const initialRate = mockedCurrencyRates.data.rate
     const initialCryptoValue = calculateCryptoValue(100)
 

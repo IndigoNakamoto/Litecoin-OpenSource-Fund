@@ -87,7 +87,7 @@ const PaymentModal: React.FC<ModalProps> = ({
 
     return (
       <>
-        <div className="flex flex-col space-y-4 py-4">
+        <div className="z-30 flex flex-col space-y-4 py-4">
           <div className="flex items-center gap-4">
             <Image
               alt={project.title}
@@ -166,7 +166,7 @@ const PaymentModal: React.FC<ModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       className="max-h-full min-h-[75vh] w-[40rem] max-w-3xl overflow-y-auto border border-black bg-[#222222] p-8 shadow-xl sm:m-8 md:p-16"
-      overlayClassName="inset-0 fixed bg-[#222222] bg-opacity-70 flex items-center justify-center transform duration-400 ease-in"
+      overlayClassName="fixed inset-0 bg-[#222222] bg-opacity-70 z-[40] flex items-center justify-center transform duration-400 ease-in"
       appElement={
         typeof window === 'undefined'
           ? undefined

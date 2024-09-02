@@ -16,20 +16,235 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     firstName: '',
     lastName: '',
     email: '',
-    address: '',
+    address1: '',
+    address2: '',
     country: '',
     state: '',
     city: '',
     postalCode: '',
   })
 
+  const [showDropdown, setShowDropdown] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  const countries = [
+    'United States',
+    'Afghanistan',
+    'Albania',
+    'Algeria',
+    'Andorra',
+    'Angola',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bhutan',
+    'Bolivia',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Brazil',
+    'Brunei',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cabo Verde',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Central African Republic',
+    'Chad',
+    'Chile',
+    'China',
+    'Colombia',
+    'Comoros',
+    'Congo (Congo-Brazzaville)',
+    'Costa Rica',
+    'Croatia',
+    'Cuba',
+    'Cyprus',
+    'Czechia (Czech Republic)',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Eswatini',
+    'Ethiopia',
+    'Fiji',
+    'Finland',
+    'France',
+    'Gabon',
+    'Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Greece',
+    'Grenada',
+    'Guatemala',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Holy See',
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Israel',
+    'Italy',
+    'Jamaica',
+    'Japan',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Laos',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Mauritania',
+    'Mauritius',
+    'Mexico',
+    'Micronesia',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Morocco',
+    'Mozambique',
+    'Myanmar (Burma)',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'North Korea',
+    'North Macedonia',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Palestine State',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Poland',
+    'Portugal',
+    'Qatar',
+    'Romania',
+    'Russia',
+    'Rwanda',
+    'Saint Kitts and Nevis',
+    'Saint Lucia',
+    'Saint Vincent and the Grenadines',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'South Korea',
+    'South Sudan',
+    'Spain',
+    'Sri Lanka',
+    'Sudan',
+    'Suriname',
+    'Sweden',
+    'Switzerland',
+    'Syria',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Timor-Leste',
+    'Togo',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Tuvalu',
+    'Uganda',
+    'Ukraine',
+    'United Arab Emirates',
+    'United Kingdom',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Venezuela',
+    'Vietnam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe',
+  ]
+
+  const filteredCountries = countries.filter((country) =>
+    country.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleCountrySelect = (country: string) => {
+    setFormData({ ...formData, country })
+    setSearchTerm(country)
+    setShowDropdown(false)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission
+  }
+
+  const isRequired = (field: string) => {
+    if (anonymous) return false
+    if (taxReceipt && field === 'email') return true
+    return !anonymous
   }
 
   return (
@@ -67,7 +282,8 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 
         <div>
           <h2 className="font-space-grotesk text-lg text-white">
-            Name<span className="text-red-600">*</span>
+            Name
+            {!anonymous && <span className="text-red-600">*</span>}
           </h2>
           <div className="flex flex-row gap-x-2">
             <input
@@ -76,7 +292,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               placeholder="First Name"
               value={formData.firstName}
               onChange={handleChange}
-              className="w-full rounded-lg border-white bg-[#222222] p-2  font-space-grotesk text-white "
+              className={`w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white ${
+                !anonymous && 'required'
+              }`}
             />
             <input
               type="text"
@@ -84,7 +302,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               placeholder="Last Name"
               value={formData.lastName}
               onChange={handleChange}
-              className="w-full rounded-lg border-white bg-[#222222] p-2  font-space-grotesk text-white"
+              className={`w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white ${
+                !anonymous && 'required'
+              }`}
             />
           </div>
         </div>
@@ -95,7 +315,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 
           <div className="flex flex-col">
             <div className="flex flex-row">
-              <div className="my-2 h-[64px]  min-w-[64px] rounded-full bg-green-400"></div>
+              <div className="my-2 h-[64px] min-w-[64px] rounded-full bg-green-400"></div>
               <p className="my-auto ml-8 font-space-grotesk text-sm text-gray-400">
                 Upload a verified profile photo to show your support. Your photo
                 and a link to your account will be featured in our community
@@ -122,39 +342,89 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
         </div>
         <div>
           <h2 className="font-space-grotesk text-lg text-white">
-            Email<span className="text-red-600">*</span>
+            Email
+            {(!anonymous || taxReceipt) && (
+              <span className="text-red-600">*</span>
+            )}
           </h2>
+          <p className="my-auto pb-1 font-space-grotesk text-sm text-gray-400">
+            Enter email for tax receipt
+          </p>
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full rounded-lg border-white bg-[#222222] p-2  font-space-grotesk text-white"
+            required={isRequired('email')}
+            className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
           />
         </div>
 
         <div>
           <h2 className="font-space-grotesk text-lg text-white">
-            Address<span className="text-red-600">*</span>
+            Address
+            {!anonymous && <span className="text-red-600">*</span>}
           </h2>
           <div className="flex flex-col gap-y-2">
+            <div className="relative flex w-full flex-col space-y-3">
+              <input
+                type="text"
+                name="country"
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value)
+                  setShowDropdown(true)
+                }}
+                placeholder="Search for a country"
+                className="flex w-full rounded-lg border-white bg-[#222222] p-2 text-left font-space-grotesk  text-white"
+                onFocus={() => {
+                  setSearchTerm('') // Clears the current value when clicked
+                  setShowDropdown(true)
+                }}
+              />
+              {showDropdown && filteredCountries.length > 0 && (
+                <ul
+                  className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-white bg-[#222222] text-white"
+                  style={{ zIndex: 10 }}
+                >
+                  {filteredCountries.map((country) => (
+                    <button
+                      key={country}
+                      onClick={() => handleCountrySelect(country)}
+                      className="flex w-full cursor-pointer items-center p-2 text-left hover:bg-[#333333]"
+                    >
+                      {country}
+                    </button>
+                  ))}
+                </ul>
+              )}
+            </div>
             <input
               type="text"
-              name="address"
-              placeholder="Street Address"
-              value={formData.address}
+              name="address1"
+              placeholder="Street Address 1"
+              value={formData.address1}
               onChange={handleChange}
-              className="w-full rounded-lg border-white bg-[#222222] p-2  font-space-grotesk text-white"
+              required={isRequired('address')}
+              className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
+            />
+            <input
+              type="text"
+              name="address2"
+              placeholder="Street Address 2"
+              value={formData.address2}
+              onChange={handleChange}
+              className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
             />
             <div className="flex flex-row gap-x-2">
               <input
                 type="text"
                 name="postalCode"
-                placeholder="ZIP Code"
+                placeholder="ZIP/Postal Code"
                 value={formData.postalCode}
                 onChange={handleChange}
-                className="w-24 rounded-lg  border-white bg-[#222222] p-2 font-space-grotesk text-white"
+                className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
               />
               <input
                 type="text"
@@ -162,26 +432,17 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 placeholder="City"
                 value={formData.city}
                 onChange={handleChange}
-                className="w-full rounded-lg border-white bg-[#222222] p-2  font-space-grotesk text-white"
+                className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
               />
-
               <input
                 type="text"
                 name="state"
-                placeholder="State"
+                placeholder="State/Province/Region"
                 value={formData.state}
                 onChange={handleChange}
-                className="w-full rounded-lg  border-white bg-[#222222] p-2  font-space-grotesk text-white"
+                className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
               />
             </div>
-            <input
-              type="text"
-              name="country"
-              placeholder="Country"
-              value={formData.country}
-              onChange={handleChange}
-              className="w-60 rounded-lg  border-white bg-[#222222] p-2 font-space-grotesk text-white"
-            />
           </div>
         </div>
         <div className="flex justify-between space-x-2 pt-8">
@@ -194,7 +455,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           </button>
           <button
             type="submit"
-            className="w-2/3 !rounded-2xl bg-white text-2xl  font-semibold !text-[#222222]"
+            className="w-2/3 !rounded-2xl bg-white text-2xl font-semibold !text-[#222222]"
           >
             Continue
           </button>
