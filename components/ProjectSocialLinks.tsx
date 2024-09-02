@@ -39,48 +39,50 @@ const ProjectSocialLinks = ({
   const projectLinks = [
     {
       kind: 'website',
-      url: website, // https://www.litecoin.com/ => <ICON> www.litecoin.com
+      url: website,
     },
     {
       kind: 'github',
-      url: gitRepository, // https://www.x.com/LTCFoundation => <ICON> @LTCFoundation
+      url: gitRepository,
     },
     {
       kind: 'x',
-      url: twitterHandle, // https://www.x.com/LTCFoundation => <ICON> @LTCFoundation
+      url: twitterHandle,
     },
     {
       kind: 'discord',
-      url: discordLink, // https://discord.gg/As4DKfgP => <ICON> Discord
+      url: discordLink,
     },
     {
       kind: 'telegram',
-      url: telegramLink, // https://t.me/LTCFoundation => <ICON> @LTCFoundation
+      url: telegramLink,
     },
     {
       kind: 'facebook',
-      url: facebookLink, // https://www.facebook.com/litecoin => <ICON> litecoin
+      url: facebookLink,
     },
     {
       kind: 'reddit',
-      url: redditLink, // https://www.reddit.com/r/litecoin => <ICON> /r/litecoin
+      url: redditLink,
     },
   ]
 
   return (
-    <div className="flex flex-col space-x-1 p-2 px-6 ">
+    <div className="flex flex-col space-x-1 p-2 px-6">
       <p className="font-semibold text-gray-800">LINKS:</p>
       {projectLinks.map((link) => (
         <a
-          className="text-sm text-[#222222] transition "
+          className="text-sm text-[#222222] transition"
           target="_blank"
           rel="noopener noreferrer"
           key={link.kind}
           href={link.url}
         >
-          <div className="transistion 500ms flex flex-row items-center space-x-2 rounded-xl  px-2 transition-colors duration-200 hover:text-white">
+          <div className="group flex w-min flex-row items-center space-x-2 rounded-xl px-2  hover:text-white">
             <SocialIcon kind={link.kind} href={link.url} size={2} />
-            <p>{formatLinkText(link.kind, link.url)}</p>
+            <p className=" group-hover:text-white">
+              {formatLinkText(link.kind, link.url)}
+            </p>
           </div>
         </a>
       ))}
