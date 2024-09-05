@@ -126,12 +126,12 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
             {showContent ? (
               <div className="flex items-center hover:text-blue-500 hover:underline ">
                 Read Less{' '}
-                <FontAwesomeIcon icon={faChevronUp} className="ml-2" />
+                <FontAwesomeIcon icon={faChevronUp} className="ml-2 w-4" />
               </div>
             ) : (
-              <div className="flex items-center hover:text-[#333333] hover:underline ">
+              <div className="flex items-center  hover:text-[#333333] hover:underline ">
                 Read More{' '}
-                <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
+                <FontAwesomeIcon icon={faChevronRight} className="ml-2 h-4" />
               </div>
             )}
           </button>
