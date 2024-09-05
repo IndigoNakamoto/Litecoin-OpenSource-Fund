@@ -6,6 +6,11 @@ class MyDocument extends Document {
     return (
       <Html lang={siteMetadata.language} className="scroll-smooth">
         <Head>
+          <script
+            type="text/javascript"
+            src="https://js.dev.shift4.com/shift4.js"
+            async
+          ></script>
           <link
             rel="apple-touch-icon"
             sizes="76x76"

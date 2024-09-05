@@ -15,7 +15,7 @@ type PaymentModalCryptoOptionProps = {
 // Mock Data
 const mockedCurrencyRates = {
   data: {
-    rate: 62.2,
+    rate: 70.2,
   },
   requestId: 'd12c8a86-7719-443e-bf77-5e297859e3ff',
 }
@@ -105,7 +105,7 @@ export default function PaymentModalCryptoOption({
     const initialRate = mockedCurrencyRates.data.rate
     const initialCryptoValue = calculateCryptoValue(100)
 
-    onCurrencySelect('LTC', parseFloat(initialCryptoValue), {
+    onCurrencySelect(selectedCurrency, parseFloat(initialCryptoValue), {
       rate: initialRate,
     })
   }, [])

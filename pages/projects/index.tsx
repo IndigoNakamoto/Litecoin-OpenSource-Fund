@@ -194,9 +194,14 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               and improving the experience of its users.
             </p>
             <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
-              <div className="text-md rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium">
-                <p className="text-white">DONATE NOW</p>
+              <div className="text-md rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
+                <Link href="/donate" className="m-auto">
+                  <button className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] text-center font-medium">
+                    DONATE NOW
+                  </button>
+                </Link>
               </div>
+
               <div className="flex w-full flex-row justify-center gap-2">
                 <button
                   className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"

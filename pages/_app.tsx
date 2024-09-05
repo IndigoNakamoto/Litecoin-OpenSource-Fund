@@ -1,3 +1,5 @@
+import { DonationProvider } from '../contexts/DonationContext'
+
 import '@/css/tailwind.css'
 import '@/css/prism.css'
 import 'katex/dist/katex.css'
@@ -109,21 +111,26 @@ export default function App({
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <SessionProvider session={session}>
-        {' '}
-        {/* <-- Wrap your components here */}
-        <Head>
-          <meta content="width=device-width, initial-scale=1" name="viewport" />
-        </Head>
-        {/* @ts-ignore */}
-        <Analytics analyticsConfig={...pageProps} />
-        <LayoutWrapper>
-          <div>
-            {/* @ts-ignore */}
-            <SearchProvider searchConfig={siteMetadata.search}>
-              <Component {...pageProps} />
-            </SearchProvider>
-          </div>
-        </LayoutWrapper>
+        <DonationProvider>
+          {' '}
+          {/* <-- Wrap your components here */}
+          <Head>
+            <meta
+              content="width=device-width, initial-scale=1"
+              name="viewport"
+            />
+          </Head>
+          {/* @ts-ignore */}
+          <Analytics analyticsConfig={...pageProps} />
+          <LayoutWrapper>
+            <div>
+              {/* @ts-ignore */}
+              <SearchProvider searchConfig={siteMetadata.search}>
+                <Component {...pageProps} />
+              </SearchProvider>
+            </div>
+          </LayoutWrapper>
+        </DonationProvider>
       </SessionProvider>{' '}
       {/* <-- Close the wrapper here */}
     </ThemeProvider>

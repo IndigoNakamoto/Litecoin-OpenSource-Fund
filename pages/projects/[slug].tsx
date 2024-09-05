@@ -553,7 +553,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
                       </>
                     ) : null}
                   </div>
-
+                  <h2 className="markdown font-space-grotesk text-3xl font-semibold">
+                    The Community
+                  </h2>
                   <div className="markdown">
                     {twitterContributorsLitecoin.length > 0 ? (
                       <>

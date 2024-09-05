@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react'
 
-// 3.0928% transaction fee from shift4
-
 export default function PaymentModalFiatOption() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(100)
   const [customAmount, setCustomAmount] = useState('') // State for manual input
@@ -90,24 +88,32 @@ export default function PaymentModalFiatOption() {
         ))}
       </div>
       <div className="relative w-full">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg text-white">
+        <span
+          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg font-semibold text-[#222222] ${
+            isCustomAmount
+              ? 'bg-white text-[#222222]'
+              : 'bg-[#222222] text-white'
+          }`}
+        >
           $
         </span>
         <input
           type="number"
           ref={inputRef}
-          className={`w-full appearance-none rounded-3xl border ${
+          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-lg font-semibold ${
             isCustomAmount
               ? 'bg-white text-[#222222]'
               : 'bg-[#222222] text-white'
-          } pl-8 font-space-grotesk text-lg`}
+          }`}
           value={displayAmount}
           onChange={handleInputChange}
           onBlur={handleInputBlur}
           step="0.01" // Ensures input increments by pennies
           min="0" // Ensures no negative values
+          style={{ paddingLeft: '2rem' }} // Ensure padding does not hide the dollar sign
         />
       </div>
+
       <div className="flex items-center space-x-3">
         <input
           type="checkbox"

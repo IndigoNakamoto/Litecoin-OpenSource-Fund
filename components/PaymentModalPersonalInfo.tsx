@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { SiX, SiFacebook, SiLinkedin } from 'react-icons/si'
+import { useDonation } from '../contexts/DonationContext' // Import the context
 
 type PaymentModalPersonalInfoProps = {
   onRequestClose: () => void
@@ -10,6 +11,8 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   onRequestClose,
   onBackClick,
 }) => {
+  const { state, dispatch } = useDonation() // Use the donation context
+
   const [anonymous, setAnonymous] = useState(false)
   const [taxReceipt, setTaxReceipt] = useState(false)
   const [formData, setFormData] = useState({
@@ -236,9 +239,48 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     setShowDropdown(false)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
+
+    const { selectedOption, selectedCurrency, selectedCurrencyPledged } = state
+
+    // Determine which API endpoint to call based on the selected option
+    const apiEndpoint =
+      selectedOption === 'fiat'
+        ? '/api/createFiatDonationPledge'
+        : '/api/createDepositAddress'
+
+    const response = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        organizationId: 12345678, // Replace with actual org ID
+        isAnonymous: anonymous,
+        pledgeCurrency: selectedCurrency, // Access from context state
+        pledgeAmount: selectedCurrencyPledged, // Access from context state
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        receiptEmail: formData.email,
+        addressLine1: formData.address1,
+        addressLine2: formData.address2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.postalCode,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (response.ok) {
+      dispatch({ type: 'SET_DONATION_DATA', payload: data })
+      // Navigate to the appropriate donation component based on selected option
+      const nextStep = selectedOption === 'fiat' ? 'fiatDonate' : 'cryptoDonate'
+      dispatch({ type: 'SET_STEP', payload: nextStep })
+    } else {
+      // Handle errors
+      console.error(data.error)
+    }
   }
 
   const isRequired = (field: string) => {
@@ -275,7 +317,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             id="tax-receipt"
           />
           <label htmlFor="tax-receipt" className="text-white">
-            Tax Receipt
+            Email Tax Receipt & Confirmation of Donation
           </label>
         </div>
         <span className="block w-full border-t border-gray-400"></span>
@@ -292,8 +334,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               placeholder="First Name"
               value={formData.firstName}
               onChange={handleChange}
+              required={!anonymous} // Make first name required when not anonymous
               className={`w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white ${
-                !anonymous && 'required'
+                !anonymous ? 'required' : ''
               }`}
             />
             <input
@@ -302,12 +345,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               placeholder="Last Name"
               value={formData.lastName}
               onChange={handleChange}
+              required={!anonymous} // Make last name required when not anonymous
               className={`w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white ${
-                !anonymous && 'required'
+                !anonymous ? 'required' : ''
               }`}
             />
           </div>
         </div>
+
         <div>
           <h2 className="font-space-grotesk text-lg text-white">
             Profile Photo
@@ -348,7 +393,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             )}
           </h2>
           <p className="my-auto pb-1 font-space-grotesk text-sm text-gray-400">
-            Enter email for tax receipt
+            Enter email for tax receipt & confirmation of donation
           </p>
           <input
             type="email"
@@ -420,14 +465,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             <div className="flex flex-row gap-x-2">
               <input
                 type="text"
-                name="postalCode"
-                placeholder="ZIP/Postal Code"
-                value={formData.postalCode}
-                onChange={handleChange}
-                className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
-              />
-              <input
-                type="text"
                 name="city"
                 placeholder="City"
                 value={formData.city}
@@ -439,6 +476,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 name="state"
                 placeholder="State/Province/Region"
                 value={formData.state}
+                onChange={handleChange}
+                className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
+              />
+              <input
+                type="text"
+                name="postalCode"
+                placeholder="ZIP/Postal Code"
+                value={formData.postalCode}
                 onChange={handleChange}
                 className="w-full rounded-lg border-white bg-[#222222] p-2 font-space-grotesk text-white"
               />
