@@ -1,32 +1,15 @@
 {
   "questionsAndAnswers": [
     {
-      "category": "General Information",
-      "items": [
-        {
-          "question": "What is open source?",
-          "answer": "Open source is a type of software that is developed through public collaboration and made available to the public for free. The source code is available for anyone to use, study, modify, and redistribute."
-        },
-        {
-          "question": "What is Lite.Space?",
-          "answer": "Lite.Space is an initiative of The Litecoin Foundation, a Singapore-registered non-profit (UEN: 201709179W). We advocate for Litecoin (LTC) adoption, education, and development. Our platform supports Litecoin Core contributors and open-source tools through sustainable funding. Donors can fund specific projects or contribute to our general fund, which we use to grant money to projects enhancing Litecoin infrastructure."
-        },
-        {
-          "question": "How can I reach Lite.Space?",
-          "answer": "<support@Lite.Space> or tweet [@LTCFoundation](https://www.twitter.com/ltcfoundation). Our mailing address: Litecoin Foundation Ltd., 111 North Bridge Rd, #08-11 Peninsula Plaza, Singapore 179098."
-        }
-      ]
-    },
-    {
       "category": "Funding & Donations",
       "items": [
         {
           "question": "How are funds distributed?",
-          "answer": "Our council distributes funds from the general fund quarterly. We prioritize impactful Litecoin projects. Additionally, donors can recommend specific mission-aligned open-source projects for funding. While we consider donor recommendations, the final decision on distribution remains with Lite.Space."
+          "answer": "Our council distributes funds from the general fund quarterly. We prioritize impactful Litecoin projects. Additionally, donors can recommend specific mission-aligned open-source projects for funding. While we consider donor recommendations, the final decision on distribution remains with The Litecoin Foundation."
         },
         {
           "question": "What percentage of my donation directly supports projects?",
-          "answer": "85% of donations to the general fund and specific open-source projects go to grant recipients, the other 15% fund the operations of Lite.Space."
+          "answer": "85% of donations go to the projects, the other 15% fund the operations of the Litecoin Foundation."
         },
         {
           "question": "In what form are grants distributed?",
@@ -38,7 +21,7 @@
         },
         {
           "question": "Are my donations tax deductible?",
-          "answer": "Currently, Lite.Space, under The Litecoin Foundation in Singapore, doesn't offer tax deductions for American Citizens. We're working on this feature. For substantial donations, U.S. citizens should <support@Lite.Space>."
+          "answer": "Yes, Litecoin Foundation Inc. is a 501(c)(3) nonprofit organization, and donations for U.S. Citizens are tax deductible."
         }
       ]
     },
