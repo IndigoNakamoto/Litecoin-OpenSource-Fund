@@ -268,7 +268,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[300px] w-full bg-white bg-cover bg-center">
         <div className="flex h-full flex-col items-center justify-center text-center">
-          <h2 className="text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
+          <h2 className="font-space-grotesk text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
             We Help Advance
           </h2>
           <h3 className="font-space-grotesk text-3xl font-semibold text-gray-800 lg:text-4xl">
@@ -307,7 +307,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px]  text-black">
+          {/* <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px]  text-black">
             Open Bounties
           </h1>
           <ul className="w-[100%]">
@@ -321,9 +321,9 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                   />
                 </li>
               ))}
-          </ul>
+          </ul> */}
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
-            Closed Bounties
+            Past Projects
           </h1>
           <ul className="grid max-w-full gap-6 md:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
