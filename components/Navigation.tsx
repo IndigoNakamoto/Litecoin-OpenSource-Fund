@@ -164,7 +164,7 @@ const Navigation = () => {
           <div className="relative flex h-full items-center pb-1">
             <Link href="/" aria-label={siteMetadata.headerTitle}>
               <div
-                className="relative mt-[0px]"
+                className="relative mt-[3px]"
                 style={{
                   height: `${logoSize}px`,
                   width: `${logoSize}px`,
@@ -195,9 +195,7 @@ const Navigation = () => {
               // Hamburger menu. TODO: Modify color with scroll position between #222222 and #C5D3D6
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
-                className={`nav-toggle mr-[-5px] mt-[-10px]  ${
-                  navShow ? 'open' : ''
-                }`}
+                className={`nav-toggle  mt-[-10px]  ${navShow ? 'open' : ''}`}
                 onClick={onToggleNav}
                 onKeyPress={onToggleNav}
                 aria-label="menu"
