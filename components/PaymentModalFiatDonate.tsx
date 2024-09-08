@@ -8,7 +8,7 @@ import Notification from './Notification' // Import your Notification component
 
 function PaymentModalFiatDonate() {
   const { state, dispatch } = useDonation()
-  // const [cardToken, setCardToken] = useState<string | null>(null)
+  const [cardToken, setCardToken] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const shift4Initialized = useRef(false)
   const [notification, setNotification] = useState<string | null>(null) // State for notification
@@ -59,7 +59,7 @@ function PaymentModalFiatDonate() {
             })
             .then((secureToken: any) => {
               console.log('3D Secure verification successful:', secureToken)
-              // setCardToken(secureToken.id)
+              setCardToken(secureToken.id)
               submitButton?.removeAttribute('disabled')
 
               handleSubmit(secureToken.id)
