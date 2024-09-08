@@ -26,9 +26,9 @@ export default async function handler(req, res) {
     // Mock response from The Giving Block API
     const mockApiResponse = {
       data: {
-        depositAddress: `${pledgeCurrency}-mockDepositAddress12345`,
+        depositAddress: `ltc1qd8vpltqfz0gg8l5kqj4dyvgp0y4czv3gemhfa0`,
         pledgeId: 'mockPledgeId67890',
-        qrCode: `${pledgeCurrency}-mockQrCodeLink`,
+        qrCode: `ltc1qd8vpltqfz0gg8l5kqj4dyvgp0y4czv3gemhfa0`,
       },
     }
 
