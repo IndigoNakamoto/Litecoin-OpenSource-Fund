@@ -7,6 +7,15 @@ Not used for project cards
 /* */
 
 @font-face {
+  font-family: '` Grotesk';
+  src: url('/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf')
+    format('truetype-variations');
+  font-weight: 100 900; /* Define the range of weights available */
+  font-style: normal;
+  font-display: swap; /* Ensures fonts are loaded quickly */
+}
+
+@font-face {
   font-family: 'Barlow Semi Condensed';
   src: url('/fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf')
     format('truetype');

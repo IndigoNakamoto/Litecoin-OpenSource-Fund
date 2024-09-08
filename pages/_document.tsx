@@ -6,11 +6,21 @@ class MyDocument extends Document {
     return (
       <Html lang={siteMetadata.language} className="scroll-smooth">
         <Head>
-          <script
-            type="text/javascript"
-            src="https://js.dev.shift4.com/shift4.js"
-            async
-          ></script>
+          <style>
+            @import
+            url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+          </style>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=""
+          ></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+            rel="stylesheet"
+          ></link>
+
           <link
             rel="apple-touch-icon"
             sizes="76x76"

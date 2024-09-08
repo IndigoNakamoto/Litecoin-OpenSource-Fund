@@ -1,19 +1,18 @@
+// next.config.js
 const { withContentlayer } = require('next-contentlayer')
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-// You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app;
-  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://js.dev.shift4.com;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
-  font-src 'self';
-  frame-src giscus.app
+  font-src 'self' https://fonts.gstatic.com;
+  frame-src giscus.app https://js.dev.shift4.com;
 `
 
 const securityHeaders = [
@@ -69,7 +68,7 @@ module.exports = () => {
         'abs.twimg.com',
         'static.tgb-preprod.com',
         'static.tgbwidget.com',
-      ], // Add this line
+      ],
     },
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
