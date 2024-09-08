@@ -470,7 +470,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-none items-center bg-white bg-cover bg-center pb-8"
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-none items-center bg-[#f2f2f2] bg-cover bg-center pb-8"
         style={{
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
@@ -724,7 +724,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               </>
             )}
           </div>
-          <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#EEEEEE] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
+          <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#dddddd] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
             {/* Div image */}
             <div className="relative max-h-max min-h-[10rem] min-w-[150px] max-w-[300px]  lg:m-4 lg:w-1/3">
               <Image
