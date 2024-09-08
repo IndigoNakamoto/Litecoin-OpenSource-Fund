@@ -39,7 +39,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
   }
 
   // Prepend currency type and amount to the address if pledged currency is bitcoin, litecoin, or dogecoin
-  const qrValue = `${pledgeCurrency}:${depositAddress}?amount=${pledgeAmount}`
+  const qrValue = `${pledgeCurrency.toLowerCase()}:${depositAddress}?amount=${pledgeAmount}`
 
   return (
     <div className="flex items-center justify-center">
