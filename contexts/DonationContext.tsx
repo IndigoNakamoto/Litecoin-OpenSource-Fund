@@ -5,7 +5,12 @@ type DonationState = {
   selectedOption: 'crypto' | 'fiat' | 'stock'
   selectedCurrency: string | null
   selectedCurrencyPledged: string | null
-  currentStep: 'payment' | 'personalInfo' | 'cryptoDonate' | 'fiatDonate'
+  currentStep:
+    | 'payment'
+    | 'personalInfo'
+    | 'cryptoDonate'
+    | 'fiatDonate'
+    | 'complete'
   currencyRates: { rate: number } | null
   donationData: any
   projectSlug: string
@@ -18,7 +23,12 @@ type Action =
   | { type: 'SET_PLEDGED_AMOUNT'; payload: string }
   | {
       type: 'SET_STEP'
-      payload: 'payment' | 'personalInfo' | 'cryptoDonate' | 'fiatDonate'
+      payload:
+        | 'payment'
+        | 'personalInfo'
+        | 'cryptoDonate'
+        | 'fiatDonate'
+        | 'complete'
     }
   | { type: 'SET_RATES'; payload: { rate: number } }
   | { type: 'SET_DONATION_DATA'; payload: any }
@@ -57,7 +67,10 @@ const donationReducer = (
     case 'SET_RATES':
       return { ...state, currencyRates: action.payload }
     case 'SET_DONATION_DATA':
-      return { ...state, donationData: action.payload }
+      return {
+        ...state,
+        donationData: { ...state.donationData, ...action.payload },
+      }
     case 'SET_PROJECT_DETAILS':
       return {
         ...state,
@@ -65,7 +78,7 @@ const donationReducer = (
         projectTitle: action.payload.title,
       }
     case 'RESET_DONATION_STATE':
-      return initialState // Reset to the initial state
+      return { ...initialState }
     default:
       return state
   }
