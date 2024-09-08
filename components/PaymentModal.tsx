@@ -1,5 +1,5 @@
 // components/PaymentModal.tsx
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
 import Image from 'next/legacy/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,10 +12,13 @@ import PaymentModalCryptoDonate from './PaymentModalCryptoDonate'
 import PaymentModalCryptoOption from './PaymentModalCryptoOption'
 import PaymentModalFiatOption from './PaymentModalFiatOption'
 import PaymentModalFiatDonate from './PaymentModalFiatDonate'
+import PaymentModalFiatThankYou from './PaymentModalFiatThankYou'
 import PaymentModalStockOption from './PaymentModalStockOption'
 import PaymentModalPersonalInfo from './PaymentModalPersonalInfo'
 import { ProjectItem } from '../utils/types'
 import { useDonation } from '../contexts/DonationContext'
+
+// import ThankYouModal from './ThankYouModal' // Import the modal
 
 type ModalProps = {
   isOpen: boolean
@@ -29,6 +32,7 @@ const PaymentModal: React.FC<ModalProps> = ({
   project,
 }) => {
   const { state, dispatch } = useDonation()
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false)
 
   useEffect(() => {
     if (project) {
@@ -99,6 +103,17 @@ const PaymentModal: React.FC<ModalProps> = ({
       return <PaymentModalFiatDonate /> // Ensure this renders correctly
     }
 
+    if (state.currentStep === 'complete') {
+      return (
+        <PaymentModalFiatThankYou
+          onRequestClose={() => {
+            setIsThankYouModalOpen(false)
+            handleClose()
+          }}
+        />
+      )
+    }
+
     return (
       <>
         <div className="z-30 flex flex-col space-y-4 py-4">
@@ -112,27 +127,27 @@ const PaymentModal: React.FC<ModalProps> = ({
               className="rounded-xl"
             />
             <div className="flex flex-col">
-              <h2 className="font-space-grotesk text-4xl font-semibold text-white ">
+              <h2 className="font-space-grotesk text-4xl font-semibold text-[#222222] ">
                 {project.title}
               </h2>
-              <h3 className="font-sans text-white">Make a donation</h3>
+              <h3 className="font-sans text-[#222222]">Make a donation</h3>
             </div>
           </div>
         </div>
         <div className="flex h-full w-full flex-col justify-between space-y-4 pb-5 pt-6 font-space-grotesk">
           <button
-            className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-white font-bold ${
+            className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] font-bold ${
               state.selectedOption === 'crypto'
-                ? 'bg-white text-[#222222]'
-                : 'bg-[#222222] text-white'
+                ? 'bg-[#222222] text-[#f0f0f0]'
+                : 'bg-[#f0f0f0] text-[#222222]'
             }`}
             onClick={() => dispatch({ type: 'SET_OPTION', payload: 'crypto' })}
           >
             <p
               className={
                 state.selectedOption === 'crypto'
-                  ? 'text-[#222222]'
-                  : 'text-white'
+                  ? 'text-[#f0f0f0]'
+                  : 'text-[#222222]'
               }
             >
               Cryptocurrency
@@ -141,10 +156,10 @@ const PaymentModal: React.FC<ModalProps> = ({
 
           <div className="flex justify-between space-x-3">
             <button
-              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-white  font-bold ${
+              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  font-bold ${
                 state.selectedOption === 'fiat'
-                  ? 'bg-white text-[#222222]'
-                  : 'bg-[#222222] text-white'
+                  ? 'bg-[#222222] text-[#f0f0f0]'
+                  : 'bg-[#f0f0f0] text-[#222222]'
               }`}
               onClick={() => dispatch({ type: 'SET_OPTION', payload: 'fiat' })}
             >
@@ -153,10 +168,10 @@ const PaymentModal: React.FC<ModalProps> = ({
             </button>
 
             <button
-              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-white  font-bold ${
+              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  font-bold ${
                 state.selectedOption === 'stock'
-                  ? 'bg-white text-[#222222]'
-                  : 'bg-[#222222] text-white'
+                  ? 'bg-[#222222] text-[#f0f0f0]'
+                  : 'bg-[#f0f0f0] text-[#222222]'
               }`}
               onClick={() => dispatch({ type: 'SET_OPTION', payload: 'stock' })}
             >
@@ -167,7 +182,7 @@ const PaymentModal: React.FC<ModalProps> = ({
         </div>
         <div>{renderPaymentOption()}</div>
         <button
-          className="mt-16 w-full rounded-2xl bg-[white] text-2xl font-semibold text-[#222222]"
+          className="mt-16 w-full rounded-2xl bg-[#222222] font-space-grotesk text-2xl font-semibold text-[#f0f0f0]"
           onClick={() =>
             dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
           }
@@ -183,8 +198,8 @@ const PaymentModal: React.FC<ModalProps> = ({
     <ReactModal
       isOpen={isOpen}
       onRequestClose={handleClose}
-      className="max-h-full min-h-[75vh] w-[40rem] max-w-3xl overflow-y-auto border border-black bg-[#222222] p-8 shadow-xl sm:m-8 md:p-16"
-      overlayClassName="fixed inset-0 bg-[#222222] bg-opacity-70 z-[40] flex items-center justify-center transform duration-400 ease-in"
+      className="max-h-full min-h-[50vh] w-[40rem] max-w-3xl overflow-y-auto border border-black bg-[#f0f0f0] p-8 shadow-xl sm:m-8 md:p-16"
+      overlayClassName="fixed inset-0 bg-[#222222] bg-opacity-80 z-[40] flex items-center justify-center transform duration-400 ease-in"
       appElement={
         typeof window === 'undefined'
           ? undefined
