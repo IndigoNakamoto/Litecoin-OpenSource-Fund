@@ -93,7 +93,8 @@ export default function PaymentModalCryptoOption({
 
   const [selectedValue, setSelectedValue] = useState('Litecoin')
   const [cryptoRate, setCryptoRate] = useState(mockedCurrencyRates.data.rate)
-  const [selectedCurrency, setSelectedCurrency] = useState('LTC')
+  const [selectedCurrencyCode, setSelectedCurrencyCode] = useState('LTC')
+  const [selectedCurrencyName, setSelectedCurrencyName] = useState('Litecoin')
   const [usdValue, setUsdValue] = useState(100)
   const [cryptoValue, setCryptoValue] = useState(calculateCryptoValue(100))
   const [minDonation, setMinDonation] = useState(0.001)
@@ -105,7 +106,7 @@ export default function PaymentModalCryptoOption({
     const initialRate = mockedCurrencyRates.data.rate
     const initialCryptoValue = calculateCryptoValue(100)
 
-    onCurrencySelect(selectedCurrency, parseFloat(initialCryptoValue), {
+    onCurrencySelect(selectedCurrencyName, parseFloat(initialCryptoValue), {
       rate: initialRate,
     })
   }, [])
@@ -132,7 +133,8 @@ export default function PaymentModalCryptoOption({
     if (currency) {
       const calculatedCryptoValue = calculateCryptoValue(usdValue)
       setSelectedValue(coin)
-      setSelectedCurrency(currency.code)
+      setSelectedCurrencyCode(currency.code)
+      setSelectedCurrencyName(currency.name)
       setMinDonation(
         Math.max(2.5 / mockedCurrencyRates.data.rate, currency.minDonation)
       )
@@ -141,7 +143,7 @@ export default function PaymentModalCryptoOption({
       setSearchTerm('')
       setShowDropdown(false)
       onCurrencySelect(
-        currency.code,
+        currency.name,
         parseFloat(calculatedCryptoValue),
         mockedCurrencyRates.data
       )
@@ -158,7 +160,7 @@ export default function PaymentModalCryptoOption({
     selectedValue !== 'Dogecoin'
 
   const selectedCurrencyData = ResponseListCurrenciesExample.data.find(
-    (currency) => currency.code === selectedCurrency
+    (currency) => currency.code === selectedCurrencyCode
   )
 
   return (
@@ -167,10 +169,10 @@ export default function PaymentModalCryptoOption({
         {['Bitcoin', 'Litecoin', 'Dogecoin'].map((coin) => (
           <button
             key={coin}
-            className={`flex w-44 items-center rounded-3xl border border-white text-lg font-semibold ${
+            className={`flex w-44 items-center rounded-3xl border border-[#222222] text-lg font-semibold ${
               selectedValue === coin
-                ? 'bg-white text-[#222222]'
-                : 'bg-[#222222] text-white'
+                ? 'bg-[#222222] text-[#f0f0f0]'
+                : 'bg-[#f0f0f0] text-[#222222]'
             }`}
             onClick={() => handleCurrencySelect(coin)}
           >
@@ -198,16 +200,16 @@ export default function PaymentModalCryptoOption({
               setShowDropdown(true)
             }}
             placeholder="Search for a coin"
-            className={`flex w-full rounded-xl border-white ${
+            className={`flex w-full rounded-xl border-[#222222] ${
               isNonDefaultCoin
-                ? 'bg-white text-[#222222]'
-                : 'bg-[#222222] text-white'
+                ? 'bg-[#222222] text-[#f0f0f0]'
+                : 'bg-[#f0f0f0] text-[#222222]'
             } text-indent-4 p-2 text-left font-space-grotesk text-lg font-bold`}
             onFocus={() => setShowDropdown(true)}
           />
           {showDropdown && filteredOptions.length > 0 && (
             <ul
-              className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-white bg-[#222222] text-white"
+              className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#222222] text-white"
               style={{ zIndex: 10 }}
             >
               {filteredOptions.map((option) => (
@@ -235,7 +237,7 @@ export default function PaymentModalCryptoOption({
 
         {/* Conversion Rate calculator */}
         <div className="flex flex-row justify-between pt-4 ">
-          <div className="flex items-center overflow-hidden rounded-3xl border border-white pl-2">
+          <div className="flex items-center overflow-hidden rounded-3xl border border-[#222222] bg-[#222222] pl-2">
             {selectedCurrencyData && (
               <Image
                 src={selectedCurrencyData.imageUrl}
@@ -249,7 +251,7 @@ export default function PaymentModalCryptoOption({
             )}
             <div className="flex h-12 w-24 items-center justify-center bg-[#222222]">
               <h1 className="font-space-grotesk text-lg font-semibold text-white">
-                {selectedCurrency}
+                {selectedCurrencyCode}
               </h1>
             </div>
             <input
@@ -270,9 +272,9 @@ export default function PaymentModalCryptoOption({
             className="m-auto h-10 px-3 text-[#c6d3d6]"
           />
 
-          <div className="flex overflow-hidden rounded-3xl  border border-white">
+          <div className="flex overflow-hidden rounded-3xl  border border-[#222222]">
             <div className="flex h-12 w-24 items-center justify-center bg-[#222222]">
-              <h1 className="font-space-grotesk text-lg font-semibold text-white">
+              <h1 className="font-space-grotesk text-lg font-semibold text-[#f2f2f2]">
                 USD
               </h1>
             </div>
