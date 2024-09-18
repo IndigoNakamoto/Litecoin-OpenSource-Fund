@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect, useRef } from 'react'
+//components/PaymentModalFiatDonate
+
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { FaRegCreditCard } from 'react-icons/fa'
 import { useDonation } from '../contexts/DonationContext'
 import Notification from './Notification' // Import your Notification component
-
-// TODO: add shift 4 logo: https://dev.shift4.com/checkout/img/matterhorn/powered-by.svg
 
 function PaymentModalFiatDonate() {
   const { state, dispatch } = useDonation()
@@ -12,6 +11,35 @@ function PaymentModalFiatDonate() {
   const formRef = useRef<HTMLFormElement>(null)
   const shift4Initialized = useRef(false)
   const [notification, setNotification] = useState<string | null>(null) // State for notification
+
+  // useCallback to memoize the function and prevent it from being a missing dependency
+  const submitDonation = useCallback(
+    async (token: string) => {
+      try {
+        const response = await fetch('/api/chargeFiatDonationPledge', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pledgeId: state.donationData.pledgeId,
+            cardToken: token,
+            amount: state.formData.pledgeAmount,
+          }),
+        })
+
+        if (response.ok) {
+          console.log('Donation successful')
+          dispatch({ type: 'SET_STEP', payload: 'complete' })
+        } else {
+          const errorData = await response.json()
+          console.error('Donation failed', errorData)
+          displayError(errorData.errorMessage)
+        }
+      } catch (error) {
+        console.error('Error charging donation:', error)
+      }
+    },
+    [state.donationData.pledgeId, state.formData.pledgeAmount, dispatch]
+  )
 
   useEffect(() => {
     const initializeShift4 = () => {
@@ -62,7 +90,8 @@ function PaymentModalFiatDonate() {
               setCardToken(secureToken.id)
               submitButton?.removeAttribute('disabled')
 
-              handleSubmit(secureToken.id)
+              // Use the submitDonation function directly
+              submitDonation(secureToken.id)
             })
             .catch(
               (error: { type: string; code?: string; message?: string }) => {
@@ -88,54 +117,29 @@ function PaymentModalFiatDonate() {
 
         return () => {
           document.body.removeChild(script)
-          if (formRef.current) {
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            formRef.current.removeEventListener('submit', () => {})
-          }
         }
       }
     }
 
     loadShift4Script()
 
-    // Correcting empty arrow function
+    // Proper cleanup with ref copied to a variable
+    const formElement = formRef.current // Copy the ref to a local variable
     return () => {
-      if (formRef.current) {
-        formRef.current.removeEventListener('submit', initializeShift4)
+      if (formElement) {
+        formElement.removeEventListener('submit', initializeShift4)
       }
     }
-  }, [])
+  }, [state.selectedCurrencyPledged, submitDonation]) // Add missing dependencies
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault() // Prevent the default form submission
     if (!cardToken) {
       console.error('Card token is missing.')
       return
     }
-
-    try {
-      const response = await fetch('/api/chargeFiatDonationPledge', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          pledgeId: state.donationData.pledgeId,
-          cardToken: cardToken,
-          amount: state.selectedCurrencyPledged,
-        }),
-      })
-
-      if (response.ok) {
-        console.log('Donation successful')
-        dispatch({ type: 'SET_STEP', payload: 'complete' })
-      } else {
-        const errorData = await response.json()
-        console.error('Donation failed', errorData)
-        displayError(errorData.errorMessage)
-      }
-    } catch (error) {
-      console.error('handle submit in payment modal fiat donate')
-      console.error('Error charging donation:', error)
-    }
+    // Call the submission function with the card token
+    submitDonation(cardToken)
   }
 
   const displayError = (errorMessage: string) => {
@@ -200,11 +204,11 @@ function PaymentModalFiatDonate() {
   const formattedAmount = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  }).format(parseFloat(state.selectedCurrencyPledged || '0'))
+  }).format(parseFloat(state.formData.pledgeAmount || '0'))
 
   return (
     <>
-      <div className="flex flex-col space-y-4 rounded-lg  p-8">
+      <div className="flex flex-col space-y-4 rounded-lg p-8">
         <h2 className="mb-4 font-space-grotesk text-2xl font-bold text-[#222222]">
           Complete Your Donation
         </h2>

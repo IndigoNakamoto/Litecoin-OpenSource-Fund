@@ -1,45 +1,87 @@
-import React, { useState } from 'react'
+//components/PaymentModalCryptoDonate
+
+import React, { useState, useCallback } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import { QRCodeSVG } from 'qrcode.react'
-// import { FaRegCopy } from 'react-icons/fa'
 import { FaRegCopy } from 'react-icons/fa6'
+import Image from 'next/image'
 
 interface PaymentModalCryptoDonateProps {
-  depositAddress: string
-  pledgeAmount: string
-  pledgeCurrency: string
   onRequestClose: () => void
 }
 
 const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
-  depositAddress,
-  pledgeAmount,
-  pledgeCurrency,
   onRequestClose,
 }) => {
-  const { dispatch } = useDonation()
-  const [copiedAddress, setCopiedAddress] = useState<boolean>(false)
-  const [copiedAmount, setCopiedAmount] = useState<boolean>(false)
+  const { state, dispatch } = useDonation()
 
-  const handleDone = () => {
-    dispatch({ type: 'RESET_DONATION_STATE', payload: {} }) // Reset state when done
+  const depositAddress = state.donationData?.depositAddress || ''
+  const pledgeAmount = state.formData?.pledgeAmount || ''
+  const pledgeCurrency = state.formData?.assetName || ''
+  const qrCode = state.donationData?.qrCode || ''
+
+  const [copied, setCopied] = useState<{ address: boolean; amount: boolean }>({
+    address: false,
+    amount: false,
+  })
+
+  const handleDone = useCallback(() => {
+    dispatch({ type: 'RESET_DONATION_STATE' })
     onRequestClose()
+  }, [dispatch, onRequestClose])
+
+  const handleCopy = useCallback(
+    (type: 'address' | 'amount') => {
+      const textToCopy = type === 'address' ? depositAddress : pledgeAmount
+      navigator.clipboard.writeText(textToCopy)
+      setCopied((prev) => ({ ...prev, [type]: true }))
+
+      setTimeout(() => setCopied((prev) => ({ ...prev, [type]: false })), 3000)
+    },
+    [depositAddress, pledgeAmount]
+  )
+
+  const qrCodeCurrencies = ['bitcoin', 'litecoin', 'dogecoin']
+
+  let qrValue = depositAddress
+  if (qrCodeCurrencies.includes(pledgeCurrency.toLowerCase())) {
+    qrValue = `${pledgeCurrency.toLowerCase()}:${depositAddress}?amount=${pledgeAmount}`
   }
 
-  const handleCopy = (type: 'address' | 'amount') => {
-    if (type === 'address') {
-      navigator.clipboard.writeText(depositAddress)
-      setCopiedAddress(true)
-      setTimeout(() => setCopiedAddress(false), 3000) // Reset after 3 seconds
-    } else if (type === 'amount') {
-      navigator.clipboard.writeText(pledgeAmount)
-      setCopiedAmount(true)
-      setTimeout(() => setCopiedAmount(false), 3000) // Reset after 3 seconds
-    }
-  }
-
-  // Prepend currency type and amount to the address if pledged currency is bitcoin, litecoin, or dogecoin
-  const qrValue = `${pledgeCurrency.toLowerCase()}:${depositAddress}?amount=${pledgeAmount}`
+  const CopyableField = ({
+    text,
+    copiedText,
+    isCopied,
+    onCopy,
+  }: {
+    text: string
+    copiedText: string
+    isCopied: boolean
+    onCopy: () => void
+  }) => (
+    <div
+      className="flex w-full cursor-pointer flex-row justify-between rounded-lg border border-[#222222] bg-[#f2f2f2] p-4"
+      role="button"
+      tabIndex={0}
+      onClick={onCopy}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onCopy()
+        }
+      }}
+    >
+      <p
+        className={`text-md break-all font-semibold text-[#222222] transition-opacity duration-300 ${
+          isCopied ? 'opacity-100' : 'opacity-100'
+        }`}
+      >
+        {isCopied ? copiedText : text}
+      </p>
+      <span>
+        <FaRegCopy />
+      </span>
+    </div>
+  )
 
   return (
     <div className="flex items-center justify-center">
@@ -51,60 +93,44 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
           Please send your donation to the following address:
         </p>
 
-        <QRCodeSVG
-          value={qrValue}
-          size={256}
-          bgColor="#222222"
-          fgColor="#f2f2f2"
-        />
-        <p className="text-[#222222]">
-          Scan the QR code above to donate {pledgeAmount} {pledgeCurrency}.
-        </p>
+        {qrCodeCurrencies.includes(pledgeCurrency.toLowerCase()) ? (
+          <>
+            <QRCodeSVG
+              value={qrValue}
+              size={256}
+              bgColor="#222222"
+              fgColor="#f2f2f2"
+            />
+            <p className="text-[#222222]">
+              Scan the QR code above to donate {pledgeAmount} {pledgeCurrency}.
+            </p>
+          </>
+        ) : qrCode ? (
+          <>
+            <Image
+              src={`data:image/png;base64,${qrCode}`}
+              alt="QR Code"
+              width={256}
+              height={256}
+            />
+            <p className="text-[#222222]">
+              Scan the QR code above to donate {pledgeAmount} {pledgeCurrency}.
+            </p>
+          </>
+        ) : null}
 
-        <div
-          className="flex w-full cursor-pointer flex-row justify-between rounded-lg border border-[#222222] bg-[#f2f2f2] p-4"
-          role="button"
-          tabIndex={0}
-          onClick={() => handleCopy('address')}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              handleCopy('address')
-            }
-          }}
-        >
-          <span>
-            <FaRegCopy />
-          </span>
-          <p
-            className={`break-all text-[#222222] transition-opacity duration-300 ${
-              copiedAddress ? 'opacity-100' : 'opacity-100'
-            }`}
-          >
-            {copiedAddress ? 'Address copied to clipboard!' : depositAddress}
-          </p>
-        </div>
-        <div
-          className="flex w-full cursor-pointer flex-row justify-between rounded-lg border border-[#222222] bg-[#f2f2f2] p-4"
-          role="button"
-          tabIndex={0}
-          onClick={() => handleCopy('amount')}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              handleCopy('amount')
-            }
-          }}
-        >
-          <span>
-            <FaRegCopy />
-          </span>
-          <p
-            className={`break-all text-[#222222] transition-opacity duration-300 ${
-              copiedAmount ? 'opacity-100' : 'opacity-100'
-            }`}
-          >
-            {copiedAmount ? 'Amount copied to clipboard!' : pledgeAmount}
-          </p>
-        </div>
+        <CopyableField
+          text={depositAddress}
+          copiedText="Address copied to clipboard!"
+          isCopied={copied.address}
+          onCopy={() => handleCopy('address')}
+        />
+        <CopyableField
+          text={pledgeAmount}
+          copiedText="Amount copied to clipboard!"
+          isCopied={copied.amount}
+          onCopy={() => handleCopy('amount')}
+        />
 
         <button
           onClick={handleDone}

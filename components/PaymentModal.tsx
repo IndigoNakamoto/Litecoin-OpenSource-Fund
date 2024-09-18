@@ -1,5 +1,6 @@
 // components/PaymentModal.tsx
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect } from 'react'
 import ReactModal from 'react-modal'
 import Image from 'next/legacy/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,10 +16,12 @@ import PaymentModalFiatDonate from './PaymentModalFiatDonate'
 import PaymentModalFiatThankYou from './PaymentModalFiatThankYou'
 import PaymentModalStockOption from './PaymentModalStockOption'
 import PaymentModalPersonalInfo from './PaymentModalPersonalInfo'
+import PaymentModalStockBrokerInfo from './PaymentModalStockBrokerInfo'
+import PaymentModalStockDonorSignature from './PaymentModalStockDonorSignature'
+import PaymentModalStockDonorThankYou from './PaymentModalStockDonorThankYou'
+
 import { ProjectItem } from '../utils/types'
 import { useDonation } from '../contexts/DonationContext'
-
-// import ThankYouModal from './ThankYouModal' // Import the modal
 
 type ModalProps = {
   isOpen: boolean
@@ -32,21 +35,35 @@ const PaymentModal: React.FC<ModalProps> = ({
   project,
 }) => {
   const { state, dispatch } = useDonation()
-  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false)
 
   useEffect(() => {
     if (project) {
       dispatch({
         type: 'SET_PROJECT_DETAILS',
-        payload: { slug: project.slug, title: project.title },
+        payload: {
+          slug: project.slug,
+          title: project.title,
+          image: project.coverImage,
+        },
       })
     }
-  }, [project])
+  }, [project, dispatch])
 
   const handleClose = () => {
-    dispatch({ type: 'RESET_DONATION_STATE', payload: {} }) // Reset state on close
-    onRequestClose() // Call the original close handler
+    dispatch({ type: 'RESET_DONATION_STATE' })
+    onRequestClose()
   }
+
+  const handleFiatOptionSelect = () => {
+    dispatch({ type: 'SET_OPTION', payload: 'fiat' })
+    dispatch({
+      type: 'SET_FORM_DATA',
+      payload: { pledgeAmount: '100', pledgeCurrency: 'USD' },
+    })
+    dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
+  }
+
+  // Handle currency selection is managed within PaymentModalCryptoOption
 
   if (!project) {
     return <div />
@@ -65,6 +82,17 @@ const PaymentModal: React.FC<ModalProps> = ({
                 payload: value.toString(),
               })
               dispatch({ type: 'SET_RATES', payload: rates })
+              dispatch({
+                type: 'SET_FORM_DATA',
+                payload: {
+                  assetSymbol: currency,
+                  pledgeCurrency: currency,
+                  pledgeAmount: value.toString(),
+                },
+              })
+              dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
+              // Since PaymentModalCryptoOption now initializes and enables the Donate button,
+              // no additional dispatch is needed here for the Donate button
             }}
           />
         )
@@ -89,29 +117,36 @@ const PaymentModal: React.FC<ModalProps> = ({
     }
 
     if (state.currentStep === 'cryptoDonate') {
-      return (
-        <PaymentModalCryptoDonate
-          depositAddress={state.donationData.depositAddress}
-          pledgeAmount={state.selectedCurrencyPledged || ''}
-          pledgeCurrency={state.selectedCurrency || ''}
-          onRequestClose={onRequestClose}
-        />
-      )
+      return <PaymentModalCryptoDonate onRequestClose={onRequestClose} />
     }
 
     if (state.currentStep === 'fiatDonate') {
-      return <PaymentModalFiatDonate /> // Ensure this renders correctly
+      return <PaymentModalFiatDonate />
     }
 
     if (state.currentStep === 'complete') {
       return (
         <PaymentModalFiatThankYou
           onRequestClose={() => {
-            setIsThankYouModalOpen(false)
             handleClose()
           }}
         />
       )
+    }
+    if (state.currentStep === 'stockBrokerInfo') {
+      return <PaymentModalStockBrokerInfo />
+    }
+
+    if (state.currentStep === 'sign') {
+      return (
+        <PaymentModalStockDonorSignature
+          onContinue={() => dispatch({ type: 'SET_STEP', payload: 'thankYou' })}
+        />
+      )
+    }
+
+    if (state.currentStep === 'thankYou') {
+      return <PaymentModalStockDonorThankYou onRequestClose={handleClose} />
     }
 
     return (
@@ -161,7 +196,7 @@ const PaymentModal: React.FC<ModalProps> = ({
                   ? 'bg-[#222222] text-[#f0f0f0]'
                   : 'bg-[#f0f0f0] text-[#222222]'
               }`}
-              onClick={() => dispatch({ type: 'SET_OPTION', payload: 'fiat' })}
+              onClick={handleFiatOptionSelect}
             >
               <FontAwesomeIcon icon={faCreditCard} className="h-6" />
               <p>Card</p>
@@ -173,7 +208,21 @@ const PaymentModal: React.FC<ModalProps> = ({
                   ? 'bg-[#222222] text-[#f0f0f0]'
                   : 'bg-[#f0f0f0] text-[#222222]'
               }`}
-              onClick={() => dispatch({ type: 'SET_OPTION', payload: 'stock' })}
+              onClick={() => {
+                dispatch({ type: 'SET_OPTION', payload: 'stock' })
+                dispatch({
+                  type: 'SET_FORM_DATA',
+                  payload: {
+                    assetSymbol: '',
+                    assetName: '',
+                    pledgeAmount: '',
+                  },
+                })
+                dispatch({
+                  type: 'SET_DONATE_BUTTON_DISABLED',
+                  payload: true,
+                })
+              }}
             >
               <FontAwesomeIcon icon={faArrowTrendUp} className="h-6" />
               <p>Stock</p>
@@ -182,11 +231,15 @@ const PaymentModal: React.FC<ModalProps> = ({
         </div>
         <div>{renderPaymentOption()}</div>
         <button
-          className="mt-16 w-full rounded-2xl bg-[#222222] font-space-grotesk text-2xl font-semibold text-[#f0f0f0]"
+          className={`mt-16 w-full rounded-2xl bg-[#222222] font-space-grotesk text-2xl font-semibold ${
+            state.isDonateButtonDisabled
+              ? 'bg-gray-600 text-gray-700'
+              : 'text-[#f0f0f0]'
+          }`}
           onClick={() =>
             dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
           }
-          disabled={!state.selectedCurrency || !state.selectedCurrencyPledged}
+          disabled={state.isDonateButtonDisabled}
         >
           Donate
         </button>

@@ -1,17 +1,16 @@
-//pages/missions/[slug].tsx
+// pages/missions/[slug].tsx
+
+import { useDonation } from '../../contexts/DonationContext'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts, getAllPostUpdates } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
 import Image from 'next/legacy/image'
-// import ProjectList from '@/components/ProjectList'
-// import BackToProjects from '@/components/BackToProjects'
-import { ProjectItem, AddressStats } from '../../utils/types' // , Donation
+import { ProjectItem, AddressStats } from '../../utils/types'
 import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import PaymentModal from '@/components/PaymentModal'
 import ThankYouModal from '@/components/ThankYouModal'
-// import Link from 'next/link'
 import { fetchGetJSON } from '../../utils/api-helpers'
 import TwitterUsers from '@/components/TwitterUsers'
 import {
@@ -39,6 +38,7 @@ type SingleProjectPageProps = {
 }
 
 const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
+  const { dispatch } = useDonation()
   const router = useRouter()
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -49,11 +49,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   function closeModal() {
     setModalOpen(false)
     setThankYouModalOpen(false)
-    // Check if the 'thankyou' query parameter exists
-    if (router.query.thankyou || router.query.name) {
+    // Check if the 'modal' query parameter exists
+    if (router.query.modal || router.query.thankyou || router.query.name) {
       // Create a shallow copy of the current URL's query parameters
       const newQuery = { ...router.query }
       // Remove the query parameters
+      delete newQuery.modal
       delete newQuery.thankyou
       delete newQuery.name
 
@@ -70,27 +71,55 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   }
 
   function openPaymentModal() {
+    // Set the selected project and open the payment modal
     setSelectedProject(project)
     setModalOpen(true)
+
+    // Dispatch the project details to the DonationContext
+    dispatch({
+      type: 'SET_PROJECT_DETAILS',
+      payload: {
+        slug: project.slug,
+        title: project.title,
+        image: project.coverImage,
+      },
+    })
+
+    // Add modal=true to the query parameters
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, modal: 'true' },
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   function openThankYouModal() {
     setSelectedProject(project)
     setThankYouModalOpen(true)
   }
-
   useEffect(() => {
     if (router.query.thankyou === 'true') {
       openThankYouModal()
     }
-  })
+  }, [router.query.thankyou])
 
-  // useEffect hook to watch for URL changes
+  // Handle opening the modal based on the 'modal' query parameter
   useEffect(() => {
-    // Check if the thankyou query param exists and is 'true'
-    const isThankYou = router.query.thankyou === 'true'
-    setThankYouModalOpen(isThankYou)
-  }, [router.query.thankyou]) // Depend on thankyou query param
+    if (router.query.modal === 'true') {
+      setModalOpen(true)
+    }
+  }, [router.query.modal])
+
+  // Handle opening the modal based on the 'modal' query parameter
+  useEffect(() => {
+    if (!router.isReady) return // Ensure router is ready
+    if (router.query.modal === 'true') {
+      setModalOpen(true)
+    }
+  }, [router.isReady, router.query.modal])
 
   function extractUsername(url) {
     // This regex will match any string that ends with a forward slash followed by any sequence of non-slash characters.
@@ -117,7 +146,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     summary,
     socialSummary,
     coverImage,
-    // TODO: Fix design where the Markdown Content isn't being rendered well
     content,
 
     // Community Interaction
@@ -916,16 +944,18 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         </article>
       </div>
 
-      <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
-      <ThankYouModal
-        isOpen={isThankYouModalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
+      <>
+        <PaymentModal
+          isOpen={modalOpen}
+          onRequestClose={closeModal}
+          project={selectedProject}
+        />
+        <ThankYouModal
+          isOpen={isThankYouModalOpen}
+          onRequestClose={closeModal}
+          project={selectedProject}
+        />
+      </>
     </>
   )
 }
@@ -936,7 +966,9 @@ type ParamsType = {
   slug: string
 }
 
-export async function getStaticProps({ params }: { params: ParamsType }) {
+export async function getServerSideProps(context) {
+  const { params, query } = context
+
   const post = getPostBySlug(params.slug)
   const updates = getAllPostUpdates(params.slug) || []
 
@@ -951,22 +983,23 @@ export async function getStaticProps({ params }: { params: ParamsType }) {
         updates,
       },
       projects,
+      query, // Pass query parameters to the component
     },
   }
 }
 
-export async function getStaticPaths() {
-  const posts = getAllPosts()
+// export async function getStaticPaths() {
+//   const posts = getAllPosts()
 
-  return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          project: post,
-          slug: post.slug,
-        },
-      }
-    }),
-    fallback: false,
-  }
-}
+//   return {
+//     paths: posts.map((post) => {
+//       return {
+//         params: {
+//           project: post,
+//           slug: post.slug,
+//         },
+//       }
+//     }),
+//     fallback: false,
+//   }
+// }

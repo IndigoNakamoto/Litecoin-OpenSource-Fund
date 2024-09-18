@@ -1,176 +1,294 @@
-import React, { useState, useEffect } from 'react'
+// components/PaymentModalCryptoOption.tsx
+
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { faExchange } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/legacy/image'
 import { SiBitcoin, SiLitecoin, SiDogecoin } from 'react-icons/si'
+import { useDonation } from '../contexts/DonationContext' // Import the context
+import axios from 'axios'
 
-type PaymentModalCryptoOptionProps = {
+type Currency = {
+  code: string
+  name: string
+  minDonation: number
+  imageUrl: string
+  isErc20?: boolean
+}
+
+const excludedCoins = ['XRP'] // Add more names or codes as needed
+
+interface PaymentModalCryptoOptionProps {
   onCurrencySelect: (
-    currency: string,
-    value: number,
-    rates: { rate: number }
-  ) => void // Include rates in prop type
-}
-
-// Mock Data
-const mockedCurrencyRates = {
-  data: {
-    rate: 70.2,
-  },
-  requestId: 'd12c8a86-7719-443e-bf77-5e297859e3ff',
-}
-
-const ResponseListCurrenciesExample = {
-  data: [
-    {
-      id: '1185632f-4b01-4c26-9743-d725ebf9acbb',
-      name: 'Bitcoin',
-      code: 'BTC',
-      imageUrl:
-        'https://static.tgb-preprod.com/currency_images%2Ff953733b-12dc-4f01-842d-afdf3a227e0e.png',
-      isErc20: false,
-      network: 'bitcoin',
-      minDonation: 0.00001,
-    },
-    {
-      id: '1185612f-4b01-4c26-9743-d725ebf9acbb',
-      name: 'Litecoin',
-      code: 'LTC',
-      imageUrl:
-        'https://static.tgbwidget.com/currency_images/4a2db833-c29b-4fe1-a7c7-e76c4d63fd2a.png',
-      isErc20: false,
-      network: 'litecoin',
-      minDonation: 0.001,
-    },
-    {
-      id: '11a3b5c8-67cd-4db8-937d-f8b5fdedb9c1',
-      name: 'USD Coin',
-      code: 'USDC',
-      imageUrl:
-        'https://static.tgb-preprod.com/currency_images%2Fbb6ccbe7-6da3-4f72-ad55-7a46d1efa4ea.png',
-      isErc20: true,
-      network: 'ethereum',
-      minDonation: 0.1,
-    },
-    {
-      id: '20f0ecc7-4b3e-4133-a440-0a4cb1e40015',
-      name: 'Dogecoin',
-      code: 'DOGE',
-      imageUrl:
-        'https://static.tgb-preprod.com/currency_images%2F8658d28d-140c-4468-963f-58d35af9af45.png',
-      isErc20: false,
-      network: 'dogecoin',
-      minDonation: 0.1,
-    },
-    {
-      id: '4fc399be-7ed7-41d8-9987-31d1a4dfc4d8',
-      name: 'Ethereum',
-      code: 'ETH',
-      imageUrl:
-        'https://static.tgb-preprod.com/currency_images%2Fc8fcd5a1-659f-4154-958e-f8eadeb6f4bb.png',
-      isErc20: false,
-      network: 'ethereum',
-      minDonation: 0.001,
-    },
-    {
-      id: '06760767-8b4b-4ba9-a764-9d88f96aa3d3',
-      name: 'Polygon',
-      code: 'MATIC',
-      imageUrl:
-        'https://static.tgbwidget.com/currency_images/a5061f25-4070-4d3e-8cdf-91b79d1b787e.png',
-      isErc20: true,
-      minDonation: 0.1,
-      network: 'polygon',
-    },
-  ],
-  requestId: 'eafedeec-776f-4bbd-9cbd-f25489c01e94',
+    currencyCode: string,
+    amount: number,
+    rateInfo: { rate: number }
+  ) => void
 }
 
 export default function PaymentModalCryptoOption({
   onCurrencySelect,
 }: PaymentModalCryptoOptionProps) {
-  const calculateCryptoValue = (usd: number) => (usd / cryptoRate).toFixed(8)
+  const { state, dispatch } = useDonation()
+  const {
+    currencyList,
+    selectedCurrencyCode,
+    selectedCurrencyName,
+    usdInput,
+    cryptoInput,
+  } = state
 
-  const [selectedValue, setSelectedValue] = useState('Litecoin')
-  const [cryptoRate, setCryptoRate] = useState(mockedCurrencyRates.data.rate)
-  const [selectedCurrencyCode, setSelectedCurrencyCode] = useState('LTC')
-  const [selectedCurrencyName, setSelectedCurrencyName] = useState('Litecoin')
-  const [usdValue, setUsdValue] = useState(100)
-  const [cryptoValue, setCryptoValue] = useState(calculateCryptoValue(100))
-  const [minDonation, setMinDonation] = useState(0.001)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [showDropdown, setShowDropdown] = useState(false)
+  // Local State Variables
+  const [cryptoRate, setCryptoRate] = useState<number | null>(null)
+  const [usdValue, setUsdValue] = useState<string>(usdInput || '100') // Calculated USD value
+  const [cryptoValue, setCryptoValue] = useState<string>(cryptoInput || '') // Calculated crypto value
+  const [minDonation, setMinDonation] = useState<number>(0.001)
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const [showDropdown, setShowDropdown] = useState<boolean>(false)
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1)
+  const [isLoadingRate, setIsLoadingRate] = useState<boolean>(false) // Loading state for fetching rate
+  const [error, setError] = useState<string | null>(null)
+  const [isFocused, setIsFocused] = useState<boolean>(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    // const initialCurrency = 'Litecoin'
-    const initialRate = mockedCurrencyRates.data.rate
-    const initialCryptoValue = calculateCryptoValue(100)
-
-    onCurrencySelect(selectedCurrencyName, parseFloat(initialCryptoValue), {
-      rate: initialRate,
-    })
+  // Utility functions to calculate values
+  const calculateCryptoValue = useCallback((usd: number, rate: number) => {
+    return (usd / rate).toFixed(8).replace(/\.?0+$/, '') || '0'
   }, [])
 
+  const calculateUsdValue = useCallback((crypto: number, rate: number) => {
+    return (crypto * rate).toFixed(2).replace(/\.?0+$/, '') || '0'
+  }, [])
+
+  // Fetch Crypto Rate when selectedCurrencyCode changes
+  useEffect(() => {
+    const fetchCryptoRate = async (currencyCode: string) => {
+      try {
+        setIsLoadingRate(true)
+        setError(null)
+        const response = await axios.get(
+          `/api/getCryptoRate?currency=${currencyCode}`
+        )
+        const rate = response.data.data.rate
+        if (rate) {
+          setCryptoRate(rate)
+          setMinDonation(2.5 / rate) // Update min donation based on rate
+
+          // Update values based on existing inputs
+          if (usdInput) {
+            const numericUsd = parseFloat(usdInput)
+            if (!isNaN(numericUsd)) {
+              const newCryptoValue = calculateCryptoValue(numericUsd, rate)
+              setCryptoValue(newCryptoValue)
+              dispatch({
+                type: 'SET_FORM_DATA',
+                payload: {
+                  pledgeAmount: newCryptoValue,
+                  pledgeCurrency: selectedCurrencyCode || '',
+                  assetName: selectedCurrencyName || '',
+                },
+              })
+              onCurrencySelect(
+                selectedCurrencyCode || '',
+                parseFloat(newCryptoValue),
+                {
+                  rate,
+                }
+              )
+            }
+          } else if (cryptoInput) {
+            const numericCrypto = parseFloat(cryptoInput)
+            if (!isNaN(numericCrypto)) {
+              const newUsdValue = calculateUsdValue(numericCrypto, rate)
+              setUsdValue(newUsdValue)
+              dispatch({
+                type: 'SET_FORM_DATA',
+                payload: {
+                  pledgeAmount: cryptoInput,
+                  pledgeCurrency: selectedCurrencyCode || '',
+                  assetName: selectedCurrencyName || '',
+                },
+              })
+              onCurrencySelect(selectedCurrencyCode!, numericCrypto, {
+                rate,
+              })
+            }
+          }
+        } else {
+          throw new Error('Invalid rate data')
+        }
+      } catch (error) {
+        console.error('Error fetching crypto rate:', error)
+        setError('Failed to load the cryptocurrency rate.')
+        setCryptoRate(null)
+      } finally {
+        setIsLoadingRate(false)
+      }
+    }
+
+    if (selectedCurrencyCode) {
+      fetchCryptoRate(selectedCurrencyCode.toLowerCase())
+    }
+    // Only depend on selectedCurrencyCode
+  }, [selectedCurrencyCode, selectedCurrencyName])
+
+  // Update cryptoValue when usdInput changes
+  useEffect(() => {
+    if (usdInput && cryptoRate) {
+      const numericUsd = parseFloat(usdInput)
+      if (!isNaN(numericUsd)) {
+        const newCryptoValue = calculateCryptoValue(numericUsd, cryptoRate)
+        setCryptoValue(newCryptoValue)
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: {
+            pledgeAmount: newCryptoValue,
+            pledgeCurrency: selectedCurrencyCode || undefined,
+            assetName: selectedCurrencyName || '',
+          },
+        })
+      } else {
+        setCryptoValue('')
+      }
+    } else if (usdInput === '') {
+      setCryptoValue('')
+    }
+  }, [
+    usdInput,
+    cryptoRate,
+    calculateCryptoValue,
+    dispatch,
+    selectedCurrencyCode,
+  ])
+
+  // Update usdValue when cryptoInput changes
+  useEffect(() => {
+    if (cryptoInput && cryptoRate) {
+      const numericCrypto = parseFloat(cryptoInput)
+      if (!isNaN(numericCrypto)) {
+        const newUsdValue = calculateUsdValue(numericCrypto, cryptoRate)
+        setUsdValue(newUsdValue)
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: {
+            pledgeAmount: cryptoInput,
+            pledgeCurrency: selectedCurrencyCode || '',
+            assetName: selectedCurrencyName || '',
+          },
+        })
+      } else {
+        setUsdValue('')
+      }
+    } else if (cryptoInput === '') {
+      setUsdValue('')
+    }
+  }, [
+    cryptoInput,
+    cryptoRate,
+    calculateUsdValue,
+    dispatch,
+    selectedCurrencyCode,
+  ])
+
+  // Handle USD input changes
   const handleUsdChange = (usd: string) => {
-    const numericUsd = parseFloat(usd) || 0
-    setUsdValue(numericUsd)
-    setCryptoValue(calculateCryptoValue(numericUsd))
+    // Validation regex for up to 2 decimal places and max 10,000,000
+    const regex = /^\d{0,10}(\.\d{0,2})?$/
+    if (regex.test(usd) || usd === '') {
+      dispatch({ type: 'SET_USD_INPUT', payload: usd })
+      dispatch({ type: 'SET_CRYPTO_INPUT', payload: '' }) // Clear crypto input when user is typing in USD
+      setCryptoValue('') // Clear local cryptoValue to allow manual input
+    }
   }
 
+  // Handle Crypto input changes
   const handleCryptoChange = (crypto: string) => {
-    const validNumber = /^(\d+\.?\d*|\.\d+)$/
-    if (crypto === '' || validNumber.test(crypto)) {
-      setCryptoValue(crypto)
-      const numericCrypto = parseFloat(crypto) || 0
-      setUsdValue(parseFloat((numericCrypto * cryptoRate).toFixed(2)))
+    // Validation regex for up to 8 decimal places and between 0.00000001 and 10,000,000
+    const regex = /^\d{0,8}(\.\d{0,8})?$/
+    const numericCrypto = parseFloat(crypto)
+
+    if (
+      (regex.test(crypto) &&
+        numericCrypto >= 0.00000001 &&
+        numericCrypto <= 10000000) ||
+      crypto === ''
+    ) {
+      dispatch({ type: 'SET_CRYPTO_INPUT', payload: crypto })
+      dispatch({ type: 'SET_USD_INPUT', payload: '' }) // Clear USD input when user is typing in crypto
+      setUsdValue('') // Clear local usdValue to allow manual input
     }
   }
 
+  // Handle Currency Selection
   const handleCurrencySelect = (coin: string) => {
-    const currency = ResponseListCurrenciesExample.data.find(
-      (c) => c.name === coin
-    )
+    const currency = currencyList.find((c) => c.name === coin)
     if (currency) {
-      const calculatedCryptoValue = calculateCryptoValue(usdValue)
-      setSelectedValue(coin)
-      setSelectedCurrencyCode(currency.code)
-      setSelectedCurrencyName(currency.name)
-      setMinDonation(
-        Math.max(2.5 / mockedCurrencyRates.data.rate, currency.minDonation)
-      )
-      setCryptoRate(mockedCurrencyRates.data.rate)
-      handleUsdChange(usdValue.toString())
-      setSearchTerm('')
+      dispatch({
+        type: 'SET_SELECTED_CURRENCY',
+        payload: { code: currency.code, name: currency.name },
+      })
+      setSearchTerm(coin)
       setShowDropdown(false)
-      onCurrencySelect(
-        currency.name,
-        parseFloat(calculatedCryptoValue),
-        mockedCurrencyRates.data
-      )
+
+      // Ensure the donate button is enabled after valid selection
+      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
     }
   }
 
-  const filteredOptions = ResponseListCurrenciesExample.data.filter(
-    (currency) => currency.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Handle Key Down Events for Dropdown Navigation
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault()
+        setHighlightedIndex((prev) =>
+          prev < filteredOptions.length - 1 ? prev + 1 : prev
+        )
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev))
+        break
+      case 'Enter':
+        if (
+          highlightedIndex >= 0 &&
+          highlightedIndex < filteredOptions.length
+        ) {
+          handleCurrencySelect(filteredOptions[highlightedIndex].name)
+        }
+        break
+      case 'Tab':
+        if (filteredOptions.length > 0) {
+          e.preventDefault()
+          setHighlightedIndex(0)
+          setShowDropdown(true)
+        }
+        break
+      default:
+        break
+    }
+  }
+
+  // Filter currency options based on search term and exclusion list
+  const filteredOptions: Currency[] = currencyList.filter(
+    (currency) =>
+      currency.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !excludedCoins.includes(currency.name)
   )
 
-  const isNonDefaultCoin =
-    selectedValue !== 'Bitcoin' &&
-    selectedValue !== 'Litecoin' &&
-    selectedValue !== 'Dogecoin'
-
-  const selectedCurrencyData = ResponseListCurrenciesExample.data.find(
+  // Find selected currency data for display
+  const selectedCurrencyData = currencyList.find(
     (currency) => currency.code === selectedCurrencyCode
   )
 
   return (
-    <div className="flex w-full flex-col gap-4 pt-5">
+    <div ref={dropdownRef} className="flex w-full flex-col gap-4 pt-5">
+      {/* Currency Selection Buttons */}
       <div className="flex h-full w-full justify-between space-x-3 pt-6 font-space-grotesk">
         {['Bitcoin', 'Litecoin', 'Dogecoin'].map((coin) => (
           <button
             key={coin}
             className={`flex w-44 items-center rounded-3xl border border-[#222222] text-lg font-semibold ${
-              selectedValue === coin
+              selectedCurrencyName === coin
                 ? 'bg-[#222222] text-[#f0f0f0]'
                 : 'bg-[#f0f0f0] text-[#222222]'
             }`}
@@ -189,104 +307,173 @@ export default function PaymentModalCryptoOption({
           </button>
         ))}
       </div>
-      <div>
-        {/* Search, dropdown, and select */}
-        <div className="relative flex w-full space-y-3">
+
+      {/* Search and Dropdown */}
+      <div className="relative flex w-full space-y-3">
+        <input
+          type="text"
+          value={
+            isFocused
+              ? searchTerm
+              : ['Bitcoin', 'Litecoin', 'Dogecoin'].includes(
+                  selectedCurrencyName || ''
+                ) // Use optional chaining and fallback
+              ? ''
+              : selectedCurrencyName || '' // Use fallback value to ensure it's never null
+          }
+          onChange={(e) => {
+            setSearchTerm(e.target.value)
+            setShowDropdown(true)
+          }}
+          placeholder="Search for a coin"
+          className={`flex w-full rounded-xl border-[#222222] ${
+            !['Bitcoin', 'Litecoin', 'Dogecoin'].includes(
+              selectedCurrencyName || ''
+            ) // Use optional chaining and fallback
+              ? 'bg-[#222222] text-[#f0f0f0]'
+              : 'bg-[#f0f0f0] text-[#222222]'
+          } p-2 text-left font-space-grotesk text-lg font-bold`}
+          onFocus={() => {
+            setIsFocused(true)
+            setShowDropdown(true)
+            if (
+              ['Bitcoin', 'Litecoin', 'Dogecoin'].includes(
+                selectedCurrencyName || ''
+              )
+            ) {
+              // Use optional chaining and fallback
+              setSearchTerm('')
+            }
+          }}
+          onBlur={() => setIsFocused(false)}
+          onKeyDown={handleKeyDown}
+        />
+
+        {showDropdown && filteredOptions.length > 0 && (
+          <ul
+            className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#222222] text-white"
+            style={{ zIndex: 10 }}
+          >
+            {filteredOptions.map((option, index) => (
+              <button
+                key={option.code}
+                onClick={() => handleCurrencySelect(option.name)}
+                className={`flex w-full cursor-pointer items-center p-2 text-left hover:bg-[#333333] ${
+                  highlightedIndex === index ? 'bg-gray-300' : ''
+                }`}
+              >
+                <Image
+                  src={option.imageUrl}
+                  alt={option.name}
+                  objectFit="contain"
+                  width={24}
+                  height={24}
+                />
+                <span className="pl-2">
+                  {option.name} {option.isErc20 && <span>(ERC-20)</span>}
+                </span>
+              </button>
+            ))}
+          </ul>
+        )}
+
+        {/* Display error if any */}
+      </div>
+
+      {/* Conversion Rate Calculator */}
+      <div className="flex flex-row justify-between pt-4">
+        {/* Crypto Input */}
+        <div className="flex items-center overflow-hidden rounded-3xl border border-[#222222] bg-[#222222] pl-2">
+          {selectedCurrencyData && (
+            <Image
+              src={selectedCurrencyData.imageUrl}
+              alt={selectedCurrencyData.name}
+              width={48}
+              height={48}
+              objectFit="contain"
+              className=""
+              style={{ zIndex: 5 }}
+            />
+          )}
+          <div className="flex h-12 w-24 items-center justify-center bg-[#222222]">
+            <h1 className="font-space-grotesk text-lg font-semibold text-white">
+              {selectedCurrencyCode}
+            </h1>
+          </div>
           <input
             type="text"
-            value={isNonDefaultCoin ? selectedValue : searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value)
-              setShowDropdown(true)
-            }}
-            placeholder="Search for a coin"
-            className={`flex w-full rounded-xl border-[#222222] ${
-              isNonDefaultCoin
-                ? 'bg-[#222222] text-[#f0f0f0]'
-                : 'bg-[#f0f0f0] text-[#222222]'
-            } text-indent-4 p-2 text-left font-space-grotesk text-lg font-bold`}
-            onFocus={() => setShowDropdown(true)}
+            name="cryptoInput"
+            className={`h-full w-40 border-none text-center font-space-grotesk text-lg font-black ${
+              isLoadingRate ? 'loading-gradient' : 'bg-[#c6d3d6]'
+            }`}
+            value={cryptoInput !== '' ? cryptoInput : cryptoValue}
+            onChange={(e) => handleCryptoChange(e.target.value)}
+            min={minDonation}
+            step={minDonation}
+            disabled={isLoadingRate}
           />
-          {showDropdown && filteredOptions.length > 0 && (
-            <ul
-              className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#222222] text-white"
-              style={{ zIndex: 10 }}
-            >
-              {filteredOptions.map((option) => (
-                <button
-                  key={option.code}
-                  onClick={() => handleCurrencySelect(option.name)}
-                  className="flex w-full cursor-pointer items-center p-2 text-left hover:bg-[#333333]"
-                >
-                  <Image
-                    src={option.imageUrl}
-                    alt={option.name}
-                    objectFit="contain"
-                    width={24}
-                    height={24}
-                    className=""
-                  />
-                  <span className="pl-2">
-                    {option.name} {option.isErc20 && <span>(ERC-20)</span>}
-                  </span>
-                </button>
-              ))}
-            </ul>
-          )}
+          {/* Styles for Gradient Animation */}
         </div>
 
-        {/* Conversion Rate calculator */}
-        <div className="flex flex-row justify-between pt-4 ">
-          <div className="flex items-center overflow-hidden rounded-3xl border border-[#222222] bg-[#222222] pl-2">
-            {selectedCurrencyData && (
-              <Image
-                src={selectedCurrencyData.imageUrl}
-                alt={selectedCurrencyData.name}
-                width={48}
-                height={48}
-                objectFit="contain"
-                className=""
-                style={{ zIndex: 5 }}
-              />
-            )}
-            <div className="flex h-12 w-24 items-center justify-center bg-[#222222]">
-              <h1 className="font-space-grotesk text-lg font-semibold text-white">
-                {selectedCurrencyCode}
-              </h1>
-            </div>
-            <input
-              type="text"
-              className="h-full w-40 border-none bg-[#c6d3d6] text-center font-space-grotesk text-lg font-black"
-              value={cryptoValue}
-              onChange={(e) => handleCryptoChange(e.target.value)}
-              min={minDonation}
-              step={minDonation}
-            />
-            <div className="absolute right-0 top-0 h-full w-4 overflow-hidden">
-              <div className="h-full w-0 border-b-[24px] border-l-[24px] border-t-[24px] border-b-transparent border-l-[#c6d3d6] border-t-transparent"></div>
-            </div>
-          </div>
+        {/* Exchange Icon */}
+        <FontAwesomeIcon
+          icon={faExchange}
+          className="m-auto h-10 px-3 text-[#c6d3d6]"
+        />
 
-          <FontAwesomeIcon
-            icon={faExchange}
-            className="m-auto h-10 px-3 text-[#c6d3d6]"
+        {/* USD Input */}
+        <div className="flex overflow-hidden rounded-3xl border border-[#222222]">
+          <div className="flex h-12 w-24 items-center justify-center bg-[#222222]">
+            <h1 className="font-space-grotesk text-lg font-semibold text-[#f2f2f2]">
+              USD
+            </h1>
+          </div>
+          <input
+            type="text"
+            name="usdInput"
+            className="w-36 border-none bg-[#c6d3d6] text-center font-space-grotesk text-lg font-black"
+            value={usdInput !== '' ? usdInput : usdValue}
+            onChange={(e) => handleUsdChange(e.target.value)}
+            disabled={isLoadingRate}
           />
-
-          <div className="flex overflow-hidden rounded-3xl  border border-[#222222]">
-            <div className="flex h-12 w-24 items-center justify-center bg-[#222222]">
-              <h1 className="font-space-grotesk text-lg font-semibold text-[#f2f2f2]">
-                USD
-              </h1>
-            </div>
-            <input
-              type="number"
-              className="w-36 border-none bg-[#c6d3d6] text-center font-space-grotesk text-lg font-black"
-              value={usdValue}
-              onChange={(e) => handleUsdChange(e.target.value)}
-            />
-          </div>
         </div>
       </div>
+      {error && (
+        <p className="mt-0 font-space-grotesk font-semibold text-red-500">
+          {error}
+        </p>
+      )}
+
+      {/* Styles for Gradient Animation */}
+      <style jsx>{`
+        @keyframes gradient-animation {
+          0% {
+            background-position: 200% 0%;
+          }
+          100% {
+            background-position: -200% 0%;
+          }
+        }
+      `}</style>
+
+      <style jsx>{`
+        .loading-gradient {
+          background: linear-gradient(
+            90deg,
+            #c6d3d6,
+            #c6d3d6,
+            #ffffff,
+            #ffffff,
+            #ffffff,
+            #ffffff,
+            #c6d3d6,
+            #c6d3d6,
+            #c6d3d6
+          );
+          background-size: 200% 100%;
+          animation: gradient-animation 4s infinite linear;
+        }
+      `}</style>
     </div>
   )
 }

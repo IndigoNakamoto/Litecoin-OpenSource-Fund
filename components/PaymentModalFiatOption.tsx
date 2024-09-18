@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react'
+// components/PaymentModalFiatOption
+
+import React, { useState, useRef, useEffect } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 
 export default function PaymentModalFiatOption() {
-  const { dispatch } = useDonation()
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(100)
+  const { state, dispatch } = useDonation()
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(100) // Default amount
   const [customAmount, setCustomAmount] = useState('')
   const [coverFees, setCoverFees] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -14,7 +16,11 @@ export default function PaymentModalFiatOption() {
     setSelectedAmount(amount)
     setCustomAmount('')
     setCoverFees(false)
-    dispatch({ type: 'SET_PLEDGED_AMOUNT', payload: amount.toString() }) // Set amount in context
+    // Update the formData with the correct pledgeAmount and selectedCurrency
+    dispatch({
+      type: 'SET_FORM_DATA',
+      payload: { pledgeAmount: amount.toString(), pledgeCurrency: 'USD' },
+    })
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +29,11 @@ export default function PaymentModalFiatOption() {
       setCustomAmount(value)
       setSelectedAmount(null)
       setCoverFees(false)
-      dispatch({ type: 'SET_PLEDGED_AMOUNT', payload: value }) // Update state with custom amount
+      // Update the formData with the correct pledgeAmount and selectedCurrency
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { pledgeAmount: value, pledgeCurrency: 'USD' },
+      })
     }
   }
 
@@ -31,7 +41,11 @@ export default function PaymentModalFiatOption() {
     if (customAmount !== '') {
       const formattedAmount = parseFloat(customAmount).toFixed(2)
       setCustomAmount(formattedAmount)
-      dispatch({ type: 'SET_PLEDGED_AMOUNT', payload: formattedAmount }) // Update on blur
+      // Ensure the formatted amount is updated in formData
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { pledgeAmount: formattedAmount, pledgeCurrency: 'USD' },
+      })
     }
   }
 
@@ -41,13 +55,32 @@ export default function PaymentModalFiatOption() {
       const baseAmount = parseFloat(customAmount) || selectedAmount || 0
       const totalAmount = (baseAmount * 1.030928).toFixed(2)
       setCustomAmount(totalAmount)
-      dispatch({ type: 'SET_PLEDGED_AMOUNT', payload: totalAmount }) // Adjust for fees
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { pledgeAmount: totalAmount, pledgeCurrency: 'USD' },
+      }) // Adjust for fees
     } else if (coverFees && inputRef.current) {
       const baseAmount = parseFloat(customAmount) / 1.030928
       setCustomAmount(baseAmount.toFixed(2))
-      dispatch({ type: 'SET_PLEDGED_AMOUNT', payload: baseAmount.toFixed(2) }) // Revert fees
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { pledgeAmount: baseAmount.toFixed(2), pledgeCurrency: 'USD' },
+      }) // Revert fees
     }
   }
+
+  // Add useEffect to dispatch initial pledgeAmount
+  useEffect(() => {
+    if (selectedAmount !== null) {
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: {
+          pledgeAmount: selectedAmount.toString(),
+          pledgeCurrency: 'USD',
+        },
+      })
+    }
+  }, [])
 
   const displayAmount =
     customAmount || (selectedAmount ? selectedAmount.toFixed(2) : '')
@@ -118,11 +151,22 @@ export default function PaymentModalFiatOption() {
           type="checkbox"
           checked={coverFees}
           onChange={handleCoverFeesChange}
-          className="h-4 w-4 border-white bg-[#222222]"
+          className="bg-white] h-4 w-4 border border-[#222222] "
           id="cover-transaction-fees"
         />
-        <label htmlFor="cover-transaction-fees" className="text-[#222222]">
-          Cover transaction fees (?)
+        {/* Hover over ? => "Make your impact go even further by covering the processing fees of this donation" */}
+        <label
+          htmlFor="cover-transaction-fees"
+          className="flex items-center text-[#222222]"
+        >
+          Cover transaction fees
+          <span className="group relative ml-1">
+            (?)
+            <span className="absolute bottom-full left-1/2 z-10 mb-2 w-64 -translate-x-1/2 rounded border border-white bg-gray-700 px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              Make your impact go even further by covering the processing fees
+              of this donation
+            </span>
+          </span>
         </label>
       </div>
     </div>

@@ -1,9 +1,12 @@
+// components/PaymentModalPersonalInfo.tsx
+
 import React, { useState, useEffect } from 'react'
 import { SiX, SiFacebook, SiLinkedin } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
 import { countries } from './countries'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import ProjectSocialLinks from './ProjectSocialLinks'
 
 type PaymentModalPersonalInfoProps = {
   onRequestClose: () => void
@@ -15,83 +18,169 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   onBackClick,
 }) => {
   const { state, dispatch } = useDonation()
+  const { formData, projectSlug } = state // Access formData from context
 
-  const [twitterError, setTwitterError] = useState('')
-  const [twitter, setTwitter] = useState('')
-
-  const [donateAnonymously, setDonateAnonymously] = useState(true)
-  const [needsTaxReceipt, setNeedsTaxReceipt] = useState(true)
-  const [joinMailingList, setJoinMailingList] = useState(false)
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address1: '',
-    address2: '',
-    country: '',
-    state: '',
-    city: '',
-    postalCode: '',
-  })
+  // Initialize local states based on formData
+  const [donateAnonymously, setDonateAnonymously] = useState(
+    formData.isAnonymous ?? true
+  )
+  const [needsTaxReceipt, setNeedsTaxReceipt] = useState(
+    formData.taxReceipt ?? true
+  )
+  const [joinMailingList, setJoinMailingList] = useState(
+    formData.joinMailingList ?? false
+  )
 
   const [showDropdown, setShowDropdown] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState(formData.country || '')
+  const [focusedCountryIndex, setFocusedCountryIndex] = useState(-1)
+
+  const [emailError, setEmailError] = useState('') // Added email error state
 
   const filteredCountries = countries.filter((country) =>
     country.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    dispatch({ type: 'SET_FORM_DATA', payload: { [name]: value } })
+
+    // Clear email error if user starts typing again
+    if (name === 'receiptEmail') {
+      if (emailError) {
+        setEmailError('')
+      }
+    }
   }
 
   const handleCountrySelect = (country: string) => {
-    setFormData({ ...formData, country })
+    dispatch({ type: 'SET_FORM_DATA', payload: { country } })
     setSearchTerm(country)
     setShowDropdown(false)
+    setFocusedCountryIndex(-1)
   }
 
+  const handleCountryKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showDropdown) return
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault()
+        setFocusedCountryIndex((prevIndex) =>
+          prevIndex < filteredCountries.length - 1 ? prevIndex + 1 : 0
+        )
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        setFocusedCountryIndex((prevIndex) =>
+          prevIndex > 0 ? prevIndex - 1 : filteredCountries.length - 1
+        )
+        break
+      case 'Enter':
+        e.preventDefault()
+        if (
+          focusedCountryIndex >= 0 &&
+          focusedCountryIndex < filteredCountries.length
+        ) {
+          handleCountrySelect(filteredCountries[focusedCountryIndex])
+        }
+        break
+      case 'Escape':
+        setShowDropdown(false)
+        break
+      default:
+        break
+    }
+  }
+
+  const handleEmailBlur = () => {
+    const isEmailRequired =
+      needsTaxReceipt ||
+      joinMailingList ||
+      (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
+
+    if (isEmailRequired) {
+      if (!formData.receiptEmail.trim()) {
+        setEmailError('Email is required.')
+      } else if (!/^\S+@\S+\.\S+$/.test(formData.receiptEmail.trim())) {
+        setEmailError('Please enter a valid email address.')
+      } else {
+        setEmailError('')
+      }
+    } else {
+      setEmailError('')
+    }
+  }
+
+  // Update formData when preferences change
+  const handleDonateAnonymouslyChange = () => {
+    const newValue = !donateAnonymously
+    setDonateAnonymously(newValue)
+    dispatch({ type: 'SET_FORM_DATA', payload: { isAnonymous: newValue } })
+  }
+
+  const handleNeedsTaxReceiptChange = () => {
+    const newValue = !needsTaxReceipt
+    setNeedsTaxReceipt(newValue)
+    dispatch({ type: 'SET_FORM_DATA', payload: { taxReceipt: newValue } })
+  }
+
+  const handleJoinMailingListChange = () => {
+    const newValue = !joinMailingList
+    setJoinMailingList(newValue)
+    dispatch({ type: 'SET_FORM_DATA', payload: { joinMailingList: newValue } })
+  }
+
+  // Initialize local states based on formData changes
+  useEffect(() => {
+    setDonateAnonymously(formData.isAnonymous ?? true)
+    setNeedsTaxReceipt(formData.taxReceipt ?? true)
+    setJoinMailingList(formData.joinMailingList ?? false)
+  }, [formData.isAnonymous, formData.taxReceipt, formData.joinMailingList])
+
+  // Reset focusedCountryIndex when the dropdown is opened or searchTerm changes
+  useEffect(() => {
+    setFocusedCountryIndex(-1)
+  }, [showDropdown, searchTerm])
+
   const areRequiredFieldsFilled = () => {
-    // For stock donations: all fields except photo are required
+    // Existing validation logic
     if (state.selectedOption === 'stock') {
       return (
-        formData.email.trim() !== '' &&
+        formData.phoneNumber.trim() !== '' &&
+        formData.receiptEmail.trim() !== '' &&
         formData.firstName.trim() !== '' &&
         formData.lastName.trim() !== '' &&
-        formData.address1.trim() !== '' &&
+        formData.addressLine1.trim() !== '' &&
         formData.city.trim() !== '' &&
         formData.state.trim() !== '' &&
         formData.country.trim() !== '' &&
-        formData.postalCode.trim() !== ''
+        formData.zipcode.trim() !== ''
       )
     }
 
-    // For card and crypto donations: check conditions based on donation type
     if (state.selectedOption === 'fiat' || state.selectedOption === 'crypto') {
       if (donateAnonymously) {
-        // Anonymously: Name, Photo, and Email are optional, Address is disabled
         if (needsTaxReceipt || joinMailingList) {
-          return formData.email.trim() !== ''
+          return formData.receiptEmail.trim() !== ''
         }
-        return true // No fields required if neither tax receipt nor mailing list is checked
+        return true
       } else {
-        // Identified: All fields except Photo are required
         return (
-          formData.email.trim() !== '' &&
+          formData.receiptEmail.trim() !== '' &&
           formData.firstName.trim() !== '' &&
           formData.lastName.trim() !== '' &&
-          formData.address1.trim() !== '' &&
+          formData.addressLine1.trim() !== '' &&
           formData.city.trim() !== '' &&
           formData.state.trim() !== '' &&
           formData.country.trim() !== '' &&
-          formData.postalCode.trim() !== ''
+          formData.zipcode.trim() !== ''
         )
       }
     }
 
-    // When none of the checkboxes are selected, require email for donation confirmation
     if (!donateAnonymously && !needsTaxReceipt && !joinMailingList) {
-      return formData.email.trim() !== ''
+      return formData.receiptEmail.trim() !== ''
     }
 
     return true
@@ -100,7 +189,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   const { data: session } = useSession()
   useEffect(() => {
     if (session) {
-      setTwitter(session.user.username)
+      // Assuming 'twitter' state exists, though it's not defined in the latest code
+      // setTwitter(session.user.username)
+      // Commented out as 'twitter' state is not defined
     }
   }, [session])
 
@@ -108,84 +199,193 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   useEffect(() => {
     if (state.selectedOption === 'stock') {
       setDonateAnonymously(false)
+      dispatch({ type: 'SET_FORM_DATA', payload: { isAnonymous: false } })
     }
-  }, [state.selectedOption])
+  }, [state.selectedOption, dispatch])
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
   useEffect(() => {
-    setIsButtonDisabled(!areRequiredFieldsFilled())
+    setIsButtonDisabled(!areRequiredFieldsFilled() || emailError !== '')
   }, [
     formData,
     needsTaxReceipt,
     joinMailingList,
     donateAnonymously,
     state.selectedOption,
+    emailError, // Include emailError in dependencies
   ])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Personal info form submitted')
 
+    // Reset previous errors
+    setEmailError('')
+
+    // Perform validation
+    let isValid = true
+
+    // Determine if email is required
+    const isEmailRequired =
+      needsTaxReceipt ||
+      joinMailingList ||
+      (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
+
+    if (isEmailRequired) {
+      if (!formData.receiptEmail.trim()) {
+        setEmailError('Email is required.')
+        isValid = false
+      } else if (!/^\S+@\S+\.\S+$/.test(formData.receiptEmail.trim())) {
+        setEmailError('Please enter a valid email address.')
+        isValid = false
+      } else {
+        setEmailError('')
+      }
+    }
+
+    if (!isValid) {
+      // Prevent submission if validation fails
+      return
+    }
+
+    // Proceed with form submission
     dispatch({
       type: 'SET_DONATION_DATA',
       payload: {
+        ...state.donationData,
         ...formData,
-        taxReceipt: needsTaxReceipt,
-        isAnonymous: donateAnonymously,
       },
     })
 
     const { selectedOption, selectedCurrency, selectedCurrencyPledged } = state
 
-    const apiEndpoint =
-      selectedOption === 'fiat'
-        ? '/api/createFiatDonationPledge'
-        : '/api/createDepositAddress'
+    let apiEndpoint = ''
+    let apiBody = {}
+
+    if (selectedOption === 'fiat') {
+      apiEndpoint = '/api/createFiatDonationPledge'
+      apiBody = {
+        organizationId: 1189134331,
+        isAnonymous: donateAnonymously,
+        pledgeCurrency: selectedCurrency,
+        pledgeAmount: selectedCurrencyPledged,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        receiptEmail: formData.receiptEmail,
+        addressLine1: formData.addressLine1,
+        addressLine2: formData.addressLine2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.zipcode,
+        taxReceipt: formData.taxReceipt,
+        joinMailingList: formData.joinMailingList,
+      }
+    } else if (selectedOption === 'crypto') {
+      apiEndpoint = '/api/createDepositAddress'
+      apiBody = {
+        // project
+        projectSlug: projectSlug,
+        organizationId: 1189134331,
+        // Donation
+        pledgeCurrency: formData.assetSymbol,
+        pledgeAmount: formData.pledgeAmount,
+        // Donor Info
+        receiptEmail: formData.receiptEmail,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        /// Donor Personal Info
+        addressLine1: formData.addressLine1,
+        addressLine2: formData.addressLine2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.zipcode,
+        // Donor Settings
+        taxReceipt: formData.taxReceipt,
+        isAnonymous: formData.isAnonymous,
+        joinMailingList: formData.joinMailingList,
+        // Donor Social Profiles
+        socialX: formData.socialX,
+        socialFacebook: formData.socialFacebook,
+        socialLinkedIn: formData.socialLinkedIn,
+      }
+    } else if (selectedOption === 'stock') {
+      apiEndpoint = '/api/createStockDonationPledge'
+      apiBody = {
+        organizationId: 1189134331,
+        // project
+        projectSlug: projectSlug,
+        // Donation
+        assetSymbol: formData.assetSymbol,
+        assetDescription: formData.assetName,
+        pledgeAmount: formData.pledgeAmount,
+        // Donor Info
+        receiptEmail: formData.receiptEmail,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        // Donor Personal Info
+        addressLine1: formData.addressLine1,
+        addressLine2: formData.addressLine2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.zipcode,
+        phoneNumber: formData.phoneNumber,
+        // Donor Settings
+        taxReceipt: formData.taxReceipt,
+        isAnonymous: formData.isAnonymous,
+        joinMailingList: formData.joinMailingList,
+        // Donor Social Profiles
+        socialX: formData.socialX,
+        socialFacebook: formData.socialFacebook,
+        socialLinkedIn: formData.socialLinkedIn,
+      }
+    }
 
     try {
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          organizationId: 12345678, // Replace with actual org ID
-          isAnonymous: donateAnonymously,
-          pledgeCurrency: selectedCurrency,
-          pledgeAmount: selectedCurrencyPledged,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          receiptEmail: formData.email,
-          addressLine1: formData.address1,
-          addressLine2: formData.address2,
-          country: formData.country,
-          state: formData.state,
-          city: formData.city,
-          zipcode: formData.postalCode,
-        }),
+        body: JSON.stringify(apiBody),
       })
 
       const data = await response.json()
 
       if (response.ok) {
-        if (
-          (selectedOption === 'fiat' && data?.data?.pledgeId) ||
-          (selectedOption === 'crypto' && data?.depositAddress)
-        ) {
+        if (selectedOption === 'fiat' && data?.data?.pledgeId) {
           dispatch({
             type: 'SET_DONATION_DATA',
             payload: {
               ...state.donationData,
-              ...(selectedOption === 'fiat'
-                ? { pledgeId: data.data.pledgeId }
-                : { depositAddress: data.depositAddress }),
+              pledgeId: data.data.pledgeId,
             },
           })
-
-          const nextStep =
-            selectedOption === 'fiat' ? 'fiatDonate' : 'cryptoDonate'
-          dispatch({ type: 'SET_STEP', payload: nextStep })
+          dispatch({ type: 'SET_STEP', payload: 'fiatDonate' })
+        } else if (selectedOption === 'crypto' && data?.depositAddress) {
+          dispatch({
+            type: 'SET_DONATION_DATA',
+            payload: {
+              ...state.donationData,
+              depositAddress: data.depositAddress,
+              qrCode: data.qrCode,
+              ...state.formData,
+            },
+          })
+          dispatch({ type: 'SET_STEP', payload: 'cryptoDonate' })
+        } else if (selectedOption === 'stock' && data?.data?.donationUuid) {
+          console.log('Donation UUID received:', data.data.donationUuid)
+          dispatch({
+            type: 'SET_DONATION_DATA',
+            payload: {
+              ...state.donationData,
+              donationUuid: data.data.donationUuid,
+            },
+          })
+          // Move to the stock broker info step
+          dispatch({ type: 'SET_STEP', payload: 'stockBrokerInfo' })
         } else {
           console.error(
-            'Expected data (pledgeId or depositAddress) missing in response',
+            'Expected data (pledgeId, depositAddress, or donationUuid) missing in response',
             data
           )
         }
@@ -209,6 +409,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       ? 'Enter your email to join our mailing list for news and updates.'
       : 'Please enter your email to receive a confirmation of your donation. We will use this email solely to notify you that your donation has been received.'
 
+  const shouldShowAddressFields =
+    (!donateAnonymously && state.selectedOption !== 'stock') ||
+    state.selectedOption === 'stock'
+
   return (
     <div className="flex flex-col space-y-4 p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
@@ -223,11 +427,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             <input
               type="checkbox"
               checked={joinMailingList}
-              onChange={() => setJoinMailingList(!joinMailingList)}
+              onChange={handleJoinMailingListChange}
               className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
               id="mailing-list"
             />
-            <label htmlFor="mailing-list" className="text-[#222222]">
+            <label
+              htmlFor="mailing-list"
+              className="font-space-grotesk text-[#222222]"
+            >
               Join our mailing list for news and updates
             </label>
           </div>
@@ -239,11 +446,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 <input
                   type="checkbox"
                   checked={donateAnonymously}
-                  onChange={() => setDonateAnonymously(!donateAnonymously)}
+                  onChange={handleDonateAnonymouslyChange}
                   className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                   id="donate-anonymously"
                 />
-                <label htmlFor="donate-anonymously" className="text-[#222222]">
+                <label
+                  htmlFor="donate-anonymously"
+                  className="font-space-grotesk  text-[#222222]"
+                >
                   Donate Anonymously
                 </label>
               </div>
@@ -253,15 +463,18 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 <input
                   type="checkbox"
                   checked={needsTaxReceipt}
-                  onChange={() => setNeedsTaxReceipt(!needsTaxReceipt)}
+                  onChange={handleNeedsTaxReceiptChange}
                   className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                   id="tax-receipt"
                 />
-                <label htmlFor="tax-receipt" className="text-[#222222]">
+                <label
+                  htmlFor="tax-receipt"
+                  className="font-space-grotesk  text-[#222222]"
+                >
                   Request A Tax Receipt
                 </label>
               </div>
-              <p className="ml-10 text-sm text-gray-600">
+              <p className="ml-10 font-space-grotesk text-sm text-gray-600 ">
                 Provide your email to receive a confirmation of your donation
                 and your tax receipt. This information will only be used to send
                 you these documents.
@@ -271,11 +484,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               <input
                 type="checkbox"
                 checked={joinMailingList}
-                onChange={() => setJoinMailingList(!joinMailingList)}
+                onChange={handleJoinMailingListChange}
                 className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                 id="mailing-list"
               />
-              <label htmlFor="mailing-list" className="text-[#222222]">
+              <label
+                htmlFor="mailing-list"
+                className="font-space-grotesk  text-[#222222]"
+              >
                 Join our mailing list for news and updates
               </label>
             </div>
@@ -284,7 +500,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
         <span className="block w-full border-t border-gray-400"></span>
         {/* PROFILE PHOTO */}
         <div>
-          <h2 className="font-space-grotesk text-lg text-[#222222]">
+          <h2 className="font-space-grotesk text-lg  text-[#222222]">
             Profile Photo <span className="text-sm">(Optional)</span>
           </h2>
 
@@ -319,14 +535,21 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               <div className="flex flex-row justify-between space-x-2">
                 {!session ? (
                   <button
+                    type="button" // Ensure type is button
                     className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
-                    onClick={() => signIn('twitter')}
+                    onClick={() => {
+                      const currentUrl = window.location.href
+                      const url = new URL(currentUrl)
+                      url.searchParams.set('modal', 'true')
+                      signIn('twitter', { callbackUrl: url.toString() })
+                    }}
                   >
                     Verify
                     <SiX className="ml-2 h-6 w-6" />
                   </button>
                 ) : (
                   <button
+                    type="button" // Ensure type is button
                     className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
                     onClick={() => signOut()}
                   >
@@ -335,11 +558,17 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   </button>
                 )}
 
-                <button className="flex w-full flex-row rounded-lg bg-white text-[#222222]">
+                <button
+                  type="button" // Ensure type is button
+                  className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
+                >
                   Verify
                   <SiLinkedin className="ml-2 h-6 w-6" />
                 </button>
-                <button className="flex w-full flex-row rounded-lg bg-white text-[#222222]">
+                <button
+                  type="button" // Ensure type is button
+                  className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
+                >
                   Verify
                   <SiFacebook className="ml-2 h-6 w-6" />
                 </button>
@@ -365,18 +594,31 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           </p>
           <input
             type="email"
-            name="email"
+            name="receiptEmail"
             placeholder="Email"
-            value={formData.email}
+            value={formData.receiptEmail}
             onChange={handleChange}
+            onBlur={handleEmailBlur} // Added onBlur handler
             required={
               needsTaxReceipt ||
               joinMailingList ||
               (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
             }
-            className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk text-[#222222]"
+            className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+              emailError
+                ? 'border-1 border-red-600 '
+                : 'border-[#222222] bg-[#f0f0f0]'
+            }`}
+            aria-invalid={emailError ? 'true' : 'false'}
+            aria-describedby={emailError ? 'email-error' : undefined}
           />
+          {emailError && (
+            <p id="email-error" className="mt-1 text-sm text-red-600">
+              {emailError}
+            </p>
+          )}
         </div>
+
         {/* NAME */}
         <div>
           <h2 className="font-space-grotesk text-lg text-[#222222]">
@@ -396,7 +638,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               value={formData.firstName}
               onChange={handleChange}
               required={!donateAnonymously || state.selectedOption === 'stock'}
-              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk text-[#222222]`}
+              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]`}
             />
             <input
               type="text"
@@ -405,145 +647,131 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               value={formData.lastName}
               onChange={handleChange}
               required={!donateAnonymously || state.selectedOption === 'stock'}
-              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk text-[#222222]`}
+              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]`}
             />
           </div>
         </div>
         {/* ADDRESS */}
         <div>
-          <h2
-            className={`font-space-grotesk text-lg ${
-              !donateAnonymously ? 'text-[#222222]' : 'text-gray-400'
-            }`}
-          >
-            Address
-            {state.selectedOption === 'stock' ? (
-              <span className="text-red-600">*</span>
-            ) : (
-              <span className="text-sm">{` (Optional)`}</span>
-            )}
-          </h2>
-          <div className="flex flex-col gap-y-2">
-            <div className="relative flex w-full flex-col space-y-3">
+          {/* Show address fields based on conditions */}
+          {shouldShowAddressFields && (
+            <div className="flex flex-col gap-y-2">
+              <h2 className="font-space-grotesk text-lg text-[#222222]">
+                Address <span className="text-red-600">*</span>
+              </h2>
+              <div className="relative flex w-full flex-col space-y-3">
+                <input
+                  type="text"
+                  name="country"
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value)
+                    setShowDropdown(true)
+                  }}
+                  placeholder="Search for a country"
+                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+                  onFocus={() => {
+                    setSearchTerm(formData.country)
+                    setShowDropdown(true)
+                  }}
+                  onKeyDown={handleCountryKeyDown}
+                  required
+                  aria-haspopup="listbox"
+                  aria-expanded={showDropdown}
+                  aria-controls="country-listbox"
+                />
+                {showDropdown && filteredCountries.length > 0 && (
+                  <ul
+                    id="country-listbox"
+                    role="listbox"
+                    className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#f0f0f0] text-[#222222]"
+                    style={{ zIndex: 10 }}
+                  >
+                    {filteredCountries.map((country, index) => (
+                      <button
+                        key={country}
+                        onClick={() => handleCountrySelect(country)}
+                        role="option"
+                        aria-selected={index === focusedCountryIndex}
+                        className={`flex w-full cursor-pointer items-center p-2 text-left font-semibold text-[#222222] ${
+                          index === focusedCountryIndex
+                            ? 'bg-gray-400'
+                            : 'hover:bg-gray-200'
+                        }`}
+                        onMouseEnter={() => setFocusedCountryIndex(index)}
+                      >
+                        {country}
+                      </button>
+                    ))}
+                  </ul>
+                )}
+              </div>
               <input
                 type="text"
-                name="country"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value)
-                  setShowDropdown(true)
-                }}
-                placeholder="Search for a country"
-                className={`flex w-full rounded-lg p-2 text-left font-space-grotesk text-[#222222] ${
-                  !donateAnonymously
-                    ? 'border-[#222222] bg-[#f0f0f0]'
-                    : 'border-none bg-white'
-                }`}
-                onFocus={() => {
-                  setSearchTerm('')
-                  setShowDropdown(true)
-                }}
-                required={
-                  !donateAnonymously || state.selectedOption === 'stock'
-                }
-                disabled={donateAnonymously && state.selectedOption !== 'stock'}
+                name="addressLine1"
+                placeholder="Street Address 1"
+                value={formData.addressLine1}
+                onChange={handleChange}
+                required
+                className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
               />
-              {showDropdown && filteredCountries.length > 0 && (
-                <ul
-                  className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#f0f0f0] text-[#222222]"
-                  style={{ zIndex: 10 }}
-                >
-                  {filteredCountries.map((country) => (
-                    <button
-                      key={country}
-                      onClick={() => handleCountrySelect(country)}
-                      className="flex w-full cursor-pointer items-center p-2 text-left text-[#222222] hover:bg-gray-400"
-                    >
-                      {country}
-                    </button>
-                  ))}
-                </ul>
-              )}
+              <input
+                type="text"
+                name="addressLine2"
+                placeholder="Street Address 2"
+                value={formData.addressLine2}
+                onChange={handleChange}
+                className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+              />
+              <div className="flex flex-row gap-x-2">
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="City"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+                />
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="State/Province/Region"
+                  value={formData.state}
+                  onChange={handleChange}
+                  required
+                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+                />
+                <input
+                  type="text"
+                  name="zipcode"
+                  placeholder="ZIP/Postal Code"
+                  value={formData.zipcode}
+                  onChange={handleChange}
+                  required
+                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              name="address1"
-              placeholder="Street Address 1"
-              value={formData.address1}
-              onChange={handleChange}
-              required={!donateAnonymously || state.selectedOption === 'stock'}
-              disabled={donateAnonymously && state.selectedOption !== 'stock'}
-              className={`flex w-full rounded-lg p-2 text-left font-space-grotesk text-[#222222] ${
-                !donateAnonymously
-                  ? 'border-[#222222] bg-[#f0f0f0]'
-                  : 'border-none bg-white'
-              }`}
-            />
-            <input
-              type="text"
-              name="address2"
-              placeholder="Street Address 2"
-              value={formData.address2}
-              onChange={handleChange}
-              disabled={donateAnonymously && state.selectedOption !== 'stock'}
-              className={`flex w-full rounded-lg p-2 text-left font-space-grotesk text-[#222222] ${
-                !donateAnonymously
-                  ? 'border-[#222222] bg-[#f0f0f0]'
-                  : 'border-none bg-white'
-              }`}
-            />
-            <div className="flex flex-row gap-x-2">
-              <input
-                type="text"
-                name="city"
-                placeholder="City"
-                value={formData.city}
-                onChange={handleChange}
-                required={
-                  !donateAnonymously || state.selectedOption === 'stock'
-                }
-                disabled={donateAnonymously && state.selectedOption !== 'stock'}
-                className={`flex w-full rounded-lg p-2 text-left font-space-grotesk text-[#222222] ${
-                  !donateAnonymously
-                    ? 'border-[#222222] bg-[#f0f0f0]'
-                    : 'border-none bg-white'
-                }`}
-              />
-              <input
-                type="text"
-                name="state"
-                placeholder="State/Province/Region"
-                value={formData.state}
-                onChange={handleChange}
-                required={
-                  !donateAnonymously || state.selectedOption === 'stock'
-                }
-                disabled={donateAnonymously && state.selectedOption !== 'stock'}
-                className={`flex w-full rounded-lg p-2 text-left font-space-grotesk text-[#222222] ${
-                  !donateAnonymously
-                    ? 'border-[#222222] bg-[#f0f0f0]'
-                    : 'border-none bg-white'
-                }`}
-              />
-              <input
-                type="text"
-                name="postalCode"
-                placeholder="ZIP/Postal Code"
-                value={formData.postalCode}
-                onChange={handleChange}
-                required={
-                  !donateAnonymously || state.selectedOption === 'stock'
-                }
-                disabled={donateAnonymously && state.selectedOption !== 'stock'}
-                className={`flex w-full rounded-lg p-2 text-left font-space-grotesk text-[#222222] ${
-                  !donateAnonymously
-                    ? 'border-[#222222] bg-[#f0f0f0]'
-                    : 'border-none bg-white'
-                }`}
-              />
-            </div>
-          </div>
+          )}
         </div>
+        {/* PHONE NUMBER */}
+        {state.selectedOption === 'stock' && (
+          <div>
+            <h2 className="font-space-grotesk text-lg text-[#222222]">
+              Phone Number <span className="text-red-600">*</span>
+            </h2>
+            <input
+              type="tel"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              required
+              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]`}
+            />
+          </div>
+        )}
         <div className="flex justify-between space-x-2 pt-8">
           <button
             type="button"
