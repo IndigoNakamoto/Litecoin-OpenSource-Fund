@@ -76,6 +76,17 @@ module.exports = () => {
     async headers() {
       return [
         {
+          source: '/api/(.*)',
+          headers: [
+            {
+              key: 'Content-Security-Policy',
+              value:
+                "default-src *; script-src * 'unsafe-inline'; connect-src *; img-src *; style-src * 'unsafe-inline';",
+            },
+            // Other headers you want to test with reduced restrictions
+          ],
+        },
+        {
           source: '/(.*)',
           headers: securityHeaders,
         },
