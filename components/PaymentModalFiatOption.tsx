@@ -151,7 +151,7 @@ export default function PaymentModalFiatOption() {
           type="checkbox"
           checked={coverFees}
           onChange={handleCoverFeesChange}
-          className="bg-white] h-4 w-4 border border-[#222222] "
+          className="bg-white] h-4 w-4 border border-[#222222] bg-[#f0f0f0]"
           id="cover-transaction-fees"
         />
         {/* Hover over ? => "Make your impact go even further by covering the processing fees of this donation" */}

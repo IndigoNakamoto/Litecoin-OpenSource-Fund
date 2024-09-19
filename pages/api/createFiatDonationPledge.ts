@@ -1,7 +1,8 @@
-// // pages/api/createFiatDonationPledge.ts
+// pages/api/createFiatDonationPledge.ts
+
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../lib/prisma'
 import axios from 'axios'
+import prisma from '../../lib/prisma' // Import your Prisma client
 import { getAccessToken } from '../../utils/authTGB'
 
 type Data =
@@ -22,28 +23,28 @@ export default async function handler(
   }
 
   const {
-    // project
+    // Project details
     organizationId,
     projectSlug,
-    // Donation
+    // Donation details
     pledgeCurrency,
     pledgeAmount,
-    // Donor Info
+    // Donor information
     receiptEmail,
     firstName,
     lastName,
-    /// Donor Personal Info
+    // Donor address details
     addressLine1,
     addressLine2,
     country,
     state,
     city,
     zipcode,
-    // Donor Settings
+    // Donor settings
     taxReceipt,
     isAnonymous,
     joinMailingList,
-    // Donor Social Profiles
+    // Donor social profiles
     socialX,
     socialFacebook,
     socialLinkedIn,
@@ -56,49 +57,50 @@ export default async function handler(
 
   try {
     const accessToken = await getAccessToken()
+
     // Start a transaction to ensure atomicity
     const result = await prisma.$transaction(async (prisma) => {
-      // Create a new Donation record without pledgeId initially
+      // Step 1: Create a new Donation record in Prisma without pledgeId initially
       const donation = await prisma.donation.create({
         data: {
-          // Project
-          projectSlug: projectSlug,
+          // Project information
+          projectSlug,
           organizationId: organizationId || null,
-          // Donation
+          // Donation details
           donationType: 'fiat',
           assetSymbol: pledgeCurrency,
           pledgeAmount: parseFloat(pledgeAmount),
-          // Donor Info
+          // Donor information
           firstName: firstName || null,
           lastName: lastName || null,
           donorEmail: receiptEmail || null,
-          // Donor Settings
+          // Donor settings
           isAnonymous: isAnonymous || false,
-          taxReceipt: taxReceipt || true,
+          taxReceipt: taxReceipt || false,
           joinMailingList: joinMailingList || false,
-          // Donor Social Profiles
+          // Donor social profiles
           socialX: socialX || null,
           socialFacebook: socialFacebook || null,
           socialLinkedIn: socialLinkedIn || null,
         },
       })
 
-      // DONE Call The Giving Block's CreateDepositAddress API
+      // Step 2: Call The Giving Block's CreateFiatDonationPledge API
       const tgbResponse = await axios.post(
-        'https://public-api.tgbwidget.com/v1/deposit-address',
+        'https://public-api.tgbwidget.com/v1/donation/fiat',
         {
-          organizationId: organizationId,
+          organizationId: organizationId.toString(),
           isAnonymous: isAnonymous,
-          pledgeAmount: pledgeAmount,
-          firstName: firstName,
-          lastName: lastName,
-          receiptEmail: receiptEmail,
-          addressLine1: addressLine1,
-          addressLine2: addressLine2,
-          country: country,
-          state: state,
-          city: city,
-          zipcode: zipcode,
+          pledgeAmount: pledgeAmount.toString(),
+          firstName: firstName || '',
+          lastName: lastName || '',
+          receiptEmail: receiptEmail || '',
+          addressLine1: addressLine1 || '',
+          addressLine2: addressLine2 || '',
+          country: country || '',
+          state: state || '',
+          city: city || '',
+          zipcode: zipcode || '',
         },
         {
           headers: {
@@ -110,7 +112,7 @@ export default async function handler(
 
       const { pledgeId } = tgbResponse.data.data
 
-      // Update the Donation record with pledgeId
+      // Step 3: Update the Donation record with the returned pledgeId
       await prisma.donation.update({
         where: { id: donation.id },
         data: {
@@ -118,94 +120,16 @@ export default async function handler(
         },
       })
 
+      // Return the pledgeId to the frontend
       return { pledgeId }
     })
 
     return res.status(200).json(result)
   } catch (error: any) {
-    console.error('Error creating crypto donation pledge:', error.message)
+    console.error(
+      'Error creating fiat donation pledge:',
+      error.message || error.response?.data
+    )
     return res.status(500).json({ error: 'Internal Server Error' })
   }
 }
-
-// // Mock storage for donations
-// const mockDonations = []
-
-// export default async function handler(req, res) {
-//   if (req.method !== 'POST') {
-//     return res.status(405).json({ message: 'Method not allowed' })
-//   }
-
-//   const {
-//     organizationId,
-//     isAnonymous,
-//     pledgeAmount,
-//     firstName,
-//     lastName,
-//     receiptEmail,
-//     addressLine1,
-//     addressLine2,
-//     country,
-//     state,
-//     city,
-//     zipcode,
-//   } = req.body
-
-//   try {
-//     // Mock response from The Giving Block API based on the expected response structure
-//     const mockApiResponse = {
-//       data: {
-//         pledgeId: '434b9bfb-69f1-4f19-baf7-55f41e331faf', // Mocked pledge ID
-//       },
-//       requestId: '232b620c-464e-454f-b131-02128bce8419', // Mocked request ID
-//     }
-
-//     // Extracting mocked data
-//     const { pledgeId } = mockApiResponse.data
-//     const { requestId } = mockApiResponse
-
-//     // Define the type for the donation object
-//     type Donation = {
-//       pledgeId: string
-//       organizationId: string
-//       isAnonymous: boolean
-//       pledgeAmount: string
-//       firstName?: string
-//       lastName?: string
-//       receiptEmail?: string
-//       addressLine1?: string
-//       addressLine2?: string
-//       country?: string
-//       state?: string
-//       city?: string
-//       zipcode?: string
-//     }
-
-//     // Mock saving the donation data
-//     const donation: Donation = {
-//       pledgeId,
-//       organizationId,
-//       isAnonymous,
-//       pledgeAmount,
-//       firstName,
-//       lastName,
-//       receiptEmail,
-//       addressLine1,
-//       addressLine2,
-//       country,
-//       state,
-//       city,
-//       zipcode,
-//     }
-//     // Save the donation to the mock storage
-//     mockDonations.push(donation as never)
-
-//     // Respond with the mocked API data
-//     res.status(200).json({ data: { pledgeId }, requestId })
-//   } catch (error) {
-//     console.error('Error saving donation:', error.message)
-//     res
-//       .status(500)
-//       .json({ error: 'Internal Server Error: Fiat donations disabled' })
-//   }
-// }

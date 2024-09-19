@@ -1,8 +1,9 @@
-//components/PaymentModalFiatDonate
+// components/PaymentModalFiatDonate.tsx
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { FaRegCreditCard } from 'react-icons/fa'
 import { useDonation } from '../contexts/DonationContext'
+import GradientButton from './GradientButton'
 import Notification from './Notification' // Import your Notification component
 
 function PaymentModalFiatDonate() {
@@ -11,10 +12,12 @@ function PaymentModalFiatDonate() {
   const formRef = useRef<HTMLFormElement>(null)
   const shift4Initialized = useRef(false)
   const [notification, setNotification] = useState<string | null>(null) // State for notification
+  const [isLoading, setIsLoading] = useState(false) // State for loading
 
   // useCallback to memoize the function and prevent it from being a missing dependency
   const submitDonation = useCallback(
     async (token: string) => {
+      setIsLoading(true) // Start loading state
       try {
         const response = await fetch('/api/chargeFiatDonationPledge', {
           method: 'POST',
@@ -26,16 +29,25 @@ function PaymentModalFiatDonate() {
           }),
         })
 
+        const data = await response.json()
+
         if (response.ok) {
           console.log('Donation successful')
           dispatch({ type: 'SET_STEP', payload: 'complete' })
         } else {
-          const errorData = await response.json()
+          const errorData = data.error || data
           console.error('Donation failed', errorData)
-          displayError(errorData.errorMessage)
+          if (errorData.errorMessage) {
+            setNotification(errorData.errorMessage)
+          } else {
+            setNotification('An unexpected error occurred. Please try again.')
+          }
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error charging donation:', error)
+        setNotification('Failed to process your donation. Please try again.')
+      } finally {
+        setIsLoading(false) // Stop loading state
       }
     },
     [state.donationData.pledgeId, state.formData.pledgeAmount, dispatch]
@@ -60,17 +72,16 @@ function PaymentModalFiatDonate() {
           e.preventDefault()
 
           const submitButton = (e.target as HTMLFormElement).querySelector(
-            'button'
+            'button[type="submit"]'
           )
           submitButton?.setAttribute('disabled', 'true')
 
-          const amountInDollars = parseFloat(
-            state.selectedCurrencyPledged || '0'
-          )
+          const amountInDollars = parseFloat(state.formData.pledgeAmount || '0')
           const amountInCents = Math.round(amountInDollars * 100)
 
           if (isNaN(amountInCents) || amountInCents <= 0) {
             console.error('Invalid amount:', amountInCents)
+            setNotification('Invalid donation amount.')
             submitButton?.removeAttribute('disabled')
             return
           }
@@ -130,74 +141,60 @@ function PaymentModalFiatDonate() {
         formElement.removeEventListener('submit', initializeShift4)
       }
     }
-  }, [state.selectedCurrencyPledged, submitDonation]) // Add missing dependencies
+  }, [state.formData.pledgeAmount, submitDonation]) // Add missing dependencies
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault() // Prevent the default form submission
     if (!cardToken) {
       console.error('Card token is missing.')
+      setNotification('Payment information is incomplete.')
       return
     }
     // Call the submission function with the card token
     submitDonation(cardToken)
   }
 
-  const displayError = (errorMessage: string) => {
-    setNotification(errorMessage) // Set the notification message
-  }
-
-  // Function to display Shift4 errors based on the error type and code
   const displayShift4Error = (error: any) => {
-    const errorElement = document.getElementById('payment-error')
-    if (errorElement) {
-      errorElement.classList.remove('hidden')
-      let errorMessage = 'An error occurred. Please try again later.'
+    let errorMessage = 'An error occurred. Please try again later.'
 
-      switch (error.type) {
-        case 'invalid_request':
-          errorMessage = 'Invalid request. Please check your card details.'
+    if (error.type === 'invalid_request') {
+      errorMessage = 'Invalid request. Please check your card details.'
+    } else if (error.type === 'card_error') {
+      switch (error.code) {
+        case 'invalid_number':
+          errorMessage = 'Invalid card number.'
           break
-        case 'card_error':
-          switch (error.code) {
-            case 'invalid_number':
-              errorMessage = 'Invalid card number.'
-              break
-            case 'invalid_expiry_month':
-              errorMessage = 'Invalid expiry month.'
-              break
-            case 'invalid_expiry_year':
-              errorMessage = 'Invalid expiry year.'
-              break
-            case 'invalid_cvc':
-              errorMessage = 'Invalid CVC code.'
-              break
-            case 'incorrect_zip':
-              errorMessage = 'Incorrect ZIP code.'
-              break
-            case 'expired_card':
-              errorMessage = 'Your card has expired.'
-              break
-            case 'insufficient_funds':
-              errorMessage = 'Insufficient funds.'
-              break
-            // ... handle other card_error codes ...
-            default:
-              errorMessage =
-                error.message || 'An error occurred while processing your card.'
-              break
-          }
+        case 'invalid_expiry_month':
+          errorMessage = 'Invalid expiry month.'
           break
-        case 'gateway_error':
-          errorMessage = 'An error occurred on our end. Please try again later.'
+        case 'invalid_expiry_year':
+          errorMessage = 'Invalid expiry year.'
           break
-        // ... handle other error types ...
+        case 'invalid_cvc':
+          errorMessage = 'Invalid CVC code.'
+          break
+        case 'incorrect_zip':
+          errorMessage = 'Incorrect ZIP code.'
+          break
+        case 'expired_card':
+          errorMessage = 'Your card has expired.'
+          break
+        case 'insufficient_funds':
+          errorMessage = 'Insufficient funds.'
+          break
+        // ... handle other card_error codes ...
         default:
-          errorMessage = error.message || 'An unknown error occurred.'
+          errorMessage =
+            error.message || 'An error occurred while processing your card.'
           break
       }
-
-      errorElement.textContent = errorMessage
+    } else if (error.type === 'gateway_error') {
+      errorMessage = 'An error occurred on our end. Please try again later.'
+    } else {
+      errorMessage = error.message || 'An unknown error occurred.'
     }
+
+    setNotification(errorMessage)
   }
 
   // Format the amount to display as currency
@@ -220,7 +217,7 @@ function PaymentModalFiatDonate() {
           <Notification
             message={notification}
             delay={5000}
-            onClose={() => setNotification(null)} // Hide notification after 3 seconds
+            onClose={() => setNotification(null)} // Hide notification after 5 seconds
           />
         )}
         <form
@@ -250,12 +247,16 @@ function PaymentModalFiatDonate() {
             ></div>
           </div>
 
-          <button
-            type="submit"
-            className="!important w-full rounded-2xl border border-white bg-[#222222] py-2 text-2xl font-semibold text-[#222222] transition hover:bg-gray-600"
+          <GradientButton
+            isLoading={isLoading} // Implement the isLoading state
+            disabled={isLoading} // Disable button while loading
+            type="submit" // Ensure the button type is submit
+            backgroundColor="#222222"
+            textColor="#f0f0f0"
+            loadingText="Processing..."
           >
             Donate
-          </button>
+          </GradientButton>
         </form>
       </div>
     </>

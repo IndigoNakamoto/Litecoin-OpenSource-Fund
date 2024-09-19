@@ -64,6 +64,9 @@ model Donation {
     pledgeId       String? @unique @map("pledge_id") // crypto / fiat
     depositAddress String? @map("deposit_address") // crypto
 
+    // Success Status
+    success Boolean @default(false) @map("success") // New field to track donation success
+
     // Webhook Event Related Fields
     transactionHash        String?   @map("transaction_hash")
     payoutAmount           Decimal?  @map("payout_amount") @db.Decimal(10, 2)

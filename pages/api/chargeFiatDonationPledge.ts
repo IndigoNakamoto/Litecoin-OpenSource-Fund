@@ -1,70 +1,70 @@
 // pages/api/chargeFiatDonationPledge.ts
 
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
+import prisma from '../../lib/prisma' // Import your Prisma client
+import { getAccessToken } from '../../utils/authTGB'
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' })
+    res.setHeader('Allow', 'POST')
+    return res.status(405).json({ message: 'Method Not Allowed' })
   }
 
   const { pledgeId, cardToken, amount } = req.body
 
-  console.log(
-    `pages/api/chargeFiatDonationPledge ${pledgeId}, ${cardToken}, ${amount}`
-  )
+  // Basic validation
+  if (!pledgeId || !cardToken) {
+    return res.status(400).json({ message: 'Missing required fields' })
+  }
 
   try {
-    // Mock response from The Giving Block API
-    const mockApiResponse = {
-      data: {
-        success: true, // Mocking a successful charge
+    const accessToken = await getAccessToken()
+
+    // Charge the pledge via The Giving Block's API
+    const chargeResponse = await axios.post(
+      'https://public-api.tgbwidget.com/v1/donation/fiat/charge',
+      {
+        pledgeId,
+        cardToken,
       },
-    }
-
-    // Extracting mocked data
-    const { success } = mockApiResponse.data
-
-    // Check for a valid pledgeId and cardToken for the mock scenario
-    if (pledgeId && cardToken) {
-      // Simulate a scenario where the charge fails due to exceeded funds or credit limit
-      if (amount > 1000) {
-        // Example condition where the amount exceeds a limit
-        throw new Error(
-          JSON.stringify({
-            errorMessage:
-              "The charge amount exceeds the available funds or the card's credit limit.",
-            errorType: 'err.generic',
-            meta: {},
-            requestId: '99f0ec91-0def-4aca-99a9-eba17c2af2a3',
-          })
-        )
-      }
-      // Mocking a successful charge operation
-      res.status(200).json({ data: { success } })
-    } else {
-      // If there are missing details, simulate a failed charge response
-      res.status(500).json({
-        error: {
-          errorMessage:
-            "The charge amount exceeds the available funds or the card's credit limit.",
-          errorType: 'err.generic',
-          meta: {},
-          requestId: '99f0ec91-0def-4aca-99a9-eba17c2af2a3',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-      })
-    }
-  } catch (error) {
-    console.error('Error charging fiat donation pledge:', error)
-    // Parsing the error message from the thrown error
-    let errorResponse
-    try {
-      errorResponse = JSON.parse(error.message)
-    } catch {
-      errorResponse = {
-        errorMessage: 'An unexpected error occurred.',
-        errorType: 'err.unknown',
-        meta: {},
-        requestId: 'unknown',
       }
-    }
-    res.status(500).json(errorResponse)
+    )
+
+    const { success } = chargeResponse.data.data
+
+    // Update the donation record in Prisma with success status
+    await prisma.donation.update({
+      where: { pledgeId },
+      data: {
+        success: success || false,
+      },
+    })
+
+    // Return success response to the frontend
+    return res.status(200).json({ success })
+  } catch (error: any) {
+    console.error(
+      'Error charging fiat donation pledge:',
+      error.message || error.response?.data
+    )
+
+    // Update the donation record to reflect failure if necessary
+    await prisma.donation.update({
+      where: { pledgeId },
+      data: {
+        success: false,
+      },
+    })
+
+    return res.status(500).json({ error: 'Internal Server Error' })
   }
 }
