@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react'
 import SignatureCanvas from 'react-signature-canvas'
 import { useDonation } from '../contexts/DonationContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEraser } from '@fortawesome/free-solid-svg-icons'
 
 export default function PaymentModalStockDonorSignature({ onContinue }) {
-  const { state } = useDonation()
+  const { state, dispatch } = useDonation()
   const signaturePadRef = useRef<SignatureCanvas | null>(null)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
@@ -22,7 +24,6 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
 
     if (signature) {
       try {
-        // Make an API call to the mock endpoint
         const response = await fetch('/api/signStockDonation', {
           method: 'POST',
           headers: {
@@ -33,6 +34,14 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
             date: new Date().toISOString(),
             signature: signature,
           }),
+        })
+
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: {
+            signatureDate: new Date().toISOString(),
+            signatureImage: signature,
+          },
         })
 
         const data = await response.json()
@@ -56,10 +65,10 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
 
   return (
     <div className="flex flex-col space-y-4 p-8">
-      <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
+      <h2 className="font-space-grotesk text-3xl font-bold text-[#222222]">
         Signature
       </h2>
-      <p className="flex items-center text-gray-600">
+      <p className="flex items-center font-space-grotesk text-base text-gray-600">
         By signing your donation request electronically, you consent to the
         terms and acknowledge the disclaimer
         <span className="group relative ml-1">
@@ -84,27 +93,27 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
           </span>
         </span>
       </p>
-      <SignatureCanvas
-        ref={signaturePadRef}
-        penColor="black"
-        canvasProps={{
-          width: 500,
-          height: 200,
-          className: 'sigCanvas border border-gray-300 rounded-lg shadow-sm',
-        }}
-        onEnd={handleEnd}
-      />
-      <button
-        type="button"
-        onClick={handleClear}
-        className="mt-2 rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-      >
-        Clear
-      </button>
+      <div className="relative">
+        <SignatureCanvas
+          ref={signaturePadRef}
+          penColor="black"
+          canvasProps={{
+            width: 445,
+            height: 200,
+            className: 'sigCanvas border border-gray-300 rounded-lg shadow-sm',
+          }}
+          onEnd={handleEnd}
+        />
+        <FontAwesomeIcon
+          icon={faEraser}
+          className="absolute bottom-2 right-2 h-6 w-6 cursor-pointer text-black hover:text-blue-600"
+          onClick={handleClear}
+        />
+      </div>
       <button
         onClick={handleSubmit}
         disabled={isButtonDisabled}
-        className={`mt-4 w-full rounded-2xl py-3 text-2xl font-semibold transition-colors duration-200 ${
+        className={`mt-4 w-full rounded-2xl py-3 text-xl font-semibold transition-colors duration-200 ${
           isButtonDisabled
             ? 'cursor-not-allowed bg-gray-400'
             : 'bg-[#222222] hover:bg-[#333333]'

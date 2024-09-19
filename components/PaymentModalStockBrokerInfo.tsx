@@ -15,6 +15,7 @@ export default function PaymentModalStockBrokerInfo() {
 
   const [brokers, setBrokers] = useState<Broker[]>([])
   const [selectedBroker, setSelectedBroker] = useState('')
+  const [selectedBrokerLabel, setSelectedBrokerLabel] = useState('')
   const [brokerageAccountNumber, setbrokerageAccountNumber] = useState('')
   const [brokerContactName, setBrokerContactName] = useState('')
   const [brokerEmail, setBrokerEmail] = useState('')
@@ -38,6 +39,19 @@ export default function PaymentModalStockBrokerInfo() {
     fetchBrokers()
   }, [])
 
+  const handleBrokerChange = (e) => {
+    const selectedBrokerName = e.target.value
+    setSelectedBroker(selectedBrokerName)
+    const broker = brokers.find((b) => b.name === selectedBrokerName)
+    if (broker) {
+      setSelectedBrokerLabel(broker.label)
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { brokerLabelName: broker.label },
+      })
+    }
+  }
+
   useEffect(() => {
     // Enable continue button only when all required fields are filled
     setIsButtonDisabled(!selectedBroker || !brokerageAccountNumber)
@@ -53,6 +67,8 @@ export default function PaymentModalStockBrokerInfo() {
       type: 'SET_FORM_DATA',
       payload: {
         brokerName: selectedBroker,
+        // TODO: Implmement brokerLabelName.
+        // brokerLabelName:
         brokerageAccountNumber,
         brokerContactName,
         brokerEmail,
@@ -67,6 +83,8 @@ export default function PaymentModalStockBrokerInfo() {
       setLoading(false)
       return
     }
+
+    dispatch({ type: 'SET_FORM_DATA', payload: { donationUuid } })
 
     const payload = {
       donationUuid,
@@ -108,13 +126,14 @@ export default function PaymentModalStockBrokerInfo() {
           <select
             id="broker-firm"
             value={selectedBroker}
-            onChange={(e) => setSelectedBroker(e.target.value)}
+            onChange={handleBrokerChange}
             required
             className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2"
           >
             <option value="">Select a broker</option>
             {brokers.map((broker) => (
               <option key={broker.id} value={broker.name}>
+                {/* This is the value we want to capture as part of the todo */}
                 {broker.label}
               </option>
             ))}

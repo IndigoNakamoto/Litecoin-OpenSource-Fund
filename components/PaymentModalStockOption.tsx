@@ -1,3 +1,5 @@
+// /components/PaymentModalStockOption.tsx
+
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -94,7 +96,7 @@ export default function PaymentModalStockOption() {
           ticker: query,
         },
         pagination: {
-          page: 1,
+          page: 1, // Modify if implementing infinite scroll or pagination
           itemsPerPage: 50,
         },
       })
@@ -110,8 +112,11 @@ export default function PaymentModalStockOption() {
         tickers,
         count: apiPagination.count,
       }
-    } catch (error) {
-      console.error('Error fetching stocks:', error)
+    } catch (error: any) {
+      console.error(
+        'Error fetching stocks:',
+        error.response?.data || error.message
+      )
       setFilteredStocks([])
     } finally {
       setLoading(false)
@@ -130,29 +135,7 @@ export default function PaymentModalStockOption() {
     } else {
       dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
     }
-  }, [formData.assetSymbol, formData.pledgeAmount, tickerCost])
-
-  const validateQuantity = () => {
-    const numQuantity = Math.floor(Number(formData.pledgeAmount))
-    const minimumQuantity = Math.ceil(500 / tickerCost)
-
-    if (isNaN(numQuantity) || numQuantity < minimumQuantity) {
-      const adjustedQuantity = minimumQuantity.toString()
-      dispatch({
-        type: 'SET_FORM_DATA',
-        payload: { pledgeAmount: adjustedQuantity },
-      })
-      setUsdValue(Number((minimumQuantity * tickerCost).toFixed(2)))
-      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
-    } else {
-      dispatch({
-        type: 'SET_FORM_DATA',
-        payload: { pledgeAmount: numQuantity.toString() },
-      })
-      setUsdValue(Number((numQuantity * tickerCost).toFixed(2)))
-      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
-    }
-  }
+  }, [formData.assetSymbol, formData.pledgeAmount, tickerCost, dispatch])
 
   const fetchTickerCost = async (ticker: string) => {
     try {
@@ -172,8 +155,11 @@ export default function PaymentModalStockOption() {
         payload: { pledgeAmount: initialQuantity.toString() },
       })
       setUsdValue(Number((initialQuantity * rate).toFixed(2)))
-    } catch (error) {
-      console.error('Error fetching ticker cost:', error)
+    } catch (error: any) {
+      console.error(
+        'Error fetching ticker cost:',
+        error.response?.data || error.message
+      )
       setTickerCost(0)
       setUsdValue(0)
       dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
@@ -188,9 +174,14 @@ export default function PaymentModalStockOption() {
       type: 'SET_FORM_DATA',
       payload: { assetSymbol: stock.ticker, assetName: stock.name },
     })
-    // Removed fetchTickerCost from here
+    // Removed fetchTickerCost from here as it's handled in useEffect
     setShowDropdown(false)
+    // Enable donate button based on validation
     dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
+  }
+
+  const roundUpToNearestCent = (value: number) => {
+    return Math.ceil(value * 100) / 100
   }
 
   const handleQuantityChange = (value: string) => {
@@ -206,11 +197,35 @@ export default function PaymentModalStockOption() {
       formData.assetSymbol &&
       tickerCost > 0
     ) {
-      setUsdValue(Number((numQuantity * tickerCost).toFixed(2)))
+      const newUsdValue = roundUpToNearestCent(numQuantity * tickerCost)
+      setUsdValue(newUsdValue)
       dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
     } else {
       setUsdValue(0)
       dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
+    }
+  }
+
+  const validateQuantity = () => {
+    const numQuantity = Math.floor(Number(formData.pledgeAmount))
+    const minimumQuantity = Math.ceil(500 / tickerCost)
+
+    if (isNaN(numQuantity) || numQuantity < minimumQuantity) {
+      const adjustedQuantity = minimumQuantity.toString()
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { pledgeAmount: adjustedQuantity },
+      })
+      setUsdValue(roundUpToNearestCent(minimumQuantity * tickerCost))
+      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
+    } else {
+      const newUsdValue = roundUpToNearestCent(numQuantity * tickerCost)
+      setUsdValue(newUsdValue)
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { pledgeAmount: numQuantity.toString() },
+      })
+      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
     }
   }
 
@@ -259,7 +274,7 @@ export default function PaymentModalStockOption() {
           dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
         }}
         placeholder="Search for a stock name or ticker"
-        className="flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk text-[#222222]"
+        className="flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]"
         onFocus={() => {
           if (!displayedStock) {
             setShowDropdown(true)
@@ -317,6 +332,7 @@ export default function PaymentModalStockOption() {
                 onChange={(e) => handleQuantityChange(e.target.value)}
                 onBlur={validateQuantity}
                 min={1}
+                required
               />
             </div>
 

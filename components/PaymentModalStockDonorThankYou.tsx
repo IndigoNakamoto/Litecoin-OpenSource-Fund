@@ -1,5 +1,3 @@
-//components/PaymentModalStockDonorThankYou
-
 import React from 'react'
 import { useDonation } from '../contexts/DonationContext'
 
@@ -13,47 +11,68 @@ export default function PaymentModalStockDonorThankYou({ onRequestClose }) {
   const donorName = state.formData.isAnonymous
     ? 'Anonymous Donor'
     : `${state.formData.firstName} ${state.formData.lastName}`
-  const brokerName = state.formData.brokerContactName || 'N/A'
+  const brokerName = state.formData.brokerLabelName || 'N/A'
+  const brokerContactName = state.formData.brokerContactName || 'N/A'
   const brokerageAccountNumber = state.formData.brokerageAccountNumber || 'N/A'
-  const signatureDate = state.formData.signatureDate || 'Pending'
+  const signatureImage = state.formData.signatureImage || ''
+
+  // Format the signature date
+  const signatureDate = state.formData.signatureDate
+    ? new Date(state.formData.signatureDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'Pending'
 
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg bg-white p-8 shadow-lg">
-      <h2 className="font-space-grotesk text-3xl font-bold text-[#222222]">
+    <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-8 font-space-grotesk">
+      <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Thank You, {donorName}!
       </h2>
-      <p className="text-center text-gray-700">
-        Your generous donation has been sent to your broker, {brokerName}.
-      </p>
-      <p className="text-center text-gray-700">
-        You will receive a confirmation email with your tax receipt once your
-        donation is processed.
-      </p>
-      <div className="flex w-full flex-col items-center space-y-2">
-        <p className="text-center text-gray-800">
-          <span className="font-semibold">Project:</span> {projectTitle}
+      <hr className="border-t-1 w-full border-gray-400" />
+      <div className="text-lg">
+        <p className="text-center text-gray-700">
+          Your generous donation has been sent to your broker {brokerName} to
+          process the donation.
+          <div className="my-4">
+            <p className="text-center text-gray-800">
+              <span className="font-semibold">Project:</span> {projectTitle}
+            </p>
+            <p className="text-center text-gray-800">
+              <span className="font-semibold">Donated Stock:</span>{' '}
+              {donatedStock}
+            </p>
+            <p className="text-center text-gray-800">
+              <span className="font-semibold">Amount:</span> {stockQuantity}{' '}
+              shares
+            </p>
+            <p className="text-center text-gray-800">
+              <span className="font-semibold">Broker Account:</span>{' '}
+              {brokerageAccountNumber}
+            </p>
+          </div>
+          <p className="text-center text-gray-700">
+            You will receive a confirmation email with your tax receipt once
+            your donation is processed.
+          </p>
         </p>
-        <p className="text-center text-gray-800">
-          <span className="font-semibold">Donated Stock:</span> {donatedStock}
-        </p>
-        <p className="text-center text-gray-800">
-          <span className="font-semibold">Amount:</span> {stockQuantity} shares
-        </p>
-        <p className="text-center text-gray-800">
-          <span className="font-semibold">Broker Account:</span>{' '}
-          {brokerageAccountNumber}
-        </p>
-        <p className="text-center text-gray-800">
-          <span className="font-semibold">Signature Date:</span> {signatureDate}
-        </p>
+        {/* Divider line with clear margin and visibility */}
+
+        {/* <div className="flex w-full flex-col items-center space-y-2">
+          {signatureImage && (
+            <img
+              src={signatureImage}
+              alt="Signature of the donor"
+              className="mt-2 w-full max-w-xs"
+            />
+          )}
+          <p className="text-center text-gray-800">
+            <span className="font-semibold">Signature Date:</span>{' '}
+            {signatureDate}
+          </p>
+        </div> */}
       </div>
-      <button
-        onClick={onRequestClose}
-        className="mt-4 w-full transform rounded-lg bg-[#222222] py-2 text-xl font-semibold text-[#f0f0f0] transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#222222] focus:ring-offset-2"
-        aria-label="Close thank you message"
-      >
-        Close
-      </button>
     </div>
   )
 }

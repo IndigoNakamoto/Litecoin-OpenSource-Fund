@@ -1,19 +1,8 @@
-// pages/api/submitStockDonation.ts
+// /pages/api/submitStockDonation.ts
 
 import { NextApiRequest, NextApiResponse } from 'next'
-
-// Define the type for the submitted stock donation object
-type SubmittedStockDonation = {
-  donationUuid: string
-  brokerName: string
-  brokerageAccountNumber: string
-  brokerContactName?: string
-  brokerEmail?: string
-  brokerPhone?: string
-}
-
-// Mock storage for submitted stock donations
-const mockSubmittedStockDonations: SubmittedStockDonation[] = []
+import axios from 'axios'
+import { getAccessToken } from '../../utils/authTGB'
 
 export default async function handler(
   req: NextApiRequest,
@@ -43,33 +32,40 @@ export default async function handler(
   }
 
   try {
-    // Mock response based on the expected structure
-    const mockApiResponse = {
-      data: {
-        isSuccess: true,
+    const accessToken = await getAccessToken() // Retrieve The Giving Block access token
+
+    if (!accessToken) {
+      console.error('Access token is missing.')
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
+
+    const response = await axios.post(
+      'https://public-api.tgbwidget.com/v1/stocks/submit',
+      {
+        donationUuid,
+        brokerName,
+        brokerageAccountNumber,
+        brokerContactName,
+        brokerEmail,
+        brokerPhone,
       },
-      requestId: '3aa84ad9-5222-4e01-a5b0-d0c6c2849836', // Mocked request ID
-    }
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
 
-    // Mock saving the submitted stock donation data
-    const submittedStockDonation: SubmittedStockDonation = {
-      donationUuid,
-      brokerName,
-      brokerageAccountNumber,
-      brokerContactName,
-      brokerEmail,
-      brokerPhone,
-    }
-
-    // Save the submitted stock donation to the mock storage
-    mockSubmittedStockDonations.push(submittedStockDonation)
-
-    // Respond with the mocked API data
-    res.status(200).json(mockApiResponse)
-  } catch (error) {
-    console.error('Error submitting stock donation:', (error as Error).message)
-    res.status(500).json({
-      error: 'Internal Server Error: Unable to submit stock donation',
-    })
+    res.status(200).json(response.data)
+  } catch (error: any) {
+    // Handle errors
+    console.error(
+      'Error submitting stock donation:',
+      error.response?.data || error.message
+    )
+    res
+      .status(500)
+      .json({ error: error.response?.data || 'Internal Server Error' })
   }
 }

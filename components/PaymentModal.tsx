@@ -171,7 +171,7 @@ const PaymentModal: React.FC<ModalProps> = ({
         </div>
         <div className="flex h-full w-full flex-col justify-between space-y-4 pb-5 pt-6 font-space-grotesk">
           <button
-            className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] font-bold ${
+            className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
               state.selectedOption === 'crypto'
                 ? 'bg-[#222222] text-[#f0f0f0]'
                 : 'bg-[#f0f0f0] text-[#222222]'
@@ -191,7 +191,7 @@ const PaymentModal: React.FC<ModalProps> = ({
 
           <div className="flex justify-between space-x-3">
             <button
-              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  font-bold ${
+              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
                 state.selectedOption === 'fiat'
                   ? 'bg-[#222222] text-[#f0f0f0]'
                   : 'bg-[#f0f0f0] text-[#222222]'
@@ -203,7 +203,7 @@ const PaymentModal: React.FC<ModalProps> = ({
             </button>
 
             <button
-              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  font-bold ${
+              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
                 state.selectedOption === 'stock'
                   ? 'bg-[#222222] text-[#f0f0f0]'
                   : 'bg-[#f0f0f0] text-[#222222]'

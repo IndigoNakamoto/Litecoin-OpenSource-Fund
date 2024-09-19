@@ -372,20 +372,20 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             },
           })
           dispatch({ type: 'SET_STEP', payload: 'cryptoDonate' })
-        } else if (selectedOption === 'stock' && data?.data?.donationUuid) {
-          console.log('Donation UUID received:', data.data.donationUuid)
+        } else if (selectedOption === 'stock' && data?.donationUuid) {
+          console.log('Donation UUID received:', data.donationUuid)
           dispatch({
             type: 'SET_DONATION_DATA',
             payload: {
               ...state.donationData,
-              donationUuid: data.data.donationUuid,
+              donationUuid: data.donationUuid,
             },
           })
           // Move to the stock broker info step
           dispatch({ type: 'SET_STEP', payload: 'stockBrokerInfo' })
         } else {
           console.error(
-            'Expected data (pledgeId, depositAddress, or donationUuid) missing in response',
+            'Expected data (psledgeId, depositAddress, or donationUuid) missing in response',
             data
           )
         }
@@ -506,7 +506,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 
           <div className="flex flex-col">
             <div className="flex flex-row">
-              <div className="relative my-2 h-[64px] min-w-[64px] rounded-full bg-green-400">
+              <div className="relative my-2 h-[64px] min-w-[64px] rounded-full bg-blue-400">
                 {!session ? (
                   <Image
                     src="/static/images/design/chickun.jpeg"

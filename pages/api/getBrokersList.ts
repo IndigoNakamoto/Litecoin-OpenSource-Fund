@@ -1,42 +1,43 @@
-// pages/api/getStockBrokers.ts
+// /pages/api/getStockBrokers.ts
 
-// Mock storage for brokers
-const mockBrokers = [
-  { name: 'ameriprise', label: 'Ameriprise' },
-  { name: 'schwab', label: 'Charles Schwab' },
-  { name: 'etrade', label: 'E-Trade' },
-  { name: 'fidelity', label: 'Fidelity Investments' },
-  { name: 'jpmorgan', label: 'J.P. Morgan' },
-  { name: 'lpl', label: 'LPL Financial' },
-  { name: 'merrill', label: 'Merrill Lynch' },
-  { name: 'morganstanley', label: 'Morgan Stanley' },
-  { name: 'ameritrade', label: 'TD Ameritrade' },
-  { name: 'tiaa', label: 'TIAA Brokerage' },
-  { name: 'trowe', label: 'T. Rowe Price' },
-  { name: 'wellsfargo', label: 'Wells Fargo' },
-  { name: 'other', label: 'Other' },
-]
+import { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
+import { getAccessToken } from '../../utils/authTGB'
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
 
   try {
-    // Mock response similar to the expected API response
-    const mockApiResponse = {
-      data: {
-        brokers: mockBrokers,
-      },
-      requestId: '821ec76e-ae39-4206-b5db-48322b07729d', // Mocked request ID
+    const accessToken = await getAccessToken() // Retrieve The Giving Block access token
+
+    if (!accessToken) {
+      console.error('Access token is missing.')
+      return res.status(401).json({ error: 'Unauthorized' })
     }
 
-    // Respond with the mocked API data
-    res.status(200).json(mockApiResponse)
-  } catch (error) {
-    console.error('Error fetching brokers:', error.message)
+    const response = await axios.get(
+      'https://public-api.tgbwidget.com/v1/stocks/brokers',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    )
+
+    res.status(200).json(response.data)
+  } catch (error: any) {
+    // Handle errors
+    console.error(
+      'Error fetching brokers:',
+      error.response?.data || error.message
+    )
     res
       .status(500)
-      .json({ error: 'Internal Server Error: Brokers data unavailable' })
+      .json({ error: error.response?.data || 'Internal Server Error' })
   }
 }

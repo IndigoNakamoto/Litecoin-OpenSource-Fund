@@ -41,6 +41,7 @@ type FormData = {
   cardToken: string // For charging fiat donation
   donationUuid: string // For stock donations
   brokerName: string // for stock donations
+  brokerLabelName: string // for stock donations
   brokerageAccountNumber: string // For stock donations
   brokerContactName: string // For stock donations
   brokerEmail: string // For stock donations
@@ -153,6 +154,7 @@ const initialState: DonationState = {
     cardToken: '',
     donationUuid: '',
     brokerName: '',
+    brokerLabelName: '',
     brokerageAccountNumber: '',
     brokerContactName: '',
     brokerEmail: '',

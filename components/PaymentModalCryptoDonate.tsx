@@ -25,6 +25,19 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
     amount: false,
   })
 
+  const formatPledgeAmount = (amount) => {
+    // Ensure the amount has exactly 8 decimal places
+    let formattedAmount = parseFloat(amount).toFixed(8)
+
+    // Insert spaces after the first two and fifth decimal places
+    formattedAmount = formattedAmount.replace(
+      /^(\d+\.\d{2})(\d{3})(\d{3})$/,
+      '$1 $2 $3'
+    )
+
+    return formattedAmount
+  }
+
   const handleDone = useCallback(() => {
     dispatch({ type: 'RESET_DONATION_STATE' })
     onRequestClose()
@@ -83,12 +96,16 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
     </div>
   )
 
+  // Update the relevant line in the component to format the pledgeAmount
+  const formattedPledgeAmount = formatPledgeAmount(pledgeAmount)
+
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center font-space-grotesk">
       <div className="my-auto flex flex-col items-center justify-center space-y-4 p-8">
         <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
           Complete Your Donation
         </h2>
+        <hr className="border-t-1 w-full border-gray-400" />
         <p className="text-[#222222]">
           Please send your donation to the following address:
         </p>
@@ -102,7 +119,8 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
               fgColor="#f2f2f2"
             />
             <p className="text-[#222222]">
-              Scan the QR code above to donate {pledgeAmount} {pledgeCurrency}.
+              Scan the QR code above to donate {formattedPledgeAmount}{' '}
+              {pledgeCurrency}.
             </p>
           </>
         ) : qrCode ? (
@@ -114,7 +132,8 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
               height={256}
             />
             <p className="text-[#222222]">
-              Scan the QR code above to donate {pledgeAmount} {pledgeCurrency}.
+              Scan the QR code above to donate {formattedPledgeAmount}{' '}
+              {pledgeCurrency}.
             </p>
           </>
         ) : null}
@@ -126,7 +145,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
           onCopy={() => handleCopy('address')}
         />
         <CopyableField
-          text={pledgeAmount}
+          text={formattedPledgeAmount}
           copiedText="Amount copied to clipboard!"
           isCopied={copied.amount}
           onCopy={() => handleCopy('amount')}
