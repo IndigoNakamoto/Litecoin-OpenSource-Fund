@@ -233,3 +233,22 @@ input[type='number'] {
 .animate-slide-up {
   animation: slide-up 0.5s forwards;
 }
+
+/* styles.css */
+.text-gradient-animation {
+  background: linear-gradient(90deg, #f0f0f0, #222222, #333333, #f0f0f0);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-move 2s infinite;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

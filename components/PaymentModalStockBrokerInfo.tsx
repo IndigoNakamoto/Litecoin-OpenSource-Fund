@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDonation } from '../contexts/DonationContext'
+import GradientButton from './GradientButton' // Import the GradientButton component
 
 export default function PaymentModalStockBrokerInfo() {
   const { state, dispatch } = useDonation()
@@ -200,7 +201,7 @@ export default function PaymentModalStockBrokerInfo() {
             className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2"
           />
         </div>
-        <div className="flex justify-between space-x-2 pt-8">
+        <div className="flex justify-between space-x-2 pt-8 !font-space-grotesk !text-xl">
           <button
             type="button"
             onClick={() =>
@@ -210,15 +211,15 @@ export default function PaymentModalStockBrokerInfo() {
           >
             Back
           </button>
-          <button
+          {/* Use the GradientButton Component */}
+          <GradientButton
             type="submit"
-            className={`w-full !rounded-2xl text-2xl font-semibold text-[#f0f0f0] ${
-              isButtonDisabled || loading ? 'bg-gray-400' : 'bg-[#222222]'
-            }`}
-            disabled={isButtonDisabled || loading}
+            isLoading={loading}
+            disabled={isButtonDisabled}
+            loadingText="Processing"
           >
-            {loading ? 'Submitting...' : 'Continue'}
-          </button>
+            Continue
+          </GradientButton>
         </div>
       </form>
     </div>

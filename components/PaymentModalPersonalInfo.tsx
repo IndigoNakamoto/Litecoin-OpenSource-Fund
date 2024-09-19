@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { countries } from './countries'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import ProjectSocialLinks from './ProjectSocialLinks'
+import GradientButton from './GradientButton' // Adjust the import path as needed
 
 type PaymentModalPersonalInfoProps = {
   onRequestClose: () => void
@@ -19,6 +20,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 }) => {
   const { state, dispatch } = useDonation()
   const { formData, projectSlug } = state // Access formData from context
+  const [isLoading, setIsLoading] = useState(false) // State to handle loading for the button
 
   // Initialize local states based on formData
   const [donateAnonymously, setDonateAnonymously] = useState(
@@ -215,8 +217,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     emailError, // Include emailError in dependencies
   ])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Function to handle form submission
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoading(true) // Set loading state to true when API request starts
 
     // Reset previous errors
     setEmailError('')
@@ -243,7 +247,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     }
 
     if (!isValid) {
-      // Prevent submission if validation fails
+      setIsLoading(false) // Set loading state back to false since validation failed
       return
     }
 
@@ -283,28 +287,22 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     } else if (selectedOption === 'crypto') {
       apiEndpoint = '/api/createDepositAddress'
       apiBody = {
-        // project
         projectSlug: projectSlug,
         organizationId: 1189134331,
-        // Donation
         pledgeCurrency: formData.assetSymbol,
         pledgeAmount: formData.pledgeAmount,
-        // Donor Info
         receiptEmail: formData.receiptEmail,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        /// Donor Personal Info
         addressLine1: formData.addressLine1,
         addressLine2: formData.addressLine2,
         country: formData.country,
         state: formData.state,
         city: formData.city,
         zipcode: formData.zipcode,
-        // Donor Settings
         taxReceipt: formData.taxReceipt,
         isAnonymous: formData.isAnonymous,
         joinMailingList: formData.joinMailingList,
-        // Donor Social Profiles
         socialX: formData.socialX,
         socialFacebook: formData.socialFacebook,
         socialLinkedIn: formData.socialLinkedIn,
@@ -313,17 +311,13 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       apiEndpoint = '/api/createStockDonationPledge'
       apiBody = {
         organizationId: 1189134331,
-        // project
         projectSlug: projectSlug,
-        // Donation
         assetSymbol: formData.assetSymbol,
         assetDescription: formData.assetName,
         pledgeAmount: formData.pledgeAmount,
-        // Donor Info
         receiptEmail: formData.receiptEmail,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        // Donor Personal Info
         addressLine1: formData.addressLine1,
         addressLine2: formData.addressLine2,
         country: formData.country,
@@ -331,11 +325,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
         city: formData.city,
         zipcode: formData.zipcode,
         phoneNumber: formData.phoneNumber,
-        // Donor Settings
         taxReceipt: formData.taxReceipt,
         isAnonymous: formData.isAnonymous,
         joinMailingList: formData.joinMailingList,
-        // Donor Social Profiles
         socialX: formData.socialX,
         socialFacebook: formData.socialFacebook,
         socialLinkedIn: formData.socialLinkedIn,
@@ -381,11 +373,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               donationUuid: data.donationUuid,
             },
           })
-          // Move to the stock broker info step
           dispatch({ type: 'SET_STEP', payload: 'stockBrokerInfo' })
         } else {
           console.error(
-            'Expected data (psledgeId, depositAddress, or donationUuid) missing in response',
+            'Expected data (pledgeId, depositAddress, or donationUuid) missing in response',
             data
           )
         }
@@ -394,6 +385,183 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       }
     } catch (error) {
       console.error('Error submitting pledge:', error)
+    } finally {
+      setIsLoading(false) // Set loading state to false when request completes
+    }
+  }
+
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault()
+    setIsLoading(true) // Set loading state to true when API request starts
+
+    // Reset previous errors
+    setEmailError('')
+
+    // Perform validation
+    let isValid = true
+
+    // Determine if email is required
+    const isEmailRequired =
+      needsTaxReceipt ||
+      joinMailingList ||
+      (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
+
+    if (isEmailRequired) {
+      if (!formData.receiptEmail.trim()) {
+        setEmailError('Email is required.')
+        isValid = false
+      } else if (!/^\S+@\S+\.\S+$/.test(formData.receiptEmail.trim())) {
+        setEmailError('Please enter a valid email address.')
+        isValid = false
+      } else {
+        setEmailError('')
+      }
+    }
+
+    if (!isValid) {
+      // Prevent submission if validation fails
+      setIsLoading(false) // Set loading state back to false since validation failed
+      return
+    }
+
+    // Proceed with form submission
+    dispatch({
+      type: 'SET_DONATION_DATA',
+      payload: {
+        ...state.donationData,
+        ...formData,
+      },
+    })
+
+    const { selectedOption, selectedCurrency, selectedCurrencyPledged } = state
+
+    let apiEndpoint = ''
+    let apiBody = {}
+
+    if (selectedOption === 'fiat') {
+      apiEndpoint = '/api/createFiatDonationPledge'
+      apiBody = {
+        organizationId: 1189134331,
+        isAnonymous: donateAnonymously,
+        pledgeCurrency: selectedCurrency,
+        pledgeAmount: selectedCurrencyPledged,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        receiptEmail: formData.receiptEmail,
+        addressLine1: formData.addressLine1,
+        addressLine2: formData.addressLine2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.zipcode,
+        taxReceipt: formData.taxReceipt,
+        joinMailingList: formData.joinMailingList,
+      }
+    } else if (selectedOption === 'crypto') {
+      apiEndpoint = '/api/createDepositAddress'
+      apiBody = {
+        projectSlug: projectSlug,
+        organizationId: 1189134331,
+        pledgeCurrency: formData.assetSymbol,
+        pledgeAmount: formData.pledgeAmount,
+        receiptEmail: formData.receiptEmail,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        addressLine1: formData.addressLine1,
+        addressLine2: formData.addressLine2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.zipcode,
+        taxReceipt: formData.taxReceipt,
+        isAnonymous: formData.isAnonymous,
+        joinMailingList: formData.joinMailingList,
+        socialX: formData.socialX,
+        socialFacebook: formData.socialFacebook,
+        socialLinkedIn: formData.socialLinkedIn,
+      }
+    } else if (selectedOption === 'stock') {
+      apiEndpoint = '/api/createStockDonationPledge'
+      apiBody = {
+        organizationId: 1189134331,
+        projectSlug: projectSlug,
+        assetSymbol: formData.assetSymbol,
+        assetDescription: formData.assetName,
+        pledgeAmount: formData.pledgeAmount,
+        receiptEmail: formData.receiptEmail,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        addressLine1: formData.addressLine1,
+        addressLine2: formData.addressLine2,
+        country: formData.country,
+        state: formData.state,
+        city: formData.city,
+        zipcode: formData.zipcode,
+        phoneNumber: formData.phoneNumber,
+        taxReceipt: formData.taxReceipt,
+        isAnonymous: formData.isAnonymous,
+        joinMailingList: formData.joinMailingList,
+        socialX: formData.socialX,
+        socialFacebook: formData.socialFacebook,
+        socialLinkedIn: formData.socialLinkedIn,
+      }
+    }
+
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(apiBody),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        if (selectedOption === 'fiat' && data?.data?.pledgeId) {
+          dispatch({
+            type: 'SET_DONATION_DATA',
+            payload: {
+              ...state.donationData,
+              pledgeId: data.data.pledgeId,
+            },
+          })
+          dispatch({ type: 'SET_STEP', payload: 'fiatDonate' })
+        } else if (selectedOption === 'crypto' && data?.depositAddress) {
+          dispatch({
+            type: 'SET_DONATION_DATA',
+            payload: {
+              ...state.donationData,
+              depositAddress: data.depositAddress,
+              qrCode: data.qrCode,
+              ...state.formData,
+            },
+          })
+          dispatch({ type: 'SET_STEP', payload: 'cryptoDonate' })
+        } else if (selectedOption === 'stock' && data?.donationUuid) {
+          console.log('Donation UUID received:', data.donationUuid)
+          dispatch({
+            type: 'SET_DONATION_DATA',
+            payload: {
+              ...state.donationData,
+              donationUuid: data.donationUuid,
+            },
+          })
+          dispatch({ type: 'SET_STEP', payload: 'stockBrokerInfo' })
+        } else {
+          console.error(
+            'Expected data (pledgeId, depositAddress, or donationUuid) missing in response',
+            data
+          )
+        }
+      } else {
+        console.error(data.error)
+      }
+    } catch (error) {
+      console.error('Error submitting pledge:', error)
+    } finally {
+      setIsLoading(false) // Set loading state to false when request completes
     }
   }
 
@@ -418,7 +586,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Personal Information
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleFormSubmit} className="space-y-4">
         {/* DONATE ANONYMOUSLY CHECKBOX */}
         <span className="block w-full border-t border-gray-400"></span>
         {state.selectedOption === 'stock' ? (
@@ -780,15 +948,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           >
             Back
           </button>
-          <button
-            type="submit"
-            className={`w-2/3 !rounded-2xl text-2xl font-semibold !text-[#f0f0f0] ${
-              isButtonDisabled ? 'bg-gray-400' : 'bg-[#222222]'
-            }`}
+          <GradientButton
+            isLoading={isLoading} // Pass the isLoading state
             disabled={isButtonDisabled}
+            onClick={handleSubmit} // Ensure the handleSubmit function handles form submission
+            loadingText="Processing.."
           >
             Continue
-          </button>
+          </GradientButton>
         </div>
       </form>
     </div>

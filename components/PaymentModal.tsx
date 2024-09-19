@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import ReactModal from 'react-modal'
 import Image from 'next/legacy/image'
+import GradientButton from './GradientButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faClose,
@@ -229,20 +230,18 @@ const PaymentModal: React.FC<ModalProps> = ({
             </button>
           </div>
         </div>
-        <div>{renderPaymentOption()}</div>
-        <button
-          className={`mt-16 w-full rounded-2xl bg-[#222222] font-space-grotesk text-2xl font-semibold ${
-            state.isDonateButtonDisabled
-              ? 'bg-gray-600 text-gray-700'
-              : 'text-[#f0f0f0]'
-          }`}
+        <div className="pb-10">{renderPaymentOption()}</div>
+        <GradientButton
           onClick={() =>
             dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
           }
+          isLoading={false} // Adjust based on your loading state
           disabled={state.isDonateButtonDisabled}
+          backgroundColor={state.isDonateButtonDisabled ? '#d1d5db' : '#222222'}
+          textColor={state.isDonateButtonDisabled ? '#gray-600' : '#f0f0f0'}
         >
           Donate
-        </button>
+        </GradientButton>
       </>
     )
   }
