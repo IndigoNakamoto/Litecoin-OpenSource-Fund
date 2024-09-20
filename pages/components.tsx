@@ -26,7 +26,7 @@ const ComponentsShowcase = () => {
           Payment Modal Fiat Thank You
         </h2>
         <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
-          <PaymentModalFiatThankYou />
+          <PaymentModalFiatThankYou onRequestClose={() => null} />
         </section>
 
         {/* Showcase PaymentModalStockDonorThankYou */}
