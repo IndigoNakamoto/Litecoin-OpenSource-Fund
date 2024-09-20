@@ -5,7 +5,7 @@ import { SiX, SiFacebook, SiLinkedin } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
 import { countries } from './countries'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react' // Removed signOut import
 import GradientButton from './GradientButton' // Adjust the import path as needed
 
 type PaymentModalPersonalInfoProps = {
@@ -189,11 +189,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 
   const { data: session } = useSession()
 
-  // State to ensure session is processed only once
-  const [hasProcessedSession, setHasProcessedSession] = useState(false)
+  // Remove hasProcessedSession state and related logic
 
   useEffect(() => {
-    if (session && !hasProcessedSession) {
+    if (session) {
       // Update formData with Twitter username and image
       dispatch({
         type: 'SET_FORM_DATA',
@@ -202,12 +201,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           socialXimageSrc: session.user.image,
         },
       })
-      // Mark session as processed to prevent re-processing
-      setHasProcessedSession(true)
-      // Sign out the user to prevent staying logged in
-      signOut({ callbackUrl: window.location.href }) // Redirect back to current URL
+      // Note: Sign-out is now handled by the parent when the modal is closed
     }
-  }, [session, dispatch, hasProcessedSession])
+  }, [session, dispatch])
 
   // Ensure donateAnonymously is false if the donation type is "stock"
   useEffect(() => {
@@ -380,7 +376,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               pledgeId: data.pledgeId,
             },
           })
-          // We are not being directed to fiatDonate
           dispatch({ type: 'SET_STEP', payload: 'fiatDonate' })
         } else if (selectedOption === 'crypto' && data?.depositAddress) {
           dispatch({
@@ -394,7 +389,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           })
           dispatch({ type: 'SET_STEP', payload: 'cryptoDonate' })
         } else if (selectedOption === 'stock' && data?.donationUuid) {
-          // console.log('Donation UUID received:', data.donationUuid)
           dispatch({
             type: 'SET_DONATION_DATA',
             payload: {
@@ -588,6 +582,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                         type: 'SET_FORM_DATA',
                         payload: { socialX: '', socialXimageSrc: '' },
                       })
+                      // Removed signOut call
                     }}
                   >
                     <SiX className="mr-2 h-6 w-6" />

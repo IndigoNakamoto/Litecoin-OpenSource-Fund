@@ -1,6 +1,6 @@
 // components/PaymentModal.tsx
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import ReactModal from 'react-modal'
 import Image from 'next/legacy/image'
 import GradientButton from './GradientButton'
@@ -23,6 +23,7 @@ import PaymentModalStockDonorThankYou from './PaymentModalStockDonorThankYou'
 
 import { ProjectItem } from '../utils/types'
 import { useDonation } from '../contexts/DonationContext'
+import { signOut } from 'next-auth/react' // Import signOut
 
 type ModalProps = {
   isOpen: boolean
@@ -53,6 +54,16 @@ const PaymentModal: React.FC<ModalProps> = ({
   const handleClose = () => {
     dispatch({ type: 'RESET_DONATION_STATE' })
     onRequestClose()
+    if (
+      state.formData.socialX ||
+      state.formData.socialFacebook ||
+      state.formData.socialLinkedIn
+    ) {
+      const currentUrl = window.location.href
+      const url = new URL(currentUrl)
+      url.searchParams.set('modal', 'false')
+      signOut({ callbackUrl: url.toString() }) // Redirect back to current URL after sign-out
+    }
   }
 
   const handleFiatOptionSelect = () => {
