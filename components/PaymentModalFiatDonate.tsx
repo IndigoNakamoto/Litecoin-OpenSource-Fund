@@ -25,7 +25,7 @@ function PaymentModalFiatDonate() {
           body: JSON.stringify({
             pledgeId: state.donationData.pledgeId,
             cardToken: token,
-            amount: state.formData.pledgeAmount,
+            // amount: state.formData.pledgeAmount,
           }),
         })
 
@@ -60,7 +60,10 @@ function PaymentModalFiatDonate() {
       const Shift4 = (window as any).Shift4
       if (Shift4) {
         console.log('Initializing Shift4...')
-        const shift4 = new Shift4('pk_test_jRGmbvC4Y1m54rNqCJ2JLBWU') // Replace with your actual Shift4 public key
+        // TODO: Replace with NEXT_PUBLIC_SHIFT4_PK_TEST
+        // TODO: Figure out why process.env.NEXT_PUBLIC_SHIFT4_PK_TEST does not work
+        // const shift4 = new Shift4('pk_test_jRGmbvC4Y1m54rNqCJ2JLBWU') // USE .ENV SHIFT_PK_TEST
+        const shift4 = new Shift4('pk_live_sln6bKZqi6a0LzzhVZhK58HK')
 
         const components = shift4
           .createComponentGroup()
@@ -94,6 +97,7 @@ function PaymentModalFiatDonate() {
                 amount: amountInCents,
                 currency: 'USD',
                 card: token.id,
+                // merchantAccountId
               })
             })
             .then((secureToken: any) => {
@@ -102,6 +106,7 @@ function PaymentModalFiatDonate() {
               submitButton?.removeAttribute('disabled')
 
               // Use the submitDonation function directly
+              console.log('secureToken: ', secureToken)
               submitDonation(secureToken.id)
             })
             .catch(

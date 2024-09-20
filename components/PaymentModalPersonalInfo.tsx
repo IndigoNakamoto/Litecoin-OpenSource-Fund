@@ -260,27 +260,43 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       },
     })
 
-    const { selectedOption, selectedCurrency, selectedCurrencyPledged } = state
+    const { selectedOption } = state
 
     let apiEndpoint = ''
     let apiBody = {}
 
+    const anonInfo = {
+      firstName: 'Anonymous',
+      lastName: 'Donor',
+      receiptEmail: 'anon@anon.com',
+      addressLine1: '123 Anon St',
+      country: 'US', // Adjust the country code as needed
+      state: 'CA', // Adjust the state code as needed
+      city: 'Anytown',
+      zipcode: '00000',
+    }
+
     if (selectedOption === 'fiat') {
       apiEndpoint = '/api/createFiatDonationPledge'
       apiBody = {
+        projectSlug: projectSlug,
         organizationId: 1189134331,
         isAnonymous: donateAnonymously,
-        pledgeCurrency: selectedCurrency,
-        pledgeAmount: selectedCurrencyPledged,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        receiptEmail: formData.receiptEmail,
-        addressLine1: formData.addressLine1,
-        addressLine2: formData.addressLine2,
-        country: formData.country,
-        state: formData.state,
-        city: formData.city,
-        zipcode: formData.zipcode,
+        pledgeCurrency: formData.pledgeCurrency,
+        pledgeAmount: formData.pledgeAmount,
+        firstName: donateAnonymously ? anonInfo.firstName : formData.firstName,
+        lastName: donateAnonymously ? anonInfo.lastName : formData.lastName,
+        receiptEmail: donateAnonymously
+          ? anonInfo.receiptEmail
+          : formData.receiptEmail,
+        addressLine1: donateAnonymously
+          ? anonInfo.addressLine1
+          : formData.addressLine1,
+        addressLine2: formData.addressLine2, // No need to anonymize this unless specified
+        country: donateAnonymously ? anonInfo.country : formData.country,
+        state: donateAnonymously ? anonInfo.state : formData.state,
+        city: donateAnonymously ? anonInfo.city : formData.city,
+        zipcode: donateAnonymously ? anonInfo.zipcode : formData.zipcode,
         taxReceipt: formData.taxReceipt,
         joinMailingList: formData.joinMailingList,
       }
@@ -344,14 +360,15 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       const data = await response.json()
 
       if (response.ok) {
-        if (selectedOption === 'fiat' && data?.data?.pledgeId) {
+        if (selectedOption === 'fiat' && data?.pledgeId) {
           dispatch({
             type: 'SET_DONATION_DATA',
             payload: {
               ...state.donationData,
-              pledgeId: data.data.pledgeId,
+              pledgeId: data.pledgeId,
             },
           })
+          // We are not being directed to fiatDonate
           dispatch({ type: 'SET_STEP', payload: 'fiatDonate' })
         } else if (selectedOption === 'crypto' && data?.depositAddress) {
           dispatch({
@@ -410,6 +427,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     state.selectedOption === 'stock'
 
   return (
+    // Rest of the code ... )}
     <div className="flex flex-col space-y-4 p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Personal Information

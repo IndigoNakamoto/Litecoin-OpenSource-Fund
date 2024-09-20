@@ -1,5 +1,3 @@
-// pages/api/chargeFiatDonationPledge.ts
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 import prisma from '../../lib/prisma' // Import your Prisma client
@@ -14,7 +12,7 @@ export default async function handler(
     return res.status(405).json({ message: 'Method Not Allowed' })
   }
 
-  const { pledgeId, cardToken, amount } = req.body
+  const { pledgeId, cardToken } = req.body
 
   // Basic validation
   if (!pledgeId || !cardToken) {
@@ -27,10 +25,7 @@ export default async function handler(
     // Charge the pledge via The Giving Block's API
     const chargeResponse = await axios.post(
       'https://public-api.tgbwidget.com/v1/donation/fiat/charge',
-      {
-        pledgeId,
-        cardToken,
-      },
+      { pledgeId, cardToken },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -39,31 +34,53 @@ export default async function handler(
       }
     )
 
+    console.log('Charge Response:', chargeResponse.data)
+
     const { success } = chargeResponse.data.data
 
     // Update the donation record in Prisma with success status
-    await prisma.donation.update({
-      where: { pledgeId },
-      data: {
-        success: success || false,
-      },
-    })
+    try {
+      await prisma.donation.update({
+        where: { pledgeId },
+        data: { success: success || false },
+      })
+    } catch (prismaError) {
+      console.error('Error updating donation status in Prisma:', prismaError)
+      return res.status(500).json({ error: 'Failed to update donation record' })
+    }
 
     // Return success response to the frontend
     return res.status(200).json({ success })
   } catch (error: any) {
+    const errorMessage =
+      error.response?.data?.errorMessage || 'Internal Server Error'
+
     console.error(
       'Error charging fiat donation pledge:',
-      error.message || error.response?.data
+      errorMessage,
+      error.response?.data || error.toString()
     )
 
-    // Update the donation record to reflect failure if necessary
-    await prisma.donation.update({
-      where: { pledgeId },
-      data: {
-        success: false,
-      },
-    })
+    // Attempt to update the donation record with failure status
+    try {
+      await prisma.donation.update({
+        where: { pledgeId },
+        data: { success: false },
+      })
+    } catch (prismaError) {
+      console.error(
+        'Error updating donation failure status in Prisma:',
+        prismaError
+      )
+    }
+
+    // Return a more descriptive error message to the frontend if applicable
+    if (error.response?.data?.errorType === 'err.generic') {
+      return res.status(500).json({
+        error:
+          "Charge failed: The charge amount exceeds the available funds or the card's credit limit. Please try a different card or adjust the donation amount.",
+      })
+    }
 
     return res.status(500).json({ error: 'Internal Server Error' })
   }
