@@ -6,7 +6,6 @@ import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
 import { countries } from './countries'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import ProjectSocialLinks from './ProjectSocialLinks'
 import GradientButton from './GradientButton' // Adjust the import path as needed
 
 type PaymentModalPersonalInfoProps = {
@@ -189,9 +188,13 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   }
 
   const { data: session } = useSession()
-  // console.log('User Session: ', session)
+
+  // State to ensure session is processed only once
+  const [hasProcessedSession, setHasProcessedSession] = useState(false)
+
   useEffect(() => {
-    if (session) {
+    if (session && !hasProcessedSession) {
+      // Update formData with Twitter username and image
       dispatch({
         type: 'SET_FORM_DATA',
         payload: {
@@ -199,11 +202,12 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           socialXimageSrc: session.user.image,
         },
       })
-      // Sign out the user right after updating context to prevent staying logged in
-
-      signOut()
+      // Mark session as processed to prevent re-processing
+      setHasProcessedSession(true)
+      // Sign out the user to prevent staying logged in
+      signOut({ callbackUrl: window.location.href }) // Redirect back to current URL
     }
-  }, [session, dispatch])
+  }, [session, dispatch, hasProcessedSession])
 
   // Ensure donateAnonymously is false if the donation type is "stock"
   useEffect(() => {
@@ -435,7 +439,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     state.selectedOption === 'stock'
 
   return (
-    // Rest of the code ... )}
     <div className="flex flex-col space-y-4 p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Personal Information
@@ -558,15 +561,22 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 {!state.formData.socialXimageSrc ? (
                   <button
                     type="button" // Ensure type is button
-                    className="flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222]"
+                    className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
+                      state.formData.socialXimageSrc
+                        ? 'cursor-not-allowed bg-gray-200'
+                        : ''
+                    }`}
                     onClick={() => {
-                      const currentUrl = window.location.href
-                      const url = new URL(currentUrl)
-                      url.searchParams.set('modal', 'true')
-                      signIn('twitter', { callbackUrl: url.toString() })
+                      if (!state.formData.socialXimageSrc) {
+                        const currentUrl = window.location.href
+                        const url = new URL(currentUrl)
+                        url.searchParams.set('modal', 'true')
+                        signIn('twitter', { callbackUrl: url.toString() })
+                      }
                     }}
+                    disabled={!!state.formData.socialXimageSrc}
                   >
-                    Verify
+                    {state.formData.socialXimageSrc ? 'Verified' : 'Verify'}
                     <SiX className="ml-2 h-6 w-6" />
                   </button>
                 ) : (
@@ -585,18 +595,43 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   </button>
                 )}
 
+                {/* LinkedIn Verification Button */}
                 <button
                   type="button" // Ensure type is button
-                  className="flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222]"
+                  className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
+                    state.formData.socialLinkedIn
+                      ? 'cursor-not-allowed bg-gray-200'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    if (!state.formData.socialLinkedIn) {
+                      // Implement LinkedIn sign-in logic here
+                      signIn('linkedin', { callbackUrl: window.location.href })
+                    }
+                  }}
+                  disabled={!!state.formData.socialLinkedIn}
                 >
-                  Verify
+                  {state.formData.socialLinkedIn ? 'Verified' : 'Verify'}
                   <SiLinkedin className="ml-2 h-6 w-6" />
                 </button>
+
+                {/* Facebook Verification Button */}
                 <button
                   type="button" // Ensure type is button
-                  className="flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222]"
+                  className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
+                    state.formData.socialFacebook
+                      ? 'cursor-not-allowed bg-gray-200'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    if (!state.formData.socialFacebook) {
+                      // Implement Facebook sign-in logic here
+                      signIn('facebook', { callbackUrl: window.location.href })
+                    }
+                  }}
+                  disabled={!!state.formData.socialFacebook}
                 >
-                  Verify
+                  {state.formData.socialFacebook ? 'Verified' : 'Verify'}
                   <SiFacebook className="ml-2 h-6 w-6" />
                 </button>
               </div>
