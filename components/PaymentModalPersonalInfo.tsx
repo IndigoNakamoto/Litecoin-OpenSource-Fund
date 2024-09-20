@@ -189,11 +189,12 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   }
 
   const { data: session } = useSession()
+  console.log('User Session: ', session)
   useEffect(() => {
     if (session) {
       dispatch({
         type: 'SET_FORM_DATA',
-        payload: { socialX: session.user.name },
+        payload: { socialX: session.user.username },
       })
     }
   }, [session, dispatch])
