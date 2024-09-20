@@ -291,6 +291,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
         organizationId: 1189134331,
         isAnonymous: donateAnonymously,
         pledgeCurrency: formData.pledgeCurrency,
+        assetDescription: formData.assetName,
         pledgeAmount: formData.pledgeAmount,
         firstName: donateAnonymously ? anonInfo.firstName : formData.firstName,
         lastName: donateAnonymously ? anonInfo.lastName : formData.lastName,

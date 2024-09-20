@@ -227,6 +227,10 @@ export default function PaymentModalCryptoOption({
         type: 'SET_SELECTED_CURRENCY',
         payload: { code: currency.code, name: currency.name },
       })
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { assetName: currency.name, assetSymbol: currency.code },
+      })
       setSearchTerm(coin)
       setShowDropdown(false)
 
