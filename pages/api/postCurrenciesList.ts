@@ -24,8 +24,8 @@ export default async function handler(
     const payload = {}
 
     // Debugging logs
-    console.log('Sending request to /currencies/list with payload:', payload)
-    console.log('Using Access Token:', accessToken)
+    // console.log('Sending request to /currencies/list with payload:', payload)
+    // console.log('Using Access Token:', accessToken)
 
     const response = await axios.post(
       'https://public-api.tgbwidget.com/v1/currencies/list',
@@ -38,7 +38,7 @@ export default async function handler(
       }
     )
 
-    console.log('Received response from /currencies/list:', response.data)
+    // console.log('Received response from /currencies/list:', response.data)
 
     // Ensure the response has the expected structure
     if (response.data && Array.isArray(response.data.data)) {

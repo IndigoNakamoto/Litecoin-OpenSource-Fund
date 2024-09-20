@@ -287,7 +287,7 @@ export const DonationProvider: React.FC<DonationProviderProps> = ({
       const response = await axios.post('/api/postCurrenciesList', {})
       if (Array.isArray(response.data)) {
         dispatch({ type: 'SET_CURRENCY_LIST', payload: response.data })
-        console.log('Fetched currencies:', response.data)
+        // console.log('Fetched currencies:', response.data)
       } else {
         throw new Error('Invalid currency list data')
       }

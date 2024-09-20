@@ -137,7 +137,7 @@ export default async function handler(
     }
 
     // Log the payload being sent
-    console.log('Payload being sent to The Giving Block API:', apiPayload)
+    // console.log('Payload being sent to The Giving Block API:', apiPayload)
 
     // Call The Giving Block's CreateDepositAddress API
     const tgbResponse = await axios.post(

@@ -1,3 +1,4 @@
+// components/ProjectSocialLinks.tsx
 import SocialIcon from './social-icons'
 
 const formatLinkText = (kind, url) => {
@@ -37,55 +38,34 @@ const ProjectSocialLinks = ({
   redditLink,
 }) => {
   const projectLinks = [
-    {
-      kind: 'website',
-      url: website,
-    },
-    {
-      kind: 'github',
-      url: gitRepository,
-    },
-    {
-      kind: 'x',
-      url: twitterHandle,
-    },
-    {
-      kind: 'discord',
-      url: discordLink,
-    },
-    {
-      kind: 'telegram',
-      url: telegramLink,
-    },
-    {
-      kind: 'facebook',
-      url: facebookLink,
-    },
-    {
-      kind: 'reddit',
-      url: redditLink,
-    },
+    { kind: 'website', url: website },
+    { kind: 'github', url: gitRepository },
+    { kind: 'x', url: twitterHandle },
+    { kind: 'discord', url: discordLink },
+    { kind: 'telegram', url: telegramLink },
+    { kind: 'facebook', url: facebookLink },
+    { kind: 'reddit', url: redditLink },
   ]
 
   return (
-    <div className="flex flex-col space-x-1 p-2 px-6">
-      <p className="font-semibold text-gray-800">LINKS:</p>
-      {projectLinks.map((link) => (
-        <a
-          className="text-sm text-[#222222] transition"
-          target="_blank"
-          rel="noopener noreferrer"
-          key={link.kind}
-          href={link.url}
-        >
-          <div className="group flex w-min flex-row items-center space-x-2 rounded-xl px-2  hover:text-white">
-            <SocialIcon kind={link.kind} href={link.url} size={2} />
-            <p className=" group-hover:text-white">
+    <div className="flex flex-col space-y-2 px-6 font-space-grotesk">
+      <p className="text-lg !font-semibold text-[#222222]">Links:</p>
+      {projectLinks.map((link) =>
+        link.url ? (
+          <a
+            key={link.kind}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center space-x-2 !text-[#222222] !no-underline hover:text-gray-800" // no-underline added
+          >
+            <SocialIcon kind={link.kind} href={link.url} className="h-6 w-6" />
+            <span className="text-md leading-none group-hover:text-white">
               {formatLinkText(link.kind, link.url)}
-            </p>
-          </div>
-        </a>
-      ))}
+            </span>
+          </a>
+        ) : null
+      )}
     </div>
   )
 }

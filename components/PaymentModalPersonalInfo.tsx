@@ -189,7 +189,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   }
 
   const { data: session } = useSession()
-  console.log('User Session: ', session)
+  // console.log('User Session: ', session)
   useEffect(() => {
     if (session) {
       dispatch({
@@ -384,7 +384,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           })
           dispatch({ type: 'SET_STEP', payload: 'cryptoDonate' })
         } else if (selectedOption === 'stock' && data?.donationUuid) {
-          console.log('Donation UUID received:', data.donationUuid)
+          // console.log('Donation UUID received:', data.donationUuid)
           dispatch({
             type: 'SET_DONATION_DATA',
             payload: {

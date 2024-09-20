@@ -59,7 +59,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
 
   return (
     <a
-      className="text-sm text-gray-500 transition hover:text-white"
+      className={`inline-block text-gray-600 transition-colors duration-300 hover:text-white`} // Change color on hover
       target="_blank"
       rel="noopener noreferrer"
       href={href}

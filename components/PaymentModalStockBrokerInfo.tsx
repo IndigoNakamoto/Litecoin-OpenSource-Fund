@@ -30,7 +30,7 @@ export default function PaymentModalStockBrokerInfo() {
     const fetchBrokers = async () => {
       try {
         const response = await axios.get('/api/getBrokersList')
-        console.log('response: ', response)
+        // console.log('response: ', response)
         setBrokers(response.data.data.brokers)
       } catch (error) {
         console.error('Error fetching brokers:', error)
@@ -98,7 +98,7 @@ export default function PaymentModalStockBrokerInfo() {
 
     try {
       const response = await axios.post('/api/submitStockDonation', payload)
-      console.log('Stock donation submitted:', response.data)
+      // console.log('Stock donation submitted:', response.data)
 
       // Proceed to the next step
       dispatch({ type: 'SET_STEP', payload: 'sign' })

@@ -58,7 +58,7 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
     ) {
       // If the click is outside the component, set highlight to false
       // You might need to lift state up or use a context if highlight is a prop
-      console.log('Click outside')
+      // console.log('Click outside')
     }
   }
 

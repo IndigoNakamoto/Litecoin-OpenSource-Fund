@@ -13,7 +13,7 @@ export default async function handler(
   }
 
   const { donationUuid, date, signature } = req.body
-  console.log('Signature: ', signature)
+  // console.log('Signature: ', signature)
 
   // Check for missing fields and return specific errors
   if (!donationUuid) {

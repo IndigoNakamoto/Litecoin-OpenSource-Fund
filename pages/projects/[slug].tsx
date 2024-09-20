@@ -123,6 +123,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const [selectedUpdateId, setSelectedUpdateId] = useState<number | null>(null)
 
   // Utility Functions
+  const isValidUsernames = (usernames: string | undefined): boolean => {
+    return typeof usernames === 'string' && usernames.trim().length > 0
+  }
+
   function closeModal() {
     setModalOpen(false)
     setThankYouModalOpen(false)
@@ -293,27 +297,27 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
         return response.json()
       }
 
-      if (contributor) {
-        const contributorsResponse = await fetchTwitterUsers(contributor)
+      if (isValidUsernames(contributor)) {
+        const contributorsResponse = await fetchTwitterUsers(contributor!)
         setTwitterContributors(contributorsResponse)
       }
 
-      if (contributorsBitcoin) {
-        const contributorsResponse = await fetchTwitterUsers(
-          contributorsBitcoin
+      if (isValidUsernames(contributorsBitcoin)) {
+        const contributorsBitcoinResponse = await fetchTwitterUsers(
+          contributorsBitcoin!
         )
-        setTwitterContributorsBitcoin(contributorsResponse)
+        setTwitterContributorsBitcoin(contributorsBitcoinResponse)
       }
 
-      if (contributorsLitecoin) {
-        const contributorsResponse = await fetchTwitterUsers(
-          contributorsLitecoin
+      if (isValidUsernames(contributorsLitecoin)) {
+        const contributorsLitecoinResponse = await fetchTwitterUsers(
+          contributorsLitecoin!
         )
-        setTwitterContributorsLitecoin(contributorsResponse)
+        setTwitterContributorsLitecoin(contributorsLitecoinResponse)
       }
 
-      if (advocates) {
-        const advocatesResponse = await fetchTwitterUsers(advocates)
+      if (isValidUsernames(advocates)) {
+        const advocatesResponse = await fetchTwitterUsers(advocates!)
         setTwitterAdvocates(advocatesResponse)
       }
 
