@@ -9,16 +9,19 @@ const Navigation = () => {
   const [dropdownOpen, setDropdownOpen] = useState({
     useLitecoin: false,
     theFoundation: false,
+    learn: false, // Added state for Learn dropdown
   })
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState({
     useLitecoin: false,
     theFoundation: false,
+    learn: false, // Added state for Learn dropdown in mobile
   })
   const [isMobile, setIsMobile] = useState(false)
   const [navShow, setNavShow] = useState(false)
 
   const useLitecoinRef = useRef<HTMLLIElement | null>(null)
   const theFoundationRef = useRef<HTMLLIElement | null>(null)
+  const learnRef = useRef<HTMLLIElement | null>(null) // Ref for Learn dropdown
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,21 +42,22 @@ const Navigation = () => {
     }
   }, [])
 
-  const toggleDropdown = (menu) => {
+  const toggleDropdown = (menu: keyof typeof dropdownOpen) => {
     setDropdownOpen((prev) => ({
       useLitecoin: menu === 'useLitecoin' ? !prev.useLitecoin : false,
       theFoundation: menu === 'theFoundation' ? !prev.theFoundation : false,
+      learn: menu === 'learn' ? !prev.learn : false, // Toggle Learn dropdown
     }))
   }
 
-  const toggleMobileDropdown = (menu) => {
+  const toggleMobileDropdown = (menu: keyof typeof mobileDropdownOpen) => {
     setMobileDropdownOpen((prevState) => ({
       ...prevState,
       [menu]: !prevState[menu], // Toggle the specific dropdown
     }))
   }
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (
       useLitecoinRef.current &&
       !useLitecoinRef.current.contains(event.target as Node)
@@ -66,11 +70,18 @@ const Navigation = () => {
 
     if (
       theFoundationRef.current &&
-      !theFoundationRef.current.contains(event.target)
+      !theFoundationRef.current.contains(event.target as Node)
     ) {
       setDropdownOpen((prev) => ({
         ...prev,
         theFoundation: false,
+      }))
+    }
+
+    if (learnRef.current && !learnRef.current.contains(event.target as Node)) {
+      setDropdownOpen((prev) => ({
+        ...prev,
+        learn: false,
       }))
     }
   }
@@ -108,8 +119,8 @@ const Navigation = () => {
     minHeaderHeight
   )
 
-  const baseLogoSize = isMobile ? 67 - 7 : 70.2 // 16px is 1rem
-  const minLogoSize = isMobile ? 67 - 16 : 60 // Adjust the minimum size for mobile as well
+  const baseLogoSize = isMobile ? 60 : 70.2 // Adjusted for better mobile sizing
+  const minLogoSize = isMobile ? 51 : 60 // Adjust the minimum size for mobile as well
 
   const logoSize = Math.max(
     baseLogoSize -
@@ -129,14 +140,18 @@ const Navigation = () => {
     12
   )
 
-  const interpolateColor = (startColor, endColor, factor) => {
+  const interpolateColor = (
+    startColor: string,
+    endColor: string,
+    factor: number
+  ) => {
     const result = startColor
       .slice(1)
-      .match(/.{2}/g)
+      .match(/.{2}/g)!
       .map((hex, i) => {
         return Math.round(
           parseInt(hex, 16) * (1 - factor) +
-            parseInt(endColor.slice(1).match(/.{2}/g)[i], 16) * factor
+            parseInt(endColor.slice(1).match(/.{2}/g)![i], 16) * factor
         )
           .toString(16)
           .padStart(2, '0')
@@ -192,79 +207,89 @@ const Navigation = () => {
           </div>
           <nav>
             {isMobile ? (
-              // Hamburger menu. TODO: Modify color with scroll position between #222222 and #C5D3D6
-              // eslint-disable-next-line jsx-a11y/anchor-is-valid
-              <a
-                className={`nav-toggle  mt-[-10px]  ${navShow ? 'open' : ''}`}
+              // Hamburger menu
+              <button
+                className={`nav-toggle mt-[-10px] ${navShow ? 'open' : ''}`}
                 onClick={onToggleNav}
-                onKeyPress={onToggleNav}
                 aria-label="menu"
-                role="button"
-                tabIndex={0}
               >
                 <span className="bar"></span>
                 <span className="bar"></span>
                 <span className="bar"></span>
-              </a>
+              </button>
             ) : (
               <ul className="flex flex-row">
+                {/* Use Litecoin Dropdown */}
                 <li
-                  className="text-md relative flex cursor-pointer items-center font-[500]"
+                  className="text-md relative !mr-[1.85rem] flex items-center font-[500]"
+                  ref={useLitecoinRef}
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.15px',
                     fontSize: `${scaledFontSize}px`,
                     transform: 'translateY(-1px)',
-                    marginRight: `${scaledMargin - 1.9}px`,
+                    marginRight: `${scaledMargin - 1.9}px`, // Adjust spacing between menu items
                   }}
-                  onClick={() => toggleDropdown('useLitecoin')}
-                  onKeyDown={(e) =>
-                    e.key === 'Enter' && toggleDropdown('useLitecoin')
-                  }
-                  tabIndex={0}
-                  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-                  role="button"
-                  aria-expanded={dropdownOpen.useLitecoin}
-                  aria-haspopup="true"
-                  ref={useLitecoinRef}
                 >
-                  Use Litecoin
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`ml-2 h-4 w-4 ${
-                      dropdownOpen.useLitecoin ? 'rotate-180' : ''
-                    }`}
-                    style={{
-                      transformOrigin: 'center',
-                      transform: `translateX(-2px) ${
-                        dropdownOpen.useLitecoin ? 'rotate(180deg)' : ''
-                      }`,
-                    }}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                  <button
+                    onClick={() => toggleDropdown('useLitecoin')}
+                    onKeyDown={(e) =>
+                      e.key === 'Enter' && toggleDropdown('useLitecoin')
+                    }
+                    className="flex cursor-pointer items-center border-none bg-transparent p-0 focus:outline-none"
+                    aria-expanded={dropdownOpen.useLitecoin}
+                    aria-haspopup="true"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    <span
+                      style={{
+                        color: fontColor,
+                        letterSpacing: '-0.15px',
+                        fontSize: `${scaledFontSize}px`,
+                      }}
+                    >
+                      Use Litecoin
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-2 h-4 w-4 ${
+                        dropdownOpen.useLitecoin ? 'rotate-180' : ''
+                      }`}
+                      style={{
+                        transformOrigin: 'center',
+                        transform: `translateX(-2px) ${
+                          dropdownOpen.useLitecoin ? 'rotate(180deg)' : ''
+                        }`,
+                        stroke: dropdownTextColor, // Ensure the chevron color follows the dropdown text color
+                      }}
+                      fill="none"
+                      viewBox="0 0 24 24"
                       strokeWidth={3.25}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
                   <ul
-                    className={`absolute left-0 top-full mt-3 w-[113.63px] rounded-3xl ${
+                    className={`w-[var(--dropdown-width, 113.63px)] dropdown absolute left-0 top-full mt-3 rounded-3xl ${
                       dropdownOpen.useLitecoin
                         ? 'dropdown-enter-active'
                         : 'dropdown-exit-active'
                     }`}
-                    style={{
-                      backgroundColor: dropdownBgColor,
-                      color: dropdownTextColor,
-                      fontSize: `${scaledFontSize}px`,
-                      visibility: dropdownOpen.useLitecoin
-                        ? 'visible'
-                        : 'hidden',
-                    }}
+                    style={
+                      {
+                        backgroundColor: dropdownBgColor,
+                        color: dropdownTextColor,
+                        fontSize: `${scaledFontSize}px`,
+                        visibility: dropdownOpen.useLitecoin
+                          ? 'visible'
+                          : 'hidden',
+                        '--dropdown-width': '113.63px',
+                      } as React.CSSProperties
+                    }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
                       <Link href="/use-litecoin/buy">Buy</Link>
@@ -281,86 +306,172 @@ const Navigation = () => {
                   </ul>
                 </li>
 
+                {/* Learn Dropdown */}
                 <li
-                  className="text-md m-[.95rem] font-[500]"
-                  style={{
-                    color: fontColor,
-                    letterSpacing: '-0.2px',
-                    fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 0.8}px`,
-                  }}
-                >
-                  <Link href="/learn">Learn</Link>
-                </li>
-                <li
-                  className="text-md m-[.95rem] font-[500]"
-                  style={{
-                    color: fontColor,
-                    letterSpacing: '-0.2px',
-                    fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 2.5}px`,
-                  }}
-                >
-                  <Link href="/projects">Projects</Link>
-                </li>
-
-                <li
-                  className="text-md relative m-[1rem] flex cursor-pointer items-center font-[500]"
+                  className="text-md relative mr-[1.85rem] flex items-center font-[500]"
+                  ref={learnRef}
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.15px',
                     fontSize: `${scaledFontSize}px`,
                     transform: 'translateY(-1px)',
-                    marginRight: `${scaledMargin - 1.9}px`,
+                    marginRight: `${scaledMargin - 1.9}px`, // Adjust spacing between menu items
                   }}
-                  onClick={() => toggleDropdown('theFoundation')}
-                  onKeyDown={(e) =>
-                    e.key === 'Enter' && toggleDropdown('theFoundation')
-                  }
-                  tabIndex={0}
-                  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-                  role="button"
-                  aria-expanded={dropdownOpen.theFoundation}
-                  aria-haspopup="true"
-                  ref={theFoundationRef}
                 >
-                  The Foundation
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`ml-2 h-4 w-4 ${
-                      dropdownOpen.theFoundation ? 'rotate-180' : ''
-                    }`}
-                    style={{
-                      transformOrigin: 'center',
-                      transform: `translateX(-2px) ${
-                        dropdownOpen.theFoundation ? 'rotate(180deg)' : ''
-                      }`,
-                    }}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                  <button
+                    onClick={() => toggleDropdown('learn')}
+                    onKeyDown={(e) =>
+                      e.key === 'Enter' && toggleDropdown('learn')
+                    }
+                    className="flex cursor-pointer items-center border-none bg-transparent p-0 focus:outline-none"
+                    aria-expanded={dropdownOpen.learn}
+                    aria-haspopup="true"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    <span
+                      style={{
+                        color: fontColor,
+                        letterSpacing: '-0.15px',
+                        fontSize: `${scaledFontSize}px`,
+                      }}
+                    >
+                      Learn
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-2 h-4 w-4 ${
+                        dropdownOpen.learn ? 'rotate-180' : ''
+                      }`}
+                      style={{
+                        transformOrigin: 'center',
+                        transform: `translateX(-2px) ${
+                          dropdownOpen.learn ? 'rotate(180deg)' : ''
+                        }`,
+                        stroke: dropdownTextColor, // Ensure the chevron color follows the dropdown text color
+                      }}
+                      fill="none"
+                      viewBox="0 0 24 24"
                       strokeWidth={3.25}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
                   <ul
-                    className={`absolute left-0 top-full mt-3 rounded-3xl pr-8 ${
+                    className={`w-[var(--dropdown-width, 180px)] dropdown absolute left-0 top-full mt-3 rounded-3xl ${
+                      dropdownOpen.learn
+                        ? 'dropdown-enter-active'
+                        : 'dropdown-exit-active'
+                    }`}
+                    style={
+                      {
+                        backgroundColor: dropdownBgColor,
+                        color: dropdownTextColor,
+                        fontSize: `${scaledFontSize}px`,
+                        visibility: dropdownOpen.learn ? 'visible' : 'hidden',
+                        '--dropdown-width': '180px',
+                      } as React.CSSProperties
+                    }
+                  >
+                    <li className="ml-2 mt-2 p-2 pl-4 text-left">
+                      <Link href="/learn/what-is-litecoin">
+                        What is Litecoin
+                      </Link>
+                    </li>
+                    <li className="ml-2 p-2 pl-4 text-left">
+                      <Link href="/learn/resources">Resources</Link>
+                    </li>
+                  </ul>
+                </li>
+                {/* End of Learn Dropdown */}
+
+                {/* Projects Menu Item */}
+                <li
+                  className="text-md !mr-[2rem] mb-[0.95rem] ml-[1rem] mt-[0.85rem] font-[500]"
+                  style={{
+                    color: fontColor,
+                    letterSpacing: '-0.2px',
+                    fontSize: `${scaledFontSize}px`,
+                    marginRight: `${scaledMargin + 1}px`, // Adjust spacing between menu items
+                  }}
+                >
+                  <Link href="/projects">Projects</Link>
+                </li>
+
+                {/* The Foundation Dropdown */}
+                <li
+                  className="text-md relative mr-[1.85rem] flex items-center font-[500]"
+                  ref={theFoundationRef}
+                  style={{
+                    color: fontColor,
+                    letterSpacing: '-0.15px',
+                    fontSize: `${scaledFontSize}px`,
+                    transform: 'translateY(-1px)',
+                    marginRight: `${scaledMargin - 1.9}px`, // Adjust spacing between menu items
+                  }}
+                >
+                  <button
+                    onClick={() => toggleDropdown('theFoundation')}
+                    onKeyDown={(e) =>
+                      e.key === 'Enter' && toggleDropdown('theFoundation')
+                    }
+                    className="flex cursor-pointer items-center border-none bg-transparent p-0 focus:outline-none"
+                    aria-expanded={dropdownOpen.theFoundation}
+                    aria-haspopup="true"
+                  >
+                    <span
+                      style={{
+                        color: fontColor,
+                        letterSpacing: '-0.15px',
+                        fontSize: `${scaledFontSize}px`,
+                      }}
+                    >
+                      The Foundation
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-2 h-4 w-4 ${
+                        dropdownOpen.theFoundation ? 'rotate-180' : ''
+                      }`}
+                      style={{
+                        transformOrigin: 'center',
+                        transform: `translateX(-2px) ${
+                          dropdownOpen.theFoundation ? 'rotate(180deg)' : ''
+                        }`,
+                        stroke: dropdownTextColor, // Ensure the chevron color follows the dropdown text color
+                      }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={3.25}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <ul
+                    className={`w-[var(--dropdown-width, 180px)] dropdown absolute left-0 top-full mt-3 rounded-3xl ${
                       dropdownOpen.theFoundation
                         ? 'dropdown-enter-active'
                         : 'dropdown-exit-active'
                     }`}
-                    style={{
-                      backgroundColor: dropdownBgColor,
-                      color: dropdownTextColor,
-                      fontSize: `${scaledFontSize}px`,
-                      visibility: dropdownOpen.theFoundation
-                        ? 'visible'
-                        : 'hidden',
-                    }}
+                    style={
+                      {
+                        backgroundColor: dropdownBgColor,
+                        color: dropdownTextColor,
+                        fontSize: `${scaledFontSize}px`,
+                        visibility: dropdownOpen.theFoundation
+                          ? 'visible'
+                          : 'hidden',
+                        '--dropdown-width': '180px',
+                      } as React.CSSProperties
+                    }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
                       <Link href="/the-foundation/about">About</Link>
@@ -376,46 +487,55 @@ const Navigation = () => {
                     </li>
                   </ul>
                 </li>
+                {/* End of The Foundation Dropdown */}
+
+                {/* News Menu Item */}
                 <li
-                  className="text-md m-[.95rem] font-[500]"
+                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[1rem] mt-[0.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 1}px`,
+                    marginRight: `${scaledMargin + 1}px`, // Adjust spacing between menu items
                   }}
                 >
                   <Link href="/news">News</Link>
                 </li>
+
+                {/* Events Menu Item */}
                 <li
-                  className="text-md m-[.95rem] font-[500]"
+                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[0.5rem] mt-[0.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 0.5}px`,
+                    marginRight: `${scaledMargin + 0.5}px`, // Adjust spacing between menu items
                   }}
                 >
                   <Link href="/events">Events</Link>
                 </li>
+
+                {/* Shop Menu Item */}
                 <li
-                  className="text-md m-[.95rem] font-[500]"
+                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[0.8rem] mt-[0.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 0.8}px`,
+                    marginRight: `${scaledMargin + 0.8}px`, // Adjust spacing between menu items
                   }}
                 >
                   <Link href="/shop">Shop</Link>
                 </li>
+
+                {/* Explorer Menu Item */}
                 <li
-                  className="text-md m-[.95rem] font-[600]"
+                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[1rem] mt-[0.85rem] font-[600]"
                   style={{
                     color: '#FC5C39',
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 1}px`,
+                    marginRight: `${scaledMargin + 1}px`, // Adjust spacing between menu items
                   }}
                 >
                   <Link href="/explorer">Explorer</Link>
@@ -427,15 +547,14 @@ const Navigation = () => {
       </header>
 
       {/* Mobile Nav */}
-      {/* TODO: Modify bg color with scroll position between #C5D3D6 and #222222*/}
       <div
-        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-20  duration-300 ease-in  md:clear-left  ${
+        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-20 duration-300 ease-in md:clear-left ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
       >
         {/* LINKS */}
         <div className="flex flex-col gap-x-6">
-          <nav className="mt-8 h-full ">
+          <nav className="mt-8 h-full">
             {[
               'Use Litecoin',
               'Learn',
@@ -447,18 +566,28 @@ const Navigation = () => {
               'Explorer',
             ].map((item) => (
               <div key={item} className="px-10 py-2 pt-2 short:py-0.5">
-                {item === 'Use Litecoin' || item === 'The Foundation' ? (
+                {['Use Litecoin', 'Learn', 'The Foundation'].includes(item) ? (
                   <>
                     <button
                       onClick={() =>
                         toggleMobileDropdown(
-                          item.replace(' ', '').toLowerCase()
+                          item
+                            .replace(' ', '')
+                            .toLowerCase() as keyof typeof mobileDropdownOpen
                         )
                       }
                       className="font-space-roc m-0 flex w-full items-center justify-between pl-0 pr-0 text-left text-[2.75rem] font-semibold text-[#222222]"
+                      aria-expanded={
+                        mobileDropdownOpen[
+                          item
+                            .replace(' ', '')
+                            .toLowerCase() as keyof typeof mobileDropdownOpen
+                        ]
+                      }
+                      aria-haspopup="true"
                     >
                       {item}
-                      {/*Mobile SVG chevon will now flip up and down */}
+                      {/* Mobile SVG chevron will now flip up and down */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-10 w-10"
@@ -468,11 +597,14 @@ const Navigation = () => {
                         style={{
                           transform: `translateY(-0.5px) ${
                             mobileDropdownOpen[
-                              item.replace(' ', '').toLowerCase()
+                              item
+                                .replace(' ', '')
+                                .toLowerCase() as keyof typeof mobileDropdownOpen
                             ]
                               ? 'rotate(180deg)'
                               : ''
                           }`,
+                          stroke: '#222222', // Ensure chevron color matches text color
                         }}
                       >
                         <path
@@ -483,54 +615,109 @@ const Navigation = () => {
                         />
                       </svg>
                     </button>
-                    {mobileDropdownOpen[item.replace(' ', '').toLowerCase()] ? (
+                    {mobileDropdownOpen[
+                      item
+                        .replace(' ', '')
+                        .toLowerCase() as keyof typeof mobileDropdownOpen
+                    ] && (
                       <ul className="pl-12 text-[2.75rem] font-medium text-[#222222]">
                         {item === 'Use Litecoin' ? (
                           <>
                             <li className="py-1">
-                              <Link href="/use-litecoin/buy">Buy</Link>
+                              <Link
+                                href="/use-litecoin/buy"
+                                onClick={onToggleNav}
+                              >
+                                Buy
+                              </Link>
                             </li>
                             <li className="py-1">
-                              <Link href="/use-litecoin/spend">Spend</Link>
+                              <Link
+                                href="/use-litecoin/spend"
+                                onClick={onToggleNav}
+                              >
+                                Spend
+                              </Link>
                             </li>
                             <li className="py-1">
-                              <Link href="/use-litecoin/store">Store</Link>
+                              <Link
+                                href="/use-litecoin/store"
+                                onClick={onToggleNav}
+                              >
+                                Store
+                              </Link>
                             </li>
                             <li className="py-1">
-                              <Link href="/use-litecoin/business">
+                              <Link
+                                href="/use-litecoin/business"
+                                onClick={onToggleNav}
+                              >
                                 Business
                               </Link>
                             </li>
                           </>
-                        ) : (
+                        ) : item === 'Learn' ? (
                           <>
                             <li className="py-1">
-                              <Link href="/the-foundation/about">About</Link>
+                              <Link
+                                href="/learn/what-is-litecoin"
+                                onClick={onToggleNav}
+                              >
+                                What is Litecoin
+                              </Link>
                             </li>
                             <li className="py-1">
-                              <Link href="/the-foundation/resources">
+                              <Link
+                                href="/learn/resources"
+                                onClick={onToggleNav}
+                              >
+                                Resources
+                              </Link>
+                            </li>
+                          </>
+                        ) : item === 'The Foundation' ? (
+                          <>
+                            <li className="py-1">
+                              <Link
+                                href="/the-foundation/about"
+                                onClick={onToggleNav}
+                              >
+                                About
+                              </Link>
+                            </li>
+                            <li className="py-1">
+                              <Link
+                                href="/the-foundation/resources"
+                                onClick={onToggleNav}
+                              >
                                 Resources
                               </Link>
                             </li>
                             <li className="py-1">
-                              <Link href="/the-foundation/financials">
+                              <Link
+                                href="/the-foundation/financials"
+                                onClick={onToggleNav}
+                              >
                                 Financials
                               </Link>
                             </li>
                             <li className="py-1">
-                              <Link href="/the-foundation/contact">
+                              <Link
+                                href="/the-foundation/contact"
+                                onClick={onToggleNav}
+                              >
                                 Contact
                               </Link>
                             </li>
                           </>
-                        )}
+                        ) : null}
                       </ul>
-                    ) : null}
+                    )}
                   </>
                 ) : (
                   <Link
                     href={`/${item.toLowerCase()}`}
-                    className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.75rem] font-semibold  text-[#222222]"
+                    className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.75rem] font-semibold text-[#222222]"
                     onClick={onToggleNav}
                   >
                     {item}
@@ -544,6 +731,13 @@ const Navigation = () => {
         </div>
       </div>
       <style jsx>{`
+        :root {
+          /* CSS Variables for easy adjustments */
+          --menu-item-margin: ${scaledMargin -
+          1.9}px; /* Adjust spacing between menu items */
+          --dropdown-width: 180px; /* Default dropdown width, can be overridden inline */
+        }
+
         .nav-toggle {
           display: flex;
           flex-direction: column;
@@ -565,7 +759,7 @@ const Navigation = () => {
 
         /* Styles when 'open' class is present (X shape) */
         .nav-toggle.open .bar:nth-of-type(1) {
-          transform: rotate(45deg) translateY(-4px); /* Shift up 3 pixels */
+          transform: rotate(45deg) translateY(-4px); /* Shift up */
           transform-origin: top left;
           width: 44px;
         }
@@ -576,7 +770,7 @@ const Navigation = () => {
         }
 
         .nav-toggle.open .bar:nth-of-type(3) {
-          transform: rotate(-45deg) translateY(4px); /* Shift down 3 pixels */
+          transform: rotate(-45deg) translateY(4px); /* Shift down */
           transform-origin: bottom left;
           width: 44px;
         }
@@ -600,6 +794,34 @@ const Navigation = () => {
         /* Ensure instant flip for SVG icons */
         svg {
           transition: none; /* Remove transition to make the flip instant */
+        }
+
+        /* Additional styles for alignment adjustments */
+        ul > li > ul {
+          /* Adjust the top position if dropdown is misaligned */
+          top: 100%; /* Ensures dropdown starts right below the parent */
+          left: 0;
+        }
+
+        /* Optional: Adjust dropdown position horizontally */
+        ul > li > ul {
+          /* Uncomment and adjust the value if needed */
+          /* left: 10px; */
+        }
+
+        /* Optional: Add spacing between menu items */
+        ul.flex > li {
+          margin-right: var(--menu-item-margin);
+        }
+
+        /* Optional: Adjust dropdown width via CSS variables */
+        ul > li > ul {
+          width: var(--dropdown-width);
+        }
+
+        /* Responsive adjustments for dropdowns */
+        @media (max-width: 991px) {
+          /* Adjustments specific to mobile view if needed */
         }
       `}</style>
     </>
