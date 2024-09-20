@@ -459,19 +459,22 @@ export default function PaymentModalCryptoOption({
       <style jsx>{`
         .loading-gradient {
           background: linear-gradient(
-            90deg,
+            70deg,
             #c6d3d6,
             #c6d3d6,
-            #ffffff,
-            #ffffff,
-            #ffffff,
-            #ffffff,
             #c6d3d6,
+            #c6d3d6,
+            #c6d3d6,
+            #ffffff,
+            #ffffff,
+            #ffffff,
+            #ffffff,
+            #ffffff,
             #c6d3d6,
             #c6d3d6
           );
           background-size: 200% 100%;
-          animation: gradient-animation 4s infinite linear;
+          animation: gradient-move 7s infinite;
         }
       `}</style>
     </div>

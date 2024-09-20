@@ -9,6 +9,8 @@ import PaymentModalPersonalInfo from '../components/PaymentModalPersonalInfo'
 import PaymentModalFiatDonate from '../components/PaymentModalFiatDonate'
 import PaymentModalFiatOption from '../components/PaymentModalFiatOption'
 import PaymentModalFiatThankYou from '../components/PaymentModalFiatThankYou'
+import PaymentModalCryptoDonate from '@/components/PaymentModalCryptoDonate'
+import PaymentModalCryptoOption from '@/components/PaymentModalCryptoOption'
 
 const ComponentsShowcase = () => {
   const handleContinue = () => {
@@ -21,6 +23,23 @@ const ComponentsShowcase = () => {
         <h1 className="mb-6 text-4xl font-bold text-white">
           Component Showcase
         </h1>
+
+        {/* // Showcase PaymentModalCryptoOption */}
+        {/* <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
+          Payment Modal Crypto Option
+        </h2>
+        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+          <PaymentModalCryptoOption onCurrencySelect={() => null} />
+        </section> */}
+
+        {/* // Showcase PaymentModalCryptoDonate */}
+        <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
+          Payment Modal Crypto Donate
+        </h2>
+        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+          <PaymentModalCryptoDonate onRequestClose={() => null} />
+        </section>
+
         {/* // Showcase PaymentModalFiatThankYou */}
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Modal Fiat Thank You
