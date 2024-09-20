@@ -34,8 +34,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const { dispatch } = useDonation()
   const router = useRouter()
 
-  const [modalOpen, setModalOpen] = useState(true)
-  const [isThankYouModalOpen, setThankYouModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(true) // Payment Modal
+  const [isThankYouModalOpen, setThankYouModalOpen] = useState(false) //Thank you modal
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
@@ -420,6 +420,32 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       document.removeEventListener('click', handleGlobalClick)
     }
   }, [updates])
+
+  // pages/missions/[slug].tsx
+
+  useEffect(() => {
+    if (!router.isReady) return
+
+    const modalParam = router.query.modal
+    if (modalParam === 'true') {
+      setModalOpen(true)
+
+      // Set the selected project
+      setSelectedProject(project)
+
+      // Dispatch the project details to DonationContext
+      dispatch({
+        type: 'SET_PROJECT_DETAILS',
+        payload: {
+          slug: project.slug,
+          title: project.title,
+          image: project.coverImage,
+        },
+      })
+    } else {
+      setModalOpen(false)
+    }
+  }, [router.isReady, router.query.modal])
 
   // Handler for menu item changes
   const handleMenuItemChange = (
