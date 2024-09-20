@@ -34,7 +34,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   const { dispatch } = useDonation()
   const router = useRouter()
 
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(true)
   const [isThankYouModalOpen, setThankYouModalOpen] = useState(false)
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
@@ -355,11 +355,16 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   }, [router.query.thankyou])
 
   useEffect(() => {
-    if (!router.isReady) return
-    if (router.query.modal === 'true') {
-      setModalOpen(true)
+    if (typeof window !== 'undefined') {
+      const query = new URLSearchParams(window.location.search)
+      const modal = query.get('modal')
+      if (modal === 'true') {
+        setModalOpen(true)
+      } else {
+        setModalOpen(false)
+      }
     }
-  }, [router.isReady, router.query.modal])
+  }, [])
 
   // Handle selected menu item based on query parameters
   useEffect(() => {

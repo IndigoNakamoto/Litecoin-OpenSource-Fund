@@ -219,6 +219,9 @@ const donationReducer = (
     case 'SET_DONATE_BUTTON_DISABLED':
       return { ...state, isDonateButtonDisabled: action.payload }
     case 'RESET_DONATION_STATE':
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('donationState')
+      }
       return {
         ...initialState,
         currencyList: state.currencyList, // Preserve currencyList
@@ -260,7 +263,24 @@ interface DonationProviderProps {
 export const DonationProvider: React.FC<DonationProviderProps> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(donationReducer, initialState)
+  const initializer = (initialValue: DonationState) => {
+    if (typeof window !== 'undefined') {
+      const savedState = localStorage.getItem('donationState')
+      return savedState ? JSON.parse(savedState) : initialValue
+    }
+    return initialValue
+  }
+  const [state, dispatch] = useReducer(
+    donationReducer,
+    initialState,
+    initializer
+  )
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('donationState', JSON.stringify(state))
+    }
+  }, [state])
 
   const fetchCurrencies = useCallback(async () => {
     try {

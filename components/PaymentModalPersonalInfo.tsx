@@ -191,11 +191,12 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   const { data: session } = useSession()
   useEffect(() => {
     if (session) {
-      // Assuming 'twitter' state exists, though it's not defined in the latest code
-      // setTwitter(session.user.username)
-      // Commented out as 'twitter' state is not defined
+      dispatch({
+        type: 'SET_FORM_DATA',
+        payload: { socialX: session.user.name },
+      })
     }
-  }, [session])
+  }, [session, dispatch])
 
   // Ensure donateAnonymously is false if the donation type is "stock"
   useEffect(() => {
@@ -565,7 +566,13 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   <button
                     type="button" // Ensure type is button
                     className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      signOut()
+                      dispatch({
+                        type: 'SET_FORM_DATA',
+                        payload: { socialX: '' },
+                      })
+                    }}
                   >
                     Sign Out
                     <SiX className="ml-2 h-6 w-6" />
