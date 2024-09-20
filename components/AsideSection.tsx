@@ -2,43 +2,47 @@
 import React from 'react'
 import DonationStats from './DonationStats'
 import Image from 'next/legacy/image'
-import { BountyStatus, AddressStats } from '../utils/types' // Adjust the path as necessary
+import { BountyStatus, AddressStats } from '../utils/types'
+import {
+  defaultAddressStats,
+  defaultBountyStatus,
+} from '../utils/defaultValues'
 
 type AsideSectionProps = {
   title: string
   coverImage: string
-  addressStats: AddressStats
-  isMatching: boolean
-  isBitcoinOlympics2024: boolean
-  isRecurring: boolean
-  matchingTotal: number
-  serviceFeeCollected: number
-  totalPaid: number
+  addressStats?: AddressStats
+  isMatching?: boolean
+  isBitcoinOlympics2024?: boolean
+  isRecurring?: boolean
+  matchingTotal?: number
+  serviceFeeCollected?: number
+  totalPaid?: number
   formatLits: (value: any) => string
   monthlyTotal?: number
   recurringAmountGoal?: number
   monthlyDonorCount?: number
   timeLeftInMonth?: number
-  bountyStatus: BountyStatus
+  bountyStatus?: BountyStatus
   openPaymentModal: () => void
 }
 
 const AsideSection: React.FC<AsideSectionProps> = ({
   title,
   coverImage,
-  addressStats,
-  isMatching,
-  isBitcoinOlympics2024,
-  isRecurring,
-  matchingTotal,
-  serviceFeeCollected,
-  totalPaid,
+  addressStats = defaultAddressStats,
+  isMatching = false,
+  isBitcoinOlympics2024 = false,
+  isRecurring = false,
+  matchingTotal = 0,
+  serviceFeeCollected = 0,
+  totalPaid = 0,
   formatLits,
-  monthlyTotal,
-  recurringAmountGoal,
-  monthlyDonorCount,
-  timeLeftInMonth,
-  bountyStatus,
+  monthlyTotal = 0,
+  recurringAmountGoal = 0,
+  monthlyDonorCount = 0,
+  timeLeftInMonth = 0,
+  bountyStatus = defaultBountyStatus,
   openPaymentModal,
 }) => (
   <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#dddddd] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
@@ -75,7 +79,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
       <div className="pb-4 pr-0 pt-8 lg:pr-8">
         <button
           onClick={openPaymentModal}
-          className={`block w-full rounded-none rounded-xl bg-[#222222] font-space-grotesk text-xl font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636] ${
+          className={`block w-full rounded-none bg-[#222222] font-space-grotesk text-xl font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636] ${
             bountyStatus === 'completed' ? 'disabled' : ''
           }`}
           disabled={bountyStatus === 'completed'}

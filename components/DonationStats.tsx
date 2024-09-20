@@ -1,15 +1,16 @@
 // components/DonationStats.tsx
 import React from 'react'
-import { AddressStats } from '../utils/types' // Adjust the path as necessary
+import { AddressStats } from '../utils/types'
+import { defaultAddressStats } from '../utils/defaultValues' // Adjust the path as necessary
 
 type DonationStatsProps = {
-  addressStats: AddressStats
-  isMatching: boolean
-  isBitcoinOlympics2024: boolean
-  isRecurring: boolean
-  matchingTotal: number
-  serviceFeeCollected: number
-  totalPaid: number
+  addressStats?: AddressStats
+  isMatching?: boolean
+  isBitcoinOlympics2024?: boolean
+  isRecurring?: boolean
+  matchingTotal?: number
+  serviceFeeCollected?: number
+  totalPaid?: number
   formatLits: (value: any) => string
   monthlyTotal?: number
   recurringAmountGoal?: number
@@ -32,21 +33,19 @@ const StatItem: React.FC<StatItemProps> = ({ value, label }) => (
 )
 
 const DonationStats: React.FC<DonationStatsProps> = ({
-  addressStats,
-  isMatching,
-  isBitcoinOlympics2024,
-  isRecurring,
-  matchingTotal,
-  serviceFeeCollected,
-  totalPaid,
+  addressStats = defaultAddressStats,
+  isMatching = false,
+  isBitcoinOlympics2024 = false,
+  isRecurring = false,
+  matchingTotal = 0,
+  serviceFeeCollected = 0,
+  totalPaid = 0,
   formatLits,
-  monthlyTotal,
-  recurringAmountGoal,
-  monthlyDonorCount,
-  timeLeftInMonth,
+  monthlyTotal = 0,
+  recurringAmountGoal = 0,
+  monthlyDonorCount = 0,
+  timeLeftInMonth = 0,
 }) => {
-  if (!addressStats) return null
-
   return (
     <div className="flex w-full flex-col">
       {!isBitcoinOlympics2024 && !isRecurring && (
