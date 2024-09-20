@@ -194,8 +194,14 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     if (session) {
       dispatch({
         type: 'SET_FORM_DATA',
-        payload: { socialX: session.user.username },
+        payload: {
+          socialX: session.user.username,
+          socialXimageSrc: session.user.image,
+        },
       })
+      // Sign out the user right after updating context to prevent staying logged in
+
+      signOut()
     }
   }, [session, dispatch])
 
@@ -523,7 +529,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           <div className="flex flex-col">
             <div className="flex flex-row">
               <div className="relative my-2 h-[64px] min-w-[64px] rounded-full bg-blue-400">
-                {!session ? (
+                {!state.formData.socialXimageSrc ? (
                   <Image
                     src="/static/images/design/chickun.jpeg"
                     alt="profile"
@@ -533,7 +539,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   />
                 ) : (
                   <Image
-                    src={session.user.image}
+                    src={state.formData.socialXimageSrc}
                     alt="profile"
                     width="120"
                     height="120"
@@ -549,10 +555,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             </div>
             <div>
               <div className="flex flex-row justify-between space-x-2">
-                {!session ? (
+                {!state.formData.socialXimageSrc ? (
                   <button
                     type="button" // Ensure type is button
-                    className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
+                    className="flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222]"
                     onClick={() => {
                       const currentUrl = window.location.href
                       const url = new URL(currentUrl)
@@ -566,30 +572,29 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 ) : (
                   <button
                     type="button" // Ensure type is button
-                    className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
+                    className="flex w-full flex-row rounded-lg bg-[#c6d3d6] font-space-grotesk font-bold text-[#222222]"
                     onClick={() => {
-                      signOut()
                       dispatch({
                         type: 'SET_FORM_DATA',
-                        payload: { socialX: '' },
+                        payload: { socialX: '', socialXimageSrc: '' },
                       })
                     }}
                   >
-                    Sign Out
-                    <SiX className="ml-2 h-6 w-6" />
+                    <SiX className="mr-2 h-6 w-6" />
+                    Verified
                   </button>
                 )}
 
                 <button
                   type="button" // Ensure type is button
-                  className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
+                  className="flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222]"
                 >
                   Verify
                   <SiLinkedin className="ml-2 h-6 w-6" />
                 </button>
                 <button
                   type="button" // Ensure type is button
-                  className="flex w-full flex-row rounded-lg bg-white text-[#222222]"
+                  className="flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222]"
                 >
                   Verify
                   <SiFacebook className="ml-2 h-6 w-6" />

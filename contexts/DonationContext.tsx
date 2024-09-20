@@ -50,6 +50,7 @@ type FormData = {
   signatureImage: string // For signing stock donations
   joinMailingList: boolean
   socialX: string
+  socialXimageSrc: string
   socialFacebook: string
   socialLinkedIn: string
 }
@@ -163,6 +164,7 @@ const initialState: DonationState = {
     signatureImage: '',
     joinMailingList: false,
     socialX: '',
+    socialXimageSrc: '',
     socialFacebook: '',
     socialLinkedIn: '',
   },
