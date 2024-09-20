@@ -1,0 +1,144 @@
+// components/MenuSections.tsx
+import React from 'react'
+import TwitterFeed from '@/components/TwitterFeed'
+import { FAQSection } from '@/components/FAQSection'
+import ProjectUpdate from '@/components/ProjectUpdate'
+import ProjectContent from '@/components/ProjectContent'
+import { TwitterUser } from '../utils/types' // Adjust the path as necessary
+
+type MenuSectionsProps = {
+  selectedMenuItem: string
+  title: string
+  content: string
+  socialSummary: string
+  faq: any
+  faqCount: number
+  updates: any[]
+  selectedUpdateId: number | null
+  setSelectedUpdateId: (id: number | null) => void
+  hashtag: string
+  tweetsData: any
+  twitterContributors: TwitterUser[]
+  twitterContributorsBitcoin: TwitterUser[]
+  twitterContributorsLitecoin: TwitterUser[]
+  twitterAdvocates: TwitterUser[]
+  twitterUsers: TwitterUser[]
+  isBitcoinOlympics2024: boolean
+  formatLits: (value: any) => string
+  website: string
+  gitRepository: string
+  twitterHandle: string
+  discordLink: string
+  telegramLink: string
+  facebookLink: string
+  redditLink: string
+}
+
+const MenuSections: React.FC<MenuSectionsProps> = ({
+  selectedMenuItem,
+  title,
+  content,
+  socialSummary,
+  faq,
+  faqCount,
+  updates,
+  selectedUpdateId,
+  setSelectedUpdateId,
+  hashtag,
+  tweetsData,
+  twitterContributors,
+  twitterContributorsBitcoin,
+  twitterContributorsLitecoin,
+  twitterAdvocates,
+  twitterUsers,
+  isBitcoinOlympics2024,
+  formatLits,
+  website,
+  gitRepository,
+  twitterHandle,
+  discordLink,
+  telegramLink,
+  facebookLink,
+  redditLink,
+}) => {
+  switch (selectedMenuItem) {
+    case 'mission':
+      return (
+        <div>
+          <div className="markdown">
+            <ProjectContent
+              title={title}
+              content={content}
+              socialSummary={socialSummary}
+              website={website}
+              gitRepository={gitRepository}
+              twitterHandle={twitterHandle}
+              discordLink={discordLink}
+              telegramLink={telegramLink}
+              facebookLink={facebookLink}
+              redditLink={redditLink}
+              twitterContributors={twitterContributors}
+              twitterContributorsBitcoin={twitterContributorsBitcoin}
+              twitterContributorsLitecoin={twitterContributorsLitecoin}
+              twitterAdvocates={twitterAdvocates}
+              twitterUsers={twitterUsers}
+              isBitcoinOlympics2024={isBitcoinOlympics2024}
+            />
+          </div>
+        </div>
+      )
+    case 'comments':
+      return (
+        <div className="markdown">
+          <h1>{`${hashtag}`}</h1>
+          <TwitterFeed hashtag={hashtag} tweetsData={tweetsData} />
+        </div>
+      )
+    case 'faq':
+      return (
+        <div className="markdown">
+          <FAQSection faqCategories={faq.questionsAndAnswers} bg={'#c6d3d6'} />
+        </div>
+      )
+    case 'updates':
+      return (
+        <div className="markdown min-h-full">
+          <div>
+            {updates && updates.filter((post) => post.id > 0).length > 0 ? (
+              updates
+                .filter((post) => post.id > 0)
+                .map((post, index) => (
+                  <div key={index} id={`update-${post.id}`}>
+                    <ProjectUpdate
+                      title={post.title}
+                      summary={post.summary}
+                      authorTwitterHandle={post.authorTwitterHandle}
+                      date={post.date}
+                      tags={post.tags || []}
+                      content={post.content}
+                      id={post.id}
+                      highlight={selectedUpdateId === post.id}
+                    />
+                  </div>
+                ))
+            ) : (
+              <h1>No updates available for this project.</h1>
+            )}
+          </div>
+        </div>
+      )
+    case 'community':
+      return (
+        <div className="markdown">
+          <h1>
+            {twitterContributors.length > 1 ? 'Contributors' : 'Contributor'}
+          </h1>
+          <TwitterFeed hashtag={hashtag} tweetsData={tweetsData} />
+        </div>
+      )
+    default:
+      return null
+  }
+}
+
+export default MenuSections

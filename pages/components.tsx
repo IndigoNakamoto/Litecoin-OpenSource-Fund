@@ -8,6 +8,7 @@ import PaymentModalStockDonorThankYou from '../components/PaymentModalStockDonor
 import PaymentModalPersonalInfo from '../components/PaymentModalPersonalInfo'
 import PaymentModalFiatDonate from '../components/PaymentModalFiatDonate'
 import PaymentModalFiatOption from '../components/PaymentModalFiatOption'
+import PaymentModalFiatThankYou from '../components/PaymentModalFiatThankYou'
 
 const ComponentsShowcase = () => {
   const handleContinue = () => {
@@ -20,6 +21,22 @@ const ComponentsShowcase = () => {
         <h1 className="mb-6 text-4xl font-bold text-white">
           Component Showcase
         </h1>
+        {/* // Showcase PaymentModalFiatThankYou */}
+        <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
+          Payment Modal Fiat Thank You
+        </h2>
+        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+          <PaymentModalFiatThankYou />
+        </section>
+
+        {/* Showcase PaymentModalStockDonorThankYou */}
+        <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
+          Payment Modal Stock Donor Thank You
+        </h2>
+        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+          <PaymentModalStockDonorThankYou onRequestClose={() => null} />
+        </section>
+
         {/* // Showcase PaymentModalFiatDonate */}
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Modal Fiat Donate
@@ -74,13 +91,7 @@ const ComponentsShowcase = () => {
         <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
           <PaymentModalStockBrokerInfo />
         </section>
-        {/* Showcase PaymentModalStockDonorThankYou */}
-        <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
-          Payment Modal Stock Donor Thank You
-        </h2>
-        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
-          <PaymentModalStockDonorThankYou onRequestClose={() => null} />
-        </section>
+
         {/* Showcase PaymentModalPersonalInfo */}
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Modal Personal Info
