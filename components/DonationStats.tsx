@@ -58,10 +58,10 @@ const DonationStats: React.FC<DonationStatsProps> = ({
             value={`$ ${formatLits(matchingTotal)}`}
             label="Donations Matched by Charlie Lee"
           />
-          <StatItem
+          {/* <StatItem
             value={`$ ${formatLits(serviceFeeCollected)}`}
             label="15% Service Fee Collected"
-          />
+          /> */}
           <StatItem
             value={`$ ${formatLits(totalPaid)}`}
             label="USD Paid to Contributors"

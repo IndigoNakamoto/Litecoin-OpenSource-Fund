@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 import crypto from 'crypto'
 import logger from '../../../lib/logger'
+import { Prisma } from '@prisma/client' // Import Prisma namespace
 
 // Define Webhook Event Types
 type WebhookEventType = 'DEPOSIT_TRANSACTION' | 'TRANSACTION_CONVERTED' | string
@@ -189,28 +190,30 @@ async function handleDepositTransaction(
     )
   }
 
+  // Prepare update data
+  const updateData: Prisma.DonationUpdateInput = {
+    transactionHash: payload.transactionHash || null,
+    payoutAmount: payload.payoutAmount,
+    payoutCurrency: payload.payoutCurrency,
+    externalId: payload.externalId,
+    campaignId: payload.campaignId,
+    valueAtDonationTimeUSD: payload.valueAtDonationTimeUSD,
+    currency: payload.currency,
+    amount: payload.amount,
+    status: payload.status,
+    timestampms: new Date(Number(payload.timestampms)),
+    eid: payload.eid,
+    paymentMethod: payload.paymentMethod,
+    eventData: Object.assign({}, donation.eventData, {
+      [eventType]: payload,
+    }),
+    updatedAt: new Date(),
+  }
+
   // Update the Donation record
   await prisma.donation.update({
     where: { id: donation.id },
-    data: {
-      transactionHash: payload.transactionHash || null,
-      payoutAmount: payload.payoutAmount,
-      payoutCurrency: payload.payoutCurrency,
-      externalId: payload.externalId,
-      campaignId: payload.campaignId,
-      valueAtDonationTimeUSD: payload.valueAtDonationTimeUSD,
-      currency: payload.currency,
-      amount: payload.amount,
-      status: payload.status,
-      timestampms: new Date(Number(payload.timestampms)),
-      eid: payload.eid,
-      paymentMethod: payload.paymentMethod,
-      eventData: {
-        ...donation.eventData,
-        [eventType]: payload,
-      },
-      updatedAt: new Date(),
-    },
+    data: updateData,
   })
 
   // Create a WebhookEvent record
@@ -261,29 +264,32 @@ async function handleTransactionConverted(
     throw new Error(`Donation with pledgeId ${pledgeId} not found`)
   }
 
+  // Prepare update data
+  const updateData: Prisma.DonationUpdateInput = {
+    convertedAt: new Date(Number(payload.convertedAt)),
+    netValueAmount: payload.netValueAmount,
+    grossAmount: payload.grossAmount,
+    netValueCurrency: payload.netValueCurrency,
+    payoutAmount: payload.payoutAmount,
+    payoutCurrency: payload.payoutCurrency,
+    externalId: payload.externalId,
+    campaignId: payload.campaignId,
+    valueAtDonationTimeUSD: payload.valueAtDonationTimeUSD,
+    currency: payload.currency,
+    amount: payload.amount,
+    status: payload.status,
+    timestampms: new Date(Number(payload.timestampms)),
+    eid: payload.eid,
+    eventData: Object.assign({}, donation.eventData, {
+      [eventType]: payload,
+    }),
+    updatedAt: new Date(),
+  }
+
   // Update the Donation record
   await prisma.donation.update({
     where: { pledgeId },
-    data: {
-      convertedAt: new Date(Number(payload.convertedAt)),
-      netValueAmount: payload.netValueAmount,
-      grossAmount: payload.grossAmount,
-      netValueCurrency: payload.netValueCurrency,
-      payoutAmount: payload.payoutAmount,
-      payoutCurrency: payload.payoutCurrency,
-      externalId: payload.externalId,
-      campaignId: payload.campaignId,
-      valueAtDonationTimeUSD: payload.valueAtDonationTimeUSD,
-      currency: payload.currency,
-      amount: payload.amount,
-      status: payload.status,
-      timestampms: new Date(Number(payload.timestampms)),
-      eid: payload.eid,
-      eventData: Object.assign({}, donation.eventData, {
-        [eventType]: payload,
-      }),
-      updatedAt: new Date(),
-    },
+    data: updateData,
   })
 
   // Create a WebhookEvent record
@@ -344,18 +350,7 @@ async function handleUnknownEvent(eventType: string, payload: any) {
     return
   }
 
-  // Create a WebhookEvent record
-  await prisma.webhookEvent.create({
-    data: {
-      eventType: eventType,
-      payload: payload,
-      donationId: donation.id,
-      eid: eid,
-      processed: true,
-    },
-  })
-
-  // Optionally, update the Donation's eventData with the unknown event
+  // Update the Donation's eventData with the unknown event
   await prisma.donation.update({
     where: { id: donation.id },
     data: {
@@ -364,6 +359,17 @@ async function handleUnknownEvent(eventType: string, payload: any) {
         [eventType]: payload,
       },
       updatedAt: new Date(),
+    },
+  })
+
+  // Create a WebhookEvent record
+  await prisma.webhookEvent.create({
+    data: {
+      eventType: eventType,
+      payload: payload,
+      donationId: donation.id,
+      eid: eid,
+      processed: true,
     },
   })
 
