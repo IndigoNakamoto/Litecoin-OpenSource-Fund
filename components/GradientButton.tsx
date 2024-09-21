@@ -11,6 +11,7 @@ type GradientButtonProps = {
   type?: 'button' | 'submit' | 'reset'
   backgroundColor?: string // User-defined background color
   textColor?: string // User-defined text gradient color
+  textColor2?: string
   loadingText?: string // Customizable loading text
 }
 
