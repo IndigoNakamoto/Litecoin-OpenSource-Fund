@@ -1,3 +1,5 @@
+// /pages/api/getInfo.ts
+
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { fetchGetJSONAuthed } from '../../utils/api-helpers'
 

@@ -55,9 +55,12 @@ model Donation {
     joinMailingList Boolean @default(false) @map("join_mailing_list")
 
     // Donor Social Profiles
-    socialX        String? @map("social_x")
-    socialFacebook String? @map("social_facebook")
-    socialLinkedIn String? @map("social_linkedin")
+    socialX                String? @map("social_x")
+    socialXimageSrc        String? @map("social_x_image_src")
+    socialFacebook         String? @map("social_facebook")
+    socialFacebookimageSrc String? @map("social_Facebook_image_src")
+    socialLinkedIn         String? @map("social_linkedin")
+    socialLinkedInimageSrc String? @map("social_LinkedIn_image_src")
 
     // TGB 200 Response Values
     donationUuid   String? @unique @map("donation_uuid") // stock
@@ -68,25 +71,26 @@ model Donation {
     success Boolean @default(false) @map("success") // New field to track donation success
 
     // Webhook Event Related Fields
-    transactionHash        String?   @map("transaction_hash")
-    payoutAmount           Decimal?  @map("payout_amount") @db.Decimal(10, 2)
-    payoutCurrency         String?   @map("payout_currency")
-    externalId             String?   @map("external_id")
-    campaignId             String?   @map("campaign_id")
-    valueAtDonationTimeUSD Decimal?  @map("value_at_donation_time_usd") @db.Decimal(10, 2)
-    convertedAt            DateTime? @map("converted_at")
-    status                 String?   @map("status")
-    timestampms            DateTime? @map("timestampms")
-    eid                    String?   @map("eid")
-    currency               String?   @map("currency")
-    amount                 Decimal?  @map("amount") @db.Decimal(10, 2)
-    paymentMethod          String?   @map("payment_method")
-
+    transactionHash        String?        @map("transaction_hash")
+    convertedAt            DateTime?      @map("converted_at")
+    netValueAmount         Decimal?       @map("net_value_amount")
+    netValueCurrency       String?        @map("net_value_currency")
+    grossAmount            Decimal?       @map("gross_amount")
+    payoutAmount           Decimal?       @map("payout_amount") @db.Decimal(10, 2)
+    payoutCurrency         String?        @map("payout_currency")
+    externalId             String?        @map("external_id")
+    campaignId             String?        @map("campaign_id")
+    valueAtDonationTimeUSD Decimal?       @map("value_at_donation_time_usd") @db.Decimal(10, 2)
+    currency               String?        @map("currency")
+    amount                 Decimal?       @map("amount") @db.Decimal(10, 2)
+    status                 String?        @map("status")
+    timestampms            DateTime?      @map("timestampms")
+    eid                    String?        @map("eid")
+    paymentMethod          String?        @map("payment_method")
     // Additional Fields for Flexibility
-    eventData Json? @map("event_data")
-
+    eventData              Json?          @map("event_data")
     // Relations
-    webhookEvents WebhookEvent[] @relation("DonationWebhookEvents")
+    webhookEvents          WebhookEvent[] @relation("DonationWebhookEvents")
 
     @@map("donations")
 }

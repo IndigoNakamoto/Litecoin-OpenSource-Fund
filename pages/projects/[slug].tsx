@@ -240,7 +240,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   useEffect(() => {
     const fetchData = async () => {
       setAddressStats(undefined)
-      const stats = await fetchGetJSON(`/api/getInfo/?slug=${slug}`)
+      const stats = await fetchGetJSON(`/api/getInfoTGB?slug=${slug}`)
       setAddressStats(stats)
       setServiceFeesCollected(serviceFeesCollected)
 
@@ -512,7 +512,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               twitterContributorsBitcoin={twitterContributorsBitcoin}
               twitterContributorsLitecoin={twitterContributorsLitecoin}
               twitterAdvocates={twitterAdvocates}
-              twitterUsers={twitterUsers}
+              twitterUsers={twitterUsers} // donors
               isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
               formatLits={formatLits}
               website={website || ''}
