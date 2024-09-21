@@ -22,6 +22,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   type = 'button',
   backgroundColor = '#222222',
   textColor = '#f0f0f0',
+  textColor2 = '#444444',
   loadingText = 'Submitting...',
 }) => {
   const isDisabled = disabled || isLoading
@@ -41,7 +42,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
         color: textColor,
       }} // Apply styles inline to override any external styles
     >
-      <span className={`${isLoading ? 'text-gradient-animation' : ''}`}>
+      <span className={`${isLoading ? 'text-gradient-animation ' : ''}`}>
         {isLoading ? loadingText : children}
       </span>
       <style jsx>{`
@@ -51,18 +52,17 @@ const GradientButton: React.FC<GradientButtonProps> = ({
             ${textColor},
             ${textColor},
             ${textColor},
-            ${backgroundColor},
-            ${backgroundColor},
-            ${backgroundColor},
-            ${backgroundColor},
-            ${backgroundColor},
+            ${textColor2},
+            ${textColor2},
+            ${textColor2},
+            ${textColor2},
+            ${textColor2},
             ${textColor}
           );
           background-size: 200%;
           background-clip: text;
           -webkit-background-clip: text;
-          color: transparent;
-          animation: gradient-move 8s infinite;
+          animation: gradient-move 7s infinite;
         }
 
         @keyframes gradient-move {

@@ -545,10 +545,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   />
                 )}
               </div>
-              <p className="my-auto ml-8 font-space-grotesk text-sm text-[#222222]">
-                Upload a verified profile photo to show your support. Your photo
-                and a link to your account will be featured in our community
-                section.
+              <p className="my-auto ml-8 font-space-grotesk text-sm text-gray-600">
+                Verify an account to show your support. Your photo and a link to
+                your account will be featured in our community section.
               </p>
             </div>
             <div>
@@ -556,9 +555,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 {!state.formData.socialXimageSrc ? (
                   <button
                     type="button" // Ensure type is button
-                    className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
+                    className={`flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-gray-500 ${
                       state.formData.socialXimageSrc
-                        ? 'cursor-not-allowed bg-gray-200'
+                        ? 'cursor-not-allowed border-none bg-gray-200 text-[#222222]'
                         : ''
                     }`}
                     onClick={() => {
@@ -571,13 +570,15 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                     }}
                     disabled={!!state.formData.socialXimageSrc}
                   >
-                    {state.formData.socialXimageSrc ? 'Verified' : 'Verify'}
-                    <SiX className="ml-2 h-6 w-6" />
+                    <span className="flex items-center">
+                      {state.formData.socialXimageSrc ? 'Verified' : 'Verify'}
+                      <SiX className="ml-2 h-6 w-6" />
+                    </span>
                   </button>
                 ) : (
                   <button
                     type="button" // Ensure type is button
-                    className="flex w-full flex-row rounded-lg bg-[#c6d3d6] font-space-grotesk font-bold text-[#222222]"
+                    className="flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-[#222222]"
                     onClick={() => {
                       dispatch({
                         type: 'SET_FORM_DATA',
@@ -592,7 +593,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 )}
 
                 {/* LinkedIn Verification Button */}
-                <button
+                {/* <button
                   type="button" // Ensure type is button
                   className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
                     state.formData.socialLinkedIn
@@ -609,10 +610,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 >
                   {state.formData.socialLinkedIn ? 'Verified' : 'Verify'}
                   <SiLinkedin className="ml-2 h-6 w-6" />
-                </button>
+                </button> */}
 
                 {/* Facebook Verification Button */}
-                <button
+                {/* <button
                   type="button" // Ensure type is button
                   className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
                     state.formData.socialFacebook
@@ -629,7 +630,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 >
                   {state.formData.socialFacebook ? 'Verified' : 'Verify'}
                   <SiFacebook className="ml-2 h-6 w-6" />
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

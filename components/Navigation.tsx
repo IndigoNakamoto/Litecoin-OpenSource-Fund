@@ -42,7 +42,7 @@ const Navigation = () => {
     }
   }, [])
 
-  const toggleDropdown = (menu: keyof typeof dropdownOpen) => {
+  const toggleDropdown = (menu) => {
     setDropdownOpen((prev) => ({
       useLitecoin: menu === 'useLitecoin' ? !prev.useLitecoin : false,
       theFoundation: menu === 'theFoundation' ? !prev.theFoundation : false,
@@ -50,14 +50,14 @@ const Navigation = () => {
     }))
   }
 
-  const toggleMobileDropdown = (menu: keyof typeof mobileDropdownOpen) => {
+  const toggleMobileDropdown = (menu) => {
     setMobileDropdownOpen((prevState) => ({
       ...prevState,
       [menu]: !prevState[menu], // Toggle the specific dropdown
     }))
   }
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = (event) => {
     if (
       useLitecoinRef.current &&
       !useLitecoinRef.current.contains(event.target as Node)
@@ -70,7 +70,7 @@ const Navigation = () => {
 
     if (
       theFoundationRef.current &&
-      !theFoundationRef.current.contains(event.target as Node)
+      !theFoundationRef.current.contains(event.target)
     ) {
       setDropdownOpen((prev) => ({
         ...prev,
@@ -78,7 +78,7 @@ const Navigation = () => {
       }))
     }
 
-    if (learnRef.current && !learnRef.current.contains(event.target as Node)) {
+    if (learnRef.current && !learnRef.current.contains(event.target)) {
       setDropdownOpen((prev) => ({
         ...prev,
         learn: false,
@@ -119,8 +119,8 @@ const Navigation = () => {
     minHeaderHeight
   )
 
-  const baseLogoSize = isMobile ? 60 : 70.2 // Adjusted for better mobile sizing
-  const minLogoSize = isMobile ? 51 : 60 // Adjust the minimum size for mobile as well
+  const baseLogoSize = isMobile ? 67 - 7 : 70.2 // 16px is 1rem
+  const minLogoSize = isMobile ? 67 - 16 : 60 // Adjust the minimum size for mobile as well
 
   const logoSize = Math.max(
     baseLogoSize -
@@ -140,18 +140,14 @@ const Navigation = () => {
     12
   )
 
-  const interpolateColor = (
-    startColor: string,
-    endColor: string,
-    factor: number
-  ) => {
+  const interpolateColor = (startColor, endColor, factor) => {
     const result = startColor
       .slice(1)
-      .match(/.{2}/g)!
+      .match(/.{2}/g)
       .map((hex, i) => {
         return Math.round(
           parseInt(hex, 16) * (1 - factor) +
-            parseInt(endColor.slice(1).match(/.{2}/g)![i], 16) * factor
+            parseInt(endColor.slice(1).match(/.{2}/g)[i], 16) * factor
         )
           .toString(16)
           .padStart(2, '0')
@@ -207,48 +203,32 @@ const Navigation = () => {
           </div>
           <nav>
             {isMobile ? (
-              // Hamburger menu
-              <button
-                className={`nav-toggle mt-[-10px] ${navShow ? 'open' : ''}`}
+              // Hamburger menu. TODO: Modify color with scroll position between #222222 and #C5D3D6
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
+              <a
+                className={`nav-toggle  mt-[-10px]  ${navShow ? 'open' : ''}`}
                 onClick={onToggleNav}
+                onKeyPress={onToggleNav}
                 aria-label="menu"
+                role="button"
+                tabIndex={0}
               >
                 <span className="bar"></span>
                 <span className="bar"></span>
                 <span className="bar"></span>
-              </button>
+              </a>
             ) : (
               <ul className="flex flex-row">
-                {/* Use Litecoin Dropdown */}
-                <li
-                  className="text-md relative !mr-[1.85rem] flex items-center font-[500]"
-                  ref={useLitecoinRef}
-                  style={{
-                    color: fontColor,
-                    letterSpacing: '-0.15px',
-                    fontSize: `${scaledFontSize}px`,
-                    transform: 'translateY(-1px)',
-                    marginRight: `${scaledMargin - 1.9}px`, // Adjust spacing between menu items
-                  }}
-                >
+                <li className="relative !-mt-[.2rem]  !mr-[0rem]  flex items-center !font-[500]">
                   <button
+                    className="flex items-center"
                     onClick={() => toggleDropdown('useLitecoin')}
-                    onKeyDown={(e) =>
-                      e.key === 'Enter' && toggleDropdown('useLitecoin')
-                    }
-                    className="flex cursor-pointer items-center border-none bg-transparent p-0 focus:outline-none"
                     aria-expanded={dropdownOpen.useLitecoin}
                     aria-haspopup="true"
+                    ref={useLitecoinRef as React.RefObject<HTMLButtonElement>}
+                    style={{ color: fontColor }}
                   >
-                    <span
-                      style={{
-                        color: fontColor,
-                        letterSpacing: '-0.15px',
-                        fontSize: `${scaledFontSize}px`,
-                      }}
-                    >
-                      Use Litecoin
-                    </span>
+                    Use Litecoin
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`ml-2 h-4 w-4 ${
@@ -259,22 +239,21 @@ const Navigation = () => {
                         transform: `translateX(-2px) ${
                           dropdownOpen.useLitecoin ? 'rotate(180deg)' : ''
                         }`,
-                        stroke: dropdownTextColor, // Ensure the chevron color follows the dropdown text color
                       }}
                       fill="none"
                       viewBox="0 0 24 24"
-                      strokeWidth={3.25}
                       stroke="currentColor"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        strokeWidth={3.25}
                         d="M19 9l-7 7-7-7"
                       />
                     </svg>
                   </button>
                   <ul
-                    className={`w-[var(--dropdown-width, 113.63px)] dropdown absolute left-0 top-full mt-3 rounded-3xl ${
+                    className={`w-[var(--dropdown-width, 113.63px)] absolute left-0 top-full mt-3 rounded-2xl ${
                       dropdownOpen.useLitecoin
                         ? 'dropdown-enter-active'
                         : 'dropdown-exit-active'
@@ -288,7 +267,7 @@ const Navigation = () => {
                           ? 'visible'
                           : 'hidden',
                         '--dropdown-width': '113.63px',
-                      } as React.CSSProperties
+                      } as any
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
@@ -307,35 +286,16 @@ const Navigation = () => {
                 </li>
 
                 {/* Learn Dropdown */}
-                <li
-                  className="text-md relative mr-[1.85rem] flex items-center font-[500]"
-                  ref={learnRef}
-                  style={{
-                    color: fontColor,
-                    letterSpacing: '-0.15px',
-                    fontSize: `${scaledFontSize}px`,
-                    transform: 'translateY(-1px)',
-                    marginRight: `${scaledMargin - 1.9}px`, // Adjust spacing between menu items
-                  }}
-                >
+                <li className="relative !-mr-[.3rem] !-mt-[.2rem] flex items-center !font-[500]">
                   <button
+                    className="flex items-center text-[#222222]"
                     onClick={() => toggleDropdown('learn')}
-                    onKeyDown={(e) =>
-                      e.key === 'Enter' && toggleDropdown('learn')
-                    }
-                    className="flex cursor-pointer items-center border-none bg-transparent p-0 focus:outline-none"
                     aria-expanded={dropdownOpen.learn}
                     aria-haspopup="true"
+                    ref={useLitecoinRef as React.RefObject<HTMLButtonElement>}
+                    style={{ color: fontColor }}
                   >
-                    <span
-                      style={{
-                        color: fontColor,
-                        letterSpacing: '-0.15px',
-                        fontSize: `${scaledFontSize}px`,
-                      }}
-                    >
-                      Learn
-                    </span>
+                    Learn
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`ml-2 h-4 w-4 ${
@@ -346,22 +306,21 @@ const Navigation = () => {
                         transform: `translateX(-2px) ${
                           dropdownOpen.learn ? 'rotate(180deg)' : ''
                         }`,
-                        stroke: dropdownTextColor, // Ensure the chevron color follows the dropdown text color
                       }}
                       fill="none"
                       viewBox="0 0 24 24"
-                      strokeWidth={3.25}
                       stroke="currentColor"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        strokeWidth={3.25}
                         d="M19 9l-7 7-7-7"
                       />
                     </svg>
                   </button>
                   <ul
-                    className={`w-[var(--dropdown-width, 180px)] dropdown absolute left-0 top-full mt-3 rounded-3xl ${
+                    className={`w-[var(--dropdown-width, 180px)] absolute left-0 top-full mt-3 rounded-2xl ${
                       dropdownOpen.learn
                         ? 'dropdown-enter-active'
                         : 'dropdown-exit-active'
@@ -372,8 +331,12 @@ const Navigation = () => {
                         color: dropdownTextColor,
                         fontSize: `${scaledFontSize}px`,
                         visibility: dropdownOpen.learn ? 'visible' : 'hidden',
-                        '--dropdown-width': '180px',
-                      } as React.CSSProperties
+                        /* 
+                        --dropdown-width controls the width of the dropdown.
+                        Adjust this value as needed.
+                      */
+                        '--dropdown-width': '165px',
+                      } as any
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
@@ -390,7 +353,7 @@ const Navigation = () => {
 
                 {/* Projects Menu Item */}
                 <li
-                  className="text-md !mr-[2rem] mb-[0.95rem] ml-[1rem] mt-[0.85rem] font-[500]"
+                  className="text-md !ml-[1rem] !mr-[.82rem] mb-[.95rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -402,35 +365,16 @@ const Navigation = () => {
                 </li>
 
                 {/* The Foundation Dropdown */}
-                <li
-                  className="text-md relative mr-[1.85rem] flex items-center font-[500]"
-                  ref={theFoundationRef}
-                  style={{
-                    color: fontColor,
-                    letterSpacing: '-0.15px',
-                    fontSize: `${scaledFontSize}px`,
-                    transform: 'translateY(-1px)',
-                    marginRight: `${scaledMargin - 1.9}px`, // Adjust spacing between menu items
-                  }}
-                >
+                <li className="relative !-mr-[.20rem] !-mt-[0.1rem] flex items-center !font-[500]">
                   <button
+                    className="flex items-center text-[#222222]"
                     onClick={() => toggleDropdown('theFoundation')}
-                    onKeyDown={(e) =>
-                      e.key === 'Enter' && toggleDropdown('theFoundation')
-                    }
-                    className="flex cursor-pointer items-center border-none bg-transparent p-0 focus:outline-none"
-                    aria-expanded={dropdownOpen.theFoundation}
+                    aria-expanded={dropdownOpen.useLitecoin}
                     aria-haspopup="true"
+                    ref={useLitecoinRef as React.RefObject<HTMLButtonElement>}
+                    style={{ color: fontColor }}
                   >
-                    <span
-                      style={{
-                        color: fontColor,
-                        letterSpacing: '-0.15px',
-                        fontSize: `${scaledFontSize}px`,
-                      }}
-                    >
-                      The Foundation
-                    </span>
+                    The Foundation
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`ml-2 h-4 w-4 ${
@@ -441,26 +385,26 @@ const Navigation = () => {
                         transform: `translateX(-2px) ${
                           dropdownOpen.theFoundation ? 'rotate(180deg)' : ''
                         }`,
-                        stroke: dropdownTextColor, // Ensure the chevron color follows the dropdown text color
                       }}
                       fill="none"
                       viewBox="0 0 24 24"
-                      strokeWidth={3.25}
                       stroke="currentColor"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        strokeWidth={3.25}
                         d="M19 9l-7 7-7-7"
                       />
                     </svg>
                   </button>
                   <ul
-                    className={`w-[var(--dropdown-width, 180px)] dropdown absolute left-0 top-full mt-3 rounded-3xl ${
+                    className={`w-[var(--dropdown-width, 180px)] absolute left-0 top-full mt-3 rounded-2xl ${
                       dropdownOpen.theFoundation
                         ? 'dropdown-enter-active'
                         : 'dropdown-exit-active'
                     }`}
+                    // Cast to allow custom CSS properties
                     style={
                       {
                         backgroundColor: dropdownBgColor,
@@ -469,8 +413,8 @@ const Navigation = () => {
                         visibility: dropdownOpen.theFoundation
                           ? 'visible'
                           : 'hidden',
-                        '--dropdown-width': '180px',
-                      } as React.CSSProperties
+                        '--dropdown-width': '140px', // Removed cast to any
+                      } as any
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
@@ -489,9 +433,8 @@ const Navigation = () => {
                 </li>
                 {/* End of The Foundation Dropdown */}
 
-                {/* News Menu Item */}
                 <li
-                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[1rem] mt-[0.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -501,10 +444,8 @@ const Navigation = () => {
                 >
                   <Link href="/news">News</Link>
                 </li>
-
-                {/* Events Menu Item */}
                 <li
-                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[0.5rem] mt-[0.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -514,10 +455,8 @@ const Navigation = () => {
                 >
                   <Link href="/events">Events</Link>
                 </li>
-
-                {/* Shop Menu Item */}
                 <li
-                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[0.8rem] mt-[0.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -527,10 +466,8 @@ const Navigation = () => {
                 >
                   <Link href="/shop">Shop</Link>
                 </li>
-
-                {/* Explorer Menu Item */}
                 <li
-                  className="text-md mb-[0.95rem] ml-[0.95rem] mr-[1rem] mt-[0.85rem] font-[600]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[600]"
                   style={{
                     color: '#FC5C39',
                     letterSpacing: '-0.2px',
@@ -547,14 +484,15 @@ const Navigation = () => {
       </header>
 
       {/* Mobile Nav */}
+      {/* TODO: Modify bg color with scroll position between #C5D3D6 and #222222*/}
       <div
-        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-20 duration-300 ease-in md:clear-left ${
+        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-20  duration-300 ease-in  md:clear-left  ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
       >
         {/* LINKS */}
         <div className="flex flex-col gap-x-6">
-          <nav className="mt-8 h-full">
+          <nav className="mt-8 h-full ">
             {[
               'Use Litecoin',
               'Learn',
@@ -565,29 +503,21 @@ const Navigation = () => {
               'Shop',
               'Explorer',
             ].map((item) => (
-              <div key={item} className="px-10 py-2 pt-2 short:py-0.5">
-                {['Use Litecoin', 'Learn', 'The Foundation'].includes(item) ? (
+              <div key={item} className="px-10 py-2 pt-2 short:py-0.5 ">
+                {item === 'Use Litecoin' ||
+                item === 'The Foundation' ||
+                item === 'Learn' ? (
                   <>
                     <button
                       onClick={() =>
                         toggleMobileDropdown(
-                          item
-                            .replace(' ', '')
-                            .toLowerCase() as keyof typeof mobileDropdownOpen
+                          item.replace(' ', '').toLowerCase()
                         )
                       }
-                      className="font-space-roc m-0 flex w-full items-center justify-between pl-0 pr-0 text-left text-[2.75rem] font-semibold text-[#222222]"
-                      aria-expanded={
-                        mobileDropdownOpen[
-                          item
-                            .replace(' ', '')
-                            .toLowerCase() as keyof typeof mobileDropdownOpen
-                        ]
-                      }
-                      aria-haspopup="true"
+                      className="font-space-roc m-0 flex w-full items-center justify-between pl-0 pr-0 text-left text-[2rem] font-semibold text-[#222222]"
                     >
                       {item}
-                      {/* Mobile SVG chevron will now flip up and down */}
+                      {/*Mobile SVG chevron will now flip up and down */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-10 w-10"
@@ -597,14 +527,11 @@ const Navigation = () => {
                         style={{
                           transform: `translateY(-0.5px) ${
                             mobileDropdownOpen[
-                              item
-                                .replace(' ', '')
-                                .toLowerCase() as keyof typeof mobileDropdownOpen
+                              item.replace(' ', '').toLowerCase()
                             ]
                               ? 'rotate(180deg)'
                               : ''
                           }`,
-                          stroke: '#222222', // Ensure chevron color matches text color
                         }}
                       >
                         <path
@@ -615,12 +542,8 @@ const Navigation = () => {
                         />
                       </svg>
                     </button>
-                    {mobileDropdownOpen[
-                      item
-                        .replace(' ', '')
-                        .toLowerCase() as keyof typeof mobileDropdownOpen
-                    ] && (
-                      <ul className="pl-12 text-[2.75rem] font-medium text-[#222222]">
+                    {mobileDropdownOpen[item.replace(' ', '').toLowerCase()] ? (
+                      <ul className="pl-12 font-space-grotesk text-[2rem] font-semibold text-[#222222]">
                         {item === 'Use Litecoin' ? (
                           <>
                             <li className="py-1">
@@ -653,25 +576,6 @@ const Navigation = () => {
                                 onClick={onToggleNav}
                               >
                                 Business
-                              </Link>
-                            </li>
-                          </>
-                        ) : item === 'Learn' ? (
-                          <>
-                            <li className="py-1">
-                              <Link
-                                href="/learn/what-is-litecoin"
-                                onClick={onToggleNav}
-                              >
-                                What is Litecoin
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/learn/resources"
-                                onClick={onToggleNav}
-                              >
-                                Resources
                               </Link>
                             </li>
                           </>
@@ -710,14 +614,33 @@ const Navigation = () => {
                               </Link>
                             </li>
                           </>
+                        ) : item === 'Learn' ? (
+                          <>
+                            <li className="py-1">
+                              <Link
+                                href="/learn/what-is-litecoin"
+                                onClick={onToggleNav}
+                              >
+                                What is Litecoin
+                              </Link>
+                            </li>
+                            <li className="py-1">
+                              <Link
+                                href="/learn/resources"
+                                onClick={onToggleNav}
+                              >
+                                Resources
+                              </Link>
+                            </li>
+                          </>
                         ) : null}
                       </ul>
-                    )}
+                    ) : null}
                   </>
                 ) : (
                   <Link
                     href={`/${item.toLowerCase()}`}
-                    className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.75rem] font-semibold text-[#222222]"
+                    className="flex w-full items-center justify-between text-left font-space-grotesk text-[2rem] font-semibold  text-[#222222]"
                     onClick={onToggleNav}
                   >
                     {item}
