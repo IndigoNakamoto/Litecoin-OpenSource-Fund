@@ -5,6 +5,11 @@ import axios from 'axios'
 import { getAccessToken } from '../../utils/authTGB'
 import Decimal from 'decimal.js'
 
+function generateRandomCharacter() {
+  const characters = 'abcdefghijklmnopqrstuvwxyz'
+  return characters[Math.floor(Math.random() * characters.length)]
+}
+
 type Data =
   | {
       depositAddress: string
@@ -162,6 +167,10 @@ export default async function handler(
       throw new Error('Invalid response from external API.')
     }
 
+    // const randomCharacter = generateRandomCharacter()
+    // const pledgeId = Math.random() * 100000 + randomCharacter
+    // const depositAddress = ' '
+    // const qrCode = ' '
     const { depositAddress, pledgeId, qrCode } = tgbResponse.data.data
 
     // Update the Donation record with pledgeId and depositAddress

@@ -19,6 +19,7 @@ type AsideSectionProps = {
   serviceFeeCollected?: number
   totalPaid?: number
   formatLits: (value: any) => string
+  formatUSD: (value: any) => string
   monthlyTotal?: number
   recurringAmountGoal?: number
   monthlyDonorCount?: number
@@ -38,6 +39,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
   serviceFeeCollected = 0,
   totalPaid = 0,
   formatLits,
+  formatUSD,
   monthlyTotal = 0,
   recurringAmountGoal = 0,
   monthlyDonorCount = 0,
@@ -69,7 +71,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
         matchingTotal={matchingTotal}
         serviceFeeCollected={serviceFeeCollected}
         totalPaid={totalPaid}
-        formatLits={formatLits}
+        formatUSD={formatUSD}
         monthlyTotal={monthlyTotal}
         recurringAmountGoal={recurringAmountGoal}
         monthlyDonorCount={monthlyDonorCount}

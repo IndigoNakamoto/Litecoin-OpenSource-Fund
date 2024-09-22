@@ -93,6 +93,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     updates,
   } = project
 
+  console.log('Project: ', coverImage)
+
   // State Variables
   const [addressStats, setAddressStats] = useState<AddressStats>()
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
@@ -186,6 +188,27 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       console.error('Error fetching FAQ data:', error)
       return {} // Return an empty object if there's an error
     }
+  }
+
+  // Format function for USD
+  function formatUSD(value) {
+    const num = Number(value)
+
+    if (isNaN(num) || value === '' || value === null) {
+      return '0.00'
+    }
+
+    if (num === 0) {
+      return '0.00'
+    }
+
+    // Format the number with two decimal places
+    let [whole, fraction] = num.toFixed(1).split('.')
+    whole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    fraction = fraction + 0
+
+    // Return formatted value with the fraction part
+    return `${whole}.${fraction}`
   }
 
   // Format function
@@ -515,6 +538,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               twitterUsers={twitterUsers} // donors
               isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
               formatLits={formatLits}
+              formatUSD={formatUSD}
               website={website || ''}
               gitRepository={gitRepository || ''}
               twitterHandle={twitterHandle || ''}
@@ -537,6 +561,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             serviceFeeCollected={serviceFeeCollected || 0}
             totalPaid={totalPaid || 0}
             formatLits={formatLits}
+            formatUSD={formatUSD}
             monthlyTotal={monthlyTotal}
             recurringAmountGoal={recurringAmountGoal}
             monthlyDonorCount={monthlyDonorCount}

@@ -11,7 +11,7 @@ type DonationStatsProps = {
   matchingTotal?: number
   serviceFeeCollected?: number
   totalPaid?: number
-  formatLits: (value: any) => string
+  formatUSD: (value: any) => string
   monthlyTotal?: number
   recurringAmountGoal?: number
   monthlyDonorCount?: number
@@ -40,7 +40,7 @@ const DonationStats: React.FC<DonationStatsProps> = ({
   matchingTotal = 0,
   serviceFeeCollected = 0,
   totalPaid = 0,
-  formatLits,
+  formatUSD,
   monthlyTotal = 0,
   recurringAmountGoal = 0,
   monthlyDonorCount = 0,
@@ -51,19 +51,19 @@ const DonationStats: React.FC<DonationStatsProps> = ({
       {!isBitcoinOlympics2024 && !isRecurring && (
         <div className="flex w-full flex-col">
           <StatItem
-            value={`$ ${formatLits(addressStats.funded_txo_sum)}`}
+            value={`$ ${formatUSD(addressStats.funded_txo_sum)}`}
             label="USD Raised"
           />
           <StatItem
-            value={`$ ${formatLits(matchingTotal)}`}
+            value={`$ ${formatUSD(matchingTotal)}`}
             label="Donations Matched by Charlie Lee"
           />
           {/* <StatItem
-            value={`$ ${formatLits(serviceFeeCollected)}`}
+            value={`$ ${formatUSD(serviceFeeCollected)}`}
             label="15% Service Fee Collected"
           /> */}
           <StatItem
-            value={`$ ${formatLits(totalPaid)}`}
+            value={`$ ${formatUSD(totalPaid)}`}
             label="USD Paid to Contributors"
           />
           <StatItem value={addressStats.tx_count || '0'} label="Donations" />
@@ -73,21 +73,21 @@ const DonationStats: React.FC<DonationStatsProps> = ({
       {isMatching && isBitcoinOlympics2024 && (
         <div className="flex w-full flex-col">
           <StatItem
-            value={`$ ${formatLits(addressStats.funded_txo_sum)}`}
+            value={`$ ${formatUSD(addressStats.funded_txo_sum)}`}
             label="The USD Community Raised Prize"
           />
           <StatItem
-            value={`$ ${formatLits(matchingTotal)}`}
+            value={`$ ${formatUSD(matchingTotal)}`}
             label="Prizes Matched by Charlie Lee & Galal Doss"
           />
           <StatItem
-            value={`$ ${formatLits(
+            value={`$ ${formatUSD(
               addressStats.funded_txo_sum + matchingTotal
             )} + $8,000`}
             label="Total Prize Pool"
           />
           <StatItem
-            value={`$ ${formatLits(totalPaid)}`}
+            value={`$ ${formatUSD(totalPaid)}`}
             label="Awarded to Bitcoin Olympics 2024 Participants"
           />
           <StatItem value="$ 0" label="15% Service Fee Collected" />
@@ -103,7 +103,7 @@ const DonationStats: React.FC<DonationStatsProps> = ({
                 Total Donations
               </h2>
               <StatItem
-                value={`$ ${formatLits(addressStats.funded_txo_sum)}`}
+                value={`$ ${formatUSD(addressStats.funded_txo_sum)}`}
                 label="USD Raised"
               />
               <StatItem
@@ -115,7 +115,7 @@ const DonationStats: React.FC<DonationStatsProps> = ({
               <h2 className="font-space-grotesk font-semibold">Monthly Goal</h2>
               <div>
                 <StatItem
-                  value={`$ ${formatLits(monthlyTotal)}`}
+                  value={`$ ${formatUSD(monthlyTotal)}`}
                   label={`Donated of $${recurringAmountGoal} monthly goal`}
                 />
               </div>

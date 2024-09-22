@@ -14,10 +14,10 @@ type SuccessResponse = {
   funded_txo_sum: number
   tx_count: number
   supporters: string[]
-  // donatedCreatedTime: {
-  //   valueAtDonationTimeUSD: number
-  //   createdTime: string
-  // }[]
+  donatedCreatedTime: {
+    valueAtDonationTimeUSD: number
+    createdTime: string
+  }[]
 }
 
 type ErrorResponse = {
@@ -73,12 +73,12 @@ export default async function handler(
       })
 
       // Donation amounts with creation timestamps
-      // const donatedCreatedTime = donations.map((donation) => ({
-      //   valueAtDonationTimeUSD: donation.valueAtDonationTimeUSD
-      //     ? parseFloat(donation.valueAtDonationTimeUSD?.toString())
-      //     : 0,
-      //   createdTime: donation.createdAt.toISOString(),
-      // }))
+      const donatedCreatedTime = donations.map((donation) => ({
+        valueAtDonationTimeUSD: donation.valueAtDonationTimeUSD
+          ? parseFloat(donation.valueAtDonationTimeUSD?.toString())
+          : 0,
+        createdTime: donation.createdAt.toISOString(),
+      }))
 
       // Sort supporters if necessary, e.g., by creation time or handle
       // supporters.sort((a, b) => {
@@ -90,7 +90,7 @@ export default async function handler(
         funded_txo_sum: totalAmount.toNumber(),
         tx_count: donations.length,
         supporters: supporters,
-        // donatedCreatedTime: donatedCreatedTime,
+        donatedCreatedTime: donatedCreatedTime,
       })
     } catch (err) {
       console.error('Error fetching donation info:', err)

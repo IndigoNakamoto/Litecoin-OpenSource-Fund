@@ -14,8 +14,11 @@ export default function DonateSection({
   style = 'markdown',
 }: Props) {
   return (
-    <div className="bg-white p-8">
-      <div className="mx-auto mt-32 flex min-h-screen w-[1300px] max-w-[90%] pb-16">
+    <div className="bg-[#f0f0f0] p-8">
+      <div
+        className="mx-auto mt-32 w-[1300px] max-w-[90%] pb-16"
+        style={{ minHeight: 'calc(100vh - 30rem)', marginTop: '8rem' }}
+      >
         <h1 className="markdown py-4 font-space-grotesk text-4xl font-semibold">
           {title}
         </h1>

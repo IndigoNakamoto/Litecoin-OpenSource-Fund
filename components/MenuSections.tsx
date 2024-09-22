@@ -25,6 +25,7 @@ type MenuSectionsProps = {
   twitterUsers: TwitterUser[]
   isBitcoinOlympics2024: boolean
   formatLits: (value: any) => string
+  formatUSD: (value: any) => string
   website: string
   gitRepository: string
   twitterHandle: string
