@@ -1,3 +1,4 @@
+export {}
 // // components/PaymentModal.tsx
 
 // import React, { useEffect } from 'react'
