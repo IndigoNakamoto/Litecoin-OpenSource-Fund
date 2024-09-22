@@ -14,7 +14,12 @@ export default function DonateSection({
   style = 'markdown',
 }: Props) {
   return (
-    <div className="bg-[#f0f0f0] p-8">
+    <div
+      className="bg-[#f0f0f0] p-8"
+      style={{
+        backgroundImage: "url('/static/images/design/Mask-Group-20.webp')",
+      }}
+    >
       <div
         className="mx-auto mt-32 w-[1300px] max-w-[90%] pb-16"
         style={{ minHeight: 'calc(100vh - 30rem)', marginTop: '8rem' }}
