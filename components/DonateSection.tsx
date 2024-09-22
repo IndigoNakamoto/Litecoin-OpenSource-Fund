@@ -21,8 +21,8 @@ export default function DonateSection({
       }}
     >
       <div
-        className="mx-auto mt-32 w-[1300px] max-w-[90%] pb-16"
-        style={{ minHeight: 'calc(100vh - 30rem)', marginTop: '8rem' }}
+        className="mx-auto mt-32 w-[1300px] max-w-full pb-16"
+        style={{ minHeight: 'calc(100vh - 12rem)', marginTop: '8rem' }}
       >
         <h1 className="markdown py-4 font-space-grotesk text-4xl font-semibold">
           {title}

@@ -111,7 +111,7 @@ export default function PaymentModalStockBrokerInfo() {
   }
 
   return (
-    <div className="flex flex-col space-y-4 p-8">
+    <div className="flex flex-col space-y-4 p-0 md:p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Broker Information
       </h2>

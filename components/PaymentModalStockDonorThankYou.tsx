@@ -27,7 +27,7 @@ export default function PaymentModalStockDonorThankYou({ onRequestClose }) {
     : 'Pending'
 
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-8 font-space-grotesk">
+    <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-0 font-space-grotesk md:p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Thank You, {donorName}!
       </h2>

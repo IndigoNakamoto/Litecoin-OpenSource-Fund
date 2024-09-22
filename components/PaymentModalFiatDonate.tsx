@@ -210,7 +210,7 @@ function PaymentModalFiatDonate() {
 
   return (
     <>
-      <div className="flex flex-col space-y-4 rounded-lg p-8">
+      <div className="flex !w-full flex-col space-y-4 rounded-lg p-0 md:p-8">
         <h2 className="mb-4 font-space-grotesk text-2xl font-bold text-[#222222]">
           Complete Your Donation
         </h2>

@@ -101,7 +101,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
 
   return (
     <div className="flex items-center justify-center font-space-grotesk">
-      <div className="my-auto flex flex-col items-center justify-center space-y-4 p-8">
+      <div className="my-auto flex flex-col items-center justify-center space-y-4 p-0 md:p-8">
         <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
           Complete Your Donation
         </h2>
