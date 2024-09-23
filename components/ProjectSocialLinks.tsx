@@ -57,10 +57,10 @@ const ProjectSocialLinks = ({
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center space-x-2 !text-[#222222] !no-underline hover:text-gray-800" // no-underline added
+            className="group flex items-center space-x-2 !text-[#222222] !no-underline hover:font-semibold " // no-underline added
           >
             <SocialIcon kind={link.kind} href={link.url} />
-            <span className="text-md leading-none group-hover:text-white">
+            <span className="text-md leading-none group-hover:text-gray-900">
               {formatLinkText(link.kind, link.url)}
             </span>
           </a>

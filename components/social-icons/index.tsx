@@ -59,7 +59,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
 
   return (
     <a
-      className={`inline-block text-gray-600 transition-colors duration-300 hover:text-white`} // Change color on hover
+      className={`inline-block text-gray-600 transition-colors duration-300 hover:text-gray-900`} // Change color on hover
       target="_blank"
       rel="noopener noreferrer"
       href={href}
@@ -70,7 +70,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
         className={`flex group-hover:text-white h-${padding} w-${padding} items-center justify-center rounded-lg transition-colors`}
       >
         <IconComponent
-          className={`fill-current h-${6} w-${6} text-gray-700 transition-colors group-hover:text-white`}
+          className={`fill-current h-${6} w-${6} text-gray-700 transition-colors group-hover:text-gray-900`}
           size={size}
         />
       </div>

@@ -1,4 +1,5 @@
 // components/GradientButton.tsx
+
 import React from 'react'
 
 type GradientButtonProps = {
@@ -7,6 +8,7 @@ type GradientButtonProps = {
   ) => void
   isLoading: boolean
   disabled?: boolean
+  appearDisabled?: boolean // New prop to control appearance without disabling functionality
   children: React.ReactNode
   type?: 'button' | 'submit' | 'reset'
   backgroundColor?: string // User-defined background color
@@ -18,7 +20,8 @@ type GradientButtonProps = {
 const GradientButton: React.FC<GradientButtonProps> = ({
   onClick,
   isLoading,
-  disabled,
+  disabled = false,
+  appearDisabled = false,
   children,
   type = 'button',
   backgroundColor = '#222222',
@@ -26,22 +29,27 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   textColor2 = '#444444',
   loadingText = 'Submitting...',
 }) => {
-  const isDisabled = disabled || isLoading
+  // Determine if the button should be functionally disabled
+  const isFunctionallyDisabled = disabled
+
+  // Determine if the button should appear disabled
+  const isAppearanceDisabled = disabled || appearDisabled
 
   return (
     <button
       type={type}
       onClick={onClick}
-      disabled={isDisabled}
+      disabled={isFunctionallyDisabled} // Only disable functionality if `disabled` is true
       className={`relative w-full overflow-hidden !rounded-2xl py-3 font-space-grotesk text-xl font-semibold transition-colors duration-200 ${
-        isDisabled
-          ? '!bg-[#222222] !text-gray-600' // Force disabled state styles
-          : '!text-[#f0f0f0] hover:bg-opacity-80'
+        isAppearanceDisabled
+          ? 'cursor-not-allowed bg-gray-400 text-gray-700' // Apply disabled styles
+          : 'cursor-pointer  text-white hover:from-blue-600 ' // Apply active styles
       } focus:outline-none`}
       style={{
-        backgroundColor: isDisabled ? '#d1d5db' : backgroundColor,
-        color: textColor,
-      }} // Apply styles inline to override any external styles
+        backgroundColor: isAppearanceDisabled ? '#222222' : backgroundColor,
+        color: isAppearanceDisabled ? '#6b7280' : textColor,
+        cursor: isAppearanceDisabled ? 'not-allowed' : 'pointer',
+      }} // Inline styles to override external styles
     >
       <span className={`${isLoading ? 'text-gradient-animation ' : ''}`}>
         {isLoading ? loadingText : children}

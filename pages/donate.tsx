@@ -2,9 +2,16 @@ import DonateSection from '@/components/DonateSection'
 import { PageSEO } from '@/components/SEO'
 import PaymentForm from '@/components/PaymentForm'
 import { ProjectCategory } from 'utils/types'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDonation } from '../contexts/DonationContext'
 
 export default function Apply() {
+  const { dispatch } = useDonation()
+  // Dispatch RESET_DONATION_STATE when the component mounts
+  useEffect(() => {
+    dispatch({ type: 'RESET_DONATION_STATE' })
+  }, [dispatch])
+
   return (
     <>
       <PageSEO

@@ -44,7 +44,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
 }) => (
   <div>
     <div className="w-full bg-[#c6d3d6]">
-      <div className="pt-4">
+      <div className="max-w-fit pt-4">
         <ProjectSocialLinks
           website={website}
           gitRepository={gitRepository}

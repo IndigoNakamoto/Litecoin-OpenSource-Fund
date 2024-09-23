@@ -1,12 +1,12 @@
 // components/PaymentModalPersonalInfo.tsx
 
 import React, { useState, useEffect } from 'react'
-import { SiX, SiFacebook, SiLinkedin } from 'react-icons/si'
+import { SiX } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
 import { countries } from './countries'
-import { signIn, useSession } from 'next-auth/react' // Removed signOut import
-import GradientButton from './GradientButton' // Adjust the import path as needed
+import { signIn, useSession } from 'next-auth/react'
+import GradientButton from './GradientButton'
 
 type PaymentModalPersonalInfoProps = {
   onRequestClose: () => void
@@ -18,12 +18,12 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   onBackClick,
 }) => {
   const { state, dispatch } = useDonation()
-  const { formData, projectSlug } = state // Access formData from context
-  const [isLoading, setIsLoading] = useState(false) // State to handle loading for the button
+  const { formData, projectSlug } = state
+  const [isLoading, setIsLoading] = useState(false)
 
   // Initialize local states based on formData
   const [donateAnonymously, setDonateAnonymously] = useState(
-    formData.isAnonymous ?? true
+    formData.isAnonymous ?? false
   )
   const [needsTaxReceipt, setNeedsTaxReceipt] = useState(
     formData.taxReceipt ?? true
@@ -36,22 +36,92 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   const [searchTerm, setSearchTerm] = useState(formData.country || '')
   const [focusedCountryIndex, setFocusedCountryIndex] = useState(-1)
 
-  const [emailError, setEmailError] = useState('') // Added email error state
+  const [emailError, setEmailError] = useState('')
 
   const filteredCountries = countries.filter((country) =>
     country.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
+  const [errors, setErrors] = useState<{
+    receiptEmail?: string
+    firstName?: string
+    lastName?: string
+    country?: string
+    addressLine1?: string
+    city?: string
+    state?: string
+    zipcode?: string
+    phoneNumber?: string
+  }>({})
+
+  const validateField = (name: string, value: string | boolean): string => {
+    const stringValue = typeof value === 'boolean' ? value.toString() : value
+
+    switch (name) {
+      case 'receiptEmail':
+        if (
+          needsTaxReceipt ||
+          joinMailingList ||
+          (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
+        ) {
+          if (!stringValue.trim()) return 'Email is required.'
+          if (!/^\S+@\S+\.\S+$/.test(stringValue.trim()))
+            return 'Please enter a valid email address.'
+        }
+        return ''
+      case 'firstName':
+        if (!donateAnonymously || state.selectedOption === 'stock') {
+          if (!stringValue.trim()) return 'First name is required.'
+        }
+        return ''
+      case 'lastName':
+        if (!donateAnonymously || state.selectedOption === 'stock') {
+          if (!stringValue.trim()) return 'Last name is required.'
+        }
+        return ''
+      case 'country':
+        if (shouldShowAddressFields && !stringValue.trim())
+          return 'Country is required.'
+        return ''
+      case 'addressLine1':
+        if (shouldShowAddressFields && !stringValue.trim())
+          return 'Street Address is required.'
+        return ''
+      case 'city':
+        if (shouldShowAddressFields && !stringValue.trim())
+          return 'City is required.'
+        return ''
+      case 'state':
+        if (shouldShowAddressFields && !stringValue.trim())
+          return 'State is required.'
+        return ''
+      case 'zipcode':
+        if (shouldShowAddressFields && !stringValue.trim())
+          return 'ZIP Code is required.'
+        return ''
+      case 'phoneNumber':
+        if (state.selectedOption === 'stock' && !stringValue.trim())
+          return 'Phone Number is required.'
+        return ''
+      default:
+        return ''
+    }
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     dispatch({ type: 'SET_FORM_DATA', payload: { [name]: value } })
 
-    // Clear email error if user starts typing again
-    if (name === 'receiptEmail') {
-      if (emailError) {
-        setEmailError('')
-      }
+    // Clear error when user modifies the field
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }))
     }
+  }
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    const error = validateField(name, value)
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: error }))
   }
 
   const handleCountrySelect = (country: string) => {
@@ -94,25 +164,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     }
   }
 
-  const handleEmailBlur = () => {
-    const isEmailRequired =
-      needsTaxReceipt ||
-      joinMailingList ||
-      (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
-
-    if (isEmailRequired) {
-      if (!formData.receiptEmail.trim()) {
-        setEmailError('Email is required.')
-      } else if (!/^\S+@\S+\.\S+$/.test(formData.receiptEmail.trim())) {
-        setEmailError('Please enter a valid email address.')
-      } else {
-        setEmailError('')
-      }
-    } else {
-      setEmailError('')
-    }
-  }
-
   // Update formData when preferences change
   const handleDonateAnonymouslyChange = () => {
     const newValue = !donateAnonymously
@@ -134,7 +185,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 
   // Initialize local states based on formData changes
   useEffect(() => {
-    setDonateAnonymously(formData.isAnonymous ?? true)
+    setDonateAnonymously(formData.isAnonymous ?? false)
     setNeedsTaxReceipt(formData.taxReceipt ?? true)
     setJoinMailingList(formData.joinMailingList ?? false)
   }, [formData.isAnonymous, formData.taxReceipt, formData.joinMailingList])
@@ -145,51 +196,48 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   }, [showDropdown, searchTerm])
 
   const areRequiredFieldsFilled = () => {
-    // Existing validation logic
     if (state.selectedOption === 'stock') {
       return (
-        formData.phoneNumber.trim() !== '' &&
-        formData.receiptEmail.trim() !== '' &&
-        formData.firstName.trim() !== '' &&
-        formData.lastName.trim() !== '' &&
-        formData.addressLine1.trim() !== '' &&
-        formData.city.trim() !== '' &&
-        formData.state.trim() !== '' &&
-        formData.country.trim() !== '' &&
-        formData.zipcode.trim() !== ''
+        formData.phoneNumber?.trim() !== '' &&
+        formData.receiptEmail?.trim() !== '' &&
+        formData.firstName?.trim() !== '' &&
+        formData.lastName?.trim() !== '' &&
+        formData.addressLine1?.trim() !== '' &&
+        formData.city?.trim() !== '' &&
+        formData.state?.trim() !== '' &&
+        formData.country?.trim() !== '' &&
+        formData.zipcode?.trim() !== ''
       )
     }
 
     if (state.selectedOption === 'fiat' || state.selectedOption === 'crypto') {
       if (donateAnonymously) {
         if (needsTaxReceipt || joinMailingList) {
-          return formData.receiptEmail.trim() !== ''
+          return formData.receiptEmail?.trim() !== ''
         }
         return true
       } else {
         return (
-          formData.receiptEmail.trim() !== '' &&
-          formData.firstName.trim() !== '' &&
-          formData.lastName.trim() !== '' &&
-          formData.addressLine1.trim() !== '' &&
-          formData.city.trim() !== '' &&
-          formData.state.trim() !== '' &&
-          formData.country.trim() !== '' &&
-          formData.zipcode.trim() !== ''
+          formData.receiptEmail?.trim() !== '' &&
+          formData.firstName?.trim() !== '' &&
+          formData.lastName?.trim() !== '' &&
+          formData.addressLine1?.trim() !== '' &&
+          formData.city?.trim() !== '' &&
+          formData.state?.trim() !== '' &&
+          formData.country?.trim() !== '' &&
+          formData.zipcode?.trim() !== ''
         )
       }
     }
 
     if (!donateAnonymously && !needsTaxReceipt && !joinMailingList) {
-      return formData.receiptEmail.trim() !== ''
+      return formData.receiptEmail?.trim() !== ''
     }
 
     return true
   }
 
   const { data: session } = useSession()
-
-  // Remove hasProcessedSession state and related logic
 
   useEffect(() => {
     if (session) {
@@ -201,7 +249,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           socialXimageSrc: session.user.image,
         },
       })
-      // Note: Sign-out is now handled by the parent when the modal is closed
     }
   }, [session, dispatch])
 
@@ -215,47 +262,60 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
   useEffect(() => {
-    setIsButtonDisabled(!areRequiredFieldsFilled() || emailError !== '')
+    const requiredFieldsFilled = areRequiredFieldsFilled()
+    const noErrors = Object.values(errors).every((error) => error === '')
+    setIsButtonDisabled(!(requiredFieldsFilled && noErrors))
   }, [
     formData,
     needsTaxReceipt,
     joinMailingList,
     donateAnonymously,
     state.selectedOption,
-    emailError, // Include emailError in dependencies
+    errors,
   ])
 
   // Function to handle form submission
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsLoading(true) // Set loading state to true when API request starts
-
-    // Reset previous errors
-    setEmailError('')
+    setIsLoading(true)
+    setErrors({})
 
     // Perform validation
-    let isValid = true
+    const newErrors: typeof errors = {}
 
-    // Determine if email is required
-    const isEmailRequired =
-      needsTaxReceipt ||
-      joinMailingList ||
-      (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
+    // List of fields to validate based on conditions
+    const fieldsToValidate = ['receiptEmail']
 
-    if (isEmailRequired) {
-      if (!formData.receiptEmail.trim()) {
-        setEmailError('Email is required.')
-        isValid = false
-      } else if (!/^\S+@\S+\.\S+$/.test(formData.receiptEmail.trim())) {
-        setEmailError('Please enter a valid email address.')
-        isValid = false
-      } else {
-        setEmailError('')
-      }
+    if (!donateAnonymously || state.selectedOption === 'stock') {
+      fieldsToValidate.push('firstName', 'lastName')
     }
 
-    if (!isValid) {
-      setIsLoading(false) // Set loading state back to false since validation failed
+    if (shouldShowAddressFields) {
+      fieldsToValidate.push(
+        'country',
+        'addressLine1',
+        'city',
+        'state',
+        'zipcode'
+      )
+    }
+
+    if (state.selectedOption === 'stock') {
+      fieldsToValidate.push('phoneNumber')
+    }
+
+    // Validate each field
+    fieldsToValidate.forEach((field) => {
+      const value = formData[field as keyof typeof formData]
+      const error = validateField(field, value)
+      if (error) {
+        newErrors[field as keyof typeof newErrors] = error
+      }
+    })
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      setIsLoading(false)
       return
     }
 
@@ -301,7 +361,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
         addressLine1: donateAnonymously
           ? anonInfo.addressLine1
           : formData.addressLine1,
-        addressLine2: formData.addressLine2, // No need to anonymize this unless specified
+        addressLine2: formData.addressLine2,
         country: donateAnonymously ? anonInfo.country : formData.country,
         state: donateAnonymously ? anonInfo.state : formData.state,
         city: donateAnonymously ? anonInfo.city : formData.city,
@@ -403,31 +463,24 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             'Expected data (pledgeId, depositAddress, or donationUuid) missing in response',
             data
           )
-          // Optionally, display a user-friendly error message here
         }
       } else {
         console.error(data.error)
-        // Optionally, display a user-friendly error message here
       }
     } catch (error: any) {
       console.error('Error submitting pledge:', error)
-      // Optionally, display a user-friendly error message here
     } finally {
-      setIsLoading(false) // Set loading state to false when request completes
+      setIsLoading(false)
     }
   }
 
   // Determine email input description based on selected checkboxes
   const emailDescription =
-    donateAnonymously && !needsTaxReceipt && !joinMailingList
+    donateAnonymously && !needsTaxReceipt
       ? 'Please enter your email to receive a confirmation of your donation. We will use this email solely to notify you that your donation has been received.'
-      : needsTaxReceipt && joinMailingList
-      ? 'Enter your email to receive a tax receipt and join the mailing list.'
       : needsTaxReceipt
       ? 'Enter your email to receive a tax receipt.'
-      : joinMailingList
-      ? 'Enter your email to join our mailing list for news and updates.'
-      : 'Please enter your email to receive a confirmation of your donation. We will use this email solely to notify you that your donation has been received.'
+      : ''
 
   const shouldShowAddressFields =
     (!donateAnonymously && state.selectedOption !== 'stock') ||
@@ -440,27 +493,11 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
       </h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
         {/* DONATE ANONYMOUSLY CHECKBOX */}
-        <span className="block w-full border-t border-gray-400"></span>
-        {state.selectedOption === 'stock' ? (
-          // Only show the mailing list checkbox when the donation type is stock
-          <div className="flex items-center space-x-3">
-            <input
-              type="checkbox"
-              checked={joinMailingList}
-              onChange={handleJoinMailingListChange}
-              className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
-              id="mailing-list"
-            />
-            <label
-              htmlFor="mailing-list"
-              className="font-space-grotesk text-[#222222]"
-            >
-              Join our mailing list for news and updates
-            </label>
-          </div>
-        ) : (
+
+        {state.selectedOption === 'stock' ? null : (
           // Show other checkboxes when the donation type is not stock
           <>
+            <span className="block w-full border-t border-gray-400"></span>
             <div className="space-y-0">
               <div className="flex items-center space-x-3">
                 <input
@@ -500,26 +537,11 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                 you these documents.
               </p>
             </div>
-            <div className="flex items-center space-x-3">
-              <input
-                type="checkbox"
-                checked={joinMailingList}
-                onChange={handleJoinMailingListChange}
-                className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
-                id="mailing-list"
-              />
-              <label
-                htmlFor="mailing-list"
-                className="font-space-grotesk  text-[#222222]"
-              >
-                Join our mailing list for news and updates
-              </label>
-            </div>
           </>
         )}
         <span className="block w-full border-t border-gray-400"></span>
         {/* PROFILE PHOTO */}
-        <div>
+        <div className="pb-2">
           <h2 className="font-space-grotesk text-lg  text-[#222222]">
             Profile Photo <span className="text-sm">(Optional)</span>
           </h2>
@@ -554,87 +576,40 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               <div className="flex flex-row justify-between space-x-2">
                 {!state.formData.socialXimageSrc ? (
                   <button
-                    type="button" // Ensure type is button
-                    className={`flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-gray-500 ${
-                      state.formData.socialXimageSrc
-                        ? 'cursor-not-allowed border-none bg-gray-200 text-[#222222]'
-                        : ''
-                    }`}
+                    type="button"
+                    className={`flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-gray-500`}
                     onClick={() => {
-                      if (!state.formData.socialXimageSrc) {
-                        const currentUrl = window.location.href
-                        const url = new URL(currentUrl)
-                        url.searchParams.set('modal', 'true')
-                        signIn('twitter', { callbackUrl: url.toString() })
-                      }
+                      const currentUrl = window.location.href
+                      const url = new URL(currentUrl)
+                      url.searchParams.set('modal', 'true')
+                      signIn('twitter', { callbackUrl: url.toString() })
                     }}
-                    disabled={!!state.formData.socialXimageSrc}
                   >
                     <span className="flex items-center">
-                      {state.formData.socialXimageSrc ? 'Verified' : 'Verify'}
+                      Verify
                       <SiX className="ml-2 h-6 w-6" />
                     </span>
                   </button>
                 ) : (
                   <button
-                    type="button" // Ensure type is button
+                    type="button"
                     className="flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-[#222222]"
                     onClick={() => {
                       dispatch({
                         type: 'SET_FORM_DATA',
                         payload: { socialX: '', socialXimageSrc: '' },
                       })
-                      // Removed signOut call
                     }}
                   >
                     <SiX className="mr-2 h-6 w-6" />
                     Verified
                   </button>
                 )}
-
-                {/* LinkedIn Verification Button */}
-                {/* <button
-                  type="button" // Ensure type is button
-                  className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
-                    state.formData.socialLinkedIn
-                      ? 'cursor-not-allowed bg-gray-200'
-                      : ''
-                  }`}
-                  onClick={() => {
-                    if (!state.formData.socialLinkedIn) {
-                      // Implement LinkedIn sign-in logic here
-                      signIn('linkedin', { callbackUrl: window.location.href })
-                    }
-                  }}
-                  disabled={!!state.formData.socialLinkedIn}
-                >
-                  {state.formData.socialLinkedIn ? 'Verified' : 'Verify'}
-                  <SiLinkedin className="ml-2 h-6 w-6" />
-                </button> */}
-
-                {/* Facebook Verification Button */}
-                {/* <button
-                  type="button" // Ensure type is button
-                  className={`flex w-full flex-row rounded-lg bg-white font-space-grotesk text-[#222222] ${
-                    state.formData.socialFacebook
-                      ? 'cursor-not-allowed bg-gray-200'
-                      : ''
-                  }`}
-                  onClick={() => {
-                    if (!state.formData.socialFacebook) {
-                      // Implement Facebook sign-in logic here
-                      signIn('facebook', { callbackUrl: window.location.href })
-                    }
-                  }}
-                  disabled={!!state.formData.socialFacebook}
-                >
-                  {state.formData.socialFacebook ? 'Verified' : 'Verify'}
-                  <SiFacebook className="ml-2 h-6 w-6" />
-                </button> */}
               </div>
             </div>
           </div>
         </div>
+        <span className="block w-full border-t border-gray-400 "></span>
         {/* EMAIL */}
         <div>
           <h2 className="font-space-grotesk text-lg text-[#222222]">
@@ -657,23 +632,23 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             placeholder="Email"
             value={formData.receiptEmail}
             onChange={handleChange}
-            onBlur={handleEmailBlur} // Added onBlur handler
+            onBlur={handleBlur}
             required={
               needsTaxReceipt ||
               joinMailingList ||
               (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
             }
             className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
-              emailError
+              errors.receiptEmail
                 ? 'border-1 border-red-600 '
                 : 'border-[#222222] bg-[#f0f0f0]'
             }`}
-            aria-invalid={emailError ? 'true' : 'false'}
-            aria-describedby={emailError ? 'email-error' : undefined}
+            aria-invalid={errors.receiptEmail ? 'true' : 'false'}
+            aria-describedby={errors.receiptEmail ? 'email-error' : undefined}
           />
-          {emailError && (
+          {errors.receiptEmail && (
             <p id="email-error" className="mt-1 text-sm text-red-600">
-              {emailError}
+              {errors.receiptEmail}
             </p>
           )}
         </div>
@@ -690,30 +665,53 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             )}
           </h2>
           <div className="flex flex-row gap-x-2">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={formData.firstName}
-              onChange={handleChange}
-              required={!donateAnonymously || state.selectedOption === 'stock'}
-              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]`}
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={handleChange}
-              required={!donateAnonymously || state.selectedOption === 'stock'}
-              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]`}
-            />
+            <div className="w-full">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                required={
+                  !donateAnonymously || state.selectedOption === 'stock'
+                }
+                className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                  errors.firstName
+                    ? 'border-1 border-red-600'
+                    : 'border-[#222222] bg-[#f0f0f0]'
+                }`}
+              />
+              {errors.firstName && (
+                <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
+              )}
+            </div>
+            <div className="w-full">
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                required={
+                  !donateAnonymously || state.selectedOption === 'stock'
+                }
+                className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                  errors.lastName
+                    ? 'border-1 border-red-600'
+                    : 'border-[#222222] bg-[#f0f0f0]'
+                }`}
+              />
+              {errors.lastName && (
+                <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
+              )}
+            </div>
           </div>
         </div>
         {/* ADDRESS */}
-        <div>
-          {/* Show address fields based on conditions */}
-          {shouldShowAddressFields && (
+        {shouldShowAddressFields && (
+          <div>
             <div className="flex flex-col gap-y-2">
               <h2 className="font-space-grotesk text-lg text-[#222222]">
                 Address <span className="text-red-600">*</span>
@@ -727,10 +725,15 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                     setSearchTerm(e.target.value)
                     setShowDropdown(true)
                   }}
+                  onBlur={handleBlur}
                   placeholder="Search for a country"
-                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+                  className={`flex w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                    errors.country
+                      ? 'border-1 border-red-600'
+                      : 'border-[#222222] bg-[#f0f0f0]'
+                  }`}
                   onFocus={() => {
-                    setSearchTerm(formData.country)
+                    setSearchTerm(formData.country || '')
                     setShowDropdown(true)
                   }}
                   onKeyDown={handleCountryKeyDown}
@@ -739,6 +742,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   aria-expanded={showDropdown}
                   aria-controls="country-listbox"
                 />
+                {errors.country && (
+                  <p className="mt-1 text-sm text-red-600">{errors.country}</p>
+                )}
                 {showDropdown && filteredCountries.length > 0 && (
                   <ul
                     id="country-listbox"
@@ -765,55 +771,99 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                   </ul>
                 )}
               </div>
-              <input
-                type="text"
-                name="addressLine1"
-                placeholder="Street Address 1"
-                value={formData.addressLine1}
-                onChange={handleChange}
-                required
-                className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
-              />
+              <div className="w-full">
+                <input
+                  type="text"
+                  name="addressLine1"
+                  placeholder="Street Address 1"
+                  value={formData.addressLine1}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  required
+                  className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                    errors.addressLine1
+                      ? 'border-1 border-red-600'
+                      : 'border-[#222222] bg-[#f0f0f0]'
+                  }`}
+                />
+                {errors.addressLine1 && (
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.addressLine1}
+                  </p>
+                )}
+              </div>
               <input
                 type="text"
                 name="addressLine2"
                 placeholder="Street Address 2"
                 value={formData.addressLine2}
                 onChange={handleChange}
-                className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
+                className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]"
               />
               <div className="flex flex-row gap-x-2">
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={formData.city}
-                  onChange={handleChange}
-                  required
-                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
-                />
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State/Province/Region"
-                  value={formData.state}
-                  onChange={handleChange}
-                  required
-                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
-                />
-                <input
-                  type="text"
-                  name="zipcode"
-                  placeholder="ZIP/Postal Code"
-                  value={formData.zipcode}
-                  onChange={handleChange}
-                  required
-                  className={`flex w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 text-left font-space-grotesk font-semibold text-[#222222]`}
-                />
+                <div className="w-full">
+                  <input
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    value={formData.city}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                      errors.city
+                        ? 'border-1 border-red-600'
+                        : 'border-[#222222] bg-[#f0f0f0]'
+                    }`}
+                  />
+                  {errors.city && (
+                    <p className="mt-1 text-sm text-red-600">{errors.city}</p>
+                  )}
+                </div>
+                <div className="w-full">
+                  <input
+                    type="text"
+                    name="state"
+                    placeholder="State/Province/Region"
+                    value={formData.state}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                      errors.state
+                        ? 'border-1 border-red-600'
+                        : 'border-[#222222] bg-[#f0f0f0]'
+                    }`}
+                  />
+                  {errors.state && (
+                    <p className="mt-1 text-sm text-red-600">{errors.state}</p>
+                  )}
+                </div>
+                <div className="w-full">
+                  <input
+                    type="text"
+                    name="zipcode"
+                    placeholder="ZIP/Postal Code"
+                    value={formData.zipcode}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                      errors.zipcode
+                        ? 'border-1 border-red-600'
+                        : 'border-[#222222] bg-[#f0f0f0]'
+                    }`}
+                  />
+                  {errors.zipcode && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.zipcode}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         {/* PHONE NUMBER */}
         {state.selectedOption === 'stock' && (
           <div>
@@ -826,9 +876,17 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
               placeholder="Phone Number"
               value={formData.phoneNumber}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
-              className={`w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]`}
+              className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                errors.phoneNumber
+                  ? 'border-1 border-red-600'
+                  : 'border-[#222222] bg-[#f0f0f0]'
+              }`}
             />
+            {errors.phoneNumber && (
+              <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>
+            )}
           </div>
         )}
         <div className="flex justify-between space-x-2 pt-8">
@@ -840,9 +898,9 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             Back
           </button>
           <GradientButton
-            isLoading={isLoading} // Pass the isLoading state
+            isLoading={isLoading}
             disabled={isButtonDisabled}
-            type="submit" // Ensure the button type is submit
+            type="submit"
             loadingText="Processing.."
           >
             Continue

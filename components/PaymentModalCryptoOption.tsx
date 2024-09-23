@@ -1,6 +1,6 @@
 // components/PaymentModalCryptoOption.tsx
 
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { SiBitcoin, SiLitecoin, SiDogecoin } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext' // Import the context
 import Image from 'next/legacy/image'
@@ -36,6 +36,7 @@ export default function PaymentModalCryptoOption({
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1)
   const [isFocused, setIsFocused] = useState<boolean>(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Handle Currency Selection
   const handleCurrencySelect = (coin: string) => {
@@ -49,7 +50,7 @@ export default function PaymentModalCryptoOption({
         type: 'SET_FORM_DATA',
         payload: { assetName: currency.name, assetSymbol: currency.code },
       })
-      setSearchTerm(coin)
+      setSearchTerm('') // Clear search term after selection
       setShowDropdown(false)
 
       // Ensure the donate button is enabled after valid selection
@@ -91,6 +92,9 @@ export default function PaymentModalCryptoOption({
           setShowDropdown(true)
         }
         break
+      case 'Escape':
+        setShowDropdown(false)
+        break
       default:
         break
     }
@@ -107,6 +111,36 @@ export default function PaymentModalCryptoOption({
   const selectedCurrencyData = currencyList.find(
     (currency) => currency.code === selectedCurrencyCode
   )
+
+  // Effect to handle clicks outside the dropdown and input
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false)
+      }
+    }
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowDropdown(false)
+      }
+    }
+
+    // Add event listeners
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+
+    // Cleanup event listeners on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [])
 
   return (
     <div ref={dropdownRef} className="flex w-full flex-col gap-4 pt-5">
@@ -155,6 +189,7 @@ export default function PaymentModalCryptoOption({
       {/* Search and Dropdown */}
       <div className="relative flex w-full space-y-3">
         <input
+          ref={inputRef}
           type="text"
           value={
             isFocused
@@ -170,7 +205,7 @@ export default function PaymentModalCryptoOption({
             setShowDropdown(true)
           }}
           placeholder="Search for a coin"
-          className={`flex w-full rounded-xl border-[#222222] ${
+          className={`flex w-full rounded-xl border-[#222222] text-center ${
             !['Bitcoin', 'Litecoin', 'Dogecoin'].includes(
               selectedCurrencyName || ''
             )

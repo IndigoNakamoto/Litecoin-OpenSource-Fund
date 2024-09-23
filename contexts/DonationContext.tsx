@@ -149,7 +149,7 @@ const initialState: DonationState = {
     assetSymbol: '',
     pledgeAmount: '',
     pledgeCurrency: '',
-    isAnonymous: true,
+    isAnonymous: false,
     taxReceipt: true,
     pledgeId: '',
     cardToken: '',

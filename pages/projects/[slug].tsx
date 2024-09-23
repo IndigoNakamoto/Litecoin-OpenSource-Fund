@@ -13,7 +13,10 @@ import {
 } from '../../utils/types'
 import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import PaymentModal from '@/components/PaymentModal'
+import dynamic from 'next/dynamic'
+const PaymentModal = dynamic(() => import('../../components/PaymentModal'), {
+  ssr: false,
+})
 import ThankYouModal from '@/components/ThankYouModal'
 import { fetchGetJSON } from '../../utils/api-helpers'
 // import Head from 'next/head'

@@ -10,6 +10,7 @@ import VerticalSocialIcons from '@/components/VerticalSocialIcons'
 import faqData from '../../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
 import React, { useEffect, useState, useRef } from 'react'
+import { useDonation } from '../../contexts/DonationContext'
 import Link from 'next/link'
 import TypingScroll from '@/components/TypingScroll'
 // TODO: Fix scroll bar. Return to default
@@ -48,6 +49,7 @@ function useIsLgScreen() {
 }
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
+  const { dispatch } = useDonation()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
   const [openSourceProjects, setOpenSourceProjects] = useState<ProjectItem[]>()
@@ -58,6 +60,10 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const outerSpinnerRef = useRef(null)
   const innerSpinnerRef = useRef(null)
   const isLgScreen = useIsLgScreen()
+
+  useEffect(() => {
+    dispatch({ type: 'RESET_DONATION_STATE' })
+  }, [dispatch])
 
   useEffect(() => {
     let previousScrollY = window.scrollY
