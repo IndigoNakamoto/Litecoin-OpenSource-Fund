@@ -267,7 +267,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                   className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
                   onClick={scrollToBounties} // Add onClick handler
                 >
-                  <span className="text-white">VIEW BOUNTIES</span>
+                  <span className="text-white">VIEW PAST PROJECTS</span>
                 </button>
               </div>
             </div>
