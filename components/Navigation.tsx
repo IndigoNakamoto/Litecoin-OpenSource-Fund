@@ -205,12 +205,13 @@ const Navigation = () => {
           <nav>
             {isMobile ? (
               // Hamburger menu with updated color interpolation
-              <button
+              <div
                 className={`nav-toggle mt-[-10px] ${navShow ? 'open' : ''}`}
                 onClick={onToggleNav}
                 onKeyPress={onToggleNav}
                 aria-label="menu"
-                aria-expanded={navShow}
+                role="button"
+                tabIndex={0}
               >
                 <span
                   className="bar"
@@ -224,7 +225,7 @@ const Navigation = () => {
                   className="bar"
                   style={{ backgroundColor: hamburgerColor }}
                 ></span>
-              </button>
+              </div>
             ) : (
               <ul className="flex flex-row">
                 {/* Use Litecoin Dropdown */}
