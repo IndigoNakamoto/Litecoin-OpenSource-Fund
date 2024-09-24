@@ -92,12 +92,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   // Render content based on the current step
   const renderContent = () => {
     if (state.currentStep === 'personalInfo') {
-      return (
-        <PaymentModalPersonalInfo
-          onRequestClose={handleRequestClose}
-          onBackClick={() => dispatch({ type: 'SET_STEP', payload: 'payment' })}
-        />
-      )
+      return <PaymentModalPersonalInfo onRequestClose={handleRequestClose} />
     }
 
     if (state.currentStep === 'cryptoDonate') {
