@@ -24,19 +24,19 @@ class MyDocument extends Document {
           <link
             rel="apple-touch-icon"
             sizes="76x76"
-            href="/static/favicons/apple-touch-icon.png"
+            href="/static/favicons/favicon-litecoin.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/static/favicons/favicon-32x32.png"
+            href="/static/favicons/favicon-litecoin.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/static/favicons/favicon-16x16.png"
+            href="/static/favicons/favicon-litecoin.png"
           />
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link

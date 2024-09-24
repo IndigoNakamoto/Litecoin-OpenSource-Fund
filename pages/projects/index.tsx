@@ -16,8 +16,8 @@ import TypingScroll from '@/components/TypingScroll'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
-  slug: 'general',
-  title: 'General Fund',
+  slug: 'projects_fund',
+  title: 'Projects Fund',
   summary: '',
   coverImage: '/static/images/projects/generalfund2.png',
   telegramLink: '',
@@ -132,7 +132,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   useEffect(() => {
     const desiredOrder = [
-      'General Fund',
+      'Projects Fund',
       'Litecoin Core',
       'MWEB',
       'Ordinals Lite',
@@ -177,7 +177,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     setModalOpen(true)
   }
 
-  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]', 'bg-[#f3ccc4]']
+  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]'] //'bg-[#F3CBC2]']
 
   return (
     <div className="w-screen">
@@ -265,19 +265,16 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         }}
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-white">
+          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-tight tracking-wide text-white">
             Open-Source Projects
           </h1>
-          <ul className="grid max-w-full gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {openSourceProjects &&
               openSourceProjects.map((p, i) => {
-                const isThreeCols = openSourceProjects.length >= 3
-                const bgColor = isThreeCols
-                  ? bgColors[i % 2] // Use only the first two colors if grid-cols-3
-                  : bgColors[i % bgColors.length] // Use all colors otherwise
+                const bgColor = bgColors[i % bgColors.length] // Simplify color assignment
 
                 return (
-                  <li key={i}>
+                  <li key={i} className="flex">
                     <ProjectCard
                       project={p}
                       openPaymentModal={openPaymentModal}
@@ -308,7 +305,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
           <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-16">
-            <h1 className="m-auto font-space-grotesk text-4xl text-[41px] font-medium leading-[32px]  text-black">
+            <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px]  text-black">
               Submit a Project
             </h1>
             <p className="m-auto max-w-3xl text-lg  text-[#222222] ">
@@ -316,8 +313,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               our commitment to decentralized open-source solutions and the
               future of Litecoin.
             </p>
-            <Link href="/projects/submit" className="m-auto">
-              <button className="w-48 rounded-none border border-[#222222] py-2 font-semibold text-[#222222]">
+            <Link href="/projects/submit" className="m-auto pt-4">
+              <button className="w-48 rounded-none border border-[#222222] font-semibold text-[#222222]">
                 Submit Project
               </button>
             </Link>
@@ -331,28 +328,13 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-          {/* <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px]  text-black">
-            Open Bounties
-          </h1>
-          <ul className="w-[100%]">
-            {bountyProjects &&
-              bountyProjects.map((p, i) => (
-                <li key={i}>
-                  <ProjectCard
-                    project={p}
-                    openPaymentModal={openPaymentModal}
-                    bgColor={'bg-[#f3ccc4]'}
-                  />
-                </li>
-              ))}
-          </ul> */}
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
             Past Projects
           </h1>
-          <ul className="grid max-w-full gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
               completedProjects.map((p, i) => (
-                <li key={i}>
+                <li key={i} className="flex">
                   <ProjectCard
                     project={p}
                     openPaymentModal={openPaymentModal}

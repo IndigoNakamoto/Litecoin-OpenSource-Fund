@@ -2,19 +2,19 @@
 
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Lite.Space',
-  author: 'Lite.Space',
-  headerTitle: 'Lite.Space',
+  title: 'litecoin',
+  author: 'litecoin',
+  headerTitle: 'litecoin',
   description:
     'Crowdfunding Litecoin Projects, One Open-Source Project at a Time.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://Lite.Space',
+  siteUrl: 'https://litecoin.com',
   siteRepo: 'https://github.com/IndigoNakamoto/foss-ltc',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter.png',
-  email: 'support@lite.space',
+  email: 'support@litecoin.com',
   github: 'https://github.com/litecoin-project',
   twitter: 'https://twitter.com/ltcfoundation',
   reddit: 'https://reddit.com/r/litecoin',

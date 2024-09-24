@@ -14,7 +14,6 @@ type PaymentModalPersonalInfoProps = {
 }
 
 const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
-  onRequestClose,
   onBackClick,
 }) => {
   const { state, dispatch } = useDonation()
@@ -35,8 +34,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   const [showDropdown, setShowDropdown] = useState(false)
   const [searchTerm, setSearchTerm] = useState(formData.country || '')
   const [focusedCountryIndex, setFocusedCountryIndex] = useState(-1)
-
-  const [emailError, setEmailError] = useState('')
 
   const filteredCountries = countries.filter((country) =>
     country.toLowerCase().includes(searchTerm.toLowerCase())
@@ -652,7 +649,32 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             </p>
           )}
         </div>
-
+        {/* PHONE NUMBER */}
+        {state.selectedOption === 'stock' && (
+          <div>
+            <h2 className="font-space-grotesk text-lg text-[#222222]">
+              Phone Number <span className="text-red-600">*</span>
+            </h2>
+            <input
+              type="tel"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              required
+              className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                errors.phoneNumber
+                  ? 'border-1 border-red-600'
+                  : 'border-[#222222] bg-[#f0f0f0]'
+              }`}
+            />
+            {errors.phoneNumber && (
+              <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>
+            )}
+            <div className=" mt-4 block w-full border-t border-gray-400 "></div>
+          </div>
+        )}
         {/* NAME */}
         <div>
           <h2 className="font-space-grotesk text-lg text-[#222222]">
@@ -864,31 +886,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
             </div>
           </div>
         )}
-        {/* PHONE NUMBER */}
-        {state.selectedOption === 'stock' && (
-          <div>
-            <h2 className="font-space-grotesk text-lg text-[#222222]">
-              Phone Number <span className="text-red-600">*</span>
-            </h2>
-            <input
-              type="tel"
-              name="phoneNumber"
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              required
-              className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
-                errors.phoneNumber
-                  ? 'border-1 border-red-600'
-                  : 'border-[#222222] bg-[#f0f0f0]'
-              }`}
-            />
-            {errors.phoneNumber && (
-              <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>
-            )}
-          </div>
-        )}
+
         <div className="flex justify-between space-x-2 pt-8">
           <button
             type="button"

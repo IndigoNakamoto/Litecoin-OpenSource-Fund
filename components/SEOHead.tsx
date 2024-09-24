@@ -9,7 +9,7 @@ type SEOHeadProps = {
 
 const SEOHead: React.FC<SEOHeadProps> = ({ title, summary, coverImage }) => (
   <Head>
-    <title>Lite.Space | {title}</title>
+    <title>Litecoin | {title}</title>
     <meta property="og:title" content={title} />
     <meta property="og:description" content={summary} />
     <meta name="twitter:card" content="summary_large_image" />
@@ -18,9 +18,12 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, summary, coverImage }) => (
     <meta name="twitter:description" content={summary} />
     <meta
       name="twitter:image"
-      content={`https://www.Lite.Space${coverImage}`}
+      content={`https://www.litecoin.com${coverImage}`}
     />
-    <meta property="og:image" content={`https://www.Lite.Space${coverImage}`} />
+    <meta
+      property="og:image"
+      content={`https://www.litecoin.com${coverImage}`}
+    />
   </Head>
 )
 

@@ -145,10 +145,15 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 className="rounded-xl"
               />
               <div className="flex flex-col">
+                <h3 className="font-sans text-[#222222]">Donate to</h3>
                 <h2 className="font-space-grotesk text-4xl font-semibold text-[#222222]">
                   {project.title}
                 </h2>
-                <h3 className="font-sans text-[#222222]">Make a donation</h3>
+                {project.title === 'Projects Fund' ? (
+                  <></>
+                ) : (
+                  <h3 className="font-sans text-[#222222]">Project</h3>
+                )}
               </div>
             </div>
           </div>

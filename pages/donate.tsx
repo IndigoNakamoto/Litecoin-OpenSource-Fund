@@ -41,8 +41,8 @@ export default function Apply() {
           <div className="mt-6 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">
             <PaymentForm
               project={{
-                slug: 'general',
-                title: 'General',
+                slug: 'ltcfoundation',
+                title: 'Litecoin Foundation',
                 summary: '',
                 coverImage: '',
                 telegramLink: '',

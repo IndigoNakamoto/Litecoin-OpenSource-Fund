@@ -27,12 +27,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <figure
-      className={`flex h-full flex-col justify-between rounded-3xl p-14 ${bgColor} sm:space-y-2`}
+      className={`flex flex-col justify-between rounded-3xl p-4 sm:p-6 md:p-8 lg:p-14 ${bgColor} w-full space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
     >
-      {/* Wrap both the image and figcaption in a container with padding */}
       <Link href={`/projects/${slug}`} passHref>
-        <div className="relative max-h-max min-h-[150px] w-[40%] min-w-[150px]">
-          {/* Set width equal to height */}
+        <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-[200px]">
           <Image
             alt={title}
             src={coverImage}
@@ -44,13 +42,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           />
         </div>
       </Link>
-      <figcaption className="flex flex-grow flex-col justify-between pt-8">
-        <div className="h-32 sm:h-auto">
-          <h2 className="font-space-grotesk text-[30px] font-semibold leading-[32px] tracking-wide text-[#333333]">
+      <figcaption className="flex flex-1 flex-col justify-between pt-0 sm:pt-8">
+        <div className="h-auto">
+          <h2 className="font-space-grotesk text-2xl font-semibold leading-tight tracking-wide text-[#333333] sm:text-3xl">
             {title}
           </h2>
           <p
-            className="pt-4 text-[15px] font-medium  text-[#333333] "
+            className="pt-4 text-sm font-medium text-[#333333] sm:text-base"
             style={{
               overflow: 'hidden',
               display: '-webkit-box',
@@ -61,9 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {summary}
           </p>
         </div>
-      </figcaption>
-      <div className="pt-12">
-        <div className="mt-auto text-left">
+        <div className="mt-4 text-left ">
           <Link
             href={`/projects/${slug}`}
             passHref
@@ -73,7 +69,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             FIND OUT MORE &rarr;
           </Link>
         </div>
-      </div>
+      </figcaption>
     </figure>
   )
 }

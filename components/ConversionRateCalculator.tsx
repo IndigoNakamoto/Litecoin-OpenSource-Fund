@@ -297,11 +297,11 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
       {/* Display USD min donation error or static message */}
       {isUsdBelowMin ? (
         <p className="mt-1 font-space-grotesk text-sm font-semibold text-red-500">
-          Minimum donation is $2.5
+          Minimum donation is $2.50
         </p>
       ) : (
         <p className="mt-1 font-space-grotesk text-sm text-gray-600">
-          Minimum donation is $2.5
+          Minimum donation is $2.50
         </p>
       )}
 
