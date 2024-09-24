@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import SignatureCanvas from 'react-signature-canvas'
 import { useDonation } from '../contexts/DonationContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,8 +8,40 @@ import GradientButton from './GradientButton' // Import the GradientButton compo
 export default function PaymentModalStockDonorSignature({ onContinue }) {
   const { state, dispatch } = useDonation()
   const signaturePadRef = useRef<SignatureCanvas | null>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [canvasWidth, setCanvasWidth] = useState(445) // Initial width
+  const [canvasHeight, setCanvasHeight] = useState(200) // You can also make height responsive if needed
+
+  // Function to update canvas width based on parent container
+  const updateCanvasSize = () => {
+    if (containerRef.current) {
+      const parentWidth = containerRef.current.clientWidth
+      // Set canvas width to 100% of parent width minus padding/margins if necessary
+      setCanvasWidth(parentWidth)
+      // Optionally adjust height based on aspect ratio or other logic
+      // setCanvasHeight(parentWidth * (200 / 445)) // Example: maintain aspect ratio
+    }
+  }
+
+  useEffect(() => {
+    updateCanvasSize()
+
+    // Create a ResizeObserver to watch for changes in the container's size
+    const resizeObserver = new ResizeObserver(() => {
+      updateCanvasSize()
+    })
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current)
+    }
+
+    // Cleanup on unmount
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [])
 
   const handleClear = () => {
     if (signaturePadRef.current) {
@@ -101,14 +133,15 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
           </span>
         </span>
       </p>
-      <div className="relative">
+      <div className="relative" ref={containerRef}>
         <SignatureCanvas
           ref={signaturePadRef}
           penColor="black"
           canvasProps={{
-            width: 445,
-            height: 200,
-            className: 'sigCanvas border border-gray-300 rounded-lg shadow-sm',
+            width: canvasWidth,
+            height: canvasHeight,
+            className:
+              'w-full h-auto sigCanvas border border-gray-300 rounded-lg shadow-sm',
           }}
           onEnd={handleEnd}
         />
@@ -118,16 +151,27 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
           onClick={handleClear}
         />
       </div>
-      <GradientButton
-        onClick={handleSubmit}
-        isLoading={isSubmitting}
-        disabled={isButtonDisabled || isSubmitting}
-        backgroundColor="#222222"
-        textColor="#f0f0f0"
-        loadingText="Submitting"
-      >
-        Sign & Continue
-      </GradientButton>
+      <div className="flex justify-between space-x-2 pt-8">
+        <button
+          type="button"
+          onClick={() =>
+            dispatch({ type: 'SET_STEP', payload: 'stockBrokerInfo' })
+          }
+          className="w-1/3 rounded-2xl border border-[#222222] text-xl font-semibold text-[#222222]"
+        >
+          Back
+        </button>
+        <GradientButton
+          onClick={handleSubmit}
+          isLoading={isSubmitting}
+          disabled={isButtonDisabled || isSubmitting}
+          backgroundColor="#222222"
+          textColor="#f0f0f0"
+          loadingText="Submitting"
+        >
+          Sign & Continue
+        </GradientButton>
+      </div>
     </div>
   )
 }

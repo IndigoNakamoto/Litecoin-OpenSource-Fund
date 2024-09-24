@@ -1,6 +1,6 @@
 // components/PaymentModalPersonalInfo.tsx
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { SiX } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
@@ -10,12 +10,11 @@ import GradientButton from './GradientButton'
 
 type PaymentModalPersonalInfoProps = {
   onRequestClose: () => void
-  onBackClick: () => void
 }
 
-const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
-  onBackClick,
-}) => {
+const PaymentModalPersonalInfo: React.FC<
+  PaymentModalPersonalInfoProps
+> = () => {
   const { state, dispatch } = useDonation()
   const { formData, projectSlug } = state
   const [isLoading, setIsLoading] = useState(false)
@@ -174,12 +173,6 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
     dispatch({ type: 'SET_FORM_DATA', payload: { taxReceipt: newValue } })
   }
 
-  const handleJoinMailingListChange = () => {
-    const newValue = !joinMailingList
-    setJoinMailingList(newValue)
-    dispatch({ type: 'SET_FORM_DATA', payload: { joinMailingList: newValue } })
-  }
-
   // Initialize local states based on formData changes
   useEffect(() => {
     setDonateAnonymously(formData.isAnonymous ?? false)
@@ -235,9 +228,10 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
   }
 
   const { data: session } = useSession()
+  // const hasSetSocialX = useRef(false)
 
   useEffect(() => {
-    if (session) {
+    if (session && formData.socialXUseSession) {
       // Update formData with Twitter username and image
       dispatch({
         type: 'SET_FORM_DATA',
@@ -247,7 +241,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
         },
       })
     }
-  }, [session, dispatch])
+  }, [session, formData.socialXUseSession, dispatch])
 
   // Ensure donateAnonymously is false if the donation type is "stock"
   useEffect(() => {
@@ -576,6 +570,12 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                     type="button"
                     className={`flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-gray-500`}
                     onClick={() => {
+                      dispatch({
+                        type: 'SET_FORM_DATA',
+                        payload: {
+                          socialXUseSession: true, // Allow useEffect to update from session
+                        },
+                      })
                       const currentUrl = window.location.href
                       const url = new URL(currentUrl)
                       url.searchParams.set('modal', 'true')
@@ -594,7 +594,11 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
                     onClick={() => {
                       dispatch({
                         type: 'SET_FORM_DATA',
-                        payload: { socialX: '', socialXimageSrc: '' },
+                        payload: {
+                          socialX: '',
+                          socialXimageSrc: '',
+                          socialXUseSession: false,
+                        },
                       })
                     }}
                   >
@@ -891,7 +895,7 @@ const PaymentModalPersonalInfo: React.FC<PaymentModalPersonalInfoProps> = ({
           <button
             type="button"
             className="w-1/3 rounded-2xl border border-[#222222] text-xl font-semibold text-[#222222]"
-            onClick={onBackClick}
+            onClick={() => dispatch({ type: 'SET_STEP', payload: 'payment' })}
           >
             Back
           </button>

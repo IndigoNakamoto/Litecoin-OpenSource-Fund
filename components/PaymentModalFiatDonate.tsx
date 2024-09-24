@@ -250,17 +250,28 @@ function PaymentModalFiatDonate() {
             style={{ minHeight: '40px' }}
           ></div>
         </div>
+        <div className="flex justify-between space-x-2 pt-8">
+          <button
+            type="button"
+            onClick={() =>
+              dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
+            }
+            className="w-1/3 rounded-2xl border border-[#222222] text-xl font-semibold text-[#222222]"
+          >
+            Back
+          </button>
 
-        <GradientButton
-          isLoading={isLoading} // Implement the isLoading state
-          disabled={isLoading} // Disable button while loading
-          type="submit" // Ensure the button type is submit
-          backgroundColor="#222222"
-          textColor="#f0f0f0"
-          loadingText="Processing..."
-        >
-          Donate
-        </GradientButton>
+          <GradientButton
+            isLoading={isLoading} // Implement the isLoading state
+            disabled={isLoading} // Disable button while loading
+            type="submit" // Ensure the button type is submit
+            backgroundColor="#222222"
+            textColor="#f0f0f0"
+            loadingText="Processing..."
+          >
+            Donate
+          </GradientButton>
+        </div>
       </form>
     </div>
   )

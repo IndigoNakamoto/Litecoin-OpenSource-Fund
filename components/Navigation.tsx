@@ -1,3 +1,4 @@
+// Navigation.jsx or Navigation.tsx (if using TypeScript)
 import siteMetadata from '@/data/siteMetadata'
 import Link from './Link'
 import React, { useState, useEffect, useRef } from 'react'
@@ -60,14 +61,13 @@ const Navigation = () => {
   const handleClickOutside = (event) => {
     if (
       useLitecoinRef.current &&
-      !useLitecoinRef.current.contains(event.target as Node)
+      !useLitecoinRef.current.contains(event.target)
     ) {
       setDropdownOpen((prev) => ({
         ...prev,
         useLitecoin: false,
       }))
     }
-
     if (
       theFoundationRef.current &&
       !theFoundationRef.current.contains(event.target)
@@ -84,6 +84,7 @@ const Navigation = () => {
         learn: false,
       }))
     }
+    // Removed extraneous text
   }
 
   useEffect(() => {
@@ -107,33 +108,26 @@ const Navigation = () => {
   const maxScrollHeight = 225
   const minHeight = 80
   const initialHeight = 92
-
   const bgOpacity = Math.min(scrollPosition / maxScrollHeight, 1)
-
   const baseHeaderHeight = isMobile ? initialHeight - 10 : initialHeight
   const minHeaderHeight = isMobile ? minHeight - 10 : minHeight
-
   const headerHeight = Math.max(
     baseHeaderHeight -
       (scrollPosition / maxScrollHeight) * (baseHeaderHeight - minHeaderHeight),
     minHeaderHeight
   )
-
-  const baseLogoSize = isMobile ? 67 - 7 : 70.2 // 16px is 1rem
-  const minLogoSize = isMobile ? 67 - 16 : 60 // Adjust the minimum size for mobile as well
-
+  const baseLogoSize = isMobile ? 60 : 70.2 // Adjusted for clarity
+  const minLogoSize = isMobile ? 60 : 60
   const logoSize = Math.max(
     baseLogoSize -
       (scrollPosition / maxScrollHeight) * (baseLogoSize - minLogoSize),
     minLogoSize
   )
-
   const baseFontSize = 16
   const scaledFontSize = Math.max(
     baseFontSize - (scrollPosition / maxScrollHeight) * 2,
     14.25
   )
-
   const baseMargin = 14
   const scaledMargin = Math.max(
     baseMargin - (scrollPosition / maxScrollHeight) * 4,
@@ -158,8 +152,9 @@ const Navigation = () => {
   const fontColor = interpolateColor('#222222', '#C6D3D6', bgOpacity)
   const dropdownBgColor = interpolateColor('#c6d3d6', '#222222', bgOpacity)
   const dropdownTextColor = interpolateColor('#222222', '#C6D3D6', bgOpacity)
-  const hamburgerColor = interpolateColor('#222222', '#C5D3D6', bgOpacity) // Updated
+  const hamburgerColor = interpolateColor('#222222', '#ffffff', bgOpacity) // Updated
   const mobileMenuTextColor = interpolateColor('#222222', '#C5D3D6', bgOpacity)
+  const socialIconTextColor = interpolateColor('#222222', '#ffffff', bgOpacity) // New color for social icons
 
   return (
     <>
@@ -186,7 +181,7 @@ const Navigation = () => {
                 <Image
                   src="/logo2.svg"
                   alt="Black Logo"
-                  fill
+                  layout="fill"
                   style={{
                     opacity: 1 - bgOpacity,
                   }}
@@ -194,7 +189,7 @@ const Navigation = () => {
                 <Image
                   src="/logo2-white.svg"
                   alt="White Logo"
-                  fill
+                  layout="fill"
                   style={{
                     opacity: bgOpacity,
                   }}
@@ -229,13 +224,15 @@ const Navigation = () => {
             ) : (
               <ul className="flex flex-row">
                 {/* Use Litecoin Dropdown */}
-                <li className="relative !-mr-[0.1rem]  !-mt-[.2rem]  flex items-center !font-[500]">
+                <li
+                  className="relative !-mr-[0.1rem] !-mt-[.2rem] flex items-center !font-[500]"
+                  ref={useLitecoinRef}
+                >
                   <button
                     className="flex items-center"
                     onClick={() => toggleDropdown('useLitecoin')}
                     aria-expanded={dropdownOpen.useLitecoin}
                     aria-haspopup="true"
-                    ref={useLitecoinRef as React.RefObject<HTMLButtonElement>}
                     style={{ color: fontColor }}
                   >
                     Use Litecoin
@@ -294,13 +291,15 @@ const Navigation = () => {
                     </li>
                   </ul>
                 </li>
-
                 {/* Learn Dropdown */}
-                <li className="relative !-mr-[.3rem] !-mt-[.2rem] flex items-center !font-[500]">
+                <li
+                  className="relative !-mr-[.3rem] !-mt-[.2rem] flex items-center !font-[500]"
+                  ref={learnRef}
+                >
                   <button
-                    className="flex items-center text-[#222222]"
+                    className="flex items-center"
                     onClick={() => toggleDropdown('learn')}
-                    aria-expanded={dropdownOpen.learn} // Updated
+                    aria-expanded={dropdownOpen.learn}
                     aria-haspopup="true"
                     ref={learnRef as React.RefObject<HTMLButtonElement>} // Updated
                     style={{ color: fontColor }}
@@ -371,13 +370,15 @@ const Navigation = () => {
                 </li>
 
                 {/* The Foundation Dropdown */}
-                <li className="relative !-mr-[.25rem] !-mt-[0.1rem] flex items-center !font-[500]">
+                <li
+                  className="relative !-mr-[.25rem] !-mt-[0.1rem] flex items-center !font-[500]"
+                  ref={theFoundationRef}
+                >
                   <button
-                    className="flex items-center text-[#222222]"
+                    className="flex items-center"
                     onClick={() => toggleDropdown('theFoundation')}
-                    aria-expanded={dropdownOpen.theFoundation} // Updated
+                    aria-expanded={dropdownOpen.theFoundation}
                     aria-haspopup="true"
-                    ref={theFoundationRef as React.RefObject<HTMLButtonElement>} // Updated
                     style={{ color: fontColor }}
                   >
                     The Foundation
@@ -497,173 +498,165 @@ const Navigation = () => {
           backgroundColor: interpolateColor('#C5D3D6', '#222222', bgOpacity),
         }}
       >
-        {/* Mobile Nav with dynamic background color */}
-        <div
-          className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform pt-20 duration-300 ease-in md:clear-left ${
-            navShow ? 'translate-x-0' : 'translate-x-[105%]'
-          }`}
-          style={{
-            backgroundColor: interpolateColor('#C5D3D6', '#222222', bgOpacity),
-          }}
-        >
-          {/* LINKS */}
-          <div className="flex flex-col gap-x-6">
-            <nav className="mt-10 h-full ">
-              {[
-                'Use Litecoin',
-                'Learn',
-                'Projects',
-                'The Foundation',
-                'News',
-                'Events',
-                'Shop',
-                'Explorer',
-              ].map((item) => {
-                const itemKey = item.replace(' ', '').toLowerCase()
-                return (
-                  <div key={item} className="px-10 py-2 short:py-0.5 ">
-                    {item === 'Use Litecoin' ||
-                    item === 'The Foundation' ||
-                    item === 'Learn' ? (
-                      <>
-                        <button
-                          onClick={() => toggleMobileDropdown(itemKey)}
-                          className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold"
-                          style={{ color: mobileMenuTextColor }}
-                        >
-                          {item}
-                          {/* Mobile SVG chevron will now flip up and down */}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-10 w-10"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            style={{
-                              transform: `translateY(-0.5px) ${
-                                mobileDropdownOpen[itemKey]
-                                  ? 'rotate(180deg)'
-                                  : ''
-                              }`,
-                            }}
-                          >
-                            <path
-                              strokeLinecap="butt"
-                              strokeLinejoin="miter"
-                              strokeWidth={3}
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </button>
-                        {mobileDropdownOpen[itemKey] ? (
-                          <ul
-                            className="pl-6 font-space-grotesk text-[2.1rem] font-semibold"
-                            style={{ color: mobileMenuTextColor }}
-                          >
-                            {/* Menu items based on `item` */}
-                            {item === 'Use Litecoin' ? (
-                              <>
-                                <li className="py-1">
-                                  <Link
-                                    href="/use-litecoin/buy"
-                                    onClick={onToggleNav}
-                                  >
-                                    Buy
-                                  </Link>
-                                </li>
-                                <li className="py-1">
-                                  <Link
-                                    href="/use-litecoin/spend"
-                                    onClick={onToggleNav}
-                                  >
-                                    Spend
-                                  </Link>
-                                </li>
-                                <li className="py-1">
-                                  <Link
-                                    href="/use-litecoin/store"
-                                    onClick={onToggleNav}
-                                  >
-                                    Store
-                                  </Link>
-                                </li>
-                                <li className="py-1">
-                                  <Link
-                                    href="/use-litecoin/business"
-                                    onClick={onToggleNav}
-                                  >
-                                    Business
-                                  </Link>
-                                </li>
-                              </>
-                            ) : item === 'The Foundation' ? (
-                              <>
-                                <li className="py-1">
-                                  <Link
-                                    href="/the-foundation/about"
-                                    onClick={onToggleNav}
-                                  >
-                                    About
-                                  </Link>
-                                </li>
-
-                                <li className="py-1">
-                                  <Link
-                                    href="/the-foundation/financials"
-                                    onClick={onToggleNav}
-                                  >
-                                    Financials
-                                  </Link>
-                                </li>
-                                <li className="py-1">
-                                  <Link
-                                    href="/the-foundation/contact"
-                                    onClick={onToggleNav}
-                                  >
-                                    Contact
-                                  </Link>
-                                </li>
-                              </>
-                            ) : item === 'Learn' ? (
-                              <>
-                                <li className="py-1">
-                                  <Link
-                                    href="/learn/what-is-litecoin"
-                                    onClick={onToggleNav}
-                                  >
-                                    What is Litecoin
-                                  </Link>
-                                </li>
-                                <li className="py-1">
-                                  <Link
-                                    href="/learn/resources"
-                                    onClick={onToggleNav}
-                                  >
-                                    Resources
-                                  </Link>
-                                </li>
-                              </>
-                            ) : null}
-                          </ul>
-                        ) : null}
-                      </>
-                    ) : (
-                      <Link
-                        href={`/${item.toLowerCase()}`}
-                        className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.1rem] font-semibold"
+        {/* LINKS */}
+        <div className="flex flex-col gap-x-6">
+          <nav className="mt-10 h-full ">
+            {[
+              'Use Litecoin',
+              'Learn',
+              'Projects',
+              'The Foundation',
+              'News',
+              'Events',
+              'Shop',
+              'Explorer',
+            ].map((item) => {
+              const itemKey = item.replace(' ', '').toLowerCase()
+              return (
+                <div key={item} className="px-10 py-2 short:py-0.5 ">
+                  {['Use Litecoin', 'The Foundation', 'Learn'].includes(
+                    item
+                  ) ? (
+                    <>
+                      <button
+                        onClick={() => toggleMobileDropdown(itemKey)}
+                        className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold"
                         style={{ color: mobileMenuTextColor }}
-                        onClick={onToggleNav}
+                        aria-expanded={mobileDropdownOpen[itemKey]}
+                        aria-haspopup="true"
                       >
                         {item}
-                      </Link>
-                    )}
-                  </div>
-                )
-              })}
-            </nav>
+                        {/* Mobile SVG chevron will now flip up and down */}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-10 w-10 transition-transform duration-200"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          style={{
+                            transform: `translateY(-0.5px) ${
+                              mobileDropdownOpen[itemKey]
+                                ? 'rotate(180deg)'
+                                : ''
+                            }`,
+                          }}
+                        >
+                          <path
+                            strokeLinecap="butt"
+                            strokeLinejoin="miter"
+                            strokeWidth={3}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      {mobileDropdownOpen[itemKey] ? (
+                        <ul
+                          className="pl-6 font-space-grotesk text-[2.1rem] font-semibold"
+                          style={{ color: mobileMenuTextColor }}
+                        >
+                          {/* Menu items based on `item` */}
+                          {item === 'Use Litecoin' ? (
+                            <>
+                              <li className="py-1">
+                                <Link
+                                  href="/use-litecoin/buy"
+                                  onClick={onToggleNav}
+                                >
+                                  Buy
+                                </Link>
+                              </li>
+                              <li className="py-1">
+                                <Link
+                                  href="/use-litecoin/spend"
+                                  onClick={onToggleNav}
+                                >
+                                  Spend
+                                </Link>
+                              </li>
+                              <li className="py-1">
+                                <Link
+                                  href="/use-litecoin/store"
+                                  onClick={onToggleNav}
+                                >
+                                  Store
+                                </Link>
+                              </li>
+                              <li className="py-1">
+                                <Link
+                                  href="/use-litecoin/business"
+                                  onClick={onToggleNav}
+                                >
+                                  Business
+                                </Link>
+                              </li>
+                            </>
+                          ) : item === 'The Foundation' ? (
+                            <>
+                              <li className="py-1">
+                                <Link
+                                  href="/the-foundation/about"
+                                  onClick={onToggleNav}
+                                >
+                                  About
+                                </Link>
+                              </li>
 
-            <HorizontalSocialIcons />
-          </div>
+                              <li className="py-1">
+                                <Link
+                                  href="/the-foundation/financials"
+                                  onClick={onToggleNav}
+                                >
+                                  Financials
+                                </Link>
+                              </li>
+                              <li className="py-1">
+                                <Link
+                                  href="/the-foundation/contact"
+                                  onClick={onToggleNav}
+                                >
+                                  Contact
+                                </Link>
+                              </li>
+                            </>
+                          ) : item === 'Learn' ? (
+                            <>
+                              <li className="py-1">
+                                <Link
+                                  href="/learn/what-is-litecoin"
+                                  onClick={onToggleNav}
+                                >
+                                  What is Litecoin
+                                </Link>
+                              </li>
+                              <li className="py-1">
+                                <Link
+                                  href="/learn/resources"
+                                  onClick={onToggleNav}
+                                >
+                                  Resources
+                                </Link>
+                              </li>
+                            </>
+                          ) : null}
+                        </ul>
+                      ) : null}
+                    </>
+                  ) : (
+                    <Link
+                      href={`/${item.toLowerCase()}`}
+                      className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.1rem] font-semibold"
+                      style={{ color: mobileMenuTextColor }}
+                      onClick={onToggleNav}
+                    >
+                      {item}
+                    </Link>
+                  )}
+                </div>
+              )
+            })}
+          </nav>
+
+          <HorizontalSocialIcons />
         </div>
       </div>
       <style jsx>{`
@@ -686,15 +679,11 @@ const Navigation = () => {
           height: 4px;
           width: 100%;
           background-color: ${hamburgerColor};
-        }
-
-        .nav-toggle.open .bar {
-          /* Apply transition only when the menu is opening */
           transition: transform 300ms ease-in-out, width 300ms ease-in-out;
         }
 
         .nav-toggle:not(.open) .bar {
-          /* Ensure no transition when the menu is closing */
+          /* Remove transition when closing */
           transition: none;
         }
 
@@ -738,7 +727,7 @@ const Navigation = () => {
 
         /* Ensure instant flip for SVG icons */
         svg {
-          transition: none; /* Remove transition to make the flip instant */
+          transition: transform 200ms ease-in-out; /* Smooth transition for rotation */
         }
 
         /* Additional styles for alignment adjustments */

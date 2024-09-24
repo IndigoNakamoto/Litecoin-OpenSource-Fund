@@ -13,6 +13,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useDonation } from '../../contexts/DonationContext'
 import Link from 'next/link'
 import TypingScroll from '@/components/TypingScroll'
+import { useRouter } from 'next/router'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -49,21 +50,34 @@ function useIsLgScreen() {
 }
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
+  const router = useRouter()
   const { dispatch } = useDonation()
   const [modalOpen, setModalOpen] = useState(false)
-  const [selectedProject, setSelectedProject] = useState<ProjectItem>()
+  // const [selectedProject, setSelectedProject] = useState<ProjectItem>()
   const [openSourceProjects, setOpenSourceProjects] = useState<ProjectItem[]>()
-  const [DevOpsProjects, setDevOpsProjects] = useState<ProjectItem[]>()
-  const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
+  // const [DevOpsProjects, setDevOpsProjects] = useState<ProjectItem[]>()
+  // const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
   const [completedProjects, setCompletedProjects] = useState<ProjectItem[]>()
-  const [scrollPosition, setScrollPosition] = useState(0)
+  // const [scrollPosition, setScrollPosition] = useState(0)
   const outerSpinnerRef = useRef(null)
   const innerSpinnerRef = useRef(null)
   const isLgScreen = useIsLgScreen()
 
   useEffect(() => {
-    dispatch({ type: 'RESET_DONATION_STATE' })
-  }, [dispatch])
+    // Open modal if 'modal=true' is in the URL
+    if (router.query.modal === 'true') {
+      setModalOpen(true)
+    } else {
+      setModalOpen(false)
+    }
+  }, [router.query])
+
+  // useEffect(() => {
+  //   // **Only reset donation state if modal is not open via URL**
+  //   if (router.query.modal !== 'true') {
+  //     dispatch({ type: 'RESET_DONATION_STATE' })
+  //   }
+  // }, [dispatch, router.query.modal])
 
   useEffect(() => {
     let previousScrollY = window.scrollY
@@ -128,6 +142,14 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   function closeModal() {
     setModalOpen(false)
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, modal: 'false' },
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   useEffect(() => {
@@ -161,23 +183,40 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       })
     )
 
-    setDevOpsProjects(
-      projects
-        .filter(isDevelopment)
-        .sort((a, b) => a.title.localeCompare(b.title))
-    )
-    setBountyProjects(projects.filter(isBounty))
+    // setDevOpsProjects(
+    //   projects
+    //     .filter(isDevelopment)
+    //     .sort((a, b) => a.title.localeCompare(b.title))
+    // )
+    // setBountyProjects(projects.filter(isBounty))
     setCompletedProjects(
       projects.filter(isCompletedBounty).sort(() => 0.5 - Math.random())
     )
   }, [projects])
 
-  function openPaymentModal(project: ProjectItem) {
-    setSelectedProject(project)
+  function openPaymentModal() {
+    // setSelectedProject(project)
     setModalOpen(true)
+    dispatch({
+      type: 'SET_PROJECT_DETAILS',
+      payload: {
+        slug: project.slug,
+        title: project.title,
+        image: project.coverImage,
+      },
+    })
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { ...router.query, modal: 'true' },
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
-  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]'] //'bg-[#F3CBC2]']
+  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]'] // Not in use (for reference) 'bg-[#F3CBC2]']
 
   return (
     <div className="w-screen">
@@ -185,11 +224,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <title>Projects</title>
       </Head>
       <VerticalSocialIcons />
-
-      {/* Hero section 
-      TODO: 
-      - Donate now button opens the donate modal to the general donations project. 
-      */}
 
       <section
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center lg:py-24"
@@ -215,7 +249,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               <div className="text-md rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
                 <button
                   className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] text-center font-medium"
-                  onClick={() => openPaymentModal(project)} // Add onClick handler
+                  onClick={() => openPaymentModal()}
                 >
                   DONATE NOW
                 </button>

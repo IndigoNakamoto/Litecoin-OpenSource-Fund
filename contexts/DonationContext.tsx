@@ -49,6 +49,7 @@ type FormData = {
   signatureDate: string // For signing stock donations
   signatureImage: string // For signing stock donations
   joinMailingList: boolean
+  socialXUseSession: boolean // Add this line
   socialX: string
   socialXimageSrc: string
   socialFacebook: string
@@ -163,6 +164,7 @@ const initialState: DonationState = {
     signatureDate: '',
     signatureImage: '',
     joinMailingList: false,
+    socialXUseSession: true,
     socialX: '',
     socialXimageSrc: '',
     socialFacebook: '',
