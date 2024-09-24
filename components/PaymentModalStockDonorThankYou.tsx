@@ -29,7 +29,7 @@ export default function PaymentModalStockDonorThankYou({ onRequestClose }) {
   return (
     <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-0 font-space-grotesk md:p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
-        Thank You, {donorName}!
+        Thank You for Your Donation!
       </h2>
       <hr className="border-t-1 w-full border-gray-400" />
       <div className="text-lg">

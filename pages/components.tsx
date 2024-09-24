@@ -49,7 +49,7 @@ const ComponentsShowcase = () => {
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Form
         </h2>
-        <section className="mb-8 max-w-lg rounded-none bg-[#f0f0f0] p-4">
+        <section className="mb-8 max-w-lg rounded-3xl border border-white bg-[#f0f0f0] p-4">
           <PaymentForm
             project={{
               slug: 'general',
@@ -78,7 +78,7 @@ const ComponentsShowcase = () => {
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Modal Fiat Thank You
         </h2>
-        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+        <section className="mb-8 w-full max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
           <PaymentModalFiatThankYou onRequestClose={() => null} />
         </section>
 
@@ -86,7 +86,7 @@ const ComponentsShowcase = () => {
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Modal Stock Donor Thank You
         </h2>
-        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+        <section className="mb-8 w-full max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
           <PaymentModalStockDonorThankYou onRequestClose={() => null} />
         </section>
 
@@ -94,7 +94,7 @@ const ComponentsShowcase = () => {
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Payment Modal Fiat Donate
         </h2>
-        <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
+        <section className="mb-8 w-full max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
           <PaymentModalFiatDonate />
         </section>
         {/* // Showcase PaymentModalFiatOption */}
@@ -108,7 +108,7 @@ const ComponentsShowcase = () => {
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Gradient Button Component
         </h2>
-        <section className="mb-8 max-w-lg space-y-2 rounded-3xl bg-[#f0f0f0] p-4">
+        <section className="mb-8 w-full max-w-lg space-y-2 rounded-3xl bg-[#f0f0f0] p-4">
           <GradientButton
             isLoading={false}
             onClick={() => alert('Button clicked!')}

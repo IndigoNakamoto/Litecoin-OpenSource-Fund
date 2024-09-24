@@ -209,62 +209,60 @@ function PaymentModalFiatDonate() {
   }).format(parseFloat(state.formData.pledgeAmount || '0'))
 
   return (
-    <>
-      <div className="flex !w-full flex-col space-y-4 rounded-lg p-0 md:p-8">
-        <h2 className="mb-4 font-space-grotesk text-2xl font-bold text-[#222222]">
-          Complete Your Donation
-        </h2>
-        {/* Display the amount at the top */}
-        <div className="mb-4 text-lg font-semibold text-[#222222]">
-          Amount to Donate: {formattedAmount}
-        </div>
-        {notification && (
-          <Notification
-            message={notification}
-            delay={5000}
-            onClose={() => setNotification(null)} // Hide notification after 5 seconds
-          />
-        )}
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          id="payment-form"
-          className="space-y-4"
-        >
-          <div className="relative mb-4 w-full">
-            <FaRegCreditCard className="absolute left-3 top-1/2 -translate-y-1/2 transform text-[#222222]" />
-            <div
-              data-shift4="number"
-              className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
-              style={{ minHeight: '40px' }}
-            ></div>
-          </div>
-          <div className="mb-4 flex flex-row space-x-3">
-            <div
-              data-shift4="expiry"
-              className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
-              style={{ minHeight: '40px' }}
-            ></div>
-            <div
-              data-shift4="cvc"
-              className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
-              style={{ minHeight: '40px' }}
-            ></div>
-          </div>
-
-          <GradientButton
-            isLoading={isLoading} // Implement the isLoading state
-            disabled={isLoading} // Disable button while loading
-            type="submit" // Ensure the button type is submit
-            backgroundColor="#222222"
-            textColor="#f0f0f0"
-            loadingText="Processing..."
-          >
-            Donate
-          </GradientButton>
-        </form>
+    <div className=" flex w-full flex-col space-y-4 rounded-lg p-0 md:p-8">
+      <h2 className="mb-4 font-space-grotesk text-2xl font-bold text-[#222222]">
+        Complete Your Donation
+      </h2>
+      {/* Display the amount at the top */}
+      <div className="mb-4 text-lg font-semibold text-[#222222]">
+        Amount to Donate: {formattedAmount}
       </div>
-    </>
+      {notification && (
+        <Notification
+          message={notification}
+          delay={5000}
+          onClose={() => setNotification(null)} // Hide notification after 5 seconds
+        />
+      )}
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        id="payment-form"
+        className="space-y-4"
+      >
+        <div className="relative mb-4 w-full">
+          <FaRegCreditCard className="absolute left-3 top-1/2 -translate-y-1/2 transform text-[#222222]" />
+          <div
+            data-shift4="number"
+            className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
+            style={{ minHeight: '40px' }}
+          ></div>
+        </div>
+        <div className="mb-4 flex flex-row space-x-3">
+          <div
+            data-shift4="expiry"
+            className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
+            style={{ minHeight: '40px' }}
+          ></div>
+          <div
+            data-shift4="cvc"
+            className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
+            style={{ minHeight: '40px' }}
+          ></div>
+        </div>
+
+        <GradientButton
+          isLoading={isLoading} // Implement the isLoading state
+          disabled={isLoading} // Disable button while loading
+          type="submit" // Ensure the button type is submit
+          backgroundColor="#222222"
+          textColor="#f0f0f0"
+          loadingText="Processing..."
+        >
+          Donate
+        </GradientButton>
+      </form>
+    </div>
   )
 }
 
