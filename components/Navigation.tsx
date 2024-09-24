@@ -158,7 +158,8 @@ const Navigation = () => {
   const fontColor = interpolateColor('#222222', '#C6D3D6', bgOpacity)
   const dropdownBgColor = interpolateColor('#c6d3d6', '#222222', bgOpacity)
   const dropdownTextColor = interpolateColor('#222222', '#C6D3D6', bgOpacity)
-  const hamburgerColor = interpolateColor('#222222', '#ffffff', bgOpacity)
+  const hamburgerColor = interpolateColor('#222222', '#C5D3D6', bgOpacity) // Updated
+  const mobileMenuTextColor = interpolateColor('#222222', '#C5D3D6', bgOpacity)
 
   return (
     <>
@@ -203,23 +204,31 @@ const Navigation = () => {
           </div>
           <nav>
             {isMobile ? (
-              // Hamburger menu. TODO: Modify color with scroll position between #222222 and #C5D3D6
-              // eslint-disable-next-line jsx-a11y/anchor-is-valid
-              <a
-                className={`nav-toggle  mt-[-10px]  ${navShow ? 'open' : ''}`}
+              // Hamburger menu with updated color interpolation
+              <button
+                className={`nav-toggle mt-[-10px] ${navShow ? 'open' : ''}`}
                 onClick={onToggleNav}
                 onKeyPress={onToggleNav}
                 aria-label="menu"
-                role="button"
-                tabIndex={0}
+                aria-expanded={navShow}
               >
-                <span className="bar"></span>
-                <span className="bar"></span>
-                <span className="bar"></span>
-              </a>
+                <span
+                  className="bar"
+                  style={{ backgroundColor: hamburgerColor }}
+                ></span>
+                <span
+                  className="bar"
+                  style={{ backgroundColor: hamburgerColor }}
+                ></span>
+                <span
+                  className="bar"
+                  style={{ backgroundColor: hamburgerColor }}
+                ></span>
+              </button>
             ) : (
               <ul className="flex flex-row">
-                <li className="relative !-mt-[.2rem]  !mr-[0rem]  flex items-center !font-[500]">
+                {/* Use Litecoin Dropdown */}
+                <li className="relative !-mr-[0.1rem]  !-mt-[.2rem]  flex items-center !font-[500]">
                   <button
                     className="flex items-center"
                     onClick={() => toggleDropdown('useLitecoin')}
@@ -267,7 +276,7 @@ const Navigation = () => {
                           ? 'visible'
                           : 'hidden',
                         '--dropdown-width': '113.63px',
-                      } as any
+                      } as React.CSSProperties & { [key: string]: string }
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
@@ -290,9 +299,9 @@ const Navigation = () => {
                   <button
                     className="flex items-center text-[#222222]"
                     onClick={() => toggleDropdown('learn')}
-                    aria-expanded={dropdownOpen.learn}
+                    aria-expanded={dropdownOpen.learn} // Updated
                     aria-haspopup="true"
-                    ref={useLitecoinRef as React.RefObject<HTMLButtonElement>}
+                    ref={learnRef as React.RefObject<HTMLButtonElement>} // Updated
                     style={{ color: fontColor }}
                   >
                     Learn
@@ -331,12 +340,8 @@ const Navigation = () => {
                         color: dropdownTextColor,
                         fontSize: `${scaledFontSize}px`,
                         visibility: dropdownOpen.learn ? 'visible' : 'hidden',
-                        /* 
-                        --dropdown-width controls the width of the dropdown.
-                        Adjust this value as needed.
-                      */
                         '--dropdown-width': '165px',
-                      } as any
+                      } as React.CSSProperties & { [key: string]: string }
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
@@ -353,25 +358,25 @@ const Navigation = () => {
 
                 {/* Projects Menu Item */}
                 <li
-                  className="text-md !ml-[1rem] !mr-[.82rem] mb-[.95rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 1}px`, // Adjust spacing between menu items
+                    marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
                   <Link href="/projects">Projects</Link>
                 </li>
 
                 {/* The Foundation Dropdown */}
-                <li className="relative !-mr-[.20rem] !-mt-[0.1rem] flex items-center !font-[500]">
+                <li className="relative !-mr-[.25rem] !-mt-[0.1rem] flex items-center !font-[500]">
                   <button
                     className="flex items-center text-[#222222]"
                     onClick={() => toggleDropdown('theFoundation')}
-                    aria-expanded={dropdownOpen.useLitecoin}
+                    aria-expanded={dropdownOpen.theFoundation} // Updated
                     aria-haspopup="true"
-                    ref={useLitecoinRef as React.RefObject<HTMLButtonElement>}
+                    ref={theFoundationRef as React.RefObject<HTMLButtonElement>} // Updated
                     style={{ color: fontColor }}
                   >
                     The Foundation
@@ -404,7 +409,6 @@ const Navigation = () => {
                         ? 'dropdown-enter-active'
                         : 'dropdown-exit-active'
                     }`}
-                    // Cast to allow custom CSS properties
                     style={
                       {
                         backgroundColor: dropdownBgColor,
@@ -413,8 +417,8 @@ const Navigation = () => {
                         visibility: dropdownOpen.theFoundation
                           ? 'visible'
                           : 'hidden',
-                        '--dropdown-width': '140px', // Removed cast to any
-                      } as any
+                        '--dropdown-width': '140px',
+                      } as React.CSSProperties & { [key: string]: string }
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
@@ -439,7 +443,7 @@ const Navigation = () => {
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 1}px`, // Adjust spacing between menu items
+                    marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
                   <Link href="/news">News</Link>
@@ -450,18 +454,18 @@ const Navigation = () => {
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 0.5}px`, // Adjust spacing between menu items
+                    marginRight: `${scaledMargin + 0.5}px`,
                   }}
                 >
                   <Link href="/events">Events</Link>
                 </li>
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.90rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 0.8}px`, // Adjust spacing between menu items
+                    marginRight: `${scaledMargin + 0.8}px`,
                   }}
                 >
                   <Link href="/shop">Shop</Link>
@@ -472,7 +476,7 @@ const Navigation = () => {
                     color: '#FC5C39',
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
-                    marginRight: `${scaledMargin + 1}px`, // Adjust spacing between menu items
+                    marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
                   <Link href="/explorer">Explorer</Link>
@@ -483,174 +487,182 @@ const Navigation = () => {
         </div>
       </header>
 
-      {/* Mobile Nav */}
-      {/* TODO: Modify bg color with scroll position between #C5D3D6 and #222222*/}
+      {/* Mobile Nav with dynamic background color */}
       <div
-        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform bg-[#C5D3D6] pt-20  duration-300 ease-in  md:clear-left  ${
+        className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform pt-20 duration-300 ease-in md:clear-left ${
           navShow ? 'translate-x-0' : 'translate-x-[105%]'
         }`}
+        style={{
+          backgroundColor: interpolateColor('#C5D3D6', '#222222', bgOpacity),
+        }}
       >
-        {/* LINKS */}
-        <div className="flex flex-col gap-x-6">
-          <nav className="mt-8 h-full ">
-            {[
-              'Use Litecoin',
-              'Learn',
-              'Projects',
-              'The Foundation',
-              'News',
-              'Events',
-              'Shop',
-              'Explorer',
-            ].map((item) => (
-              <div key={item} className="px-10 py-2 pt-2 short:py-0.5 ">
-                {item === 'Use Litecoin' ||
-                item === 'The Foundation' ||
-                item === 'Learn' ? (
-                  <>
-                    <button
-                      onClick={() =>
-                        toggleMobileDropdown(
-                          item.replace(' ', '').toLowerCase()
-                        )
-                      }
-                      className="font-space-roc m-0 flex w-full items-center justify-between pl-0 pr-0 text-left text-[2rem] font-semibold text-[#222222]"
-                    >
-                      {item}
-                      {/*Mobile SVG chevron will now flip up and down */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-10 w-10"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        style={{
-                          transform: `translateY(-0.5px) ${
-                            mobileDropdownOpen[
-                              item.replace(' ', '').toLowerCase()
-                            ]
-                              ? 'rotate(180deg)'
-                              : ''
-                          }`,
-                        }}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={3.25}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    {mobileDropdownOpen[item.replace(' ', '').toLowerCase()] ? (
-                      <ul className="pl-12 font-space-grotesk text-[2rem] font-semibold text-[#222222]">
-                        {item === 'Use Litecoin' ? (
-                          <>
-                            <li className="py-1">
-                              <Link
-                                href="/use-litecoin/buy"
-                                onClick={onToggleNav}
-                              >
-                                Buy
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/use-litecoin/spend"
-                                onClick={onToggleNav}
-                              >
-                                Spend
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/use-litecoin/store"
-                                onClick={onToggleNav}
-                              >
-                                Store
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/use-litecoin/business"
-                                onClick={onToggleNav}
-                              >
-                                Business
-                              </Link>
-                            </li>
-                          </>
-                        ) : item === 'The Foundation' ? (
-                          <>
-                            <li className="py-1">
-                              <Link
-                                href="/the-foundation/about"
-                                onClick={onToggleNav}
-                              >
-                                About
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/the-foundation/resources"
-                                onClick={onToggleNav}
-                              >
-                                Resources
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/the-foundation/financials"
-                                onClick={onToggleNav}
-                              >
-                                Financials
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/the-foundation/contact"
-                                onClick={onToggleNav}
-                              >
-                                Contact
-                              </Link>
-                            </li>
-                          </>
-                        ) : item === 'Learn' ? (
-                          <>
-                            <li className="py-1">
-                              <Link
-                                href="/learn/what-is-litecoin"
-                                onClick={onToggleNav}
-                              >
-                                What is Litecoin
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                href="/learn/resources"
-                                onClick={onToggleNav}
-                              >
-                                Resources
-                              </Link>
-                            </li>
-                          </>
-                        ) : null}
-                      </ul>
-                    ) : null}
-                  </>
-                ) : (
-                  <Link
-                    href={`/${item.toLowerCase()}`}
-                    className="flex w-full items-center justify-between text-left font-space-grotesk text-[2rem] font-semibold  text-[#222222]"
-                    onClick={onToggleNav}
-                  >
-                    {item}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </nav>
+        {/* Mobile Nav with dynamic background color */}
+        <div
+          className={`fixed bottom-0 right-0 top-0 z-10 min-w-full transform pt-20 duration-300 ease-in md:clear-left ${
+            navShow ? 'translate-x-0' : 'translate-x-[105%]'
+          }`}
+          style={{
+            backgroundColor: interpolateColor('#C5D3D6', '#222222', bgOpacity),
+          }}
+        >
+          {/* LINKS */}
+          <div className="flex flex-col gap-x-6">
+            <nav className="mt-10 h-full ">
+              {[
+                'Use Litecoin',
+                'Learn',
+                'Projects',
+                'The Foundation',
+                'News',
+                'Events',
+                'Shop',
+                'Explorer',
+              ].map((item) => {
+                const itemKey = item.replace(' ', '').toLowerCase()
+                return (
+                  <div key={item} className="px-10 py-2 short:py-0.5 ">
+                    {item === 'Use Litecoin' ||
+                    item === 'The Foundation' ||
+                    item === 'Learn' ? (
+                      <>
+                        <button
+                          onClick={() => toggleMobileDropdown(itemKey)}
+                          className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold"
+                          style={{ color: mobileMenuTextColor }}
+                        >
+                          {item}
+                          {/* Mobile SVG chevron will now flip up and down */}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-10 w-10"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            style={{
+                              transform: `translateY(-0.5px) ${
+                                mobileDropdownOpen[itemKey]
+                                  ? 'rotate(180deg)'
+                                  : ''
+                              }`,
+                            }}
+                          >
+                            <path
+                              strokeLinecap="butt"
+                              strokeLinejoin="miter"
+                              strokeWidth={3}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                        {mobileDropdownOpen[itemKey] ? (
+                          <ul
+                            className="pl-6 font-space-grotesk text-[2.1rem] font-semibold"
+                            style={{ color: mobileMenuTextColor }}
+                          >
+                            {/* Menu items based on `item` */}
+                            {item === 'Use Litecoin' ? (
+                              <>
+                                <li className="py-1">
+                                  <Link
+                                    href="/use-litecoin/buy"
+                                    onClick={onToggleNav}
+                                  >
+                                    Buy
+                                  </Link>
+                                </li>
+                                <li className="py-1">
+                                  <Link
+                                    href="/use-litecoin/spend"
+                                    onClick={onToggleNav}
+                                  >
+                                    Spend
+                                  </Link>
+                                </li>
+                                <li className="py-1">
+                                  <Link
+                                    href="/use-litecoin/store"
+                                    onClick={onToggleNav}
+                                  >
+                                    Store
+                                  </Link>
+                                </li>
+                                <li className="py-1">
+                                  <Link
+                                    href="/use-litecoin/business"
+                                    onClick={onToggleNav}
+                                  >
+                                    Business
+                                  </Link>
+                                </li>
+                              </>
+                            ) : item === 'The Foundation' ? (
+                              <>
+                                <li className="py-1">
+                                  <Link
+                                    href="/the-foundation/about"
+                                    onClick={onToggleNav}
+                                  >
+                                    About
+                                  </Link>
+                                </li>
 
-          <HorizontalSocialIcons />
+                                <li className="py-1">
+                                  <Link
+                                    href="/the-foundation/financials"
+                                    onClick={onToggleNav}
+                                  >
+                                    Financials
+                                  </Link>
+                                </li>
+                                <li className="py-1">
+                                  <Link
+                                    href="/the-foundation/contact"
+                                    onClick={onToggleNav}
+                                  >
+                                    Contact
+                                  </Link>
+                                </li>
+                              </>
+                            ) : item === 'Learn' ? (
+                              <>
+                                <li className="py-1">
+                                  <Link
+                                    href="/learn/what-is-litecoin"
+                                    onClick={onToggleNav}
+                                  >
+                                    What is Litecoin
+                                  </Link>
+                                </li>
+                                <li className="py-1">
+                                  <Link
+                                    href="/learn/resources"
+                                    onClick={onToggleNav}
+                                  >
+                                    Resources
+                                  </Link>
+                                </li>
+                              </>
+                            ) : null}
+                          </ul>
+                        ) : null}
+                      </>
+                    ) : (
+                      <Link
+                        href={`/${item.toLowerCase()}`}
+                        className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.1rem] font-semibold"
+                        style={{ color: mobileMenuTextColor }}
+                        onClick={onToggleNav}
+                      >
+                        {item}
+                      </Link>
+                    )}
+                  </div>
+                )
+              })}
+            </nav>
+
+            <HorizontalSocialIcons />
+          </div>
         </div>
       </div>
       <style jsx>{`
@@ -673,7 +685,16 @@ const Navigation = () => {
           height: 4px;
           width: 100%;
           background-color: ${hamburgerColor};
-          transition: all 300ms ease-in-out;
+        }
+
+        .nav-toggle.open .bar {
+          /* Apply transition only when the menu is opening */
+          transition: transform 300ms ease-in-out, width 300ms ease-in-out;
+        }
+
+        .nav-toggle:not(.open) .bar {
+          /* Ensure no transition when the menu is closing */
+          transition: none;
         }
 
         .nav-toggle:hover {
