@@ -150,10 +150,7 @@ const ComponentsShowcase = () => {
           Payment Modal Personal Info
         </h2>
         <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
-          <PaymentModalPersonalInfo
-            onRequestClose={() => null}
-            onBackClick={() => null}
-          />
+          <PaymentModalPersonalInfo onRequestClose={() => null} />
         </section>
         {/* Add more sections as needed for each component */}
       </div>
