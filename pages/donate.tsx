@@ -1,3 +1,6 @@
+// pages/donate.tsx
+
+import { useRouter } from 'next/router'
 import DonateSection from '@/components/DonateSection'
 import { PageSEO } from '@/components/SEO'
 import PaymentForm from '@/components/PaymentForm'
@@ -5,12 +8,29 @@ import { ProjectCategory } from 'utils/types'
 import React, { useEffect } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 
-export default function Apply() {
+export default function Donate() {
+  // Renamed from Apply
   const { dispatch } = useDonation()
-  // Dispatch RESET_DONATION_STATE when the component mounts
+  const router = useRouter()
+  const { reset } = router.query
+
   useEffect(() => {
-    dispatch({ type: 'RESET_DONATION_STATE' })
-  }, [dispatch])
+    if (reset === 'true') {
+      dispatch({ type: 'RESET_DONATION_STATE' })
+      // Optionally, remove the reset parameter from the URL
+      const newPath = router.pathname
+      const newQuery = { ...router.query }
+      delete newQuery.reset
+      router.replace(
+        {
+          pathname: newPath,
+          query: newQuery,
+        },
+        undefined,
+        { shallow: true }
+      )
+    }
+  }, [dispatch, reset, router])
 
   return (
     <>

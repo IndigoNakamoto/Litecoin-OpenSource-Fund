@@ -1,3 +1,4 @@
+// pages/projects/index.tsx
 import type { NextPage } from 'next'
 import Head from 'next/head'
 // import { useEffect, useState } from 'react'

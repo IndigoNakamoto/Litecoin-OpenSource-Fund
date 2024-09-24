@@ -22,7 +22,7 @@ import { useDonation } from '../contexts/DonationContext'
 type PaymentFormProps = {
   project: ProjectItem | undefined
   onRequestClose?: () => void // Make this prop optional
-  modal: boolean | true
+  modal: boolean // Corrected the type to boolean
 }
 
 const PaymentForm: React.FC<PaymentFormProps> = ({
@@ -31,19 +31,28 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   modal,
 }) => {
   const { state, dispatch } = useDonation()
+  const { projectSlug, projectTitle, image } = state
 
   useEffect(() => {
     if (project) {
-      dispatch({
-        type: 'SET_PROJECT_DETAILS',
-        payload: {
-          slug: project.slug,
-          title: project.title,
-          image: project.coverImage,
-        },
-      })
+      // Only dispatch if project details have changed
+      if (
+        projectSlug !== project.slug ||
+        projectTitle !== project.title ||
+        image !== project.coverImage
+      ) {
+        dispatch({
+          type: 'SET_PROJECT_DETAILS',
+          payload: {
+            slug: project.slug,
+            title: project.title,
+            image: project.coverImage,
+          },
+        })
+      }
     }
-  }, [project, dispatch])
+    // Removed 'dispatch' from dependencies since it's stable
+  }, [project, projectSlug, projectTitle, image])
 
   if (!project) {
     return <div />
@@ -75,8 +84,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 },
               })
               dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
-              // Since PaymentModalCryptoOption now initializes and enables the Donate button,
-              // no additional dispatch is needed here for the Donate button
             }}
           />
         )
@@ -144,9 +151,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 <h2 className="font-space-grotesk text-4xl font-semibold text-[#222222]">
                   {project.title}
                 </h2>
-                {project.title === 'Projects Fund' ? (
-                  <></>
-                ) : (
+                {project.title === 'Projects Fund' ? null : (
                   <h3 className="font-sans text-[#222222]">Project</h3>
                 )}
               </div>

@@ -1,6 +1,8 @@
-// Navigation.jsx or Navigation.tsx (if using TypeScript)
+// components/Navigation
 import siteMetadata from '@/data/siteMetadata'
-import Link from './Link'
+// import Link from './Link' REMOVE
+import Link from 'next/link' // ADDED
+
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import HorizontalSocialIcons from './HorizontalSocialIcons'
