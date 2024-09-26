@@ -21,7 +21,7 @@ const project = {
   slug: 'projects_fund',
   title: 'Projects Fund',
   summary: '',
-  coverImage: '/static/images/projects/generalfund2.png',
+  coverImage: '/static/images/projects/projects2.png',
   telegramLink: '',
   redditLink: '',
   facebookLink: '',
