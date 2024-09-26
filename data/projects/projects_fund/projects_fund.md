@@ -2,7 +2,7 @@
 title: 'Projects Fund'
 summary: 'The Projects Fund by the Litecoin Foundation is the hub for open-source Litecoin ventures. With a focus on quality and innovation, it invites supporters to join its mission in reshaping the Litecoin landscape.'
 nym: 'Litecoin Foundation'
-coverImage: '/static/images/projects/generalfund2.png'
+coverImage: '/static/images/projects/projects2.png'
 twitterHandle: 'https://www.twitter.com/ltcfoundation'
 hidden: false
 type: 'Project'

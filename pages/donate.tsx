@@ -5,14 +5,16 @@ import DonateSection from '@/components/DonateSection'
 import { PageSEO } from '@/components/SEO'
 import PaymentForm from '@/components/PaymentForm'
 import { ProjectCategory } from 'utils/types'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 
 export default function Donate() {
-  // Renamed from Apply
   const { dispatch } = useDonation()
   const router = useRouter()
   const { reset } = router.query
+
+  const [widgetSnippet, setWidgetSnippet] = useState('')
+  const [widgetError, setWidgetError] = useState('')
 
   useEffect(() => {
     if (reset === 'true') {
@@ -31,6 +33,45 @@ export default function Donate() {
       )
     }
   }, [dispatch, reset, router])
+
+  useEffect(() => {
+    // Fetch the widget snippet from the API
+    const fetchWidgetSnippet = async () => {
+      try {
+        const res = await fetch('/api/getWidgetSnippet')
+        if (!res.ok) {
+          const errorData = await res.json()
+          throw new Error(
+            `HTTP error! status: ${res.status} - ${
+              errorData.error || res.statusText
+            }`
+          )
+        }
+        const data = await res.json()
+
+        // The response contains 'popup', 'script', and 'iframe' options
+        // We'll use the 'popup' option
+        setWidgetSnippet(data.popup)
+
+        // Parse and execute the script manually
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(data.popup, 'text/html')
+        const script = doc.querySelector('script')
+
+        if (script) {
+          const newScript = document.createElement('script')
+          newScript.id = script.id
+          newScript.innerHTML = script.innerHTML
+          document.body.appendChild(newScript)
+        }
+      } catch (error) {
+        console.error('Failed to fetch widget snippet:', error)
+        setWidgetError(error.message)
+      }
+    }
+
+    fetchWidgetSnippet()
+  }, [])
 
   return (
     <>
@@ -57,8 +98,22 @@ export default function Donate() {
               community support, partnerships and advocacy related to Litecoin,
               cryptocurrency and financial privacy.
             </p>
+            <p className="mt-4 text-lg text-[#222222]">
+              We now accept donations through Donor-Advised Funds (DAF). To
+              contribute via DAF, please click the button below.
+            </p>
+            {/* Render the widget snippet or display an error */}
+            <div className="mt-6">
+              {widgetError ? (
+                <p className="text-red-500">
+                  Failed to load donation widget: {widgetError}
+                </p>
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
+              )}
+            </div>
           </div>
-          <div className="mt-6 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">
+          <div className="mt-12 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">
             <PaymentForm
               project={{
                 slug: 'ltcfoundation',

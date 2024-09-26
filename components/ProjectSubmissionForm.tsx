@@ -93,7 +93,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Project Description <span className="text-red-500">*</span>
         <textarea
-          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+          className="mt-1 block h-40 w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('project_description', { required: true })}
         />
       </label>
@@ -122,7 +122,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Potential Impact <span className="text-red-500">*</span>
         <textarea
-          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+          className="mt-1 block h-40 w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('potential_impact', { required: true })}
         />
       </label>
@@ -380,7 +380,7 @@ export default function ProjectSubmissionForm() {
       <label className="block">
         Prior Contributions
         <textarea
-          className="mt-1 block w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
+          className="mt-1 block h-40 w-full rounded-none border-gray-300 text-black shadow-sm focus:border-[#C5D3D6] focus:ring focus:ring-[#C5D3D6] focus:ring-opacity-50"
           {...register('prior_contributions')}
         />
       </label>

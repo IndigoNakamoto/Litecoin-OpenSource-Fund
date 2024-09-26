@@ -522,7 +522,7 @@ const Navigation = () => {
                     <>
                       <button
                         onClick={() => toggleMobileDropdown(itemKey)}
-                        className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold"
+                        className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold "
                         style={{ color: mobileMenuTextColor }}
                         aria-expanded={mobileDropdownOpen[itemKey]}
                         aria-haspopup="true"
@@ -546,14 +546,14 @@ const Navigation = () => {
                           <path
                             strokeLinecap="butt"
                             strokeLinejoin="miter"
-                            strokeWidth={3}
-                            d="M19 9l-7 7-7-7"
+                            strokeWidth={2.5}
+                            d="M19 9l-6.75 6.75-6.75-6.75"
                           />
                         </svg>
                       </button>
                       {mobileDropdownOpen[itemKey] ? (
                         <ul
-                          className="pl-6 font-space-grotesk text-[2.1rem] font-semibold"
+                          className={`pl-6 font-space-grotesk text-[2.1rem] font-semibold`}
                           style={{ color: mobileMenuTextColor }}
                         >
                           {/* Menu items based on `item` */}
@@ -658,7 +658,7 @@ const Navigation = () => {
             })}
           </nav>
 
-          <HorizontalSocialIcons />
+          <HorizontalSocialIcons mobileMenuTextColor={socialIconTextColor} />
         </div>
       </div>
       <style jsx>{`
@@ -729,7 +729,7 @@ const Navigation = () => {
 
         /* Ensure instant flip for SVG icons */
         svg {
-          transition: transform 200ms ease-in-out; /* Smooth transition for rotation */
+          transition: transform 0ms ease-in-out; /* Smooth transition for rotation */
         }
 
         /* Additional styles for alignment adjustments */
