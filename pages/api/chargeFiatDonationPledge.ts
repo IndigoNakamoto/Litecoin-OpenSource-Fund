@@ -52,13 +52,11 @@ export default async function handler(
     // Return success response to the frontend
     return res.status(200).json({ success })
   } catch (error: any) {
-    const errorMessage =
-      error.response?.data?.errorMessage || 'Internal Server Error'
+    const errorMessage = `${error.response?.data?.data?.meta.type} - ${error.response?.data?.data?.meta.message}`
 
     console.error(
       'Error charging fiat donation pledge:',
-      errorMessage,
-      error.response?.data?.data?.meta
+      errorMessage
       // error.response?.data || error.data.toString()
     )
 
@@ -78,10 +76,10 @@ export default async function handler(
     // Return a more descriptive error message to the frontend if applicable
     if (error.response?.data?.errorType === 'err.generic') {
       return res.status(500).json({
-        error: `${error.response?.data?.meta?.message}`,
+        error: `${errorMessage}`,
       })
     }
 
-    return res.status(500).json({ error: 'Internal Server Error' })
+    return res.status(500).json({ error: `${errorMessage}` })
   }
 }

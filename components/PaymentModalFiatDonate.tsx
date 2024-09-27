@@ -37,8 +37,8 @@ function PaymentModalFiatDonate() {
         } else {
           const errorData = data.error || data
           console.error('Donation failed', errorData)
-          if (errorData.errorMessage) {
-            setNotification(errorData.errorMessage)
+          if (errorData) {
+            setNotification(errorData)
           } else {
             setNotification('An unexpected error occurred. Please try again.')
           }
@@ -100,14 +100,14 @@ function PaymentModalFiatDonate() {
                 // merchantAccountId
               })
             })
-            .then((secureToken: any) => {
+            .then(async (secureToken: any) => {
               console.log('3D Secure verification successful:', secureToken)
               setCardToken(secureToken.id)
               submitButton?.removeAttribute('disabled')
 
               // Use the submitDonation function directly
               console.log('secureToken: ', secureToken)
-              submitDonation(secureToken.id)
+              await submitDonation(secureToken.id)
             })
             .catch(
               (error: { type: string; code?: string; message?: string }) => {
@@ -152,11 +152,11 @@ function PaymentModalFiatDonate() {
     event.preventDefault() // Prevent the default form submission
     if (!cardToken) {
       console.error('Card token is missing.')
-      setNotification('Payment information is incomplete.')
+      setNotification('Card token is missing.')
       return
     }
     // Call the submission function with the card token
-    submitDonation(cardToken)
+    await submitDonation(cardToken)
   }
 
   const displayShift4Error = (error: any) => {
