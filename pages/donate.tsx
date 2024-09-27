@@ -93,7 +93,7 @@ export default function Donate() {
       <PageSEO
         title="Donate to Litecoin Foundation | Support Cryptocurrency Innovation"
         description="Support the Litecoin Foundation by making a donation. Your contribution helps advance Litecoin adoption, development, and community initiatives. Donate securely today."
-        keywords="Litecoin, Donate, Cryptocurrency, Support, Foundation, Blockchain"
+        // keywords="Litecoin, Donate, Cryptocurrency, Support, Foundation, Blockchain"
       />
       <DonateSection title="">
         <div className="mx-auto flex w-full flex-col items-center justify-between xl:flex-row xl:items-start ">
