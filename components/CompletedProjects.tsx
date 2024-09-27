@@ -44,7 +44,7 @@ const images = [
 
 function CompletedProjects() {
   return (
-    <section className="flex flex-col pt-40 text-gray-800">
+    <section className="flex flex-col pt-40 font-space-grotesk text-gray-800">
       <div className="mx-auto flex flex-col items-center text-center">
         <h2 className="text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
           We Help Advance
@@ -55,15 +55,10 @@ function CompletedProjects() {
         <p className="pt-2 text-2xl text-gray-600 ">
           Unite. Fund. Innovate. - The Litecoin Development Portal
         </p>
-        <Link
-          href="/missions"
-          className="mb-10 mt-8 w-40 rounded-full bg-blue-500 px-9 py-2 font-semibold text-white transition duration-300 hover:bg-blue-400"
-        >
-          Explore More
-        </Link>
+        {/* Removed the existing "View All Projects" button */}
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-4 pb-32 pt-16 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
         {images.map((image) => (
           <div key={image.title} className="relative h-48">
             <Link
@@ -86,6 +81,13 @@ function CompletedProjects() {
             </Link>
           </div>
         ))}
+
+        {/* New grid item for "View All Projects" button */}
+        <div className="relative flex h-48 items-center justify-center rounded-xl bg-[#222222] text-white transition duration-300 hover:bg-opacity-75">
+          <Link href="/projects" aria-label="View All Projects">
+            <span className="text-2xl font-semibold">View All Projects</span>
+          </Link>
+        </div>
       </div>
     </section>
   )

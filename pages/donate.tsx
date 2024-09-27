@@ -2,11 +2,13 @@
 
 import { useRouter } from 'next/router'
 import DonateSection from '@/components/DonateSection'
+import SectionProjects from '@/components/SectionProjects'
 import { PageSEO } from '@/components/SEO'
 import PaymentForm from '@/components/PaymentForm'
 import { ProjectCategory } from 'utils/types'
 import React, { useEffect, useState } from 'react'
 import { useDonation } from '../contexts/DonationContext'
+import CompletedProjects from '@/components/CompletedProjects'
 
 export default function Donate() {
   const { dispatch } = useDonation()
@@ -15,6 +17,19 @@ export default function Donate() {
 
   const [widgetSnippet, setWidgetSnippet] = useState('')
   const [widgetError, setWidgetError] = useState('')
+  const [showDAF, setShowDAF] = useState(false) // State to manage DAF section visibility
+
+  // Handler to toggle DAF section visibility
+  const handleDAFClick = () => {
+    setShowDAF(true)
+    // Optionally, scroll to the DAF section
+    setTimeout(() => {
+      const dafSection = document.getElementById('daf-section')
+      if (dafSection) {
+        dafSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
+  }
 
   useEffect(() => {
     if (reset === 'true') {
@@ -76,14 +91,15 @@ export default function Donate() {
   return (
     <>
       <PageSEO
-        title="Litecoin.com | Donate"
-        description="Submit your project to Litecoin.com for community crowdfunding and support. Join the Litecoin ecosystem and get your project listed today."
+        title="Donate to Litecoin Foundation | Support Cryptocurrency Innovation"
+        description="Support the Litecoin Foundation by making a donation. Your contribution helps advance Litecoin adoption, development, and community initiatives. Donate securely today."
+        keywords="Litecoin, Donate, Cryptocurrency, Support, Foundation, Blockchain"
       />
       <DonateSection title="">
         <div className="mx-auto flex w-full flex-col items-center justify-between xl:flex-row xl:items-start ">
           <div className="max-w-[600px] flex-1 pr-0 xl:pr-6">
             <h1 className="font-space-grotesk text-4xl font-bold text-[#222222]">
-              Why Donate to Litecoin Foundation?
+              Support the Future of Litecoin: Donate Today
             </h1>
             <p className="mt-6 text-lg text-[#222222]">
               Litecoin Foundation Inc. is a 501(c)(3) nonprofit organization
@@ -131,6 +147,16 @@ export default function Donate() {
           </div>
         </div>
       </DonateSection>
+      <SectionProjects>
+        <div className="min-w-full">
+          <CompletedProjects />
+        </div>
+      </SectionProjects>
+      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-full items-center bg-[#f2f2f2] bg-cover bg-center pb-8">
+        <div className="min-w-full bg-green-50 px-32">
+          <CompletedProjects />
+        </div>
+      </section> */}
     </>
   )
 }

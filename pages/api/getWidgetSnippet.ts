@@ -30,7 +30,7 @@ export default async function handler(
         id: 'tgb-widget-button',
         text: 'Donate via DAF',
         style:
-          'font-family: "Space Grotesk", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif; border-radius: 20px; background-color: #FFFFFF; border: 1px solid #222222; color: #222222; font-size: 16px; font-weight: 500; padding: 13px 30px 14px;',
+          'font-family: "Space Grotesk", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif; border-radius: 40px; background-color: #FFFFFF; border: 1px solid #222222; color: #222222; font-size: 16px; font-weight: 600; padding: 13px 30px 14px;',
       },
       scriptId: 'tgb-widget-script',
       campaignId: 'LitecoinWebsiteDAF',
