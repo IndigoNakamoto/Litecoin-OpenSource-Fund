@@ -52,7 +52,7 @@ export default async function handler(
     // Return success response to the frontend
     return res.status(200).json({ success })
   } catch (error: any) {
-    const errorMessage = `${error.response?.data?.data?.meta.type} - ${error.response?.data?.data?.meta.message}`
+    const errorMessage = `${error.response?.data?.data?.meta.message}`
 
     console.error(
       'Error charging fiat donation pledge:',
