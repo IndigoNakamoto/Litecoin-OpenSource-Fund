@@ -36,7 +36,7 @@ function PaymentModalFiatDonate() {
           dispatch({ type: 'SET_STEP', payload: 'complete' })
         } else {
           const errorData = data.error || data
-          console.error('Donation failed', errorData)
+          console.error('Donation failed', data)
           if (errorData.errorMessage) {
             setNotification(errorData.errorMessage)
           } else {

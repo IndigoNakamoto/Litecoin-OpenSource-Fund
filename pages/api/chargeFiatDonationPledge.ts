@@ -58,7 +58,7 @@ export default async function handler(
     console.error(
       'Error charging fiat donation pledge:',
       errorMessage,
-      error.response?.data || error.toString()
+      error.response?.data || error.data.toString()
     )
 
     // Attempt to update the donation record with failure status
