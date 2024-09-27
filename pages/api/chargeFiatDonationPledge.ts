@@ -58,7 +58,8 @@ export default async function handler(
     console.error(
       'Error charging fiat donation pledge:',
       errorMessage,
-      error.response?.data || error.data.toString()
+      error.response?.data?.data?.meta
+      // error.response?.data || error.data.toString()
     )
 
     // Attempt to update the donation record with failure status
@@ -77,8 +78,7 @@ export default async function handler(
     // Return a more descriptive error message to the frontend if applicable
     if (error.response?.data?.errorType === 'err.generic') {
       return res.status(500).json({
-        error:
-          "Charge failed: The charge amount exceeds the available funds or the card's credit limit. Please try a different card or adjust the donation amount.",
+        error: `${error.response?.data?.meta?.message}`,
       })
     }
 
