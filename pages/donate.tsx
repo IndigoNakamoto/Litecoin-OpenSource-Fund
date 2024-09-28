@@ -148,7 +148,7 @@ export default function Donate() {
         </div>
       </DonateSection>
       <SectionProjects>
-        <div className="min-w-full">
+        <div className="min-w-full p-8">
           <CompletedProjects />
         </div>
       </SectionProjects>

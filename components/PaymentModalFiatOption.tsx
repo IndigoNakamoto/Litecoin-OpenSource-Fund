@@ -1,5 +1,4 @@
-// components/PaymentModalFiatOption
-
+// components/PaymentModalFiatOption.js
 import React, { useState, useRef, useEffect } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 
@@ -10,7 +9,13 @@ export default function PaymentModalFiatOption() {
   const [coverFees, setCoverFees] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const minDonation = 10 // Minimum donation amount in USD
   const buttonValues = [50, 100, 250, 500, 1000, 2500]
+
+  // Check if the current amount is below the minimum donation
+  const isBelowMin =
+    (selectedAmount !== null && selectedAmount < minDonation) ||
+    (customAmount !== '' && parseFloat(customAmount) < minDonation)
 
   const handleAmountClick = (amount: number) => {
     setSelectedAmount(amount)
@@ -88,6 +93,14 @@ export default function PaymentModalFiatOption() {
   const isCustomAmount =
     !buttonValues.includes(Number(displayAmount)) && customAmount !== ''
 
+  // **New useEffect to handle Donate button disabled state**
+  useEffect(() => {
+    dispatch({
+      type: 'SET_DONATE_BUTTON_DISABLED',
+      payload: isBelowMin, // Disable if below min
+    })
+  }, [isBelowMin, dispatch])
+
   return (
     <div className="flex w-full flex-col gap-4 pt-5">
       <div className="flex h-full w-full justify-between space-x-6 pt-6 font-space-grotesk">
@@ -146,15 +159,23 @@ export default function PaymentModalFiatOption() {
           style={{ paddingLeft: '2rem' }}
         />
       </div>
+      {isBelowMin ? (
+        <p className="-mt-3 font-space-grotesk text-sm font-semibold text-red-500">
+          Minimum donation is {minDonation.toFixed(2)} USD
+        </p>
+      ) : (
+        <p className="-mt-3 font-space-grotesk text-sm text-gray-600">
+          Minimum donation is {minDonation.toFixed(2)} USD
+        </p>
+      )}
       <div className="flex items-center space-x-3">
         <input
           type="checkbox"
           checked={coverFees}
           onChange={handleCoverFeesChange}
-          className="bg-white] h-4 w-4 border border-[#222222] bg-[#f0f0f0]"
+          className="h-4 w-4 border border-[#222222] bg-[#f0f0f0]"
           id="cover-transaction-fees"
         />
-        {/* Hover over ? => "Make your impact go even further by covering the processing fees of this donation" */}
         <label
           htmlFor="cover-transaction-fees"
           className="flex items-center text-[#222222]"
@@ -162,7 +183,7 @@ export default function PaymentModalFiatOption() {
           Cover transaction fees
           <span className="group relative ml-1">
             (?)
-            <span className="absolute bottom-full left-1/2 z-10 mb-2 w-64 -translate-x-1/2 rounded border border-white bg-gray-700 px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span className="absolute z-10 mt-2 w-64 rounded border border-white bg-gray-700 px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               Make your impact go even further by covering the processing fees
               of this donation
             </span>
