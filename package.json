@@ -28,6 +28,7 @@
     "@vercel/postgres": "^0.10.0",
     "autoprefixer": "^10.4.13",
     "babel-plugin-macros": "^3.1.0",
+    "bottleneck": "^2.19.5",
     "contentlayer": "0.3.0",
     "decimal.js": "^10.4.3",
     "esbuild": "0.17.5",
