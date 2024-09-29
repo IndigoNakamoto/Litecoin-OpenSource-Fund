@@ -9,7 +9,7 @@ gitRepository: 'https://github.com/litecoinlabs/market'
 type: 'Bounty'
 contributor: 'jamesscaur'
 bountyStatus: 'completed'
-totalPaid: 7.5
+totalPaid: 527.70
 ---
 
 # Litecoin Ordinals Decentralized Exchange

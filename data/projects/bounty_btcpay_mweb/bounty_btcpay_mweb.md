@@ -12,6 +12,7 @@ contributor: ''
 hashtag: '#LTCDev'
 telegramLink: 'https://t.me/MWEB_Testnet'
 bountyStatus: 'completed'
+totalPaid: 2767.40
 ---
 
 # Add MWEB Support on BTCPay for Litecoin
