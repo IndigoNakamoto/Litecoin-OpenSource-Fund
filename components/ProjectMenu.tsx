@@ -84,7 +84,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
             {item === 'faq' && faqCount === 1 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
               updatesCount === 0 ? null : item === 'comments' && // Hide the entire button for "Updates" when updatesCount is 0
               commentCount === 0 ? null : ( // Hide the entire button for "Comments" when commentCount is 0
-              <div className="transform-gpu overflow-hidden rounded-xl transition duration-200 hover:bg-white ">
+              <div className="transform-gpu overflow-hidden rounded-xl transition duration-200">
                 <button
                   onClick={() => handleMenuItemClick(item)}
                   className={`text-lg ${
@@ -118,7 +118,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'updates'
-                            ? 'font-bold text-blue-600 '
+                            ? 'font-bold text-[#222222] '
                             : 'font-semibold'
                         }`}
                       >
@@ -130,7 +130,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'comments'
-                            ? 'font-bold text-blue-600 '
+                            ? 'font-bold text-[#222222] '
                             : 'font-semibold'
                         }`}
                       >

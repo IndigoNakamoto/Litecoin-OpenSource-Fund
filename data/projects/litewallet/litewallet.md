@@ -11,7 +11,7 @@ type: 'Project'
 hashtag: '#Litewallet'
 socialSummary: 'Litewallet is the official Litecoin mobile wallet, backed by the Litecoin Foundation, offering a simple and secure way to manage Litecoin assets.'
 slug: 'litewallet'
-totalPaid: 21
+totalPaid: 1719.10
 ---
 
 ## Welcome to Litewallet

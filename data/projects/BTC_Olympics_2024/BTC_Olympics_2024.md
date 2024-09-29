@@ -18,6 +18,7 @@ hashtag: '#BitcoinOlympics'
 bountyStatus: 'open'
 isBitcoinOlympics2024: true
 serviceFeesCollected: 2.123
+totalPaid: 1000
 ---
 
 ## Build on Litecoin at the Bitcoin Olympics 2024!
