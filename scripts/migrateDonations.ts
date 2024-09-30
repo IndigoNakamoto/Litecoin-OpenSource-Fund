@@ -1,11 +1,12 @@
-// migrateDonations.ts
-
 import axios from 'axios'
 import crypto from 'crypto'
-import prisma from './lib/prisma' // Ensure the path is correct
+import prisma from '../lib/prisma' // Ensure the path is correct
 import Decimal from 'decimal.js'
 import readline from 'readline'
 import Bottleneck from 'bottleneck'
+import fs from 'fs'
+import { join } from 'path'
+import matter from 'gray-matter'
 
 // Create a Bottleneck limiter to manage CoinGecko API rate limits
 const limiter = new Bottleneck({
@@ -75,6 +76,7 @@ async function fetchDonationData(slug: string): Promise<DonationData[] | null> {
   }
 }
 
+// Function to fetch historical LTC/USD rate using Coinbase API
 async function fetchHistoricalLtcUsdRateCoinbase(
   timestamp: number
 ): Promise<number | null> {
@@ -117,51 +119,6 @@ async function fetchHistoricalLtcUsdRateCoinbase(
   }
 }
 
-// Function to fetch historical LTC/USD rate using CoinGecko API with rate limiting
-async function fetchHistoricalLtcUsdRate(
-  timestamp: number
-): Promise<number | null> {
-  try {
-    // Use the limiter to rate limit API calls
-    const ltcUsdValue: number = await limiter.schedule(async () => {
-      // Convert timestamp to date format required by CoinGecko (dd-mm-yyyy)
-      const date = new Date(timestamp * 1000)
-      const day = String(date.getUTCDate()).padStart(2, '0')
-      const month = String(date.getUTCMonth() + 1).padStart(2, '0') // Months are zero-indexed
-      const year = date.getUTCFullYear()
-      const formattedDate = `${day}-${month}-${year}`
-
-      // CoinGecko API URL
-      const coingeckoApiUrl = `https://api.coingecko.com/api/v3/coins/litecoin/history?date=${formattedDate}&localization=false`
-
-      // Send the request to CoinGecko API
-      const response = await axios.get(coingeckoApiUrl)
-
-      if (
-        !response.data ||
-        !response.data.market_data ||
-        !response.data.market_data.current_price ||
-        typeof response.data.market_data.current_price.usd !== 'number'
-      ) {
-        throw new Error('Invalid response structure from CoinGecko')
-      }
-
-      // Extract the price in USD
-      const ltcUsdValue = response.data.market_data.current_price.usd
-      console.log(`LTC/USD rate on ${formattedDate}: $${ltcUsdValue}`)
-      return ltcUsdValue
-    })
-
-    return ltcUsdValue
-  } catch (error: any) {
-    console.error(
-      'Error fetching historical LTC/USD rate from CoinGecko:',
-      error.message
-    )
-    return null // Return null or a fallback value if needed
-  }
-}
-
 // Function to create a donation record in PostgreSQL via Prisma
 async function createDonationRecord(
   donationData: DonationData,
@@ -174,11 +131,6 @@ async function createDonationRecord(
 
     // Generate a unique pledgeId
     const pledgeId = crypto.randomUUID()
-
-    // Since we can't store invoiceId or prevent duplicates based on it,
-    // we can attempt to prevent duplicates by checking for existing records
-    // with the same pledgeAmount, createdAt, and projectSlug.
-    // Note: This method is not foolproof.
 
     const existingDonation = await prisma.donation.findFirst({
       where: {
@@ -247,7 +199,6 @@ async function createDonationRecord(
           },
         },
         pledgeId: pledgeId, // Assign the generated pledgeId
-        // We cannot store invoiceId as per the schema constraints
       },
     })
 
@@ -274,7 +225,21 @@ function promptUser(query: string): Promise<string> {
   )
 }
 
-// Main function to run the migration per project slug
+// Function to get all project slugs
+function getPostSlugs() {
+  const postsDirectory = join(process.cwd(), 'data/projects')
+  return fs.readdirSync(postsDirectory)
+}
+
+// Function to migrate donations for all projects
+async function migrateAllDonations() {
+  const slugs = getPostSlugs()
+  for (const slug of slugs) {
+    await migrateDonations(slug)
+  }
+}
+
+// Main function to run the migration per project slug or all projects
 async function migrateDonations(slug: string) {
   console.log(`\nStarting migration for project slug: "${slug}"`)
 
@@ -316,17 +281,21 @@ async function migrateDonations(slug: string) {
 // Main execution
 async function main() {
   try {
-    // Prompt user to enter project slug
-    const slugInput = await promptUser('Enter the project slug to migrate: ')
+    // Prompt user to enter project slug or choose to migrate all
+    const slugInput = await promptUser(
+      'Enter the project slug to migrate or type "all" to migrate all projects: '
+    )
 
     const slug = slugInput.trim()
 
-    if (!slug) {
+    if (slug.toLowerCase() === 'all') {
+      await migrateAllDonations()
+    } else if (!slug) {
       console.error('No valid project slug entered. Exiting...')
       process.exit(1)
+    } else {
+      await migrateDonations(slug)
     }
-
-    await migrateDonations(slug)
 
     console.log('\nAll migrations completed.')
   } catch (error: any) {
