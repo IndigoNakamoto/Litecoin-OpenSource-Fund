@@ -1,7 +1,7 @@
 // components/TwitterUsers.tsx
 import Link from './Link'
 import Image from 'next/image'
-import { customImageLoader } from '../utils/customImageLoader'
+// import { customImageLoader } from '../utils/customImageLoader'
 import Head from 'next/head'
 
 type TwitterUser = {
@@ -29,11 +29,10 @@ const TwitterUsers: React.FC<TwitterUsersProps> = ({ users }) => {
             </Head>
           )}
           <Link
-            href={`https://twitter.com/${user.screen_name}`}
+            href={`https://x.com/${user.screen_name}`}
             className=" transition-transform duration-200 ease-in-out hover:scale-105"
           >
             <Image
-              loader={customImageLoader}
               src={user.profile_image_url_https.replace('_normal', '')}
               alt={user.name}
               width={100}
