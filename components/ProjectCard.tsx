@@ -1,6 +1,8 @@
-import Image from 'next/image' // Updated import
+// components/ProjectCard.js
+import Image from 'next/image'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
+import { customImageLoader } from '../utils/customImageLoader'
 
 export type ProjectCardProps = {
   project: ProjectItem
@@ -24,12 +26,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <Link href={`/projects/${slug}`} passHref>
         <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
           <Image
-            alt={title}
+            loader={customImageLoader} // Use the custom loader
             src={coverImage} // Ensure this is a valid URL from Webflow
+            alt={title}
             fill // Replaces layout="fill"
             style={{ objectFit: 'cover', objectPosition: '50% 50%' }} // Moved styling to 'style' prop
             className="cursor-pointer rounded-xl"
             priority={true}
+            sizes="(max-width: 768px) 100vw,
+                   (max-width: 1200px) 50vw,
+                   33vw"
           />
         </div>
       </Link>
