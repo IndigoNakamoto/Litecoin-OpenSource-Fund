@@ -62,15 +62,51 @@ module.exports = () => {
     reactStrictMode: true,
     transpilePackages: ['react-tweet'],
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // images: {
+    //   domains: [
+    //     'pbs.twimg.com',
+    //     'abs.twimg.com',
+    //     'static.tgb-preprod.com',
+    //     'static.tgbwidget.com',
+    //     'cdn.prod.website-files.com',
+    //   ],
+    // },
     images: {
-      domains: [
-        'pbs.twimg.com',
-        'abs.twimg.com',
-        'static.tgb-preprod.com',
-        'static.tgbwidget.com',
-        'cdn.prod.website-files.com',
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'pbs.twimg.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'abs.twimg.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'static.tgb-preprod.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'static.tgbwidget.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'cdn.prod.website-files.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'foss.litecoin.net',
+          pathname: '/**',
+        },
+        // Add any additional domains if necessary
       ],
     },
+    imageSizes: [64, 128, 256, 512],
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
     },
