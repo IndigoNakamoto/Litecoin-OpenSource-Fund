@@ -17,7 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const { slug, title, summary, coverImage } = project
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleClick = () => {
     setIsLoading(true) // Set loading state to true on click
