@@ -1,12 +1,13 @@
 // components/AsideSection.tsx
 import React from 'react'
 import DonationStats from './DonationStats'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { BountyStatus, AddressStats } from '../utils/types'
 import {
   defaultAddressStats,
   defaultBountyStatus,
 } from '../utils/defaultValues'
+import { customImageLoader } from '../utils/customImageLoader'
 
 type AsideSectionProps = {
   title: string
@@ -49,15 +50,18 @@ const AsideSection: React.FC<AsideSectionProps> = ({
 }) => (
   <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#dddddd] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
     {/* Cover Image */}
-    <div className="relative max-h-max min-h-[10rem] min-w-[150px] max-w-[300px] lg:m-4 lg:w-1/3">
+    <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
       <Image
-        alt={title}
+        loader={customImageLoader} // Use the custom loader
         src={coverImage}
-        layout="fill"
-        objectFit="cover"
-        objectPosition="50% 50%"
+        alt={title}
+        fill
+        style={{ objectFit: 'cover', objectPosition: '50% 50%' }} // Moved styling to 'style' prop
         className=""
         priority={true}
+        sizes="(max-width: 768px) 100vw,
+        (max-width: 1200px) 50vw,
+        33vw"
       />
     </div>
 
