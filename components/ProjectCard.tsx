@@ -1,5 +1,6 @@
 // components/ProjectCard.js
 import Image from 'next/image'
+import React from 'react'
 import { customImageLoader } from '../utils/customImageLoader'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
@@ -71,4 +72,4 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   )
 }
 
-export default ProjectCard
+export default React.memo(ProjectCard)

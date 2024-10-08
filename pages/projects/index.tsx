@@ -1,5 +1,6 @@
 // pages/projects/index.tsx
 import type { NextPage } from 'next'
+
 import Head from 'next/head'
 import PaymentModal from '@/components/PaymentModal'
 import ProjectCard from '@/components/ProjectCard'
@@ -13,6 +14,7 @@ import Link from 'next/link'
 import TypingScroll from '@/components/TypingScroll'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { useCallback, useMemo } from 'react'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -184,7 +186,7 @@ const AllProjects: NextPage = () => {
     )
   }
 
-  function openPaymentModal() {
+  const openPaymentModal = useCallback(() => {
     setModalOpen(true)
     dispatch({
       type: 'SET_PROJECT_DETAILS',
@@ -203,7 +205,7 @@ const AllProjects: NextPage = () => {
       undefined,
       { shallow: true }
     )
-  }
+  }, [project.slug, project.title, project.coverImage, dispatch, router])
 
   const projectsRef = useRef<HTMLDivElement>(null)
   const bountiesRef = useRef<HTMLDivElement>(null)
@@ -226,7 +228,7 @@ const AllProjects: NextPage = () => {
     window.scrollTo({ top: yPosition, behavior: 'smooth' })
   }
 
-  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]']
+  const bgColors = useMemo(() => ['bg-[#EEEEEE]', 'bg-[#c6d3d6]'], [])
 
   return (
     <div className="w-screen">
