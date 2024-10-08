@@ -8,45 +8,38 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src * blob: data:;img-src 'self' https://pbs.twimg.com https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://foss.litecoin.net blob: data:;
+  img-src 'self' https://pbs.twimg.com https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://foss.litecoin.net https://uploads-ssl.webflow.com https://static.webflow.com https://images.webflow.com blob: data:;
   media-src 'none';
-  connect-src *;
+  connect-src 'self';
   font-src 'self' https://fonts.gstatic.com;
-  frame-src giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;;
+  frame-src giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;
 `
 
 const securityHeaders = [
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
     key: 'Content-Security-Policy',
     value: ContentSecurityPolicy.replace(/\n/g, ''),
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
     key: 'Referrer-Policy',
     value: 'strict-origin-when-cross-origin',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
   {
     key: 'X-Frame-Options',
     value: 'DENY',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
   {
     key: 'X-Content-Type-Options',
     value: 'nosniff',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
   {
     key: 'X-DNS-Prefetch-Control',
     value: 'on',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
   {
     key: 'Strict-Transport-Security',
     value: 'max-age=31536000; includeSubDomains',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
   {
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
@@ -62,15 +55,6 @@ module.exports = () => {
     reactStrictMode: true,
     transpilePackages: ['react-tweet'],
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    // images: {
-    //   domains: [
-    //     'pbs.twimg.com',
-    //     'abs.twimg.com',
-    //     'static.tgb-preprod.com',
-    //     'static.tgbwidget.com',
-    //     'cdn.prod.website-files.com',
-    //   ],
-    // },
     images: {
       remotePatterns: [
         {
@@ -103,11 +87,26 @@ module.exports = () => {
           hostname: 'foss.litecoin.net',
           pathname: '/**',
         },
-        // Add any additional domains if necessary
+        {
+          protocol: 'https',
+          hostname: 'uploads-ssl.webflow.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'static.webflow.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'images.webflow.com',
+          pathname: '/**',
+        },
+        // Add any additional Webflow domains if necessary
       ],
+      deviceSizes: [400, 640, 750, 828, 1080, 1200, 1920],
+      imageSizes: [64, 128, 256, 512],
     },
-    imageSizes: [64, 128, 256, 512],
-    deviceSizes: [400, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
     },
@@ -121,7 +120,16 @@ module.exports = () => {
               value:
                 "default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline';",
             },
-            // Other headers you want to test with reduced restrictions
+            // Other headers with reduced restrictions if necessary
+          ],
+        },
+        {
+          source: '/_next/image:path*', // Specifically target image optimization routes
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'no-store, max-age=0',
+            },
           ],
         },
         {

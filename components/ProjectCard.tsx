@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image' // Updated import
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
 
@@ -13,17 +13,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // openPaymentModal,
   bgColor,
 }) => {
-  const {
-    slug,
-    title,
-    summary,
-    coverImage,
-    // gitRepository,
-    // twitterHandle,
-    // nym,
-  } = project
+  const { slug, title, summary, coverImage } = project
 
-  // const showButton = project.bountyStatus !== 'completed'
+  console.log('Image website url: ', coverImage)
 
   return (
     <figure
@@ -33,10 +25,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
           <Image
             alt={title}
-            src={coverImage}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="50% 50%"
+            src={coverImage} // Ensure this is a valid URL from Webflow
+            fill // Replaces layout="fill"
+            style={{ objectFit: 'cover', objectPosition: '50% 50%' }} // Moved styling to 'style' prop
             className="cursor-pointer rounded-xl"
             priority={true}
           />
@@ -59,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {summary}
           </p>
         </div>
-        <div className="mt-4 text-left ">
+        <div className="mt-4 text-left">
           <Link
             href={`/projects/${slug}`}
             passHref
