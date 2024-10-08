@@ -5,7 +5,7 @@ import PaymentModal from '@/components/PaymentModal'
 import ProjectCard from '@/components/ProjectCard'
 import { ProjectItem, ProjectCategory, BountyStatus } from '../../utils/types'
 import VerticalSocialIcons from '@/components/VerticalSocialIcons'
-import faqData from '../../data/pages/faq.json'
+// import faqData from '../../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
 import React, { useEffect, useState, useRef } from 'react'
 import { useDonation } from '../../contexts/DonationContext'
@@ -391,16 +391,16 @@ const AllProjects: NextPage = () => {
       </section>
 
       {/* FAQ SECTION */}
-      <section
+      {/* <section
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-[#C5D3D6] bg-cover bg-center py-20 pt-16"
         style={{
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         }}
       >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col md:justify-between lg:flex-row">
-          {/* Left Column: Static h1 */}
-          <div
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col md:justify-between lg:flex-row"> */}
+      {/* Left Column: Static h1 */}
+      {/* <div
             className="w-full pb-8 xl:w-[40%]"
             style={
               isLgScreen
@@ -418,16 +418,16 @@ const AllProjects: NextPage = () => {
             <p className="font-[15px]">
               To learn more about Litecoin, take a look at our FAQs:
             </p>
-          </div>
+          </div> */}
 
-          {/* Right Column: FAQ Section */}
-          <div className="w-full xl:w-[60%]">
+      {/* Right Column: FAQ Section */}
+      {/* <div className="w-full xl:w-[60%]">
             <div className="rounded-x mt-8 w-full md:mt-0">
-              <FAQSection faqCategories={faqData.questionsAndAnswers} />
+              <FAQSection faqs={faqData.questionsAndAnswers} />
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <PaymentModal
         isOpen={modalOpen}
