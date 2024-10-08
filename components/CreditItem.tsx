@@ -1,4 +1,5 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 
 export type CreditItemProps = {
   link: string
@@ -11,6 +12,7 @@ const CreditItem: React.FC<CreditItemProps> = ({ image, nym, link }) => {
     <a href={link} target="_blank" rel="noreferrer">
       <div className="flex flex-col items-center gap-2 p-4">
         <Image
+          loader={customImageLoader} // Use the custom loader
           width={192}
           height={192}
           src={image}

@@ -1,5 +1,6 @@
 import React from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 import TypingScroll from './TypingScroll'
 import Link from './Link'
 
@@ -67,6 +68,7 @@ function CompletedProjects() {
             >
               <div className="image-wrapper relative h-full w-full overflow-hidden">
                 <Image
+                  loader={customImageLoader}
                   alt={`Image of ${image.title}`}
                   src={`${imageDirectory}${image.src}`}
                   layout="fill"

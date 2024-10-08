@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import { ProjectItem } from '../utils/types'
@@ -76,6 +77,7 @@ const ThankYouModal: React.FC<ModalProps> = ({
           <div className="mt-4 flex flex-col items-center justify-center">
             {session?.user?.image && (
               <Image
+                loader={customImageLoader} // Use the custom loader
                 src={getCleanImageUrl(session.user.image)}
                 alt={session.user.name}
                 width={96}

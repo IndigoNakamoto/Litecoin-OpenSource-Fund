@@ -1,5 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 import { PageSEO } from '@/components/SEO'
 import CompletedProjects from '@/components/CompletedProjects'
 import Link from 'next/link'
@@ -38,6 +39,7 @@ export default function Mission({
             {/* Litecoin logo */}
             <div className="mt-32 w-32 md:w-60 xl:w-80 short:w-20 medium:w-36">
               <Image
+                loader={customImageLoader} // Use the custom loader
                 src={COIN}
                 alt="Litecoin Logo"
                 width={300}

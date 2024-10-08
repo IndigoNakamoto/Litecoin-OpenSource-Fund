@@ -1,8 +1,8 @@
 // components/ProjectCard.js
 import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
-import { customImageLoader } from '../utils/customImageLoader'
 
 export type ProjectCardProps = {
   project: ProjectItem

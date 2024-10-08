@@ -8,7 +8,8 @@ import Link from './Link'
 
 // Font Awesome
 import { config } from '@fortawesome/fontawesome-svg-core'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import React from 'react'
@@ -177,12 +178,12 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           ) : (
             <div className="flex items-center">
               <Image
+                loader={customImageLoader} // Use the custom loader
                 src={session.user.image}
                 alt={session.user.name}
                 width={45}
                 height={45}
                 className="rounded-full"
-                loading="lazy" // Apply lazy loading
               />
               <div className="ml-2 flex items-center">
                 <div className="m-0 p-0">

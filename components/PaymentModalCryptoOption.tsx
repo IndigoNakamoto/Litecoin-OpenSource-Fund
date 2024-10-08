@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { SiBitcoin, SiLitecoin, SiDogecoin } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext' // Import the context
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 import ConversionRateCalculator from './ConversionRateCalculator' // Import the new component
 
 type Currency = {
@@ -241,6 +242,7 @@ export default function PaymentModalCryptoOption({
                 }`}
               >
                 <Image
+                  loader={customImageLoader} // Use the custom loader
                   src={option.imageUrl}
                   alt={option.name}
                   objectFit="contain"
