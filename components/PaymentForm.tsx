@@ -1,7 +1,8 @@
 // components/PaymentForm.tsx
 
 import React, { useEffect } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
+import { customImageLoader } from '../utils/customImageLoader'
 import GradientButton from './GradientButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCreditCard, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
@@ -139,12 +140,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           <div className="z-30 flex flex-col space-y-4 py-4">
             <div className="flex items-center gap-4">
               <Image
+                loader={customImageLoader} // Use the custom loader
                 alt={project.title}
                 src={project.coverImage}
                 width={96}
                 height={96}
+                priority={true}
                 objectFit="cover"
-                className="rounded-xl"
+                className="rounded-lg"
               />
               <div className="flex flex-col">
                 <h3 className="font-sans text-[#222222]">Donate to</h3>
