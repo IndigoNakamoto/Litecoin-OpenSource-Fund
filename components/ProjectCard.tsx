@@ -1,6 +1,5 @@
-// components/ProjectCard.js
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { customImageLoader } from '../utils/customImageLoader'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
@@ -18,7 +17,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const { slug, title, summary, coverImage } = project
 
-  console.log('Image website url: ', coverImage)
+  const [isLoading, setIsLoading] = useState(true)
+
+  const handleClick = () => {
+    setIsLoading(true) // Set loading state to true on click
+  }
 
   return (
     <figure
@@ -63,11 +66,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             passHref
             className="text-secondary-500 hover:text-secondary-600 font-bold tracking-wider text-[#7e7e7e] underline"
             aria-label="FIND OUT MORE"
+            onClick={handleClick} // Handle click
           >
-            FIND OUT MORE &rarr;
+            {isLoading ? (
+              <span className="loading-text-gradient">LOADING &rarr;</span>
+            ) : (
+              <span>FIND OUT MORE &rarr;</span>
+            )}
           </Link>
         </div>
       </figcaption>
+
+      {/* CSS for Gradient Effect */}
+      <style jsx>{`
+        .loading-text-gradient {
+          background: linear-gradient(
+            70deg,
+            #333333,
+            #333333,
+            #7e7e7e,
+            #7e7e7e,
+            #333333
+          );
+          background-size: 200%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          animation: gradient-move 3s infinite;
+        }
+
+        @keyframes gradient-move {
+          0% {
+            background-position: 200% 0;
+          }
+          100% {
+            background-position: -200% 0;
+          }
+        }
+      `}</style>
     </figure>
   )
 }
