@@ -8,7 +8,7 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src * blob: data:;
+  img-src * blob: data:;img-src 'self' https://pbs.twimg.com https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://foss.litecoin.net blob: data:;
   media-src 'none';
   connect-src *;
   font-src 'self' https://fonts.gstatic.com;
@@ -107,6 +107,7 @@ module.exports = () => {
       ],
     },
     imageSizes: [64, 128, 256, 512],
+    deviceSizes: [400, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
     },
@@ -118,7 +119,7 @@ module.exports = () => {
             {
               key: 'Content-Security-Policy',
               value:
-                "default-src *; script-src * 'unsafe-inline'; connect-src *; img-src *; style-src * 'unsafe-inline';",
+                "default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline';",
             },
             // Other headers you want to test with reduced restrictions
           ],
