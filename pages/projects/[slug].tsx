@@ -1,10 +1,16 @@
 // pages/missions/[slug].tsx
+import { FAQItem, Post, Update } from '../../utils/webflow'
 
 import { useDonation } from '../../contexts/DonationContext'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import { getPostBySlug, getAllPosts, getAllPostUpdates } from '../../utils/md'
-import markdownToHtml from '../../utils/markdownToHtml'
+import {
+  getProjectBySlug,
+  getProjectUpdatesBySlug,
+  getContributorsByIds,
+  getFAQsByProjectSlug,
+  getPostsBySlug,
+} from '../../utils/webflow'
 import {
   ProjectItem,
   AddressStats,
@@ -19,7 +25,6 @@ const PaymentModal = dynamic(() => import('../../components/PaymentModal'), {
 })
 import ThankYouModal from '@/components/ThankYouModal'
 import { fetchGetJSON } from '../../utils/api-helpers'
-// import Head from 'next/head'
 import SEOHead from '@/components/SEOHead'
 import ProjectHeader from '@/components/ProjectHeader'
 import ProjectMenu from '@/components/ProjectMenu'
@@ -31,18 +36,26 @@ import React from 'react'
 type SingleProjectPageProps = {
   project: ProjectItem
   projects: ProjectItem[]
+  posts: object[]
+  updates: object[]
+  faqs: object[]
 }
 
-const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
+const Project: NextPage<SingleProjectPageProps> = ({
+  project,
+  updates,
+  faqs,
+  posts,
+}) => {
   const { dispatch } = useDonation()
   const router = useRouter()
 
   const [modalOpen, setModalOpen] = useState(true) // Payment Modal
-  const [isThankYouModalOpen, setThankYouModalOpen] = useState(false) //Thank you modal
+  const [isThankYouModalOpen, setThankYouModalOpen] = useState(false) // Thank you modal
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
-  // Markdown Project Data
+  // Project Data
   const {
     // Main Info
     slug,
@@ -61,8 +74,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
 
     // Resources and Metadata
     website,
-    tutorials,
-    owner,
 
     // Links
     twitterHandle,
@@ -72,38 +83,26 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     facebookLink,
     redditLink,
 
-    // Categorization and status
-    type,
-    bugSeverity,
-    bugStatus,
-
     // Funding
-    bountyAmount,
     bountyStatus,
-    targetFunding,
-    fundingDeadline,
     isRecurring,
     isBitcoinOlympics2024,
     serviceFeesCollected,
     isMatching,
     matchingMultiplier,
     recurringAmountGoal,
-    recurringPeriod,
     totalPaid,
-
-    // Timelines
-    expectedCompletion,
-    updates,
   } = project
 
-  console.log('Project: ', coverImage)
+  // Log coverImage when it changes
+  useEffect(() => {
+    console.log('Project cover image: ', coverImage)
+  }, [coverImage])
 
   // State Variables
   const [addressStats, setAddressStats] = useState<AddressStats>()
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
   const [matchingTotal, setMatchingTotal] = useState(0)
-  const [serviceFeeCollected, setServiceFeesCollected] =
-    useState(serviceFeesCollected)
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
     []
   )
@@ -183,16 +182,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     return match ? match[1] : url
   }
 
-  async function fetchFAQData(slug: string) {
-    try {
-      const faqDataModule = await import(`../../data/projects/${slug}/faq.json`)
-      return faqDataModule.default
-    } catch (error) {
-      console.error('Error fetching FAQ data:', error)
-      return {} // Return an empty object if there's an error
-    }
-  }
-
   // Format function for USD
   function formatUSD(value) {
     const num = Number(value)
@@ -214,7 +203,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     return `${whole}.${fraction}`
   }
 
-  // Format function
+  // Format function for Lits
   function formatLits(value: any) {
     const num = Number(value)
 
@@ -248,19 +237,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
   // Load FAQ data
   useEffect(() => {
     async function loadFAQData() {
-      const data = await fetchFAQData(slug)
-      const totalItems = data?.questionsAndAnswers?.reduce(
-        (acc: number, category: any) => {
-          return acc + category.items.length
-        },
-        0
-      )
-      setFaqCount(totalItems)
-      setFaq(data)
+      setFaqCount(faqs.length)
+      setFaq(faqs)
     }
 
     loadFAQData()
-  }, [slug])
+  }, [faqs])
 
   // Fetch donations, contributors, and supporters
   useEffect(() => {
@@ -268,7 +250,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfoTGB?slug=${slug}`)
       setAddressStats(stats)
-      setServiceFeesCollected(serviceFeesCollected)
 
       // Matching goal calculation
       if (
@@ -374,7 +355,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     isBitcoinOlympics2024,
     isRecurring,
     recurringAmountGoal,
-    serviceFeesCollected,
   ])
 
   // Handle opening modals based on query parameters
@@ -432,7 +412,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     const handleGlobalClick = (event: MouseEvent) => {
       if (updates) {
         let isOutside = true
-        updates.forEach((post) => {
+        updates.forEach((post: any) => {
           const element = document.getElementById(`update-${post.id}`)
           if (element && element.contains(event.target as Node)) {
             isOutside = false
@@ -451,8 +431,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     }
   }, [updates])
 
-  // pages/missions/[slug].tsx
-
+  // Handle modal opening based on query parameters
   useEffect(() => {
     if (!router.isReady) return
 
@@ -475,7 +454,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
     } else {
       setModalOpen(false)
     }
-  }, [router.isReady, router.query.modal])
+  }, [router.isReady, router.query.modal, project, dispatch])
 
   // Handler for menu item changes
   const handleMenuItemChange = (
@@ -514,11 +493,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             <ProjectMenu
               onMenuItemChange={handleMenuItemChange}
               activeMenu={selectedMenuItem}
-              commentCount={
-                hashtag && tweetsData[hashtag] ? tweetsData[hashtag].length : 0
-              }
+              commentCount={posts.length || 0}
               faqCount={faqCount || 0}
-              updatesCount={(updates && updates.length - 1) || 0}
+              updatesCount={(updates && updates.length) || 0}
             />
 
             {/* Menu Sections */}
@@ -533,7 +510,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
               selectedUpdateId={selectedUpdateId}
               setSelectedUpdateId={setSelectedUpdateId}
               hashtag={hashtag || ''}
-              tweetsData={tweetsData}
+              tweetsData={posts} // WIP
               twitterContributors={twitterContributors}
               twitterContributorsBitcoin={twitterContributorsBitcoin}
               twitterContributorsLitecoin={twitterContributorsLitecoin}
@@ -561,7 +538,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project }) => {
             isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
             isRecurring={isRecurring}
             matchingTotal={matchingTotal}
-            serviceFeeCollected={serviceFeeCollected || 0}
+            serviceFeeCollected={serviceFeesCollected || 0}
             totalPaid={totalPaid || 0}
             formatLits={formatLits}
             formatUSD={formatUSD}
@@ -599,20 +576,60 @@ type ParamsType = {
 export async function getServerSideProps(context: any) {
   const { params } = context
 
-  const post = getPostBySlug(params.slug)
-  const updates = getAllPostUpdates(params.slug) || []
+  // Fetch project data from the API
+  const project = await getProjectBySlug(params.slug)
 
-  const projects = getAllPosts()
+  // Fetch project updates
+  const updates = await getProjectUpdatesBySlug(params.slug)
 
-  const content = await markdownToHtml(post.content || '')
+  // Fetch project FAQs
+  const faqs = await getFAQsByProjectSlug(params.slug)
+
+  const posts = await getPostsBySlug(params.slug)
+  console.log('Projects posts: ', posts)
+
+  if (!project) {
+    return {
+      notFound: true,
+    }
+  }
+
+  // Adjust the project object to match your component's expectations
+  const projectData = {
+    ...project.fieldData,
+    content: project.fieldData['content-rich'] || null,
+    coverImage: project.fieldData['cover-image'].url || null,
+    gitRepository: project.fieldData['github-link'] || null,
+    twitterHandle: project.fieldData['twitter-link'] || null,
+    discordLink: project.fieldData['discord-link'] || null,
+    telegramLink: project.fieldData['telegram-link'] || null,
+    redditLink: project.fieldData['reddit-link'] || null,
+    facebookLink: project.fieldData['facebook-link'] || null,
+    website: project.fieldData['website-link'] || null,
+    hidden: project.fieldData.hidden || null,
+    isRecurring: project.fieldData.recurring || null,
+    totalPaid: project.fieldData['total-paid'] || null,
+    serviceFeesCollected: project.fieldData['service-fees-collected'] || null,
+    contributorsBitcoin:
+      (await getContributorsByIds(
+        project.fieldData['bitcoin-contributors-2']
+      )) || null,
+    contributorsLitecoin:
+      (await getContributorsByIds(
+        project.fieldData['litecoin-contributors-2']
+      )) || null,
+    advocates:
+      (await getContributorsByIds(project.fieldData['advocates-2'])) || null,
+    title: project.fieldData.name,
+    // You can include other fields here, ensuring none are undefined
+  }
+
   return {
     props: {
-      project: {
-        ...post,
-        content,
-        updates,
-      },
-      projects,
+      project: projectData,
+      updates,
+      faqs,
+      posts,
     },
   }
 }

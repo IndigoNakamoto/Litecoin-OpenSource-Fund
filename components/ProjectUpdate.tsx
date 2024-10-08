@@ -92,20 +92,23 @@ const ProjectUpdate: React.FC<ProjectUpdateProps> = ({
         {/* Conditionally render text based on isCopied */}
       </h6>
       <h2 className="text-xl font-semibold">{title}</h2>
-      <Link
+      {/* <Link
         className="mt-0"
         href={`https://www.twitter.com/${authorTwitterHandle}`}
       >
         <h6 className="mt-0">{`@${authorTwitterHandle}`}</h6>
-      </Link>
+      </Link> */}
       <h6 className="mb-4 text-gray-600 ">{date}</h6>
       <hr className="my-4 border-t border-gray-300 " />
       <div className="content">
-        {summary && <ReactMarkdown>{summary}</ReactMarkdown>}
+        {summary && <p className="markdown">{summary}</p>}
         {showContent && content && (
           <>
             <hr className="my-4 border-t border-gray-300 " />
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <div
+              dangerouslySetInnerHTML={{ __html: content }}
+              className="markdown"
+            />
           </>
         )}
       </div>

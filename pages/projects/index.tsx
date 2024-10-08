@@ -1,12 +1,9 @@
 // pages/projects/index.tsx
 import type { NextPage } from 'next'
 import Head from 'next/head'
-// import { useEffect, useState } from 'react'
 import PaymentModal from '@/components/PaymentModal'
 import ProjectCard from '@/components/ProjectCard'
 import { ProjectItem, ProjectCategory, BountyStatus } from '../../utils/types'
-import { getAllPosts } from '../../utils/md'
-// import LitecoinIcon from '@/components/litecoin-icons'
 import VerticalSocialIcons from '@/components/VerticalSocialIcons'
 import faqData from '../../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
@@ -15,6 +12,7 @@ import { useDonation } from '../../contexts/DonationContext'
 import Link from 'next/link'
 import TypingScroll from '@/components/TypingScroll'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -50,16 +48,12 @@ function useIsLgScreen() {
   return isLgScreen
 }
 
-const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
+const AllProjects: NextPage = () => {
   const router = useRouter()
   const { dispatch } = useDonation()
   const [modalOpen, setModalOpen] = useState(false)
-  // const [selectedProject, setSelectedProject] = useState<ProjectItem>()
   const [openSourceProjects, setOpenSourceProjects] = useState<ProjectItem[]>()
-  // const [DevOpsProjects, setDevOpsProjects] = useState<ProjectItem[]>()
-  // const [bountyProjects, setBountyProjects] = useState<ProjectItem[]>()
   const [completedProjects, setCompletedProjects] = useState<ProjectItem[]>()
-  // const [scrollPosition, setScrollPosition] = useState(0)
   const outerSpinnerRef = useRef(null)
   const innerSpinnerRef = useRef(null)
   const isLgScreen = useIsLgScreen()
@@ -72,13 +66,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       setModalOpen(false)
     }
   }, [router.query])
-
-  // useEffect(() => {
-  //   // **Only reset donation state if modal is not open via URL**
-  //   if (router.query.modal !== 'true') {
-  //     dispatch({ type: 'RESET_DONATION_STATE' })
-  //   }
-  // }, [dispatch, router.query.modal])
 
   useEffect(() => {
     let previousScrollY = window.scrollY
@@ -119,27 +106,71 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     }
   }, [])
 
-  // Create refs for the projects and bounties sections
-  const projectsRef = useRef<HTMLDivElement>(null)
-  const bountiesRef = useRef<HTMLDivElement>(null)
-  // Scroll handler for "VIEW PROJECTS"
-  const scrollToProjects = () => {
-    const yOffset = -64 // Offset by the height of the sticky menu
-    const yPosition =
-      (projectsRef.current?.getBoundingClientRect().top ?? 0) +
-      window.scrollY +
-      yOffset
-    window.scrollTo({ top: yPosition, behavior: 'smooth' })
-  }
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('/api/webflow/projects')
 
-  const scrollToBounties = () => {
-    const yOffset = -64 // Offset by the height of the sticky menu
-    const yPosition =
-      (bountiesRef.current?.getBoundingClientRect().top ?? 0) +
-      window.scrollY +
-      yOffset
-    window.scrollTo({ top: yPosition, behavior: 'smooth' })
-  }
+        const projects = response.data.projects
+        console.log('projects: ', projects)
+
+        const transformedProjects: ProjectItem[] = projects.map(
+          (project: any) => ({
+            slug: project.fieldData.slug,
+            title: project.fieldData.name,
+            summary: project.fieldData.summary,
+            coverImage: project.fieldData['cover-image'].url,
+            telegramLink: project.fieldData['telegram-link'] || '',
+            redditLink: project.fieldData['reddit-link'] || '',
+            facebookLink: project.fieldData['facebook-link'] || '',
+            type: ProjectCategory.PROJECT, // Assuming all fetched projects are of type PROJECT for now
+            isRecurring: false, // Assuming no recurring projects for now
+            nym: 'Litecoin Foundation',
+          })
+        )
+
+        const desiredOrder = [
+          'Projects Fund',
+          'Litecoin Core',
+          'MWEB',
+          'Ordinals Lite',
+          'Litewallet',
+          'Litecoin Development Kit',
+          'Litecoin Mempool Explorer',
+        ]
+
+        setOpenSourceProjects(
+          transformedProjects.filter(isProject).sort((a, b) => {
+            const indexA = desiredOrder.indexOf(a.title)
+            const indexB = desiredOrder.indexOf(b.title)
+
+            if (indexA !== -1 && indexB !== -1) {
+              return indexA - indexB
+            }
+
+            if (indexA !== -1) {
+              return -1
+            }
+            if (indexB !== -1) {
+              return 1
+            }
+
+            return a.title.localeCompare(b.title)
+          })
+        )
+
+        setCompletedProjects(
+          transformedProjects
+            .filter(isCompletedBounty)
+            .sort(() => 0.5 - Math.random())
+        )
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+      }
+    }
+
+    fetchProjects()
+  }, [])
 
   function closeModal() {
     setModalOpen(false)
@@ -153,50 +184,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     )
   }
 
-  useEffect(() => {
-    const desiredOrder = [
-      'Projects Fund',
-      'Litecoin Core',
-      'MWEB',
-      'Ordinals Lite',
-      'Litewallet',
-      'Litecoin Development Kit',
-      'Litecoin Mempool Explorer',
-    ]
-
-    setOpenSourceProjects(
-      projects.filter(isProject).sort((a, b) => {
-        const indexA = desiredOrder.indexOf(a.title)
-        const indexB = desiredOrder.indexOf(b.title)
-
-        if (indexA !== -1 && indexB !== -1) {
-          return indexA - indexB
-        }
-
-        if (indexA !== -1) {
-          return -1
-        }
-        if (indexB !== -1) {
-          return 1
-        }
-
-        return a.title.localeCompare(b.title)
-      })
-    )
-
-    // setDevOpsProjects(
-    //   projects
-    //     .filter(isDevelopment)
-    //     .sort((a, b) => a.title.localeCompare(b.title))
-    // )
-    // setBountyProjects(projects.filter(isBounty))
-    setCompletedProjects(
-      projects.filter(isCompletedBounty).sort(() => 0.5 - Math.random())
-    )
-  }, [projects])
-
   function openPaymentModal() {
-    // setSelectedProject(project)
     setModalOpen(true)
     dispatch({
       type: 'SET_PROJECT_DETAILS',
@@ -217,7 +205,28 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     )
   }
 
-  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]'] // Not in use (for reference) 'bg-[#F3CBC2]']
+  const projectsRef = useRef<HTMLDivElement>(null)
+  const bountiesRef = useRef<HTMLDivElement>(null)
+
+  const scrollToProjects = () => {
+    const yOffset = -64 // Offset by the height of the sticky menu
+    const yPosition =
+      (projectsRef.current?.getBoundingClientRect().top ?? 0) +
+      window.scrollY +
+      yOffset
+    window.scrollTo({ top: yPosition, behavior: 'smooth' })
+  }
+
+  const scrollToBounties = () => {
+    const yOffset = -64 // Offset by the height of the sticky menu
+    const yPosition =
+      (bountiesRef.current?.getBoundingClientRect().top ?? 0) +
+      window.scrollY +
+      yOffset
+    window.scrollTo({ top: yPosition, behavior: 'smooth' })
+  }
+
+  const bgColors = ['bg-[#EEEEEE]', 'bg-[#c6d3d6]']
 
   return (
     <div className="w-screen">
@@ -265,7 +274,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                 </button>
                 <button
                   className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
-                  onClick={scrollToBounties} // Add onClick handler
+                  onClick={scrollToBounties}
                 >
                   <span className="text-white">VIEW PAST PROJECTS</span>
                 </button>
@@ -292,7 +301,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* OPEN SOURCE PROJECTS */}
       <section
-        ref={projectsRef} // Attach ref to the projects section
+        ref={projectsRef}
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-20 flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center"
         style={{
           fontFamily:
@@ -306,7 +315,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {openSourceProjects &&
               openSourceProjects.map((p, i) => {
-                const bgColor = bgColors[i % bgColors.length] // Simplify color assignment
+                const bgColor = bgColors[i % bgColors.length]
 
                 return (
                   <li key={i} className="flex">
@@ -359,7 +368,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
       {/* BOUNTIES SECTION */}
       <section
-        ref={bountiesRef} // Attach ref to the bounties section
+        ref={bountiesRef}
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
@@ -397,7 +406,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
               isLgScreen
                 ? {
                     position: 'sticky',
-                    top: '6rem', // Adjust this value as needed
+                    top: '6rem',
                     alignSelf: 'start',
                   }
                 : {}
@@ -420,24 +429,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         </div>
       </section>
 
-      {/* TODO: CONTRIBUTORS SECTION */}
-      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full  bg-[#F3CBC4] bg-cover bg-center">
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] items-center justify-center p-8">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-black">
-            Contributors
-          </h1>
-        </div>
-      </section> */}
-
-      {/* TODO: SUPPORTERS SECTION */}
-      {/* <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-white bg-cover bg-center">
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] items-center justify-center p-8">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] tracking-wide text-black">
-            Supporters
-          </h1>
-        </div>
-      </section> */}
-
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
@@ -448,16 +439,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 }
 
 export default AllProjects
-
-export async function getStaticProps({ params }: { params: any }) {
-  const projects = getAllPosts()
-
-  return {
-    props: {
-      projects,
-    },
-  }
-}
 
 export function isOpenSatsProject(project: ProjectItem): boolean {
   return project.nym === 'Litecoin Foundation'

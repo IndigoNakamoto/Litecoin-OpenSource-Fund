@@ -1,3 +1,4 @@
+// /scripts/migrateDonations.ts
 import axios from 'axios'
 import crypto from 'crypto'
 import prisma from '../lib/prisma' // Ensure the path is correct
@@ -155,6 +156,7 @@ async function createDonationRecord(
         // Donation
         donationType: 'crypto',
         assetSymbol: 'LTC',
+        success: true,
         pledgeAmount: parsedPledgeAmount,
         // Donor Info
         firstName: 'Supporter',

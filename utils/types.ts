@@ -110,13 +110,13 @@ export type ProjectItem = {
   totalPaid?: number | undefined
   serviceFeesCollected?: number
 
-  // Technical Details
-  techStack?: string[]
-  dependencies?: string[]
+  // // Technical Details
+  // techStack?: string[]
+  // dependencies?: string[]
 
-  // Documentation
-  documentationLink?: string
-  APIReference?: string
+  // // Documentation
+  // documentationLink?: string
+  // APIReference?: string
 }
 
 export type ProjectUpdate = {
@@ -171,3 +171,31 @@ export type Donation = {
 }
 
 export type TwitterUsers = [TwitterUser]
+
+export type CMSFAQItem = {
+  id: string
+  cmsLocaleId: string
+  lastPublished: string
+  lastUpdated: string
+  createdOn: string
+  isArchived: boolean
+  isDraft: boolean
+  fieldData: {
+    order: number
+    slug: string
+    name: string
+    answer: string
+    category?: string // Make category optional
+    project: string
+  }
+}
+
+export type FAQItem = {
+  question: string
+  answer: string
+}
+
+export type FAQCategory = {
+  category: string
+  items: FAQItem[]
+}

@@ -68,6 +68,7 @@ module.exports = () => {
         'abs.twimg.com',
         'static.tgb-preprod.com',
         'static.tgbwidget.com',
+        'cdn.prod.website-files.com',
       ],
     },
     eslint: {

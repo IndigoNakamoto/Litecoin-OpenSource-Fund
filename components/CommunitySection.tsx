@@ -31,6 +31,8 @@ const CommunitySection: React.FC<CommunitySectionProps> = ({
         </>
       )}
     </div>
+
+    {/* For BTC Olympics one time use to help differentiate their contirbutors */}
     <div className="markdown">
       {twitterContributors.length > 0 && isBitcoinOlympics2024 && (
         <>
@@ -81,7 +83,7 @@ const CommunitySection: React.FC<CommunitySectionProps> = ({
     <div className="markdown">
       {twitterUsers.length > 0 && (
         <>
-          <h3>{twitterUsers.length > 1 ? 'Supporters' : 'Supporter'}</h3>
+          <h3>{twitterUsers.length > 1 ? 'Donors' : 'Donor'}</h3>
           <TwitterUsers users={twitterUsers} />
         </>
       )}

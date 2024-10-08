@@ -98,30 +98,28 @@ const MenuSections: React.FC<MenuSectionsProps> = ({
     case 'faq':
       return (
         <div className="markdown">
-          <FAQSection faqCategories={faq.questionsAndAnswers} bg={'#c6d3d6'} />
+          <FAQSection faqs={faq} bg={'#c6d3d6'} />
         </div>
       )
     case 'updates':
       return (
         <div className="markdown min-h-full">
           <div>
-            {updates && updates.filter((post) => post.id > 0).length > 0 ? (
-              updates
-                .filter((post) => post.id > 0)
-                .map((post, index) => (
-                  <div key={index} id={`update-${post.id}`}>
-                    <ProjectUpdate
-                      title={post.title}
-                      summary={post.summary}
-                      authorTwitterHandle={post.authorTwitterHandle}
-                      date={post.date}
-                      tags={post.tags || []}
-                      content={post.content}
-                      id={post.id}
-                      highlight={selectedUpdateId === post.id}
-                    />
-                  </div>
-                ))
+            {updates ? (
+              updates.map((post, index) => (
+                <div key={index} id={`update-${post.id}`}>
+                  <ProjectUpdate
+                    title={post.fieldData.name}
+                    summary={post.fieldData.summary}
+                    authorTwitterHandle={post.authorTwitterHandle}
+                    date={post.fieldData.createdOn}
+                    tags={post.tags || []}
+                    content={post.fieldData.content}
+                    id={index}
+                    highlight={selectedUpdateId === post.id}
+                  />
+                </div>
+              ))
             ) : (
               <h1>No updates available for this project.</h1>
             )}

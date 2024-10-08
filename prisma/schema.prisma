@@ -70,6 +70,9 @@ model Donation {
     // Success Status
     success Boolean @default(false) @map("success") // New field to track donation success
 
+    // Webflow processed for matching
+    processed Boolean @default(false) @map("processed")
+
     // Webhook Event Related Fields
     transactionHash        String?        @map("transaction_hash")
     convertedAt            DateTime?      @map("converted_at")
@@ -93,6 +96,15 @@ model Donation {
     webhookEvents          WebhookEvent[] @relation("DonationWebhookEvents")
 
     @@map("donations")
+}
+
+model MatchingDonationLog {
+    id            Int      @id @default(autoincrement())
+    donorId       String
+    donationId    Int
+    matchedAmount Decimal  @db.Decimal(10, 2)
+    date          DateTime @default(now())
+    projectSlug   String
 }
 
 /// Model to store individual webhook events

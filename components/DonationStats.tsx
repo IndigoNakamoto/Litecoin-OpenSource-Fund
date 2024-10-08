@@ -70,6 +70,7 @@ const DonationStats: React.FC<DonationStatsProps> = ({
         </div>
       )}
 
+      {/* Bitcoin Olypmics */}
       {isMatching && isBitcoinOlympics2024 && (
         <div className="flex w-full flex-col">
           <StatItem

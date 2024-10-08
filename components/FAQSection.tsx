@@ -1,5 +1,6 @@
+// /components/FAQSection.tsx
 import React, { useState } from 'react'
-import ReactMarkdown from 'react-markdown' // Import the ReactMarkdown component
+import ReactMarkdown from 'react-markdown'
 
 type FAQItem = {
   question: string
@@ -37,9 +38,10 @@ const PlusIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
 }
 
 export const FAQSection: React.FC<{
-  faqCategories: FAQCategory[]
+  faqs: any[] // Updated to any[] to handle the new data structure
   bg?: BG
-}> = ({ faqCategories, bg = '#222222' }) => {
+}> = ({ faqs, bg = '#222222' }) => {
+  console.log('FAQ SECTION COMPONENT, FAQS: ', faqs)
   const [openIndex, setOpenIndex] = useState<{
     catIndex: number
     qIndex: number
@@ -58,7 +60,7 @@ export const FAQSection: React.FC<{
       // Open the new FAQ after a short delay to allow the close animation to complete
       setTimeout(() => {
         setOpenIndex({ catIndex, qIndex })
-      }, 300) // Adjust this timing to match the duration of your close animation
+      }, 300)
     }
   }
 
@@ -70,13 +72,41 @@ export const FAQSection: React.FC<{
       : 'max-h-0'
   }
 
-  if (!faqCategories || faqCategories.length === 0) {
+  if (!faqs || faqs.length === 0) {
     return (
       <div className="">
         <h3 className="">Frequently Asked Questions</h3>
       </div>
     )
   }
+
+  // **Step 1: Group FAQs by Category**
+  const categoryMap: { [category: string]: FAQItem[] } = {}
+
+  faqs.forEach((faq) => {
+    // Extract the necessary fields from fieldData
+    const { category = 'General', name: question, answer } = faq.fieldData
+
+    const faqItem: FAQItem = {
+      question,
+      answer,
+    }
+
+    // Assign FAQs to their respective categories
+    if (categoryMap[category]) {
+      categoryMap[category].push(faqItem)
+    } else {
+      categoryMap[category] = [faqItem]
+    }
+  })
+
+  // Convert the categoryMap into an array for rendering
+  const faqCategories: FAQCategory[] = Object.keys(categoryMap).map(
+    (category) => ({
+      category,
+      items: categoryMap[category],
+    })
+  )
 
   return (
     <div>
@@ -108,7 +138,7 @@ export const FAQSection: React.FC<{
               </button>
 
               <div
-                className={`overflow-hidden border border-[#222222]  bg-white transition-all duration-700 ${getMaxHeight(
+                className={`overflow-hidden border border-[#222222] bg-white transition-all duration-700 ${getMaxHeight(
                   catIndex,
                   qIndex
                 )}`}
