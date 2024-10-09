@@ -1,6 +1,7 @@
 // /utils/webflow.ts
 import axios, { AxiosInstance } from 'axios'
 import dotenv from 'dotenv'
+import { Controller } from 'react-hook-form'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -198,6 +199,28 @@ interface FAQFieldData {
   order?: number
 }
 
+interface MatchingDonor {
+  id: string
+  slug: string
+  isDraft: boolean
+  isArchived: boolean
+  fieldData: MatchingDonorFieldData
+}
+
+interface MatchingDonorFieldData {
+  name: string
+  'matching-type': string
+  'total-matching-amount': number
+  'remaining-matching-amount': number
+  'supported-projects'?: string[]
+  'start-date': string
+  'end-date': string
+  multiplier?: number
+  status: string
+  contributor?: string
+  // other fields...
+}
+
 // Environment Variables
 const API_TOKEN = process.env.WEBFLOW_API_TOKEN_TEST_REDESIGN_LITE_SPACE
 const COLLECTION_ID_PROJECTS = process.env.WEBFLOW_COLLECTION_ID_PROJECTS
@@ -230,6 +253,176 @@ const webflowClient: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 })
+
+export const getMatchingDonorsByProjectSlug = async (
+  slug: string
+): Promise<object[]> => {
+  try {
+    // First, get the project by its slug
+    const project = await getProjectBySlug(slug)
+    if (!project) {
+      console.warn(`No project found with slug "${slug}".`)
+      return []
+    }
+    const projectId = project.id
+
+    // Get all active matching donors
+    const donors = await getActiveMatchingDonors()
+
+    // Initialize the matching-type option map
+    const matchingTypeMap = await createOptionIdToLabelMap(
+      COLLECTION_ID_MATCHING_DONORS,
+      'matching-type'
+    )
+
+    // Get the option ID for 'All Projects'
+    const allProjectsOptionId = [...matchingTypeMap.entries()].find(
+      ([, label]) => label === 'All Projects'
+    )?.[0]
+
+    if (!allProjectsOptionId) {
+      console.error(
+        'Option ID for "All Projects" not found in matching-type options.'
+      )
+      return []
+    }
+
+    // Filter donors that support this project or have matching-type 'All Projects'
+    const donorsForProject = donors.filter((donor) => {
+      const supportedProjects = donor.fieldData['supported-projects'] || []
+      const matchingTypeId = donor.fieldData['matching-type']
+
+      // Include donor if matching-type is 'All Projects'
+      if (matchingTypeId === allProjectsOptionId) {
+        return true
+      }
+
+      // Include donor if supported-projects includes projectId
+      return supportedProjects.includes(projectId)
+    })
+
+    // Map each donor to MappedMatchingDonor
+    const mappedDonors = await Promise.all(
+      donorsForProject.map(async (donor) => {
+        // Map the 'status' option ID to its label
+        const statusLabel = await getStatusLabel(donor.fieldData.status)
+
+        // Map the 'matching-type' option ID to its label
+        const matchingTypeLabel =
+          matchingTypeMap.get(donor.fieldData['matching-type']) ||
+          'Unknown Matching Type'
+
+        // Map the 'supported-projects' IDs to their corresponding project slugs
+        const supportedProjectSlugs = await getSupportedProjectsForDonor(donor)
+
+        const mappedDonor: object = {
+          ...donor,
+          fieldData: {
+            ...donor.fieldData,
+            statusLabel: statusLabel, // New field
+            matchingTypeLabel: matchingTypeLabel, // New field
+            supportedProjectSlugs: supportedProjectSlugs, // New field
+          },
+        }
+
+        return mappedDonor
+      })
+    )
+    // console.log('getMatchingDonorsByProjectSlug: ', mappedDonor)
+    return mappedDonors
+  } catch (error) {
+    console.error('Error fetching matching donors by project slug:', error)
+    return []
+  }
+}
+
+export interface MappedMatchingDonor {
+  id: string
+  cmsLocaleId: string
+  lastPublished: string
+  lastUpdated: string
+  createdOn: string
+  isArchived: boolean
+  isDraft: boolean
+  fieldData: {
+    'end-date': string
+    'start-date': string
+    multiplier?: number
+    'matching-type': string // Original ID
+    status: string // Original ID
+    'total-matching-amount': number
+    name: string
+    slug: string
+    'supported-projects': string[] // Original IDs
+    contributor?: string
+    // Mapped fields
+    statusLabel: string
+    matchingTypeLabel: string
+    // supportedProjectSlugs: string[]
+  }
+}
+
+export const getMatchingDonorById = async (
+  donorId: string
+): Promise<MappedMatchingDonor | null> => {
+  try {
+    // Fetch the donor data from Webflow by donorId
+    const response = await webflowClient.get(
+      `/collections/${COLLECTION_ID_MATCHING_DONORS}/items/${donorId}`
+    )
+
+    // Ensure that the response contains at least one item
+    if (response.data) {
+      const donor = response.data
+
+      // Map the 'status' option ID to its label
+      const statusLabel = await getStatusLabel(donor.fieldData.status)
+
+      // Map the 'matching-type' option ID to its label
+      const matchingTypeLabel = await getMatchingTypeLabel(
+        donor.fieldData['matching-type']
+      )
+
+      // Map the 'supported-projects' IDs to their corresponding project slugs
+      // const supportedProjects = await getSupportedProjectsForDonor(donor)
+
+      const mappedDonor: MappedMatchingDonor = {
+        id: donor.id,
+        cmsLocaleId: donor.cmsLocaleId,
+        lastPublished: donor.lastPublished,
+        lastUpdated: donor.lastUpdated,
+        createdOn: donor.createdOn,
+        isDraft: donor.isDraft,
+        isArchived: donor.isArchived,
+        fieldData: {
+          ['end-date']: donor.fieldData['end-date'],
+          ['start-date']: donor.fieldData['start-date'],
+          multiplier: donor.fieldData['multiplier'],
+          ['matching-type']: donor.fieldData['matching-type'],
+          status: donor.fieldData['status'],
+          ['total-matching-amount']: donor.fieldData['total-matching-amount'],
+          name: donor.fieldData['name'],
+          slug: donor.fieldData['slug'],
+          ['supported-projects']: donor.fieldData['supported-projects'],
+          contributor: donor.fieldData['contributor'],
+          // Mapped fields
+          statusLabel: statusLabel,
+          matchingTypeLabel: matchingTypeLabel,
+          // supportedProjectSlugs: supportedProjectSlugs,
+          // Include any other necessary fields
+        },
+      }
+
+      return mappedDonor
+    } else {
+      // Return null if no donor is found
+      return null
+    }
+  } catch (error) {
+    console.error('Error fetching donor data from Webflow:', error)
+    return null
+  }
+}
 
 let cachedStatusMap: Map<string, string> | null = null
 let cachedMatchingTypeMap: Map<string, string> | null = null
@@ -456,6 +649,8 @@ export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
   const donors = await listCollectionItems<MatchingDonor>(
     COLLECTION_ID_MATCHING_DONORS
   )
+  // donors.forEach((donor) => console.log(donor.fieldData['supported-projects']))
+  // console.log('webflow getActiveMatchingDonors: ', donors)
 
   const now = new Date()
 
@@ -464,21 +659,33 @@ export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
     COLLECTION_ID_MATCHING_DONORS,
     'status'
   )
-  const matchingTypeMap = await createOptionIdToLabelMap(
-    COLLECTION_ID_MATCHING_DONORS,
-    'matching-type'
-  )
+  // const matchingTypeMap = await createOptionIdToLabelMap(
+  //   COLLECTION_ID_MATCHING_DONORS,
+  //   'matching-type'
+  // )
 
   // Filter active donors within the date range and with remaining matching amount
-  const activeDonors = donors.filter((donor) => {
+  const activeDonors = donors.filter(async (donor) => {
+    // console.log(
+    //   '\n\n***********************************************\nDonor: ',
+    //   donor
+    // )
     const startDate = new Date(donor.fieldData['start-date'])
+    // console.log('startDate: ', startDate)
     const endDate = new Date(donor.fieldData['end-date'])
+    // console.log('endDate: ', endDate)
 
     const statusId = donor.fieldData['status']
-
+    // console.log('statusId: ', statusId)
     const statusLabel = statusMap.get(statusId) || 'Unknown Status'
+    // console.log('statusLabel: ', statusLabel)
+
+    // const matchingType = donor.fieldData['matching-type']
+    // const matchType = await getMatchingTypeLabelForDonor(donor)
+    // console.log('match type: ', matchType)
 
     const isActive = statusLabel === 'Active'
+    // console.log('isActive: ', isActive)
     const withinDateRange = now >= startDate && now <= endDate
 
     // This has to be calculated from prisma model logs
@@ -779,9 +986,9 @@ export const getSupportedProjectsForDonor = async (
   const supportedProjectIds = donor.fieldData['supported-projects']
 
   if (!supportedProjectIds || supportedProjectIds.length === 0) {
-    console.log(
-      `Donor "${donor.fieldData['name']}" does not support any projects.`
-    )
+    // console.log(
+    //   `Donor "${donor.fieldData['name']}" does not support any projects.`
+    // )
     return []
   }
 
@@ -799,10 +1006,10 @@ export const getSupportedProjectsForDonor = async (
     .filter((projectSlug): projectSlug is string => projectSlug !== undefined)
 
   // Log the supported projects for debugging
-  console.log(
-    `Donor "${donor.fieldData['name']}" supports ${supportedProjects.length} project(s):`,
-    supportedProjects
-  )
+  // console.log(
+  //   `Donor "${donor.fieldData['name']}" supports ${supportedProjects.length} project(s):`,
+  //   supportedProjects
+  // )
 
   return supportedProjects
 }

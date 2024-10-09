@@ -6,7 +6,7 @@ const TwitterFeed = ({ hashtag, tweetsData }) => {
   const [tweets, setTweets] = useState<string[] | null>(null) // Explicitly type tweets
 
   useEffect(() => {
-    const tweetsForHashtag = tweetsData[hashtag]
+    const tweetsForHashtag = tweetsData
     setTweets(tweetsForHashtag || [])
   }, [hashtag])
 

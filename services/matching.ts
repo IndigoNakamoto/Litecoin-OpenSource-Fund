@@ -38,16 +38,19 @@ export const processDonationMatching = async () => {
     console.log('Starting processDonationMatching')
 
     const donations = await getUnprocessedDonations()
+    console.log('Matching.ts donations: ', donations)
     const matchingDonors = await getActiveMatchingDonors()
 
     // Get donor IDs
     const donorIds = matchingDonors.map((donor) => donor.id)
+    console.log('Matching.ts donorIds: ', donorIds)
 
     // Get already matched amounts for donors
     const donorMatchedAmountMap = await getDonorsMatchedAmounts(donorIds)
+    console.log('Matching.ts donorMatchedAmountMap: ', donorMatchedAmountMap)
 
     for (const donation of donations) {
-      const donationAmount = Number(donation.amount)
+      const donationAmount = Number(donation.valueAtDonationTimeUSD)
       const projectSlug = donation.projectSlug
 
       console.log(

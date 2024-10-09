@@ -101,6 +101,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
 
   // State Variables
   const [addressStats, setAddressStats] = useState<AddressStats>()
+  const [matchingDonors, setMatchingDonors] = useState(undefined)
   const [twitterUsers, setTwitterUsers] = useState<TwitterUser[]>([])
   const [matchingTotal, setMatchingTotal] = useState(0)
   const [twitterContributors, setTwitterContributors] = useState<TwitterUser[]>(
@@ -250,6 +251,13 @@ const Project: NextPage<SingleProjectPageProps> = ({
       setAddressStats(undefined)
       const stats = await fetchGetJSON(`/api/getInfoTGB?slug=${slug}`)
       setAddressStats(stats)
+
+      const matchingDonors = await fetchGetJSON(
+        `/api/matching-donors-by-project?slug=${slug}`
+      )
+      console.log('matching donors', matchingDonors)
+
+      setMatchingDonors(matchingDonors)
 
       // Matching goal calculation
       if (
@@ -537,6 +545,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
             isMatching={isMatching || true}
             isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
             isRecurring={isRecurring}
+            matchingDonors={matchingDonors}
             matchingTotal={matchingTotal}
             serviceFeeCollected={serviceFeesCollected || 0}
             totalPaid={totalPaid || 0}

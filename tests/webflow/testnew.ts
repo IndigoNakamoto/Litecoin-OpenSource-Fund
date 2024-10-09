@@ -15,6 +15,8 @@ import {
   getProjectUpdatesBySlug,
   getPostsByProjectIdLocal,
   getPostsBySlug,
+  getMatchingDonorById,
+  getMatchingDonorsByProjectSlug,
 } from '../../utils/webflow' // Adjust the path as necessary
 ;(async () => {
   try {
@@ -34,18 +36,25 @@ import {
     // })
 
     // Test getPostsBySlug
-    console.log('\nTesting getPostsBySlug...')
-    const slug = 'mweb'
-    const posts = await getPostsBySlug(slug)
-    console.log(`Posts for ${slug}: `, posts)
+    // console.log('\nTesting getPostsBySlug...')
+    // const slug = 'mweb'
+    // const posts = await getPostsBySlug(slug)
+    // console.log(`Posts for ${slug}: `, posts)
 
     // Test getActiveMatchingDonors
     // console.log('\nTesting getActiveMatchingDonors...')
     // const activeDonors = await getActiveMatchingDonors()
-    // console.log(
-    //   'Active Matching Donors:',
-    //   JSON.stringify(activeDonors[0], null, 2)
-    // )
+    // console.log('Active Matching Donors: ', activeDonors)
+
+    // Test getMatchingDonorById
+    // console.log('\nTesting getMatchingDonorById...')
+    // const matchingDonor = await getMatchingDonorById('66febf8db539816be90591c2')
+    // console.log('matching donor info: ', matchingDonor)
+
+    // Test getMatchingDonorsByProjectSlug
+    console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
+    const matchingDonors = await getMatchingDonorsByProjectSlug('core')
+    console.log('matching donors for slug: ', matchingDonors)
 
     // const donorMatchingType = await getMatchingTypeLabelForDonor(
     //   activeDonors[0]
@@ -80,8 +89,8 @@ import {
     const projectSlug = 'mweb' // Replace with an actual project slug
 
     // Test getProjectBySlug
-    console.log('\nTesting getProjectBySlug...')
-    const projectWithDetails = await getProjectBySlug(projectSlug)
+    // console.log('\nTesting getProjectBySlug...')
+    // const projectWithDetails = await getProjectBySlug(projectSlug)
     // console.log(
     //   `Project '${projectSlug}':`,
     //   JSON.stringify(projectWithDetails, null, 2)
@@ -96,17 +105,17 @@ import {
     // )
 
     // Test getPostsByProjectIdLocal
-    console.log('\nTesting getPostsByProjectIdLocal...')
-    if (projectWithDetails) {
-      const projectId = projectWithDetails.id
-      const projectPostsLocal = await getPostsByProjectIdLocal(projectId)
-      console.log(
-        `Posts (local filter) for project ID '${projectId}':`,
-        JSON.stringify(projectPostsLocal, null, 2)
-      )
-    } else {
-      console.log(`Project '${projectSlug}' not found.`)
-    }
+    // console.log('\nTesting getPostsByProjectIdLocal...')
+    // if (projectWithDetails) {
+    //   const projectId = projectWithDetails.id
+    //   const projectPostsLocal = await getPostsByProjectIdLocal(projectId)
+    //   console.log(
+    //     `Posts (local filter) for project ID '${projectId}':`,
+    //     JSON.stringify(projectPostsLocal, null, 2)
+    //   )
+    // } else {
+    //   console.log(`Project '${projectSlug}' not found.`)
+    // }
 
     console.log('\nAll tests completed successfully.')
   } catch (error: any) {

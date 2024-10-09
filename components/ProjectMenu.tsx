@@ -76,14 +76,14 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {/* Wrap the button in a div for each li. TODO: Decide to add community back 'community' */}
-        {['mission', 'faq', 'updates', 'comments'].map((item) => (
+        {['mission', 'faq', 'updates', 'posts'].map((item) => (
           <li
             className="group flex h-16 items-center justify-center rounded-lg font-space-grotesk"
             key={item}
           >
             {item === 'faq' && faqCount === 1 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
-              updatesCount === 0 ? null : item === 'comments' && // Hide the entire button for "Updates" when updatesCount is 0
-              commentCount === 0 ? null : ( // Hide the entire button for "Comments" when commentCount is 0
+              updatesCount === 0 ? null : item === 'posts' && // Hide the entire button for "Updates" when updatesCount is 0
+              commentCount === 0 ? null : ( // Hide the entire button for "Posts" when commentCount is 0
               <div className="transform-gpu overflow-hidden rounded-xl transition duration-200">
                 <button
                   onClick={() => handleMenuItemClick(item)}
@@ -97,10 +97,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                     ? 'FAQ'
                     : item === 'updates'
                     ? 'Updates'
-                    : item === 'comments'
-                    ? 'Comments'
+                    : item === 'posts'
+                    ? 'Posts'
                     : item.charAt(0).toUpperCase() + item.slice(1)}{' '}
-                  {/* Display "FAQ," "Updates," and "Comments" in uppercase */}
+                  {/* Display "FAQ," "Updates," and "Posts" in uppercase */}
                   {item === 'faq' &&
                     faqCount > 1 && ( // Conditionally render the span if faqCount > 1
                       <span
@@ -125,11 +125,11 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                         {updatesCount}
                       </span>
                     )}
-                  {item === 'comments' &&
+                  {item === 'posts' &&
                     commentCount > 0 && ( // Conditionally render the span if commentCount > 0
                       <span
                         className={`absolute text-xs ${
-                          activeItem === 'comments'
+                          activeItem === 'posts'
                             ? 'font-bold text-[#222222] '
                             : 'font-semibold'
                         }`}

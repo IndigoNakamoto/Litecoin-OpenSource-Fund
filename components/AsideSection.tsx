@@ -1,4 +1,3 @@
-// components/AsideSection.tsx
 import React from 'react'
 import DonationStats from './DonationStats'
 import Image from 'next/image'
@@ -19,6 +18,7 @@ type AsideSectionProps = {
   matchingTotal?: number
   serviceFeeCollected?: number
   totalPaid?: number
+  matchingDonors?: []
   formatLits: (value: any) => string
   formatUSD: (value: any) => string
   monthlyTotal?: number
@@ -39,6 +39,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
   matchingTotal = 0,
   serviceFeeCollected = 0,
   totalPaid = 0,
+  matchingDonors = [],
   formatLits,
   formatUSD,
   monthlyTotal = 0,
@@ -49,40 +50,44 @@ const AsideSection: React.FC<AsideSectionProps> = ({
   openPaymentModal,
 }) => (
   <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#dddddd] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
-    {/* Cover Image */}
-    <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
-      <Image
-        loader={customImageLoader} // Use the custom loader
-        src={coverImage}
-        alt={title}
-        fill
-        style={{ objectFit: 'cover', objectPosition: '50% 50%' }} // Moved styling to 'style' prop
-        className=""
-        priority={true}
-        sizes="(max-width: 768px) 100vw,
-        (max-width: 1200px) 50vw,
-        33vw"
-      />
-    </div>
+    {/* Image and Donate Button Wrapper */}
+    <div className="relative w-full max-w-full">
+      {/* Cover Image */}
+      <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
+        <Image
+          loader={customImageLoader} // Use the custom loader
+          src={coverImage}
+          alt={title}
+          fill
+          style={{ objectFit: 'cover', objectPosition: '50% 50%' }} // Moved styling to 'style' prop
+          className=""
+          priority={true}
+          sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+        />
+      </div>
+      {/* Donation Stats */}
+      <div className="flex w-full flex-col pt-4">
+        <DonationStats
+          addressStats={addressStats}
+          isMatching={isMatching}
+          isBitcoinOlympics2024={isBitcoinOlympics2024}
+          isRecurring={isRecurring}
+          matchingTotal={matchingTotal}
+          serviceFeeCollected={serviceFeeCollected}
+          matchingDonors={matchingDonors}
+          totalPaid={totalPaid}
+          formatUSD={formatUSD}
+          monthlyTotal={monthlyTotal}
+          recurringAmountGoal={recurringAmountGoal}
+          monthlyDonorCount={monthlyDonorCount}
+          timeLeftInMonth={timeLeftInMonth}
+        />
+      </div>
 
-    {/* Donation Stats and Donate Button */}
-    <div className="flex w-full flex-col">
-      <DonationStats
-        addressStats={addressStats}
-        isMatching={isMatching}
-        isBitcoinOlympics2024={isBitcoinOlympics2024}
-        isRecurring={isRecurring}
-        matchingTotal={matchingTotal}
-        serviceFeeCollected={serviceFeeCollected}
-        totalPaid={totalPaid}
-        formatUSD={formatUSD}
-        monthlyTotal={monthlyTotal}
-        recurringAmountGoal={recurringAmountGoal}
-        monthlyDonorCount={monthlyDonorCount}
-        timeLeftInMonth={timeLeftInMonth}
-      />
-
-      <div className="pb-4 pr-0 pt-8 lg:pr-8">
+      {/* Donate Button */}
+      <div className="relative w-full pt-6">
         <button
           onClick={openPaymentModal}
           className={`block w-full rounded-none bg-[#222222] font-space-grotesk text-xl font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636] ${

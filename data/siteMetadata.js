@@ -2,9 +2,9 @@
 
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'litecoin',
-  author: 'litecoin',
-  headerTitle: 'litecoin',
+  title: 'Litecoin',
+  author: 'Litecoin Foundation Inc.',
+  headerTitle: 'Litecoin',
   description:
     'Crowdfunding Litecoin Projects, One Open-Source Project at a Time.',
   language: 'en-us',
@@ -18,6 +18,7 @@ const siteMetadata = {
   github: 'https://github.com/litecoin-project',
   twitter: 'https://twitter.com/ltcfoundation',
   reddit: 'https://reddit.com/r/litecoin',
+  webflowBaseUrl: 'https://litecoin.net', // Replace with your actual Webflow domain
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the

@@ -12,7 +12,7 @@ const ContentSecurityPolicy = `
   media-src 'none';
   connect-src 'self';
   font-src 'self' https://fonts.gstatic.com;
-  frame-src giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;
+  frame-src giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com https://www.youtube.com https://www.youtube-nocookie.com;
 `
 
 const securityHeaders = [

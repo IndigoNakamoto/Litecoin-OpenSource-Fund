@@ -7,13 +7,14 @@ import readline from 'readline'
 import Bottleneck from 'bottleneck'
 import fs from 'fs'
 import { join } from 'path'
-import matter from 'gray-matter'
+import { fetchGetJSONAuthed } from '../utils/api-helpers'
+// import matter from 'gray-matter'
 
-// Create a Bottleneck limiter to manage CoinGecko API rate limits
-const limiter = new Bottleneck({
-  minTime: 1200, // Minimum time between requests in milliseconds (1200ms = ~50 requests/minute)
-  maxConcurrent: 1, // Only one request at a time
-})
+// // Create a Bottleneck limiter to manage CoinGecko API rate limits
+// const limiter = new Bottleneck({
+//   minTime: 1200, // Minimum time between requests in milliseconds (1200ms = ~50 requests/minute)
+//   maxConcurrent: 1, // Only one request at a time
+// })
 
 // Define types for donation data
 type DonationData = {
@@ -25,8 +26,20 @@ type DonationData = {
 // Function to fetch donation data from BTCPay Server for a given slug
 async function fetchDonationData(slug: string): Promise<DonationData[] | null> {
   try {
+    console.log('Fetch donation data for slug: ', slug)
     const username = process.env.BTCPAY_USERNAME
     const password = process.env.BTCPAY_PASSWORD
+    const btcpay_url = process.env.BTCPAY_URL
+    const btcpay_store_id = process.env.BTCPAY_STORE_ID
+    // console.log('username: ', username)
+    // console.log('password: ', password)
+    // console.log('btcpay_url: ', btcpay_url)
+    // console.log('btcpay_store_id: ', btcpay_store_id)
+
+    // Ensure BTCPay credentials are set
+    if (!username || !password || !btcpay_store_id || !btcpay_url) {
+      console.log('username or password is not set')
+    }
 
     if (!username || !password) {
       throw new Error('BTCPAY_USERNAME and BTCPAY_PASSWORD must be set in .env')
@@ -36,22 +49,22 @@ async function fetchDonationData(slug: string): Promise<DonationData[] | null> {
       'base64'
     )
 
-    const response = await axios.get(
-      `${process.env.BTCPAY_URL}/stores/${process.env.BTCPAY_STORE_ID}/invoices?status=Settled&status=Processing`,
-      {
-        headers: {
-          Authorization: `Basic ${base64Credentials}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    console.log('base64: ', base64Credentials)
+    const auth = `Basic ${base64Credentials}`
 
-    if (!Array.isArray(response.data)) {
-      throw new Error('Unexpected response format from BTCPay Server')
+    console.log('make get request')
+    const response = await fetchGetJSONAuthed(
+      `${process.env.BTCPAY_URL}/stores/${process.env.BTCPAY_STORE_ID}/invoices?status=Settled&status=Processing`,
+      auth
+    )
+    // console.log('Fetched Invoices: ', response.data)
+
+    if (!Array.isArray(response)) {
+      console.log('Unexpected response format from BTCPay Server')
     }
 
     // Filter invoices by slug
-    const filteredInvoices = response.data.filter(
+    const filteredInvoices = response.filter(
       (item: any) =>
         item.metadata &&
         item.metadata.posData &&

@@ -12,6 +12,7 @@ type DonationStatsProps = {
   serviceFeeCollected?: number
   totalPaid?: number
   formatUSD: (value: any) => string
+  matchingDonors?: any[]
   monthlyTotal?: number
   recurringAmountGoal?: number
   monthlyDonorCount?: number
@@ -39,6 +40,7 @@ const DonationStats: React.FC<DonationStatsProps> = ({
   isRecurring = false,
   matchingTotal = 0,
   serviceFeeCollected = 0,
+  matchingDonors = [],
   totalPaid = 0,
   formatUSD,
   monthlyTotal = 0,
@@ -54,17 +56,24 @@ const DonationStats: React.FC<DonationStatsProps> = ({
             value={`$ ${formatUSD(addressStats.funded_txo_sum)}`}
             label="USD Raised"
           />
-          <StatItem
-            value={`$ ${formatUSD(matchingTotal)}`}
-            label="Donations Matched by Charlie Lee"
-          />
+          {/* TODO: map matching donors: Name, Amount Matched, Multiplier */}
+          {matchingDonors?.map((donor, i) => {
+            return (
+              <StatItem
+                key={i}
+                value={`$ ${formatUSD(donor.totalMatchedAmount)}`}
+                label={`Donations Matched by ${donor.donorFieldData.name}`}
+              />
+            )
+          })}
+
           {/* <StatItem
             value={`$ ${formatUSD(serviceFeeCollected)}`}
             label="15% Service Fee Collected"
           /> */}
           <StatItem
             value={`$ ${formatUSD(totalPaid)}`}
-            label="USD Paid to Contributors"
+            label="Paid to Contributors"
           />
           <StatItem value={addressStats.tx_count || '0'} label="Donations" />
         </div>
