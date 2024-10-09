@@ -280,16 +280,16 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <Link href="/use-litecoin/buy">Buy</Link>
+                      <a href="https://litecoin.net/buy">Buy</a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <Link href="/use-litecoin/spend">Spend</Link>
+                      <a href="https://litecoin.net/spend">Spend</a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <Link href="/use-litecoin/store">Store</Link>
+                      <a href="https://litecoin.net/store">Store</a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <Link href="/use-litecoin/business">Business</Link>
+                      <a href="https://litecoin.net/business">Business</a>
                     </li>
                   </ul>
                 </li>
@@ -347,12 +347,12 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <Link href="/learn/what-is-litecoin">
+                      <a href="https://litecoin.net/what-is-litecoin">
                         What is Litecoin
-                      </Link>
+                      </a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <Link href="/learn/resources">Resources</Link>
+                      <a href="https://litecoin.net/resources">Resources</a>
                     </li>
                   </ul>
                 </li>
@@ -426,16 +426,18 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <Link href="/the-foundation/about">About</Link>
+                      <a href="https://litecoin.net/litecoin-foundation">
+                        About
+                      </a>
                     </li>
+
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <Link href="/the-foundation/resources">Resources</Link>
-                    </li>
-                    <li className="ml-2 p-2 pl-4 text-left">
-                      <Link href="/the-foundation/financials">Financials</Link>
+                      <a href="https://litecoin.net/financials">Financials</a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <Link href="/the-foundation/contact">Contact</Link>
+                      <a href="https://litecoin.net/litecoin-foundation#contact">
+                        Contact
+                      </a>
                     </li>
                   </ul>
                 </li>
@@ -450,7 +452,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
-                  <Link href="/news">News</Link>
+                  <a href="https://litecoin.net/news">News</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
@@ -461,7 +463,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.5}px`,
                   }}
                 >
-                  <Link href="/events">Events</Link>
+                  <a href="https://litecoin.net/events">Events</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.90rem] mt-[.85rem] font-[500]"
@@ -472,7 +474,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.8}px`,
                   }}
                 >
-                  <Link href="/shop">Shop</Link>
+                  <a href="https://litecoin.net/shop">Shop</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[600]"
@@ -483,7 +485,13 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
-                  <Link href="/explorer">Explorer</Link>
+                  <a
+                    href="https://explorer.litecoin.net/"
+                    target="_blank" // Opens the link in a new tab
+                    rel="noopener noreferrer" // Security best practices
+                  >
+                    Explorer
+                  </a>
                 </li>
               </ul>
             )}
@@ -560,12 +568,7 @@ const Navigation = () => {
                           {item === 'Use Litecoin' ? (
                             <>
                               <li className="py-1">
-                                <Link
-                                  href="/use-litecoin/buy"
-                                  onClick={onToggleNav}
-                                >
-                                  Buy
-                                </Link>
+                                <a href="https://litecoin.net/buy">Buy</a>
                               </li>
                               <li className="py-1">
                                 <Link
