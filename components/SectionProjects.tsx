@@ -3,6 +3,7 @@ import React from 'react'
 
 interface Props {
   children: ReactNode
+  bgColor?: string
   style?: string
 }
 
