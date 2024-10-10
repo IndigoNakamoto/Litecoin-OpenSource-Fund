@@ -8,7 +8,7 @@ export default function Footer() {
     // TODO: Footer
     <footer className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-screen bg-[#222222] bg-cover bg-center">
       {/* Full-width section with bg-[#222222] */}
-      <div className="mx-auto w-[1300px] max-w-[90%] pb-20 pt-10">
+      <div className="mx-auto w-[1300px] max-w-[90%] pb-60 pt-20">
         {/* background */}
         <div className=" bg-[#222222] bg-cover bg-center">
           {/* Overlay on top */}
@@ -23,34 +23,108 @@ export default function Footer() {
                   height: 'auto', // Maintain aspect ratio
                   opacity: 1,
                 }}
-                className="min-h-max max-w-min pr-16 pt-[-6]"
+                className="min-h-max max-w-min pr-16"
               />
               {/*
                */}
               <div className="flex w-full flex-row justify-between pt-10 xl:pl-36 xl:pt-0">
-                <div className="  w-full">
-                  <h1 className="font-space-grotesk text-[16px] font-bold">
-                    ADDRESS
+                <div className="w-full">
+                  <h1 className="font-space-grotesk text-[18px] font-bold">
+                    LITECOIN SOCIALS
                   </h1>
-                  <p className="pt-4 text-xs">Litecoin Foundation Ltd.</p>
-                  <p className="text-xs">111 North Bridge Rd</p>
-                  <p className="text-xs">#08-11 Peninsula Plaza</p>
-                  <p className="text-xs">Singapore 179098</p>
+                  <p className="pt-4 text-sm">
+                    <a
+                      href="https://x.com/litecoin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      twitter
+                    </a>
+                  </p>
+                  <p className="text-sm">
+                    <a
+                      href="https://t.me/Litecoin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      telegram
+                    </a>
+                  </p>
+                  <p className="text-sm">
+                    <a
+                      href="https://www.reddit.com/r/litecoin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      reddit
+                    </a>
+                  </p>
+                  <p className="text-sm">
+                    <a
+                      href="https://github.com/litecoin-project"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      github
+                    </a>
+                  </p>
                 </div>
-                <div className="  w-full">
-                  <h1 className="font-space-grotesk text-[16px] font-bold">
+
+                <div className="w-full">
+                  <h1 className="font-space-grotesk text-[18px] font-bold">
+                    FOUNDATION SOCIAL
+                  </h1>
+                  <p className="pt-4 text-sm">
+                    <a
+                      href="https://x.com/LTCFoundation"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      twitter
+                    </a>
+                  </p>
+                  <p className="text-sm">
+                    <a
+                      href="https://temporaryreddit.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      reddit
+                    </a>
+                  </p>
+                  <p className="text-sm">
+                    <a
+                      href="https://www.facebook.com/LitecoinFoundation/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      facebook
+                    </a>
+                  </p>
+                  <p className="text-sm">
+                    <a
+                      href="https://github.com/litecoin-foundation/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      github
+                    </a>
+                  </p>
+                </div>
+
+                <div className="w-full">
+                  <h1 className="font-space-grotesk text-[18px] font-bold">
                     CONTACT
                   </h1>
-                  <p className="pt-4 text-xs">contact@litecoin.net</p>
-                </div>
-                <div className="  w-full">
-                  <h1 className="font-space-grotesk text-[16px] font-bold">
-                    SOCIAL
-                  </h1>
-                  <p className="pt-4 text-xs">twitter</p>
-                  <p className="text-xs">reddit</p>
-                  <p className="text-xs">facebook</p>
-                  <p className="text-xs">github</p>
+                  <p className="pt-4 text-sm">
+                    <a
+                      href="mailto:contact@litecoin.net"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      contact@litecoin.net
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -61,14 +135,21 @@ export default function Footer() {
       <div className="m-auto flex h-[52px] items-center bg-[black] bg-cover bg-center">
         {/* TODO: Link privacy and terms */}
         <div
-          className="mx-auto flex w-[1300px] max-w-[90%] items-center bg-black text-left text-[13px] text-[#767e7f]"
+          className="mx-auto flex w-[1300px] max-w-[90%] items-center bg-black text-left text-[14px] text-[#767e7f]"
           style={{
             fontFamily:
               'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
           }}
         >
-          Copyright © 2024 Litecoin Foundation. | Privacy Policy | Terms &
-          Conditions
+          Copyright © 2024 Litecoin Foundation. |
+          <a
+            href="https://litecoin.com/privacy"
+            className="pl-1 underline hover:text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Privacy Policy
+          </a>
           <br />
         </div>
       </div>
