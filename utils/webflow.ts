@@ -750,7 +750,7 @@ export const getMatchingTypeLabelForDonor = async (
 export const getProjectBySlug = async (
   slug: string
 ): Promise<ProjectWithUpdatesAndContributors | undefined> => {
-  const cacheKey = `project:${slug}`
+  const cacheKey = `project:${slug}2`
   const cachedProject = await kv.get<ProjectWithUpdatesAndContributors>(
     cacheKey
   )
@@ -773,6 +773,13 @@ export const getProjectBySlug = async (
     // No project found with the given slug
     return undefined
   }
+
+  // Fetch the status label by mapping the ID
+  const statusLabel = await getLabel(
+    COLLECTION_ID_PROJECTS,
+    'status',
+    project.fieldData.status
+  )
 
   // Fetch updates and contributors as before
   const [updates, allContributors] = await Promise.all([
@@ -808,6 +815,11 @@ export const getProjectBySlug = async (
     litecoinContributors,
     bitcoinContributors,
     advocates,
+    // Update status label here
+    fieldData: {
+      ...project.fieldData,
+      status: statusLabel, // Ensure the status is now a human-readable label
+    },
   }
 
   // Cache the result with an appropriate TTL (e.g., 1 hour)

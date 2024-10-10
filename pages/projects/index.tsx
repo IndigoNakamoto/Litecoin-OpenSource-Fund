@@ -121,13 +121,20 @@ const AllProjects: NextPage = () => {
     }
   }
 
-  function determineBountyStatus(status: string): BountyStatus | undefined {
-    if (status === 'Bounty Open') {
-      return BountyStatus.OPEN
-    } else if (['Bounty Closed', 'Closed', 'Completed'].includes(status)) {
-      return BountyStatus.COMPLETED
-    } else {
-      return undefined
+  function determineProjectStatus(status: string): BountyStatus | undefined {
+    switch (status) {
+      case 'Bounty Open':
+        return BountyStatus.OPEN
+      case 'Closed':
+        return BountyStatus.CLOSED
+      case 'Bounty Closed':
+        return BountyStatus.BOUNTY_CLOSED
+      case 'Completed':
+        return BountyStatus.COMPLETED
+      case 'Bounty Completed':
+        return BountyStatus.BOUNTY_COMPLETED
+      default:
+        return undefined
     }
   }
 
@@ -142,7 +149,7 @@ const AllProjects: NextPage = () => {
           (project: any) => {
             const status = project.fieldData.status
             const projectType = determineProjectType(status)
-            const bountyStatus = determineBountyStatus(status)
+            const bountyStatus = determineProjectStatus(status)
 
             return {
               slug: project.fieldData.slug,
@@ -539,32 +546,16 @@ const AllProjects: NextPage = () => {
 
 export default AllProjects
 
-export function isOpenSatsProject(project: ProjectItem): boolean {
-  return project.nym === 'Litecoin Foundation'
-}
-
-export function isNotOpenSatsProject(project: ProjectItem): boolean {
-  return !isOpenSatsProject(project)
-}
-
 export function isProject(project: ProjectItem): boolean {
-  return project.type === ProjectCategory.PROJECT
-}
-
-export function isCompletedBounty(project: ProjectItem): boolean {
-  return (
-    project.type === ProjectCategory.BOUNTY &&
-    project.bountyStatus === BountyStatus.COMPLETED
-  )
+  return ['Open'].includes(project.status || '')
 }
 
 export function isOpenBounty(project: ProjectItem): boolean {
-  return (
-    project.type === ProjectCategory.BOUNTY &&
-    project.bountyStatus === BountyStatus.OPEN
-  )
+  return ['Bounty Open'].includes(project.status || '')
 }
 
 export function isPastProject(project: ProjectItem): boolean {
-  return ['Bounty Closed', 'Closed', 'Completed'].includes(project.status || '')
+  return ['Bounty Closed', 'Bounty Completed', 'Closed', 'Completed'].includes(
+    project.status || ''
+  )
 }

@@ -17,12 +17,15 @@ export enum ProjectCategory {
   PROJECT = 'PROJECT',
   BOUNTY = 'BOUNTY',
   DEVELOPMENT = 'DEVELOPMENT',
-  OTHER = 'OTHER', // Add this if necessary
+  OTHER = 'OTHER',
 }
 
 export enum BountyStatus {
-  OPEN = 'OPEN',
-  COMPLETED = 'COMPLETED',
+  OPEN = 'Bounty Open',
+  CLOSED = 'Closed',
+  BOUNTY_CLOSED = 'Bounty Closed',
+  COMPLETED = 'Completed',
+  BOUNTY_COMPLETED = 'Bounty Completed',
 }
 
 export enum BugSeverity {

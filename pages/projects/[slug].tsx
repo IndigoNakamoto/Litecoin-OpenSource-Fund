@@ -15,6 +15,7 @@ import {
 } from '../../utils/webflow'
 import {
   ProjectItem,
+  ProjectCategory,
   AddressStats,
   BountyStatus,
   TwitterUser,
@@ -544,19 +545,19 @@ const Project: NextPage<SingleProjectPageProps> = ({
             title={title}
             coverImage={coverImage}
             addressStats={addressStats as AddressStats}
-            isMatching={isMatching || true}
-            isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
-            isRecurring={isRecurring}
-            matchingDonors={matchingDonors}
-            matchingTotal={matchingTotal}
-            serviceFeeCollected={serviceFeesCollected || 0}
-            totalPaid={totalPaid || 0}
-            formatLits={formatLits}
+            // isMatching={isMatching || true}
+            // isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
+            // isRecurring={isRecurring}
+            // matchingDonors={matchingDonors}
+            // matchingTotal={matchingTotal}
+            // serviceFeeCollected={serviceFeesCollected || 0}
+            // totalPaid={totalPaid || 0}
+            // formatLits={formatLits}
             formatUSD={formatUSD}
-            monthlyTotal={monthlyTotal}
-            recurringAmountGoal={recurringAmountGoal}
-            monthlyDonorCount={monthlyDonorCount}
-            timeLeftInMonth={timeLeftInMonth}
+            // monthlyTotal={monthlyTotal}
+            // recurringAmountGoal={recurringAmountGoal}
+            // monthlyDonorCount={monthlyDonorCount}
+            // timeLeftInMonth={timeLeftInMonth}
             bountyStatus={bountyStatus as BountyStatus}
             openPaymentModal={openPaymentModal}
           />
@@ -584,7 +585,11 @@ type ParamsType = {
   slug: string
 }
 
-// Update your getStaticProps function
+import {
+  determineProjectType,
+  determineBountyStatus,
+} from '../../utils/statusHelpers'
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
   const slug = params?.slug as string
@@ -632,8 +637,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const advocates = allContributors.filter((contributor) =>
     advocateIds.includes(contributor.id)
   )
+  const status = project.fieldData.status || ''
+
+  console.log('Project status: ', status)
 
   // Adjust the project object to match your component's expectations
+  const projectType = determineProjectType(status)
+  const bountyStatus = determineBountyStatus(status) ?? null
+
   const projectData = {
     ...project.fieldData,
     title: project.fieldData.name || null,
@@ -651,6 +662,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     isRecurring: project.fieldData.recurring || null,
     totalPaid: project.fieldData['total-paid'] || null,
     serviceFeesCollected: project.fieldData['service-fees-collected'] || null,
+    type: projectType,
+    bountyStatus: bountyStatus,
     contributorsBitcoin:
       contributorsBitcoin
         .map((c) =>
@@ -681,7 +694,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     // You can include other fields here, ensuring none are undefined
   }
 
-  console.log('Project Data: ', projectData)
+  // console.log('Project Data: ', projectData)
 
   return {
     props: {
@@ -708,76 +721,3 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking', // or 'true' depending on your preference
   }
 }
-
-// export async function getServerSideProps(context: any) {
-//   const { params } = context
-
-//   // Fetch project data from the API
-//   const project = await getProjectBySlug(params.slug)
-//   console.log('Project: ', project)
-
-//   // Fetch project updates
-//   const updates = await getProjectUpdatesBySlug(params.slug)
-//   // console.log('Updates: ', updates)
-
-//   // Fetch project FAQs
-//   const faqs = await getFAQsByProjectSlug(params.slug)
-
-//   const posts = await getPostsBySlug(params.slug)
-//   // console.log('Projects posts: ', posts)
-
-//   if (!project) {
-//     return {
-//       notFound: true,
-//     }
-//   }
-
-//   const allContributors = await getAllActiveContributors()
-//   // Filter contributors for each type
-//   const contributorsBitcoin = allContributors.filter((contributor) =>
-//     project.fieldData['bitcoin-contributors']?.includes(contributor.id)
-//   )
-
-//   const contributorsLitecoin = allContributors.filter((contributor) =>
-//     project.fieldData['litecoin-contributors']?.includes(contributor.id)
-//   )
-
-//   const advocates = allContributors.filter((contributor) =>
-//     project.fieldData['advocates']?.includes(contributor.id)
-//   )
-
-//   // Adjust the project object to match your component's expectations
-//   const projectData = {
-//     ...project.fieldData,
-//     title: project.fieldData.name || null,
-//     slug: project.fieldData.slug,
-//     content: project.fieldData['content'] || null,
-//     coverImage: project.fieldData['cover-image'].url || null,
-//     gitRepository: project.fieldData['github-link'] || null,
-//     twitterHandle: project.fieldData['twitter-link'] || null,
-//     discordLink: project.fieldData['discord'] || null,
-//     telegramLink: project.fieldData['telegram-link'] || null,
-//     redditLink: project.fieldData['reddit-link'] || null,
-//     facebookLink: project.fieldData['facebook-link'] || null,
-//     website: project.fieldData['website-link'] || null,
-//     hidden: project.fieldData.hidden || null,
-//     isRecurring: project.fieldData.recurring || null,
-//     totalPaid: project.fieldData['total-paid'] || null,
-//     serviceFeesCollected: project.fieldData['service-fees-collected'] || null,
-//     contributorsBitcoin: contributorsBitcoin || null,
-//     contributorsLitecoin: contributorsLitecoin || null,
-//     advocates: advocates || null,
-//     // You can include other fields here, ensuring none are undefined
-//   }
-
-//   console.log('Project Data: ', projectData)
-
-//   return {
-//     props: {
-//       project: projectData,
-//       updates,
-//       faqs,
-//       posts,
-//     },
-//   }
-// }
