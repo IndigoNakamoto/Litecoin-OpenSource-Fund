@@ -10,6 +10,8 @@ import {
   getContributorsByIds,
   getFAQsByProjectSlug,
   getPostsBySlug,
+  getAllActiveContributors,
+  getAllProjects,
 } from '../../utils/webflow'
 import {
   ProjectItem,
@@ -17,7 +19,7 @@ import {
   BountyStatus,
   TwitterUser,
 } from '../../utils/types'
-import { NextPage } from 'next'
+import { NextPage, GetStaticProps, GetStaticPaths } from 'next'
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 const PaymentModal = dynamic(() => import('../../components/PaymentModal'), {
@@ -582,31 +584,61 @@ type ParamsType = {
   slug: string
 }
 
-export async function getServerSideProps(context: any) {
+// Update your getStaticProps function
+export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
+  const slug = params?.slug as string
 
   // Fetch project data from the API
-  const project = await getProjectBySlug(params.slug)
+  const project = await getProjectBySlug(slug)
+  console.log('Project: ', project)
 
-  // Fetch project updates
-  const updates = await getProjectUpdatesBySlug(params.slug)
-
-  // Fetch project FAQs
-  const faqs = await getFAQsByProjectSlug(params.slug)
-
-  const posts = await getPostsBySlug(params.slug)
-  console.log('Projects posts: ', posts)
-
+  // Handle the case where the project is not found
   if (!project) {
     return {
       notFound: true,
+      revalidate: 60, // Revalidate after 60 seconds
     }
   }
+
+  // Fetch project updates
+  const updates = await getProjectUpdatesBySlug(slug)
+  // console.log('Updates: ', updates);
+
+  // Fetch project FAQs
+  const faqs = await getFAQsByProjectSlug(slug)
+
+  const posts = await getPostsBySlug(slug)
+  // console.log('Projects posts: ', posts);
+
+  // Fetch all contributors once
+  const allContributors = await getAllActiveContributors()
+
+  // Extract contributor IDs from project field data
+  const contributorsBitcoinIds = project.fieldData['bitcoin-contributors'] || []
+  const contributorsLitecoinIds =
+    project.fieldData['litecoin-contributors'] || []
+  const advocateIds = project.fieldData['advocates'] || []
+
+  // Filter contributors for each type
+  const contributorsBitcoin = allContributors.filter((contributor) =>
+    contributorsBitcoinIds.includes(contributor.id)
+  )
+
+  const contributorsLitecoin = allContributors.filter((contributor) =>
+    contributorsLitecoinIds.includes(contributor.id)
+  )
+
+  const advocates = allContributors.filter((contributor) =>
+    advocateIds.includes(contributor.id)
+  )
 
   // Adjust the project object to match your component's expectations
   const projectData = {
     ...project.fieldData,
-    content: project.fieldData['content-rich'] || null,
+    title: project.fieldData.name || null,
+    slug: project.fieldData.slug,
+    content: project.fieldData['content'] || null,
     coverImage: project.fieldData['cover-image'].url || null,
     gitRepository: project.fieldData['github-link'] || null,
     twitterHandle: project.fieldData['twitter-link'] || null,
@@ -620,18 +652,36 @@ export async function getServerSideProps(context: any) {
     totalPaid: project.fieldData['total-paid'] || null,
     serviceFeesCollected: project.fieldData['service-fees-collected'] || null,
     contributorsBitcoin:
-      (await getContributorsByIds(
-        project.fieldData['bitcoin-contributors-2']
-      )) || null,
+      contributorsBitcoin
+        .map((c) =>
+          c.fieldData['twitter-link'].replace(
+            /^https?:\/\/(www\.)?(twitter\.com|x\.com)\//,
+            ''
+          )
+        )
+        .join(',') || null,
     contributorsLitecoin:
-      (await getContributorsByIds(
-        project.fieldData['litecoin-contributors-2']
-      )) || null,
+      contributorsLitecoin
+        .map((c) =>
+          c.fieldData['twitter-link'].replace(
+            /^https?:\/\/(www\.)?(twitter\.com|x\.com)\//,
+            ''
+          )
+        )
+        .join(',') || null,
     advocates:
-      (await getContributorsByIds(project.fieldData['advocates-2'])) || null,
-    title: project.fieldData.name,
+      advocates
+        .map((c) =>
+          c.fieldData['twitter-link'].replace(
+            /^https?:\/\/(www\.)?(twitter\.com|x\.com)\//,
+            ''
+          )
+        )
+        .join(',') || null,
     // You can include other fields here, ensuring none are undefined
   }
+
+  console.log('Project Data: ', projectData)
 
   return {
     props: {
@@ -640,5 +690,94 @@ export async function getServerSideProps(context: any) {
       faqs,
       posts,
     },
+    revalidate: 600, // Revalidate every 600 seconds
   }
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // Fetch all projects to get their slugs
+  const projects = await getAllProjects()
+
+  // Generate paths for each project slug
+  const paths = projects.map((project) => ({
+    params: { slug: project.fieldData.slug },
+  }))
+
+  return {
+    paths,
+    fallback: 'blocking', // or 'true' depending on your preference
+  }
+}
+
+// export async function getServerSideProps(context: any) {
+//   const { params } = context
+
+//   // Fetch project data from the API
+//   const project = await getProjectBySlug(params.slug)
+//   console.log('Project: ', project)
+
+//   // Fetch project updates
+//   const updates = await getProjectUpdatesBySlug(params.slug)
+//   // console.log('Updates: ', updates)
+
+//   // Fetch project FAQs
+//   const faqs = await getFAQsByProjectSlug(params.slug)
+
+//   const posts = await getPostsBySlug(params.slug)
+//   // console.log('Projects posts: ', posts)
+
+//   if (!project) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+
+//   const allContributors = await getAllActiveContributors()
+//   // Filter contributors for each type
+//   const contributorsBitcoin = allContributors.filter((contributor) =>
+//     project.fieldData['bitcoin-contributors']?.includes(contributor.id)
+//   )
+
+//   const contributorsLitecoin = allContributors.filter((contributor) =>
+//     project.fieldData['litecoin-contributors']?.includes(contributor.id)
+//   )
+
+//   const advocates = allContributors.filter((contributor) =>
+//     project.fieldData['advocates']?.includes(contributor.id)
+//   )
+
+//   // Adjust the project object to match your component's expectations
+//   const projectData = {
+//     ...project.fieldData,
+//     title: project.fieldData.name || null,
+//     slug: project.fieldData.slug,
+//     content: project.fieldData['content'] || null,
+//     coverImage: project.fieldData['cover-image'].url || null,
+//     gitRepository: project.fieldData['github-link'] || null,
+//     twitterHandle: project.fieldData['twitter-link'] || null,
+//     discordLink: project.fieldData['discord'] || null,
+//     telegramLink: project.fieldData['telegram-link'] || null,
+//     redditLink: project.fieldData['reddit-link'] || null,
+//     facebookLink: project.fieldData['facebook-link'] || null,
+//     website: project.fieldData['website-link'] || null,
+//     hidden: project.fieldData.hidden || null,
+//     isRecurring: project.fieldData.recurring || null,
+//     totalPaid: project.fieldData['total-paid'] || null,
+//     serviceFeesCollected: project.fieldData['service-fees-collected'] || null,
+//     contributorsBitcoin: contributorsBitcoin || null,
+//     contributorsLitecoin: contributorsLitecoin || null,
+//     advocates: advocates || null,
+//     // You can include other fields here, ensuring none are undefined
+//   }
+
+//   console.log('Project Data: ', projectData)
+
+//   return {
+//     props: {
+//       project: projectData,
+//       updates,
+//       faqs,
+//       posts,
+//     },
+//   }
+// }

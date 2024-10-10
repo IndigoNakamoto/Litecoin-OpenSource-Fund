@@ -181,7 +181,7 @@ const Navigation = () => {
                 }}
               >
                 <Image
-                  src="/logo2.svg"
+                  src="/static/logo2.svg"
                   alt="Black Logo"
                   layout="fill"
                   style={{
@@ -189,7 +189,7 @@ const Navigation = () => {
                   }}
                 />
                 <Image
-                  src="/logo2-white.svg"
+                  src="/static/logo2-white.svg"
                   alt="White Logo"
                   layout="fill"
                   style={{
@@ -289,7 +289,7 @@ const Navigation = () => {
                       <a href="https://litecoin.net/store">Store</a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/business">Business</a>
+                      <a href="https://litecoin.net/for-business">Business</a>
                     </li>
                   </ul>
                 </li>
@@ -588,7 +588,7 @@ const Navigation = () => {
                               </li>
                               <li className="py-1">
                                 <Link
-                                  href="/use-litecoin/business"
+                                  href="/use-litecoin/for-business"
                                   onClick={onToggleNav}
                                 >
                                   Business

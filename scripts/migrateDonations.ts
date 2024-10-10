@@ -164,7 +164,7 @@ async function createDonationRecord(
     const donationRecord = await prisma.donation.create({
       data: {
         // Project
-        projectSlug: slug,
+        projectSlug: slug.replace(/_/g, '-'),
         organizationId: 1189134331, // Replace with your actual organization ID
         // Donation
         donationType: 'crypto',

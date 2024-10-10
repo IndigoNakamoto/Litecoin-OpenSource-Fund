@@ -2,6 +2,7 @@
 import axios, { AxiosInstance } from 'axios'
 import dotenv from 'dotenv'
 import { Controller } from 'react-hook-form'
+import { kv } from '@vercel/kv'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -69,12 +70,10 @@ interface ProjectFieldData {
   name: string
   slug: string
   content: string
-  'bitcoin-contributors-2': string[]
-  'litecoin-contributors-2': string[]
-  'advocates-2': string[]
+  'bitcoin-contributors': string[]
+  'litecoin-contributors': string[]
+  advocates: string[]
   hashtags: string[]
-  'content-2': string
-  'content-rich': string
   status: string
 }
 
@@ -276,7 +275,7 @@ export const getMatchingDonorsByProjectSlug = async (
     )
 
     // Get the option ID for 'All Projects'
-    const allProjectsOptionId = [...matchingTypeMap.entries()].find(
+    const allProjectsOptionId = Object.entries(matchingTypeMap).find(
       ([, label]) => label === 'All Projects'
     )?.[0]
 
@@ -309,7 +308,7 @@ export const getMatchingDonorsByProjectSlug = async (
 
         // Map the 'matching-type' option ID to its label
         const matchingTypeLabel =
-          matchingTypeMap.get(donor.fieldData['matching-type']) ||
+          matchingTypeMap[donor.fieldData['matching-type']] ||
           'Unknown Matching Type'
 
         // Map the 'supported-projects' IDs to their corresponding project slugs
@@ -424,32 +423,46 @@ export const getMatchingDonorById = async (
   }
 }
 
-let cachedStatusMap: Map<string, string> | null = null
-let cachedMatchingTypeMap: Map<string, string> | null = null
-let cachedProjectStatusMap: Map<string, string> | null = null
-/**
- * Initialize and cache the option maps for 'status' and 'matching-type'.
- */
+// Helper function to get or set cached data in kv
+const getOrSetCache = async <T>(
+  key: string,
+  fetchFunction: () => Promise<T>,
+  ttl = 600
+): Promise<T> => {
+  const cachedData = await kv.get<T>(key)
+  if (cachedData) {
+    return cachedData
+  }
+  const data = await fetchFunction()
+  await kv.set(key, data, { ex: ttl })
+  return data
+}
+
 const initializeOptionMaps = async () => {
   if (!cachedStatusMap) {
-    cachedStatusMap = await createOptionIdToLabelMap(
-      COLLECTION_ID_MATCHING_DONORS,
-      'status'
+    cachedStatusMap = await getOrSetCache<{ [key: string]: string }>(
+      'matchingDonors:statusMap',
+      async () =>
+        await createOptionIdToLabelMap(COLLECTION_ID_MATCHING_DONORS, 'status')
     )
   }
 
   if (!cachedMatchingTypeMap) {
-    cachedMatchingTypeMap = await createOptionIdToLabelMap(
-      COLLECTION_ID_MATCHING_DONORS,
-      'matching-type'
+    cachedMatchingTypeMap = await getOrSetCache<{ [key: string]: string }>(
+      'matchingDonors:matchingTypeMap',
+      async () =>
+        await createOptionIdToLabelMap(
+          COLLECTION_ID_MATCHING_DONORS,
+          'matching-type'
+        )
     )
   }
 
-  // Initialize the project status map if not already done
   if (!cachedProjectStatusMap) {
-    cachedProjectStatusMap = await createOptionIdToLabelMap(
-      COLLECTION_ID_PROJECTS,
-      'status'
+    cachedProjectStatusMap = await getOrSetCache<{ [key: string]: string }>(
+      'projects:statusMap',
+      async () =>
+        await createOptionIdToLabelMap(COLLECTION_ID_PROJECTS, 'status')
     )
   }
 }
@@ -475,17 +488,17 @@ export const getLabel = async (
     collectionId === COLLECTION_ID_MATCHING_DONORS &&
     fieldSlug === 'status'
   ) {
-    label = cachedStatusMap?.get(fieldId) || 'Unknown Status'
+    label = cachedStatusMap?.[fieldId] || 'Unknown Status'
   } else if (
     collectionId === COLLECTION_ID_MATCHING_DONORS &&
     fieldSlug === 'matching-type'
   ) {
-    label = cachedMatchingTypeMap?.get(fieldId) || 'Unknown Matching Type'
+    label = cachedMatchingTypeMap?.[fieldId] || 'Unknown Matching Type'
   } else if (
     collectionId === COLLECTION_ID_PROJECTS &&
     fieldSlug === 'status'
   ) {
-    label = cachedProjectStatusMap?.get(fieldId) || 'Unknown Status'
+    label = cachedProjectStatusMap?.[fieldId] || 'Unknown Status'
   }
 
   return label
@@ -498,7 +511,7 @@ export const getLabel = async (
  */
 export const getStatusLabel = async (statusId: string): Promise<string> => {
   await initializeOptionMaps()
-  return cachedStatusMap?.get(statusId) || 'Unknown Status'
+  return cachedStatusMap?.[statusId] || 'Unknown Status'
 }
 
 /**
@@ -510,7 +523,7 @@ export const getMatchingTypeLabel = async (
   matchingTypeId: string
 ): Promise<string> => {
   await initializeOptionMaps()
-  return cachedMatchingTypeMap?.get(matchingTypeId) || 'Unknown Matching Type'
+  return cachedMatchingTypeMap?.[matchingTypeId] || 'Unknown Matching Type'
 }
 
 /**
@@ -535,10 +548,11 @@ export const getCollectionSchema = async (
   }
 }
 
+// Update createOptionIdToLabelMap to return plain objects that can be cached
 export const createOptionIdToLabelMap = async (
   collectionId: string,
   fieldSlug: string
-): Promise<Map<string, string>> => {
+): Promise<{ [key: string]: string }> => {
   const schema = await getCollectionSchema(collectionId)
   const field = schema.fields.find((f) => f.slug === fieldSlug)
 
@@ -557,13 +571,18 @@ export const createOptionIdToLabelMap = async (
     )
   }
 
-  const map = new Map<string, string>()
+  const map: { [key: string]: string } = {}
   field.validations.options.forEach((option) => {
-    map.set(option.id, option.name.trim())
+    map[option.id] = option.name.trim()
   })
 
   return map
 }
+
+// Since Map objects can't be directly cached, we'll use plain objects
+let cachedStatusMap: { [key: string]: string } | null = null
+let cachedMatchingTypeMap: { [key: string]: string } | null = null
+let cachedProjectStatusMap: { [key: string]: string } | null = null
 
 /**
  * Function to list collection items with pagination.
@@ -610,6 +629,13 @@ const listCollectionItems = async <T>(
 export const getFAQsByProjectId = async (
   projectId: string
 ): Promise<FAQItem[]> => {
+  const cacheKey = `faqs:project:${projectId}`
+  const cachedFAQs = await kv.get<FAQItem[]>(cacheKey)
+
+  if (cachedFAQs) {
+    return cachedFAQs
+  }
+
   const faqs = await listCollectionItems<FAQItem>(COLLECTION_ID_FAQS)
 
   // Filter FAQs by project ID and exclude drafts and archived items
@@ -619,6 +645,9 @@ export const getFAQsByProjectId = async (
         faq.fieldData.project === projectId && !faq.isDraft && !faq.isArchived
     )
     .sort((a, b) => (a.fieldData.order || 0) - (b.fieldData.order || 0)) // Optional sorting
+
+  // Cache the FAQs
+  await kv.set(cacheKey, projectFAQs, { ex: 600 })
 
   return projectFAQs
 }
@@ -646,11 +675,16 @@ export const getFAQsByProjectSlug = async (
 }
 
 export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
+  const cacheKey = 'matchingDonors:active'
+  const cachedDonors = await kv.get<MatchingDonor[]>(cacheKey)
+
+  if (cachedDonors) {
+    return cachedDonors
+  }
+
   const donors = await listCollectionItems<MatchingDonor>(
     COLLECTION_ID_MATCHING_DONORS
   )
-  // donors.forEach((donor) => console.log(donor.fieldData['supported-projects']))
-  // console.log('webflow getActiveMatchingDonors: ', donors)
 
   const now = new Date()
 
@@ -659,33 +693,16 @@ export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
     COLLECTION_ID_MATCHING_DONORS,
     'status'
   )
-  // const matchingTypeMap = await createOptionIdToLabelMap(
-  //   COLLECTION_ID_MATCHING_DONORS,
-  //   'matching-type'
-  // )
 
   // Filter active donors within the date range and with remaining matching amount
-  const activeDonors = donors.filter(async (donor) => {
-    // console.log(
-    //   '\n\n***********************************************\nDonor: ',
-    //   donor
-    // )
+  const activeDonors = donors.filter((donor) => {
     const startDate = new Date(donor.fieldData['start-date'])
-    // console.log('startDate: ', startDate)
     const endDate = new Date(donor.fieldData['end-date'])
-    // console.log('endDate: ', endDate)
 
     const statusId = donor.fieldData['status']
-    // console.log('statusId: ', statusId)
-    const statusLabel = statusMap.get(statusId) || 'Unknown Status'
-    // console.log('statusLabel: ', statusLabel)
-
-    // const matchingType = donor.fieldData['matching-type']
-    // const matchType = await getMatchingTypeLabelForDonor(donor)
-    // console.log('match type: ', matchType)
+    const statusLabel = statusMap[statusId] || 'Unknown Status'
 
     const isActive = statusLabel === 'Active'
-    // console.log('isActive: ', isActive)
     const withinDateRange = now >= startDate && now <= endDate
 
     // This has to be calculated from prisma model logs
@@ -699,6 +716,9 @@ export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
       !donor.isArchived
     )
   })
+
+  // Cache the active donors
+  await kv.set(cacheKey, activeDonors, { ex: 600 })
 
   return activeDonors
 }
@@ -717,7 +737,7 @@ export const getMatchingTypeLabelForDonor = async (
 
   // Find the corresponding label from the matching type map
   const matchingTypeLabel =
-    matchingTypeMap.get(matchingTypeId) || 'Unknown Matching Type'
+    matchingTypeMap[donor.fieldData['matching-type']] || 'Unknown Matching Type'
 
   return matchingTypeLabel
 }
@@ -730,7 +750,16 @@ export const getMatchingTypeLabelForDonor = async (
 export const getProjectBySlug = async (
   slug: string
 ): Promise<ProjectWithUpdatesAndContributors | undefined> => {
-  // Fetch the project by slug
+  const cacheKey = `project:${slug}`
+  const cachedProject = await kv.get<ProjectWithUpdatesAndContributors>(
+    cacheKey
+  )
+
+  if (cachedProject) {
+    return cachedProject
+  }
+
+  // Fetch the project from Webflow
   const projectResponse = await webflowClient.get<WebflowResponse<Project>>(
     `/collections/${COLLECTION_ID_PROJECTS}/items`,
     {
@@ -745,16 +774,16 @@ export const getProjectBySlug = async (
     return undefined
   }
 
-  // Fetch all updates
-  const updates = await getAllUpdates()
+  // Fetch updates and contributors as before
+  const [updates, allContributors] = await Promise.all([
+    getAllUpdates(),
+    getAllActiveContributors(),
+  ])
 
   // Filter updates related to the fetched project
   const projectUpdates = updates.filter(
     (update) => update.fieldData.project === project.id
   )
-
-  // Fetch all active contributors
-  const allContributors = await getAllActiveContributors()
 
   // Helper function to fetch contributor details by IDs
   const getContributorsByIds = (ids: string[]): Contributor[] => {
@@ -772,7 +801,7 @@ export const getProjectBySlug = async (
 
   const advocates = getContributorsByIds(project.fieldData['advocates-2'] || [])
 
-  // Return the project along with its updates and contributors
+  // Combine data into projectWithContributors
   const projectWithContributors: ProjectWithUpdatesAndContributors = {
     ...project,
     updates: projectUpdates,
@@ -781,21 +810,29 @@ export const getProjectBySlug = async (
     advocates,
   }
 
+  // Cache the result with an appropriate TTL (e.g., 1 hour)
+  await kv.set(cacheKey, projectWithContributors, { ex: 600 })
+
   return projectWithContributors
 }
 
 export const getContributorsByIds = async (
-  contributors: string[]
+  contributorIds: string[]
 ): Promise<string> => {
   // Fetch all active contributors
   const allContributors = await getAllActiveContributors()
 
+  // Ensure contributors is an array and is not null/undefined
+  if (!Array.isArray(contributorIds)) {
+    throw new Error('Contributors must be an array')
+  }
+
   // Helper function to fetch contributor details by IDs
-  const getContributorsByIds = (contributors: string[]): string[] => {
+  const fetchContributorsByIds = (ids: string[]): string[] => {
     return allContributors
-      .filter((contributor) => contributors.includes(contributor.id))
+      .filter((contributor) => ids.includes(contributor.id))
       .map((contributor) => {
-        const twitterLink = contributor.fieldData['twitter-link']
+        const twitterLink = contributor.fieldData['twitter-link'] || ''
         // Extract the Twitter handle from the link (removes the URL part)
         return twitterLink
           .replace('http://x.com/', '')
@@ -803,17 +840,29 @@ export const getContributorsByIds = async (
       })
   }
 
-  return getContributorsByIds(contributors).join(',')
+  return fetchContributorsByIds(contributorIds).join(',')
 }
 
 /**
  * Get all contributors.
  * @returns An array of all contributors.
  */
+// Modify your data fetching functions to use the cache
 export const getAllContributors = async (): Promise<Contributor[]> => {
+  const cacheKey = 'contributors:all'
+  const cachedContributors = await kv.get<Contributor[]>(cacheKey)
+
+  if (cachedContributors) {
+    return cachedContributors
+  }
+
   const contributors = await listCollectionItems<Contributor>(
     COLLECTION_ID_CONTRIBUTORS
   )
+
+  // Cache the result with an appropriate TTL (e.g., 10 minutes)
+  await kv.set(cacheKey, contributors, { ex: 600 })
+
   return contributors
 }
 
@@ -834,46 +883,45 @@ export const getAllActiveContributors = async (): Promise<Contributor[]> => {
  * @returns An array of ProjectSummaryLite objects.
  */
 export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
-  try {
-    // Fetch all projects from the Webflow collection
-    const projects = await listCollectionItems<Project>(COLLECTION_ID_PROJECTS)
+  const cacheKey = 'projects:all'
+  const cachedProjects = await kv.get<ProjectSummaryLite[]>(cacheKey)
 
-    // Filter out archived and draft projects
-    const activeProjects = projects.filter(
-      (project) => !project.isArchived && !project.isDraft
-    )
-
-    // Map each active project to the ProjectSummaryLite structure
-    const projectSummaries: ProjectSummaryLite[] = await Promise.all(
-      activeProjects.map(async (project) => {
-        // Map the status ID to its label using the projects collection
-        const statusLabel = await getLabel(
-          COLLECTION_ID_PROJECTS,
-          'status',
-          project.fieldData.status
-        )
-
-        // Return the summarized project data
-        return {
-          id: project.id,
-          lastUpdated: project.lastUpdated,
-          createdOn: project.createdOn,
-          fieldData: {
-            summary: project.fieldData.summary,
-            name: project.fieldData.name,
-            slug: project.fieldData.slug,
-            'cover-image': project.fieldData['cover-image'], // Properly typed
-            status: statusLabel,
-          },
-        }
-      })
-    )
-
-    return projectSummaries
-  } catch (error) {
-    console.error('Error fetching and processing projects:', error)
-    throw error
+  if (cachedProjects) {
+    return cachedProjects
   }
+
+  // Fetch projects from Webflow API
+  const projects = await listCollectionItems<Project>(COLLECTION_ID_PROJECTS)
+
+  // Process projects
+  const projectSummaries = await Promise.all(
+    projects.map(async (project) => {
+      // Map status ID to label
+      const statusLabel = await getLabel(
+        COLLECTION_ID_PROJECTS,
+        'status',
+        project.fieldData.status
+      )
+
+      return {
+        id: project.id,
+        lastUpdated: project.lastUpdated,
+        createdOn: project.createdOn,
+        fieldData: {
+          summary: project.fieldData.summary,
+          name: project.fieldData.name,
+          slug: project.fieldData.slug,
+          'cover-image': project.fieldData['cover-image'],
+          status: statusLabel,
+        },
+      }
+    })
+  )
+
+  // Cache the result
+  await kv.set(cacheKey, projectSummaries, { ex: 600 })
+
+  return projectSummaries
 }
 
 /**
@@ -881,8 +929,18 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
  * @returns An array of all posts.
  */
 export const getAllPosts = async (): Promise<Post[]> => {
+  const cacheKey = 'posts:all'
+  const cachedPosts = await kv.get<Post[]>(cacheKey)
+
+  if (cachedPosts) {
+    return cachedPosts
+  }
+
   const posts = await listCollectionItems<Post>(COLLECTION_ID_POSTS)
-  // TODO: posts[0].fieldData.hashtags.forEach get post
+
+  // Cache the posts
+  await kv.set(cacheKey, posts, { ex: 600 })
+
   return posts
 }
 
@@ -891,7 +949,18 @@ export const getAllPosts = async (): Promise<Post[]> => {
  * @returns An array of all updates.
  */
 export const getAllUpdates = async (): Promise<Update[]> => {
+  const cacheKey = 'updates:all'
+  const cachedUpdates = await kv.get<Update[]>(cacheKey)
+
+  if (cachedUpdates) {
+    return cachedUpdates
+  }
+
   const updates = await listCollectionItems<Update>(COLLECTION_ID_UPDATES)
+
+  // Cache the updates
+  await kv.set(cacheKey, updates, { ex: 600 })
+
   return updates
 }
 
@@ -957,18 +1026,31 @@ export const getPostsByProjectIdLocal = async (
 }
 
 // Add a new cache for projects by ID
-const cachedProjectsMap: Map<string, ProjectSummaryLite> = new Map()
+let cachedProjectsMap: { [key: string]: ProjectSummaryLite } = {}
 
 /**
  * Initialize and cache all projects in a Map for quick lookup by ID.
  */
 const initializeProjectsMap = async () => {
-  if (cachedProjectsMap.size === 0) {
-    const projects = await getAllProjects()
-    projects.forEach((project) => {
-      cachedProjectsMap.set(project.id, project)
-    })
+  const cacheKey = 'projects:map'
+  const cachedMap = await kv.get<{ [key: string]: ProjectSummaryLite }>(
+    cacheKey
+  )
+
+  if (cachedMap) {
+    cachedProjectsMap = cachedMap
+    return
   }
+
+  const projects = await getAllProjects()
+  const projectsMap: { [key: string]: ProjectSummaryLite } = {}
+  projects.forEach((project) => {
+    projectsMap[project.id] = project
+  })
+
+  // Cache the map
+  await kv.set(cacheKey, projectsMap, { ex: 600 })
+  cachedProjectsMap = projectsMap
 }
 
 /**
@@ -986,16 +1068,13 @@ export const getSupportedProjectsForDonor = async (
   const supportedProjectIds = donor.fieldData['supported-projects']
 
   if (!supportedProjectIds || supportedProjectIds.length === 0) {
-    // console.log(
-    //   `Donor "${donor.fieldData['name']}" does not support any projects.`
-    // )
     return []
   }
 
   // Retrieve the corresponding Project objects from the cached map
   const supportedProjects: string[] = supportedProjectIds
     .map((projectId) => {
-      const project = cachedProjectsMap.get(projectId)
+      const project = cachedProjectsMap[projectId]
       if (!project) {
         console.warn(
           `Project with ID "${projectId}" not found for donor "${donor.fieldData['name']}".`
@@ -1004,12 +1083,6 @@ export const getSupportedProjectsForDonor = async (
       return project?.fieldData.slug
     })
     .filter((projectSlug): projectSlug is string => projectSlug !== undefined)
-
-  // Log the supported projects for debugging
-  // console.log(
-  //   `Donor "${donor.fieldData['name']}" supports ${supportedProjects.length} project(s):`,
-  //   supportedProjects
-  // )
 
   return supportedProjects
 }
