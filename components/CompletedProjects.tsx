@@ -45,7 +45,7 @@ const images = [
 
 function CompletedProjects() {
   return (
-    <section className="flex flex-col pt-40 font-space-grotesk text-gray-800">
+    <section className="flex flex-col pt-16 font-space-grotesk text-gray-800">
       <div className="mx-auto flex flex-col items-center text-center">
         <h2 className="text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
           We Help Advance
