@@ -17,6 +17,7 @@ import {
   getPostsBySlug,
   getMatchingDonorById,
   getMatchingDonorsByProjectSlug,
+  getFAQsByProjectSlug,
 } from '../../utils/webflow' // Adjust the path as necessary
 ;(async () => {
   try {
@@ -51,10 +52,15 @@ import {
     // const matchingDonor = await getMatchingDonorById('66febf8db539816be90591c2')
     // console.log('matching donor info: ', matchingDonor)
 
+    // Test getFAQsByProjectSlug
+    console.log(`\ngetFAQsByProjectSlug...`)
+    const faqs = await getFAQsByProjectSlug('core')
+    console.log('FAQs for core: ', faqs)
+
     // Test getMatchingDonorsByProjectSlug
-    console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
-    const matchingDonors = await getMatchingDonorsByProjectSlug('core')
-    console.log('matching donors for slug: ', matchingDonors)
+    // console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
+    // const matchingDonors = await getMatchingDonorsByProjectSlug('core')
+    // console.log('matching donors for slug: ', matchingDonors)
 
     // const donorMatchingType = await getMatchingTypeLabelForDonor(
     //   activeDonors[0]

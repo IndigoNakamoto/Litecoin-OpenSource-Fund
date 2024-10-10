@@ -82,7 +82,7 @@ const MenuSections: React.FC<MenuSectionsProps> = ({
   redditLink,
 }) => {
   switch (selectedMenuItem) {
-    case 'mission':
+    case 'Info':
       return (
         <div>
           <div className="markdown">

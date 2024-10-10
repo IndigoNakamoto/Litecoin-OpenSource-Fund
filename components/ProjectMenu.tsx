@@ -76,12 +76,12 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {/* Wrap the button in a div for each li. TODO: Decide to add community back 'community' */}
-        {['mission', 'faq', 'updates', 'posts'].map((item) => (
+        {['Info', 'faq', 'updates', 'posts'].map((item) => (
           <li
             className="group flex h-16 items-center justify-center rounded-lg font-space-grotesk"
             key={item}
           >
-            {item === 'faq' && faqCount === 1 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
+            {item === 'faq' && faqCount === 0 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
               updatesCount === 0 ? null : item === 'posts' && // Hide the entire button for "Updates" when updatesCount is 0
               commentCount === 0 ? null : ( // Hide the entire button for "Posts" when commentCount is 0
               <div className="transform-gpu overflow-hidden rounded-xl transition duration-200">

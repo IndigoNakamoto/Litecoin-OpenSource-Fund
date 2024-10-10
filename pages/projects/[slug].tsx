@@ -1,4 +1,4 @@
-// pages/missions/[slug].tsx
+// pages/projects/[slug].tsx
 import { FAQItem, Post, Update } from '../../utils/webflow'
 
 import { useDonation } from '../../contexts/DonationContext'
@@ -126,7 +126,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
   const [timeLeftInMonth, setTimeLeftInMonth] = useState(0)
 
   const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(
-    'mission'
+    'Info'
   )
   const [selectedUpdateId, setSelectedUpdateId] = useState<number | null>(null)
 
@@ -397,7 +397,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
     if (selectedMenu) {
       setSelectedMenuItem(selectedMenu)
     } else {
-      setSelectedMenuItem('mission')
+      setSelectedMenuItem('Info')
     }
 
     if (updateId) {
@@ -511,7 +511,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
 
             {/* Menu Sections */}
             <MenuSections
-              selectedMenuItem={selectedMenuItem || 'mission'}
+              selectedMenuItem={selectedMenuItem || 'Info'}
               title={title}
               content={content || ''}
               socialSummary={socialSummary || ''}
@@ -612,6 +612,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // Fetch project FAQs
   const faqs = await getFAQsByProjectSlug(slug)
+  console.log('FAQs: ', faqs)
 
   const posts = await getPostsBySlug(slug)
   // console.log('Projects posts: ', posts);
