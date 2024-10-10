@@ -892,6 +892,7 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
 
   // Fetch projects from Webflow API
   const projects = await listCollectionItems<Project>(COLLECTION_ID_PROJECTS)
+  // console.log('utils/webflow/gtAllProjects: ', projects)
 
   // Process projects
   const projectSummaries = await Promise.all(

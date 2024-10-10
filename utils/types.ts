@@ -14,19 +14,15 @@ declare module 'next-auth' {
 
 // Enums for clarity and cleaner codebase
 export enum ProjectCategory {
-  PROTOCOL = 'protocol',
-  BOUNTY = 'Bounty',
-  PROJECT = 'Project',
-  BUG_REPORT = 'bug-report',
-  OTHER = 'other',
-  DEVELOPMENT = 'Development Fund',
+  PROJECT = 'PROJECT',
+  BOUNTY = 'BOUNTY',
+  DEVELOPMENT = 'DEVELOPMENT',
+  OTHER = 'OTHER', // Add this if necessary
 }
 
 export enum BountyStatus {
-  OPEN = 'open',
-  IN_PROGRESS = 'in-progress',
-  COMPLETED = 'completed',
-  CLOSED = 'closed',
+  OPEN = 'OPEN',
+  COMPLETED = 'COMPLETED',
 }
 
 export enum BugSeverity {
@@ -97,6 +93,7 @@ export type ProjectItem = {
   // Funding
   bountyAmount?: number
   bountyStatus?: BountyStatus
+  status?: string
   targetFunding?: number // The one-time funding goal
   fundingDeadline?: Date // Date by which target funding should be met
   isRecurring: boolean

@@ -15,6 +15,7 @@ import TypingScroll from '@/components/TypingScroll'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useCallback, useMemo } from 'react'
+import SectionProjects from '@/components/SectionProjects'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -56,6 +57,8 @@ const AllProjects: NextPage = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [openSourceProjects, setOpenSourceProjects] = useState<ProjectItem[]>()
   const [completedProjects, setCompletedProjects] = useState<ProjectItem[]>()
+  const [openBounties, setOpenBounties] = useState<ProjectItem[]>()
+
   const outerSpinnerRef = useRef(null)
   const innerSpinnerRef = useRef(null)
   const isLgScreen = useIsLgScreen()
@@ -108,27 +111,54 @@ const AllProjects: NextPage = () => {
     }
   }, [])
 
+  function determineProjectType(status: string): ProjectCategory {
+    if (status === 'Open') {
+      return ProjectCategory.PROJECT
+    } else if (status === 'Bounty Open' || status === 'Bounty Closed') {
+      return ProjectCategory.BOUNTY
+    } else {
+      return ProjectCategory.OTHER // You can define 'OTHER' in your enum or handle it accordingly
+    }
+  }
+
+  function determineBountyStatus(status: string): BountyStatus | undefined {
+    if (status === 'Bounty Open') {
+      return BountyStatus.OPEN
+    } else if (['Bounty Closed', 'Closed', 'Completed'].includes(status)) {
+      return BountyStatus.COMPLETED
+    } else {
+      return undefined
+    }
+  }
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get('/api/webflow/projects')
 
         const projects = response.data.projects
-        console.log('projects: ', projects)
 
         const transformedProjects: ProjectItem[] = projects.map(
-          (project: any) => ({
-            slug: project.fieldData.slug,
-            title: project.fieldData.name,
-            summary: project.fieldData.summary,
-            coverImage: project.fieldData['cover-image'].url,
-            telegramLink: project.fieldData['telegram-link'] || '',
-            redditLink: project.fieldData['reddit-link'] || '',
-            facebookLink: project.fieldData['facebook-link'] || '',
-            type: ProjectCategory.PROJECT, // Assuming all fetched projects are of type PROJECT for now
-            isRecurring: false, // Assuming no recurring projects for now
-            nym: 'Litecoin Foundation',
-          })
+          (project: any) => {
+            const status = project.fieldData.status
+            const projectType = determineProjectType(status)
+            const bountyStatus = determineBountyStatus(status)
+
+            return {
+              slug: project.fieldData.slug,
+              title: project.fieldData.name,
+              summary: project.fieldData.summary,
+              coverImage: project.fieldData['cover-image'].url,
+              telegramLink: project.fieldData['telegram-link'] || '',
+              redditLink: project.fieldData['reddit-link'] || '',
+              facebookLink: project.fieldData['facebook-link'] || '',
+              type: projectType,
+              bountyStatus: bountyStatus,
+              status: status, // Add status here
+              isRecurring: false,
+              nym: 'Litecoin Foundation',
+            }
+          }
         )
 
         const desiredOrder = [
@@ -161,11 +191,9 @@ const AllProjects: NextPage = () => {
           })
         )
 
-        setCompletedProjects(
-          transformedProjects
-            .filter(isCompletedBounty)
-            .sort(() => 0.5 - Math.random())
-        )
+        setOpenBounties(transformedProjects.filter(isOpenBounty))
+
+        setCompletedProjects(transformedProjects.filter(isPastProject))
       } catch (error) {
         console.error('Error fetching projects:', error)
       }
@@ -236,7 +264,6 @@ const AllProjects: NextPage = () => {
         <title>Projects</title>
       </Head>
       <VerticalSocialIcons />
-
       <section
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center lg:py-24"
         style={{
@@ -300,7 +327,55 @@ const AllProjects: NextPage = () => {
           </div>
         </div>
       </section>
+      <SectionProjects bgColor={'#f2f2f2'}>
+        {/* Matching Donations Section */}
 
+        <div className="mx-auto max-w-4xl p-4 py-16 text-center">
+          <h1 className="mb-4 font-space-grotesk text-4xl font-bold text-[#222222]">
+            Double Your Impact with Charlie Lee’s Matching Donations!
+          </h1>
+          <p className="mb-6 font-space-grotesk text-lg  text-[#333333]">
+            In an exciting announcement at the Litecoin Summit in Nashville,
+            Charlie Lee has pledged to match donations up to{' '}
+            <strong>$250,000 annually</strong> for the next five years, totaling{' '}
+            <strong>$1.25 million</strong>! This means your donation will have
+            double the impact.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+            <div className="flex-1">
+              <h3 className="mb-2 font-space-grotesk text-2xl font-semibold  text-[#222222]">
+                Allocation of Funds:
+              </h3>
+              <ul className="list-inside list-disc font-space-grotesk  text-lg text-[#555555]">
+                <li>
+                  <strong>$50,000</strong> dedicated to the projects and bounty
+                  program.
+                </li>
+                <li>
+                  <strong>$200,000</strong> for direct support of the Litecoin
+                  Foundation.
+                </li>
+              </ul>
+            </div>
+            <div className="flex-1 font-space-grotesk ">
+              <h3 className="mb-2 text-2xl font-semibold text-[#222222]">
+                Why It Matters:
+              </h3>
+              <p className="markdown text-lg text-[#555555]">
+                "Because Litecoin was launched fairly, as you all know, we
+                didn’t print money for ourselves. So because of that the
+                Litecoin Foundation is very lean. Most projects that come to us
+                we have to turn down because we don’t have the funding. I want
+                to change that." - <em>Charlie Lee</em>
+              </p>
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-[#777777]">
+            *Charlie Lee will match your donations dollar for dollar up to the
+            specified amounts each year.
+          </p>
+        </div>
+      </SectionProjects>
       {/* OPEN SOURCE PROJECTS */}
       <section
         ref={projectsRef}
@@ -332,7 +407,6 @@ const AllProjects: NextPage = () => {
           </ul>
         </div>
       </section>
-
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[300px] w-full bg-white bg-cover bg-center">
         <div className="flex h-full flex-col items-center justify-center text-center">
           <h2 className="font-space-grotesk text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
@@ -346,7 +420,34 @@ const AllProjects: NextPage = () => {
           </p>
         </div>
       </section>
+      {/* OPEN BOUNTIES */}
+      {openBounties && openBounties.length > 0 ? (
+        <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[30vh]  w-full bg-[#f3ccc4] bg-cover bg-center pb-20">
+          <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
+            <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-tight tracking-wide text-black">
+              Open Bounties
+            </h1>
+            <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {openSourceProjects &&
+                openSourceProjects.map((p, i) => {
+                  const bgColor = bgColors[i % bgColors.length]
 
+                  return (
+                    <li key={i} className="flex">
+                      <ProjectCard
+                        project={p}
+                        openPaymentModal={openPaymentModal}
+                        bgColor={bgColor}
+                      />
+                    </li>
+                  )
+                })}
+            </ul>
+          </div>
+        </section>
+      ) : (
+        <></>
+      )}
       {/* SUBMIT PROJECT SECTION */}
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
@@ -367,8 +468,7 @@ const AllProjects: NextPage = () => {
           </div>
         </div>
       </section>
-
-      {/* BOUNTIES SECTION */}
+      {/* PAST PROJECTS */}
       <section
         ref={bountiesRef}
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
@@ -391,7 +491,6 @@ const AllProjects: NextPage = () => {
           </ul>
         </div>
       </section>
-
       {/* FAQ SECTION */}
       {/* <section
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-[#C5D3D6] bg-cover bg-center py-20 pt-16"
@@ -421,7 +520,6 @@ const AllProjects: NextPage = () => {
               To learn more about Litecoin, take a look at our FAQs:
             </p>
           </div> */}
-
       {/* Right Column: FAQ Section */}
       {/* <div className="w-full xl:w-[60%]">
             <div className="rounded-x mt-8 w-full md:mt-0">
@@ -430,7 +528,6 @@ const AllProjects: NextPage = () => {
           </div>
         </div>
       </section> */}
-
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
@@ -450,24 +547,24 @@ export function isNotOpenSatsProject(project: ProjectItem): boolean {
   return !isOpenSatsProject(project)
 }
 
-export function isBounty(project: ProjectItem): boolean {
+export function isProject(project: ProjectItem): boolean {
+  return project.type === ProjectCategory.PROJECT
+}
+
+export function isCompletedBounty(project: ProjectItem): boolean {
+  return (
+    project.type === ProjectCategory.BOUNTY &&
+    project.bountyStatus === BountyStatus.COMPLETED
+  )
+}
+
+export function isOpenBounty(project: ProjectItem): boolean {
   return (
     project.type === ProjectCategory.BOUNTY &&
     project.bountyStatus === BountyStatus.OPEN
   )
 }
 
-export function isCompletedBounty(project: ProjectItem): boolean {
-  return project.bountyStatus === BountyStatus.COMPLETED
-}
-
-export function isOpenBounty(project: ProjectItem): boolean {
-  return project.bountyStatus === BountyStatus.OPEN
-}
-
-export function isDevelopment(project: ProjectItem): boolean {
-  return project.type === ProjectCategory.DEVELOPMENT
-}
-export function isProject(project: ProjectItem): boolean {
-  return project.type === ProjectCategory.PROJECT
+export function isPastProject(project: ProjectItem): boolean {
+  return ['Bounty Closed', 'Closed', 'Completed'].includes(project.status || '')
 }

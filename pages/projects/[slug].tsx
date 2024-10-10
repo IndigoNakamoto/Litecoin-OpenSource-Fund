@@ -98,7 +98,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
 
   // Log coverImage when it changes
   useEffect(() => {
-    console.log('Project cover image: ', coverImage)
+    // console.log('Project cover image: ', coverImage)
   }, [coverImage])
 
   // State Variables
@@ -257,7 +257,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
       const matchingDonors = await fetchGetJSON(
         `/api/matching-donors-by-project?slug=${slug}`
       )
-      console.log('matching donors', matchingDonors)
+      // console.log('matching donors', matchingDonors)
 
       setMatchingDonors(matchingDonors)
 
@@ -591,7 +591,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // Fetch project data from the API
   const project = await getProjectBySlug(slug)
-  console.log('Project: ', project)
+  // console.log('Project: ', project)
 
   // Handle the case where the project is not found
   if (!project) {
