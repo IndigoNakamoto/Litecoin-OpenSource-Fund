@@ -171,7 +171,10 @@ const Navigation = () => {
       >
         <div className="mx-auto flex h-full w-[1300px] max-w-[90%] items-center justify-between">
           <div className="relative flex h-full items-center pb-1">
-            <Link href="/" aria-label={siteMetadata.headerTitle}>
+            <a
+              href="https://foss.litecoin.net"
+              aria-label={siteMetadata.headerTitle}
+            >
               <div
                 className="relative mt-[3px]"
                 style={{
@@ -197,7 +200,7 @@ const Navigation = () => {
                   }}
                 />
               </div>
-            </Link>
+            </a>
           </div>
           <nav>
             {isMobile ? (
@@ -280,16 +283,18 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/buy">Buy</a>
+                      <a href="https://foss.litecoin.net/buy">Buy</a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/spend">Spend</a>
+                      <a href="https://foss.litecoin.net/spend">Spend</a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/store">Store</a>
+                      <a href="https://foss.litecoin.net/store">Store</a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/for-business">Business</a>
+                      <a href="https://foss.litecoin.net/for-business">
+                        Business
+                      </a>
                     </li>
                   </ul>
                 </li>
@@ -347,12 +352,14 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/what-is-litecoin">
+                      <a href="https://foss.litecoin.net/what-is-litecoin">
                         What is Litecoin
                       </a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/resources">Resources</a>
+                      <a href="https://foss.litecoin.net/resources">
+                        Resources
+                      </a>
                     </li>
                   </ul>
                 </li>
@@ -368,7 +375,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
-                  <Link href="/projects">Projects</Link>
+                  <Link href="/projects-new">Projects</Link>
                 </li>
 
                 {/* The Foundation Dropdown */}
@@ -426,16 +433,18 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/litecoin-foundation">
+                      <a href="https://foss.litecoin.net/litecoin-foundation">
                         About
                       </a>
                     </li>
 
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/financials">Financials</a>
+                      <a href="https://foss.litecoin.net/financials">
+                        Financials
+                      </a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/litecoin-foundation#contact">
+                      <a href="https://foss.litecoin.net/litecoin-foundation#contact">
                         Contact
                       </a>
                     </li>
@@ -452,7 +461,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
-                  <a href="https://litecoin.net/news">News</a>
+                  <a href="https://foss.litecoin.net/news">News</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
@@ -463,7 +472,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.5}px`,
                   }}
                 >
-                  <a href="https://litecoin.net/events">Events</a>
+                  <a href="https://foss.litecoin.net/events">Events</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.90rem] mt-[.85rem] font-[500]"
@@ -474,7 +483,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.8}px`,
                   }}
                 >
-                  <a href="https://litecoin.net/shop">Shop</a>
+                  <a href="https://foss.litecoin.net/shop">Shop</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[600]"
@@ -486,7 +495,7 @@ const Navigation = () => {
                   }}
                 >
                   <a
-                    href="https://explorer.litecoin.net/"
+                    href="https://explorer.foss.litecoin.net/"
                     target="_blank" // Opens the link in a new tab
                     rel="noopener noreferrer" // Security best practices
                   >
@@ -512,21 +521,22 @@ const Navigation = () => {
         <div className="flex flex-col gap-x-6">
           <nav className="mt-10 h-full ">
             {[
-              'Use Litecoin',
-              'Learn',
-              'Projects',
-              'The Foundation',
-              'News',
-              'Events',
-              'Shop',
-              'Explorer',
+              { title: 'Use Litecoin', dropdown: true },
+              { title: 'Learn', dropdown: true },
+              {
+                title: 'Projects',
+                link: 'https://foss.litecoin.net/project-new',
+              },
+              { title: 'The Foundation', dropdown: true },
+              { title: 'News', link: 'https://foss.litecoin.net/news' },
+              { title: 'Events', link: 'https://foss.litecoin.net/events' },
+              { title: 'Shop', link: 'https://foss.litecoin.net/shop' },
+              { title: 'Explorer', link: 'https://litecoin.net/explorer' },
             ].map((item) => {
-              const itemKey = item.replace(' ', '').toLowerCase()
+              const itemKey = item.title.replace(' ', '').toLowerCase()
               return (
-                <div key={item} className="px-10 py-2 short:py-0.5 ">
-                  {['Use Litecoin', 'The Foundation', 'Learn'].includes(
-                    item
-                  ) ? (
+                <div key={item.title} className="px-10 py-2 short:py-0.5 ">
+                  {item.dropdown ? (
                     <>
                       <button
                         onClick={() => toggleMobileDropdown(itemKey)}
@@ -535,7 +545,7 @@ const Navigation = () => {
                         aria-expanded={mobileDropdownOpen[itemKey]}
                         aria-haspopup="true"
                       >
-                        {item}
+                        {item.title}
                         {/* Mobile SVG chevron will now flip up and down */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -564,82 +574,57 @@ const Navigation = () => {
                           className={`pl-6 font-space-grotesk text-[2.1rem] font-semibold`}
                           style={{ color: mobileMenuTextColor }}
                         >
-                          {/* Menu items based on `item` */}
-                          {item === 'Use Litecoin' ? (
+                          {/* Menu items based on `item.title` */}
+                          {item.title === 'Use Litecoin' ? (
                             <>
                               <li className="py-1">
-                                <a href="https://litecoin.net/buy">Buy</a>
+                                <a href="https://foss.litecoin.net/buy">Buy</a>
                               </li>
                               <li className="py-1">
-                                <Link
-                                  href="/use-litecoin/spend"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/spend">
                                   Spend
-                                </Link>
+                                </a>
                               </li>
                               <li className="py-1">
-                                <Link
-                                  href="/use-litecoin/store"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/store">
                                   Store
-                                </Link>
+                                </a>
                               </li>
                               <li className="py-1">
-                                <Link
-                                  href="/use-litecoin/for-business"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/for-business">
                                   Business
-                                </Link>
+                                </a>
                               </li>
                             </>
-                          ) : item === 'The Foundation' ? (
+                          ) : item.title === 'The Foundation' ? (
                             <>
                               <li className="py-1">
-                                <Link
-                                  href="/the-foundation/about"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/litecoin-foundation">
                                   About
-                                </Link>
+                                </a>
                               </li>
-
                               <li className="py-1">
-                                <Link
-                                  href="/the-foundation/financials"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/financials">
                                   Financials
-                                </Link>
+                                </a>
                               </li>
                               <li className="py-1">
-                                <Link
-                                  href="/the-foundation/contact"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/litecoin-foundation#contact">
                                   Contact
-                                </Link>
+                                </a>
                               </li>
                             </>
-                          ) : item === 'Learn' ? (
+                          ) : item.title === 'Learn' ? (
                             <>
                               <li className="py-1">
-                                <Link
-                                  href="/learn/what-is-litecoin"
-                                  onClick={onToggleNav}
-                                >
-                                  What is Litecoin
-                                </Link>
+                                <a href="https://foss.litecoin.net/what-is-litecoin">
+                                  What Is Litecoin
+                                </a>
                               </li>
                               <li className="py-1">
-                                <Link
-                                  href="/learn/resources"
-                                  onClick={onToggleNav}
-                                >
+                                <a href="https://foss.litecoin.net/resources">
                                   Resources
-                                </Link>
+                                </a>
                               </li>
                             </>
                           ) : null}
@@ -647,14 +632,13 @@ const Navigation = () => {
                       ) : null}
                     </>
                   ) : (
-                    <Link
-                      href={`/${item.toLowerCase()}`}
+                    <a
+                      href={item.link}
                       className="flex w-full items-center justify-between text-left font-space-grotesk text-[2.1rem] font-semibold"
                       style={{ color: mobileMenuTextColor }}
-                      onClick={onToggleNav}
                     >
-                      {item}
-                    </Link>
+                      {item.title}
+                    </a>
                   )}
                 </div>
               )

@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   FaXTwitter,
-  // FaTwitter,
+  FaTwitter,
   FaRedditAlien,
   FaFacebookF,
   FaGithub,
@@ -28,7 +28,7 @@ const HorizontalSocialIcons: React.FC<HorizontalSocialIconsProps> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaXTwitter
+        <FaTwitter
           className="h-[28px] w-[28px] transition-transform duration-200 ease-in-out hover:translate-y-[-4px]"
           style={iconStyle}
         />
