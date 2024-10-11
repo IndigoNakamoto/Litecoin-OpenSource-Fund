@@ -8,38 +8,42 @@ import Link from './Link'
 const imageDirectory = '/static/images/projects/completed/'
 const images = [
   // List your images with descriptive alt text for SEO
-  { title: 'Litecoin Core', src: 'core.png', href: '/projects/core' },
+  { title: 'Litecoin Core', src: 'core.png', href: '/projects-new/core' },
   {
     title: 'Litecoin Space',
     src: 'litecoin-space.jpeg',
-    href: '/projects/litecoin_space_mempool',
+    href: '/projects-new/litecoin_space_mempool',
   },
   {
     title: 'Ordinals Lite',
     src: 'OrdinalsLite3.png',
-    href: '/projects/ordinals_lite',
+    href: '/projects-new/ordinals_lite',
   },
-  { title: 'MWEB', src: 'MWEB.webp', href: '/projects/mweb' },
+  { title: 'MWEB', src: 'MWEB.webp', href: '/projects-new/mweb' },
   {
     title: 'Litecoin Dev Kit',
     src: 'ldk.png',
-    href: '/projects/litecoin_dev_kit',
+    href: '/projects-new/litecoin_dev_kit',
   },
-  { title: 'Litescribe', src: 'litescribe3.png', href: '/projects/litescribe' },
+  {
+    title: 'Litescribe',
+    src: 'litescribe3.png',
+    href: '/projects-new/litescribe',
+  },
   {
     title: 'Litewallet',
     src: 'litewallet.png',
-    href: '/projects/litewallet',
+    href: '/projects-new/litewallet',
   },
   {
     title: 'Electrum-LTC',
     src: 'electrum.png',
-    href: '/projects/electrum',
+    href: '/projects-new/electrum',
   },
   {
     title: 'Stackwallet',
     src: 'stackwallet.png',
-    href: '/projects/stackwallet',
+    href: '/projects-new/stackwallet',
   },
 ]
 
@@ -86,7 +90,7 @@ function CompletedProjects() {
 
         {/* New grid item for "View All Projects" button */}
         <div className="relative flex h-48 items-center justify-center rounded-xl bg-[#222222] text-white transition duration-300 hover:bg-opacity-75">
-          <Link href="/projects" aria-label="View All Projects">
+          <Link href="/projects-new" aria-label="View All Projects">
             <span className="text-2xl font-semibold">View All Projects</span>
           </Link>
         </div>

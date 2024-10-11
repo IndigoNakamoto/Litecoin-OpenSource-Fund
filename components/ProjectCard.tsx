@@ -27,7 +27,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <figure
       className={`flex flex-col justify-between rounded-3xl p-4 sm:p-6 md:p-6 ${bgColor} w-full space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
     >
-      <Link href={`/projects/${slug}`} passHref>
+      <Link href={`/projects-new/${slug}`} passHref>
         <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
           <Image
             loader={customImageLoader} // Use the custom loader

@@ -53,7 +53,7 @@ export default function ProjectSubmissionForm() {
     try {
       const res = await fetchPostJSON('/api/github', structuredData)
       if (res.message === 'success') {
-        router.push('/projects/submitted')
+        router.push('/projects-new/submitted')
         setLoading(false)
       } else {
         setFailureReason('Submission failed. Please try again.')

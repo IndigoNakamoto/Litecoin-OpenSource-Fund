@@ -252,7 +252,7 @@ const Header = () => {
                   marginRight: `${scaledMargin + 2.5}px`,
                 }}
               >
-                <Link href="/projects">Projects</Link>
+                <Link href="/projects-new">Projects</Link>
               </li>
 
               <li

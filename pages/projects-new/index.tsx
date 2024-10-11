@@ -467,7 +467,7 @@ const AllProjects: NextPage = () => {
               our commitment to decentralized open-source solutions and the
               future of Litecoin.
             </p>
-            <Link href="/projects/submit" className="m-auto pt-4">
+            <Link href="/projects-new/submit" className="m-auto pt-4">
               <button className="w-48 rounded-none border border-[#222222] font-semibold text-[#222222]">
                 Submit Project
               </button>
