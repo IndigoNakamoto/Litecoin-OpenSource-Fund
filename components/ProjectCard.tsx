@@ -62,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         <div className="mt-4 text-left">
           <Link
-            href={`/projects/${slug}`}
+            href={`/projects-new/${slug}`}
             passHref
             className="text-secondary-500 hover:text-secondary-600 font-bold tracking-wider text-[#7e7e7e] underline"
             aria-label="FIND OUT MORE"
