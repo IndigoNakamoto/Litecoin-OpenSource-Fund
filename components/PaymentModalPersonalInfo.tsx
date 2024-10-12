@@ -368,7 +368,9 @@ const PaymentModalPersonalInfo: React.FC<
         organizationId: 1189134331,
         pledgeCurrency: formData.assetSymbol,
         pledgeAmount: formData.pledgeAmount,
-        receiptEmail: formData.receiptEmail,
+        receiptEmail: donateAnonymously
+          ? anonInfo.receiptEmail
+          : formData.receiptEmail,
         firstName: donateAnonymously ? anonInfo.firstName : formData.firstName,
         lastName: donateAnonymously ? anonInfo.lastName : formData.lastName,
         addressLine1: donateAnonymously

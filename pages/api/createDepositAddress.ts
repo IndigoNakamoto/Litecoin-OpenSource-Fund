@@ -122,11 +122,7 @@ export default async function handler(
       isAnonymous: isAnonymous,
       pledgeCurrency: pledgeCurrency,
       pledgeAmount: parsedPledgeAmount.toString(), // Convert to string
-    }
-
-    // Include receiptEmail if provided
-    if (receiptEmail) {
-      apiPayload.receiptEmail = receiptEmail
+      receiptEmail: receiptEmail,
     }
 
     // If the donation is not anonymous, include all required donor fields
