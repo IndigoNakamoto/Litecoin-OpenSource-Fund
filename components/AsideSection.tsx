@@ -40,6 +40,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
   recurringAmountGoal,
   monthlyDonorCount,
   timeLeftInMonth,
+  totalPaid,
   openPaymentModal,
 }) => {
   return (
@@ -75,6 +76,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
             recurringAmountGoal={recurringAmountGoal}
             monthlyDonorCount={monthlyDonorCount}
             timeLeftInMonth={timeLeftInMonth}
+            totalPaid={totalPaid}
           />
         </div>
 

@@ -58,9 +58,9 @@ import {
     // console.log('FAQs for core: ', faqs)
 
     // Test getMatchingDonorsByProjectSlug
-    console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
-    const matchingDonors = await getMatchingDonorsByProjectSlug('ordinals-lite')
-    console.log('matching donors for slug: ', matchingDonors)
+    // console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
+    // const matchingDonors = await getMatchingDonorsByProjectSlug('ordinals-lite')
+    // console.log('matching donors for slug: ', matchingDonors)
 
     // const donorMatchingType = await getMatchingTypeLabelForDonor(
     //   activeDonors[0]
@@ -92,15 +92,15 @@ import {
     // const contributors = await getAllContributors()
     // console.log('Contributors:', JSON.stringify(contributors, null, 2))
 
-    const projectSlug = 'mweb' // Replace with an actual project slug
+    const projectSlug = 'ordinals-lite' // Replace with an actual project slug
 
     // Test getProjectBySlug
-    // console.log('\nTesting getProjectBySlug...')
-    // const projectWithDetails = await getProjectBySlug(projectSlug)
-    // console.log(
-    //   `Project '${projectSlug}':`,
-    //   JSON.stringify(projectWithDetails, null, 2)
-    // )
+    console.log('\nTesting getProjectBySlug...')
+    const projectWithDetails = await getProjectBySlug(projectSlug)
+    console.log(
+      `Project '${projectSlug}':`,
+      JSON.stringify(projectWithDetails, null, 2)
+    )
 
     // // Test getProjectUpdatesBySlug
     // console.log('\nTesting getProjectUpdatesBySlug...')
