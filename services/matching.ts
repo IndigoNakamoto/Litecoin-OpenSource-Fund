@@ -32,10 +32,12 @@ export const processDonationMatching = async () => {
     for (const donation of donations) {
       try {
         const donationAmount = Number(donation.valueAtDonationTimeUSD)
-        if (isNaN(donationAmount)) {
-          throw new Error(
-            `Invalid donation amount for donation ID ${donation.id}`
+        if (isNaN(donationAmount) || donationAmount <= 0) {
+          console.warn(
+            `Donation ID ${donation.id} has invalid or zero amount (${donationAmount}), skipping matching.`
           )
+          // Do not mark as processed; allow future processing if amount is updated
+          continue // Skip to the next donation
         }
         const projectSlug = donation.projectSlug
 

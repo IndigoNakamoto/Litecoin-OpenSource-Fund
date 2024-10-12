@@ -214,7 +214,8 @@ async function handleDepositTransaction(
     payoutCurrency: payload.payoutCurrency,
     externalId: payload.externalId,
     campaignId: payload.campaignId,
-    valueAtDonationTimeUSD: payload.valueAtDonationTimeUSD,
+    valueAtDonationTimeUSD:
+      payload.valueAtDonationTimeUSD || donation.valueAtDonationTimeUSD, // Update if provided
     currency: payload.currency,
     amount: payload.amount,
     status: payload.status,
@@ -233,9 +234,10 @@ async function handleDepositTransaction(
     data: updateData,
   })
 
-  // Create a WebhookEvent record
-  await prisma.webhookEvent.create({
-    data: {
+  await prisma.webhookEvent.upsert({
+    where: { eid },
+    update: { processed: true }, // Update if already exists
+    create: {
       eventType: 'DEPOSIT_TRANSACTION',
       payload: payload,
       donationId: donation.id,

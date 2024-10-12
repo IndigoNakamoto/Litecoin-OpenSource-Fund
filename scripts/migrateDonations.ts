@@ -170,6 +170,7 @@ async function createDonationRecord(
         donationType: 'crypto',
         assetSymbol: 'LTC',
         success: true,
+        processed: true,
         pledgeAmount: parsedPledgeAmount,
         // Donor Info
         firstName: 'Supporter',

@@ -327,13 +327,13 @@ const PaymentModalPersonalInfo: React.FC<
     const anonInfo = {
       firstName: formData.firstName || 'Anonymous',
       lastName: formData.lastName || 'Donor',
-      receiptEmail: formData.receiptEmail || 'anon@anon.com',
-      addressLine1: '123 Anon St',
-      addressLine2: 'Anon street line 2',
-      country: 'US', // Adjust the country code as needed
-      state: 'CA', // Adjust the state code as needed
-      city: 'Anytown',
-      zipcode: '00000',
+      receiptEmail: formData.receiptEmail || 'N/A',
+      addressLine1: 'N/A',
+      addressLine2: 'N/A',
+      country: 'N/A', // Adjust the country code as needed
+      state: 'N/A', // Adjust the state code as needed
+      city: 'N/A',
+      zipcode: 'N/A',
     }
 
     if (selectedOption === 'fiat') {
