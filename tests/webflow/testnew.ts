@@ -49,18 +49,18 @@ import {
 
     // Test getMatchingDonorById
     // console.log('\nTesting getMatchingDonorById...')
-    // const matchingDonor = await getMatchingDonorById('66febf8db539816be90591c2')
+    // const matchingDonor = await getMatchingDonorById('670718cdf8133590e50b7770')
     // console.log('matching donor info: ', matchingDonor)
 
     // Test getFAQsByProjectSlug
-    console.log(`\ngetFAQsByProjectSlug...`)
-    const faqs = await getFAQsByProjectSlug('core')
-    console.log('FAQs for core: ', faqs)
+    // console.log(`\ngetFAQsByProjectSlug...`)
+    // const faqs = await getFAQsByProjectSlug('core')
+    // console.log('FAQs for core: ', faqs)
 
     // Test getMatchingDonorsByProjectSlug
-    // console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
-    // const matchingDonors = await getMatchingDonorsByProjectSlug('core')
-    // console.log('matching donors for slug: ', matchingDonors)
+    console.log(`\nTesting getMatchingDonorsByProjectSlug...`)
+    const matchingDonors = await getMatchingDonorsByProjectSlug('ordinals-lite')
+    console.log('matching donors for slug: ', matchingDonors)
 
     // const donorMatchingType = await getMatchingTypeLabelForDonor(
     //   activeDonors[0]

@@ -545,19 +545,19 @@ const Project: NextPage<SingleProjectPageProps> = ({
             title={title}
             coverImage={coverImage}
             addressStats={addressStats as AddressStats}
-            // isMatching={isMatching || true}
-            // isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
-            // isRecurring={isRecurring}
-            // matchingDonors={matchingDonors}
-            // matchingTotal={matchingTotal}
-            // serviceFeeCollected={serviceFeesCollected || 0}
-            // totalPaid={totalPaid || 0}
+            isMatching={isMatching || true}
+            isBitcoinOlympics2024={isBitcoinOlympics2024 || false}
+            isRecurring={isRecurring}
+            matchingDonors={matchingDonors}
+            matchingTotal={matchingTotal}
+            serviceFeeCollected={serviceFeesCollected || 0}
+            totalPaid={totalPaid || 0}
             // formatLits={formatLits}
             formatUSD={formatUSD}
-            // monthlyTotal={monthlyTotal}
-            // recurringAmountGoal={recurringAmountGoal}
-            // monthlyDonorCount={monthlyDonorCount}
-            // timeLeftInMonth={timeLeftInMonth}
+            monthlyTotal={monthlyTotal}
+            recurringAmountGoal={recurringAmountGoal}
+            monthlyDonorCount={monthlyDonorCount}
+            timeLeftInMonth={timeLeftInMonth}
             bountyStatus={bountyStatus as BountyStatus}
             openPaymentModal={openPaymentModal}
           />
@@ -612,7 +612,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // Fetch project FAQs
   const faqs = await getFAQsByProjectSlug(slug)
-  console.log('FAQs: ', faqs)
+  // console.log('FAQs: ', faqs)
 
   const posts = await getPostsBySlug(slug)
   // console.log('Projects posts: ', posts);

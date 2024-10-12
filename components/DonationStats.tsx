@@ -5,13 +5,13 @@ import { defaultAddressStats } from '../utils/defaultValues' // Adjust the path 
 
 type DonationStatsProps = {
   addressStats?: AddressStats
+  formatUSD: (value: any) => string
   isMatching?: boolean
   isBitcoinOlympics2024?: boolean
   isRecurring?: boolean
   matchingTotal?: number
   serviceFeeCollected?: number
   totalPaid?: number
-  formatUSD: (value: any) => string
   matchingDonors?: any[]
   monthlyTotal?: number
   recurringAmountGoal?: number

@@ -1,8 +1,9 @@
 // /utils/webflow.ts
 import axios, { AxiosInstance } from 'axios'
 import dotenv from 'dotenv'
-import { Controller } from 'react-hook-form'
+// import { Controller } from 'react-hook-form'
 import { kv } from '@vercel/kv'
+import { prisma } from '../lib/prisma' // Adjust the path to your prisma client
 
 // Load environment variables from .env file
 dotenv.config()
@@ -90,6 +91,9 @@ export interface Post {
   }
   // Add other relevant fields
 }
+export interface MatchingDonorWithRemainingAmount extends MatchingDonor {
+  remainingAmount: number
+}
 
 export interface Update {
   id: string
@@ -124,7 +128,7 @@ interface MatchingDonor {
 interface MatchingDonorFieldData {
   name: string
   'matching-type': string // Option field, returns option ID
-  'total-matching-amount': number
+  'total-matching-amount': number | string
   'remaining-matching-amount': number
   'supported-projects'?: string[]
   'start-date': string
@@ -209,7 +213,7 @@ interface MatchingDonor {
 interface MatchingDonorFieldData {
   name: string
   'matching-type': string
-  'total-matching-amount': number
+  'total-matching-amount': number | string
   'remaining-matching-amount': number
   'supported-projects'?: string[]
   'start-date': string
@@ -263,72 +267,80 @@ export const getMatchingDonorsByProjectSlug = async (
       console.warn(`No project found with slug "${slug}".`)
       return []
     }
-    const projectId = project.id
 
-    // Get all active matching donors
-    const donors = await getActiveMatchingDonors()
-
-    // Initialize the matching-type option map
-    const matchingTypeMap = await createOptionIdToLabelMap(
-      COLLECTION_ID_MATCHING_DONORS,
-      'matching-type'
+    // Fetch all matching donors
+    const allDonors = await listCollectionItems<MatchingDonor>(
+      COLLECTION_ID_MATCHING_DONORS
     )
 
-    // Get the option ID for 'All Projects'
-    const allProjectsOptionId = Object.entries(matchingTypeMap).find(
-      ([, label]) => label === 'All Projects'
-    )?.[0]
-
-    if (!allProjectsOptionId) {
-      console.error(
-        'Option ID for "All Projects" not found in matching-type options.'
-      )
-      return []
-    }
-
-    // Filter donors that support this project or have matching-type 'All Projects'
-    const donorsForProject = donors.filter((donor) => {
-      const supportedProjects = donor.fieldData['supported-projects'] || []
-      const matchingTypeId = donor.fieldData['matching-type']
-
-      // Include donor if matching-type is 'All Projects'
-      if (matchingTypeId === allProjectsOptionId) {
-        return true
-      }
-
-      // Include donor if supported-projects includes projectId
-      return supportedProjects.includes(projectId)
+    // Get donor IDs who have made matching donations to this project
+    const matchingDonations = await prisma.matchingDonationLog.findMany({
+      where: {
+        projectSlug: slug,
+      },
+      select: {
+        donorId: true,
+      },
     })
 
-    // Map each donor to MappedMatchingDonor
-    const mappedDonors = await Promise.all(
-      donorsForProject.map(async (donor) => {
+    const donorIdsWhoMatchedProject = Array.from(
+      new Set(matchingDonations.map((donation) => donation.donorId))
+    )
+
+    // Filter donors to those who have matched donations for this project
+    const donorsWhoMatchedProject = allDonors.filter((donor) =>
+      donorIdsWhoMatchedProject.includes(donor.id)
+    )
+
+    // Get total matched amounts for donors for this project
+    const totalMatchedAmounts = await prisma.matchingDonationLog.groupBy({
+      by: ['donorId'],
+      where: {
+        projectSlug: slug,
+      },
+      _sum: {
+        matchedAmount: true,
+      },
+    })
+
+    // Create a map of donorId to totalMatchedAmount
+    const totalMatchedAmountMap: { [donorId: string]: number } = {}
+    totalMatchedAmounts.forEach((item) => {
+      totalMatchedAmountMap[item.donorId] =
+        item._sum.matchedAmount?.toNumber() ?? 0
+    })
+
+    // For each donor, retrieve the total matched amount from the map
+    const donorsWithMatchedAmounts = await Promise.all(
+      donorsWhoMatchedProject.map(async (donor) => {
+        const donorId = donor.id
+        const totalMatchedAmount = totalMatchedAmountMap[donorId] || 0
+
         // Map the 'status' option ID to its label
         const statusLabel = await getStatusLabel(donor.fieldData.status)
 
         // Map the 'matching-type' option ID to its label
-        const matchingTypeLabel =
-          matchingTypeMap[donor.fieldData['matching-type']] ||
-          'Unknown Matching Type'
+        const matchingTypeLabel = await getMatchingTypeLabel(
+          donor.fieldData['matching-type']
+        )
 
         // Map the 'supported-projects' IDs to their corresponding project slugs
         const supportedProjectSlugs = await getSupportedProjectsForDonor(donor)
 
-        const mappedDonor: object = {
-          ...donor,
-          fieldData: {
+        return {
+          donorId,
+          donorFieldData: {
             ...donor.fieldData,
-            statusLabel: statusLabel, // New field
-            matchingTypeLabel: matchingTypeLabel, // New field
-            supportedProjectSlugs: supportedProjectSlugs, // New field
+            statusLabel,
+            matchingTypeLabel,
+            supportedProjectSlugs,
           },
+          totalMatchedAmount,
         }
-
-        return mappedDonor
       })
     )
-    // console.log('getMatchingDonorsByProjectSlug: ', mappedDonor)
-    return mappedDonors
+
+    return donorsWithMatchedAmounts
   } catch (error) {
     console.error('Error fetching matching donors by project slug:', error)
     return []
@@ -674,14 +686,35 @@ export const getFAQsByProjectSlug = async (
   return faqs
 }
 
-export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
-  const cacheKey = 'matchingDonors:active'
-  const cachedDonors = await kv.get<MatchingDonor[]>(cacheKey)
+const calculateRemainingAmount = async (
+  donor: MatchingDonor
+): Promise<number> => {
+  const donorId = donor.id
+  // Aggregate the total matched amount for this donor
+  const totalMatched = await prisma.matchingDonationLog.aggregate({
+    where: {
+      donorId,
+    },
+    _sum: {
+      matchedAmount: true,
+    },
+  })
 
-  if (cachedDonors) {
-    return cachedDonors
-  }
+  const totalMatchedAmount: number =
+    totalMatched._sum.matchedAmount?.toNumber() ?? 0
 
+  const totalMatchingAmount: number =
+    Number(donor.fieldData['total-matching-amount']) || 0
+  const remainingAmount = totalMatchingAmount - totalMatchedAmount
+  return remainingAmount
+}
+
+export const getActiveMatchingDonors = async (): Promise<
+  MatchingDonorWithRemainingAmount[]
+> => {
+  console.log('webflow get active matching donors')
+
+  // Directly fetch donors without cache
   const donors = await listCollectionItems<MatchingDonor>(
     COLLECTION_ID_MATCHING_DONORS
   )
@@ -694,8 +727,11 @@ export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
     'status'
   )
 
+  // Initialize the activeDonors array with explicit type annotation
+  const activeDonors: MatchingDonorWithRemainingAmount[] = []
+
   // Filter active donors within the date range and with remaining matching amount
-  const activeDonors = donors.filter((donor) => {
+  for (const donor of donors) {
     const startDate = new Date(donor.fieldData['start-date'])
     const endDate = new Date(donor.fieldData['end-date'])
 
@@ -704,21 +740,22 @@ export const getActiveMatchingDonors = async (): Promise<MatchingDonor[]> => {
 
     const isActive = statusLabel === 'Active'
     const withinDateRange = now >= startDate && now <= endDate
+    const notDraftOrArchived = !donor.isDraft && !donor.isArchived
 
-    // This has to be calculated from prisma model logs
-    const hasRemainingAmount = donor.fieldData['remaining-matching-amount'] > 0
+    if (isActive && withinDateRange && notDraftOrArchived) {
+      const remainingAmount = await calculateRemainingAmount(donor)
+      const hasRemainingAmount = remainingAmount > 0
 
-    return (
-      isActive &&
-      withinDateRange &&
-      hasRemainingAmount &&
-      !donor.isDraft &&
-      !donor.isArchived
-    )
-  })
-
-  // Cache the active donors
-  await kv.set(cacheKey, activeDonors, { ex: 600 })
+      if (hasRemainingAmount) {
+        // Include the remainingAmount in the donor object
+        const donorWithRemaining: MatchingDonorWithRemainingAmount = {
+          ...donor,
+          remainingAmount, // add the remainingAmount
+        }
+        activeDonors.push(donorWithRemaining)
+      }
+    }
+  }
 
   return activeDonors
 }

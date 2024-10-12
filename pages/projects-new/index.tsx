@@ -19,7 +19,7 @@ import SectionProjects from '@/components/SectionProjects'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
-  slug: 'projects_fund',
+  slug: 'projects-fund',
   title: 'Projects Fund',
   summary: '',
   coverImage: '/static/images/projects/projects2.png',

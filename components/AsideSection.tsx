@@ -10,8 +10,19 @@ type AsideSectionProps = {
   title: string
   coverImage: string
   addressStats?: AddressStats
-  bountyStatus?: BountyStatus
   formatUSD?: any
+  isMatching?: boolean
+  isBitcoinOlympics2024?: boolean
+  isRecurring?: boolean
+  matchingDonors?: any[]
+  matchingTotal?: number
+  monthlyTotal?: number
+  recurringAmountGoal?: number
+  monthlyDonorCount?: number
+  timeLeftInMonth?: number
+  serviceFeeCollected?: number
+  bountyStatus?: BountyStatus
+  totalPaid?: number
   openPaymentModal: () => void
 }
 
@@ -21,6 +32,14 @@ const AsideSection: React.FC<AsideSectionProps> = ({
   addressStats = defaultAddressStats,
   formatUSD,
   bountyStatus,
+  isMatching,
+  isBitcoinOlympics2024,
+  isRecurring,
+  matchingDonors,
+  matchingTotal,
+  recurringAmountGoal,
+  monthlyDonorCount,
+  timeLeftInMonth,
   openPaymentModal,
 }) => {
   return (
@@ -45,7 +64,18 @@ const AsideSection: React.FC<AsideSectionProps> = ({
 
         {/* Donation Stats */}
         <div className="flex w-full flex-col pt-4">
-          <DonationStats addressStats={addressStats} formatUSD={formatUSD} />
+          <DonationStats
+            addressStats={addressStats}
+            formatUSD={formatUSD}
+            isMatching={isMatching}
+            isBitcoinOlympics2024={isBitcoinOlympics2024}
+            isRecurring={isRecurring}
+            matchingDonors={matchingDonors}
+            matchingTotal={matchingTotal}
+            recurringAmountGoal={recurringAmountGoal}
+            monthlyDonorCount={monthlyDonorCount}
+            timeLeftInMonth={timeLeftInMonth}
+          />
         </div>
 
         {/* Donate Button */}
