@@ -39,7 +39,9 @@ export default async function handler(
       const donations: Donation[] = await prisma.donation.findMany({
         where: {
           projectSlug: slug,
-          status: 'Complete',
+          status: {
+            in: ['Complete', 'Advanced'], // Filter donations with 'Complete' or 'Advanced' status
+          },
         },
       })
 
@@ -62,7 +64,7 @@ export default async function handler(
 
       donations.forEach((donation) => {
         if (donation.socialX) {
-          supporters.push(`www.twitter.com/${donation.socialX}`)
+          supporters.push(`${donation.socialX}`)
         }
         // if (donation.socialLinkedIn) {
         //   supporters.push({ handle: donation.socialLinkedIn, type: 'LinkedIn' })

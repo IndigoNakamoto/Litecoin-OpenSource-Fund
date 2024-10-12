@@ -5,6 +5,7 @@ import prisma from '../../../lib/prisma'
 import crypto from 'crypto'
 import logger from '../../../lib/logger'
 import { Prisma } from '@prisma/client' // Import Prisma namespace
+import { processDonationMatching } from '../../../services/matching'
 
 // Define Webhook Event Types
 type WebhookEventType = 'DEPOSIT_TRANSACTION' | 'TRANSACTION_CONVERTED' | string
@@ -123,6 +124,16 @@ export default async function handler(
 
     // Process the event
     await handlerFunction(webhookRequest.eventType, decryptedPayload)
+
+    // Run the matching logic
+    try {
+      await processDonationMatching()
+    } catch (error) {
+      logger.error('Error running matching logic:', {
+        message: error.message,
+        stack: error.stack,
+      })
+    }
 
     return res.status(200).json({ message: 'Webhook processed successfully' })
   } catch (error: any) {

@@ -327,8 +327,9 @@ const PaymentModalPersonalInfo: React.FC<
     const anonInfo = {
       firstName: 'Anonymous',
       lastName: 'Donor',
-      receiptEmail: 'anon@anon.com',
+      receiptEmail: formData.receiptEmail || 'anon@anon.com',
       addressLine1: '123 Anon St',
+      addressLine2: 'Anon street line 2',
       country: 'US', // Adjust the country code as needed
       state: 'CA', // Adjust the state code as needed
       city: 'Anytown',
@@ -346,9 +347,7 @@ const PaymentModalPersonalInfo: React.FC<
         pledgeAmount: formData.pledgeAmount,
         firstName: donateAnonymously ? anonInfo.firstName : formData.firstName,
         lastName: donateAnonymously ? anonInfo.lastName : formData.lastName,
-        receiptEmail: donateAnonymously
-          ? anonInfo.receiptEmail
-          : formData.receiptEmail,
+        receiptEmail: formData.receiptEmail,
         addressLine1: donateAnonymously
           ? anonInfo.addressLine1
           : formData.addressLine1,
@@ -368,14 +367,18 @@ const PaymentModalPersonalInfo: React.FC<
         pledgeCurrency: formData.assetSymbol,
         pledgeAmount: formData.pledgeAmount,
         receiptEmail: formData.receiptEmail,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        addressLine1: formData.addressLine1,
-        addressLine2: formData.addressLine2,
-        country: formData.country,
-        state: formData.state,
-        city: formData.city,
-        zipcode: formData.zipcode,
+        firstName: donateAnonymously ? anonInfo.firstName : formData.firstName,
+        lastName: donateAnonymously ? anonInfo.lastName : formData.lastName,
+        addressLine1: donateAnonymously
+          ? anonInfo.addressLine1
+          : formData.addressLine1,
+        addressLine2: donateAnonymously
+          ? anonInfo.addressLine2
+          : formData.addressLine2,
+        country: donateAnonymously ? anonInfo.country : formData.country,
+        state: donateAnonymously ? anonInfo.state : formData.state,
+        city: donateAnonymously ? anonInfo.city : formData.city,
+        zipcode: donateAnonymously ? anonInfo.zipcode : formData.zipcode,
         taxReceipt: formData.taxReceipt,
         isAnonymous: formData.isAnonymous,
         joinMailingList: formData.joinMailingList,
