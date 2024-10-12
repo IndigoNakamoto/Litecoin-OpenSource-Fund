@@ -325,8 +325,8 @@ const PaymentModalPersonalInfo: React.FC<
     let apiBody = {}
 
     const anonInfo = {
-      firstName: 'Anonymous',
-      lastName: 'Donor',
+      firstName: formData.firstName || 'Anonymous',
+      lastName: formData.lastName || 'Donor',
       receiptEmail: formData.receiptEmail || 'anon@anon.com',
       addressLine1: '123 Anon St',
       addressLine2: 'Anon street line 2',
