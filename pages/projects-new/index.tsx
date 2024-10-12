@@ -475,14 +475,14 @@ const AllProjects: NextPage = () => {
           </div>
         </div>
       </section>
-      {/* PAST PROJECTS */}
+      {/* COMPLETED PROJECTS */}
       <section
         ref={bountiesRef}
         className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
-            Past Projects
+            Completed
           </h1>
           <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
