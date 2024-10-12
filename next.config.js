@@ -8,7 +8,7 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src 'self' https://pbs.twimg.com https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://foss.litecoin.net https://uploads-ssl.webflow.com https://static.webflow.com https://images.webflow.com blob: data:;
+  img-src 'self' https://pbs.twimg.com https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://litecoin.net https://uploads-ssl.webflow.com https://static.webflow.com https://images.webflow.com blob: data:;
   media-src 'none';
   connect-src 'self';
   font-src 'self' https://fonts.gstatic.com;
@@ -84,7 +84,7 @@ module.exports = () => {
         },
         {
           protocol: 'https',
-          hostname: 'foss.litecoin.net',
+          hostname: 'litecoin.net',
           pathname: '/**',
         },
         {
