@@ -414,19 +414,6 @@ const AllProjects: NextPage = () => {
           </ul>
         </div>
       </section>
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[300px] w-full bg-white bg-cover bg-center">
-        <div className="flex h-full flex-col items-center justify-center text-center">
-          <h2 className="font-space-grotesk text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
-            We Help Advance
-          </h2>
-          <h3 className="font-space-grotesk text-3xl font-semibold text-gray-800 lg:text-4xl">
-            <TypingScroll />
-          </h3>
-          <p className="pt-2 font-space-grotesk text-2xl text-gray-600">
-            Unite. Fund. Advance. - The Litecoin Project Development Portal
-          </p>
-        </div>
-      </section>
       {/* OPEN BOUNTIES */}
       {openBounties && openBounties.length > 0 ? (
         <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[30vh]  w-full bg-[#f3ccc4] bg-cover bg-center pb-20">
@@ -435,8 +422,8 @@ const AllProjects: NextPage = () => {
               Open Bounties
             </h1>
             <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {openSourceProjects &&
-                openSourceProjects.map((p, i) => {
+              {openBounties &&
+                openBounties.map((p, i) => {
                   const bgColor = bgColors[i % bgColors.length]
 
                   return (
@@ -455,6 +442,21 @@ const AllProjects: NextPage = () => {
       ) : (
         <></>
       )}
+      {/* SCROLLING TEXT  */}
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[300px] w-full bg-[#C5D3D6] bg-cover bg-center">
+        <div className="flex h-full flex-col items-center justify-center text-center">
+          <h2 className="font-space-grotesk text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
+            We Help Advance
+          </h2>
+          <h3 className="font-space-grotesk text-3xl font-semibold text-gray-800 lg:text-4xl">
+            <TypingScroll />
+          </h3>
+          <p className="pt-2 font-space-grotesk text-2xl text-gray-600">
+            Unite. Fund. Advance. - The Litecoin Project Development Portal
+          </p>
+        </div>
+      </section>
+
       {/* SUBMIT PROJECT SECTION */}
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
