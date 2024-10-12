@@ -14,8 +14,7 @@ if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 export const getUnprocessedDonations = async () => {
   return await prisma.donation.findMany({
     where: {
-      success: true,
-      processed: false, // You'll need to add the 'processed' field to your Donation model
+      processed: false, // Ensure the 'processed' field is in your Donation model
     },
   })
 }
