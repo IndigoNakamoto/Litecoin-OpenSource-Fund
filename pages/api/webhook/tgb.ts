@@ -128,6 +128,12 @@ export default async function handler(
     // Run the matching logic
     try {
       await processDonationMatching()
+        .then(() => {
+          console.log('Process completed successfully.')
+        })
+        .catch((error) => {
+          console.error('An error occurred during processing:', error)
+        })
     } catch (error) {
       logger.error('Error running matching logic:', {
         message: error.message,
