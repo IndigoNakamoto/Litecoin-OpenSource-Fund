@@ -347,7 +347,9 @@ const PaymentModalPersonalInfo: React.FC<
         pledgeAmount: formData.pledgeAmount,
         firstName: donateAnonymously ? anonInfo.firstName : formData.firstName,
         lastName: donateAnonymously ? anonInfo.lastName : formData.lastName,
-        receiptEmail: formData.receiptEmail,
+        receiptEmail: donateAnonymously
+          ? anonInfo.receiptEmail
+          : formData.receiptEmail,
         addressLine1: donateAnonymously
           ? anonInfo.addressLine1
           : formData.addressLine1,
