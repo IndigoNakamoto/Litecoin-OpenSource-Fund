@@ -482,7 +482,7 @@ const AllProjects: NextPage = () => {
       >
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
           <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
-            Completed
+            Completed Projects
           </h1>
           <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
