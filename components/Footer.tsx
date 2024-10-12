@@ -85,7 +85,7 @@ export default function Footer() {
                   </p>
                   <p className="text-sm">
                     <a
-                      href="https://temporaryreddit.com"
+                      href="https://reddit.com/r/litecoin"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

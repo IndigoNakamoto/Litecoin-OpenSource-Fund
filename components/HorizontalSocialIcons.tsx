@@ -43,7 +43,11 @@ const HorizontalSocialIcons: React.FC<HorizontalSocialIconsProps> = ({
           style={iconStyle}
         />
       </a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://facebook.com/LitecoinFoundation/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <FaFacebookF
           className="h-[28px] w-[28px] transition-transform duration-200 ease-in-out hover:translate-y-[-4px]"
           style={iconStyle}
