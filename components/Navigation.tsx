@@ -519,7 +519,7 @@ const Navigation = () => {
               { title: 'Learn', dropdown: true },
               {
                 title: 'Projects',
-                link: 'https://litecoin.net/project-new',
+                link: 'https://litecoin.net/projects-new',
               },
               { title: 'The Foundation', dropdown: true },
               { title: 'News', link: 'https://litecoin.net/news' },
