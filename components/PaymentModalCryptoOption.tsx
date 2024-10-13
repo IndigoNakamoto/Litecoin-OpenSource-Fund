@@ -103,11 +103,13 @@ export default function PaymentModalCryptoOption({
   }
 
   // Filter currency options based on search term and exclusion list
-  const filteredOptions: Currency[] = currencyList.filter(
-    (currency) =>
-      currency.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !excludedCoins.includes(currency.name)
-  )
+  const filteredOptions: Currency[] = currencyList
+    .filter(
+      (currency) =>
+        currency.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        !excludedCoins.includes(currency.name)
+    )
+    .sort((a, b) => a.name.localeCompare(b.name))
 
   // Find selected currency data for display
   // const selectedCurrencyData = currencyList.find(
