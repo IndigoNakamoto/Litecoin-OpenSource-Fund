@@ -1,6 +1,6 @@
 // components/PaymentForm.tsx
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import GradientButton from './GradientButton'
@@ -33,6 +33,47 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 }) => {
   const { state, dispatch } = useDonation()
   const { projectSlug, projectTitle, image } = state
+  const [widgetSnippet, setWidgetSnippet] = useState('')
+  const [widgetError, setWidgetError] = useState('')
+
+  useEffect(() => {
+    // Fetch the widget snippet from the API
+    const fetchWidgetSnippet = async () => {
+      try {
+        const res = await fetch('/api/getWidgetSnippet')
+        if (!res.ok) {
+          const errorData = await res.json()
+          throw new Error(
+            `HTTP error! status: ${res.status} - ${
+              errorData.error || res.statusText
+            }`
+          )
+        }
+        const data = await res.json()
+
+        // The response contains 'popup', 'script', and 'iframe' options
+        // We'll use the 'popup' option
+        setWidgetSnippet(data.popup)
+
+        // Parse and execute the script manually
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(data.popup, 'text/html')
+        const script = doc.querySelector('script')
+
+        if (script) {
+          const newScript = document.createElement('script')
+          newScript.id = script.id
+          newScript.innerHTML = script.innerHTML
+          document.body.appendChild(newScript)
+        }
+      } catch (error) {
+        console.error('Failed to fetch widget snippet:', error)
+        setWidgetError(error.message)
+      }
+    }
+
+    fetchWidgetSnippet()
+  }, [])
 
   useEffect(() => {
     if (project) {
@@ -161,25 +202,43 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             </div>
           </div>
         )}
-        <div className="flex h-full w-full flex-col justify-between space-y-4  pb-5 pt-6 font-space-grotesk">
-          <button
-            className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-              state.selectedOption === 'crypto'
-                ? 'bg-[#222222] text-[#f0f0f0]'
-                : 'bg-[#f0f0f0] text-[#222222]'
-            }`}
-            onClick={() => dispatch({ type: 'SET_OPTION', payload: 'crypto' })}
-          >
-            <p
-              className={
-                state.selectedOption === 'crypto'
-                  ? 'text-[#f0f0f0]'
-                  : 'text-[#222222]'
-              }
+        <div className="flex w-full flex-col justify-between space-y-4  pb-5 pt-6 font-space-grotesk">
+          <div className="flex justify-between space-x-3">
+            <div
+              className={`${
+                project.slug === 'projects-fund' ? 'w-1/2' : 'w-full'
+              }`}
             >
-              Cryptocurrency
-            </p>
-          </button>
+              <button
+                className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
+                  state.selectedOption === 'crypto'
+                    ? 'bg-[#222222] text-[#f0f0f0]'
+                    : 'bg-[#f0f0f0] text-[#222222]'
+                }`}
+                onClick={() =>
+                  dispatch({ type: 'SET_OPTION', payload: 'crypto' })
+                }
+              >
+                <p
+                  className={
+                    state.selectedOption === 'crypto'
+                      ? 'text-[#f0f0f0]'
+                      : 'text-[#222222]'
+                  }
+                >
+                  Cryptocurrency
+                </p>
+              </button>
+            </div>
+
+            {project.slug === 'projects-fund' && !widgetError ? (
+              <div className="w-1/2">
+                <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
+                  <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
+                </div>
+              </div>
+            ) : null}
+          </div>
 
           <div className="flex justify-between space-x-3">
             <button
