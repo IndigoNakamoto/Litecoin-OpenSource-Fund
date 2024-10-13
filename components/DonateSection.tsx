@@ -15,7 +15,7 @@ export default function DonateSection({
 }: Props) {
   return (
     <div
-      className="bg-[#f0f0f0] p-8"
+      className="bg-[#f0f0f0] p-6"
       style={{
         backgroundImage: "url('/static/images/design/Mask-Group-20.webp')",
       }}

@@ -13,7 +13,7 @@ export default function SectionProjects({
 }: Props) {
   return (
     <div className={`bg-[${bgColor}]`}>
-      <div className="mx-auto w-[1300px] max-w-full pb-16">{children}</div>
+      <div className="mx-auto w-[1300px] max-w-full p-6 pb-16">{children}</div>
     </div>
   )
 }
