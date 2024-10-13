@@ -50,6 +50,9 @@ const PaymentModal: React.FC<ModalProps> = ({
     }
   }
 
+  // Only render the modal and PaymentForm when isOpen is true
+  if (!isOpen) return null
+
   return (
     <ReactModal
       isOpen={isOpen}

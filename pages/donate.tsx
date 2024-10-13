@@ -69,14 +69,15 @@ export default function Donate() {
                 slug: 'projects-fund',
                 title: 'Projects Fund',
                 summary: '',
-                coverImage: '',
+                coverImage:
+                  'https://cdn.prod.website-files.com/6233ca951c563d47368b1def/6707199b42e1cff0f6727e56_projects2.png?w=1200&q=75',
                 telegramLink: '',
                 redditLink: '',
                 facebookLink: '',
                 type: ProjectCategory.BOUNTY,
                 isRecurring: false,
               }}
-              modal={false}
+              modal={true}
             />
           </div>
         </div>

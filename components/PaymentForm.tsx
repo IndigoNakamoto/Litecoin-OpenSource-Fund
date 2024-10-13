@@ -231,7 +231,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               </button>
             </div>
 
-            {project.slug === 'projects-fund' && !widgetError ? (
+            {project.slug === 'projects-fund' && modal && !widgetError ? (
               <div className="w-1/2">
                 <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
                   <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
