@@ -61,16 +61,12 @@ export default function Donate() {
                 advocacy related to Litecoin, cryptocurrency and financial
                 privacy.
               </p>
-              <p className="mt-4 text-lg text-[#222222]">
-                We now accept donations through Donor-Advised Funds (DAF). To
-                contribute via DAF, please click the button below.
-              </p>
             </div>
           </div>
           <div className="mt-12 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">
             <PaymentForm
               project={{
-                slug: 'project-fund',
+                slug: 'projects-fund',
                 title: 'Projects Fund',
                 summary: '',
                 coverImage: '',
