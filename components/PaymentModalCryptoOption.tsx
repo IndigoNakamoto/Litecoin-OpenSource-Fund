@@ -6,6 +6,7 @@ import { useDonation } from '../contexts/DonationContext' // Import the context
 import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import ConversionRateCalculator from './ConversionRateCalculator' // Import the new component
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
 type Currency = {
   code: string
@@ -227,6 +228,19 @@ export default function PaymentModalCryptoOption({
           onBlur={() => setIsFocused(false)}
           onKeyDown={handleKeyDown}
         />
+
+        {/* Chevron Icon */}
+        <div className="absolute right-3 top-1/4 -translate-y-1/2 transform">
+          {showDropdown ? (
+            <FaChevronUp
+              className={searchTerm ? 'text-[#222222]' : 'text-[#f0f0f0]'}
+            />
+          ) : (
+            <FaChevronDown
+              className={searchTerm ? 'text-[#222222]' : 'text-[#f0f0f0]'}
+            />
+          )}
+        </div>
 
         {showDropdown && filteredOptions.length > 0 && (
           <ul
