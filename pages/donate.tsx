@@ -101,39 +101,42 @@ export default function Donate() {
             <h1 className="font-space-grotesk text-4xl font-bold text-[#222222]">
               Support the Future of Litecoin: Donate Today
             </h1>
-            <p className="mt-6 text-lg text-[#222222]">
-              Litecoin Foundation Inc. is a 501(c)(3) nonprofit organization
-              whose mission is to promote the adoption, awareness & development
-              of Litecoin & its ecosystem.
-            </p>
-            <p className="mt-4 text-lg text-[#222222]">
-              Since Litecoin is a fairly launched, decentralized cryptocurrency,
-              Litecoin Foundation’s primary source of financial support is
-              through individual donations. Your contribution helps Litecoin
-              Foundation continue to fund research and development, education,
-              community support, partnerships and advocacy related to Litecoin,
-              cryptocurrency and financial privacy.
-            </p>
-            <p className="mt-4 text-lg text-[#222222]">
-              We now accept donations through Donor-Advised Funds (DAF). To
-              contribute via DAF, please click the button below.
-            </p>
-            {/* Render the widget snippet or display an error */}
-            <div className="mt-6">
-              {widgetError ? (
-                <p className="text-red-500">
-                  Failed to load donation widget: {widgetError}
-                </p>
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
-              )}
+            <div>
+              <p className="mt-6 text-lg text-[#222222]">
+                Litecoin Foundation Inc. is a 501(c)(3) nonprofit organization
+                whose mission is to promote the adoption, awareness &
+                development of Litecoin & its ecosystem.
+              </p>
+              <p className="mt-4 text-lg text-[#222222]">
+                Since Litecoin is a fairly launched, decentralized
+                cryptocurrency, Litecoin Foundation’s primary source of
+                financial support is through individual donations. Your
+                contribution helps Litecoin Foundation continue to fund research
+                and development, education, community support, partnerships and
+                advocacy related to Litecoin, cryptocurrency and financial
+                privacy.
+              </p>
+              <p className="mt-4 text-lg text-[#222222]">
+                We now accept donations through Donor-Advised Funds (DAF). To
+                contribute via DAF, please click the button below.
+              </p>
+              {/* Render the widget snippet or display an error */}
+              <div className="mt-6">
+                {widgetError ? (
+                  <p className="text-red-500">
+                    Failed to load donation widget: {widgetError}
+                  </p>
+                ) : (
+                  <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
+                )}
+              </div>
             </div>
           </div>
           <div className="mt-12 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">
             <PaymentForm
               project={{
-                slug: 'ltcfoundation',
-                title: 'Litecoin Foundation',
+                slug: 'project-fund',
+                title: 'Projects Fund',
                 summary: '',
                 coverImage: '',
                 telegramLink: '',
