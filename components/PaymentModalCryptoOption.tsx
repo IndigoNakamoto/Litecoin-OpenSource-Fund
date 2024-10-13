@@ -2,10 +2,10 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { SiBitcoin, SiLitecoin, SiDogecoin } from 'react-icons/si'
-import { useDonation } from '../contexts/DonationContext' // Import the context
+import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
-import ConversionRateCalculator from './ConversionRateCalculator' // Import the new component
+import ConversionRateCalculator from './ConversionRateCalculator'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
 type Currency = {
@@ -110,9 +110,9 @@ export default function PaymentModalCryptoOption({
   )
 
   // Find selected currency data for display
-  const selectedCurrencyData = currencyList.find(
-    (currency) => currency.code === selectedCurrencyCode
-  )
+  // const selectedCurrencyData = currencyList.find(
+  //   (currency) => currency.code === selectedCurrencyCode
+  // )
 
   // Effect to handle clicks outside the dropdown and input
   useEffect(() => {
@@ -214,23 +214,26 @@ export default function PaymentModalCryptoOption({
               ? 'bg-[#222222] text-[#f0f0f0]'
               : 'bg-[#f0f0f0] text-[#222222]'
           } p-2 text-left font-space-grotesk text-lg font-bold`}
-          onFocus={() => {
-            setIsFocused(true)
-            setShowDropdown(true)
-            if (
-              ['Bitcoin', 'Litecoin', 'Dogecoin'].includes(
-                selectedCurrencyName || ''
-              )
-            ) {
-              setSearchTerm('')
-            }
-          }}
+          onClick={() => setShowDropdown((prev) => !prev)}
+          onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           onKeyDown={handleKeyDown}
         />
 
         {/* Chevron Icon */}
-        <div className="absolute right-3 top-1/4 -translate-y-1/2 transform">
+        <div
+          role="button"
+          tabIndex={0}
+          className="absolute right-3 top-1/4 -translate-y-1/2 transform cursor-pointer focus:outline-none"
+          onClick={() => setShowDropdown((prev) => !prev)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              setShowDropdown((prev) => !prev)
+            }
+          }}
+          aria-label={showDropdown ? 'Close dropdown' : 'Open dropdown'}
+        >
           {showDropdown ? (
             <FaChevronUp
               className={searchTerm ? 'text-[#222222]' : 'text-[#f0f0f0]'}
@@ -256,7 +259,7 @@ export default function PaymentModalCryptoOption({
                 }`}
               >
                 <Image
-                  loader={customImageLoader} // Use the custom loader
+                  loader={customImageLoader}
                   src={option.imageUrl}
                   alt={option.name}
                   objectFit="contain"
