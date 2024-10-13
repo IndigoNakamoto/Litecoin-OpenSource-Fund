@@ -17,19 +17,6 @@ export default function Donate() {
 
   const [widgetSnippet, setWidgetSnippet] = useState('')
   const [widgetError, setWidgetError] = useState('')
-  const [showDAF, setShowDAF] = useState(false) // State to manage DAF section visibility
-
-  // Handler to toggle DAF section visibility
-  const handleDAFClick = () => {
-    setShowDAF(true)
-    // Optionally, scroll to the DAF section
-    setTimeout(() => {
-      const dafSection = document.getElementById('daf-section')
-      if (dafSection) {
-        dafSection.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
-  }
 
   useEffect(() => {
     if (reset === 'true') {
