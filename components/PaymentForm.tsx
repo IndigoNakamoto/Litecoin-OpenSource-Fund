@@ -1,5 +1,3 @@
-// components/PaymentForm.tsx
-
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
@@ -22,8 +20,8 @@ import { useDonation } from '../contexts/DonationContext'
 
 type PaymentFormProps = {
   project: ProjectItem | undefined
-  onRequestClose?: () => void // Make this prop optional
-  modal: boolean // Corrected the type to boolean
+  onRequestClose?: () => void
+  modal: boolean
 }
 
 const PaymentForm: React.FC<PaymentFormProps> = ({
@@ -35,9 +33,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   const { projectSlug, projectTitle, image } = state
   const [widgetSnippet, setWidgetSnippet] = useState('')
   const [widgetError, setWidgetError] = useState('')
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    // Fetch the widget snippet from the API
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
     const fetchWidgetSnippet = async () => {
       try {
         const res = await fetch('/api/getWidgetSnippet')
@@ -51,8 +53,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         }
         const data = await res.json()
 
-        // The response contains 'popup', 'script', and 'iframe' options
-        // We'll use the 'popup' option
         setWidgetSnippet(data.popup)
 
         // Parse and execute the script manually
@@ -61,10 +61,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         const script = doc.querySelector('script')
 
         if (script) {
-          const newScript = document.createElement('script')
-          newScript.id = script.id
-          newScript.innerHTML = script.innerHTML
-          document.body.appendChild(newScript)
+          const existingScript = document.getElementById(script.id)
+          if (!existingScript) {
+            const newScript = document.createElement('script')
+            newScript.id = script.id
+            newScript.innerHTML = script.innerHTML
+            document.body.appendChild(newScript)
+          }
         }
       } catch (error) {
         console.error('Failed to fetch widget snippet:', error)
@@ -73,11 +76,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     }
 
     fetchWidgetSnippet()
+    // Removed the cleanup function
   }, [])
 
   useEffect(() => {
     if (project) {
-      // Only dispatch if project details have changed
       if (
         projectSlug !== project.slug ||
         projectTitle !== project.title ||
@@ -93,18 +96,18 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         })
       }
     }
-    // Removed 'dispatch' from dependencies since it's stable
   }, [project, projectSlug, projectTitle, image])
 
   if (!project) {
     return <div />
   }
 
-  // Define a default onRequestClose if it's not provided
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const handleRequestClose = onRequestClose || (() => {})
+  const handleRequestClose =
+    onRequestClose ||
+    (() => {
+      /* no-op */
+    })
 
-  // Function to render the payment options based on the selected option
   const renderPaymentOption = () => {
     switch (state.selectedOption) {
       case 'crypto':
@@ -138,7 +141,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     }
   }
 
-  // Render content based on the current step
   const renderContent = () => {
     if (state.currentStep === 'personalInfo') {
       return <PaymentModalPersonalInfo onRequestClose={handleRequestClose} />
@@ -176,12 +178,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
     return (
       <>
-        {/* Conditionally render the div based on the 'modal' prop */}
         {modal && (
           <div className="z-30 flex flex-col space-y-4 py-4">
             <div className="flex items-center gap-4">
               <Image
-                loader={customImageLoader} // Use the custom loader
+                loader={customImageLoader}
                 alt={project.title}
                 src={project.coverImage}
                 width={96}
@@ -231,7 +232,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               </button>
             </div>
 
-            {project.slug === 'projects-fund' && modal && !widgetError ? (
+            {isMounted &&
+            project.slug === 'projects-fund' &&
+            modal &&
+            !widgetError ? (
               <div className="w-1/2">
                 <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
                   <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
@@ -292,7 +296,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           onClick={() =>
             dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
           }
-          isLoading={false} // Adjust based on your loading state
+          isLoading={false}
           disabled={state.isDonateButtonDisabled}
           backgroundColor={state.isDonateButtonDisabled ? '#d1d5db' : '#222222'}
           textColor={state.isDonateButtonDisabled ? '#gray-600' : '#f0f0f0'}

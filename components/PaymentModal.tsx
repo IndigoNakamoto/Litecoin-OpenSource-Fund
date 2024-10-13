@@ -38,10 +38,13 @@ const PaymentModal: React.FC<ModalProps> = ({
   const handleClose = () => {
     dispatch({ type: 'RESET_DONATION_STATE' })
     onRequestClose()
+
+    // Check if window is defined
     if (
-      state.formData.socialX ||
-      state.formData.socialFacebook ||
-      state.formData.socialLinkedIn
+      typeof window !== 'undefined' &&
+      (state.formData.socialX ||
+        state.formData.socialFacebook ||
+        state.formData.socialLinkedIn)
     ) {
       const currentUrl = window.location.href
       const url = new URL(currentUrl)
@@ -65,6 +68,7 @@ const PaymentModal: React.FC<ModalProps> = ({
     >
       <div className="relative flex justify-end text-[#f46748]">
         <FontAwesomeIcon
+          key="close-icon"
           icon={faClose}
           className="hover:text-primary h-[2rem] w-[2rem] cursor-pointer"
           onClick={handleClose}
