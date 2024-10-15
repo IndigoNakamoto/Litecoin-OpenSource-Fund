@@ -327,7 +327,7 @@ const PaymentModalPersonalInfo: React.FC<
     const anonInfo = {
       firstName: formData.firstName || 'Anonymous',
       lastName: formData.lastName || 'Donor',
-      receiptEmail: formData.receiptEmail || 'N/A',
+      receiptEmail: formData.receiptEmail || 'anon@anon.com',
       addressLine1: 'N/A',
       addressLine2: 'N/A',
       country: 'N/A', // Adjust the country code as needed
