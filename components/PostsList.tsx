@@ -1,30 +1,70 @@
+// components/PostsList.tsx
+
 import React from 'react'
 import PostX from './PostX'
 import PostYouTube from './PostYouTube'
+import { extractYouTubeID, extractXPostID } from '../utils/extractIds' // Adjust the import path as needed
 
-function PostsList() {
+interface Post {
+  id: string
+  fieldData: {
+    link: string
+    name: string
+  }
+  // ... other fields if necessary
+}
+
+interface PostsListProps {
+  posts: Post[]
+}
+
+const PostsList: React.FC<PostsListProps> = ({ posts }) => {
   return (
-    <div className="markdown">
-      <h1>PostsList</h1>
-      <PostX
-        tweetId={[
-          '1764101413356052870',
-          '1711124576715915586',
-          '1710990765566951919',
-          '1710628331912081468',
-          '1710265897728823479',
-          '1710089856825581982',
-          '1710066625049669766',
-          '1709931002460807392',
-          '1709903463658787068',
-          '1709616221459718440',
-          '1709589816398995744',
-          '1711200405814702257',
-          '1709541029681012871',
-          '1709178595606745364',
-        ]}
-      />
-      <PostYouTube youtubeLink="nSLBvAOlhKc" />
+    <div className="posts-list">
+      <h1>Posts</h1>
+      {posts.map((post) => {
+        const { id, fieldData } = post
+        const { link, name } = fieldData
+
+        if (!link) {
+          // Skip if there's no link
+          return null
+        }
+
+        // Determine the type of link and extract the relevant ID
+        let YouTubeID: string | null = null
+        let XPostID: string | null = null
+
+        if (link.includes('youtube.com') || link.includes('youtu.be')) {
+          YouTubeID = extractYouTubeID(link)
+        } else if (link.includes('x.com') || link.includes('twitter.com')) {
+          XPostID = extractXPostID(link)
+        }
+
+        // Render based on the extracted ID
+        if (YouTubeID) {
+          return (
+            <div key={id} className="post-item">
+              <PostYouTube YouTubeID={YouTubeID} />
+            </div>
+          )
+        } else if (XPostID) {
+          return (
+            <div key={id} className="post-item">
+              <PostX XPostID={XPostID} />
+            </div>
+          )
+        } else {
+          // Optionally handle other types of links or content
+          return (
+            <div key={id} className="post-item">
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                {name}
+              </a>
+            </div>
+          )
+        }
+      })}
     </div>
   )
 }

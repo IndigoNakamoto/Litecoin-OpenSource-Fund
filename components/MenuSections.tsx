@@ -36,24 +36,6 @@ type MenuSectionsProps = {
   redditLink: string
 }
 
-const hashtag2 = 'LitecoinFam2'
-const tweetData2 = [
-  '1764101413356052870',
-  '1711124576715915586',
-  '1710990765566951919',
-  '1710628331912081468',
-  '1710265897728823479',
-  '1710089856825581982',
-  '1710066625049669766',
-  '1709931002460807392',
-  '1709903463658787068',
-  '1709616221459718440',
-  '1709589816398995744',
-  '1711200405814702257',
-  '1709541029681012871',
-  '1709178595606745364',
-]
-
 const MenuSections: React.FC<MenuSectionsProps> = ({
   selectedMenuItem,
   title,
@@ -110,9 +92,7 @@ const MenuSections: React.FC<MenuSectionsProps> = ({
     case 'posts':
       return (
         <div className="markdown">
-          <h1>{`${hashtag2}`}</h1>
-          <PostsList />
-          <TwitterFeed hashtag={hashtag2} tweetsData={tweetData2} />
+          <PostsList posts={tweetsData} />
         </div>
       )
     case 'faq':
@@ -147,14 +127,14 @@ const MenuSections: React.FC<MenuSectionsProps> = ({
           </div>
         </div>
       )
-    case 'community':
-      return (
-        <div className="markdown">
-          <h1>
-            {twitterContributors.length > 1 ? 'Contributors' : 'Contributor'}
-          </h1>
-        </div>
-      )
+    // case 'community':
+    //   return (
+    //     <div className="markdown">
+    //       <h1>
+    //         {twitterContributors.length > 1 ? 'Contributors' : 'Contributor'}
+    //       </h1>
+    //     </div>
+    //   )
     default:
       return null
   }

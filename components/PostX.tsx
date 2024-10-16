@@ -1,10 +1,10 @@
 import React from 'react'
 import { Tweet } from 'react-tweet'
 
-function PostX({ tweetId }) {
+function PostX({ XPostID }) {
   return (
     <div data-theme="light">
-      <Tweet id={tweetId} />
+      <Tweet id={XPostID} />
     </div>
   )
 }
