@@ -1,0 +1,89 @@
+// components/SectionStats.tsx
+
+import React, { useEffect, useState, useCallback } from 'react'
+
+interface Stats {
+  projectsSupported: string
+  totalPaid: string | null
+  donationsRaised: string | null
+  donationsMatched: string | null
+}
+
+function SectionStats() {
+  const [stats, setStats] = useState<Stats>({
+    projectsSupported: 'Loading...',
+    totalPaid: null,
+    donationsRaised: null,
+    donationsMatched: null,
+  })
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const response = await fetch('/api/stats')
+      if (!response.ok) {
+        throw new Error('Failed to fetch stats')
+      }
+      const data = await response.json()
+      setStats({
+        projectsSupported: data.projectsSupported.toString(),
+        totalPaid: formatter.format(data.totalPaid),
+        donationsRaised: formatter.format(data.donationsRaised),
+        donationsMatched: formatter.format(data.donationsMatched),
+      })
+    } catch (error) {
+      console.error('Error fetching stats:', error)
+      setStats({
+        projectsSupported: 'N/A',
+        totalPaid: 'N/A',
+        donationsRaised: 'N/A',
+        donationsMatched: 'N/A',
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchStats()
+  }, [fetchStats])
+
+  return (
+    <div className="m-8 mx-auto max-w-5xl border border-black p-8 text-center">
+      <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div>
+          <div className="font-space-grotesk text-4xl font-semibold">
+            {stats.projectsSupported}
+          </div>
+          <p>Projects Supported</p>
+        </div>
+        <div>
+          <div className="font-space-grotesk text-4xl font-semibold">
+            {stats.totalPaid !== null ? stats.totalPaid : 'Loading...'}
+          </div>
+          <p>Towards Open Source Work</p>
+        </div>
+        <div>
+          <div className="font-space-grotesk text-4xl font-semibold">
+            {stats.donationsRaised !== null
+              ? stats.donationsRaised
+              : 'Loading...'}
+          </div>
+          <p>Donations Raised</p>
+        </div>
+        <div>
+          <div className="font-space-grotesk text-4xl font-semibold">
+            {stats.donationsMatched !== null
+              ? stats.donationsMatched
+              : 'Loading...'}
+          </div>
+          <p>Donations Matched</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default SectionStats

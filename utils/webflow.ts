@@ -932,7 +932,7 @@ export const getAllActiveContributors = async (): Promise<Contributor[]> => {
  * @returns An array of ProjectSummaryLite objects.
  */
 export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
-  const cacheKey = 'projects:all'
+  const cacheKey = 'projects:all2'
   const cachedProjects = await kv.get<ProjectSummaryLite[]>(cacheKey)
 
   if (cachedProjects) {
@@ -962,6 +962,7 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
           name: project.fieldData.name,
           slug: project.fieldData.slug,
           'cover-image': project.fieldData['cover-image'],
+          'total-paid': project.fieldData['total-paid'],
           status: statusLabel,
         },
       }

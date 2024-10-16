@@ -16,6 +16,7 @@ import ProjectRichTextRenderer from '@/components/ProjectRichTextRenderer'
 // import PostsList from '@/components/PostsList'
 import PaymentForm from '@/components/PaymentForm'
 import { ProjectCategory } from 'utils/types'
+import SectionStats from '@/components/SectionStats'
 
 const ComponentsShowcase = () => {
   // const handleContinue = () => {
@@ -39,6 +40,13 @@ const ComponentsShowcase = () => {
         <h1 className="mb-6 text-4xl font-bold text-white">
           Component Showcase
         </h1>
+
+        <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
+          Section Stats
+        </h2>
+        <section className="mb-8 max-w-4xl rounded-3xl bg-[#f0f0f0] p-4">
+          <SectionStats />
+        </section>
 
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Post List

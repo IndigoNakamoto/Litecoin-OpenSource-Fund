@@ -640,7 +640,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   )
   const status = project.fieldData.status || ''
 
-  console.log('Project status: ', status)
+  // console.log('Project status: ', status)
 
   // Adjust the project object to match your component's expectations
   const projectType = determineProjectType(status)

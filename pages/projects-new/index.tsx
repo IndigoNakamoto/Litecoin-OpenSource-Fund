@@ -16,6 +16,8 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useCallback, useMemo } from 'react'
 import SectionProjects from '@/components/SectionProjects'
+import SectionMatchingDonations from '@/components/SectionMatchingDonations'
+import SectionStats from '@/components/SectionStats'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -279,109 +281,69 @@ const AllProjects: NextPage = () => {
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         }}
       >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
-          <div className="lg:py-30 py-20 lg:w-1/2">
-            <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
-              Litecoin Projects
-            </h1>
-            <p className="w-11/12 pt-6 text-[19px]">
-              The Litecoin Foundation is dedicated to consistently improving the
-              Litecoin network, whilst supporting the development of exciting
-              projects on the Litecoin blockchain. Below are a handful of
-              initiatives that demonstrate Litecoin's commitment to innovation
-              and improving the experience of its users.
-            </p>
-            <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
-              <div className="text-md rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
-                <button
-                  className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] text-center font-medium"
-                  onClick={() => openPaymentModal()}
-                >
-                  DONATE NOW
-                </button>
-              </div>
+        <div className=" w-full items-center">
+          <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
+            <div className="lg:py-30 py-20 lg:w-1/2">
+              <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
+                Litecoin Projects
+              </h1>
+              <p className="w-11/12 pt-6 text-[19px]">
+                The Litecoin Foundation is dedicated to consistently improving
+                the Litecoin network, whilst supporting the development of
+                exciting projects on the Litecoin blockchain. Below are a
+                handful of initiatives that demonstrate Litecoin's commitment to
+                innovation and improving the experience of its users.
+              </p>
+              <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
+                <div className="text-md rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
+                  <button
+                    className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] text-center font-medium"
+                    onClick={() => openPaymentModal()}
+                  >
+                    DONATE NOW
+                  </button>
+                </div>
 
-              <div className="flex w-full flex-row justify-center gap-2">
-                <button
-                  className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
-                  onClick={scrollToProjects}
-                >
-                  <span className="text-white">VIEW PROJECTS</span>
-                </button>
-                <button
-                  className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
-                  onClick={scrollToBounties}
-                >
-                  <span className="text-white">VIEW PAST PROJECTS</span>
-                </button>
+                <div className="flex w-full flex-row justify-center gap-2">
+                  <button
+                    className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
+                    onClick={scrollToProjects}
+                  >
+                    <span className="text-white">VIEW PROJECTS</span>
+                  </button>
+                  <button
+                    className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
+                    onClick={scrollToBounties}
+                  >
+                    <span className="text-white">VIEW PAST PROJECTS</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="w-7/12 pt-80 lg:w-1/2 lg:pb-0 lg:pl-20 lg:pt-0">
+              <div className="relative flex items-center justify-center">
+                <img
+                  src="/static/images/design/outline-litecoin-spinner-inner.svg"
+                  alt="Litecoin Spinner Inner"
+                  className="absolute w-1/2 max-w-[160px] pb-8 lg:max-w-[full]"
+                />
+                <img
+                  src="/static/images/design/outline-litecoin-spinner-outer.svg"
+                  alt="Litecoin Spinner Outer"
+                  ref={outerSpinnerRef}
+                  className="absolute w-full lg:w-full"
+                />
               </div>
             </div>
           </div>
-          <div className="w-7/12 pt-80 lg:w-1/2 lg:pb-0 lg:pl-20 lg:pt-0">
-            <div className="relative flex items-center justify-center">
-              <img
-                src="/static/images/design/outline-litecoin-spinner-inner.svg"
-                alt="Litecoin Spinner Inner"
-                className="absolute w-1/2 max-w-[160px] pb-8 lg:max-w-[full]"
-              />
-              <img
-                src="/static/images/design/outline-litecoin-spinner-outer.svg"
-                alt="Litecoin Spinner Outer"
-                ref={outerSpinnerRef}
-                className="absolute w-full lg:w-full"
-              />
-            </div>
+          <div className="m-auto flex h-full w-[1300px] max-w-[90%]  md:pt-24">
+            <SectionStats />
           </div>
         </div>
       </section>
-      <SectionProjects bgColor={'#f2f2f2'}>
-        {/* Matching Donations Section */}
 
-        <div className="mx-auto max-w-4xl p-4 py-16 text-center">
-          <h1 className="mb-4 font-space-grotesk text-4xl font-bold text-[#222222]">
-            Double Your Impact with Charlie Lee’s Matching Donations!
-          </h1>
-          <p className="mb-6 font-space-grotesk text-lg  text-[#333333]">
-            In an exciting announcement at the Litecoin Summit in Nashville,
-            Charlie Lee has pledged to match donations up to{' '}
-            <strong>$250,000 annually</strong> for the next five years, totaling{' '}
-            <strong>$1.25 million</strong>! This means your donation will have
-            double the impact.
-          </p>
-          <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
-            <div className="flex-1">
-              <h3 className="mb-2 font-space-grotesk text-2xl font-semibold  text-[#222222]">
-                Allocation of Funds:
-              </h3>
-              <ul className="list-inside list-disc font-space-grotesk  text-lg text-[#555555]">
-                <li>
-                  <strong>$50,000</strong> dedicated to the projects and bounty
-                  program.
-                </li>
-                <li>
-                  <strong>$200,000</strong> for direct support of the Litecoin
-                  Foundation.
-                </li>
-              </ul>
-            </div>
-            <div className="flex-1 font-space-grotesk ">
-              <h3 className="mb-2 text-2xl font-semibold text-[#222222]">
-                Why It Matters:
-              </h3>
-              <p className="markdown text-lg text-[#555555]">
-                "Because Litecoin was launched fairly, as you all know, we
-                didn’t print money for ourselves. So because of that the
-                Litecoin Foundation is very lean. Most projects that come to us
-                we have to turn down because we don’t have the funding. I want
-                to change that." - <em>Charlie Lee</em>
-              </p>
-            </div>
-          </div>
-          <p className="mt-4 text-sm text-[#777777]">
-            *Charlie Lee will match your donations dollar for dollar up to the
-            specified amounts each year.
-          </p>
-        </div>
+      <SectionProjects bgColor={'#f2f2f2'}>
+        <SectionMatchingDonations />
       </SectionProjects>
       {/* OPEN SOURCE PROJECTS */}
       <section
