@@ -1,6 +1,5 @@
 // components/MenuSections.tsx
 import React from 'react'
-import TwitterFeed from '@/components/TwitterFeed'
 import { FAQSection } from '@/components/FAQSection'
 import ProjectUpdate from '@/components/ProjectUpdate'
 import ProjectContent from '@/components/ProjectContent'
