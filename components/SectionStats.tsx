@@ -54,19 +54,19 @@ function SectionStats() {
     <div className="m-8 mx-auto max-w-5xl border border-black p-8 text-center">
       <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
         <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-4xl">
+          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
             {stats.projectsSupported}
           </div>
           <p>Projects Supported</p>
         </div>
         <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-4xl">
+          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
             {stats.totalPaid !== null ? stats.totalPaid : 'Loading...'}
           </div>
           <p>Towards Open Source Work</p>
         </div>
         <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-4xl">
+          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
             {stats.donationsRaised !== null
               ? stats.donationsRaised
               : 'Loading...'}
@@ -74,7 +74,7 @@ function SectionStats() {
           <p>Donations Raised</p>
         </div>
         <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-4xl">
+          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
             {stats.donationsMatched !== null
               ? stats.donationsMatched
               : 'Loading...'}
