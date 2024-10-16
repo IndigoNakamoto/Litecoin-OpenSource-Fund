@@ -13,7 +13,7 @@ import PaymentModalCryptoDonate from '@/components/PaymentModalCryptoDonate'
 import PaymentModalCryptoOption from '@/components/PaymentModalCryptoOption'
 import ProjectMarkdownRenderer from '@/components/ProjectMarkdownRenderer'
 import ProjectRichTextRenderer from '@/components/ProjectRichTextRenderer'
-import PostsList from '@/components/PostsList'
+// import PostsList from '@/components/PostsList'
 import PaymentForm from '@/components/PaymentForm'
 import { ProjectCategory } from 'utils/types'
 
@@ -44,7 +44,7 @@ const ComponentsShowcase = () => {
           Post List
         </h2>
         <section className="mb-8 max-w-lg rounded-3xl bg-[#f0f0f0] p-4">
-          <PostsList />
+          {/* <PostsList /> */}
         </section>
 
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
