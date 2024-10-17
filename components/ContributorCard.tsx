@@ -69,7 +69,7 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
       case 'facebook':
         return normalizedUrl.split('/').pop() || '' // Extract the last part of the URL, ensuring it's a string
       case 'reddit':
-        return `/user/${normalizedUrl.split('/').pop() || ''}` // Extract the last part of the URL and prepend "/r/", ensuring it's a string
+        return `/u/${normalizedUrl.split('/').pop() || ''}` // Extract the last part of the URL and prepend "/r/", ensuring it's a string
       case 'linkedin':
         return `Linkedin`
       case 'youtube':
