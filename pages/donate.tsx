@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import CompletedProjects from '@/components/CompletedProjects'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
+import SectionDonors from '@/components/SectionDonors'
 
 export default function Donate() {
   const { dispatch } = useDonation()
@@ -92,6 +93,7 @@ export default function Donate() {
           <CompletedProjects />
         </div>
       </SectionProjects>
+      <SectionDonors />
     </>
   )
 }

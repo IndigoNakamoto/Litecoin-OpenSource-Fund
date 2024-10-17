@@ -11,6 +11,63 @@ export const prisma =
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
+/**
+ * Type representing a processed donation with conditional fields.
+ */
+export interface ProcessedDonation {
+  isAnonymous: boolean
+  firstName?: string | null
+  lastName?: string | null
+  socialX?: string | null
+  socialFacebook?: string | null
+  socialLinkedIn?: string | null
+}
+
+/**
+ * Transforms a donation by excluding firstName and lastName if isAnonymous is true.
+ *
+ * @param {ProcessedDonation} donation - The donation to transform.
+ * @returns {ProcessedDonation} - The transformed donation.
+ */
+export const transformDonation = (
+  donation: ProcessedDonation
+): ProcessedDonation => {
+  if (donation.isAnonymous) {
+    const { firstName, lastName, ...rest } = donation
+    return rest
+  }
+  return donation
+}
+
+/**
+ * Fetches all donations where `processed` is true.
+ * Conditionally excludes `firstName` and `lastName` if `isAnonymous` is true.
+ *
+ * @returns {Promise<Array<ProcessedDonation>>} Array of processed donations with selected fields.
+ */
+export const getProcessedDonations = async (): Promise<ProcessedDonation[]> => {
+  try {
+    const donations = await prisma.donation.findMany({
+      where: {
+        processed: true,
+      },
+      select: {
+        isAnonymous: true,
+        firstName: true,
+        lastName: true,
+        socialX: true,
+        socialFacebook: true,
+        socialLinkedIn: true,
+      },
+    })
+
+    return donations.map(transformDonation)
+  } catch (error) {
+    console.error('Error fetching processed donations:', error)
+    throw error
+  }
+}
+
 export const getUnprocessedDonations = async () => {
   return await prisma.donation.findMany({
     where: {

@@ -8,7 +8,7 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src 'self' https://pbs.twimg.com https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://litecoin.net https://uploads-ssl.webflow.com https://static.webflow.com https://images.webflow.com blob: data:;
+  img-src 'self' https://pbs.twimg.com https://unavatar.io https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://litecoin.net https://uploads-ssl.webflow.com https://static.webflow.com https://images.webflow.com blob: data:;
   media-src 'none';
   connect-src 'self' https://react-tweet.vercel.app;
   font-src 'self' https://fonts.gstatic.com;
@@ -60,6 +60,11 @@ module.exports = () => {
         {
           protocol: 'https',
           hostname: 'pbs.twimg.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'unavatar.io',
           pathname: '/**',
         },
         {
