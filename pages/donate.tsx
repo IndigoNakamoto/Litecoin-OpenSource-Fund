@@ -93,7 +93,9 @@ export default function Donate() {
           <CompletedProjects />
         </div>
       </SectionProjects>
-      <SectionDonors />
+      <div className="pb-16">
+        <SectionDonors />
+      </div>
     </>
   )
 }
