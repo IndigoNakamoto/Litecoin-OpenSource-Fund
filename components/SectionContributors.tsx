@@ -46,7 +46,7 @@ function SectionContributors() {
       </h1>
       {loading && <p>Loading contributors...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="contributors-list grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+      <div className="contributors-list grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
         {contributors.map((contributor) => (
           <ContributorCard key={contributor.id} contributor={contributor} />
         ))}
