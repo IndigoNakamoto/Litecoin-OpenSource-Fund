@@ -11,7 +11,7 @@ interface Stats {
 
 function SectionStats() {
   const [stats, setStats] = useState<Stats>({
-    projectsSupported: 'Loading...',
+    projectsSupported: '0',
     totalPaid: null,
     donationsRaised: null,
     donationsMatched: null,
@@ -61,23 +61,19 @@ function SectionStats() {
         </div>
         <div>
           <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
-            {stats.totalPaid !== null ? stats.totalPaid : 'Loading...'}
+            {stats.totalPaid !== null ? stats.totalPaid : '$0.00'}
           </div>
           <p>Towards Open Source Work</p>
         </div>
         <div>
           <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
-            {stats.donationsRaised !== null
-              ? stats.donationsRaised
-              : 'Loading...'}
+            {stats.donationsRaised !== null ? stats.donationsRaised : '$0.00'}
           </div>
           <p>Donations Raised</p>
         </div>
         <div>
           <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
-            {stats.donationsMatched !== null
-              ? stats.donationsMatched
-              : 'Loading...'}
+            {stats.donationsMatched !== null ? stats.donationsMatched : '$0.00'}
           </div>
           <p>Donations Matched</p>
         </div>

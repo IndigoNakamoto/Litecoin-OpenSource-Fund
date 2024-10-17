@@ -15,16 +15,17 @@ import React from 'react'
 // Icons taken from: https://react-icons.github.io/react-icons/
 
 const components = {
-  mail: FaEnvelope,
+  twitter: SiX, // Assuming SiX represents Twitter; replace if different
+  x: SiX,
   github: SiGithub,
+  reddit: SiReddit,
+  email: FaEnvelope,
+  mail: FaEnvelope,
+  linkedin: SiLinkedin,
   discord: SiDiscord,
   facebook: SiFacebook,
   youtube: SiYoutube,
-  linkedin: SiLinkedin,
-  twitter: SiX, // Assuming SiX represents Twitter; replace if different
   nostr: null, // Nostr icon might not be available, handle separately if needed
-  x: SiX,
-  reddit: SiReddit,
   telegram: SiTelegram,
   website: FaGlobe,
   link: FaLink,

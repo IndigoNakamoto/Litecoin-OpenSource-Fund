@@ -18,6 +18,7 @@ import { useCallback, useMemo } from 'react'
 import SectionProjects from '@/components/SectionProjects'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
 import SectionStats from '@/components/SectionStats'
+import SectionContributors from '@/components/SectionContributors'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -461,6 +462,9 @@ const AllProjects: NextPage = () => {
               ))}
           </ul>
         </div>
+      </section>
+      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20">
+        <SectionContributors />
       </section>
       {/* FAQ SECTION */}
       {/* <section

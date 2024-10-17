@@ -87,20 +87,19 @@ import {
     // const updates = await getAllUpdates()
     // console.log('Updates:', JSON.stringify(updates, null, 2))
 
-    // // Test getAllContributors
-    // console.log('\nTesting getAllContributors...')
-    // const contributors = await getAllContributors()
-    // console.log('Contributors:', JSON.stringify(contributors, null, 2))
+    // Test getAllContributors
+    console.log('\nTesting getAllContributors...')
+    const contributors = await getAllContributors()
+    console.log('Contributors:', JSON.stringify(contributors, null, 2))
 
-    const projectSlug = 'ordinals-lite' // Replace with an actual project slug
-
-    // Test getProjectBySlug
-    console.log('\nTesting getProjectBySlug...')
-    const projectWithDetails = await getProjectBySlug(projectSlug)
-    console.log(
-      `Project '${projectSlug}':`,
-      JSON.stringify(projectWithDetails, null, 2)
-    )
+    // // Test getProjectBySlug
+    // const projectSlug = 'ordinals-lite' // Replace with an actual project slug
+    // console.log('\nTesting getProjectBySlug...')
+    // const projectWithDetails = await getProjectBySlug(projectSlug)
+    // console.log(
+    //   `Project '${projectSlug}':`,
+    //   JSON.stringify(projectWithDetails, null, 2)
+    // )
 
     // // Test getProjectUpdatesBySlug
     // console.log('\nTesting getProjectUpdatesBySlug...')
