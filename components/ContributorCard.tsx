@@ -97,11 +97,11 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
   return (
     <>
       <button
-        className="contributor group transform cursor-pointer border-none p-4 text-center transition-transform duration-300 focus:outline-none group-hover:scale-110"
+        className="contributor group transform cursor-pointer border-none bg-[#333333] text-center transition-transform duration-300 focus:outline-none group-hover:scale-110"
         onClick={handleCardClick}
         tabIndex={0}
       >
-        <div className="relative mx-auto mb-4 flex h-32 w-32 transform items-center justify-center overflow-hidden rounded-full bg-blue-800 transition-transform duration-300 group-hover:scale-105">
+        <div className="relative mx-auto mb-4 flex h-36 w-36 transform items-center justify-center overflow-hidden  transition-transform duration-300 group-hover:scale-105">
           {contributor.fieldData['profile-picture'] ? (
             <Image
               src={contributor.fieldData['profile-picture'].url}
@@ -109,7 +109,7 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
                 contributor.fieldData['profile-picture'].alt ||
                 contributor.fieldData.name
               }
-              className="h-full w-full transform rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="h-full w-full transform rounded-full object-cover p-1 transition-transform duration-300 group-hover:scale-105"
               width={128}
               height={128}
             />
@@ -120,7 +120,7 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
           )}
           {/* Overlay on hover */}
           <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="text-center text-white">
+            <span className="text-center text-base text-white">
               {contributor.fieldData.name}
             </span>
           </div>

@@ -41,7 +41,7 @@ function SectionContributors() {
 
   return (
     <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center px-4">
-      <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide text-black">
+      <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide text-white">
         Litecoin Contributors
       </h1>
       {loading && <p>Loading contributors...</p>}
