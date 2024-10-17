@@ -2,7 +2,7 @@ import React from 'react'
 
 function PostYouTube({ YouTubeID }) {
   return (
-    <div className="w-full max-w-[550px] rounded-xl border border-gray-300 bg-white p-4">
+    <div className="mb-6 w-full max-w-[550px] rounded-xl border border-gray-300 bg-white p-4">
       <div className="aspect-video">
         <iframe
           className="h-full w-full rounded-md"

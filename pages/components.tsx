@@ -17,6 +17,7 @@ import ProjectRichTextRenderer from '@/components/ProjectRichTextRenderer'
 import PaymentForm from '@/components/PaymentForm'
 import { ProjectCategory } from 'utils/types'
 import SectionStats from '@/components/SectionStats'
+import PostReddit from '@/components/PostReddit' // <-- Add this import
 
 const ComponentsShowcase = () => {
   // const handleContinue = () => {
@@ -40,6 +41,14 @@ const ComponentsShowcase = () => {
         <h1 className="mb-6 text-4xl font-bold text-white">
           Component Showcase
         </h1>
+
+        {/* Add a section for Reddit post */}
+        <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
+          Reddit Post Embed
+        </h2>
+        <section className="mb-8 w-[550px] rounded-3xl bg-[#f0f0f0] p-4">
+          <PostReddit redditPostURL="https://www.reddit.com/r/litecoin/comments/1fddivu/coinswap_is_now_available_for_ltc_mweb_iykyk/" />
+        </section>
 
         <h2 className="mb-2 pt-10 text-2xl font-semibold text-white">
           Section Stats

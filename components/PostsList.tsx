@@ -3,6 +3,8 @@
 import React from 'react'
 import PostX from './PostX'
 import PostYouTube from './PostYouTube'
+import PostReddit from './PostReddit'
+
 import { extractYouTubeID, extractXPostID } from '../utils/extractIds' // Adjust the import path as needed
 
 interface Post {
@@ -34,11 +36,14 @@ const PostsList: React.FC<PostsListProps> = ({ posts }) => {
         // Determine the type of link and extract the relevant ID
         let YouTubeID: string | null = null
         let XPostID: string | null = null
+        let RedditPostURL: string | null = null
 
         if (link.includes('youtube.com') || link.includes('youtu.be')) {
           YouTubeID = extractYouTubeID(link)
         } else if (link.includes('x.com') || link.includes('twitter.com')) {
           XPostID = extractXPostID(link)
+        } else if (link.includes('reddit.com')) {
+          RedditPostURL = link
         }
 
         // Render based on the extracted ID
@@ -52,6 +57,12 @@ const PostsList: React.FC<PostsListProps> = ({ posts }) => {
           return (
             <div key={id} className="post-item">
               <PostX XPostID={XPostID} />
+            </div>
+          )
+        } else if (RedditPostURL) {
+          return (
+            <div key={id} className="post-item">
+              <PostReddit redditPostURL={RedditPostURL} />
             </div>
           )
         } else {
