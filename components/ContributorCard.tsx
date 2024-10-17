@@ -68,8 +68,11 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
         return `@${normalizedUrl.split('/').pop()}` // Similar to Twitter
       case 'facebook':
         return normalizedUrl.split('/').pop() || '' // Extract the last part of the URL, ensuring it's a string
-      case 'reddit':
-        return `/u/${normalizedUrl.split('/').pop() || ''}` // Extract the last part of the URL and prepend "/r/", ensuring it's a string
+      case 'reddit': {
+        // Wrap the case block in curly braces to create a new scope
+        const redditUsername = normalizedUrl.split('/').filter(Boolean).pop()
+        return redditUsername ? `u/${redditUsername}` : ''
+      }
       case 'linkedin':
         return `Linkedin`
       case 'youtube':
