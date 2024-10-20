@@ -79,10 +79,10 @@ const SectionDonors: React.FC = () => {
   const uniqueUsernames = new Set<string>()
 
   return (
-    <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center ">
-      <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide text-white">
+    <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center p-8 ">
+      {/* <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide">
         Donors
-      </h1>
+      </h1> */}
       <div className="col-span-2 col-start-2 grid grid-cols-4 gap-x-4 space-y-2 md:grid-cols-6 md:gap-x-6 lg:grid-cols-8 xl:grid-cols-10">
         {donors.map((donor, index) => {
           const username = extractTwitterUsername(donor.socialX || '')

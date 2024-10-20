@@ -51,28 +51,28 @@ function SectionStats() {
   }, [fetchStats])
 
   return (
-    <div className="m-8 mx-auto max-w-5xl border border-black p-8 text-center text-white">
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-        <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
+    <div className="mx-auto max-w-5xl text-center text-white">
+      <div className="grid grid-cols-2 gap-8 md:grid-cols-4 ">
+        <div className="flex flex-col items-center">
+          <div className="font-space-grotesk text-3xl font-semibold md:text-3xl lg:text-4xl">
             {stats.projectsSupported}
           </div>
           <p>Projects Supported</p>
         </div>
-        <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
+        <div className="flex flex-col items-center">
+          <div className="font-space-grotesk text-3xl font-semibold md:text-3xl lg:text-4xl">
             {stats.totalPaid !== null ? stats.totalPaid : '$0.00'}
           </div>
           <p>Towards Open Source Work</p>
         </div>
-        <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
+        <div className="flex flex-col items-center">
+          <div className="font-space-grotesk text-3xl font-semibold md:text-3xl lg:text-4xl">
             {stats.donationsRaised !== null ? stats.donationsRaised : '$0.00'}
           </div>
           <p>Donations Raised</p>
         </div>
-        <div>
-          <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
+        <div className="flex flex-col items-center">
+          <div className="font-space-grotesk text-3xl font-semibold md:text-3xl lg:text-4xl">
             {stats.donationsMatched !== null ? stats.donationsMatched : '$0.00'}
           </div>
           <p>Donations Matched</p>

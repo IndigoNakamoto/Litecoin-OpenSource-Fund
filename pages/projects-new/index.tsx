@@ -343,7 +343,7 @@ const AllProjects: NextPage = () => {
           {/* </div> */}
         </div>
       </section>
-      <SectionProjects bgColor="black">
+      <SectionProjects bgColor="#222222">
         <SectionStats />
       </SectionProjects>
 
@@ -351,16 +351,9 @@ const AllProjects: NextPage = () => {
         <SectionMatchingDonations />
       </SectionProjects>
       {/* OPEN SOURCE PROJECTS */}
-      <section
-        ref={projectsRef}
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-20 flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center"
-        style={{
-          fontFamily:
-            'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-        }}
-      >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-tight tracking-wide text-white">
+      <SectionProjects bgColor="">
+        <div className="flex flex-col items-center">
+          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-white">
             Open-Source Projects
           </h1>
           <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -380,12 +373,34 @@ const AllProjects: NextPage = () => {
               })}
           </ul>
         </div>
-      </section>
+      </SectionProjects>
+
+      {/* COMPLETED PROJECTS */}
+      <SectionProjects bgColor="">
+        <div className="flex flex-col items-center pb-8">
+          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-white">
+            Completed Projects
+          </h1>
+          <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {completedProjects &&
+              completedProjects.map((p, i) => (
+                <li key={i} className="flex">
+                  <ProjectCard
+                    project={p}
+                    openPaymentModal={openPaymentModal}
+                    bgColor={'bg-[#f3ccc4]'}
+                  />
+                </li>
+              ))}
+          </ul>
+        </div>
+      </SectionProjects>
+
       {/* OPEN BOUNTIES */}
       {openBounties && openBounties.length > 0 ? (
-        <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[30vh]  w-full bg-[#f3ccc4] bg-cover bg-center pb-20">
-          <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-            <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-medium leading-tight tracking-wide text-black">
+        <SectionProjects bgColor="">
+          <div className="flex flex-col items-center">
+            <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-white">
               Open Bounties
             </h1>
             <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -405,33 +420,30 @@ const AllProjects: NextPage = () => {
                 })}
             </ul>
           </div>
-        </section>
+        </SectionProjects>
       ) : (
         <></>
       )}
+
       {/* SCROLLING TEXT  */}
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[300px] w-full bg-[#C5D3D6] bg-cover bg-center">
-        <div className="flex h-full flex-col items-center justify-center text-center">
-          <h2 className="font-space-grotesk text-5xl font-semibold tracking-tight text-gray-800 lg:text-7xl">
+      <SectionProjects bgColor="#C5D3D6">
+        <div className="flex flex-col items-center pb-8 pt-4">
+          <h1 className="pb-4 font-space-grotesk text-5xl font-semibold tracking-tight text-[#222222] lg:text-7xl">
             We Help Advance
-          </h2>
-          <h3 className="font-space-grotesk text-3xl font-semibold text-gray-800 lg:text-4xl">
+          </h1>
+          <h3 className="font-space-grotesk text-3xl font-semibold text-[#222222] lg:text-4xl">
             <TypingScroll />
           </h3>
           <p className="pt-2 font-space-grotesk text-2xl text-gray-600">
             Unite. Fund. Advance. - The Litecoin Project Development Portal
           </p>
         </div>
-      </section>
-
-      {/* SUBMIT PROJECT SECTION */}
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
-          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-16">
-            <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] text-black">
+        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center lg:flex-row lg:items-center">
+          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-8">
+            <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] text-[#222222]">
               Submit a Project
             </h1>
-            <p className="m-auto max-w-3xl text-lg text-[#222222]">
+            <p className="m-auto max-w-3xl font-space-grotesk text-lg text-[#222222]">
               We are looking to support talented individuals and teams who share
               our commitment to decentralized open-source solutions and the
               future of Litecoin.
@@ -443,73 +455,21 @@ const AllProjects: NextPage = () => {
             </Link>
           </div>
         </div>
-      </section>
-      {/* COMPLETED PROJECTS */}
-      <section
-        ref={bountiesRef}
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-white bg-cover bg-center pb-20"
-      >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col items-center justify-center">
-          <h1 className="m-8 font-space-grotesk text-4xl text-[41px] font-semibold leading-[32px] tracking-wide text-black">
-            Completed Projects
+
+        <div className="flex flex-col items-center pt-16">
+          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-[#222222]">
+            Contributors
           </h1>
-          <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {completedProjects &&
-              completedProjects.map((p, i) => (
-                <li key={i} className="flex">
-                  <ProjectCard
-                    project={p}
-                    openPaymentModal={openPaymentModal}
-                    bgColor={'bg-[#f3ccc4]'}
-                  />
-                </li>
-              ))}
-          </ul>
+          <SectionContributors />
         </div>
-      </section>
-      <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-cover bg-center pb-20">
-        <SectionContributors />
-      </section>
-      <section className="pb-16">
-        <SectionDonors />
-      </section>
-      {/* FAQ SECTION */}
-      {/* <section
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-full bg-[#C5D3D6] bg-cover bg-center py-20 pt-16"
-        style={{
-          fontFamily:
-            'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-        }}
-      >
-        <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col md:justify-between lg:flex-row"> */}
-      {/* Left Column: Static h1 */}
-      {/* <div
-            className="w-full pb-8 xl:w-[40%]"
-            style={
-              isLgScreen
-                ? {
-                    position: 'sticky',
-                    top: '6rem',
-                    alignSelf: 'start',
-                  }
-                : {}
-            }
-          >
-            <h1 className="font-space-grotesk text-4xl text-[41px] font-semibold leading-[50px] text-black">
-              Frequently Asked Questions:
-            </h1>
-            <p className="font-[15px]">
-              To learn more about Litecoin, take a look at our FAQs:
-            </p>
-          </div> */}
-      {/* Right Column: FAQ Section */}
-      {/* <div className="w-full xl:w-[60%]">
-            <div className="rounded-x mt-8 w-full md:mt-0">
-              <FAQSection faqs={faqData.questionsAndAnswers} />
-            </div>
-          </div>
+        <div className="flex flex-col items-center pb-8 pt-8">
+          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-[#222222]">
+            Donors
+          </h1>
+          <SectionDonors />
         </div>
-      </section> */}
+      </SectionProjects>
+
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}

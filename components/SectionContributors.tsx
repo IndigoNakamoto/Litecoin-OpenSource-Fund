@@ -41,9 +41,6 @@ function SectionContributors() {
 
   return (
     <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center p-8">
-      <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide text-white">
-        Litecoin Contributors
-      </h1>
       {loading && <p>Loading contributors...</p>}
       {error && <p className="text-red-500">{error}</p>}
       <div className="contributors-list grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8">

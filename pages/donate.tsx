@@ -10,7 +10,9 @@ import React, { useEffect, useState } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import CompletedProjects from '@/components/CompletedProjects'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
-import SectionDonors from '@/components/SectionDonors'
+// import SectionDonors from '@/components/SectionDonors'
+// import SectionProjects from './SectionProjects'
+import SectionStats from '@/components/SectionStats'
 
 export default function Donate() {
   const { dispatch } = useDonation()
@@ -84,6 +86,9 @@ export default function Donate() {
           </div>
         </div>
       </DonateSection>
+      <SectionProjects bgColor={'#222222'}>
+        <SectionStats />
+      </SectionProjects>
       <SectionProjects bgColor={'#f2f2f2'}>
         {/* Matching Donations Section */}
         <SectionMatchingDonations />
@@ -93,9 +98,6 @@ export default function Donate() {
           <CompletedProjects />
         </div>
       </SectionProjects>
-      <div className="pb-16">
-        <SectionDonors />
-      </div>
     </>
   )
 }

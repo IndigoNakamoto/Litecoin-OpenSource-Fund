@@ -156,7 +156,7 @@ button.small {
 }
 
 button.group {
-  @apply bg-[#333333] p-4 text-sm text-black;
+  @apply bg-[#C5D3D6] p-2 text-sm text-black;
 }
 
 button.pay {

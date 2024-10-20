@@ -7,13 +7,12 @@ interface Props {
   style?: string
 }
 
-export default function SectionProjects({
-  children,
-  bgColor = '#f0f0f0',
-}: Props) {
+export default function SectionProjects({ children, bgColor }: Props) {
   return (
     <div className={`bg-[${bgColor}]`}>
-      <div className="mx-auto w-[1300px] max-w-full p-6 pb-16">{children}</div>
+      <div className="mx-auto w-[1300px] max-w-full p-4 md:p-14 ">
+        {children}
+      </div>
     </div>
   )
 }
