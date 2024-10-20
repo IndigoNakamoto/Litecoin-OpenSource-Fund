@@ -6,21 +6,20 @@ class MyDocument extends Document {
     return (
       <Html lang={siteMetadata.language} className="scroll-smooth">
         <Head>
-          <style>
-            @import
-            url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-          </style>
+          {/* Remove the redundant <style> tag with @import */}
+          {/* Correct Google Fonts Link */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossOrigin=""
-          ></link>
+          />
           <link
-            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
-          ></link>
+          />
 
+          {/* Favicon Links */}
           <link
             rel="apple-touch-icon"
             sizes="76x76"
@@ -57,7 +56,7 @@ class MyDocument extends Document {
           />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         </Head>
-        <body className="bg-[#333333] bg-[#333333] text-black antialiased dark:text-black">
+        <body className="bg-[#333333] text-black antialiased dark:text-black">
           <Main />
           <NextScript />
         </body>
