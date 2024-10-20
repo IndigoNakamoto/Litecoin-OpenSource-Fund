@@ -1,7 +1,7 @@
 // components/ContributorCard.tsx
 
 import React, { useState } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import ReactModal from 'react-modal'
 import SocialIcon from './social-icons' // Ensure the correct path
 
@@ -114,8 +114,11 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
                 contributor.fieldData.name
               }
               className="h-full w-full transform rounded-full object-cover p-1 transition-transform duration-300 group-hover:scale-105"
-              layout="fill" // Use fill to cover the parent
-              objectFit="cover" // Ensure the image covers the container
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{
+                objectFit: 'cover',
+              }}
             />
           ) : (
             <span className="transform text-2xl font-semibold text-white transition-transform duration-300 group-hover:scale-105">
@@ -163,6 +166,10 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
               className="mb-4 h-32 w-32 rounded-full object-cover"
               width={128}
               height={128}
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+              }}
             />
           ) : (
             <div className="mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-blue-500">

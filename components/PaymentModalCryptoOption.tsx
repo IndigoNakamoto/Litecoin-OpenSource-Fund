@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { SiBitcoin, SiLitecoin, SiDogecoin } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import ConversionRateCalculator from './ConversionRateCalculator'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
@@ -264,9 +264,13 @@ export default function PaymentModalCryptoOption({
                   loader={customImageLoader}
                   src={option.imageUrl}
                   alt={option.name}
-                  objectFit="contain"
                   width={24}
                   height={24}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    objectFit: 'contain',
+                  }}
                 />
                 <span className="pl-2">
                   {option.name} {option.isErc20 && <span>(ERC-20)</span>}

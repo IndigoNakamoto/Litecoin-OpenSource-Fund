@@ -4,7 +4,7 @@ import siteMetadata from '@/data/siteMetadata'
 import Link from 'next/link' // ADDED
 
 import React, { useState, useEffect, useRef } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import HorizontalSocialIcons from './HorizontalSocialIcons'
 
 const Navigation = () => {

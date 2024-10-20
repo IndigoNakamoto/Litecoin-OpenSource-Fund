@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { SiX } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { countries } from './countries'
 import { signIn, useSession } from 'next-auth/react'
 import GradientButton from './GradientButton'
@@ -554,6 +554,10 @@ const PaymentModalPersonalInfo: React.FC<
                     width="120"
                     height="120"
                     className="rounded-full"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                    }}
                   />
                 ) : (
                   <Image
@@ -562,6 +566,10 @@ const PaymentModalPersonalInfo: React.FC<
                     width="120"
                     height="120"
                     className="rounded-full"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                    }}
                   />
                 )}
               </div>

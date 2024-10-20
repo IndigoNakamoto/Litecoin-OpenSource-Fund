@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
 
@@ -35,11 +35,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             <Image
               alt={title}
               src={coverImage}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="50% 50%"
               className="cursor-pointer rounded-2xl bg-white dark:bg-black "
               priority={true}
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+                objectPosition: '50% 50%',
+              }}
             />
           </div>
         </Link>

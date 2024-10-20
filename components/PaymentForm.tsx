@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import GradientButton from './GradientButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -188,8 +188,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 width={96}
                 height={96}
                 priority={true}
-                objectFit="cover"
                 className="rounded-lg"
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  objectFit: 'cover',
+                }}
               />
               <div className="flex flex-col">
                 <h3 className="font-sans text-[#222222]">Donate to</h3>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import Link from './Link'
 import Head from 'next/head'
 
@@ -119,6 +119,10 @@ const SectionDonors: React.FC = () => {
                   height={100}
                   className="rounded-full"
                   loading="lazy"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
                 />
               </Link>
             </div>

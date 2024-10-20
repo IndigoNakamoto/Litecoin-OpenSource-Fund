@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import { QRCodeSVG } from 'qrcode.react'
 import { FaRegCopy } from 'react-icons/fa6'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 interface PaymentModalCryptoDonateProps {
   onRequestClose: () => void
@@ -130,6 +130,10 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
               alt="QR Code"
               width={256}
               height={256}
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+              }}
             />
             <p className="text-[#222222]">
               Scan the QR code above to donate {formattedPledgeAmount}{' '}

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import axios from 'axios'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchange } from '@fortawesome/free-solid-svg-icons'
@@ -232,14 +232,19 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         <div className=" flex h-12 w-36 items-center justify-center bg-[#222222]">
           {selectedCurrencyData && (
             <Image
-              loader={customImageLoader} // Use the custom loader
+              // Use the custom loader
+              loader={customImageLoader}
               src={selectedCurrencyData.imageUrl}
               alt={selectedCurrencyData.name}
               width={36}
               height={36}
               priority={true}
-              objectFit="contain"
-              style={{ zIndex: 5 }}
+              style={{
+                zIndex: 5,
+                maxWidth: '100%',
+                height: 'auto',
+                objectFit: 'contain',
+              }}
             />
           )}
 

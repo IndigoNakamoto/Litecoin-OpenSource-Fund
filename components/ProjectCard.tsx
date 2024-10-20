@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import React, { useState } from 'react'
 import { customImageLoader } from '../utils/customImageLoader'
 import Link from 'next/link'
@@ -30,16 +30,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <Link href={`/projects-new/${slug}`} passHref>
         <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
           <Image
-            loader={customImageLoader} // Use the custom loader
-            src={coverImage} // Ensure this is a valid URL from Webflow
+            // Use the custom loader
+            loader={customImageLoader}
+            // Ensure this is a valid URL from Webflow
+            src={coverImage}
             alt={title}
-            fill // Replaces layout="fill"
-            style={{ objectFit: 'cover', objectPosition: '50% 50%' }} // Moved styling to 'style' prop
+            // Replaces layout="fill"
+            fill
             className="cursor-pointer rounded-xl"
             priority={true}
             sizes="(max-width: 768px) 100vw,
                    (max-width: 1200px) 50vw,
                    33vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: '50% 50%',
+              maxWidth: '100%',
+            }}
           />
         </div>
       </Link>

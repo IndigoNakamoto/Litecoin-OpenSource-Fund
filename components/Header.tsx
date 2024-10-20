@@ -1,7 +1,7 @@
 import siteMetadata from '@/data/siteMetadata'
 import Link from './Link'
 import React, { useState, useEffect, useRef } from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import MobileNav from './MobileNav'
 
 const Header = () => {
@@ -143,6 +143,8 @@ const Header = () => {
                 fill
                 style={{
                   opacity: 1 - bgOpacity,
+                  maxWidth: '100%',
+                  height: 'auto',
                 }}
               />
               <Image
@@ -151,6 +153,8 @@ const Header = () => {
                 fill
                 style={{
                   opacity: bgOpacity,
+                  maxWidth: '100%',
+                  height: 'auto',
                 }}
               />
             </div>

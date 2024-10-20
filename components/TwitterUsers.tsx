@@ -1,6 +1,6 @@
 // components/TwitterUsers.tsx
 import Link from './Link'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 // import { customImageLoader } from '../utils/customImageLoader'
 import Head from 'next/head'
 
@@ -38,7 +38,12 @@ const TwitterUsers: React.FC<TwitterUsersProps> = ({ users }) => {
               width={100}
               height={100}
               className="rounded-full"
-              loading="lazy" // Apply lazy loading
+              // Apply lazy loading
+              loading="lazy"
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+              }}
             />
           </Link>
         </div>

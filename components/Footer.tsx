@@ -1,7 +1,7 @@
 // import Link from './Link'
 // import siteMetadata from '@/data/siteMetadata'
 // import SocialIcon from '@/components/social-icons'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -17,13 +17,18 @@ export default function Footer() {
               <Image
                 src="/static/images/design/Group 5.svg"
                 alt="Black Logo"
-                width={260} // Fixed width
-                height={0} // This will allow the height to auto-adjust based on aspect ratio
-                style={{
-                  height: 'auto', // Maintain aspect ratio
-                  opacity: 1,
-                }}
+                // Fixed width
+                width={260}
+                // This will allow the height to auto-adjust based on aspect ratio
+                height={0}
                 className="min-h-max max-w-min pr-16"
+                style={{
+                  // Maintain aspect ratio
+                  height: 'auto',
+
+                  opacity: 1,
+                  maxWidth: '100%',
+                }}
               />
               {/*
                */}

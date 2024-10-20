@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import TypingScroll from './TypingScroll'
 import Link from './Link'
@@ -75,10 +75,13 @@ function CompletedProjects() {
                   loader={customImageLoader}
                   alt={`Image of ${image.title}`}
                   src={`${imageDirectory}${image.src}`}
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="center"
                   className="rounded-xl transition duration-300"
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
                 />
                 <h4 className="image-title absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-0 text-2xl font-semibold text-white opacity-0 transition-opacity duration-300 ease-in-out hover:bg-opacity-50 hover:opacity-100 hover:backdrop-blur-xl ">
                   {image.title}

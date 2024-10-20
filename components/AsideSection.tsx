@@ -1,6 +1,6 @@
 import React from 'react'
 import DonationStats from './DonationStats'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { AddressStats, BountyStatus } from '../utils/types'
 import { defaultAddressStats } from '../utils/defaultValues'
 import { customImageLoader } from '../utils/customImageLoader'
@@ -54,12 +54,17 @@ const AsideSection: React.FC<AsideSectionProps> = ({
             src={coverImage}
             alt={title}
             fill
-            style={{ objectFit: 'cover', objectPosition: '50% 50%' }}
             className=""
             priority={true}
             sizes="(max-width: 768px) 100vw,
                    (max-width: 1200px) 50vw,
                    33vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: '50% 50%',
+              maxWidth: '100%',
+              height: 'auto',
+            }}
           />
         </div>
 
