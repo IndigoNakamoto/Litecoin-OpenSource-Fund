@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { customImageLoader } from '../utils/customImageLoader'
 
 export type CreditItemProps = {

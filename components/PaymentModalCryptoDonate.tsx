@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import { QRCodeSVG } from 'qrcode.react'
 import { FaRegCopy } from 'react-icons/fa6'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 
 interface PaymentModalCryptoDonateProps {
   onRequestClose: () => void

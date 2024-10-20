@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { SiX } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { countries } from './countries'
 import { signIn, useSession } from 'next-auth/react'
 import GradientButton from './GradientButton'

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDonation } from '../contexts/DonationContext'
 import axios from 'axios'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchange } from '@fortawesome/free-solid-svg-icons'

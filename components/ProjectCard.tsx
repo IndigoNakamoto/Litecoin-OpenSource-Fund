@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import React, { useState } from 'react'
 import { customImageLoader } from '../utils/customImageLoader'
 import Link from 'next/link'

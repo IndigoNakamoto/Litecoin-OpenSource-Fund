@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { SiBitcoin, SiLitecoin, SiDogecoin } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import ConversionRateCalculator from './ConversionRateCalculator'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'

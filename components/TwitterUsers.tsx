@@ -1,6 +1,6 @@
 // components/TwitterUsers.tsx
 import Link from './Link'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 // import { customImageLoader } from '../utils/customImageLoader'
 import Head from 'next/head'
 

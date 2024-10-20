@@ -8,7 +8,7 @@ import Link from './Link'
 
 // Font Awesome
 import { config } from '@fortawesome/fontawesome-svg-core'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { customImageLoader } from '../utils/customImageLoader'
 
 import '@fortawesome/fontawesome-svg-core/styles.css'

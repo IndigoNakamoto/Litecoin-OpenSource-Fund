@@ -1,6 +1,6 @@
 import React from 'react'
 import DonationStats from './DonationStats'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { AddressStats, BountyStatus } from '../utils/types'
 import { defaultAddressStats } from '../utils/defaultValues'
 import { customImageLoader } from '../utils/customImageLoader'

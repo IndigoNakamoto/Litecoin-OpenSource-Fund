@@ -1,7 +1,7 @@
 // components/ContributorCard.tsx
 
 import React, { useState } from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import ReactModal from 'react-modal'
 import SocialIcon from './social-icons' // Ensure the correct path
 

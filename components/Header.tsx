@@ -1,7 +1,7 @@
 import siteMetadata from '@/data/siteMetadata'
 import Link from './Link'
 import React, { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import MobileNav from './MobileNav'
 
 const Header = () => {
