@@ -2,7 +2,7 @@ import React from 'react'
 
 function SectionMatchingDonations() {
   return (
-    <div className="mx-auto w-full p-4 text-center">
+    <div className="text-center">
       <h1 className="mb-4 font-space-grotesk text-4xl font-bold text-[#222222]">
         Double Your Impact with Charlie Lee’s Matching Donations!
       </h1>

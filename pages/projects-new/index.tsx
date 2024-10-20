@@ -276,7 +276,7 @@ const AllProjects: NextPage = () => {
       </Head>
       <VerticalSocialIcons />
       <section
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center lg:py-24"
+        className="relative flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center lg:py-24"
         style={{
           backgroundImage: "url('/static/images/design/Mask-Group-20.webp')",
           fontFamily:
@@ -296,7 +296,7 @@ const AllProjects: NextPage = () => {
                 handful of initiatives that demonstrate Litecoin's commitment to
                 innovation and improving the experience of its users.
               </p>
-              <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
+              <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4 font-space-grotesk">
                 <div className="text-md rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
                   <button
                     className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] text-center font-medium"
@@ -338,25 +338,25 @@ const AllProjects: NextPage = () => {
               </div>
             </div>
           </div>
-          {/* <div className="m-auto flex h-full w-[1300px] max-w-[90%] md:pt-24"> */}
-          {/* <SectionStats /> */}
-          {/* </div> */}
         </div>
       </section>
       <SectionProjects bgColor="#222222">
-        <SectionStats />
+        <div className="py-2">
+          <SectionStats />
+        </div>
       </SectionProjects>
 
       <SectionProjects bgColor={'#f2f2f2'}>
         <SectionMatchingDonations />
       </SectionProjects>
+
       {/* OPEN SOURCE PROJECTS */}
       <SectionProjects bgColor="">
         <div className="flex flex-col items-center">
-          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-white">
+          <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
             Open-Source Projects
           </h1>
-          <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {openSourceProjects &&
               openSourceProjects.map((p, i) => {
                 const bgColor = bgColors[i % bgColors.length]
@@ -378,10 +378,10 @@ const AllProjects: NextPage = () => {
       {/* COMPLETED PROJECTS */}
       <SectionProjects bgColor="">
         <div className="flex flex-col items-center pb-8">
-          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-white">
+          <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
             Completed Projects
           </h1>
-          <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
               completedProjects.map((p, i) => (
                 <li key={i} className="flex">
@@ -400,10 +400,10 @@ const AllProjects: NextPage = () => {
       {openBounties && openBounties.length > 0 ? (
         <SectionProjects bgColor="">
           <div className="flex flex-col items-center">
-            <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-white">
+            <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
               Open Bounties
             </h1>
-            <ul className="grid max-w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {openBounties &&
                 openBounties.map((p, i) => {
                   const bgColor = bgColors[i % bgColors.length]
@@ -427,7 +427,7 @@ const AllProjects: NextPage = () => {
 
       {/* SCROLLING TEXT  */}
       <SectionProjects bgColor="#C5D3D6">
-        <div className="flex flex-col items-center pb-8 pt-4">
+        <div className="flex flex-col items-center pb-8  pt-4 text-center">
           <h1 className="pb-4 font-space-grotesk text-5xl font-semibold tracking-tight text-[#222222] lg:text-7xl">
             We Help Advance
           </h1>
@@ -457,13 +457,13 @@ const AllProjects: NextPage = () => {
         </div>
 
         <div className="flex flex-col items-center pt-16">
-          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-[#222222]">
+          <h1 className=" font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-[#222222] md:text-5xl">
             Contributors
           </h1>
           <SectionContributors />
         </div>
         <div className="flex flex-col items-center pb-8 pt-8">
-          <h1 className="pb-4 font-space-grotesk text-5xl font-medium leading-tight tracking-wide text-[#222222]">
+          <h1 className=" font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-[#222222] md:text-5xl">
             Donors
           </h1>
           <SectionDonors />

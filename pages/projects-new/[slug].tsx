@@ -489,7 +489,7 @@ const Project: NextPage<SingleProjectPageProps> = ({
     <>
       <SEOHead title={title} summary={summary} coverImage={coverImage} />
       <div
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen max-w-none items-center bg-[#f2f2f2] bg-cover bg-center pb-8"
+        className="flex h-full w-screen max-w-none items-center bg-[#f2f2f2] bg-cover bg-center pb-8"
         style={{
           fontFamily:
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',

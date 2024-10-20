@@ -6,131 +6,130 @@ import Image from 'next/image'
 export default function Footer() {
   return (
     // TODO: Footer
-    <footer className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-screen bg-[#222222] bg-cover bg-center">
+    <footer className="relative h-[600px] max-w-full bg-[#222222]">
       {/* Full-width section with bg-[#222222] */}
       <div className="mx-auto w-[1300px] max-w-[90%] pb-60 pt-20">
         {/* background */}
-        <div className="bg-[#222222] bg-cover bg-center">
-          {/* Overlay on top */}
-          <div className="">
-            <div className="flex flex-col space-x-0 text-[#c6d3d6] lg:flex-row">
-              <Image
-                src="/static/images/design/Group 5.svg"
-                alt="Black Logo"
-                // Fixed width
-                width={260}
-                // This will allow the height to auto-adjust based on aspect ratio
-                height={0}
-                className="min-h-max max-w-min pr-16"
-                style={{
-                  // Maintain aspect ratio
-                  height: 'auto',
 
-                  opacity: 1,
-                  maxWidth: '100%',
-                }}
-              />
-              {/*
-               */}
-              <div className="flex w-full flex-row justify-between pt-10 xl:pl-36 xl:pt-0">
-                <div className="w-full">
-                  <h1 className="font-space-grotesk text-[18px] font-bold">
-                    LITECOIN SOCIALS
-                  </h1>
-                  <p className="pt-4 text-sm">
-                    <a
-                      href="https://x.com/litecoin"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      twitter
-                    </a>
-                  </p>
-                  <p className="text-sm">
-                    <a
-                      href="https://t.me/Litecoin"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      telegram
-                    </a>
-                  </p>
-                  <p className="text-sm">
-                    <a
-                      href="https://www.reddit.com/r/litecoin"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      reddit
-                    </a>
-                  </p>
-                  <p className="text-sm">
-                    <a
-                      href="https://github.com/litecoin-project"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      github
-                    </a>
-                  </p>
-                </div>
+        {/* Overlay on top */}
+        <div className="">
+          <div className="flex flex-col space-x-0 text-[#c6d3d6] lg:flex-row">
+            <Image
+              src="/static/images/design/Group 5.svg"
+              alt="Black Logo"
+              // Fixed width
+              width={260}
+              // This will allow the height to auto-adjust based on aspect ratio
+              height={0}
+              className="min-h-max max-w-min pr-16"
+              style={{
+                // Maintain aspect ratio
+                height: 'auto',
 
-                <div className="w-full">
-                  <h1 className="font-space-grotesk text-[18px] font-bold">
-                    FOUNDATION SOCIAL
-                  </h1>
-                  <p className="pt-4 text-sm">
-                    <a
-                      href="https://x.com/LTCFoundation"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      twitter
-                    </a>
-                  </p>
-                  <p className="text-sm">
-                    <a
-                      href="https://reddit.com/r/litecoin"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      reddit
-                    </a>
-                  </p>
-                  <p className="text-sm">
-                    <a
-                      href="https://www.facebook.com/LitecoinFoundation/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      facebook
-                    </a>
-                  </p>
-                  <p className="text-sm">
-                    <a
-                      href="https://github.com/litecoin-foundation/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      github
-                    </a>
-                  </p>
-                </div>
+                opacity: 1,
+                maxWidth: '100%',
+              }}
+            />
+            {/*
+             */}
+            <div className="flex w-full flex-row justify-between pt-10 xl:pl-36 xl:pt-0">
+              <div className="w-full">
+                <h1 className="font-space-grotesk text-[18px] font-bold">
+                  LITECOIN SOCIALS
+                </h1>
+                <p className="pt-4 text-sm">
+                  <a
+                    href="https://x.com/litecoin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    twitter
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a
+                    href="https://t.me/Litecoin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    telegram
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a
+                    href="https://www.reddit.com/r/litecoin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    reddit
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a
+                    href="https://github.com/litecoin-project"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    github
+                  </a>
+                </p>
+              </div>
 
-                <div className="w-full">
-                  <h1 className="font-space-grotesk text-[18px] font-bold">
-                    CONTACT
-                  </h1>
-                  <p className="pt-4 text-sm">
-                    <a
-                      href="mailto:contact@litecoin.net"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      contact@litecoin.net
-                    </a>
-                  </p>
-                </div>
+              <div className="w-full">
+                <h1 className="font-space-grotesk text-[18px] font-bold">
+                  FOUNDATION SOCIAL
+                </h1>
+                <p className="pt-4 text-sm">
+                  <a
+                    href="https://x.com/LTCFoundation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    twitter
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a
+                    href="https://reddit.com/r/litecoin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    reddit
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a
+                    href="https://www.facebook.com/LitecoinFoundation/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    facebook
+                  </a>
+                </p>
+                <p className="text-sm">
+                  <a
+                    href="https://github.com/litecoin-foundation/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    github
+                  </a>
+                </p>
+              </div>
+
+              <div className="w-full">
+                <h1 className="font-space-grotesk text-[18px] font-bold">
+                  CONTACT
+                </h1>
+                <p className="pt-4 text-sm">
+                  <a
+                    href="mailto:contact@litecoin.net"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    contact@litecoin.net
+                  </a>
+                </p>
               </div>
             </div>
           </div>
