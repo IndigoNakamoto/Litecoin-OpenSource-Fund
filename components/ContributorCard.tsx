@@ -30,12 +30,12 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleCardClick = () => {
-    console.log('Modal open triggered')
+    // console.log('Modal open triggered')
     setIsModalOpen(true)
   }
 
   const handleModalClose = () => {
-    console.log('Modal close triggered')
+    // console.log('Modal close triggered')
     setIsModalOpen(false)
   }
 
@@ -74,7 +74,7 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
         return redditUsername ? `u/${redditUsername}` : ''
       }
       case 'linkedin':
-        return `Linkedin`
+        return `LinkedIn`
       case 'youtube':
         return `YouTube`
       default:
@@ -100,11 +100,12 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
   return (
     <>
       <button
-        className="contributor group transform cursor-pointer border-none bg-[#333333] text-center transition-transform duration-300 focus:outline-none group-hover:scale-110"
+        className="contributor group w-full transform cursor-pointer border-none bg-[#333333] text-center transition-transform duration-300 focus:outline-none group-hover:scale-105"
         onClick={handleCardClick}
         tabIndex={0}
       >
-        <div className="relative mx-auto mb-4 flex h-36 w-36 transform items-center justify-center overflow-hidden  transition-transform duration-300 group-hover:scale-105">
+        {/* Use aspect-square to maintain square aspect ratio */}
+        <div className="relative flex aspect-square items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
           {contributor.fieldData['profile-picture'] ? (
             <Image
               src={contributor.fieldData['profile-picture'].url}
@@ -113,8 +114,8 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
                 contributor.fieldData.name
               }
               className="h-full w-full transform rounded-full object-cover p-1 transition-transform duration-300 group-hover:scale-105"
-              width={128}
-              height={128}
+              layout="fill" // Use fill to cover the parent
+              objectFit="cover" // Ensure the image covers the container
             />
           ) : (
             <span className="transform text-2xl font-semibold text-white transition-transform duration-300 group-hover:scale-105">
