@@ -22,7 +22,7 @@ const HorizontalSocialIcons: React.FC<HorizontalSocialIconsProps> = ({
   }
 
   return (
-    <div className={`flex flex-row space-x-10 pl-10 pt-10 ${topOffset || ''}`}>
+    <div className={`flex flex-row space-x-10 pl-10 pt-10${topOffset || ''}`}>
       <a
         href="https://x.com/ltcfoundation"
         target="_blank"

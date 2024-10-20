@@ -9,7 +9,7 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com https://vercel.live https://va.vercel-scripts.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' https://pbs.twimg.com https://unavatar.io https://abs.twimg.com https://static.tgb-preprod.com https://static.tgbwidget.com https://cdn.prod.website-files.com https://litecoin.net https://uploads-ssl.webflow.com https://static.webflow.com https://images.webflow.com blob: data:;
-  media-src 'none';
+  media-src 'self' https://video.twimg.com;
   connect-src 'self' https://react-tweet.vercel.app;
   font-src 'self' https://fonts.gstatic.com;
   frame-src giscus.app https://js.dev.shift4.com https://widget.thegivingblock.com https://www.youtube.com https://www.youtube-nocookie.com https://www.redditmedia.com/;

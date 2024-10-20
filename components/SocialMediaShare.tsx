@@ -40,7 +40,7 @@ const SocialMediaShare = ({ title, summary, className }) => {
 
   return (
     <div className={className}>
-      <p className="font-space-grotesk text-lg !font-semibold text-[#222222] ">
+      <p className="font-space-grotesk text-lg !font-semibold text-[#222222]">
         Share:
       </p>
       {shareLinks.map((link) => (

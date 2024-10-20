@@ -63,7 +63,6 @@ const AsideSection: React.FC<AsideSectionProps> = ({
               objectFit: 'cover',
               objectPosition: '50% 50%',
               maxWidth: '100%',
-              height: 'auto',
             }}
           />
         </div>
@@ -89,8 +88,8 @@ const AsideSection: React.FC<AsideSectionProps> = ({
         <div className="relative w-full pt-6">
           <button
             onClick={openPaymentModal}
-            className={`block w-full rounded-none bg-[#222222] font-space-grotesk text-xl font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636] ${
-              isButtonDisabled(bountyStatus) ? 'disabled' : ''
+            className={`block w-full rounded-none bg-[#222222] font-space-grotesk text-xl font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636]${
+              isButtonDisabled(bountyStatus) ? ' disabled' : ''
             }`}
             disabled={isButtonDisabled(bountyStatus)}
           >

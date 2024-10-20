@@ -60,19 +60,10 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
   }
 
   return (
-    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-gray-300  ">
-      {showLeftChevron && (
-        <button
-          className="z-10 rounded-lg bg-white bg-opacity-50 p-1 text-blue-600"
-          onClick={() => scrollMenu('left')}
-        >
-          <FontAwesomeIcon icon={faChevronLeft} size="2x" />
-        </button>
-      )}
-
+    <nav className="relative mt-6 flex h-16 items-center justify-between border-b border-t border-gray-300">
       <ul
         ref={menuRef}
-        className="overflow-x:overlay flex space-x-2 overflow-x-auto whitespace-nowrap py-4 "
+        className="overflow-x:overlay flex space-x-2 overflow-x-auto whitespace-nowrap py-4"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {/* Wrap the button in a div for each li. TODO: Decide to add community back 'community' */}
@@ -89,8 +80,8 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                   onClick={() => handleMenuItemClick(item)}
                   className={`text-lg ${
                     activeItem === item
-                      ? 'font-semibold text-[#222222] '
-                      : 'text-gray-700 '
+                      ? 'font-semibold text-[#222222]'
+                      : 'text-gray-700'
                   }`}
                 >
                   {item === 'faq'
@@ -106,7 +97,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'faq'
-                            ? 'font-bold text-[#222222] '
+                            ? 'font-bold text-[#222222]'
                             : 'font-semibold'
                         }`}
                       >
@@ -118,7 +109,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'updates'
-                            ? 'font-bold text-[#222222] '
+                            ? 'font-bold text-[#222222]'
                             : 'font-semibold'
                         }`}
                       >
@@ -130,7 +121,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'posts'
-                            ? 'font-bold text-[#222222] '
+                            ? 'font-bold text-[#222222]'
                             : 'font-semibold'
                         }`}
                       >
@@ -143,15 +134,6 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
           </li>
         ))}
       </ul>
-
-      {showRightChevron && (
-        <button
-          className="z-10 rounded-lg bg-white bg-opacity-50 p-1 text-blue-600"
-          onClick={() => scrollMenu('right')}
-        >
-          <FontAwesomeIcon icon={faChevronRight} size="2x" />
-        </button>
-      )}
     </nav>
   )
 }

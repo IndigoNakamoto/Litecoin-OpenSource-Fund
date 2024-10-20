@@ -10,9 +10,9 @@ export default function Footer() {
       {/* Full-width section with bg-[#222222] */}
       <div className="mx-auto w-[1300px] max-w-[90%] pb-60 pt-20">
         {/* background */}
-        <div className=" bg-[#222222] bg-cover bg-center">
+        <div className="bg-[#222222] bg-cover bg-center">
           {/* Overlay on top */}
-          <div className="mx-auto ">
+          <div className="">
             <div className="flex flex-col space-x-0 text-[#c6d3d6] lg:flex-row">
               <Image
                 src="/static/images/design/Group 5.svg"

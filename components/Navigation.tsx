@@ -1,8 +1,6 @@
-// components/Navigation
+// components/Navigation.tsx
 import siteMetadata from '@/data/siteMetadata'
-// import Link from './Link' REMOVE
-import Link from 'next/link' // ADDED
-
+import Link from 'next/link'
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import HorizontalSocialIcons from './HorizontalSocialIcons'
@@ -186,7 +184,7 @@ const Navigation = () => {
                 <Image
                   src="/static/logo2.svg"
                   alt="Black Logo"
-                  layout="fill"
+                  fill
                   style={{
                     opacity: 1 - bgOpacity,
                   }}
@@ -194,7 +192,7 @@ const Navigation = () => {
                 <Image
                   src="/static/logo2-white.svg"
                   alt="White Logo"
-                  layout="fill"
+                  fill
                   style={{
                     opacity: bgOpacity,
                   }}
@@ -243,8 +241,8 @@ const Navigation = () => {
                     Use Litecoin
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`ml-2 h-4 w-4 ${
-                        dropdownOpen.useLitecoin ? 'rotate-180' : ''
+                      className={`ml-2 h-4 w-4${
+                        dropdownOpen.useLitecoin ? ' rotate-180' : ''
                       }`}
                       style={{
                         transformOrigin: 'center',
@@ -312,8 +310,8 @@ const Navigation = () => {
                     Learn
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`ml-2 h-4 w-4 ${
-                        dropdownOpen.learn ? 'rotate-180' : ''
+                      className={`ml-2 h-4 w-4${
+                        dropdownOpen.learn ? ' rotate-180' : ''
                       }`}
                       style={{
                         transformOrigin: 'center',
@@ -389,8 +387,8 @@ const Navigation = () => {
                     The Foundation
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`ml-2 h-4 w-4 ${
-                        dropdownOpen.theFoundation ? 'rotate-180' : ''
+                      className={`ml-2 h-4 w-4${
+                        dropdownOpen.theFoundation ? ' rotate-180' : ''
                       }`}
                       style={{
                         transformOrigin: 'center',
@@ -513,7 +511,7 @@ const Navigation = () => {
       >
         {/* LINKS */}
         <div className="flex flex-col gap-x-6">
-          <nav className="mt-10 h-full ">
+          <nav className="mt-10 h-full">
             {[
               { title: 'Use Litecoin', dropdown: true },
               { title: 'Learn', dropdown: true },
@@ -529,12 +527,12 @@ const Navigation = () => {
             ].map((item) => {
               const itemKey = item.title.replace(' ', '').toLowerCase()
               return (
-                <div key={item.title} className="px-10 py-2 short:py-0.5 ">
+                <div key={item.title} className="px-10 py-2 short:py-0.5">
                   {item.dropdown ? (
                     <>
                       <button
                         onClick={() => toggleMobileDropdown(itemKey)}
-                        className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold "
+                        className="m-0 flex w-full items-center justify-between pl-0 pr-0 text-left font-space-grotesk text-[2.1rem] font-semibold"
                         style={{ color: mobileMenuTextColor }}
                         aria-expanded={mobileDropdownOpen[itemKey]}
                         aria-haspopup="true"

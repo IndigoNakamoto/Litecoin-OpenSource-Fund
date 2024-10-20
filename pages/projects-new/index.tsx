@@ -283,7 +283,7 @@ const AllProjects: NextPage = () => {
             'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         }}
       >
-        <div className=" w-full items-center">
+        <div className="w-full items-center">
           <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
             <div className="lg:py-30 py-20 lg:w-1/2">
               <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
@@ -338,7 +338,7 @@ const AllProjects: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="m-auto flex h-full w-[1300px] max-w-[90%]  md:pt-24">
+          <div className="m-auto flex h-full w-[1300px] max-w-[90%] md:pt-24">
             <SectionStats />
           </div>
         </div>
@@ -425,10 +425,10 @@ const AllProjects: NextPage = () => {
       <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[600px] w-full bg-[#C5D3D6] bg-cover bg-center">
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
           <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-16">
-            <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px]  text-black">
+            <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] text-black">
               Submit a Project
             </h1>
-            <p className="m-auto max-w-3xl text-lg  text-[#222222] ">
+            <p className="m-auto max-w-3xl text-lg text-[#222222]">
               We are looking to support talented individuals and teams who share
               our commitment to decentralized open-source solutions and the
               future of Litecoin.

@@ -52,18 +52,16 @@ const ProjectSocialLinks = ({
       <p className="text-lg !font-semibold text-[#222222]">Links:</p>
       {projectLinks.map((link) =>
         link.url ? (
-          <a
+          <div
             key={link.kind}
-            href={link.url}
-            target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center space-x-2 !text-[#222222] !no-underline hover:font-semibold " // no-underline added
+            className="group flex items-center space-x-2 !text-[#222222] !no-underline hover:font-semibold" // no-underline added
           >
             <SocialIcon kind={link.kind} href={link.url} />
             <span className="text-md leading-none group-hover:text-gray-900">
               {formatLinkText(link.kind, link.url)}
             </span>
-          </a>
+          </div>
         ) : null
       )}
     </div>

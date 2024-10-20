@@ -101,7 +101,7 @@ const MenuSections: React.FC<MenuSectionsProps> = ({
         </div>
       )
     case 'updates':
-      console.log('updates: ', updates)
+      // console.log('updates: ', updates)
       return (
         <div className="markdown min-h-full">
           <div>

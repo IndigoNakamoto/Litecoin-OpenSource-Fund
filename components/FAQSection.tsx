@@ -41,7 +41,7 @@ export const FAQSection: React.FC<{
   faqs: any[] // Updated to any[] to handle the new data structure
   bg?: BG
 }> = ({ faqs, bg = '#222222' }) => {
-  console.log('FAQ SECTION COMPONENT, FAQS: ', faqs)
+  // console.log('FAQ SECTION COMPONENT, FAQS: ', faqs)
   const [openIndex, setOpenIndex] = useState<{
     catIndex: number
     qIndex: number

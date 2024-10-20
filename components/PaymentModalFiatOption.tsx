@@ -135,7 +135,7 @@ export default function PaymentModalFiatOption() {
       </div>
       <div className="relative w-full">
         <span
-          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg font-semibold text-[#222222] ${
+          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg font-semibold text-[#222222]${
             isCustomAmount
               ? 'bg-[#222222] text-[#f0f0f0]'
               : 'bg-[#f0f0f0] text-[#222222]'
@@ -146,7 +146,7 @@ export default function PaymentModalFiatOption() {
         <input
           type="number"
           ref={inputRef}
-          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-lg font-semibold ${
+          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-lg font-semibold${
             isCustomAmount
               ? 'bg-[#222222] text-[#f0f0f0]'
               : 'bg-[#f0f0f0] text-[#222222]'

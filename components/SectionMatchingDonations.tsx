@@ -6,7 +6,7 @@ function SectionMatchingDonations() {
       <h1 className="mb-4 font-space-grotesk text-4xl font-bold text-[#222222]">
         Double Your Impact with Charlie Lee’s Matching Donations!
       </h1>
-      <p className="mb-6 font-space-grotesk text-lg  text-[#333333]">
+      <p className="mb-6 font-space-grotesk text-lg text-[#333333]">
         In an exciting announcement at the Litecoin Summit in Nashville, Charlie
         Lee has pledged to match donations up to{' '}
         <strong>$250,000 annually</strong> for the next five years, totaling{' '}
@@ -15,10 +15,10 @@ function SectionMatchingDonations() {
       </p>
       <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
         <div className="flex-1">
-          <h3 className="mb-2 font-space-grotesk text-2xl font-semibold  text-[#222222]">
+          <h3 className="mb-2 font-space-grotesk text-2xl font-semibold text-[#222222]">
             Allocation of Funds:
           </h3>
-          <ul className="list-inside list-disc font-space-grotesk  text-lg text-[#555555]">
+          <ul className="list-inside list-disc font-space-grotesk text-lg text-[#555555]">
             <li>
               <strong>$50,000</strong> dedicated to the projects and bounty
               program.
@@ -29,7 +29,7 @@ function SectionMatchingDonations() {
             </li>
           </ul>
         </div>
-        <div className="flex-1 font-space-grotesk ">
+        <div className="flex-1 font-space-grotesk">
           <h3 className="mb-2 text-2xl font-semibold text-[#222222]">
             Why It Matters:
           </h3>

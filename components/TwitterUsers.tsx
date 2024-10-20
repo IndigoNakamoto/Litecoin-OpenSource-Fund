@@ -22,7 +22,6 @@ const TwitterUsers: React.FC<TwitterUsersProps> = ({ users }) => {
           {index < 3 && ( // Preload first three images (if critical)
             <Head>
               <link
-                rel="preload"
                 as="image"
                 href={user.profile_image_url_https.replace('_normal', '')}
               />
