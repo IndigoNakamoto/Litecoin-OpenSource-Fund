@@ -28,7 +28,7 @@ const fetchProcessedDonations = async (): Promise<ProcessedDonation[]> => {
   const cachedData = await kv.get<ProcessedDonation[]>(cacheKey)
 
   if (cachedData !== null && cachedData !== undefined) {
-    console.log('Returning cached processed donations')
+    // console.log('Returning cached processed donations')
     return cachedData
   }
 

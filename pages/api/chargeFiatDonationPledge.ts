@@ -35,7 +35,7 @@ export default async function handler(
       }
     )
 
-    console.log('Charge Response:', chargeResponse.data)
+    // console.log('Charge Response:', chargeResponse.data)
 
     const { success } = chargeResponse.data.data
 

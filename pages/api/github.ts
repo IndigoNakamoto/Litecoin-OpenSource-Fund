@@ -17,7 +17,7 @@ export default async function handler(
     }
 
     // Log incoming request data for debugging
-    console.log('Received Data:', req.body)
+    // console.log('Received Data:', req.body)
 
     // Extract structured data from request body
     const {

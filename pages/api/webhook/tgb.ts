@@ -129,7 +129,7 @@ export default async function handler(
     try {
       await processDonationMatching()
         .then(() => {
-          console.log('Process completed successfully.')
+          // console.log('Process completed successfully.')
         })
         .catch((error) => {
           console.error('An error occurred during processing:', error)

@@ -18,7 +18,7 @@ const ProjectRichTextRenderer: React.FC<ProjectProps> = ({ slug }) => {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json()
-        console.log('data: ', data.project.fieldData)
+        // console.log('data: ', data.project.fieldData)
 
         // Check if 'content-rich' exists
         if (data.project && data.project.fieldData['content-rich']) {

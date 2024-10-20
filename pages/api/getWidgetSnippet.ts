@@ -36,10 +36,10 @@ export default async function handler(
       campaignId: 'LitecoinWebsiteDAF',
     }
 
-    console.log(
-      'Sending Request to Giving Block API with payload:',
-      requestBody
-    )
+    // console.log(
+    //   'Sending Request to Giving Block API with payload:',
+    //   requestBody
+    // )
 
     const response = await axios.post(apiUrl, requestBody, {
       headers: {
@@ -48,7 +48,7 @@ export default async function handler(
       },
     })
 
-    console.log('Received Response from Giving Block API:', response.data)
+    // console.log('Received Response from Giving Block API:', response.data)
 
     res.status(200).json(response.data.data)
   } catch (error: any) {

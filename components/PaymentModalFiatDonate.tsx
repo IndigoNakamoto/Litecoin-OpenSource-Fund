@@ -29,7 +29,7 @@ function PaymentModalFiatDonate() {
         const data = await response.json()
 
         if (response.ok) {
-          console.log('Donation successful')
+          // console.log('Donation successful')
           dispatch({ type: 'SET_STEP', payload: 'complete' })
         } else {
           const errorData = data.error || data
@@ -54,7 +54,7 @@ function PaymentModalFiatDonate() {
 
       const Shift4 = (window as any).Shift4
       if (Shift4) {
-        console.log('Initializing Shift4...')
+        // console.log('Initializing Shift4...')
         // TODO: Replace with NEXT_PUBLIC_SHIFT4_PK_TEST
         // TODO: Figure out why process.env.NEXT_PUBLIC_SHIFT4_PK_TEST does not work
 
@@ -117,7 +117,7 @@ function PaymentModalFiatDonate() {
 
     try {
       const token = await shift4.createToken(components)
-      console.log('Token created:', token)
+      // console.log('Token created:', token)
 
       const secureToken = await shift4.verifyThreeDSecure({
         amount: amountInCents,
@@ -125,7 +125,7 @@ function PaymentModalFiatDonate() {
         card: token.id,
       })
 
-      console.log('3D Secure verification successful:', secureToken)
+      // console.log('3D Secure verification successful:', secureToken)
 
       await submitDonation(secureToken.id)
     } catch (error: any) {

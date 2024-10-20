@@ -38,7 +38,7 @@ async function fetchDonationData(slug: string): Promise<DonationData[] | null> {
 
     // Ensure BTCPay credentials are set
     if (!username || !password || !btcpay_store_id || !btcpay_url) {
-      console.log('username or password is not set')
+      // console.log('username or password is not set')
     }
 
     if (!username || !password) {
@@ -49,10 +49,10 @@ async function fetchDonationData(slug: string): Promise<DonationData[] | null> {
       'base64'
     )
 
-    console.log('base64: ', base64Credentials)
+    // console.log('base64: ', base64Credentials)
     const auth = `Basic ${base64Credentials}`
 
-    console.log('make get request')
+    // console.log('make get request')
     const response = await fetchGetJSONAuthed(
       `${process.env.BTCPAY_URL}/stores/${process.env.BTCPAY_STORE_ID}/invoices?status=Settled&status=Processing`,
       auth
@@ -60,7 +60,7 @@ async function fetchDonationData(slug: string): Promise<DonationData[] | null> {
     // console.log('Fetched Invoices: ', response.data)
 
     if (!Array.isArray(response)) {
-      console.log('Unexpected response format from BTCPay Server')
+      // console.log('Unexpected response format from BTCPay Server')
     }
 
     // Filter invoices by slug

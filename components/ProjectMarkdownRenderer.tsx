@@ -15,7 +15,7 @@ const ProjectMarkdownRenderer: React.FC<ProjectProps> = ({ slug }) => {
         // Fetch project data from the serverless API route
         const response = await fetch(`/api/webflow/projects?slug=${slug}`)
         const data = await response.json()
-        console.log('data: ', data.project.fieldData)
+        // console.log('data: ', data.project.fieldData)
 
         // Check if 'content-2' exists
         if (data.project && data.project.fieldData['content-2']) {

@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('\n \n api/twitterUsers')
 
   if (!usernames) {
-    console.log('Usernames parameter is missing')
+    // console.log('Usernames parameter is missing')
     res.status(400).json({ error: 'Usernames parameter is required' })
     return
   }
@@ -23,17 +23,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     //clearCache // eslint-disable-next-line no-constant-condition
     if (clearCache) {
       // Clear cache logic
-      console.log(`Clearing cache for key: ${cacheKey}`)
+      // console.log(`Clearing cache for key: ${cacheKey}`)
       await kv.del(cacheKey)
     }
 
-    console.log('Checking KV for cached data')
+    // console.log('Checking KV for cached data')
     let users = await kv.get<
       { name: string; screen_name: string; profile_image_url_https: string }[]
     >(cacheKey)
 
     if (!users) {
-      console.log('No cached data found, calling Twitter API using GET')
+      // console.log('No cached data found, calling Twitter API using GET')
       const endpoint = `https://api.twitter.com/2/users/by?usernames=${usernamesStr}&user.fields=profile_image_url`
 
       const response = await axios.get(endpoint, {
@@ -48,7 +48,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         profile_image_url_https: obj.profile_image_url,
       }))
 
-      console.log('Caching the new data from Twitter API')
+      // console.log('Caching the new data from Twitter API')
       await kv.set(cacheKey, users) // Expires after 1 hour, adjust as needed
     }
 
