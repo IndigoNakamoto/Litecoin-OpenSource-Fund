@@ -338,11 +338,14 @@ const AllProjects: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="m-auto flex h-full w-[1300px] max-w-[90%] md:pt-24">
-            <SectionStats />
-          </div>
+          {/* <div className="m-auto flex h-full w-[1300px] max-w-[90%] md:pt-24"> */}
+          {/* <SectionStats /> */}
+          {/* </div> */}
         </div>
       </section>
+      <SectionProjects bgColor="black">
+        <SectionStats />
+      </SectionProjects>
 
       <SectionProjects bgColor={'#f2f2f2'}>
         <SectionMatchingDonations />

@@ -51,7 +51,7 @@ function SectionStats() {
   }, [fetchStats])
 
   return (
-    <div className="m-8 mx-auto max-w-5xl border border-black p-8 text-center">
+    <div className="m-8 mx-auto max-w-5xl border border-black p-8 text-center text-white">
       <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
         <div>
           <div className="font-space-grotesk text-2xl font-semibold md:text-3xl lg:text-4xl">
