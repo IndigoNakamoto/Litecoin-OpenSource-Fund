@@ -40,44 +40,45 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   }, [])
 
   useEffect(() => {
-    const fetchWidgetSnippet = async () => {
-      try {
-        const res = await fetch('/api/getWidgetSnippet')
-        if (!res.ok) {
-          const errorData = await res.json()
-          throw new Error(
-            `HTTP error! status: ${res.status} - ${
-              errorData.error || res.statusText
-            }`
-          )
-        }
-        const data = await res.json()
-
-        setWidgetSnippet(data.popup)
-
-        // Parse and execute the script manually
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(data.popup, 'text/html')
-        const script = doc.querySelector('script')
-
-        if (script) {
-          const existingScript = document.getElementById(script.id)
-          if (!existingScript) {
-            const newScript = document.createElement('script')
-            newScript.id = script.id
-            newScript.innerHTML = script.innerHTML
-            document.body.appendChild(newScript)
+    if (project?.slug === 'projects-fund') {
+      const fetchWidgetSnippet = async () => {
+        try {
+          const res = await fetch('/api/getWidgetSnippet')
+          if (!res.ok) {
+            const errorData = await res.json()
+            throw new Error(
+              `HTTP error! status: ${res.status} - ${
+                errorData.error || res.statusText
+              }`
+            )
           }
-        }
-      } catch (error) {
-        console.error('Failed to fetch widget snippet:', error)
-        setWidgetError(error.message)
-      }
-    }
+          const data = await res.json()
 
-    fetchWidgetSnippet()
-    // Removed the cleanup function
-  }, [])
+          setWidgetSnippet(data.popup)
+
+          // Parse and execute the script manually
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(data.popup, 'text/html')
+          const script = doc.querySelector('script')
+
+          if (script) {
+            const existingScript = document.getElementById(script.id)
+            if (!existingScript) {
+              const newScript = document.createElement('script')
+              newScript.id = script.id
+              newScript.innerHTML = script.innerHTML
+              document.body.appendChild(newScript)
+            }
+          }
+        } catch (error) {
+          console.error('Failed to fetch widget snippet:', error)
+          setWidgetError(error.message)
+        }
+      }
+
+      fetchWidgetSnippet()
+    }
+  }, [project])
 
   useEffect(() => {
     if (project) {
@@ -239,7 +240,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             {isMounted &&
             project.slug === 'projects-fund' &&
             modal &&
-            !widgetError ? (
+            !widgetError &&
+            widgetSnippet ? (
               <div className="w-1/2">
                 <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
                   <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
