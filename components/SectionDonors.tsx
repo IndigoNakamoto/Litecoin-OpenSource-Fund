@@ -79,11 +79,11 @@ const SectionDonors: React.FC = () => {
   const uniqueUsernames = new Set<string>()
 
   return (
-    <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center p-8 ">
+    <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center p-10">
       {/* <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide">
         Donors
       </h1> */}
-      <div className="col-span-2 col-start-2 grid grid-cols-5 gap-x-4 space-y-2 md:grid-cols-6 md:gap-x-6 lg:grid-cols-8 xl:grid-cols-10">
+      <div className="contributors-list grid w-full grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
         {donors.map((donor, index) => {
           const username = extractTwitterUsername(donor.socialX || '')
           if (!username || uniqueUsernames.has(username)) {
@@ -100,7 +100,7 @@ const SectionDonors: React.FC = () => {
 
           return (
             <div
-              className="items-left flex flex-col space-x-1 pt-2"
+              className="group relative flex aspect-square transform items-center justify-center overflow-hidden transition-transform duration-300 focus:outline-none group-hover:scale-105 "
               key={index}
             >
               {index < 3 && (
@@ -108,20 +108,15 @@ const SectionDonors: React.FC = () => {
                   <link rel="preload" as="image" href={imageUrl} />
                 </Head>
               )}
-              <Link
-                href={profileLink}
-                className="transition-transform duration-200 ease-in-out hover:scale-105"
-              >
+              <Link href={profileLink} className="">
                 <Image
                   src={imageUrl}
                   alt={username || 'Default avatar'}
-                  width={100}
-                  height={100}
-                  className="rounded-full"
-                  loading="lazy"
+                  className="h-full w-full transform rounded-full object-cover p-1 transition-transform duration-300 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={{
-                    maxWidth: '100%',
-                    height: 'auto',
+                    objectFit: 'cover',
                   }}
                 />
               </Link>

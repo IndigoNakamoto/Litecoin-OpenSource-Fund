@@ -43,7 +43,7 @@ function SectionContributors() {
     <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center p-8">
       {loading && <p>Loading contributors...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="contributors-list grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8">
+      <div className="contributors-list grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
         {contributors.map((contributor) => (
           <ContributorCard key={contributor.id} contributor={contributor} />
         ))}
