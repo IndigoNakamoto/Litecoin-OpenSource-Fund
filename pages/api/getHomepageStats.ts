@@ -1,14 +1,26 @@
-// /pages/api/getHomepageStats.ts
+// pages/api/getHomepageStats.ts
 
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
+import { kv } from '@vercel/kv' // Import KV from Vercel
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+type HomepageStats = {
+  numberOfDailyTransactions: number
+  usdValuePerDay: number
+  networkSecurity: number
+  dailyAddresses: number
+}
+
+const fetchHomepageStats = async (): Promise<HomepageStats> => {
+  const cacheKey = 'homepageStats'
+  const cachedStats = await kv.get<HomepageStats>(cacheKey)
+
+  if (cachedStats !== null && cachedStats !== undefined) {
+    return cachedStats
+  }
+
   try {
-    // 1. Fetch Data from Blockchair Public API
+    // Fetch data from Blockchair API
     const response = await fetch('https://api.blockchair.com/litecoin/stats')
 
     if (!response.ok) {
@@ -23,9 +35,7 @@ export default async function handler(
 
     const data = blockchairData.data
 
-    // 2. Extract and Calculate Required Data
-
-    // Number of Daily Transactions
+    // Extract and calculate required data
     const numberOfDailyTransactions = data.transactions_24h
 
     // USD Value per Day
@@ -45,17 +55,32 @@ export default async function handler(
     // Daily Addresses
     const dailyAddresses = data.hodling_addresses
 
-    // 3. Prepare and Send the Response
-    const result = {
+    const homepageStats: HomepageStats = {
       numberOfDailyTransactions,
       usdValuePerDay,
       networkSecurity,
       dailyAddresses,
     }
 
-    res.status(200).json(result)
+    // Cache the result for 5 minutes (300 seconds)
+    await kv.set(cacheKey, homepageStats, { ex: 300 })
+
+    return homepageStats
   } catch (error) {
-    console.error('Error in getHomepageStats API:', error)
-    res.status(500).json({ statusCode: 500, message: (error as Error).message })
+    console.error('Error fetching homepage stats:', error)
+    throw new Error('Failed to fetch homepage stats')
+  }
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<HomepageStats | { error: string }>
+) {
+  try {
+    const homepageStats = await fetchHomepageStats()
+    res.status(200).json(homepageStats)
+  } catch (error) {
+    console.error('Error in getHomepageStats handler:', error)
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
