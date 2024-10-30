@@ -592,6 +592,7 @@ const PaymentModalPersonalInfo: React.FC<
                         },
                       })
                       const currentUrl = window.location.href
+                      console.log('Current url for sign in: ', currentUrl)
                       const url = new URL(currentUrl)
                       console.log('URL for twitter callback', url)
                       url.searchParams.set('modal', 'true')
