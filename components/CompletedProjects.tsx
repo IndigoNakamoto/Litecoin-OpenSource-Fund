@@ -24,7 +24,6 @@ const images = [
     src: 'ldk.png',
     href: '/missions/litecoin_dev_kit',
   },
-  { title: 'Litescribe', src: 'litescribe3.png', href: '/missions/litescribe' },
   {
     title: 'Litewallet',
     src: 'litewallet.png',
