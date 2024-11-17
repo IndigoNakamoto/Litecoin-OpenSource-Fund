@@ -33,3 +33,13 @@ Thanks for supporting OpenSats!
 ## Clear community twitter image cache
 
 search and uncomment //&clearCache=true
+
+## Start prisma
+
+npx prisma studio
+
+### Remove matched donation
+
+Open prisma studio
+Go to the matching donation log table
+Update matchedAmount for the donation to 0
