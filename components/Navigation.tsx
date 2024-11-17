@@ -236,7 +236,7 @@ const Navigation = () => {
                     onClick={() => toggleDropdown('useLitecoin')}
                     aria-expanded={dropdownOpen.useLitecoin}
                     aria-haspopup="true"
-                    style={{ color: fontColor }}
+                    style={{ color: fontColor, fontSize: '1rem' }}
                   >
                     Use Litecoin
                     <svg
@@ -478,7 +478,7 @@ const Navigation = () => {
                   <a href="https://litecoin.net/shop">Shop</a>
                 </li>
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[600]"
+                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
                   style={{
                     color: '#FC5C39',
                     letterSpacing: '-0.2px',
