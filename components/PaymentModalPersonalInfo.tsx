@@ -593,10 +593,10 @@ const PaymentModalPersonalInfo: React.FC<
                 <p className="mt-2 text-sm text-gray-500">
                   Feature currently unavailable. Please email
                   <a
-                    href="mailto:indigo@litecoin.net"
+                    href="mailto:donate@litecoin.net"
                     className="ml-1 text-blue-500 underline"
                   >
-                    indigo@litecoin.net
+                    donate@litecoin.net
                   </a>
                   &nbsp;to request your X profile to be added.
                 </p>
