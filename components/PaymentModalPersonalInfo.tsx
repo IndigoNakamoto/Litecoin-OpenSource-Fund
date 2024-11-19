@@ -579,54 +579,32 @@ const PaymentModalPersonalInfo: React.FC<
               </p>
             </div>
             <div>
-              <div className="flex flex-row justify-between space-x-2">
-                {!state.formData.socialXimageSrc ? (
-                  <button
-                    type="button"
-                    className={`flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-gray-500`}
-                    onClick={() => {
-                      dispatch({
-                        type: 'SET_FORM_DATA',
-                        payload: {
-                          socialXUseSession: true, // Allow useEffect to update from session
-                        },
-                      })
-                      const currentUrl = window.location.href
-                      console.log('Current url for sign in: ', currentUrl)
-                      const url = new URL(currentUrl)
-                      console.log('URL for twitter callback ', url)
-                      url.searchParams.set('modal', 'true')
-                      signIn('twitter', { callbackUrl: url.toString() })
-                    }}
+              <div className="flex flex-col">
+                <button
+                  type="button"
+                  className="flex w-1/2 cursor-not-allowed items-center justify-center rounded-lg border border-gray-300 bg-gray-200 font-space-grotesk font-semibold text-gray-500"
+                  disabled
+                >
+                  <span className="flex items-center">
+                    Verify
+                    <SiX className="ml-2 h-6 w-6" />
+                  </span>
+                </button>
+                <p className="mt-2 text-sm text-gray-500">
+                  Feature currently unavailable. Please email
+                  <a
+                    href="mailto:indigo@litecoin.net"
+                    className="ml-1 text-blue-500 underline"
                   >
-                    <span className="flex items-center">
-                      Verify
-                      <SiX className="ml-2 h-6 w-6" />
-                    </span>
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="flex w-1/2 items-center justify-center rounded-lg border border-[#222222] font-space-grotesk font-semibold text-[#222222]"
-                    onClick={() => {
-                      dispatch({
-                        type: 'SET_FORM_DATA',
-                        payload: {
-                          socialX: '',
-                          socialXimageSrc: '',
-                          socialXUseSession: false,
-                        },
-                      })
-                    }}
-                  >
-                    <SiX className="mr-2 h-6 w-6" />
-                    Verified
-                  </button>
-                )}
+                    indigo@litecoin.net
+                  </a>
+                  &nbsp;to request your X profile to be added.
+                </p>
               </div>
             </div>
           </div>
         </div>
+
         <span className="block w-full border-t border-gray-400 "></span>
         {/* EMAIL */}
         <div>
