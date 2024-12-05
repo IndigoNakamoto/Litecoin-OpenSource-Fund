@@ -9,6 +9,7 @@ type HomepageStats = {
   usdValuePerDay: number
   networkSecurity: number
   dailyAddresses: number
+  median_transaction_fee_usd_24h: number
 }
 
 const fetchHomepageStats = async (): Promise<HomepageStats> => {
@@ -41,6 +42,7 @@ const fetchHomepageStats = async (): Promise<HomepageStats> => {
     // USD Value per Day
     const volume24h = data.volume_24h // In satoshis
     const marketPriceUsd = data.market_price_usd
+    const median_transaction_fee_usd_24h = data.median_transaction_fee_usd_24h
 
     // Convert volume from satoshis to LTC
     const totalLtcTransferred = volume24h / 1e8
@@ -60,6 +62,7 @@ const fetchHomepageStats = async (): Promise<HomepageStats> => {
       usdValuePerDay,
       networkSecurity,
       dailyAddresses,
+      median_transaction_fee_usd_24h,
     }
 
     // Cache the result for 5 minutes (300 seconds)
