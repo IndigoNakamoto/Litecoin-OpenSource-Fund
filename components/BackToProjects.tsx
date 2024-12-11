@@ -4,7 +4,7 @@ const BackToProjects = () => {
   return (
     <div className="flex items-center pb-4">
       <Link
-        href="/projects-new"
+        href="/projects"
         aria-label="Back to projects"
         className="text-primary"
       >

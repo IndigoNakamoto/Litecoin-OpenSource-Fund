@@ -369,7 +369,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
-                  <Link href="/projects-new">Projects</Link>
+                  <Link href="/projects">Projects</Link>
                 </li>
 
                 {/* The Foundation Dropdown */}
@@ -517,7 +517,7 @@ const Navigation = () => {
               { title: 'Learn', dropdown: true },
               {
                 title: 'Projects',
-                link: 'https://litecoin.net/projects-new',
+                link: 'https://litecoin.net/projects',
               },
               { title: 'The Foundation', dropdown: true },
               { title: 'News', link: 'https://litecoin.net/news' },

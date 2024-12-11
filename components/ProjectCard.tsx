@@ -27,7 +27,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <figure
       className={`flex flex-col justify-between rounded-3xl p-4 sm:p-6 md:p-6 ${bgColor} w-full space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
     >
-      <Link href={`/projects-new/${slug}`} passHref>
+      <Link href={`/projects/${slug}`} passHref>
         <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
           <Image
             // Use the custom loader
@@ -69,7 +69,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         <div className="mt-4 text-left">
           <Link
-            href={`/projects-new/${slug}`}
+            href={`/projects/${slug}`}
             passHref
             className="text-secondary-500 hover:text-secondary-600 font-bold tracking-wider text-[#7e7e7e] underline"
             aria-label="FIND OUT MORE"

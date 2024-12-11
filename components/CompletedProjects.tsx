@@ -9,42 +9,42 @@ import SectionDonors from '@/components/SectionDonors'
 const imageDirectory = '/static/images/projects/completed/'
 const images = [
   // List your images with descriptive alt text for SEO
-  { title: 'Litecoin Core', src: 'core.png', href: '/projects-new/core' },
+  { title: 'Litecoin Core', src: 'core.png', href: '/projects/core' },
   {
     title: 'Litecoin Space',
     src: 'litecoin-space.jpeg',
-    href: '/projects-new/litecoin_space_mempool',
+    href: '/projects/litecoin_space_mempool',
   },
   {
     title: 'Ordinals Lite',
     src: 'OrdinalsLite3.png',
-    href: '/projects-new/ordinals_lite',
+    href: '/projects/ordinals_lite',
   },
-  { title: 'MWEB', src: 'MWEB.webp', href: '/projects-new/mweb' },
+  { title: 'MWEB', src: 'MWEB.webp', href: '/projects/mweb' },
   {
     title: 'Litecoin Dev Kit',
     src: 'ldk.png',
-    href: '/projects-new/litecoin_dev_kit',
+    href: '/projects/litecoin_dev_kit',
   },
   {
     title: 'Litescribe',
     src: 'litescribe3.png',
-    href: '/projects-new/litescribe',
+    href: '/projects/litescribe',
   },
   {
     title: 'Litewallet',
     src: 'litewallet.png',
-    href: '/projects-new/litewallet',
+    href: '/projects/litewallet',
   },
   {
     title: 'Electrum-LTC',
     src: 'electrum.png',
-    href: '/projects-new/electrum',
+    href: '/projects/electrum',
   },
   {
     title: 'Stackwallet',
     src: 'stackwallet.png',
-    href: '/projects-new/stackwallet',
+    href: '/projects/stackwallet',
   },
 ]
 

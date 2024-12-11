@@ -475,8 +475,8 @@ const Project: NextPage<SingleProjectPageProps> = ({
     setSelectedMenuItem(newMenuItem)
 
     const updatedURL = updateId
-      ? `/projects-new/${slug}?menu=${newMenuItem}&updateId=${updateId}`
-      : `/projects-new/${slug}?menu=${newMenuItem}`
+      ? `/projects/${slug}?menu=${newMenuItem}&updateId=${updateId}`
+      : `/projects/${slug}?menu=${newMenuItem}`
 
     router.push(updatedURL, undefined, { shallow: true })
   }
