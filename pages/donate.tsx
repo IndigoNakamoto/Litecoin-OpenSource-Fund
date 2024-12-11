@@ -65,6 +65,12 @@ export default function Donate() {
                 advocacy related to Litecoin, cryptocurrency and financial
                 privacy.
               </p>
+              <p className="mt-4 text-lg text-[#222222]">
+                Your contribution may also reduce your taxable income, depending
+                on your tax situation. If you have any questions, please feel
+                free to consult with your tax advisor to ensure you're getting
+                the full benefit of your charitable donation.
+              </p>
             </div>
           </div>
           <div className="mt-12 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">

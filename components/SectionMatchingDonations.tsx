@@ -42,15 +42,13 @@ function SectionMatchingDonations() {
           </p>
         </div>
       </div>
-      <p className="my-6  text-lg text-[#333333]">
-        Your contribution may also reduce your taxable income, depending on your
-        tax situation. If you have any questions, please feel free to consult
-        with your tax advisor to ensure you're getting the full benefit of your
-        charitable donation.
-      </p>
       <p className="mt-4 text-sm text-[#777777]">
-        *Charlie Lee will match your donations dollar for dollar up to the
+        Charlie Lee will match your donations dollar for dollar up to the
         specified amounts each year.
+      </p>
+      <p className="text-sm text-[#777777]">
+        Your donation may also reduce your taxable income, depending on your tax
+        situation.
       </p>
     </div>
   )
