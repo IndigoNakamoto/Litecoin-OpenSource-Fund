@@ -42,7 +42,7 @@ function SectionMatchingDonations() {
           </p>
         </div>
       </div>
-      <p className="mb-6  text-lg text-[#333333]">
+      <p className="my-6  text-lg text-[#333333]">
         Your contribution may also reduce your taxable income, depending on your
         tax situation. If you have any questions, please feel free to consult
         with your tax advisor to ensure you're getting the full benefit of your
