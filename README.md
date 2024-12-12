@@ -43,3 +43,8 @@ npx prisma studio
 Open prisma studio
 Go to the matching donation log table
 Update matchedAmount for the donation to 0
+
+### Github
+
+Token Expires on Sat, Dec 13 2025.
+lite-space/applicants
