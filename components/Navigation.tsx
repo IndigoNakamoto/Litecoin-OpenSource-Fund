@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import HorizontalSocialIcons from './HorizontalSocialIcons'
+import LitecoinLogo from '../public/static/litecoin_dark_logo.svg'
 
 const Navigation = () => {
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -107,17 +108,18 @@ const Navigation = () => {
 
   const maxScrollHeight = 225
   const minHeight = 80
-  const initialHeight = 92
+  const initialHeight = 80
   const bgOpacity = Math.min(scrollPosition / maxScrollHeight, 1)
   const baseHeaderHeight = isMobile ? initialHeight - 10 : initialHeight
   const minHeaderHeight = isMobile ? minHeight - 10 : minHeight
-  const headerHeight = Math.max(
-    baseHeaderHeight -
-      (scrollPosition / maxScrollHeight) * (baseHeaderHeight - minHeaderHeight),
-    minHeaderHeight
-  )
-  const baseLogoSize = isMobile ? 60 : 70.2 // Adjusted for clarity
-  const minLogoSize = isMobile ? 60 : 60
+  // const headerHeight = Math.max(
+  //   baseHeaderHeight -
+  //     (scrollPosition / maxScrollHeight) * (baseHeaderHeight - minHeaderHeight),
+  //   minHeaderHeight
+  // )
+  const headerHeight = isMobile ? 70 : 82
+  const baseLogoSize = isMobile ? 130 : 142 // Adjusted for clarity
+  const minLogoSize = isMobile ? 124 : 124
   const logoSize = Math.max(
     baseLogoSize -
       (scrollPosition / maxScrollHeight) * (baseLogoSize - minLogoSize),
@@ -155,6 +157,11 @@ const Navigation = () => {
   const hamburgerColor = interpolateColor('#222222', '#ffffff', bgOpacity) // Updated
   const mobileMenuTextColor = interpolateColor('#222222', '#C5D3D6', bgOpacity)
   const socialIconTextColor = interpolateColor('#222222', '#ffffff', bgOpacity) // New color for social icons
+  const logoColor = bgOpacity < 0.5 ? '#000000' : '#ffffff'
+
+  useEffect(() => {
+    console.log('Scroll Position:', scrollPosition, 'bgOpacity:', bgOpacity)
+  }, [scrollPosition, bgOpacity])
 
   return (
     <>
@@ -174,28 +181,19 @@ const Navigation = () => {
               aria-label={siteMetadata.headerTitle}
             >
               <div
-                className="relative mt-[3px]"
+                className={`relative ${isMobile ? 'ml-2' : 'ml-1'}  mt-[3px]`}
                 style={{
                   height: `${logoSize}px`,
                   width: `${logoSize}px`,
                   transform: 'translateY(-0.5px)',
+                  color: logoColor, // Set the color for the SVG
+                  transition: 'color 0.3s ease-in-out', // Smooth transition
                 }}
               >
-                <Image
-                  src="/static/logo2.svg"
-                  alt="Black Logo"
-                  fill
-                  style={{
-                    opacity: 1 - bgOpacity,
-                  }}
-                />
-                <Image
-                  src="/static/logo2-white.svg"
-                  alt="White Logo"
-                  fill
-                  style={{
-                    opacity: bgOpacity,
-                  }}
+                <LitecoinLogo
+                  width={logoSize}
+                  height={logoSize}
+                  // If needed, pass additional props
                 />
               </div>
             </a>
@@ -480,7 +478,7 @@ const Navigation = () => {
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
                   style={{
-                    color: '#FC5C39',
+                    color: fontColor,
                     letterSpacing: '-0.2px',
                     fontSize: `${scaledFontSize}px`,
                     marginRight: `${scaledMargin + 1}px`,
