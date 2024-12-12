@@ -76,8 +76,8 @@ export default function Donate() {
           <div className="mt-12 w-full max-w-[600px] flex-none rounded-2xl border border-[#222222] bg-gray-100 p-6 xl:mt-0">
             <PaymentForm
               project={{
-                slug: 'projects-fund',
-                title: 'Projects Fund',
+                slug: 'litecoin-foundation',
+                title: 'Litecoin Foundation',
                 summary: '',
                 coverImage:
                   'https://cdn.prod.website-files.com/6233ca951c563d47368b1def/6707199b42e1cff0f6727e56_projects2.png?w=1200&q=75',

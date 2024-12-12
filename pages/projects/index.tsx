@@ -23,8 +23,8 @@ import SectionDonors from '@/components/SectionDonors'
 // TODO: Fix scroll bar. Return to default
 
 const project = {
-  slug: 'projects-fund',
-  title: 'Projects Fund',
+  slug: 'litecoin-foundation',
+  title: 'Litecoin Foundation',
   summary: '',
   coverImage: '/static/images/projects/projects2.png',
   telegramLink: '',

@@ -898,7 +898,7 @@ export const getContributorsByIds = async (
  */
 // Modify your data fetching functions to use the cache
 export const getAllContributors = async (): Promise<Contributor[]> => {
-  const cacheKey = 'contributors:all'
+  const cacheKey = 'contributors:all2'
   const cachedContributors = await kv.get<Contributor[]>(cacheKey)
 
   if (cachedContributors) {
@@ -932,7 +932,7 @@ export const getAllActiveContributors = async (): Promise<Contributor[]> => {
  * @returns An array of ProjectSummaryLite objects.
  */
 export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
-  const cacheKey = 'projects:all3'
+  const cacheKey = 'projects:all2'
   const cachedProjects = await kv.get<ProjectSummaryLite[]>(cacheKey)
 
   if (cachedProjects) {
@@ -980,7 +980,7 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
  * @returns An array of all posts.
  */
 export const getAllPosts = async (): Promise<Post[]> => {
-  const cacheKey = 'posts:all'
+  const cacheKey = 'posts:all2'
   const cachedPosts = await kv.get<Post[]>(cacheKey)
 
   if (cachedPosts) {
@@ -1000,7 +1000,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
  * @returns An array of all updates.
  */
 export const getAllUpdates = async (): Promise<Update[]> => {
-  const cacheKey = 'updates:all'
+  const cacheKey = 'updates:all2'
   const cachedUpdates = await kv.get<Update[]>(cacheKey)
 
   if (cachedUpdates) {

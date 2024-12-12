@@ -40,7 +40,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   }, [])
 
   useEffect(() => {
-    if (project?.slug === 'projects-fund') {
+    if (project?.slug === 'litecoin-foundation') {
       const fetchWidgetSnippet = async () => {
         try {
           const res = await fetch('/api/getWidgetSnippet')
@@ -201,7 +201,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 <h2 className="font-space-grotesk text-4xl font-semibold text-[#222222]">
                   {project.title}
                 </h2>
-                {project.title === 'Projects Fund' ? null : (
+                {project.title === 'The Litecoin Foundation' ? null : (
                   <h3 className="font-sans text-[#222222]">Project</h3>
                 )}
               </div>
@@ -212,7 +212,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           <div className="flex justify-between space-x-3">
             <div
               className={`${
-                project.slug === 'projects-fund' ? 'w-1/2' : 'w-full'
+                project.slug === 'litecoin-foundation' ? 'w-1/2' : 'w-full'
               }`}
             >
               <button
@@ -238,7 +238,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             </div>
 
             {isMounted &&
-            project.slug === 'projects-fund' &&
+            project.slug === 'litecoin-foundation' &&
             modal &&
             !widgetError &&
             widgetSnippet ? (
