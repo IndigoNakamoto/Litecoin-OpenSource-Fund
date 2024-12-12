@@ -352,7 +352,7 @@ const AllProjects: NextPage = () => {
 
       {/* OPEN SOURCE PROJECTS */}
       <SectionProjects bgColor="">
-        <div className="flex flex-col items-center">
+        <div ref={projectsRef} className="flex flex-col items-center">
           <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
             Open-Source Projects
           </h1>
@@ -377,7 +377,7 @@ const AllProjects: NextPage = () => {
 
       {/* COMPLETED PROJECTS */}
       <SectionProjects bgColor="">
-        <div className="flex flex-col items-center pb-8">
+        <div ref={bountiesRef} className="flex flex-col items-center pb-8">
           <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
             Completed Projects
           </h1>
