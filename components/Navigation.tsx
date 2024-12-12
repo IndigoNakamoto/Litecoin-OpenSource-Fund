@@ -473,7 +473,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.8}px`,
                   }}
                 >
-                  <a href="https://litecoin.com/shop">Shop</a>
+                  <a href="https://shop.litecoin.net">Shop</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
@@ -520,7 +520,7 @@ const Navigation = () => {
               { title: 'The Foundation', dropdown: true },
               { title: 'News', link: 'https://litecoin.com/news' },
               { title: 'Events', link: 'https://litecoin.com/events' },
-              { title: 'Shop', link: 'https://litecoin.com/shop' },
+              { title: 'Shop', link: 'https://shop.litecoin.net' },
               { title: 'Explorer', link: 'https://litecoinspace.org/' },
             ].map((item) => {
               const itemKey = item.title.replace(' ', '').toLowerCase()
