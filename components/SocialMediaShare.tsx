@@ -6,7 +6,7 @@ import Notification from './Notification'
 
 const SocialMediaShare = ({ title, summary, className }) => {
   const router = useRouter()
-  const currentURL = `https://redesign.lite.space` + router.asPath
+  const currentURL = `https://litecoin.com` + router.asPath
   const encodedText = encodeURIComponent(summary)
 
   const [notification, setNotification] = useState('')

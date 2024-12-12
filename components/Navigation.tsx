@@ -177,7 +177,7 @@ const Navigation = () => {
         <div className="mx-auto flex h-full w-[1300px] max-w-[90%] items-center justify-between">
           <div className="relative flex h-full items-center pb-1">
             <a
-              href="https://litecoin.net"
+              href="https://litecoin.com"
               aria-label={siteMetadata.headerTitle}
             >
               <div
@@ -279,16 +279,16 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/buy">Buy</a>
+                      <a href="https://litecoin.com/buy">Buy</a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/spend">Spend</a>
+                      <a href="https://litecoin.com/spend">Spend</a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/store">Store</a>
+                      <a href="https://litecoin.com/store">Store</a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/for-business">Business</a>
+                      <a href="https://litecoin.com/for-business">Business</a>
                     </li>
                   </ul>
                 </li>
@@ -346,12 +346,12 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/what-is-litecoin">
+                      <a href="https://litecoin.com/what-is-litecoin">
                         What is Litecoin
                       </a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/resources">Resources</a>
+                      <a href="https://litecoin.com/resources">Resources</a>
                     </li>
                   </ul>
                 </li>
@@ -425,16 +425,16 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/litecoin-foundation">
+                      <a href="https://litecoin.com/litecoin-foundation">
                         About
                       </a>
                     </li>
 
                     <li className="ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/financials">Financials</a>
+                      <a href="https://litecoin.com/financials">Financials</a>
                     </li>
                     <li className="mb-2 ml-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.net/litecoin-foundation#contact">
+                      <a href="https://litecoin.com/litecoin-foundation#contact">
                         Contact
                       </a>
                     </li>
@@ -451,7 +451,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 1}px`,
                   }}
                 >
-                  <a href="https://litecoin.net/news">News</a>
+                  <a href="https://litecoin.com/news">News</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
@@ -462,7 +462,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.5}px`,
                   }}
                 >
-                  <a href="https://litecoin.net/events">Events</a>
+                  <a href="https://litecoin.com/events">Events</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.90rem] mt-[.85rem] font-[500]"
@@ -473,7 +473,7 @@ const Navigation = () => {
                     marginRight: `${scaledMargin + 0.8}px`,
                   }}
                 >
-                  <a href="https://litecoin.net/shop">Shop</a>
+                  <a href="https://litecoin.com/shop">Shop</a>
                 </li>
                 <li
                   className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
@@ -485,7 +485,7 @@ const Navigation = () => {
                   }}
                 >
                   <a
-                    href="https://explorer.litecoin.net/"
+                    href="https://litecoinspace.org/"
                     target="_blank" // Opens the link in a new tab
                     rel="noopener noreferrer" // Security best practices
                   >
@@ -515,13 +515,13 @@ const Navigation = () => {
               { title: 'Learn', dropdown: true },
               {
                 title: 'Projects',
-                link: 'https://litecoin.net/projects',
+                link: 'https://litecoin.com/projects',
               },
               { title: 'The Foundation', dropdown: true },
-              { title: 'News', link: 'https://litecoin.net/news' },
-              { title: 'Events', link: 'https://litecoin.net/events' },
-              { title: 'Shop', link: 'https://litecoin.net/shop' },
-              { title: 'Explorer', link: 'https://litecoin.net/explorer' },
+              { title: 'News', link: 'https://litecoin.com/news' },
+              { title: 'Events', link: 'https://litecoin.com/events' },
+              { title: 'Shop', link: 'https://litecoin.com/shop' },
+              { title: 'Explorer', link: 'https://litecoinspace.org/' },
             ].map((item) => {
               const itemKey = item.title.replace(' ', '').toLowerCase()
               return (
@@ -568,16 +568,16 @@ const Navigation = () => {
                           {item.title === 'Use Litecoin' ? (
                             <>
                               <li className="py-1">
-                                <a href="https://litecoin.net/buy">Buy</a>
+                                <a href="https://litecoin.com/buy">Buy</a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.net/spend">Spend</a>
+                                <a href="https://litecoin.com/spend">Spend</a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.net/store">Store</a>
+                                <a href="https://litecoin.com/store">Store</a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.net/for-business">
+                                <a href="https://litecoin.com/for-business">
                                   Business
                                 </a>
                               </li>
@@ -585,17 +585,17 @@ const Navigation = () => {
                           ) : item.title === 'The Foundation' ? (
                             <>
                               <li className="py-1">
-                                <a href="https://litecoin.net/litecoin-foundation">
+                                <a href="https://litecoin.com/litecoin-foundation">
                                   About
                                 </a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.net/financials">
+                                <a href="https://litecoin.com/financials">
                                   Financials
                                 </a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.net/litecoin-foundation#contact">
+                                <a href="https://litecoin.com/litecoin-foundation#contact">
                                   Contact
                                 </a>
                               </li>
@@ -603,12 +603,12 @@ const Navigation = () => {
                           ) : item.title === 'Learn' ? (
                             <>
                               <li className="py-1">
-                                <a href="https://litecoin.net/what-is-litecoin">
+                                <a href="https://litecoin.com/what-is-litecoin">
                                   What Is Litecoin
                                 </a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.net/resources">
+                                <a href="https://litecoin.com/resources">
                                   Resources
                                 </a>
                               </li>
