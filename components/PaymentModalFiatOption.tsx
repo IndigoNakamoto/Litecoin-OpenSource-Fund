@@ -30,27 +30,66 @@ export default function PaymentModalFiatOption() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    if (/^\d*\.?\d{0,2}$/.test(value) && parseFloat(value) >= 0) {
-      setCustomAmount(value)
+
+    // Allow empty input
+    if (value === '') {
+      setCustomAmount('')
       setSelectedAmount(null)
-      setCoverFees(false)
-      // Update the formData with the correct pledgeAmount and selectedCurrency
       dispatch({
         type: 'SET_FORM_DATA',
-        payload: { pledgeAmount: value, pledgeCurrency: 'USD' },
+        payload: { pledgeAmount: '', pledgeCurrency: 'USD' },
       })
+      return
+    }
+
+    // Validate input as a number with up to two decimal places
+    if (/^\d*\.?\d{0,2}$/.test(value)) {
+      const numericValue = parseFloat(value)
+
+      // Check if the entered amount matches any predefined button value
+      if (buttonValues.includes(numericValue)) {
+        setSelectedAmount(numericValue)
+        setCustomAmount('')
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: {
+            pledgeAmount: numericValue.toString(),
+            pledgeCurrency: 'USD',
+          },
+        })
+      } else {
+        setCustomAmount(value)
+        setSelectedAmount(null)
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: { pledgeAmount: value, pledgeCurrency: 'USD' },
+        })
+      }
     }
   }
 
   const handleInputBlur = () => {
     if (customAmount !== '') {
       const formattedAmount = parseFloat(customAmount).toFixed(2)
-      setCustomAmount(formattedAmount)
-      // Ensure the formatted amount is updated in formData
-      dispatch({
-        type: 'SET_FORM_DATA',
-        payload: { pledgeAmount: formattedAmount, pledgeCurrency: 'USD' },
-      })
+      const numericAmount = parseFloat(formattedAmount)
+
+      if (buttonValues.includes(numericAmount)) {
+        setSelectedAmount(numericAmount)
+        setCustomAmount('')
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: {
+            pledgeAmount: numericAmount.toString(),
+            pledgeCurrency: 'USD',
+          },
+        })
+      } else {
+        setCustomAmount(formattedAmount)
+        dispatch({
+          type: 'SET_FORM_DATA',
+          payload: { pledgeAmount: formattedAmount, pledgeCurrency: 'USD' },
+        })
+      }
     }
   }
 
@@ -85,7 +124,7 @@ export default function PaymentModalFiatOption() {
         },
       })
     }
-  }, [])
+  }, [selectedAmount, dispatch])
 
   const displayAmount =
     customAmount || (selectedAmount ? selectedAmount.toFixed(2) : '')
@@ -135,10 +174,12 @@ export default function PaymentModalFiatOption() {
       </div>
       <div className="relative w-full">
         <span
-          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg font-semibold text-[#222222]${
+          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg font-semibold ${
             isCustomAmount
-              ? 'bg-[#222222] text-[#f0f0f0]'
-              : 'bg-[#f0f0f0] text-[#222222]'
+              ? !isBelowMin
+                ? 'text-[#f0f0f0]'
+                : 'text-gray-600'
+              : 'text-[#222222]'
           }`}
         >
           $
@@ -146,11 +187,14 @@ export default function PaymentModalFiatOption() {
         <input
           type="number"
           ref={inputRef}
-          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-lg font-semibold${
-            isCustomAmount
-              ? 'bg-[#222222] text-[#f0f0f0]'
-              : 'bg-[#f0f0f0] text-[#222222]'
-          }`}
+          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-lg font-semibold 
+    ${
+      isCustomAmount
+        ? !isBelowMin
+          ? 'border-[#222222] bg-[#222222] text-[#f0f0f0]' // Valid custom input
+          : 'border-gray-400 bg-[#f0f0f0] text-gray-600' // Below minimum or invalid input
+        : 'border-[#222222] bg-[#f0f0f0] text-[#222222]' // Default predefined styles
+    }`}
           value={displayAmount}
           onChange={handleInputChange}
           onBlur={handleInputBlur}
