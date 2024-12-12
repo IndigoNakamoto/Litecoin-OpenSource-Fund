@@ -15,7 +15,8 @@ export default function PaymentModalFiatOption() {
   // Check if the current amount is below the minimum donation
   const isBelowMin =
     (selectedAmount !== null && selectedAmount < minDonation) ||
-    (customAmount !== '' && parseFloat(customAmount) < minDonation)
+    (customAmount !== '' &&
+      (!parseFloat(customAmount) || parseFloat(customAmount) < minDonation))
 
   const handleAmountClick = (amount: number) => {
     setSelectedAmount(amount)
@@ -34,7 +35,7 @@ export default function PaymentModalFiatOption() {
     // Allow empty or partial input, including decimals like "50."
     if (/^\d*\.?\d{0,2}$/.test(value) || value === '') {
       setCustomAmount(value)
-      setSelectedAmount(null)
+      setSelectedAmount(null) // Reset selectedAmount as user is entering a custom value
       dispatch({
         type: 'SET_FORM_DATA',
         payload: { pledgeAmount: value, pledgeCurrency: 'USD' },
@@ -49,12 +50,42 @@ export default function PaymentModalFiatOption() {
       if (!isNaN(numericValue)) {
         // Format to two decimal places
         const formattedAmount = numericValue.toFixed(2)
-        setCustomAmount(formattedAmount)
+
+        // Check if the formatted amount matches any predefined button value
+        const matchingAmount = buttonValues.find(
+          (value) => value === parseFloat(formattedAmount)
+        )
+
+        if (matchingAmount) {
+          setSelectedAmount(matchingAmount)
+          setCustomAmount('') // Clear customAmount since a predefined button is selected
+          dispatch({
+            type: 'SET_FORM_DATA',
+            payload: {
+              pledgeAmount: matchingAmount.toString(),
+              pledgeCurrency: 'USD',
+            },
+          })
+        } else {
+          setCustomAmount(formattedAmount)
+          setSelectedAmount(null) // No matching predefined amount
+          dispatch({
+            type: 'SET_FORM_DATA',
+            payload: { pledgeAmount: formattedAmount, pledgeCurrency: 'USD' },
+          })
+        }
+      } else {
+        // Handle non-numeric input if necessary
+        setCustomAmount('')
+        setSelectedAmount(null)
         dispatch({
           type: 'SET_FORM_DATA',
-          payload: { pledgeAmount: formattedAmount, pledgeCurrency: 'USD' },
+          payload: { pledgeAmount: '', pledgeCurrency: 'USD' },
         })
       }
+    } else {
+      // If customAmount is cleared, you might want to reset selectedAmount or keep it as is
+      // Here, we keep selectedAmount as is to maintain the current selection
     }
   }
 
@@ -92,18 +123,20 @@ export default function PaymentModalFiatOption() {
   }, [selectedAmount, dispatch])
 
   const displayAmount =
-    customAmount || (selectedAmount ? selectedAmount.toFixed(2) : '')
+    customAmount || (selectedAmount !== null ? selectedAmount.toFixed(2) : '')
 
   const isCustomAmount =
     !buttonValues.includes(Number(displayAmount)) && customAmount !== ''
 
   // **New useEffect to handle Donate button disabled state**
   useEffect(() => {
+    const disableDonate =
+      isBelowMin || (customAmount === '' && selectedAmount === null)
     dispatch({
       type: 'SET_DONATE_BUTTON_DISABLED',
-      payload: isBelowMin, // Disable if below min
+      payload: disableDonate,
     })
-  }, [isBelowMin, dispatch])
+  }, [isBelowMin, customAmount, selectedAmount, dispatch])
 
   return (
     <div className="flex w-full flex-col gap-4 pt-5">
@@ -168,7 +201,11 @@ export default function PaymentModalFiatOption() {
           style={{ paddingLeft: '2rem' }}
         />
       </div>
-      {isBelowMin ? (
+      {customAmount === '' && selectedAmount === null ? (
+        <p className="-mt-3 font-space-grotesk text-sm font-semibold text-red-500">
+          Please enter a valid donation amount.
+        </p>
+      ) : isBelowMin ? (
         <p className="-mt-3 font-space-grotesk text-sm font-semibold text-red-500">
           Minimum donation is {minDonation.toFixed(2)} USD
         </p>
