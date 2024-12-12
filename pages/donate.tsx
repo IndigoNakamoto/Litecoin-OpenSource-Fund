@@ -46,7 +46,7 @@ export default function Donate() {
       />
       <DonateSection title="">
         <div className="mx-auto flex w-full flex-col items-center justify-between xl:flex-row xl:items-start ">
-          <div className="max-w-[600px] flex-1 pr-0 font-space-grotesk  xl:pr-6">
+          <div className="max-w-[600px] flex-1 pr-0  xl:pr-6">
             <h1 className="font-space-grotesk text-4xl font-bold text-[#222222]">
               Support the Future of Litecoin: Donate Today
             </h1>

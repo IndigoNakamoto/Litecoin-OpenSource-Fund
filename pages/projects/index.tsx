@@ -443,7 +443,7 @@ const AllProjects: NextPage = () => {
             <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] text-[#222222]">
               Submit a Project
             </h1>
-            <p className="m-auto max-w-3xl font-space-grotesk text-lg text-[#222222]">
+            <p className="m-auto max-w-3xl text-lg text-[#222222]">
               We are looking to support talented individuals and teams who share
               our commitment to decentralized open-source solutions and the
               future of Litecoin.

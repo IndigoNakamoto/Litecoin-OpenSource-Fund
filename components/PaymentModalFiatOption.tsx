@@ -202,15 +202,15 @@ export default function PaymentModalFiatOption() {
         />
       </div>
       {customAmount === '' && selectedAmount === null ? (
-        <p className="-mt-3 font-space-grotesk text-sm font-semibold text-red-500">
+        <p className="-mt-3 text-sm font-semibold text-red-500">
           Please enter a valid donation amount.
         </p>
       ) : isBelowMin ? (
-        <p className="-mt-3 font-space-grotesk text-sm font-semibold text-red-500">
+        <p className="-mt-3 text-sm font-semibold text-red-500">
           Minimum donation is {minDonation.toFixed(2)} USD
         </p>
       ) : (
-        <p className="-mt-3 font-space-grotesk text-sm text-gray-600">
+        <p className="-mt-3 text-sm text-gray-600">
           Minimum donation is {minDonation.toFixed(2)} USD
         </p>
       )}
