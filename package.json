@@ -81,7 +81,7 @@
     "winston-transport": "^4.7.1"
   },
   "devDependencies": {
-    "@svgr/webpack": "^6.3.1",
+    "@svgr/webpack": "^6.5.1",
     "@types/jest": "^29.5.13",
     "@types/react": "^18.0.18",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
