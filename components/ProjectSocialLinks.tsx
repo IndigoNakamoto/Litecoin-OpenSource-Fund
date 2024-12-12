@@ -15,6 +15,7 @@ const formatLinkText = (kind, url) => {
     case 'github':
       return 'Github'
     case 'x':
+    case 'twitter':
     case 'telegram':
       return `@${normalizedUrl.split('/').pop()}` // Extract the last part of the URL and prepend '@'
     case 'discord':
@@ -40,7 +41,7 @@ const ProjectSocialLinks = ({
   const projectLinks = [
     { kind: 'website', url: website },
     { kind: 'github', url: gitRepository },
-    { kind: 'x', url: twitterHandle },
+    { kind: 'twitter', url: twitterHandle },
     { kind: 'discord', url: discordLink },
     { kind: 'telegram', url: telegramLink },
     { kind: 'facebook', url: facebookLink },
@@ -49,19 +50,21 @@ const ProjectSocialLinks = ({
 
   return (
     <div className="flex flex-col space-y-2 px-6 font-space-grotesk">
-      <p className="text-lg !font-semibold text-[#222222]">Links:</p>
+      <p className="text-lg font-semibold text-[#222222]">Links:</p>
       {projectLinks.map((link) =>
         link.url ? (
-          <div
+          <a
             key={link.kind}
+            href={link.url}
+            target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center space-x-2 !text-[#222222] !no-underline hover:font-semibold" // no-underline added
+            className="group flex items-center space-x-2 text-[#222222] no-underline transition-colors duration-300 hover:font-semibold hover:text-gray-900"
           >
-            <SocialIcon kind={link.kind} href={link.url} />
-            <span className="text-md leading-none group-hover:text-gray-900">
+            <SocialIcon kind={link.kind} href={link.url} noLink />
+            <span className="text-md leading-none text-[#222222] group-hover:text-gray-900">
               {formatLinkText(link.kind, link.url)}
             </span>
-          </div>
+          </a>
         ) : null
       )}
     </div>

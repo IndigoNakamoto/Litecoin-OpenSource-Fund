@@ -35,14 +35,16 @@ interface SocialIconProps {
   kind: string
   href: string
   size?: number
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void // Added onClick prop
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+  noLink?: boolean // New prop to control link rendering
 }
 
 const SocialIcon: React.FC<SocialIconProps> = ({
   kind,
   href,
-  size = 8,
+  size = 24, // Adjusted default size for better visibility
   onClick,
+  noLink = false,
 }) => {
   if (
     !href ||
@@ -58,23 +60,35 @@ const SocialIcon: React.FC<SocialIconProps> = ({
 
   const padding = 10
 
+  const iconElement = (
+    <div
+      className={`flex items-center justify-center h-${padding} w-${padding} rounded-lg transition-colors group-hover:text-gray-900`}
+    >
+      <IconComponent
+        className={`h-6 w-6 fill-current text-gray-700 transition-colors group-hover:text-gray-900`}
+        size={size}
+      />
+    </div>
+  )
+
+  if (noLink) {
+    return (
+      <span className="inline-block text-gray-600 transition-colors duration-300 hover:text-gray-900">
+        {iconElement}
+      </span>
+    )
+  }
+
   return (
     <a
-      className={`inline-block text-gray-600 transition-colors duration-300 hover:text-gray-900`} // Change color on hover
+      className={`inline-block text-gray-600 transition-colors duration-300 hover:text-gray-900`}
       target="_blank"
       rel="noopener noreferrer"
       href={href}
-      onClick={onClick} // Added onClick handler
+      onClick={onClick}
     >
       <span className="sr-only">{kind}</span>
-      <div
-        className={`flex group-hover:text-white h-${padding} w-${padding} items-center justify-center rounded-lg transition-colors`}
-      >
-        <IconComponent
-          className={`fill-current h-${6} w-${6} text-gray-700 transition-colors group-hover:text-gray-900`}
-          size={size}
-        />
-      </div>
+      {iconElement}
     </a>
   )
 }
