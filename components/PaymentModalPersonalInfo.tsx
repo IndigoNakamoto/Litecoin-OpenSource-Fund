@@ -1,11 +1,11 @@
 // components/PaymentModalPersonalInfo.tsx
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SiX } from 'react-icons/si'
 import { useDonation } from '../contexts/DonationContext'
 import Image from 'next/image'
 import { countries } from './countries'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import GradientButton from './GradientButton'
 
 type PaymentModalPersonalInfoProps = {
@@ -19,7 +19,6 @@ const PaymentModalPersonalInfo: React.FC<
   const { formData, projectSlug } = state
   const [isLoading, setIsLoading] = useState(false)
 
-  // Initialize local states based on formData
   const [donateAnonymously, setDonateAnonymously] = useState(
     formData.isAnonymous ?? false
   )
@@ -50,65 +49,108 @@ const PaymentModalPersonalInfo: React.FC<
     phoneNumber?: string
   }>({})
 
+  const { data: session } = useSession()
+
+  const shouldShowAddressFields =
+    (!donateAnonymously && state.selectedOption !== 'stock') ||
+    state.selectedOption === 'stock'
+
   const validateField = (name: string, value: string | boolean): string => {
-    const stringValue = typeof value === 'boolean' ? value.toString() : value
+    const stringValue =
+      typeof value === 'boolean' ? value.toString() : value.trim()
+
+    // Conditions for required fields:
+    const isEmailRequired =
+      needsTaxReceipt ||
+      joinMailingList ||
+      (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
+    const isNameRequired =
+      !donateAnonymously || state.selectedOption === 'stock'
+    const isAddressRequired = shouldShowAddressFields
+    const isPhoneRequired = state.selectedOption === 'stock'
 
     switch (name) {
       case 'receiptEmail':
-        if (
-          needsTaxReceipt ||
-          joinMailingList ||
-          (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
-        ) {
-          if (!stringValue.trim()) return 'Email is required.'
-          if (!/^\S+@\S+\.\S+$/.test(stringValue.trim()))
+        if (isEmailRequired) {
+          if (!stringValue) return 'Email is required.'
+          if (!/^\S+@\S+\.\S+$/.test(stringValue))
             return 'Please enter a valid email address.'
         }
         return ''
       case 'firstName':
-        if (!donateAnonymously || state.selectedOption === 'stock') {
-          if (!stringValue.trim()) return 'First name is required.'
-        }
+        if (isNameRequired && !stringValue) return 'First name is required.'
         return ''
       case 'lastName':
-        if (!donateAnonymously || state.selectedOption === 'stock') {
-          if (!stringValue.trim()) return 'Last name is required.'
-        }
+        if (isNameRequired && !stringValue) return 'Last name is required.'
         return ''
       case 'country':
-        if (shouldShowAddressFields && !stringValue.trim())
-          return 'Country is required.'
+        if (isAddressRequired && !stringValue) return 'Country is required.'
         return ''
       case 'addressLine1':
-        if (shouldShowAddressFields && !stringValue.trim())
+        if (isAddressRequired && !stringValue)
           return 'Street Address is required.'
         return ''
       case 'city':
-        if (shouldShowAddressFields && !stringValue.trim())
-          return 'City is required.'
+        if (isAddressRequired && !stringValue) return 'City is required.'
         return ''
       case 'state':
-        if (shouldShowAddressFields && !stringValue.trim())
-          return 'State is required.'
+        if (isAddressRequired && !stringValue) return 'State is required.'
         return ''
       case 'zipcode':
-        if (shouldShowAddressFields && !stringValue.trim())
-          return 'ZIP Code is required.'
+        if (isAddressRequired && !stringValue) return 'ZIP Code is required.'
         return ''
       case 'phoneNumber':
-        if (state.selectedOption === 'stock' && !stringValue.trim())
-          return 'Phone Number is required.'
+        if (isPhoneRequired && !stringValue) return 'Phone Number is required.'
         return ''
       default:
         return ''
     }
   }
 
+  const validateForm = () => {
+    const newErrors: typeof errors = {}
+
+    // Determine which fields need validation:
+    const fieldsToValidate: (keyof typeof formData)[] = []
+
+    // Email
+    fieldsToValidate.push('receiptEmail')
+
+    // Names if required
+    if (!donateAnonymously || state.selectedOption === 'stock') {
+      fieldsToValidate.push('firstName', 'lastName')
+    }
+
+    // Address if required
+    if (shouldShowAddressFields) {
+      fieldsToValidate.push(
+        'country',
+        'addressLine1',
+        'city',
+        'state',
+        'zipcode'
+      )
+    }
+
+    // Phone if stock
+    if (state.selectedOption === 'stock') {
+      fieldsToValidate.push('phoneNumber')
+    }
+
+    fieldsToValidate.forEach((field) => {
+      const val = formData[field] ?? ''
+      const error = validateField(field, val)
+      if (error) newErrors[field] = error
+    })
+
+    return newErrors
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     dispatch({ type: 'SET_FORM_DATA', payload: { [name]: value } })
 
-    // Clear error when user modifies the field
+    // Clear error for this field if any
     if (errors[name as keyof typeof errors]) {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }))
     }
@@ -125,6 +167,11 @@ const PaymentModalPersonalInfo: React.FC<
     setSearchTerm(country)
     setShowDropdown(false)
     setFocusedCountryIndex(-1)
+
+    // Clear the country error after selection if any
+    if (errors.country) {
+      setErrors((prevErrors) => ({ ...prevErrors, country: '' }))
+    }
   }
 
   const handleCountryKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -160,79 +207,43 @@ const PaymentModalPersonalInfo: React.FC<
     }
   }
 
-  // Update formData when preferences change
   const handleDonateAnonymouslyChange = () => {
     const newValue = !donateAnonymously
     setDonateAnonymously(newValue)
     dispatch({ type: 'SET_FORM_DATA', payload: { isAnonymous: newValue } })
+
+    // Clear relevant errors if going anonymous might relax some requirements
+    if (errors.firstName || errors.lastName || errors.receiptEmail) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        firstName: '',
+        lastName: '',
+        receiptEmail: '',
+      }))
+    }
   }
 
   const handleNeedsTaxReceiptChange = () => {
     const newValue = !needsTaxReceipt
     setNeedsTaxReceipt(newValue)
     dispatch({ type: 'SET_FORM_DATA', payload: { taxReceipt: newValue } })
+
+    // If tax receipt becomes optional and errors related to email exist, clear them if not required.
+    // We'll let form-level validation handle correctness on submit.
   }
 
-  // Initialize local states based on formData changes
   useEffect(() => {
     setDonateAnonymously(formData.isAnonymous ?? false)
     setNeedsTaxReceipt(formData.taxReceipt ?? true)
     setJoinMailingList(formData.joinMailingList ?? false)
   }, [formData.isAnonymous, formData.taxReceipt, formData.joinMailingList])
 
-  // Reset focusedCountryIndex when the dropdown is opened or searchTerm changes
   useEffect(() => {
     setFocusedCountryIndex(-1)
   }, [showDropdown, searchTerm])
 
-  const areRequiredFieldsFilled = () => {
-    if (state.selectedOption === 'stock') {
-      return (
-        formData.phoneNumber?.trim() !== '' &&
-        formData.receiptEmail?.trim() !== '' &&
-        formData.firstName?.trim() !== '' &&
-        formData.lastName?.trim() !== '' &&
-        formData.addressLine1?.trim() !== '' &&
-        formData.city?.trim() !== '' &&
-        formData.state?.trim() !== '' &&
-        formData.country?.trim() !== '' &&
-        formData.zipcode?.trim() !== ''
-      )
-    }
-
-    if (state.selectedOption === 'fiat' || state.selectedOption === 'crypto') {
-      if (donateAnonymously) {
-        if (needsTaxReceipt || joinMailingList) {
-          return formData.receiptEmail?.trim() !== ''
-        }
-        return true
-      } else {
-        return (
-          formData.receiptEmail?.trim() !== '' &&
-          formData.firstName?.trim() !== '' &&
-          formData.lastName?.trim() !== '' &&
-          formData.addressLine1?.trim() !== '' &&
-          formData.city?.trim() !== '' &&
-          formData.state?.trim() !== '' &&
-          formData.country?.trim() !== '' &&
-          formData.zipcode?.trim() !== ''
-        )
-      }
-    }
-
-    if (!donateAnonymously && !needsTaxReceipt && !joinMailingList) {
-      return formData.receiptEmail?.trim() !== ''
-    }
-
-    return true
-  }
-
-  const { data: session } = useSession()
-  // const hasSetSocialX = useRef(false)
-
   useEffect(() => {
     if (session && formData.socialXUseSession) {
-      // Update formData with Twitter username and image
       dispatch({
         type: 'SET_FORM_DATA',
         payload: {
@@ -243,7 +254,6 @@ const PaymentModalPersonalInfo: React.FC<
     }
   }, [session, formData.socialXUseSession, dispatch])
 
-  // Ensure donateAnonymously is false if the donation type is "stock"
   useEffect(() => {
     if (state.selectedOption === 'stock') {
       setDonateAnonymously(false)
@@ -251,66 +261,28 @@ const PaymentModalPersonalInfo: React.FC<
     }
   }, [state.selectedOption, dispatch])
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-  useEffect(() => {
-    const requiredFieldsFilled = areRequiredFieldsFilled()
+  const isButtonDisabled = (() => {
+    // Button disabled if any error exists or if required fields aren't filled correctly
     const noErrors = Object.values(errors).every((error) => error === '')
-    setIsButtonDisabled(!(requiredFieldsFilled && noErrors))
-  }, [
-    formData,
-    needsTaxReceipt,
-    joinMailingList,
-    donateAnonymously,
-    state.selectedOption,
-    errors,
-  ])
+    if (!noErrors) return true
 
-  // Function to handle form submission
+    // Double-check if all conditions are met (in case of fields that are empty but no error yet)
+    const validationCheck = validateForm()
+    return Object.keys(validationCheck).length > 0
+  })()
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
     setErrors({})
 
-    // Perform validation
-    const newErrors: typeof errors = {}
-
-    // List of fields to validate based on conditions
-    const fieldsToValidate = ['receiptEmail']
-
-    if (!donateAnonymously || state.selectedOption === 'stock') {
-      fieldsToValidate.push('firstName', 'lastName')
-    }
-
-    if (shouldShowAddressFields) {
-      fieldsToValidate.push(
-        'country',
-        'addressLine1',
-        'city',
-        'state',
-        'zipcode'
-      )
-    }
-
-    if (state.selectedOption === 'stock') {
-      fieldsToValidate.push('phoneNumber')
-    }
-
-    // Validate each field
-    fieldsToValidate.forEach((field) => {
-      const value = formData[field as keyof typeof formData]
-      const error = validateField(field, value)
-      if (error) {
-        newErrors[field as keyof typeof newErrors] = error
-      }
-    })
-
+    const newErrors = validateForm()
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       setIsLoading(false)
       return
     }
 
-    // Proceed with form submission
     dispatch({
       type: 'SET_DONATION_DATA',
       payload: {
@@ -330,8 +302,8 @@ const PaymentModalPersonalInfo: React.FC<
       receiptEmail: formData.receiptEmail || 'anon@anon.com',
       addressLine1: 'N/A',
       addressLine2: 'N/A',
-      country: 'N/A', // Adjust the country code as needed
-      state: 'N/A', // Adjust the state code as needed
+      country: 'N/A',
+      state: 'N/A',
       city: 'N/A',
       zipcode: 'N/A',
     }
@@ -472,7 +444,6 @@ const PaymentModalPersonalInfo: React.FC<
     }
   }
 
-  // Determine email input description based on selected checkboxes
   const emailDescription =
     donateAnonymously && !needsTaxReceipt
       ? 'Please enter your email to receive a confirmation of your donation. We will use this email solely to notify you that your donation has been received.'
@@ -480,20 +451,13 @@ const PaymentModalPersonalInfo: React.FC<
       ? 'Enter your email to receive a tax receipt.'
       : ''
 
-  const shouldShowAddressFields =
-    (!donateAnonymously && state.selectedOption !== 'stock') ||
-    state.selectedOption === 'stock'
-
   return (
     <div className="flex flex-col space-y-4 p-0 md:p-8">
       <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
         Personal Information
       </h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
-        {/* DONATE ANONYMOUSLY CHECKBOX */}
-
         {state.selectedOption === 'stock' ? null : (
-          // Show other checkboxes when the donation type is not stock
           <>
             <span className="block w-full border-t border-gray-400"></span>
             <div className="space-y-0">
@@ -507,7 +471,7 @@ const PaymentModalPersonalInfo: React.FC<
                 />
                 <label
                   htmlFor="donate-anonymously"
-                  className="font-space-grotesk  text-[#222222]"
+                  className="font-space-grotesk text-[#222222]"
                 >
                   Donate Anonymously
                 </label>
@@ -524,7 +488,7 @@ const PaymentModalPersonalInfo: React.FC<
                 />
                 <label
                   htmlFor="tax-receipt"
-                  className="font-space-grotesk  text-[#222222]"
+                  className="font-space-grotesk text-[#222222]"
                 >
                   Request A Tax Receipt
                 </label>
@@ -538,9 +502,9 @@ const PaymentModalPersonalInfo: React.FC<
           </>
         )}
         <span className="block w-full border-t border-gray-400"></span>
-        {/* PROFILE PHOTO */}
+
         <div className="pb-2">
-          <h2 className="font-space-grotesk text-lg  text-[#222222]">
+          <h2 className="font-space-grotesk text-lg text-[#222222]">
             Profile Photo <span className="text-sm">(Optional)</span>
           </h2>
 
@@ -606,6 +570,7 @@ const PaymentModalPersonalInfo: React.FC<
         </div>
 
         <span className="block w-full border-t border-gray-400 "></span>
+
         {/* EMAIL */}
         <div>
           <h2 className="font-space-grotesk text-lg text-[#222222]">
@@ -629,11 +594,6 @@ const PaymentModalPersonalInfo: React.FC<
             value={formData.receiptEmail}
             onChange={handleChange}
             onBlur={handleBlur}
-            required={
-              needsTaxReceipt ||
-              joinMailingList ||
-              (!needsTaxReceipt && !joinMailingList && !donateAnonymously)
-            }
             className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
               errors.receiptEmail
                 ? 'border-1 border-red-600 '
@@ -648,6 +608,7 @@ const PaymentModalPersonalInfo: React.FC<
             </p>
           )}
         </div>
+
         {/* PHONE NUMBER */}
         {state.selectedOption === 'stock' && (
           <div>
@@ -661,7 +622,6 @@ const PaymentModalPersonalInfo: React.FC<
               value={formData.phoneNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-              required
               className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                 errors.phoneNumber
                   ? 'border-1 border-red-600'
@@ -674,6 +634,7 @@ const PaymentModalPersonalInfo: React.FC<
             <div className=" mt-4 block w-full border-t border-gray-400 "></div>
           </div>
         )}
+
         {/* NAME */}
         <div>
           <h2 className="font-space-grotesk text-lg text-[#222222]">
@@ -694,9 +655,6 @@ const PaymentModalPersonalInfo: React.FC<
                 value={formData.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                required={
-                  !donateAnonymously || state.selectedOption === 'stock'
-                }
                 className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                   errors.firstName
                     ? 'border-1 border-red-600'
@@ -715,9 +673,6 @@ const PaymentModalPersonalInfo: React.FC<
                 value={formData.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                required={
-                  !donateAnonymously || state.selectedOption === 'stock'
-                }
                 className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                   errors.lastName
                     ? 'border-1 border-red-600'
@@ -730,6 +685,7 @@ const PaymentModalPersonalInfo: React.FC<
             </div>
           </div>
         </div>
+
         {/* ADDRESS */}
         {shouldShowAddressFields && (
           <div>
@@ -745,6 +701,9 @@ const PaymentModalPersonalInfo: React.FC<
                   onChange={(e) => {
                     setSearchTerm(e.target.value)
                     setShowDropdown(true)
+                    if (errors.country) {
+                      setErrors((prev) => ({ ...prev, country: '' }))
+                    }
                   }}
                   onBlur={handleBlur}
                   placeholder="Search for a country"
@@ -758,7 +717,6 @@ const PaymentModalPersonalInfo: React.FC<
                     setShowDropdown(true)
                   }}
                   onKeyDown={handleCountryKeyDown}
-                  required
                   aria-haspopup="listbox"
                   aria-expanded={showDropdown}
                   aria-controls="country-listbox"
@@ -800,7 +758,6 @@ const PaymentModalPersonalInfo: React.FC<
                   value={formData.addressLine1}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  required
                   className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                     errors.addressLine1
                       ? 'border-1 border-red-600'
@@ -830,7 +787,6 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.city}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
                     className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                       errors.city
                         ? 'border-1 border-red-600'
@@ -849,7 +805,6 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.state}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
                     className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                       errors.state
                         ? 'border-1 border-red-600'
@@ -868,7 +823,6 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.zipcode}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
                     className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
                       errors.zipcode
                         ? 'border-1 border-red-600'
