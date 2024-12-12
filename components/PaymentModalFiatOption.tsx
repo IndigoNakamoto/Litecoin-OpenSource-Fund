@@ -31,59 +31,24 @@ export default function PaymentModalFiatOption() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
 
-    // Allow empty input
-    if (value === '') {
-      setCustomAmount('')
+    // Allow empty or partial input, including decimals like "50."
+    if (/^\d*\.?\d{0,2}$/.test(value) || value === '') {
+      setCustomAmount(value)
       setSelectedAmount(null)
       dispatch({
         type: 'SET_FORM_DATA',
-        payload: { pledgeAmount: '', pledgeCurrency: 'USD' },
+        payload: { pledgeAmount: value, pledgeCurrency: 'USD' },
       })
-      return
-    }
-
-    // Validate input as a number with up to two decimal places
-    if (/^\d*\.?\d{0,2}$/.test(value)) {
-      const numericValue = parseFloat(value)
-
-      // Check if the entered amount matches any predefined button value
-      if (buttonValues.includes(numericValue)) {
-        setSelectedAmount(numericValue)
-        setCustomAmount('')
-        dispatch({
-          type: 'SET_FORM_DATA',
-          payload: {
-            pledgeAmount: numericValue.toString(),
-            pledgeCurrency: 'USD',
-          },
-        })
-      } else {
-        setCustomAmount(value)
-        setSelectedAmount(null)
-        dispatch({
-          type: 'SET_FORM_DATA',
-          payload: { pledgeAmount: value, pledgeCurrency: 'USD' },
-        })
-      }
     }
   }
 
   const handleInputBlur = () => {
     if (customAmount !== '') {
-      const formattedAmount = parseFloat(customAmount).toFixed(2)
-      const numericAmount = parseFloat(formattedAmount)
+      const numericValue = parseFloat(customAmount)
 
-      if (buttonValues.includes(numericAmount)) {
-        setSelectedAmount(numericAmount)
-        setCustomAmount('')
-        dispatch({
-          type: 'SET_FORM_DATA',
-          payload: {
-            pledgeAmount: numericAmount.toString(),
-            pledgeCurrency: 'USD',
-          },
-        })
-      } else {
+      if (!isNaN(numericValue)) {
+        // Format to two decimal places
+        const formattedAmount = numericValue.toFixed(2)
         setCustomAmount(formattedAmount)
         dispatch({
           type: 'SET_FORM_DATA',
