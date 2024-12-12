@@ -346,8 +346,8 @@ const Navigation = () => {
                     }
                   >
                     <li className="ml-2 mt-2 p-2 pl-4 text-left">
-                      <a href="https://litecoin.com/what-is-litecoin">
-                        What is Litecoin
+                      <a href="https://litecoin.com/learningcenter">
+                        Learning Center
                       </a>
                     </li>
                     <li className="ml-2 p-2 pl-4 text-left">
