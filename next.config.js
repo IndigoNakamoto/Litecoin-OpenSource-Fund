@@ -81,7 +81,7 @@ module.exports = () => {
       return [
         {
           source: '/missions/:path*', // Matches /missions and any subpath (e.g., /missions/mweb)
-          destination: 'litecoin.com/projects/:path*', // Forwards subpath to the destination
+          destination: 'https://litecoin.com/projects/:path*', // Forwards subpath to the destination
           permanent: true, // 301 Permanent Redirect
         },
       ]
