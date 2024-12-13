@@ -26,7 +26,7 @@ const project = {
   slug: 'litecoin-foundation',
   title: 'Litecoin Foundation',
   summary: '',
-  coverImage: '/static/images/projects/projects2.png',
+  coverImage: '/static/images/projects/Litecoin_Foundation_Project.png',
   telegramLink: '',
   redditLink: '',
   facebookLink: '',
@@ -173,7 +173,7 @@ const AllProjects: NextPage = () => {
         )
 
         const desiredOrder = [
-          'Projects Fund',
+          'Litecoin Foundation',
           'Litecoin Core',
           'MWEB',
           'Ordinals Lite',
