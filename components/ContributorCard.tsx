@@ -30,46 +30,40 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleCardClick = () => {
-    // console.log('Modal open triggered')
     setIsModalOpen(true)
   }
 
   const handleModalClose = () => {
-    // console.log('Modal close triggered')
     setIsModalOpen(false)
   }
 
-  // Function to get initials from name
   const getInitials = (name: string) => {
     const names = name.split(' ')
     const initials = names.map((n) => n.charAt(0).toUpperCase())
     return initials.slice(0, 2).join('')
   }
 
-  // Function to format link text
   const formatLinkText = (kind: string, url: string): string => {
     if (!url) {
-      return '' // Return an empty string if the URL is undefined or null
+      return ''
     }
 
-    // Normalize the URL by stripping out protocol and www
     const normalizedUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '')
 
     switch (kind) {
       case 'website':
-        return normalizedUrl // Return the normalized URL directly
+        return normalizedUrl
       case 'github':
         return 'GitHub'
       case 'twitter':
-        return `@${normalizedUrl.split('/').pop()}` // Extract the last part of the URL and prepend '@'
+        return `@${normalizedUrl.split('/').pop()}`
       case 'discord':
         return 'Discord'
       case 'telegram':
-        return `@${normalizedUrl.split('/').pop()}` // Similar to Twitter
+        return `@${normalizedUrl.split('/').pop()}`
       case 'facebook':
-        return normalizedUrl.split('/').pop() || '' // Extract the last part of the URL, ensuring it's a string
+        return normalizedUrl.split('/').pop() || ''
       case 'reddit': {
-        // Wrap the case block in curly braces to create a new scope
         const redditUsername = normalizedUrl.split('/').filter(Boolean).pop()
         return redditUsername ? `u/${redditUsername}` : ''
       }
@@ -82,7 +76,6 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
     }
   }
 
-  // Define the social links based on available data
   const socialLinks = [
     { kind: 'github', url: contributor.fieldData['github-link'] },
     { kind: 'twitter', url: contributor.fieldData['twitter-link'] },
@@ -142,7 +135,7 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
         shouldCloseOnEsc={true}
         className="h-auto max-w-md overflow-y-auto rounded bg-white p-8 shadow-xl outline-none sm:m-8 sm:w-full"
         overlayClassName="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-80"
-        ariaHideApp={false} // Add this line if you haven't set the app element elsewhere
+        ariaHideApp={false}
       >
         {/* Close button */}
         <div className="relative mb-4 flex justify-end">
@@ -188,16 +181,18 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
             <div className="flex flex-col space-y-2">
               {socialLinks.map((link) =>
                 link.url ? (
-                  <div
+                  <a
                     key={link.kind}
+                    href={link.url}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center space-x-2 text-gray-700 no-underline hover:font-semibold hover:text-gray-900"
                   >
-                    <SocialIcon kind={link.kind} href={link.url} />
+                    <SocialIcon kind={link.kind} href={link.url} noLink />
                     <span className="text-md leading-none group-hover:text-gray-900">
                       {formatLinkText(link.kind, link.url)}
                     </span>
-                  </div>
+                  </a>
                 ) : null
               )}
             </div>
