@@ -498,7 +498,7 @@ const PaymentModalPersonalInfo: React.FC<
         <span className="block w-full border-t border-gray-400"></span>
 
         <div className="pb-2">
-          <h2 className="font-space-grotesk text-lg text-[#222222]">
+          <h2 className="text-lg text-[#222222]">
             Profile Photo <span className="text-sm">(Optional)</span>
           </h2>
 
