@@ -469,10 +469,7 @@ const PaymentModalPersonalInfo: React.FC<
                   className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                   id="donate-anonymously"
                 />
-                <label
-                  htmlFor="donate-anonymously"
-                  className="font-space-grotesk text-[#222222]"
-                >
+                <label htmlFor="donate-anonymously" className="text-[#222222]">
                   Donate Anonymously
                 </label>
               </div>
@@ -486,14 +483,11 @@ const PaymentModalPersonalInfo: React.FC<
                   className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                   id="tax-receipt"
                 />
-                <label
-                  htmlFor="tax-receipt"
-                  className="font-space-grotesk text-[#222222]"
-                >
+                <label htmlFor="tax-receipt" className="text-[#222222]">
                   Request A Tax Receipt
                 </label>
               </div>
-              <p className="ml-10 font-space-grotesk text-sm text-gray-600 ">
+              <p className="ml-10 text-sm text-gray-600 ">
                 Provide your email to receive a confirmation of your donation
                 and your tax receipt. This information will only be used to send
                 you these documents.
@@ -537,7 +531,7 @@ const PaymentModalPersonalInfo: React.FC<
                   />
                 )}
               </div>
-              <p className="my-auto ml-8 font-space-grotesk text-sm text-gray-600">
+              <p className="my-auto ml-8 text-sm text-gray-600">
                 Verify an account to show your support. Your photo and a link to
                 your account will be featured in our community section.
               </p>
@@ -555,7 +549,7 @@ const PaymentModalPersonalInfo: React.FC<
                   </span>
                 </button>
                 <p className="mt-2 text-sm text-gray-500">
-                  Feature currently unavailable. Please email
+                  Feature available soon. Please email
                   <a
                     href="mailto:donate@litecoin.net"
                     className="ml-1 text-blue-500 underline"
@@ -573,7 +567,7 @@ const PaymentModalPersonalInfo: React.FC<
 
         {/* EMAIL */}
         <div>
-          <h2 className="font-space-grotesk text-lg text-[#222222]">
+          <h2 className=" text-lg text-[#222222]">
             Email
             {(needsTaxReceipt ||
               joinMailingList ||
@@ -584,7 +578,7 @@ const PaymentModalPersonalInfo: React.FC<
               <span className="text-sm">{` (Optional)`}</span>
             )}
           </h2>
-          <p className="my-auto pb-1 font-space-grotesk text-sm text-gray-600">
+          <p className="my-auto pb-1  text-sm text-gray-600">
             {emailDescription}
           </p>
           <input
@@ -594,7 +588,7 @@ const PaymentModalPersonalInfo: React.FC<
             value={formData.receiptEmail}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+            className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
               errors.receiptEmail
                 ? 'border-1 border-red-600 '
                 : 'border-[#222222] bg-[#f0f0f0]'
@@ -612,7 +606,7 @@ const PaymentModalPersonalInfo: React.FC<
         {/* PHONE NUMBER */}
         {state.selectedOption === 'stock' && (
           <div>
-            <h2 className="font-space-grotesk text-lg text-[#222222]">
+            <h2 className=" text-lg text-[#222222]">
               Phone Number <span className="text-red-600">*</span>
             </h2>
             <input
@@ -622,7 +616,7 @@ const PaymentModalPersonalInfo: React.FC<
               value={formData.phoneNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+              className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                 errors.phoneNumber
                   ? 'border-1 border-red-600'
                   : 'border-[#222222] bg-[#f0f0f0]'
@@ -637,7 +631,7 @@ const PaymentModalPersonalInfo: React.FC<
 
         {/* NAME */}
         <div>
-          <h2 className="font-space-grotesk text-lg text-[#222222]">
+          <h2 className=" text-lg text-[#222222]">
             Name
             {(!donateAnonymously || state.selectedOption === 'stock') && (
               <span className="text-red-600">*</span>
@@ -655,7 +649,7 @@ const PaymentModalPersonalInfo: React.FC<
                 value={formData.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                   errors.firstName
                     ? 'border-1 border-red-600'
                     : 'border-[#222222] bg-[#f0f0f0]'
@@ -673,7 +667,7 @@ const PaymentModalPersonalInfo: React.FC<
                 value={formData.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                   errors.lastName
                     ? 'border-1 border-red-600'
                     : 'border-[#222222] bg-[#f0f0f0]'
@@ -690,7 +684,7 @@ const PaymentModalPersonalInfo: React.FC<
         {shouldShowAddressFields && (
           <div>
             <div className="flex flex-col gap-y-2">
-              <h2 className="font-space-grotesk text-lg text-[#222222]">
+              <h2 className=" text-lg text-[#222222]">
                 Address <span className="text-red-600">*</span>
               </h2>
               <div className="relative flex w-full flex-col space-y-3">
@@ -707,7 +701,7 @@ const PaymentModalPersonalInfo: React.FC<
                   }}
                   onBlur={handleBlur}
                   placeholder="Search for a country"
-                  className={`flex w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                  className={`flex w-full rounded-lg p-2  font-semibold text-[#222222] ${
                     errors.country
                       ? 'border-1 border-red-600'
                       : 'border-[#222222] bg-[#f0f0f0]'
@@ -758,7 +752,7 @@ const PaymentModalPersonalInfo: React.FC<
                   value={formData.addressLine1}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                  className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                     errors.addressLine1
                       ? 'border-1 border-red-600'
                       : 'border-[#222222] bg-[#f0f0f0]'
@@ -776,7 +770,7 @@ const PaymentModalPersonalInfo: React.FC<
                 placeholder="Street Address 2"
                 value={formData.addressLine2}
                 onChange={handleChange}
-                className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2 font-space-grotesk font-semibold text-[#222222]"
+                className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2  font-semibold text-[#222222]"
               />
               <div className="flex flex-row gap-x-2">
                 <div className="w-full">
@@ -787,7 +781,7 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.city}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                    className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                       errors.city
                         ? 'border-1 border-red-600'
                         : 'border-[#222222] bg-[#f0f0f0]'
@@ -805,7 +799,7 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.state}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                    className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                       errors.state
                         ? 'border-1 border-red-600'
                         : 'border-[#222222] bg-[#f0f0f0]'
@@ -823,7 +817,7 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.zipcode}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full rounded-lg p-2 font-space-grotesk font-semibold text-[#222222] ${
+                    className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
                       errors.zipcode
                         ? 'border-1 border-red-600'
                         : 'border-[#222222] bg-[#f0f0f0]'

@@ -29,7 +29,7 @@ const StatItem: React.FC<StatItemProps> = ({ value, label }) => (
     <h4 className="font-space-grotesk text-3xl font-semibold text-blue-500">
       {value}
     </h4>
-    <h4 className="font-space-grotesk">{label}</h4>
+    <h4 className="">{label}</h4>
   </div>
 )
 
