@@ -77,6 +77,15 @@ module.exports = () => {
         },
       ]
     },
+    async redirects() {
+      return [
+        {
+          source: '/missions/:path*', // Matches /missions and any subpath (e.g., /missions/mweb)
+          destination: 'https://www.litecoin.com/projects/:path*', // Forwards subpath to the destination
+          permanent: true, // 301 Permanent Redirect
+        },
+      ]
+    },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,
