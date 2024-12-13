@@ -1,3 +1,4 @@
+// components/PaymentModalFiatDonate.tsx
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { FaRegCreditCard } from 'react-icons/fa'
 import { useDonation } from '../contexts/DonationContext'

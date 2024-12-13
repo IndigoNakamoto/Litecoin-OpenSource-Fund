@@ -1,16 +1,22 @@
 // components/PaymentModalFiatThankYou.tsx
 import React from 'react'
 import { useDonation } from '../contexts/DonationContext'
+import GradientButton from './GradientButton' // Import the GradientButton component
 
 type ThankYouModalProps = {
-  onRequestClose: () => void
+  onRequestClose?: () => void // Optional: Remove if not needed
 }
 
 const PaymentModalFiatThankYou: React.FC<ThankYouModalProps> = ({
   onRequestClose,
 }) => {
-  const { state } = useDonation()
+  const { state, dispatch } = useDonation()
   const projectTitle = state.projectTitle || 'your selected project'
+
+  const handleBack = () => {
+    dispatch({ type: 'RESET_DONATION_STATE' })
+    // Do NOT call onRequestClose to keep the modal open and render initial step
+  }
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-8 font-space-grotesk">
@@ -36,6 +42,16 @@ const PaymentModalFiatThankYou: React.FC<ThankYouModalProps> = ({
         You will receive a confirmation email with your tax receipt once your
         donation is processed.
       </p>
+      {/* Back Button using GradientButton */}
+      <GradientButton
+        onClick={handleBack}
+        isLoading={false} // Back button typically doesn't require a loading state
+        disabled={false} // Enable the button
+        loadingText="Going Back..." // Optional: Custom loading text if needed
+        type="button"
+      >
+        Back
+      </GradientButton>
     </div>
   )
 }

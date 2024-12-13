@@ -1,3 +1,4 @@
+// components/PaymentForm.tsx
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
@@ -143,174 +144,173 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   }
 
   const renderContent = () => {
-    if (state.currentStep === 'personalInfo') {
-      return <PaymentModalPersonalInfo onRequestClose={handleRequestClose} />
-    }
-
-    if (state.currentStep === 'cryptoDonate') {
-      return <PaymentModalCryptoDonate onRequestClose={handleRequestClose} />
-    }
-
-    if (state.currentStep === 'fiatDonate') {
-      return <PaymentModalFiatDonate />
-    }
-
-    if (state.currentStep === 'complete') {
-      return <PaymentModalFiatThankYou onRequestClose={handleRequestClose} />
-    }
-
-    if (state.currentStep === 'stockBrokerInfo') {
-      return <PaymentModalStockBrokerInfo />
-    }
-
-    if (state.currentStep === 'sign') {
-      return (
-        <PaymentModalStockDonorSignature
-          onContinue={() => dispatch({ type: 'SET_STEP', payload: 'thankYou' })}
-        />
-      )
-    }
-
-    if (state.currentStep === 'thankYou') {
-      return (
-        <PaymentModalStockDonorThankYou onRequestClose={handleRequestClose} />
-      )
-    }
-
-    return (
-      <>
-        {modal && (
-          <div className="z-30 flex flex-col space-y-4 py-4">
-            <div className="flex items-center gap-4">
-              <Image
-                loader={customImageLoader}
-                alt={project.title}
-                src={project.coverImage}
-                width={96}
-                height={96}
-                priority={true}
-                className="rounded-lg"
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                  objectFit: 'cover',
-                }}
-              />
-              <div className="flex flex-col">
-                <h3 className="font-sans text-[#222222]">Donate to</h3>
-                <h2 className="font-space-grotesk text-4xl font-semibold text-[#222222]">
-                  {project.title}
-                </h2>
-                {project.title === 'The Litecoin Foundation' ? null : (
-                  <h3 className="font-sans text-[#222222]">Project</h3>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-        <div className="flex w-full flex-col justify-between space-y-4  pb-5 pt-6 font-space-grotesk">
-          <div className="flex justify-between space-x-3">
-            <div
-              className={`${
-                project.slug === 'litecoin-foundation' ? 'w-1/2' : 'w-full'
-              }`}
-            >
-              <button
-                className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-                  state.selectedOption === 'crypto'
-                    ? 'bg-[#222222] text-[#f0f0f0]'
-                    : 'bg-[#f0f0f0] text-[#222222]'
-                }`}
-                onClick={() =>
-                  dispatch({ type: 'SET_OPTION', payload: 'crypto' })
-                }
-              >
-                <p
-                  className={
-                    state.selectedOption === 'crypto'
-                      ? 'text-[#f0f0f0]'
-                      : 'text-[#222222]'
-                  }
-                >
-                  Cryptocurrency
-                </p>
-              </button>
-            </div>
-
-            {isMounted &&
-            project.slug === 'litecoin-foundation' &&
-            modal &&
-            !widgetError &&
-            widgetSnippet ? (
-              <div className="w-1/2">
-                <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
-                  <div dangerouslySetInnerHTML={{ __html: widgetSnippet }} />
+    switch (state.currentStep) {
+      case 'personalInfo':
+        return <PaymentModalPersonalInfo onRequestClose={handleRequestClose} />
+      case 'cryptoDonate':
+        return <PaymentModalCryptoDonate onRequestClose={handleRequestClose} />
+      case 'fiatDonate':
+        return <PaymentModalFiatDonate />
+      case 'complete':
+        return <PaymentModalFiatThankYou onRequestClose={handleRequestClose} />
+      case 'stockBrokerInfo':
+        return <PaymentModalStockBrokerInfo />
+      case 'sign':
+        return (
+          <PaymentModalStockDonorSignature
+            onContinue={() =>
+              dispatch({ type: 'SET_STEP', payload: 'thankYou' })
+            }
+          />
+        )
+      case 'thankYou':
+        return (
+          <PaymentModalStockDonorThankYou onRequestClose={handleRequestClose} />
+        )
+      case 'payment': // Explicitly handle 'payment' step
+      default:
+        return (
+          <>
+            {modal && (
+              <div className="z-30 flex flex-col space-y-4 py-4">
+                <div className="flex items-center gap-4">
+                  <Image
+                    loader={customImageLoader}
+                    alt={project.title}
+                    src={project.coverImage}
+                    width={96}
+                    height={96}
+                    priority={true}
+                    className="rounded-lg"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <div className="flex flex-col">
+                    <h3 className="font-sans text-[#222222]">Donate to</h3>
+                    <h2 className="font-space-grotesk text-4xl font-semibold text-[#222222]">
+                      {project.title}
+                    </h2>
+                    {project.title === 'The Litecoin Foundation' ? null : (
+                      <h3 className="font-sans text-[#222222]">Project</h3>
+                    )}
+                  </div>
                 </div>
               </div>
-            ) : null}
-          </div>
+            )}
+            <div className="flex w-full flex-col justify-between space-y-4  pb-5 pt-6 font-space-grotesk">
+              <div className="flex justify-between space-x-3">
+                <div
+                  className={`${
+                    project.slug === 'litecoin-foundation' ? 'w-1/2' : 'w-full'
+                  }`}
+                >
+                  <button
+                    className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
+                      state.selectedOption === 'crypto'
+                        ? 'bg-[#222222] text-[#f0f0f0]'
+                        : 'bg-[#f0f0f0] text-[#222222]'
+                    }`}
+                    onClick={() =>
+                      dispatch({ type: 'SET_OPTION', payload: 'crypto' })
+                    }
+                  >
+                    <p
+                      className={
+                        state.selectedOption === 'crypto'
+                          ? 'text-[#f0f0f0]'
+                          : 'text-[#222222]'
+                      }
+                    >
+                      Cryptocurrency
+                    </p>
+                  </button>
+                </div>
 
-          <div className="flex justify-between space-x-3">
-            <button
-              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
-                state.selectedOption === 'fiat'
-                  ? 'bg-[#222222] text-[#f0f0f0]'
-                  : 'bg-[#f0f0f0] text-[#222222]'
-              }`}
-              onClick={() => {
-                dispatch({ type: 'SET_OPTION', payload: 'fiat' })
-                dispatch({
-                  type: 'SET_FORM_DATA',
-                  payload: { pledgeAmount: '100', pledgeCurrency: 'USD' },
-                })
-                dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
-              }}
-            >
-              <FontAwesomeIcon icon={faCreditCard} className="h-6" />
-              <p>Card</p>
-            </button>
+                {isMounted &&
+                project.slug === 'litecoin-foundation' &&
+                modal &&
+                !widgetError &&
+                widgetSnippet ? (
+                  <div className="w-1/2">
+                    <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
+                      <div
+                        dangerouslySetInnerHTML={{ __html: widgetSnippet }}
+                      />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
 
-            <button
-              className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
-                state.selectedOption === 'stock'
-                  ? 'bg-[#222222] text-[#f0f0f0]'
-                  : 'bg-[#f0f0f0] text-[#222222]'
-              }`}
-              onClick={() => {
-                dispatch({ type: 'SET_OPTION', payload: 'stock' })
-                dispatch({
-                  type: 'SET_FORM_DATA',
-                  payload: {
-                    assetSymbol: '',
-                    assetName: '',
-                    pledgeAmount: '',
-                  },
-                })
-                dispatch({
-                  type: 'SET_DONATE_BUTTON_DISABLED',
-                  payload: true,
-                })
-              }}
+              <div className="flex justify-between space-x-3">
+                <button
+                  className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
+                    state.selectedOption === 'fiat'
+                      ? 'bg-[#222222] text-[#f0f0f0]'
+                      : 'bg-[#f0f0f0] text-[#222222]'
+                  }`}
+                  onClick={() => {
+                    dispatch({ type: 'SET_OPTION', payload: 'fiat' })
+                    dispatch({
+                      type: 'SET_FORM_DATA',
+                      payload: { pledgeAmount: '100', pledgeCurrency: 'USD' },
+                    })
+                    dispatch({
+                      type: 'SET_DONATE_BUTTON_DISABLED',
+                      payload: false,
+                    })
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCreditCard} className="h-6" />
+                  <p>Card</p>
+                </button>
+
+                <button
+                  className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
+                    state.selectedOption === 'stock'
+                      ? 'bg-[#222222] text-[#f0f0f0]'
+                      : 'bg-[#f0f0f0] text-[#222222]'
+                  }`}
+                  onClick={() => {
+                    dispatch({ type: 'SET_OPTION', payload: 'stock' })
+                    dispatch({
+                      type: 'SET_FORM_DATA',
+                      payload: {
+                        assetSymbol: '',
+                        assetName: '',
+                        pledgeAmount: '',
+                      },
+                    })
+                    dispatch({
+                      type: 'SET_DONATE_BUTTON_DISABLED',
+                      payload: true,
+                    })
+                  }}
+                >
+                  <FontAwesomeIcon icon={faArrowTrendUp} className="h-6" />
+                  <p>Stock</p>
+                </button>
+              </div>
+            </div>
+            <div className="pb-10">{renderPaymentOption()}</div>
+            <GradientButton
+              onClick={() =>
+                dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
+              }
+              isLoading={false}
+              disabled={state.isDonateButtonDisabled}
+              backgroundColor={
+                state.isDonateButtonDisabled ? '#d1d5db' : '#222222'
+              }
+              textColor={state.isDonateButtonDisabled ? '#gray-600' : '#f0f0f0'}
             >
-              <FontAwesomeIcon icon={faArrowTrendUp} className="h-6" />
-              <p>Stock</p>
-            </button>
-          </div>
-        </div>
-        <div className="pb-10">{renderPaymentOption()}</div>
-        <GradientButton
-          onClick={() =>
-            dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
-          }
-          isLoading={false}
-          disabled={state.isDonateButtonDisabled}
-          backgroundColor={state.isDonateButtonDisabled ? '#d1d5db' : '#222222'}
-          textColor={state.isDonateButtonDisabled ? '#gray-600' : '#f0f0f0'}
-        >
-          Donate
-        </GradientButton>
-      </>
-    )
+              Donate
+            </GradientButton>
+          </>
+        )
+    }
   }
 
   return <div>{renderContent()}</div>
