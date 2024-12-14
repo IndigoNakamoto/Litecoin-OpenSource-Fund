@@ -3,12 +3,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import PaymentModal from '../../components/PaymentModal'
-import ProjectCard from '../../components/ProjectCard'
-import { ProjectItem } from '../../utils/types'
-import { getAllPosts } from '../../utils/md'
+import PaymentModal from '../../../components/PaymentModal'
+import ProjectCard from '../../../components/ProjectCard'
+import { ProjectItem } from '../../../utils/types'
+import { getAllPosts } from '../../../utils/md'
 // import Link from '@/components/Link'
-import { isBounty, isCompletedBounty } from 'pages/missions'
+import { isBounty, isCompletedBounty } from 'pages/archive/missions'
 import { PageSEO } from '@/components/SEO'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {

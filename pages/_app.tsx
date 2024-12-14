@@ -108,24 +108,11 @@ export default function App({
 }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
-      <SessionProvider session={session}>
-        {' '}
-        {/* <-- Wrap your components here */}
-        <Head>
-          <meta content="width=device-width, initial-scale=1" name="viewport" />
-        </Head>
+      {/* @ts-ignore */}
+      <div className={barlowSemiCondensed.className}>
         {/* @ts-ignore */}
-        <Analytics analyticsConfig={...pageProps} />
-        <LayoutWrapper>
-          <div className={barlowSemiCondensed.className}>
-            {/* @ts-ignore */}
-            <SearchProvider searchConfig={siteMetadata.search}>
-              <Component {...pageProps} />
-            </SearchProvider>
-          </div>
-        </LayoutWrapper>
-      </SessionProvider>{' '}
-      {/* <-- Close the wrapper here */}
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   )
 }

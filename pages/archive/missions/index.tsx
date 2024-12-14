@@ -4,10 +4,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/legacy/image' // <-- Import the Image component
 import { useEffect, useState } from 'react'
-import PaymentModal from '../../components/PaymentModal'
-import ProjectCard from '../../components/ProjectCard'
-import { ProjectItem, ProjectCategory, BountyStatus } from '../../utils/types'
-import { getAllPosts } from '../../utils/md'
+import PaymentModal from '../../../components/PaymentModal'
+import ProjectCard from '../../../components/ProjectCard'
+import {
+  ProjectItem,
+  ProjectCategory,
+  BountyStatus,
+} from '../../../utils/types'
+import { getAllPosts } from '../../../utils/md'
 // import Link from '@/components/Link'
 import Typing from '@/components/Typing'
 import siteMetadata from '@/data/siteMetadata'

@@ -1,7 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
 import Image from 'next/legacy/image'
 import { PageSEO } from '@/components/SEO'
-import CompletedProjects from '@/components/CompletedProjects'
 import Link from 'next/link'
 
 const FULL_SCREEN_IMAGE = '/static/images/lite-space-bg.jpg'
@@ -9,76 +8,65 @@ const COIN = '/litecoin-svg/L-white.png'
 
 export const getStaticProps = async () => {
   const page = true
-  return { props: { page: page } }
+  return { props: { page } }
 }
 
-export default function Mission({
+export default function RedirectPage({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (!page) {
-    return <div>Error: Mission page content not found.</div>
+    return <div>Error: Redirect page content not found.</div>
   }
 
   return (
     <>
       <PageSEO
-        title={`Lite.Space`}
-        description="Crowdfunding Litecoin Projects, One Open-Source Project at a Time."
+        title="We've Moved to Litecoin.com/Projects"
+        description="Lite.space has moved to litecoin.com/projects. Thank you to all our supporters, donors, and contributors."
       />
-      {/* background image*/}
-      <div className="absolute inset-x-0 top-[6rem] z-0 bg-black">
-        <div style={{ position: 'relative', height: '89vh' }}>
-          <Image
-            src={FULL_SCREEN_IMAGE}
-            alt="Mission - Promote the adoption, education & development of Litecoin (LTC)"
-            layout="fill"
-            objectFit="cover"
-          />
-          <div className="z-1 relative inset-x-0 flex flex-col items-center justify-center">
-            {/* Litecoin logo */}
-            <div className="mt-32 w-32 md:w-60 xl:w-80 short:w-20 medium:w-36">
-              <Image
-                src={COIN}
-                alt="Litecoin Logo"
-                width={300}
-                height={300}
-                objectFit="cover"
-              />
-            </div>
-            {/* Litecoin mission statement */}
-            <div className="container p-4 sm:mt-10 md:mt-24">
-              <h1 className="text-center text-3xl font-semibold tracking-tight text-gray-100 md:text-4xl lg:text-5xl">
-                Lite.Space
-              </h1>
-              <h2 className="mb-4 text-center text-xl leading-normal text-gray-100 md:text-2xl lg:text-3xl">
-                Our portal to bring together developers and community members to
-                accelerate ideas and development in the Litecoin ecosystem.
-                Crowdfunding Litecoin Projects, One Open-Source Project at a
-                Time.
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="z-1 mt-[calc(90vh)] pb-32">
-        <CompletedProjects />
-      </div>
-      {/* Apply for Funding section */}
-      <div className="mb-20 divide-y divide-gray-200 rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-500 to-blue-300 p-4 pb-10 pt-10 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 md:space-y-5">
-          <h1 className="text-5xl font-semibold tracking-tight text-white lg:text-7xl">
-            Apply for Funding
+      <div
+        className="relative flex min-h-screen flex-col items-center justify-center bg-cover bg-center"
+        style={{ backgroundImage: `url(${FULL_SCREEN_IMAGE})` }}
+      >
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative z-10 flex flex-col items-center px-4 text-center">
+          <Image src={COIN} alt="Litecoin Logo" width={100} height={100} />
+          <h1 className="mt-4 text-5xl font-extrabold text-white md:text-7xl">
+            We've Moved!
           </h1>
-          <p className="py-4 text-2xl leading-7 text-white ">
-            We are looking to support talented individuals and teams who share
-            our commitment to decentralized open-source solutions and the future
-            of Litecoin.
+          <p className="mt-6 max-w-2xl text-xl text-gray-200">
+            Thank you to all our supporters, donors, and contributors!
           </p>
-          <Link href="/apply">
-            <button className="w-48 rounded-full bg-white py-2 font-semibold text-blue-500 transition duration-300 hover:bg-gray-200">
-              Apply for Funding
-            </button>
+          <p className="mt-4 max-w-2xl text-lg text-gray-300">
+            Lite.space has officially transitioned to{' '}
+            <Link
+              href="https://litecoin.com/projects"
+              className="text-blue-400 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              litecoin.com/projects
+            </Link>
+            .
+          </p>
+          <p className="mt-4 max-w-2xl text-lg text-gray-300">
+            Lite.space was a crowdfunding platform dedicated to funding
+            open-source Litecoin development. Together, we've supported
+            innovation, empowered developers, and helped grow the Litecoin
+            ecosystem. Your contributions have made a lasting impact.
+          </p>
+          <Link
+            href="https://litecoin.com/projects"
+            className="mt-8 inline-block rounded bg-blue-500 px-6 py-3 font-semibold text-white transition hover:bg-blue-600"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit Litecoin Projects
           </Link>
+          <p className="mt-6 text-sm text-gray-400">
+            If you have any questions, feel free to reach out to our support
+            team.
+          </p>
         </div>
       </div>
     </>

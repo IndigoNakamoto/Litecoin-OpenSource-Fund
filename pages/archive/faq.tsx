@@ -2,7 +2,7 @@
 
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
-import faqData from '../data/pages/faq.json'
+import faqData from '../../data/pages/faq.json'
 import { FAQSection } from '@/components/FAQSection'
 import { PageSEO } from '@/components/SEO'
 

@@ -1,18 +1,22 @@
 //pages/missions/[slug].tsx
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import { getPostBySlug, getAllPosts, getAllPostUpdates } from '../../utils/md'
-import markdownToHtml from '../../utils/markdownToHtml'
+import {
+  getPostBySlug,
+  getAllPosts,
+  getAllPostUpdates,
+} from '../../../utils/md'
+import markdownToHtml from '../../../utils/markdownToHtml'
 import Image from 'next/legacy/image'
 // import ProjectList from '@/components/ProjectList'
 // import BackToProjects from '@/components/BackToProjects'
-import { ProjectItem, AddressStats, Donation } from '../../utils/types'
+import { ProjectItem, AddressStats, Donation } from '../../../utils/types'
 import { NextPage } from 'next/types'
 import { useEffect, useState } from 'react'
 import PaymentModal from '@/components/PaymentModal'
 import ThankYouModal from '@/components/ThankYouModal'
 // import Link from 'next/link'
-import { fetchGetJSON } from '../../utils/api-helpers'
+import { fetchGetJSON } from '../../../utils/api-helpers'
 import TwitterUsers from '@/components/TwitterUsers'
 import {
   TwitterUser,
@@ -21,12 +25,12 @@ import {
   BugStatus,
   FundingStatus,
   RecurringPeriod,
-} from '../../utils/types'
+} from '../../../utils/types'
 import Head from 'next/head'
 import ProjectMenu from '@/components/ProjectMenu'
 import TwitterFeed from '@/components/TwitterFeed'
 import SocialMediaShare from '@/components/SocialMediaShare'
-import tweetsData from '../../data/tweets.json'
+import tweetsData from '../../../data/tweets.json'
 import { FAQSection } from '@/components/FAQSection'
 import ProjectUpdate from '@/components/ProjectUpdate'
 import React from 'react'
