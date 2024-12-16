@@ -99,7 +99,7 @@ const SectionDonors: React.FC = () => {
   const uniqueUsernames = new Set<string>()
 
   return (
-    <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center p-10">
+    <div className="m-auto flex h-full w-full max-w-[1300px] flex-col items-center justify-center">
       {/* <h1 className="m-8 font-space-grotesk text-4xl font-semibold leading-[32px] tracking-wide">
         Donors
       </h1> */}

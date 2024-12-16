@@ -6,15 +6,10 @@ import { ProjectItem } from '../utils/types'
 
 export type ProjectCardProps = {
   project: ProjectItem
-  openPaymentModal: (project: ProjectItem) => void
   bgColor: string // Accept bgColor as a prop
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
-  // openPaymentModal,
-  bgColor,
-}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, bgColor }) => {
   const { slug, title, summary, coverImage } = project
 
   const [isLoading, setIsLoading] = useState(false)
@@ -24,39 +19,40 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   }
 
   return (
-    <figure
-      className={`flex flex-col justify-between rounded-3xl p-4 sm:p-6 md:p-6 ${bgColor} w-full space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
+    <Link
+      href={`/projects/${slug}`}
+      className={`block flex flex-col justify-between rounded-3xl p-4 sm:p-6 md:p-6 ${bgColor} w-full cursor-pointer space-y-4 overflow-y-auto shadow-md sm:space-x-0 sm:space-y-0`}
+      onClick={handleClick}
+      aria-label={`View project: ${title}`}
     >
-      <Link href={`/projects/${slug}`} passHref>
-        <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
-          <Image
-            // Use the custom loader
-            loader={customImageLoader}
-            // Ensure this is a valid URL from Webflow
-            src={coverImage}
-            alt={title}
-            // Replaces layout="fill"
-            fill
-            className="cursor-pointer rounded-xl"
-            priority={true}
-            sizes="(max-width: 768px) 100vw,
-                   (max-width: 1200px) 50vw,
-                   33vw"
-            style={{
-              objectFit: 'cover',
-              objectPosition: '50% 50%',
-              maxWidth: '100%',
-            }}
-          />
-        </div>
-      </Link>
+      <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
+        <Image
+          // Use the custom loader
+          loader={customImageLoader}
+          // Ensure this is a valid URL from Webflow
+          src={coverImage}
+          alt={title}
+          // Replaces layout="fill"
+          fill
+          className="rounded-xl"
+          priority={true}
+          sizes="(max-width: 768px) 100vw,
+                 (max-width: 1200px) 50vw,
+                 33vw"
+          style={{
+            objectFit: 'cover',
+            objectPosition: '50% 50%',
+            maxWidth: '100%',
+          }}
+        />
+      </div>
       <figcaption className="flex flex-1 flex-col justify-between pt-0 sm:pt-8">
         <div className="h-auto">
-          <h2 className="font-space-grotesk text-2xl font-semibold leading-tight tracking-wide text-[#333333] sm:text-3xl">
+          <h2 className="font-space-grotesk text-2xl font-semibold leading-tight tracking-tight text-[#333333] sm:text-3xl">
             {title}
           </h2>
           <p
-            className="pt-4 text-sm font-medium text-[#333333] sm:text-base"
+            className="pt-4 text-[13px] text-[#333333] sm:text-base"
             style={{
               overflow: 'hidden',
               display: '-webkit-box',
@@ -68,19 +64,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </p>
         </div>
         <div className="mt-4 text-left">
-          <Link
-            href={`/projects/${slug}`}
-            passHref
-            className="text-secondary-500 hover:text-secondary-600 font-bold tracking-wider text-[#7e7e7e] underline"
-            aria-label="FIND OUT MORE"
-            onClick={handleClick} // Handle click
-          >
-            {isLoading ? (
-              <span className="loading-text-gradient">LOADING &rarr;</span>
-            ) : (
-              <span>FIND OUT MORE &rarr;</span>
-            )}
-          </Link>
+          {isLoading ? (
+            <span className="loading-text-gradient text-[14px]">
+              LOADING &rarr;
+            </span>
+          ) : (
+            <span className="text-secondary-500 hover:text-secondary-600 text-[14px]">
+              READ MORE &rarr;
+            </span>
+          )}
         </div>
       </figcaption>
 
@@ -111,7 +103,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           }
         }
       `}</style>
-    </figure>
+    </Link>
   )
 }
 

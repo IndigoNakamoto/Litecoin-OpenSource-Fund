@@ -286,7 +286,7 @@ const AllProjects: NextPage = () => {
         <div className="w-full items-center">
           <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
             <div className="lg:py-30 py-20 lg:w-1/2">
-              <h1 className="font-space-grotesk text-4xl text-[41px] font-bold leading-[32px] tracking-wide text-black">
+              <h1 className="font-space-grotesk text-[41px] font-bold leading-[32px] tracking-tight text-black">
                 Litecoin Projects
               </h1>
               <p className="w-11/12 pt-6 text-[19px]">
@@ -346,14 +346,14 @@ const AllProjects: NextPage = () => {
         </div>
       </SectionProjects>
 
-      <SectionProjects bgColor={'#f2f2f2'}>
+      <SectionProjects bgColor={'#ffffff'}>
         <SectionMatchingDonations />
       </SectionProjects>
 
       {/* OPEN SOURCE PROJECTS */}
-      <SectionProjects bgColor="">
+      <SectionProjects bgColor="#f0f0f0">
         <div ref={projectsRef} className="flex flex-col items-center">
-          <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
+          <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Open-Source Projects
           </h1>
           <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -366,7 +366,7 @@ const AllProjects: NextPage = () => {
                     <ProjectCard
                       project={p}
                       openPaymentModal={openPaymentModal}
-                      bgColor={bgColor}
+                      bgColor={'bg-[#FFFFFF]'}
                     />
                   </li>
                 )
@@ -376,9 +376,9 @@ const AllProjects: NextPage = () => {
       </SectionProjects>
 
       {/* COMPLETED PROJECTS */}
-      <SectionProjects bgColor="">
+      <SectionProjects bgColor="#f0f0f0">
         <div ref={bountiesRef} className="flex flex-col items-center pb-8">
-          <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
+          <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Completed Projects
           </h1>
           <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -388,7 +388,7 @@ const AllProjects: NextPage = () => {
                   <ProjectCard
                     project={p}
                     openPaymentModal={openPaymentModal}
-                    bgColor={'bg-[#f3ccc4]'}
+                    bgColor={'bg-[#FFFFFF]'}
                   />
                 </li>
               ))}
@@ -400,7 +400,7 @@ const AllProjects: NextPage = () => {
       {openBounties && openBounties.length > 0 ? (
         <SectionProjects bgColor="">
           <div className="flex flex-col items-center">
-            <h1 className="pb-8 pt-8 font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-white md:text-5xl">
+            <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
               Open Bounties
             </h1>
             <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -428,22 +428,22 @@ const AllProjects: NextPage = () => {
       {/* SCROLLING TEXT  */}
       <SectionProjects bgColor="#C5D3D6">
         <div className="flex flex-col items-center pb-8  pt-4 text-center">
-          <h1 className="pb-4 font-space-grotesk text-5xl font-semibold tracking-tight text-[#222222] lg:text-7xl">
+          <h1 className="pb-0 font-space-grotesk text-5xl font-semibold tracking-tight text-[#222222] lg:text-[41px]">
             We Help Advance
           </h1>
-          <h3 className="font-space-grotesk text-3xl font-semibold text-[#222222] lg:text-4xl">
+          <h3 className="font-space-grotesk text-3xl font-semibold text-[#222222] lg:text-[39px]">
             <TypingScroll />
           </h3>
-          <p className="pt-2 font-space-grotesk text-2xl text-gray-600">
+          <p className="pt-0 font-space-grotesk text-2xl text-gray-600">
             Unite. Fund. Advance. - The Litecoin Project Development Portal
           </p>
         </div>
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center lg:flex-row lg:items-center">
           <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-8">
-            <h1 className="m-auto py-4 font-space-grotesk text-4xl text-[41px] font-medium leading-[32px] text-[#222222]">
+            <h1 className="m-auto py-4 font-space-grotesk !text-[39px] font-medium leading-[32px] text-[#222222]">
               Submit a Project
             </h1>
-            <p className="m-auto max-w-3xl text-lg text-[#222222]">
+            <p className="m-auto max-w-3xl text-center text-lg text-[#222222]">
               We are looking to support talented individuals and teams who share
               our commitment to decentralized open-source solutions and the
               future of Litecoin.
@@ -457,13 +457,13 @@ const AllProjects: NextPage = () => {
         </div>
 
         <div className="flex flex-col items-center pt-16">
-          <h1 className=" font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-[#222222] md:text-5xl">
+          <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Contributors
           </h1>
           <SectionContributors />
         </div>
         <div className="flex flex-col items-center pb-8 pt-8">
-          <h1 className=" font-space-grotesk text-3xl font-medium leading-tight tracking-wide text-[#222222] md:text-5xl">
+          <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Donors
           </h1>
           <SectionDonors />

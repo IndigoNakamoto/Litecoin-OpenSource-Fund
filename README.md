@@ -48,3 +48,10 @@ Update matchedAmount for the donation to 0
 
 Token Expires on Sat, Dec 13 2025.
 lite-space/applicants
+
+# TODO:
+
+[ ] Button text should be consistent with the paragraph text
+[ ] All text on light backgrounds should be black (not grey)
+[ ] The transparent orange/pink colour shouldn't be used as a background. White or light blue/grey only
+[ ] The letterspacing for headings should follow the rest of the site (slightly condensed rather than slightly extended). There are also many heading sizes on this page, it should be consisted with the headings sizes for the rest of the site.
