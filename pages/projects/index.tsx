@@ -18,6 +18,7 @@ import { useCallback, useMemo } from 'react'
 import SectionProjects from '@/components/SectionProjects'
 import SectionGrey from '@/components/SectionGrey'
 import SectionWhite from '@/components/SectionWhite'
+import SectionOrange from '@/components/SectionOrange'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
 import SectionStats from '@/components/SectionStats'
 import SectionContributors from '@/components/SectionContributors'
@@ -342,15 +343,15 @@ const AllProjects: NextPage = () => {
           </div>
         </div>
       </section>
-      <SectionWhite bgColor="#f0f0f0">
+      <SectionWhite>
         <div className="py-2">
           <SectionStats />
         </div>
       </SectionWhite>
 
-      <SectionProjects bgColor={'#f0f0f0'}>
+      <SectionOrange>
         <SectionMatchingDonations />
-      </SectionProjects>
+      </SectionOrange>
 
       {/* OPEN SOURCE PROJECTS */}
       <SectionWhite bgColor="#FFFFFF">
