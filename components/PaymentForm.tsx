@@ -5,6 +5,9 @@ import { customImageLoader } from '../utils/customImageLoader'
 import GradientButton from './GradientButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCreditCard, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
+import { SiLitecoin } from 'react-icons/si'
+import { FaHandHoldingHeart } from 'react-icons/fa'
+
 import PaymentModalCryptoDonate from './PaymentModalCryptoDonate'
 import PaymentModalCryptoOption from './PaymentModalCryptoOption'
 import PaymentModalFiatOption from './PaymentModalFiatOption'
@@ -71,7 +74,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               document.body.appendChild(newScript)
             }
           }
-        } catch (error) {
+        } catch (error: any) {
+          // Added type annotation for error
           console.error('Failed to fetch widget snippet:', error)
           setWidgetError(error.message)
         }
@@ -200,99 +204,211 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 </div>
               </div>
             )}
-            <div className="flex w-full flex-col justify-between space-y-4  pb-5 pt-6 font-space-grotesk">
-              <div className="flex justify-between space-x-3">
-                <div
-                  className={`${
-                    project.slug === 'litecoin-foundation' ? 'w-1/2' : 'w-full'
-                  }`}
-                >
-                  <button
-                    className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-                      state.selectedOption === 'crypto'
-                        ? 'bg-[#222222] text-[#f0f0f0]'
-                        : 'bg-[#f0f0f0] text-[#222222]'
-                    }`}
-                    onClick={() =>
-                      dispatch({ type: 'SET_OPTION', payload: 'crypto' })
-                    }
-                  >
-                    <p
-                      className={
-                        state.selectedOption === 'crypto'
-                          ? 'text-[#f0f0f0]'
-                          : 'text-[#222222]'
-                      }
-                    >
-                      Cryptocurrency
-                    </p>
-                  </button>
-                </div>
+            <div className="flex w-full flex-col justify-between space-y-4 pb-5 pt-6 font-space-grotesk">
+              {project.slug === 'litecoin-foundation' && widgetSnippet ? (
+                <>
+                  {/* First Row: Crypto and Card Buttons */}
+                  <div className="flex justify-between space-x-3">
+                    <div className="w-1/2">
+                      <button
+                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
+                          state.selectedOption === 'crypto'
+                            ? 'bg-[#222222] text-[#f0f0f0]'
+                            : 'bg-[#f0f0f0] text-[#222222]'
+                        }`}
+                        onClick={() =>
+                          dispatch({ type: 'SET_OPTION', payload: 'crypto' })
+                        }
+                      >
+                        <SiLitecoin className="mr-2 h-6 w-6" />
 
-                {isMounted &&
-                project.slug === 'litecoin-foundation' &&
-                modal &&
-                !widgetError &&
-                widgetSnippet ? (
-                  <div className="w-1/2">
-                    <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
-                      <div
-                        dangerouslySetInnerHTML={{ __html: widgetSnippet }}
-                      />
+                        <p
+                          className={
+                            state.selectedOption === 'crypto'
+                              ? 'text-[#f0f0f0]'
+                              : 'text-[#222222]'
+                          }
+                        >
+                          Crypto
+                        </p>
+                      </button>
+                    </div>
+
+                    <div className="w-1/2">
+                      <button
+                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
+                          state.selectedOption === 'fiat'
+                            ? 'bg-[#222222] text-[#f0f0f0]'
+                            : 'bg-[#f0f0f0] text-[#222222]'
+                        }`}
+                        onClick={() => {
+                          dispatch({ type: 'SET_OPTION', payload: 'fiat' })
+                          dispatch({
+                            type: 'SET_FORM_DATA',
+                            payload: {
+                              pledgeAmount: '100',
+                              pledgeCurrency: 'USD',
+                            },
+                          })
+                          dispatch({
+                            type: 'SET_DONATE_BUTTON_DISABLED',
+                            payload: false,
+                          })
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faCreditCard} className="h-6" />
+                        <p>Card</p>
+                      </button>
                     </div>
                   </div>
-                ) : null}
-              </div>
 
-              <div className="flex justify-between space-x-3">
-                <button
-                  className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
-                    state.selectedOption === 'fiat'
-                      ? 'bg-[#222222] text-[#f0f0f0]'
-                      : 'bg-[#f0f0f0] text-[#222222]'
-                  }`}
-                  onClick={() => {
-                    dispatch({ type: 'SET_OPTION', payload: 'fiat' })
-                    dispatch({
-                      type: 'SET_FORM_DATA',
-                      payload: { pledgeAmount: '100', pledgeCurrency: 'USD' },
-                    })
-                    dispatch({
-                      type: 'SET_DONATE_BUTTON_DISABLED',
-                      payload: false,
-                    })
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCreditCard} className="h-6" />
-                  <p>Card</p>
-                </button>
+                  {/* Second Row: widgetSnippet and Stock Button */}
+                  <div className="flex justify-between space-x-3">
+                    <div className="w-1/2">
+                      <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
+                        <FaHandHoldingHeart />
 
-                <button
-                  className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
-                    state.selectedOption === 'stock'
-                      ? 'bg-[#222222] text-[#f0f0f0]'
-                      : 'bg-[#f0f0f0] text-[#222222]'
-                  }`}
-                  onClick={() => {
-                    dispatch({ type: 'SET_OPTION', payload: 'stock' })
-                    dispatch({
-                      type: 'SET_FORM_DATA',
-                      payload: {
-                        assetSymbol: '',
-                        assetName: '',
-                        pledgeAmount: '',
-                      },
-                    })
-                    dispatch({
-                      type: 'SET_DONATE_BUTTON_DISABLED',
-                      payload: true,
-                    })
-                  }}
-                >
-                  <FontAwesomeIcon icon={faArrowTrendUp} className="h-6" />
-                  <p>Stock</p>
-                </button>
-              </div>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: widgetSnippet }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="w-1/2">
+                      <button
+                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
+                          state.selectedOption === 'stock'
+                            ? 'bg-[#222222] text-[#f0f0f0]'
+                            : 'bg-[#f0f0f0] text-[#222222]'
+                        }`}
+                        onClick={() => {
+                          dispatch({ type: 'SET_OPTION', payload: 'stock' })
+                          dispatch({
+                            type: 'SET_FORM_DATA',
+                            payload: {
+                              assetSymbol: '',
+                              assetName: '',
+                              pledgeAmount: '',
+                            },
+                          })
+                          dispatch({
+                            type: 'SET_DONATE_BUTTON_DISABLED',
+                            payload: true,
+                          })
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faArrowTrendUp}
+                          className="h-6"
+                        />
+                        <p>Stock</p>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Original Layout */}
+                  <div className="flex justify-between space-x-3">
+                    <div
+                      className={`${
+                        project.slug === 'litecoin-foundation'
+                          ? 'w-1/2'
+                          : 'w-full'
+                      }`}
+                    >
+                      <button
+                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
+                          state.selectedOption === 'crypto'
+                            ? 'bg-[#222222] text-[#f0f0f0]'
+                            : 'bg-[#f0f0f0] text-[#222222]'
+                        }`}
+                        onClick={() =>
+                          dispatch({ type: 'SET_OPTION', payload: 'crypto' })
+                        }
+                      >
+                        <SiLitecoin className="mr-2 h-6 w-6" />
+                        <p
+                          className={
+                            state.selectedOption === 'crypto'
+                              ? 'text-[#f0f0f0]'
+                              : 'text-[#222222]'
+                          }
+                        >
+                          Crypto
+                        </p>
+                      </button>
+                    </div>
+
+                    {isMounted &&
+                    project.slug === 'litecoin-foundation' &&
+                    modal &&
+                    !widgetError &&
+                    widgetSnippet ? (
+                      <div className="w-1/2">
+                        <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
+                          <div
+                            dangerouslySetInnerHTML={{ __html: widgetSnippet }}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="flex justify-between space-x-3">
+                    <button
+                      className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
+                        state.selectedOption === 'fiat'
+                          ? 'bg-[#222222] text-[#f0f0f0]'
+                          : 'bg-[#f0f0f0] text-[#222222]'
+                      }`}
+                      onClick={() => {
+                        dispatch({ type: 'SET_OPTION', payload: 'fiat' })
+                        dispatch({
+                          type: 'SET_FORM_DATA',
+                          payload: {
+                            pledgeAmount: '100',
+                            pledgeCurrency: 'USD',
+                          },
+                        })
+                        dispatch({
+                          type: 'SET_DONATE_BUTTON_DISABLED',
+                          payload: false,
+                        })
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faCreditCard} className="h-6" />
+                      <p>Card</p>
+                    </button>
+
+                    <button
+                      className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
+                        state.selectedOption === 'stock'
+                          ? 'bg-[#222222] text-[#f0f0f0]'
+                          : 'bg-[#f0f0f0] text-[#222222]'
+                      }`}
+                      onClick={() => {
+                        dispatch({ type: 'SET_OPTION', payload: 'stock' })
+                        dispatch({
+                          type: 'SET_FORM_DATA',
+                          payload: {
+                            assetSymbol: '',
+                            assetName: '',
+                            pledgeAmount: '',
+                          },
+                        })
+                        dispatch({
+                          type: 'SET_DONATE_BUTTON_DISABLED',
+                          payload: true,
+                        })
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faArrowTrendUp} className="h-6" />
+                      <p>Stock</p>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
             <div className="pb-10">{renderPaymentOption()}</div>
             <GradientButton

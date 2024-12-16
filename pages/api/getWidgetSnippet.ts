@@ -28,7 +28,7 @@ export default async function handler(
       donationFlow: ['daf'],
       button: {
         id: 'tgb-widget-button',
-        text: 'Donor Advised Fund',
+        text: 'DAF',
         style:
           'font-family: "Space Grotesk", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif; color: #222222; font-size: 20px; font-weight: 700; ',
       },
