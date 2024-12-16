@@ -43,26 +43,33 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
   isBitcoinOlympics2024,
 }) => (
   <div>
-    <div className="w-full rounded-md bg-[#c6d3d6]">
-      <div className="mt-6 max-w-fit pt-4">
-        <ProjectSocialLinks
-          website={website}
-          gitRepository={gitRepository}
-          twitterHandle={twitterHandle}
-          discordLink={discordLink}
-          telegramLink={telegramLink}
-          facebookLink={facebookLink}
-          redditLink={redditLink}
-        />
-      </div>
-      <div className="pt-4">
-        <SocialMediaShare
-          className="mt-0 flex w-full space-x-1 rounded-xl p-2 px-6"
-          title={title}
-          summary={socialSummary}
-        />
+    <h2>Info</h2>
+    <div className="flex w-full flex-col items-start rounded-md bg-[#c6d3d6] lg:flex-row">
+      <div className="flex w-full flex-col rounded-md bg-[#c6d3d6] lg:flex-row">
+        {/* First Column */}
+        <div className="w-full p-4 lg:w-1/2">
+          <ProjectSocialLinks
+            website={website}
+            gitRepository={gitRepository}
+            twitterHandle={twitterHandle}
+            discordLink={discordLink}
+            telegramLink={telegramLink}
+            facebookLink={facebookLink}
+            redditLink={redditLink}
+          />
+        </div>
+
+        {/* Second Column */}
+        <div className="w-full p-4 lg:w-1/2">
+          <SocialMediaShare
+            className="flex w-full space-x-1 rounded-xl p-2 px-6"
+            title={title}
+            summary={socialSummary}
+          />
+        </div>
       </div>
     </div>
+
     <div className="markdown" dangerouslySetInnerHTML={{ __html: content }} />
     <CommunitySection
       twitterContributors={twitterContributors}

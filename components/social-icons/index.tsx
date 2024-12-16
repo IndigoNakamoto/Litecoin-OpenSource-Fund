@@ -42,7 +42,6 @@ interface SocialIconProps {
 const SocialIcon: React.FC<SocialIconProps> = ({
   kind,
   href,
-  size = 24, // Adjusted default size for better visibility
   onClick,
   noLink = false,
 }) => {
@@ -65,8 +64,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
       className={`flex items-center justify-center h-${padding} w-${padding} rounded-lg transition-colors group-hover:text-gray-900`}
     >
       <IconComponent
-        className={`h-6 w-6 fill-current text-gray-700 transition-colors group-hover:text-gray-900`}
-        size={size}
+        className={`h-5 w-5 fill-current text-gray-700 transition-colors group-hover:text-gray-900`}
       />
     </div>
   )

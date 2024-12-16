@@ -112,7 +112,7 @@ export const FAQSection: React.FC<{
     <div>
       {faqCategories.map((category, catIndex) => (
         <div key={catIndex} className="">
-          <h4 className="mb-4 pt-4 font-space-grotesk text-3xl font-semibold text-[#222222] ">
+          <h4 className="mb-4 pt-4 font-space-grotesk text-[30px] font-semibold text-[black] ">
             {category.category.trim()}
           </h4>
           {category.items.map((faq, qIndex) => (
@@ -138,7 +138,7 @@ export const FAQSection: React.FC<{
               </button>
 
               <div
-                className={`overflow-hidden border border-[#222222] bg-white transition-all duration-700 ${getMaxHeight(
+                className={`overflow-hidden border border-[black] bg-white transition-all duration-700 ${getMaxHeight(
                   catIndex,
                   qIndex
                 )}`}

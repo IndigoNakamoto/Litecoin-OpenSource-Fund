@@ -23,7 +23,7 @@ interface PostsListProps {
 const PostsList: React.FC<PostsListProps> = ({ posts }) => {
   return (
     <div className="posts-list">
-      <h1>Posts</h1>
+      <h2>Posts</h2>
       {posts.map((post) => {
         const { id, fieldData } = post
         const { link, name } = fieldData

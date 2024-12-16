@@ -39,10 +39,8 @@ const SocialMediaShare = ({ title, summary, className }) => {
   ]
 
   return (
-    <div className={className}>
-      <p className="font-space-grotesk text-lg !font-semibold text-[#222222]">
-        Share:
-      </p>
+    <div className="markdown pb-6 pl-6">
+      <h3>Share:</h3>
       {shareLinks.map((link) => (
         <SocialIcon
           key={link.kind}

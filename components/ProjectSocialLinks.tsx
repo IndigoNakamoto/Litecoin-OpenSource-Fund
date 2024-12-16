@@ -50,9 +50,7 @@ const ProjectSocialLinks = ({
 
   return (
     <div className="flex flex-col px-6">
-      <p className="font-space-grotesk text-lg !font-semibold text-[#222222]">
-        Links:
-      </p>
+      <h3>Links:</h3>
       {projectLinks.map((link) =>
         link.url ? (
           <a
