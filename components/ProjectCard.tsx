@@ -22,11 +22,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, bgColor }) => {
   return (
     <Link
       href={`/projects/${slug}`}
-      className={`block flex flex-col justify-between rounded-3xl p-4 sm:p-6 md:p-6 ${bgColor} w-full cursor-pointer space-y-4 overflow-y-auto shadow-md sm:space-x-0 sm:space-y-0`}
+      className={`block flex flex-col justify-between rounded-md p-4 shadow sm:p-6 md:p-6 ${bgColor} w-full cursor-pointer space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
       onClick={handleClick}
       aria-label={`View project: ${title}`}
     >
-      <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
+      {/* Updated Image Container */}
+      <div className="relative aspect-square w-full">
         <Image
           // Use the custom loader
           loader={customImageLoader}
@@ -35,7 +36,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, bgColor }) => {
           alt={title}
           // Replaces layout="fill"
           fill
-          className="rounded-xl"
+          className="rounded-sm"
           priority={true}
           sizes="(max-width: 768px) 100vw,
                  (max-width: 1200px) 50vw,
@@ -43,17 +44,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, bgColor }) => {
           style={{
             objectFit: 'cover',
             objectPosition: '50% 50%',
-            maxWidth: '100%',
           }}
         />
       </div>
       <figcaption className="flex flex-1 flex-col justify-between pt-0 sm:pt-8">
         <div className="h-auto">
-          <h2 className="font-space-grotesk text-2xl font-semibold leading-tight tracking-tight text-[#333333] sm:text-3xl">
+          <h2 className="font-space-grotesk text-2xl font-semibold leading-tight tracking-tight text-[#000000] sm:text-3xl">
             {title}
           </h2>
           <p
-            className="pt-4 text-[13px] text-[#333333] sm:text-base"
+            className="pt-4 !text-[16px] text-[#000000] sm:text-base"
             style={{
               overflow: 'hidden',
               display: '-webkit-box',

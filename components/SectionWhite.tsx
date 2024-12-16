@@ -9,7 +9,7 @@ interface Props {
 
 export default function SectionProjects({ children, bgColor }: Props) {
   return (
-    <div className={`bg-[${bgColor}] w-full`}>
+    <div className={`bg-[#FFFFFF]`}>
       <div className={`mx-auto w-full max-w-[1300px] p-8`}>{children}</div>
     </div>
   )

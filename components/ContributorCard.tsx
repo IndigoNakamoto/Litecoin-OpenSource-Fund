@@ -93,7 +93,7 @@ const ContributorCard: React.FC<ContributorCardProps> = ({ contributor }) => {
   return (
     <>
       <button
-        className="contributor group w-full transform cursor-pointer border-none text-center transition-transform duration-300 focus:outline-none group-hover:scale-105"
+        className="contributor group w-full transform cursor-pointer border-none !bg-[#f0f0f0] !p-3 text-center transition-transform duration-300 focus:outline-none group-hover:scale-105"
         onClick={handleCardClick}
         tabIndex={0}
       >

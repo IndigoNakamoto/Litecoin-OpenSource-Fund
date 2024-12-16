@@ -16,6 +16,8 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useCallback, useMemo } from 'react'
 import SectionProjects from '@/components/SectionProjects'
+import SectionGrey from '@/components/SectionGrey'
+import SectionWhite from '@/components/SectionWhite'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
 import SectionStats from '@/components/SectionStats'
 import SectionContributors from '@/components/SectionContributors'
@@ -286,10 +288,10 @@ const AllProjects: NextPage = () => {
         <div className="w-full items-center">
           <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center gap-y-40 lg:flex-row lg:items-center">
             <div className="lg:py-30 py-20 lg:w-1/2">
-              <h1 className="font-space-grotesk text-[41px] font-bold leading-[32px] tracking-tight text-black">
+              <h1 className="font-space-grotesk text-[39px] font-semibold leading-[32px] tracking-tight text-black">
                 Litecoin Projects
               </h1>
-              <p className="w-11/12 pt-6 text-[19px]">
+              <p className="w-11/12 pt-6 text-[18px]">
                 The Litecoin Foundation is dedicated to consistently improving
                 the Litecoin network, whilst supporting the development of
                 exciting projects on the Litecoin blockchain. Below are a
@@ -297,9 +299,9 @@ const AllProjects: NextPage = () => {
                 innovation and improving the experience of its users.
               </p>
               <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4 font-space-grotesk">
-                <div className="text-md rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
+                <div className="rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
                   <button
-                    className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] text-center font-medium"
+                    className="w-full cursor-pointer rounded-3xl bg-[#222222] text-center text-[14px] font-medium !tracking-wide"
                     onClick={() => openPaymentModal()}
                   >
                     DONATE NOW
@@ -340,18 +342,18 @@ const AllProjects: NextPage = () => {
           </div>
         </div>
       </section>
-      <SectionProjects bgColor="#222222">
+      <SectionWhite bgColor="#f0f0f0">
         <div className="py-2">
           <SectionStats />
         </div>
-      </SectionProjects>
+      </SectionWhite>
 
       <SectionProjects bgColor={'#f0f0f0'}>
         <SectionMatchingDonations />
       </SectionProjects>
 
       {/* OPEN SOURCE PROJECTS */}
-      <SectionProjects bgColor="#f0f0f0">
+      <SectionWhite bgColor="#FFFFFF">
         <div ref={projectsRef} className="flex flex-col items-center">
           <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Open-Source Projects
@@ -366,17 +368,17 @@ const AllProjects: NextPage = () => {
                     <ProjectCard
                       project={p}
                       openPaymentModal={openPaymentModal}
-                      bgColor={'bg-[#FFFFFF]'}
+                      bgColor={'bg-[#f0f0f0]'}
                     />
                   </li>
                 )
               })}
           </ul>
         </div>
-      </SectionProjects>
+      </SectionWhite>
 
       {/* COMPLETED PROJECTS */}
-      <SectionProjects bgColor="#f0f0f0">
+      <SectionWhite bgColor="white">
         <div ref={bountiesRef} className="flex flex-col items-center pb-8">
           <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Completed Projects
@@ -388,17 +390,17 @@ const AllProjects: NextPage = () => {
                   <ProjectCard
                     project={p}
                     openPaymentModal={openPaymentModal}
-                    bgColor={'bg-[#FFFFFF]'}
+                    bgColor={'bg-[#c6d3d6]'}
                   />
                 </li>
               ))}
           </ul>
         </div>
-      </SectionProjects>
+      </SectionWhite>
 
       {/* OPEN BOUNTIES */}
       {openBounties && openBounties.length > 0 ? (
-        <SectionProjects bgColor="">
+        <SectionWhite bgColor="white">
           <div className="flex flex-col items-center">
             <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
               Open Bounties
@@ -420,13 +422,13 @@ const AllProjects: NextPage = () => {
                 })}
             </ul>
           </div>
-        </SectionProjects>
+        </SectionWhite>
       ) : (
         <></>
       )}
 
       {/* SCROLLING TEXT  */}
-      <SectionProjects bgColor="#C5D3D6">
+      <SectionProjects bgColor="#f0f0f0">
         <div className="flex flex-col items-center pb-8  pt-4 text-center">
           <h1 className="pb-0 font-space-grotesk text-5xl font-semibold tracking-tight text-[#222222] lg:text-[41px]">
             We Help Advance

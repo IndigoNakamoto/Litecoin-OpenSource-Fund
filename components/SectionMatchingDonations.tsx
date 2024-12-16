@@ -3,10 +3,10 @@ import React from 'react'
 function SectionMatchingDonations() {
   return (
     <div className="text-center">
-      <h1 className="mb-4 font-space-grotesk text-4xl font-bold text-[#222222]">
+      <h2 className="mb-4 font-space-grotesk text-[30px] font-bold text-[#222222]">
         Double Your Impact with Charlie Lee’s Matching Donations!
-      </h1>
-      <p className="mb-6  text-lg text-[#333333]">
+      </h2>
+      <p className="mb-6  text-[16px] text-[#000000]">
         In an exciting announcement at the Litecoin Summit in Nashville, Charlie
         Lee has pledged to match donations up to{' '}
         <strong>$250,000 annually</strong> for the next five years, totaling{' '}
@@ -15,10 +15,10 @@ function SectionMatchingDonations() {
       </p>
       <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
         <div className="flex-1">
-          <h3 className="mb-2 font-space-grotesk text-2xl font-semibold text-[#222222]">
+          <h3 className="mb-2 font-space-grotesk text-[20px] font-semibold text-[#000000]">
             Allocation of Funds:
           </h3>
-          <ul className="list-inside list-disc  text-lg text-[#555555]">
+          <ul className="list-inside list-disc  text-[16px] text-[#000000]">
             <li>
               <strong>$50,000</strong> dedicated to the projects and bounty
               program.
@@ -30,10 +30,10 @@ function SectionMatchingDonations() {
           </ul>
         </div>
         <div className="flex-1">
-          <h3 className="mb-2 font-space-grotesk text-2xl font-semibold text-[#222222]">
+          <h3 className="mb-2 font-space-grotesk text-[20px] font-semibold text-[#000000]">
             Why It Matters:
           </h3>
-          <p className="markdown text-lg text-[#555555]">
+          <p className="markdown text-[16px] text-[#000000]">
             "Because Litecoin was launched fairly, as you all know, we didn’t
             print money for ourselves. So because of that the Litecoin
             Foundation is very lean. Most projects that come to us we have to
@@ -42,11 +42,11 @@ function SectionMatchingDonations() {
           </p>
         </div>
       </div>
-      <p className="mt-4 text-sm text-[#777777]">
-        *Charlie Lee will match your donations dollar for dollar up to the
+      <p className="mt-4 text-sm text-[#000000]">
+        Charlie Lee will match your donations dollar for dollar up to the
         specified amounts each year.
       </p>
-      <p className="text-sm text-[#777777]">
+      <p className="text-sm text-[#000000]">
         Your donation may also reduce your taxable income, depending on your tax
         situation.
       </p>
