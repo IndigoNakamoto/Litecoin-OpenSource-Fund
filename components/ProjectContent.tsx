@@ -43,8 +43,8 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
   isBitcoinOlympics2024,
 }) => (
   <div>
-    <div className="w-full bg-[#c6d3d6]">
-      <div className="max-w-fit pt-4">
+    <div className="w-full rounded-md bg-[#c6d3d6]">
+      <div className="mt-6 max-w-fit pt-4">
         <ProjectSocialLinks
           website={website}
           gitRepository={gitRepository}

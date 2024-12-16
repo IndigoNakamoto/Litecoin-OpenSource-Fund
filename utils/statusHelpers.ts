@@ -50,13 +50,13 @@ export function getButtonText(bountyStatus?: BountyStatus): string {
     bountyStatus === BountyStatus.COMPLETED ||
     bountyStatus === BountyStatus.BOUNTY_COMPLETED
   ) {
-    return 'Project Completed'
+    return 'PROJECT COMPLETED'
   } else if (
     bountyStatus === BountyStatus.CLOSED ||
     bountyStatus === BountyStatus.BOUNTY_CLOSED
   ) {
-    return 'Project Closed'
+    return 'PROJECT CLOSED'
   } else {
-    return 'Donate'
+    return 'DONATE'
   }
 }

@@ -44,17 +44,17 @@ const AsideSection: React.FC<AsideSectionProps> = ({
   openPaymentModal,
 }) => {
   return (
-    <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 bg-[#dddddd] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
+    <aside className="top-32 mb-8 flex min-w-[20rem] flex-col space-y-4 rounded-md bg-[#dddddd] p-4 lg:sticky lg:flex-col lg:space-x-4 lg:space-y-0">
       {/* Image and Donate Button Wrapper */}
       <div className="relative w-full max-w-full">
         {/* Cover Image */}
-        <div className="relative max-h-max min-h-[150px] min-w-[150px] max-w-full">
+        <div className="relative max-h-max min-h-[150px] min-w-[150px]  max-w-full">
           <Image
             loader={customImageLoader}
             src={coverImage}
             alt={title}
             fill
-            className=""
+            className="rounded-sm"
             priority={true}
             sizes="(max-width: 768px) 100vw,
                    (max-width: 1200px) 50vw,
@@ -88,7 +88,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
         <div className="relative w-full pt-6">
           <button
             onClick={openPaymentModal}
-            className={`block w-full rounded-none bg-[#222222] font-space-grotesk text-xl font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636]${
+            className={`block w-full  rounded-3xl bg-[#222222] font-space-grotesk text-[14px] font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636]${
               isButtonDisabled(bountyStatus) ? ' disabled' : ''
             }`}
             disabled={isButtonDisabled(bountyStatus)}

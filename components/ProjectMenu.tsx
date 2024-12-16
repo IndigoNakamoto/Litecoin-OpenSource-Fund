@@ -78,9 +78,9 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
               <div className="transform-gpu overflow-hidden rounded-xl transition duration-200">
                 <button
                   onClick={() => handleMenuItemClick(item)}
-                  className={`text-lg ${
+                  className={`text-[14px] uppercase ${
                     activeItem === item
-                      ? 'font-semibold text-[#222222]'
+                      ? 'font-semibold text-[#000000]'
                       : 'text-gray-700'
                   }`}
                 >
@@ -97,7 +97,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'faq'
-                            ? 'font-bold text-[#222222]'
+                            ? 'font-bold text-[#000000]'
                             : 'font-semibold'
                         }`}
                       >
@@ -109,7 +109,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'updates'
-                            ? 'font-bold text-[#222222]'
+                            ? 'font-bold text-[#000000]'
                             : 'font-semibold'
                         }`}
                       >
@@ -121,7 +121,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
                       <span
                         className={`absolute text-xs ${
                           activeItem === 'posts'
-                            ? 'font-bold text-[#222222]'
+                            ? 'font-bold text-[#000000]'
                             : 'font-semibold'
                         }`}
                       >
