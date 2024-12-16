@@ -346,7 +346,7 @@ const AllProjects: NextPage = () => {
         </div>
       </SectionProjects>
 
-      <SectionProjects bgColor={'#ffffff'}>
+      <SectionProjects bgColor={'#f0f0f0'}>
         <SectionMatchingDonations />
       </SectionProjects>
 

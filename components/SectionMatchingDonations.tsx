@@ -43,7 +43,7 @@ function SectionMatchingDonations() {
         </div>
       </div>
       <p className="mt-4 text-sm text-[#777777]">
-        Charlie Lee will match your donations dollar for dollar up to the
+        *Charlie Lee will match your donations dollar for dollar up to the
         specified amounts each year.
       </p>
       <p className="text-sm text-[#777777]">
