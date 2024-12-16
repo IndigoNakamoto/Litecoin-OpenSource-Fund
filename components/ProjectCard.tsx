@@ -6,6 +6,7 @@ import { ProjectItem } from '../utils/types'
 
 export type ProjectCardProps = {
   project: ProjectItem
+  openPaymentModal: (project: ProjectItem) => void
   bgColor: string // Accept bgColor as a prop
 }
 
