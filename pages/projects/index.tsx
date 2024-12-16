@@ -310,13 +310,13 @@ const AllProjects: NextPage = () => {
 
                 <div className="flex w-full flex-row justify-center gap-2">
                   <button
-                    className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
+                    className="w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center text-[14px] font-medium "
                     onClick={scrollToProjects}
                   >
                     <span className="text-white">VIEW PROJECTS</span>
                   </button>
                   <button
-                    className="text-md w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center font-medium"
+                    className="w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center text-[14px] font-medium "
                     onClick={scrollToBounties}
                   >
                     <span className="text-white">VIEW PAST PROJECTS</span>
