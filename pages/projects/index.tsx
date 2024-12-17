@@ -25,6 +25,7 @@ import SectionStats from '@/components/SectionStats'
 import SectionContributors from '@/components/SectionContributors'
 import SectionDonors from '@/components/SectionDonors'
 import Button from '@/components/Button'
+import { PageSEO } from '@/components/SEO'
 
 // TODO: Fix scroll bar. Return to default
 
@@ -277,6 +278,11 @@ const AllProjects: NextPage = () => {
 
   return (
     <div className="w-full overflow-x-hidden">
+      <PageSEO
+        title="Projects"
+        description="Open Source Projects, Bounties, and Initiatives for the Litecoin Ecosystem. Explore and contribute to the future of Litecoin."
+        // keywords="Litecoin, Donate, Cryptocurrency, Support, Foundation, Blockchain"
+      />
       <Head>
         <title>Projects</title>
       </Head>
