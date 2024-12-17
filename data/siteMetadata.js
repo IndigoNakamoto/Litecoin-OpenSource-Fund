@@ -11,14 +11,14 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://litecoin.com',
   siteRepo: 'https://github.com/IndigoNakamoto/foss-ltc',
-  siteLogo: '/static/images/logo.png',
-  image: '/static/images/avatar.png',
+  siteLogo: '/static/images/twitter.png',
+  image: '/static/images/twitter.png',
   socialBanner: '/static/images/twitter.png',
   email: 'support@litecoin.com',
   github: 'https://github.com/litecoin-project',
   twitter: 'https://twitter.com/ltcfoundation',
   reddit: 'https://reddit.com/r/litecoin',
-  webflowBaseUrl: 'https://litecoin.net', // Replace with your actual Webflow domain
+  webflowBaseUrl: 'https://litecoin.com', // Replace with your actual Webflow domain
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
