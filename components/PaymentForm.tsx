@@ -222,7 +222,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                             ? 'primary'
                             : 'secondary'
                         }`}
-                        className={`block w-full`}
+                        className={`block h-12 w-full`}
                       >
                         CRYPTO
                       </Button>
@@ -256,7 +256,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                             ? 'primary'
                             : 'secondary'
                         }
-                        className={`w-full`}
+                        className={`block h-12 w-full`}
                       >
                         CARD
                       </Button>
@@ -304,7 +304,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                             ? 'primary'
                             : 'secondary'
                         }
-                        className="w-full"
+                        className={`block h-12 w-full`}
                       >
                         STOCK
                       </Button>

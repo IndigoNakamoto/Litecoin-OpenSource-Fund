@@ -156,7 +156,7 @@ export default function PaymentModalCryptoOption({
           onClick={() => handleCurrencySelect('Bitcoin')}
           icon={<SiBitcoin className="h-6 w-6" />} // Icon without 'mr-2'
           variant={selectedCurrencyName === 'Bitcoin' ? 'primary' : 'secondary'}
-          className={`order-2 w-full`}
+          className={`order-2 h-12 w-full`}
         >
           BITCOIN
         </Button>
@@ -168,7 +168,7 @@ export default function PaymentModalCryptoOption({
           variant={
             selectedCurrencyName === 'Litecoin' ? 'primary' : 'secondary'
           }
-          className={`order-1 w-full`}
+          className={`order-1 h-12 w-full`}
         >
           LITECOIN
         </Button>
@@ -180,9 +180,9 @@ export default function PaymentModalCryptoOption({
           variant={
             selectedCurrencyName === 'Dogecoin' ? 'primary' : 'secondary'
           }
-          className={`order-3 w-full`}
+          className={`order-3 h-12 w-full`}
         >
-          DOGECOIN
+          Dogecoin
         </Button>
       </div>
 
