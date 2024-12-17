@@ -365,7 +365,7 @@ const AllProjects: NextPage = () => {
           <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Open-Source Projects
           </h1>
-          <ul className="grid max-w-full grid-cols-3 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {openSourceProjects &&
               openSourceProjects.map((p, i) => {
                 const bgColor = bgColors[i % bgColors.length]
@@ -390,7 +390,7 @@ const AllProjects: NextPage = () => {
           <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Completed Projects
           </h1>
-          <ul className="grid max-w-full grid-cols-3 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
               completedProjects.map((p, i) => (
                 <li key={i} className="flex">
@@ -412,7 +412,7 @@ const AllProjects: NextPage = () => {
             <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
               Open Bounties
             </h1>
-            <ul className="grid max-w-full grid-cols-3 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {openBounties &&
                 openBounties.map((p, i) => {
                   const bgColor = bgColors[i % bgColors.length]

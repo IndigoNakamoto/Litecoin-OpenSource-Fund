@@ -267,9 +267,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                   <div className="flex justify-between space-x-3">
                     <div className="w-1/2">
                       <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
-                        <FaHandHoldingHeart />
+                        {/* <FaHandHoldingHeart /> */}
                         <div
                           dangerouslySetInnerHTML={{ __html: widgetSnippet }}
+                          className="h-full w-full"
                         />
                       </div>
                     </div>
