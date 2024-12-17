@@ -74,7 +74,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
     onCopy: () => void
   }) => (
     <div
-      className="flex w-full cursor-pointer flex-row justify-between rounded-lg border border-[#222222] bg-[#f2f2f2] p-4"
+      className="flex w-full cursor-pointer flex-row justify-between rounded-lg border border-[#000] bg-[#f2f2f2] p-4"
       role="button"
       tabIndex={0}
       onClick={onCopy}
@@ -85,7 +85,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
       }}
     >
       <p
-        className={`text-md break-all font-semibold text-[#222222] transition-opacity duration-300 ${
+        className={`text-md break-all font-semibold text-[#000] transition-opacity duration-300 ${
           isCopied ? 'opacity-100' : 'opacity-100'
         }`}
       >
@@ -103,7 +103,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
   return (
     <div className="flex items-center justify-center">
       <div className="my-auto flex flex-col items-center justify-center space-y-4 p-0 md:p-8">
-        <h2 className="font-space-grotesk text-[30px] font-bold text-[#000]">
+        <h2 className="font-space-grotesk text-[30px] font-[600] text-[#000]">
           Complete Your Donation
         </h2>
         <hr className="border-t-1 w-full border-gray-400" />
@@ -159,7 +159,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
         <Button onClick={handleDone} className="mt-4 h-12 w-full">
           DONE
         </Button>
-        <p className="mt-4 text-center text-[16px] text-[#000]">
+        <p className="mt-4 text-[16px] text-[#000]">
           You will receive an email confirmation once your transaction is
           settled. Thank you for your generous support!
         </p>

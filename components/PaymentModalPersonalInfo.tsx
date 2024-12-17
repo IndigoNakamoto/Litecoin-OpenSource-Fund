@@ -454,7 +454,7 @@ const PaymentModalPersonalInfo: React.FC<
 
   return (
     <div className="flex flex-col space-y-4 p-0 md:p-8">
-      <h2 className="font-space-grotesk text-[30px] font-bold text-[#222222]">
+      <h2 className="font-space-grotesk text-[30px] font-bold text-[#000]">
         Personal Information
       </h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -470,7 +470,7 @@ const PaymentModalPersonalInfo: React.FC<
                   className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                   id="donate-anonymously"
                 />
-                <label htmlFor="donate-anonymously" className="text-[#222222]">
+                <label htmlFor="donate-anonymously" className="text-[#000]">
                   Donate Anonymously
                 </label>
               </div>
@@ -484,11 +484,11 @@ const PaymentModalPersonalInfo: React.FC<
                   className="h-4 w-4 border-[#222222] bg-[#f0f0f0]"
                   id="tax-receipt"
                 />
-                <label htmlFor="tax-receipt" className="text-[#222222]">
+                <label htmlFor="tax-receipt" className="text-[#000]">
                   Request A Tax Receipt
                 </label>
               </div>
-              <p className="ml-10 text-sm text-gray-600 ">
+              <p className="ml-10 text-[14px] text-black ">
                 Provide your email to receive a confirmation of your donation
                 and your tax receipt. This information will only be used to send
                 you these documents.
@@ -499,7 +499,7 @@ const PaymentModalPersonalInfo: React.FC<
         <span className="block w-full border-t border-gray-400"></span>
 
         <div className="pb-2">
-          <h2 className="text-lg text-[#222222]">
+          <h2 className="text-lg text-[#000]">
             Profile Photo <span className="text-sm">(Optional)</span>
           </h2>
 
@@ -532,7 +532,7 @@ const PaymentModalPersonalInfo: React.FC<
                   />
                 )}
               </div>
-              <p className="my-auto ml-8 text-sm text-gray-600">
+              <p className="my-auto ml-8 text-[14px] text-black">
                 Verify an account to show your support. Your photo and a link to
                 your account will be featured in our community section.
               </p>
@@ -541,7 +541,7 @@ const PaymentModalPersonalInfo: React.FC<
               <div className="flex flex-col">
                 <button
                   type="button"
-                  className="flex w-1/2 cursor-not-allowed items-center justify-center rounded-lg border border-gray-300 bg-gray-200 font-space-grotesk font-semibold text-gray-500"
+                  className="flex w-1/2 cursor-not-allowed items-center justify-center rounded-lg border border-gray-300 bg-gray-200 text-gray-500"
                   disabled
                 >
                   <span className="flex items-center">
@@ -549,7 +549,7 @@ const PaymentModalPersonalInfo: React.FC<
                     <SiX className="ml-2 h-6 w-6" />
                   </span>
                 </button>
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-2 text-[14px] text-black">
                   Feature available soon. Please email
                   <a
                     href="mailto:donate@litecoin.net"
@@ -568,7 +568,7 @@ const PaymentModalPersonalInfo: React.FC<
 
         {/* EMAIL */}
         <div>
-          <h2 className=" text-lg text-[#222222]">
+          <h2 className=" text-lg text-[#000]">
             Email
             {(needsTaxReceipt ||
               joinMailingList ||
@@ -589,7 +589,7 @@ const PaymentModalPersonalInfo: React.FC<
             value={formData.receiptEmail}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+            className={`w-full rounded-lg p-2  text-[#000] ${
               errors.receiptEmail
                 ? 'border-1 border-red-600 '
                 : 'border-[#222222] bg-[#f0f0f0]'
@@ -607,7 +607,7 @@ const PaymentModalPersonalInfo: React.FC<
         {/* PHONE NUMBER */}
         {state.selectedOption === 'stock' && (
           <div>
-            <h2 className=" text-lg text-[#222222]">
+            <h2 className=" text-lg text-[#000]">
               Phone Number <span className="text-red-600">*</span>
             </h2>
             <input
@@ -617,7 +617,7 @@ const PaymentModalPersonalInfo: React.FC<
               value={formData.phoneNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+              className={`w-full rounded-lg p-2  text-[#000] ${
                 errors.phoneNumber
                   ? 'border-1 border-red-600'
                   : 'border-[#222222] bg-[#f0f0f0]'
@@ -632,7 +632,7 @@ const PaymentModalPersonalInfo: React.FC<
 
         {/* NAME */}
         <div>
-          <h2 className=" text-lg text-[#222222]">
+          <h2 className=" text-lg text-[#000]">
             Name
             {(!donateAnonymously || state.selectedOption === 'stock') && (
               <span className="text-red-600">*</span>
@@ -650,7 +650,7 @@ const PaymentModalPersonalInfo: React.FC<
                 value={formData.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                className={`w-full rounded-lg p-2  text-[#000] ${
                   errors.firstName
                     ? 'border-1 border-red-600'
                     : 'border-[#222222] bg-[#f0f0f0]'
@@ -668,7 +668,7 @@ const PaymentModalPersonalInfo: React.FC<
                 value={formData.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                className={`w-full rounded-lg p-2  text-[#000] ${
                   errors.lastName
                     ? 'border-1 border-red-600'
                     : 'border-[#222222] bg-[#f0f0f0]'
@@ -685,7 +685,7 @@ const PaymentModalPersonalInfo: React.FC<
         {shouldShowAddressFields && (
           <div>
             <div className="flex flex-col gap-y-2">
-              <h2 className=" text-lg text-[#222222]">
+              <h2 className=" text-lg text-[#000]">
                 Address <span className="text-red-600">*</span>
               </h2>
               <div className="relative flex w-full flex-col space-y-3">
@@ -702,7 +702,7 @@ const PaymentModalPersonalInfo: React.FC<
                   }}
                   onBlur={handleBlur}
                   placeholder="Search for a country"
-                  className={`flex w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                  className={`flex w-full rounded-lg p-2  text-[#000] ${
                     errors.country
                       ? 'border-1 border-red-600'
                       : 'border-[#222222] bg-[#f0f0f0]'
@@ -723,7 +723,7 @@ const PaymentModalPersonalInfo: React.FC<
                   <ul
                     id="country-listbox"
                     role="listbox"
-                    className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#f0f0f0] text-[#222222]"
+                    className="absolute top-12 max-h-56 w-full overflow-y-auto rounded-lg border border-[#222222] bg-[#f0f0f0] text-[#000]"
                     style={{ zIndex: 10 }}
                   >
                     {filteredCountries.map((country, index) => (
@@ -732,7 +732,7 @@ const PaymentModalPersonalInfo: React.FC<
                         onClick={() => handleCountrySelect(country)}
                         role="option"
                         aria-selected={index === focusedCountryIndex}
-                        className={`flex w-full cursor-pointer items-center p-2 text-left font-semibold text-[#222222] ${
+                        className={`flex w-full cursor-pointer items-center p-2 text-left text-[#000] ${
                           index === focusedCountryIndex
                             ? 'bg-gray-400'
                             : 'hover:bg-gray-200'
@@ -753,7 +753,7 @@ const PaymentModalPersonalInfo: React.FC<
                   value={formData.addressLine1}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                  className={`w-full rounded-lg p-2  text-[#000] ${
                     errors.addressLine1
                       ? 'border-1 border-red-600'
                       : 'border-[#222222] bg-[#f0f0f0]'
@@ -771,7 +771,7 @@ const PaymentModalPersonalInfo: React.FC<
                 placeholder="Street Address 2"
                 value={formData.addressLine2}
                 onChange={handleChange}
-                className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2  font-semibold text-[#222222]"
+                className="w-full rounded-lg border-[#222222] bg-[#f0f0f0] p-2  text-[#000]"
               />
               <div className="flex flex-row gap-x-2">
                 <div className="w-full">
@@ -782,7 +782,7 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.city}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                    className={`w-full rounded-lg p-2  text-[#000] ${
                       errors.city
                         ? 'border-1 border-red-600'
                         : 'border-[#222222] bg-[#f0f0f0]'
@@ -800,7 +800,7 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.state}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                    className={`w-full rounded-lg p-2  text-[#000] ${
                       errors.state
                         ? 'border-1 border-red-600'
                         : 'border-[#222222] bg-[#f0f0f0]'
@@ -818,7 +818,7 @@ const PaymentModalPersonalInfo: React.FC<
                     value={formData.zipcode}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full rounded-lg p-2  font-semibold text-[#222222] ${
+                    className={`w-full rounded-lg p-2  text-[#000] ${
                       errors.zipcode
                         ? 'border-1 border-red-600'
                         : 'border-[#222222] bg-[#f0f0f0]'
