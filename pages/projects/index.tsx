@@ -276,7 +276,7 @@ const AllProjects: NextPage = () => {
   const bgColors = useMemo(() => ['bg-[#EEEEEE]', 'bg-[#c6d3d6]'], [])
 
   return (
-    <div className="w-screen">
+    <div className="w-full overflow-x-hidden">
       <Head>
         <title>Projects</title>
       </Head>
