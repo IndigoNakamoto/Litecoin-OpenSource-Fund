@@ -282,7 +282,7 @@ const AllProjects: NextPage = () => {
       </Head>
       <VerticalSocialIcons />
       <section
-        className="relative flex max-h-fit min-h-[62vh] w-full items-center bg-cover bg-center lg:py-24"
+        className="relative flex max-h-fit min-h-[62vh] w-full items-center overflow-x-hidden bg-cover bg-center lg:py-24"
         style={{
           backgroundImage: "url('/static/images/design/Mask-Group-20.webp')",
           fontFamily:

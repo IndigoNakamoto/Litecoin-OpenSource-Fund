@@ -252,3 +252,7 @@ input[type='number'] {
     background-position: -200% 0;
   }
 }
+
+.no-scroll {
+  overflow-x: hidden;
+}

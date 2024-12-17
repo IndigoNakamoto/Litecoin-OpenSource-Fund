@@ -181,13 +181,13 @@ export default function PaymentModalFiatOption() {
           type="number"
           ref={inputRef}
           className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-[14px] font-[600] 
-    ${
-      isCustomAmount
-        ? !isBelowMin
-          ? 'border-[#222222] bg-[#222222] text-[#f0f0f0]' // Valid custom input
-          : 'border-gray-400 bg-[#f0f0f0] text-gray-600' // Below minimum or invalid input
-        : 'border-[#222222] bg-[#f0f0f0] text-[#222222]' // Default predefined styles
-    }`}
+      ${
+        isCustomAmount
+          ? !isBelowMin
+            ? 'border-[#222222] bg-[#222222] text-[#f0f0f0]' // Valid custom input
+            : 'border-gray-400 bg-[#f0f0f0] text-gray-600' // Below minimum or invalid input
+          : 'border-[#222222] bg-[#f0f0f0] text-[#222222]' // Default predefined styles
+      }`}
           value={displayAmount}
           onChange={handleInputChange}
           onBlur={handleInputBlur}

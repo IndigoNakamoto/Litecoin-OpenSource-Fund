@@ -31,7 +31,6 @@ function PaymentModalFiatDonate() {
         const data = await response.json()
 
         if (response.ok) {
-          // console.log('Donation successful')
           dispatch({ type: 'SET_STEP', payload: 'complete' })
         } else {
           const errorData = data.error || data
@@ -56,11 +55,6 @@ function PaymentModalFiatDonate() {
 
       const Shift4 = (window as any).Shift4
       if (Shift4) {
-        // console.log('Initializing Shift4...')
-        // TODO: Replace with NEXT_PUBLIC_SHIFT4_PK_TEST
-        // TODO: Figure out why process.env.NEXT_PUBLIC_SHIFT4_PK_TEST does not work
-
-        // const shift4 = new Shift4('pk_test_jRGmbvC4Y1m54rNqCJ2JLBWU') // USE .ENV SHIFT_PK_TEST
         const shift4 = new Shift4('pk_live_sln6bKZqi6a0LzzhVZhK58HK')
 
         const components = shift4
@@ -119,15 +113,11 @@ function PaymentModalFiatDonate() {
 
     try {
       const token = await shift4.createToken(components)
-      // console.log('Token created:', token)
-
       const secureToken = await shift4.verifyThreeDSecure({
         amount: amountInCents,
         currency: 'USD',
         card: token.id,
       })
-
-      // console.log('3D Secure verification successful:', secureToken)
 
       await submitDonation(secureToken.id)
     } catch (error: any) {
@@ -148,7 +138,6 @@ function PaymentModalFiatDonate() {
         case 'invalid_number':
           errorMessage = 'Invalid card number.'
           break
-        // Handle other error codes...
         default:
           errorMessage =
             error.message || 'An error occurred while processing your card.'
@@ -167,7 +156,7 @@ function PaymentModalFiatDonate() {
   }).format(parseFloat(state.formData.pledgeAmount || '0'))
 
   return (
-    <div className="flex w-full flex-col space-y-4 rounded-lg p-0 md:p-8">
+    <div className="space-y- relative mx-auto flex w-full flex-col overflow-x-hidden p-4 ">
       <h2 className="mb-4 font-space-grotesk text-[30px] font-[600] text-[#000]">
         Complete Your Donation
       </h2>
@@ -187,32 +176,36 @@ function PaymentModalFiatDonate() {
         id="payment-form"
         className="space-y-4"
       >
-        <div className="relative mb-4 w-full">
-          <FaRegCreditCard className="absolute left-3 top-1/2 -translate-y-1/2 transform text-[#222222]" />
+        {/* Credit Card Number */}
+        <div className="relative w-full">
+          <FaRegCreditCard className="absolute left-3 top-1/2 -translate-y-1/2 text-[#222]" />
           <div
             data-shift4="number"
-            className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
+            className="w-full rounded-lg border border-gray-300 bg-white p-3 pl-10 font-space-grotesk text-[#222]"
             style={{ minHeight: '40px' }}
           ></div>
         </div>
-        <div className="mb-4 flex flex-row space-x-3">
+
+        {/* Expiry and CVC */}
+        <div className="flex space-x-3">
           <div
             data-shift4="expiry"
-            className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
+            className="w-1/2 rounded-lg border border-gray-300 bg-white p-3 font-space-grotesk text-[#222]"
             style={{ minHeight: '40px' }}
           ></div>
           <div
             data-shift4="cvc"
-            className="w-full rounded-lg border-white bg-white p-3 font-space-grotesk text-[#222222]"
+            className="w-1/2 rounded-lg border border-gray-300 bg-white p-3 font-space-grotesk text-[#222]"
             style={{ minHeight: '40px' }}
           ></div>
         </div>
-        <div className="flex justify-between space-x-2 pt-8">
+
+        {/* Buttons */}
+        <div className="flex justify-between gap-x-2 pt-8">
           <Button
             onClick={() =>
               dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
             }
-            className=""
             variant="secondary"
           >
             BACK
@@ -221,7 +214,7 @@ function PaymentModalFiatDonate() {
             isLoading={isLoading}
             disabled={isLoading}
             type="submit"
-            backgroundColor="#222222"
+            backgroundColor="#222"
             textColor="#f0f0f0"
             loadingText="Processing..."
           >
