@@ -1,6 +1,7 @@
 // components/PaymentModalFiatOption.js
 import React, { useState, useRef, useEffect } from 'react'
 import { useDonation } from '../contexts/DonationContext'
+import Button from './Button'
 
 export default function PaymentModalFiatOption() {
   const { state, dispatch } = useDonation()
@@ -142,37 +143,31 @@ export default function PaymentModalFiatOption() {
     <div className="flex w-full flex-col gap-4 pt-5">
       <div className="flex h-full w-full justify-between space-x-6 pt-6 font-space-grotesk">
         {buttonValues.slice(0, 3).map((value) => (
-          <button
+          <Button
             key={value}
-            className={`w-[24vw] rounded-3xl border border-[#222222] ${
-              selectedAmount === value
-                ? 'bg-[#222222] text-[#f0f0f0]'
-                : 'bg-[#f0f0f0] text-[#222222]'
-            } text-lg font-semibold`}
             onClick={() => handleAmountClick(value)}
+            variant={selectedAmount === value ? 'primary' : 'secondary'}
+            className="h-[50px] w-[24vw]"
           >
             ${value}
-          </button>
+          </Button>
         ))}
       </div>
       <div className="flex h-full w-full justify-between space-x-6 font-space-grotesk">
         {buttonValues.slice(3).map((value) => (
-          <button
+          <Button
             key={value}
-            className={`w-[24vw] rounded-3xl border border-[#222222] ${
-              selectedAmount === value
-                ? 'bg-[#222222] text-[#f0f0f0]'
-                : 'bg-[#f0f0f0] text-[#222222]'
-            } text-lg font-semibold`}
             onClick={() => handleAmountClick(value)}
+            variant={selectedAmount === value ? 'primary' : 'secondary'}
+            className="h-[50px] w-[24vw]"
           >
             ${value}
-          </button>
+          </Button>
         ))}
       </div>
       <div className="relative w-full">
         <span
-          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-lg font-semibold ${
+          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-[14px] font-[600] ${
             isCustomAmount
               ? !isBelowMin
                 ? 'text-[#f0f0f0]'
@@ -185,7 +180,7 @@ export default function PaymentModalFiatOption() {
         <input
           type="number"
           ref={inputRef}
-          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-lg font-semibold 
+          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-[14px] font-[600] 
     ${
       isCustomAmount
         ? !isBelowMin
@@ -219,12 +214,12 @@ export default function PaymentModalFiatOption() {
           type="checkbox"
           checked={coverFees}
           onChange={handleCoverFeesChange}
-          className="h-4 w-4 border border-[#222222] bg-[#f0f0f0]"
+          className="h-4 w-4 border border-[#000] bg-[#f0f0f0]"
           id="cover-transaction-fees"
         />
         <label
           htmlFor="cover-transaction-fees"
-          className="flex items-center text-[#222222]"
+          className="flex items-center text-[14px] text-[#000]"
         >
           Cover transaction fees
           <span className="group relative ml-1">

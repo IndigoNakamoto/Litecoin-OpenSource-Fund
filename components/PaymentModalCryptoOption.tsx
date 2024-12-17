@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { customImageLoader } from '../utils/customImageLoader'
 import ConversionRateCalculator from './ConversionRateCalculator'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import Button from './Button'
 
 type Currency = {
   code: string
@@ -151,43 +152,38 @@ export default function PaymentModalCryptoOption({
       {/* Currency Selection Buttons */}
       <div className="grid grid-cols-2 gap-3 font-space-grotesk sm:grid-cols-3">
         {/* Bitcoin Button */}
-        <button
-          className={`order-2 flex w-full items-center justify-center rounded-3xl border border-[#222222] text-lg font-semibold sm:order-1 ${
-            selectedCurrencyName === 'Bitcoin'
-              ? 'bg-[#222222] text-[#f0f0f0]'
-              : 'bg-[#f0f0f0] text-[#222222]'
-          }`}
+        <Button
           onClick={() => handleCurrencySelect('Bitcoin')}
+          icon={<SiBitcoin className="h-6 w-6" />} // Icon without 'mr-2'
+          variant={selectedCurrencyName === 'Bitcoin' ? 'primary' : 'secondary'}
+          className={`order-2 w-full`}
         >
-          <SiBitcoin className="mr-2 h-6 w-6" />
           Bitcoin
-        </button>
+        </Button>
 
         {/* Litecoin Button */}
-        <button
-          className={`order-1 col-span-2 flex w-full items-center justify-center rounded-3xl border border-[#222222] text-lg font-semibold sm:order-2 sm:col-span-1 ${
-            selectedCurrencyName === 'Litecoin'
-              ? 'bg-[#222222] text-[#f0f0f0]'
-              : 'bg-[#f0f0f0] text-[#222222]'
-          }`}
+        <Button
           onClick={() => handleCurrencySelect('Litecoin')}
+          icon={<SiLitecoin className="h-6 w-6" />} // Icon without 'mr-2'
+          variant={
+            selectedCurrencyName === 'Litecoin' ? 'primary' : 'secondary'
+          }
+          className={`order-1 w-full`}
         >
-          <SiLitecoin className="mr-2 h-6 w-6" />
           Litecoin
-        </button>
+        </Button>
 
         {/* Dogecoin Button */}
-        <button
-          className={`order-3 flex w-full items-center justify-center rounded-3xl border border-[#222222] text-lg font-semibold ${
-            selectedCurrencyName === 'Dogecoin'
-              ? 'bg-[#222222] text-[#f0f0f0]'
-              : 'bg-[#f0f0f0] text-[#222222]'
-          }`}
+        <Button
           onClick={() => handleCurrencySelect('Dogecoin')}
+          icon={<SiDogecoin className="h-6 w-6" />} // Icon without 'mr-2'
+          variant={
+            selectedCurrencyName === 'Dogecoin' ? 'primary' : 'secondary'
+          }
+          className={`order-3 w-full`}
         >
-          <SiDogecoin className="mr-2 h-6 w-6" />
           Dogecoin
-        </button>
+        </Button>
       </div>
 
       {/* Search and Dropdown */}
@@ -213,9 +209,9 @@ export default function PaymentModalCryptoOption({
             !['Bitcoin', 'Litecoin', 'Dogecoin'].includes(
               selectedCurrencyName || ''
             )
-              ? 'bg-[#222222] text-[#f0f0f0]'
+              ? 'bg-[#222222] text-[#ffffff]'
               : 'bg-[#f0f0f0] text-[#222222]'
-          } p-2 text-left font-space-grotesk text-lg font-bold`}
+          } p-2 text-left font-space-grotesk text-[16px]`}
           onClick={() => setShowDropdown((prev) => !prev)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}

@@ -15,6 +15,7 @@ type GradientButtonProps = {
   textColor?: string // User-defined text gradient color
   textColor2?: string
   loadingText?: string // Customizable loading text
+  moveOnHover?: boolean // New prop to control hover movement
 }
 
 const GradientButton: React.FC<GradientButtonProps> = ({
@@ -28,6 +29,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   textColor = '#f0f0f0',
   textColor2 = '#444444',
   loadingText = 'Submitting...',
+  moveOnHover = true, // Default to true
 }) => {
   // Determine if the button should be functionally disabled
   const isFunctionallyDisabled = disabled
@@ -35,15 +37,19 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   // Determine if the button should appear disabled
   const isAppearanceDisabled = disabled || appearDisabled
 
+  // Hover movement style
+  const hoverMoveStyle =
+    moveOnHover && !isAppearanceDisabled ? 'hover:-translate-y-[5px]' : ''
+
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={isFunctionallyDisabled} // Only disable functionality if `disabled` is true
-      className={`relative w-full overflow-hidden !rounded-2xl py-3 font-space-grotesk text-xl font-semibold transition-colors duration-200 ${
+      className={`relative w-full transform overflow-hidden !rounded-3xl py-3 font-space-grotesk text-[16px] font-[600] transition duration-200 ${
         isAppearanceDisabled
           ? 'cursor-not-allowed bg-gray-400 text-gray-700' // Apply disabled styles
-          : 'cursor-pointer  text-white hover:from-blue-600 ' // Apply active styles
+          : `cursor-pointer text-white hover:from-blue-600 ${hoverMoveStyle}` // Apply active styles with hover movement
       } focus:outline-none`}
       style={{
         backgroundColor: isAppearanceDisabled ? '#222222' : backgroundColor,

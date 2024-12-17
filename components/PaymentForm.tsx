@@ -18,6 +18,7 @@ import PaymentModalPersonalInfo from './PaymentModalPersonalInfo'
 import PaymentModalStockBrokerInfo from './PaymentModalStockBrokerInfo'
 import PaymentModalStockDonorSignature from './PaymentModalStockDonorSignature'
 import PaymentModalStockDonorThankYou from './PaymentModalStockDonorThankYou'
+import Button from '@/components/Button'
 
 import { ProjectItem } from '../utils/types'
 import { useDonation } from '../contexts/DonationContext'
@@ -210,37 +211,26 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                   {/* First Row: Crypto and Card Buttons */}
                   <div className="flex justify-between space-x-3">
                     <div className="w-1/2">
-                      <button
-                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-                          state.selectedOption === 'crypto'
-                            ? 'bg-[#222222] text-[#f0f0f0]'
-                            : 'bg-[#f0f0f0] text-[#222222]'
-                        }`}
+                      <Button
+                        moveOnHover={false}
                         onClick={() =>
                           dispatch({ type: 'SET_OPTION', payload: 'crypto' })
                         }
+                        icon={<SiLitecoin className="h-6 w-6" />} // Adding the icon
+                        variant={`${
+                          state.selectedOption === 'crypto'
+                            ? 'primary'
+                            : 'secondary'
+                        }`}
+                        className={`block w-full`}
                       >
-                        <SiLitecoin className="mr-2 h-6 w-6" />
-
-                        <p
-                          className={
-                            state.selectedOption === 'crypto'
-                              ? 'text-[#f0f0f0]'
-                              : 'text-[#222222]'
-                          }
-                        >
-                          Crypto
-                        </p>
-                      </button>
+                        CRYPTO
+                      </Button>
                     </div>
 
                     <div className="w-1/2">
-                      <button
-                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-                          state.selectedOption === 'fiat'
-                            ? 'bg-[#222222] text-[#f0f0f0]'
-                            : 'bg-[#f0f0f0] text-[#222222]'
-                        }`}
+                      <Button
+                        moveOnHover={false}
                         onClick={() => {
                           dispatch({ type: 'SET_OPTION', payload: 'fiat' })
                           dispatch({
@@ -255,10 +245,21 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                             payload: false,
                           })
                         }}
+                        icon={
+                          <FontAwesomeIcon
+                            icon={faCreditCard}
+                            className="h-6 w-6"
+                          />
+                        } // Adding the icon
+                        variant={
+                          state.selectedOption === 'fiat'
+                            ? 'primary'
+                            : 'secondary'
+                        }
+                        className={`w-full`}
                       >
-                        <FontAwesomeIcon icon={faCreditCard} className="h-6" />
-                        <p>Card</p>
-                      </button>
+                        CARD
+                      </Button>
                     </div>
                   </div>
 
@@ -267,7 +268,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                     <div className="w-1/2">
                       <div className="flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold">
                         <FaHandHoldingHeart />
-
                         <div
                           dangerouslySetInnerHTML={{ __html: widgetSnippet }}
                         />
@@ -275,12 +275,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                     </div>
 
                     <div className="w-1/2">
-                      <button
-                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-                          state.selectedOption === 'stock'
-                            ? 'bg-[#222222] text-[#f0f0f0]'
-                            : 'bg-[#f0f0f0] text-[#222222]'
-                        }`}
+                      <Button
+                        moveOnHover={false}
                         onClick={() => {
                           dispatch({ type: 'SET_OPTION', payload: 'stock' })
                           dispatch({
@@ -296,13 +292,21 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                             payload: true,
                           })
                         }}
+                        icon={
+                          <FontAwesomeIcon
+                            icon={faArrowTrendUp}
+                            className="h-6 w-6"
+                          />
+                        } // Adding the icon
+                        variant={
+                          state.selectedOption === 'stock'
+                            ? 'primary'
+                            : 'secondary'
+                        }
+                        className="w-full"
                       >
-                        <FontAwesomeIcon
-                          icon={faArrowTrendUp}
-                          className="h-6"
-                        />
-                        <p>Stock</p>
-                      </button>
+                        STOCK
+                      </Button>
                     </div>
                   </div>
                 </>
@@ -317,27 +321,20 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                           : 'w-full'
                       }`}
                     >
-                      <button
-                        className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222] text-xl font-bold ${
-                          state.selectedOption === 'crypto'
-                            ? 'bg-[#222222] text-[#f0f0f0]'
-                            : 'bg-[#f0f0f0] text-[#222222]'
-                        }`}
+                      <Button
                         onClick={() =>
                           dispatch({ type: 'SET_OPTION', payload: 'crypto' })
                         }
+                        icon={<SiLitecoin className="h-6 w-6" />} // Adding the icon
+                        variant={`${
+                          state.selectedOption === 'crypto'
+                            ? 'primary'
+                            : 'secondary'
+                        }`}
+                        className={`block w-full`}
                       >
-                        <SiLitecoin className="mr-2 h-6 w-6" />
-                        <p
-                          className={
-                            state.selectedOption === 'crypto'
-                              ? 'text-[#f0f0f0]'
-                              : 'text-[#222222]'
-                          }
-                        >
-                          Crypto
-                        </p>
-                      </button>
+                        {'CRYPTO'}
+                      </Button>
                     </div>
 
                     {isMounted &&
@@ -356,12 +353,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                   </div>
 
                   <div className="flex justify-between space-x-3">
-                    <button
-                      className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
-                        state.selectedOption === 'fiat'
-                          ? 'bg-[#222222] text-[#f0f0f0]'
-                          : 'bg-[#f0f0f0] text-[#222222]'
-                      }`}
+                    <Button
                       onClick={() => {
                         dispatch({ type: 'SET_OPTION', payload: 'fiat' })
                         dispatch({
@@ -376,17 +368,23 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                           payload: false,
                         })
                       }}
+                      icon={
+                        <FontAwesomeIcon
+                          icon={faCreditCard}
+                          className="h-6 w-6"
+                        />
+                      } // Adding the icon
+                      variant={
+                        state.selectedOption === 'fiat'
+                          ? 'primary'
+                          : 'secondary'
+                      }
+                      className={`w-full`}
                     >
-                      <FontAwesomeIcon icon={faCreditCard} className="h-6" />
-                      <p>Card</p>
-                    </button>
+                      CARD
+                    </Button>
 
-                    <button
-                      className={`flex w-full flex-row items-center justify-center gap-2 rounded-3xl border border-[#222222]  text-xl font-bold ${
-                        state.selectedOption === 'stock'
-                          ? 'bg-[#222222] text-[#f0f0f0]'
-                          : 'bg-[#f0f0f0] text-[#222222]'
-                      }`}
+                    <Button
                       onClick={() => {
                         dispatch({ type: 'SET_OPTION', payload: 'stock' })
                         dispatch({
@@ -402,10 +400,21 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                           payload: true,
                         })
                       }}
+                      icon={
+                        <FontAwesomeIcon
+                          icon={faArrowTrendUp}
+                          className="h-6 w-6"
+                        />
+                      } // Adding the icon
+                      variant={
+                        state.selectedOption === 'stock'
+                          ? 'primary'
+                          : 'secondary'
+                      }
+                      className="w-full"
                     >
-                      <FontAwesomeIcon icon={faArrowTrendUp} className="h-6" />
-                      <p>Stock</p>
-                    </button>
+                      STOCK
+                    </Button>
                   </div>
                 </>
               )}
@@ -420,9 +429,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               backgroundColor={
                 state.isDonateButtonDisabled ? '#d1d5db' : '#222222'
               }
-              textColor={state.isDonateButtonDisabled ? '#gray-600' : '#f0f0f0'}
+              textColor={state.isDonateButtonDisabled ? '#gray-800' : '#f0f0f0'}
             >
-              Donate
+              DONATE
             </GradientButton>
           </>
         )

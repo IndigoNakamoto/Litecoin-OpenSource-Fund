@@ -248,14 +248,14 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
             />
           )}
 
-          <h1 className="px-2 font-space-grotesk text-lg font-semibold text-white">
+          <h1 className="px-2 font-space-grotesk text-[16px] font-[600] text-white">
             {selectedCurrencyCode}
           </h1>
         </div>
         <input
           type="text"
           name="cryptoInput"
-          className={`h-12 w-full border-none pl-8 font-space-grotesk text-lg font-black ${
+          className={`h-12 w-full border-none pl-8 font-space-grotesk text-[16px] font-[600] ${
             isLoadingRate
               ? 'loading-gradient'
               : isBelowMin
@@ -272,7 +272,7 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
 
       {/* Display min donation error */}
       {isBelowMin && (
-        <p className="mt-1 font-space-grotesk text-sm font-semibold text-red-500">
+        <p className="mt-1  text-sm font-[600] text-red-500">
           Minimum donation is {minDonation.toFixed(8)} {selectedCurrencyCode}
         </p>
       )}
@@ -286,14 +286,14 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
       {/* USD Input */}
       <div className="flex overflow-hidden rounded-3xl border border-[#222222]">
         <div className="flex h-12 w-36 items-center justify-center bg-[#222222]">
-          <h1 className="font-space-grotesk text-lg font-semibold text-[#f2f2f2]">
+          <h1 className="font-space-grotesk text-[16px] font-[600] text-[#f2f2f2]">
             USD
           </h1>
         </div>
         <input
           type="text"
           name="usdInput"
-          className={`w-full border-none pl-8 font-space-grotesk text-lg font-black ${
+          className={`w-full border-none pl-8 text-[16px] ${
             isUsdBelowMin ? '' : 'bg-[#c6d3d6]'
           } rounded-r-3xl transition-colors duration-300`}
           value={usdInput !== '' ? usdInput : usdValue}
@@ -304,21 +304,15 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
 
       {/* Display USD min donation error or static message */}
       {isUsdBelowMin ? (
-        <p className="mt-1 font-space-grotesk text-sm font-semibold text-red-500">
+        <p className="mt-1 text-sm font-[600] text-red-500">
           Minimum donation is $2.50
         </p>
       ) : (
-        <p className="mt-1 font-space-grotesk text-sm text-gray-600">
-          Minimum donation is $2.50
-        </p>
+        <p className="mt-1 text-sm text-gray-600">Minimum donation is $2.50</p>
       )}
 
       {/* Existing error messages */}
-      {error && (
-        <p className="mt-1 font-space-grotesk text-sm font-semibold text-red-500">
-          {error}
-        </p>
-      )}
+      {error && <p className="mt-1 text-sm font-[600] text-red-500">{error}</p>}
 
       {/* Styles for Gradient Animation */}
       <style jsx>{`

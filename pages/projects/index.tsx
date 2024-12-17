@@ -24,6 +24,8 @@ import SectionMatchingDonations from '@/components/SectionMatchingDonations'
 import SectionStats from '@/components/SectionStats'
 import SectionContributors from '@/components/SectionContributors'
 import SectionDonors from '@/components/SectionDonors'
+import Button from '@/components/Button'
+
 // TODO: Fix scroll bar. Return to default
 
 const project = {
@@ -301,28 +303,31 @@ const AllProjects: NextPage = () => {
                 innovation and improving the experience of its users.
               </p>
               <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4 font-space-grotesk">
-                <div className="rounded-3xl bg-[black] px-6 py-1 text-center font-medium">
-                  <button
-                    className="w-full cursor-pointer rounded-3xl bg-[black] text-center text-[14px] font-medium !tracking-wide"
-                    onClick={() => openPaymentModal()}
+                <div className="">
+                  <Button
+                    variant="primary"
+                    onClick={openPaymentModal}
+                    className="h-12 w-full px-6 py-1 !tracking-wide"
                   >
                     DONATE NOW
-                  </button>
+                  </Button>
                 </div>
 
                 <div className="flex w-full flex-row justify-center gap-2">
-                  <button
-                    className="w-full cursor-pointer rounded-3xl bg-[black] px-6 py-3 text-center text-[14px] font-medium "
+                  <Button
+                    variant="secondary"
                     onClick={scrollToProjects}
+                    className="w-full px-6 py-3"
                   >
-                    <span className="text-white">VIEW PROJECTS</span>
-                  </button>
-                  <button
-                    className="w-full cursor-pointer rounded-3xl bg-[black] px-6 py-3 text-center text-[14px] font-medium "
+                    VIEW PROJECTS
+                  </Button>
+                  <Button
+                    variant="secondary"
                     onClick={scrollToBounties}
+                    className="w-full px-6 py-3"
                   >
-                    <span className="text-white">VIEW PAST PROJECTS</span>
-                  </button>
+                    VIEW PAST PROJECTS
+                  </Button>
                 </div>
               </div>
             </div>
@@ -355,12 +360,12 @@ const AllProjects: NextPage = () => {
       </SectionBlue>
 
       {/* OPEN SOURCE PROJECTS */}
-      <SectionWhite bgColor="#FFFFFF">
+      <SectionGrey>
         <div ref={projectsRef} className="flex flex-col items-center">
           <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Open-Source Projects
           </h1>
-          <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-3 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {openSourceProjects &&
               openSourceProjects.map((p, i) => {
                 const bgColor = bgColors[i % bgColors.length]
@@ -370,44 +375,44 @@ const AllProjects: NextPage = () => {
                     <ProjectCard
                       project={p}
                       openPaymentModal={openPaymentModal}
-                      bgColor={'bg-[#EEEEEE]'}
+                      bgColor={'bg-[white]'}
                     />
                   </li>
                 )
               })}
           </ul>
         </div>
-      </SectionWhite>
+      </SectionGrey>
 
       {/* COMPLETED PROJECTS */}
-      <SectionWhite bgColor="white">
+      <SectionGrey>
         <div ref={bountiesRef} className="flex flex-col items-center pb-8">
           <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
             Completed Projects
           </h1>
-          <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid max-w-full grid-cols-3 gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {completedProjects &&
               completedProjects.map((p, i) => (
                 <li key={i} className="flex">
                   <ProjectCard
                     project={p}
                     openPaymentModal={openPaymentModal}
-                    bgColor={'bg-[#EEEEEE]'}
+                    bgColor={'bg-[white]'}
                   />
                 </li>
               ))}
           </ul>
         </div>
-      </SectionWhite>
+      </SectionGrey>
 
       {/* OPEN BOUNTIES */}
       {openBounties && openBounties.length > 0 ? (
-        <SectionWhite bgColor="white">
+        <SectionGrey>
           <div className="flex flex-col items-center">
             <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
               Open Bounties
             </h1>
-            <ul className="grid max-w-full grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="grid max-w-full grid-cols-3 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {openBounties &&
                 openBounties.map((p, i) => {
                   const bgColor = bgColors[i % bgColors.length]
@@ -424,13 +429,13 @@ const AllProjects: NextPage = () => {
                 })}
             </ul>
           </div>
-        </SectionWhite>
+        </SectionGrey>
       ) : (
         <></>
       )}
 
       {/* SCROLLING TEXT  */}
-      <SectionProjects bgColor="#f0f0f0">
+      <SectionWhite>
         <div className="flex flex-col items-center pb-8  pt-4 text-center">
           <h1 className="font-space-grotesk text-[39px] font-[600] text-[black]">
             The Litecoin Project Development Portal
@@ -453,9 +458,9 @@ const AllProjects: NextPage = () => {
               future of Litecoin.
             </p>
             <Link href="/projects/submit" className="m-auto pt-4">
-              <button className="w-48 rounded-none border border-[black] font-semibold text-[black]">
+              <Button variant="primary" className="w-48">
                 Submit Project
-              </button>
+              </Button>
             </Link>
           </div>
         </div>
@@ -472,7 +477,7 @@ const AllProjects: NextPage = () => {
           </h1>
           <SectionDonors />
         </div>
-      </SectionProjects>
+      </SectionWhite>
 
       <PaymentModal
         isOpen={modalOpen}

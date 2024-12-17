@@ -29,8 +29,15 @@ export default async function handler(
       button: {
         id: 'tgb-widget-button',
         text: 'DAF',
-        style:
-          'font-family: "Space Grotesk", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif; color: #222222; font-size: 20px; font-weight: 700; ',
+        style: `
+          font-family: "Space Grotesk", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif;
+          color: #222222;
+          font-size: 14px;
+          font-weight: 600;
+          transition: transform 0.2s;
+          transform: translateY(0px);
+          cursor: pointer; /* Optional: Change cursor on hover */
+        `,
       },
       scriptId: 'tgb-widget-script',
       campaignId: 'LitecoinWebsiteDAF',

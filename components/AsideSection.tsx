@@ -5,6 +5,7 @@ import { AddressStats, BountyStatus } from '../utils/types'
 import { defaultAddressStats } from '../utils/defaultValues'
 import { customImageLoader } from '../utils/customImageLoader'
 import { isButtonDisabled, getButtonText } from '../utils/statusHelpers'
+import Button from '@/components/Button'
 
 type AsideSectionProps = {
   title: string
@@ -86,15 +87,14 @@ const AsideSection: React.FC<AsideSectionProps> = ({
 
         {/* Donate Button */}
         <div className="relative w-full pt-6">
-          <button
+          <Button
             onClick={openPaymentModal}
-            className={`block w-full  rounded-3xl bg-[#222222] font-space-grotesk text-[14px] font-semibold text-white transition-colors duration-200 hover:border-transparent hover:bg-[#363636]${
-              isButtonDisabled(bountyStatus) ? ' disabled' : ''
-            }`}
+            variant="primary" // Using 'primary' variant based on original styles
+            className={`block h-10 w-full font-space-grotesk`}
             disabled={isButtonDisabled(bountyStatus)}
           >
             {getButtonText(bountyStatus)}
-          </button>
+          </Button>
         </div>
       </div>
     </aside>
