@@ -225,7 +225,7 @@ function PaymentModalFiatDonate() {
             textColor="#f0f0f0"
             loadingText="Processing..."
           >
-            Donate
+            DONATE
           </GradientButton>
         </div>
       </form>

@@ -50,7 +50,7 @@ const PaymentModalFiatThankYou: React.FC<ThankYouModalProps> = ({
         loadingText="Going Back..." // Optional: Custom loading text if needed
         type="button"
       >
-        Back
+        BACK
       </GradientButton>
     </div>
   )
