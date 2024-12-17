@@ -255,7 +255,7 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         <input
           type="text"
           name="cryptoInput"
-          className={`h-12 w-full border-none pl-8 font-space-grotesk text-[16px] font-[600] ${
+          className={`h-12 w-full border-none pl-8 font-space-grotesk text-[16px] ${
             isLoadingRate
               ? 'loading-gradient'
               : isBelowMin

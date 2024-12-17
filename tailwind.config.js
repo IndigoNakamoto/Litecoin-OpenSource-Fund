@@ -95,18 +95,22 @@ module.exports = {
               code: { color: theme('colors.primary.400') },
             },
             h1: {
-              fontWeight: '700',
+              fontWeight: 'font-semibold',
               letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.900'),
+              color: theme('colors.black'),
+              fontFamily: theme('fontFamily.space-grotesk'),
             },
             h2: {
-              fontWeight: '700',
+              fontWeight: 'font-semibold',
               letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.900'),
+              color: theme('colors.black'),
+              fontFamily: theme('fontFamily.space-grotesk'),
             },
             h3: {
-              fontWeight: '600',
-              color: theme('colors.gray.900'),
+              fontWeight: 'font-semibold',
+              color: theme('colors.black'),
+              letterSpacing: theme('letterSpacing.tight'),
+              fontFamily: theme('fontFamily.space-grotesk'),
             },
             'h4,h5,h6': {
               color: theme('colors.gray.900'),

@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { countries } from './countries'
 import { useSession } from 'next-auth/react'
 import GradientButton from './GradientButton'
+import Button from './Button'
 
 type PaymentModalPersonalInfoProps = {
   onRequestClose: () => void
@@ -453,7 +454,7 @@ const PaymentModalPersonalInfo: React.FC<
 
   return (
     <div className="flex flex-col space-y-4 p-0 md:p-8">
-      <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
+      <h2 className="font-space-grotesk text-[30px] font-bold text-[#222222]">
         Personal Information
       </h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -835,20 +836,20 @@ const PaymentModalPersonalInfo: React.FC<
         )}
 
         <div className="flex justify-between space-x-2 pt-8">
-          <button
-            type="button"
-            className="w-1/3 rounded-2xl border border-[#222222] text-xl font-semibold text-[#222222]"
+          <Button
+            className="w-1/3"
+            variant="secondary"
             onClick={() => dispatch({ type: 'SET_STEP', payload: 'payment' })}
           >
-            Back
-          </button>
+            BACK
+          </Button>
           <GradientButton
             isLoading={isLoading}
             disabled={isButtonDisabled}
             type="submit"
             loadingText="Processing.."
           >
-            Continue
+            CONTINUE
           </GradientButton>
         </div>
       </form>

@@ -5,6 +5,7 @@ import { useDonation } from '../contexts/DonationContext'
 import { QRCodeSVG } from 'qrcode.react'
 import { FaRegCopy } from 'react-icons/fa6'
 import Image from 'next/image'
+import Button from './Button'
 
 interface PaymentModalCryptoDonateProps {
   onRequestClose: () => void
@@ -100,13 +101,13 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
   const formattedPledgeAmount = formatPledgeAmount(pledgeAmount)
 
   return (
-    <div className="flex items-center justify-center font-space-grotesk">
+    <div className="flex items-center justify-center">
       <div className="my-auto flex flex-col items-center justify-center space-y-4 p-0 md:p-8">
-        <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
+        <h2 className="font-space-grotesk text-[30px] font-bold text-[#000]">
           Complete Your Donation
         </h2>
         <hr className="border-t-1 w-full border-gray-400" />
-        <p className="text-[#222222]">
+        <p className="text-[#000]">
           Please send your donation to the following address:
         </p>
 
@@ -115,10 +116,10 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
             <QRCodeSVG
               value={qrValue}
               size={256}
-              bgColor="#222222"
+              bgColor="#000"
               fgColor="#f2f2f2"
             />
-            <p className="text-[#222222]">
+            <p className="text-[#000]">
               Scan the QR code above to donate {formattedPledgeAmount}{' '}
               {pledgeCurrency}.
             </p>
@@ -135,7 +136,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
                 height: 'auto',
               }}
             />
-            <p className="text-[#222222]">
+            <p className="text-[#000]">
               Scan the QR code above to donate {formattedPledgeAmount}{' '}
               {pledgeCurrency}.
             </p>
@@ -155,13 +156,10 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
           onCopy={() => handleCopy('amount')}
         />
 
-        <button
-          onClick={handleDone}
-          className="mt-4 w-full rounded-2xl bg-[#222222] text-2xl font-semibold text-[#f0f0f0]"
-        >
-          Done
-        </button>
-        <p className="mt-4 text-center text-base text-[#222222]">
+        <Button onClick={handleDone} className="mt-4 h-12 w-full">
+          DONE
+        </Button>
+        <p className="mt-4 text-center text-[16px] text-[#000]">
           You will receive an email confirmation once your transaction is
           settled. Thank you for your generous support!
         </p>

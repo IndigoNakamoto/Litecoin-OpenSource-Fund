@@ -27,33 +27,31 @@ export default function PaymentModalStockDonorThankYou({ onRequestClose }) {
     : 'Pending'
 
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-0 font-space-grotesk md:p-8">
-      <h2 className="font-space-grotesk text-2xl font-bold text-[#222222]">
-        Thank You for Your Donation!
-      </h2>
+    <div className="mx-auto flex max-w-md flex-col items-center justify-center space-y-6 rounded-lg p-0 md:p-8">
+      <h2 className="text-[30px] font-[600]">Thank You for Your Donation!</h2>
       <hr className="border-t-1 w-full border-gray-400" />
-      <div className="text-lg">
-        <p className="text-center text-gray-700">
+      <div className="">
+        <p className=" text-black">
           Your generous donation has been sent to your broker {brokerName} to
           process the donation.
           <div className="my-4">
-            <p className="text-center text-gray-800">
+            <p className=" text-black">
               <span className="font-semibold">Project:</span> {projectTitle}
             </p>
-            <p className="text-center text-gray-800">
+            <p className=" text-black">
               <span className="font-semibold">Donated Stock:</span>{' '}
               {donatedStock}
             </p>
-            <p className="text-center text-gray-800">
+            <p className=" text-black">
               <span className="font-semibold">Amount:</span> {stockQuantity}{' '}
               shares
             </p>
-            <p className="text-center text-gray-800">
+            <p className=" text-black">
               <span className="font-semibold">Broker Account:</span>{' '}
               {brokerageAccountNumber}
             </p>
           </div>
-          <p className="text-center text-gray-700">
+          <p className=" text-black">
             You will receive a confirmation email with your tax receipt once
             your donation is processed.
           </p>
@@ -68,7 +66,7 @@ export default function PaymentModalStockDonorThankYou({ onRequestClose }) {
               className="mt-2 w-full max-w-xs"
             />
           )}
-          <p className="text-center text-gray-800">
+          <p className="text-center text-black">
             <span className="font-semibold">Signature Date:</span>{' '}
             {signatureDate}
           </p>

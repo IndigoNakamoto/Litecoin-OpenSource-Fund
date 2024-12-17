@@ -158,7 +158,7 @@ export default function PaymentModalCryptoOption({
           variant={selectedCurrencyName === 'Bitcoin' ? 'primary' : 'secondary'}
           className={`order-2 w-full`}
         >
-          Bitcoin
+          BITCOIN
         </Button>
 
         {/* Litecoin Button */}
@@ -170,7 +170,7 @@ export default function PaymentModalCryptoOption({
           }
           className={`order-1 w-full`}
         >
-          Litecoin
+          LITECOIN
         </Button>
 
         {/* Dogecoin Button */}
@@ -182,7 +182,7 @@ export default function PaymentModalCryptoOption({
           }
           className={`order-3 w-full`}
         >
-          Dogecoin
+          DOGECOIN
         </Button>
       </div>
 

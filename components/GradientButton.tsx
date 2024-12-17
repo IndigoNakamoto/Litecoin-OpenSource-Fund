@@ -46,7 +46,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={isFunctionallyDisabled} // Only disable functionality if `disabled` is true
-      className={`relative w-full transform overflow-hidden !rounded-3xl py-3 font-space-grotesk text-[16px] font-[600] transition duration-200 ${
+      className={`relative w-full transform overflow-hidden !rounded-3xl py-3 font-space-grotesk text-[14px] font-[600] transition duration-200 ${
         isAppearanceDisabled
           ? 'cursor-not-allowed bg-gray-400 text-gray-700' // Apply disabled styles
           : `cursor-pointer text-white hover:from-blue-600 ${hoverMoveStyle}` // Apply active styles with hover movement

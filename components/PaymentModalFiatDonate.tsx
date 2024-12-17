@@ -4,6 +4,7 @@ import { FaRegCreditCard } from 'react-icons/fa'
 import { useDonation } from '../contexts/DonationContext'
 import GradientButton from './GradientButton'
 import Notification from './Notification'
+import Button from './Button'
 
 function PaymentModalFiatDonate() {
   const { state, dispatch } = useDonation()
@@ -167,10 +168,10 @@ function PaymentModalFiatDonate() {
 
   return (
     <div className="flex w-full flex-col space-y-4 rounded-lg p-0 md:p-8">
-      <h2 className="mb-4 font-space-grotesk text-2xl font-bold text-[#222222]">
+      <h2 className="mb-4 font-space-grotesk text-[30px] font-[600] text-[#000]">
         Complete Your Donation
       </h2>
-      <div className="mb-4 text-lg font-semibold text-[#222222]">
+      <div className="mb-4 text-[16px] text-[#000]">
         Amount to Donate: {formattedAmount}
       </div>
       {notification && (
@@ -207,15 +208,15 @@ function PaymentModalFiatDonate() {
           ></div>
         </div>
         <div className="flex justify-between space-x-2 pt-8">
-          <button
-            type="button"
+          <Button
             onClick={() =>
               dispatch({ type: 'SET_STEP', payload: 'personalInfo' })
             }
-            className="w-1/3 rounded-2xl border border-[#222222] text-xl font-semibold text-[#222222]"
+            className=""
+            variant="secondary"
           >
-            Back
-          </button>
+            BACK
+          </Button>
           <GradientButton
             isLoading={isLoading}
             disabled={isLoading}

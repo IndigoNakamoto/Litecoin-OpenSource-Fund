@@ -4,6 +4,7 @@ import { useDonation } from '../contexts/DonationContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEraser } from '@fortawesome/free-solid-svg-icons'
 import GradientButton from './GradientButton' // Import the GradientButton component
+import Button from './Button'
 
 export default function PaymentModalStockDonorSignature({ onContinue }) {
   const { state, dispatch } = useDonation()
@@ -102,10 +103,10 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
 
   return (
     <div className="flex flex-col space-y-4 p-8">
-      <h2 className="font-space-grotesk text-3xl font-bold text-[#222222]">
+      <h2 className="font-space-grotesk text-[30px] font-[600] text-[#000]">
         Signature
       </h2>
-      <p className="flex items-center font-space-grotesk text-base text-gray-600">
+      <p className="flex items-center text-[16px] text-gray-600">
         By signing your donation request electronically, you consent to the
         terms and acknowledge the disclaimer
         <span className="relative ml-1 inline-block">
@@ -152,15 +153,15 @@ export default function PaymentModalStockDonorSignature({ onContinue }) {
         />
       </div>
       <div className="flex justify-between space-x-2 pt-8">
-        <button
-          type="button"
+        <Button
           onClick={() =>
             dispatch({ type: 'SET_STEP', payload: 'stockBrokerInfo' })
           }
-          className="w-1/3 rounded-2xl border border-[#222222] text-xl font-semibold text-[#222222]"
+          className="w-1/3"
+          variant="secondary"
         >
           Back
-        </button>
+        </Button>
         <GradientButton
           onClick={handleSubmit}
           isLoading={isSubmitting}

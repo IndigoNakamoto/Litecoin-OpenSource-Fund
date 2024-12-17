@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, bgColor }) => {
   return (
     <Link
       href={`/projects/${slug}`}
-      className={`block flex flex-col justify-between rounded-md p-4 shadow sm:p-6 md:p-6 ${bgColor} w-full cursor-pointer space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
+      className={`flex flex-col justify-between rounded-md p-4 shadow sm:p-6 md:p-6 ${bgColor} w-full cursor-pointer space-y-4 overflow-y-auto sm:space-x-0 sm:space-y-0`}
       onClick={handleClick}
       aria-label={`View project: ${title}`}
     >
