@@ -19,6 +19,7 @@ import SectionProjects from '@/components/SectionProjects'
 import SectionGrey from '@/components/SectionGrey'
 import SectionWhite from '@/components/SectionWhite'
 import SectionOrange from '@/components/SectionOrange'
+import SectionBlue from '@/components/SectionBlue'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
 import SectionStats from '@/components/SectionStats'
 import SectionContributors from '@/components/SectionContributors'
@@ -300,9 +301,9 @@ const AllProjects: NextPage = () => {
                 innovation and improving the experience of its users.
               </p>
               <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4 font-space-grotesk">
-                <div className="rounded-3xl bg-[#222222] px-6 py-1 text-center font-medium">
+                <div className="rounded-3xl bg-[black] px-6 py-1 text-center font-medium">
                   <button
-                    className="w-full cursor-pointer rounded-3xl bg-[#222222] text-center text-[14px] font-medium !tracking-wide"
+                    className="w-full cursor-pointer rounded-3xl bg-[black] text-center text-[14px] font-medium !tracking-wide"
                     onClick={() => openPaymentModal()}
                   >
                     DONATE NOW
@@ -311,13 +312,13 @@ const AllProjects: NextPage = () => {
 
                 <div className="flex w-full flex-row justify-center gap-2">
                   <button
-                    className="w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center text-[14px] font-medium "
+                    className="w-full cursor-pointer rounded-3xl bg-[black] px-6 py-3 text-center text-[14px] font-medium "
                     onClick={scrollToProjects}
                   >
                     <span className="text-white">VIEW PROJECTS</span>
                   </button>
                   <button
-                    className="w-full cursor-pointer rounded-3xl bg-[#222222] px-6 py-3 text-center text-[14px] font-medium "
+                    className="w-full cursor-pointer rounded-3xl bg-[black] px-6 py-3 text-center text-[14px] font-medium "
                     onClick={scrollToBounties}
                   >
                     <span className="text-white">VIEW PAST PROJECTS</span>
@@ -349,9 +350,9 @@ const AllProjects: NextPage = () => {
         </div>
       </SectionWhite>
 
-      <SectionOrange>
+      <SectionBlue>
         <SectionMatchingDonations />
-      </SectionOrange>
+      </SectionBlue>
 
       {/* OPEN SOURCE PROJECTS */}
       <SectionWhite bgColor="#FFFFFF">
@@ -369,7 +370,7 @@ const AllProjects: NextPage = () => {
                     <ProjectCard
                       project={p}
                       openPaymentModal={openPaymentModal}
-                      bgColor={'bg-[#f0f0f0]'}
+                      bgColor={'bg-[#EEEEEE]'}
                     />
                   </li>
                 )
@@ -391,7 +392,7 @@ const AllProjects: NextPage = () => {
                   <ProjectCard
                     project={p}
                     openPaymentModal={openPaymentModal}
-                    bgColor={'bg-[#c6d3d6]'}
+                    bgColor={'bg-[#EEEEEE]'}
                   />
                 </li>
               ))}
@@ -431,28 +432,28 @@ const AllProjects: NextPage = () => {
       {/* SCROLLING TEXT  */}
       <SectionProjects bgColor="#f0f0f0">
         <div className="flex flex-col items-center pb-8  pt-4 text-center">
-          <h1 className="pb-0 font-space-grotesk text-5xl font-semibold tracking-tight text-[#222222] lg:text-[41px]">
-            We Help Advance
+          <h1 className="font-space-grotesk text-[39px] font-[600] text-[black]">
+            The Litecoin Project Development Portal
           </h1>
-          <h3 className="font-space-grotesk text-3xl font-semibold text-[#222222] lg:text-[39px]">
+          <h2 className="pt-2 font-space-grotesk text-[30px] font-[600] text-[black]">
+            We help advance
+          </h2>
+          <h3 className="font-space-grotesk text-[20px] font-semibold text-[black]">
             <TypingScroll />
           </h3>
-          <p className="pt-0 font-space-grotesk text-2xl text-gray-600">
-            Unite. Fund. Advance. - The Litecoin Project Development Portal
-          </p>
         </div>
         <div className="m-auto flex h-full w-[1300px] max-w-[90%] flex-col-reverse justify-center lg:flex-row lg:items-center">
-          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[#222222] p-8">
-            <h1 className="m-auto py-4 font-space-grotesk !text-[39px] font-medium leading-[32px] text-[#222222]">
+          <div className="flex h-4/6 min-h-fit w-full flex-col justify-center border border-[black] p-8">
+            <h1 className="m-auto py-4 font-space-grotesk !text-[30px] font-[600] leading-[32px] text-[black]">
               Submit a Project
             </h1>
-            <p className="m-auto max-w-3xl text-center text-lg text-[#222222]">
+            <p className="m-auto max-w-3xl text-center text-lg text-[black]">
               We are looking to support talented individuals and teams who share
               our commitment to decentralized open-source solutions and the
               future of Litecoin.
             </p>
             <Link href="/projects/submit" className="m-auto pt-4">
-              <button className="w-48 rounded-none border border-[#222222] font-semibold text-[#222222]">
+              <button className="w-48 rounded-none border border-[black] font-semibold text-[black]">
                 Submit Project
               </button>
             </Link>

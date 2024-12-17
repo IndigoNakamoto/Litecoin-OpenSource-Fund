@@ -12,6 +12,9 @@ import CompletedProjects from '@/components/CompletedProjects'
 import SectionMatchingDonations from '@/components/SectionMatchingDonations'
 // import SectionDonors from '@/components/SectionDonors'
 // import SectionProjects from './SectionProjects'
+import SectionWhite from '@/components/SectionWhite'
+import SectionBlue from '@/components/SectionBlue'
+import SectionGrey from '@/components/SectionGrey'
 import SectionStats from '@/components/SectionStats'
 
 export default function Donate() {
@@ -92,18 +95,19 @@ export default function Donate() {
           </div>
         </div>
       </DonateSection>
-      <SectionProjects bgColor={'#222222'}>
+      <SectionWhite>
         <SectionStats />
-      </SectionProjects>
-      <SectionProjects bgColor={'#f2f2f2'}>
+      </SectionWhite>
+      <SectionBlue>
         {/* Matching Donations Section */}
         <SectionMatchingDonations />
-      </SectionProjects>
-      <SectionProjects bgColor={'#C5D3D6'}>
+      </SectionBlue>
+
+      <SectionGrey bgColor={'#C5D3D6'}>
         <div className="min-w-full">
           <CompletedProjects />
         </div>
-      </SectionProjects>
+      </SectionGrey>
     </>
   )
 }
