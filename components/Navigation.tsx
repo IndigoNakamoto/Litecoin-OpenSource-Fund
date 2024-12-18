@@ -226,11 +226,11 @@ const Navigation = () => {
               <ul className="flex flex-row">
                 {/* Use Litecoin Dropdown */}
                 <li
-                  className="relative !-mr-[0.1rem] !-mt-[.2rem] flex items-center !font-[500]"
+                  className="relative !-mr-[0.2rem] !-mt-[.17rem] flex items-center !font-[500]"
                   ref={useLitecoinRef}
                 >
                   <button
-                    className="flex items-center"
+                    className="flex items-center tracking-[-0.01em]"
                     onClick={() => toggleDropdown('useLitecoin')}
                     aria-expanded={dropdownOpen.useLitecoin}
                     aria-haspopup="true"
@@ -294,11 +294,11 @@ const Navigation = () => {
                 </li>
                 {/* Learn Dropdown */}
                 <li
-                  className="relative !-mr-[.3rem] !-mt-[.2rem] flex items-center !font-[500]"
+                  className="relative !-mr-[.36rem] !-mt-[.17rem] flex items-center !font-[500]"
                   ref={learnRef}
                 >
                   <button
-                    className="flex items-center"
+                    className="flex items-center tracking-[-0.01em]"
                     onClick={() => toggleDropdown('learn')}
                     aria-expanded={dropdownOpen.learn}
                     aria-haspopup="true"
@@ -359,7 +359,7 @@ const Navigation = () => {
 
                 {/* Projects Menu Item */}
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[1rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -372,11 +372,11 @@ const Navigation = () => {
 
                 {/* The Foundation Dropdown */}
                 <li
-                  className="relative !-mr-[.25rem] !-mt-[0.1rem] flex items-center !font-[500]"
+                  className="relative !-mt-[0.1rem] !ml-[-.1rem] flex items-center !font-[500]"
                   ref={theFoundationRef}
                 >
                   <button
-                    className="flex items-center"
+                    className="flex items-center tracking-[-0.01em]"
                     onClick={() => toggleDropdown('theFoundation')}
                     aria-expanded={dropdownOpen.theFoundation}
                     aria-haspopup="true"
@@ -443,7 +443,7 @@ const Navigation = () => {
                 {/* End of The Foundation Dropdown */}
 
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.6rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -454,7 +454,7 @@ const Navigation = () => {
                   <a href="https://litecoin.com/news">News</a>
                 </li>
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.8rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -465,7 +465,7 @@ const Navigation = () => {
                   <a href="https://litecoin.com/events">Events</a>
                 </li>
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.90rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.8rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
@@ -476,7 +476,7 @@ const Navigation = () => {
                   <a href="https://shop.litecoin.com">Shop</a>
                 </li>
                 <li
-                  className="text-md mb-[.95rem] ml-[.95rem] mr-[.95rem] mt-[.85rem] font-[500]"
+                  className="text-md mb-[.95rem] ml-[.8rem] mt-[.85rem] font-[500]"
                   style={{
                     color: fontColor,
                     letterSpacing: '-0.2px',
