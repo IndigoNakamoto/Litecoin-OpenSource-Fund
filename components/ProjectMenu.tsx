@@ -69,7 +69,7 @@ const ProjectMenu: React.FC<ProjectMenuProps> = ({
         {/* Wrap the button in a div for each li. TODO: Decide to add community back 'community' */}
         {['Info', 'faq', 'updates', 'posts'].map((item) => (
           <li
-            className="group flex h-16 items-center justify-center rounded-lg font-space-grotesk"
+            className="group flex h-16 items-center justify-center rounded-lg "
             key={item}
           >
             {item === 'faq' && faqCount === 0 ? null : item === 'updates' && // Hide the entire button for "FAQ" when faqCount is 1
