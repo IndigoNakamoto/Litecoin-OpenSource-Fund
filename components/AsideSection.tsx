@@ -90,7 +90,7 @@ const AsideSection: React.FC<AsideSectionProps> = ({
           <Button
             onClick={openPaymentModal}
             variant="primary" // Using 'primary' variant based on original styles
-            className={`block h-10 w-full font-space-grotesk`}
+            className={`block h-10 w-full`}
             disabled={isButtonDisabled(bountyStatus)}
           >
             {getButtonText(bountyStatus)}

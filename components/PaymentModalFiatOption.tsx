@@ -141,7 +141,7 @@ export default function PaymentModalFiatOption() {
 
   return (
     <div className="flex w-full flex-col gap-4 pt-5">
-      <div className="flex h-full w-full justify-between space-x-6 pt-6 font-space-grotesk">
+      <div className="flex h-full w-full justify-between space-x-6 pt-6">
         {buttonValues.slice(0, 3).map((value) => (
           <Button
             key={value}
@@ -153,7 +153,7 @@ export default function PaymentModalFiatOption() {
           </Button>
         ))}
       </div>
-      <div className="flex h-full w-full justify-between space-x-6 font-space-grotesk">
+      <div className="flex h-full w-full justify-between space-x-6">
         {buttonValues.slice(3).map((value) => (
           <Button
             key={value}
@@ -167,7 +167,7 @@ export default function PaymentModalFiatOption() {
       </div>
       <div className="relative w-full">
         <span
-          className={`absolute left-4 top-1/2 -translate-y-1/2 font-space-grotesk text-[14px] font-[600] ${
+          className={`absolute left-4 top-1/2 -translate-y-1/2 text-[14px] font-[600] ${
             isCustomAmount
               ? !isBelowMin
                 ? 'text-[#f0f0f0]'
@@ -180,7 +180,7 @@ export default function PaymentModalFiatOption() {
         <input
           type="number"
           ref={inputRef}
-          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 font-space-grotesk text-[14px] font-[600] 
+          className={`w-full appearance-none rounded-3xl border pl-8 pr-4 text-[14px] font-[600] 
       ${
         isCustomAmount
           ? !isBelowMin

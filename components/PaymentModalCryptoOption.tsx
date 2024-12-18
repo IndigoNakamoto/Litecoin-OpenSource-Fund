@@ -150,7 +150,7 @@ export default function PaymentModalCryptoOption({
   return (
     <div ref={dropdownRef} className="flex w-full flex-col gap-4 pt-5">
       {/* Currency Selection Buttons */}
-      <div className="grid grid-cols-2 gap-3 font-space-grotesk sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {/* Bitcoin Button */}
         <Button
           onClick={() => handleCurrencySelect('Bitcoin')}
@@ -182,7 +182,7 @@ export default function PaymentModalCryptoOption({
           }
           className={`order-3 h-12 w-full`}
         >
-          Dogecoin
+          DOGECOIN
         </Button>
       </div>
 

@@ -308,7 +308,7 @@ const AllProjects: NextPage = () => {
                 handful of initiatives that demonstrate Litecoin's commitment to
                 innovation and improving the experience of its users.
               </p>
-              <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4 font-space-grotesk">
+              <div className="my-8 flex w-11/12 max-w-[508px] flex-col gap-4">
                 <div className="">
                   <Button
                     variant="primary"

@@ -26,7 +26,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   children,
   type = 'button',
   backgroundColor = '#222222',
-  textColor = '#f0f0f0',
+  textColor = '#ffffff',
   textColor2 = '#444444',
   loadingText = 'Submitting...',
   moveOnHover = true, // Default to true
@@ -46,14 +46,14 @@ const GradientButton: React.FC<GradientButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={isFunctionallyDisabled} // Only disable functionality if `disabled` is true
-      className={`relative w-full transform overflow-hidden !rounded-3xl py-3 font-space-grotesk text-[14px] font-[600] transition duration-200 ${
+      className={`relative w-full transform overflow-hidden !rounded-3xl py-3 text-[14px] transition duration-200 ${
         isAppearanceDisabled
           ? 'cursor-not-allowed bg-gray-400 text-gray-700' // Apply disabled styles
           : `cursor-pointer text-white hover:from-blue-600 ${hoverMoveStyle}` // Apply active styles with hover movement
       } focus:outline-none`}
       style={{
-        backgroundColor: isAppearanceDisabled ? '#222222' : backgroundColor,
-        color: isAppearanceDisabled ? '#6b7280' : textColor,
+        backgroundColor: isAppearanceDisabled ? textColor2 : backgroundColor,
+        color: isAppearanceDisabled ? '#858585' : textColor,
         cursor: isAppearanceDisabled ? 'not-allowed' : 'pointer',
       }} // Inline styles to override external styles
     >

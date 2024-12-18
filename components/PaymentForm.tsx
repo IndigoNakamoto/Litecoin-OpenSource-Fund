@@ -205,7 +205,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 </div>
               </div>
             )}
-            <div className="flex w-full flex-col justify-between space-y-4 pb-5 pt-6 font-space-grotesk">
+            <div className="flex w-full flex-col justify-between space-y-4 pb-5 pt-6 ">
               {project.slug === 'litecoin-foundation' && widgetSnippet ? (
                 <>
                   {/* First Row: Crypto and Card Buttons */}
@@ -430,7 +430,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               backgroundColor={
                 state.isDonateButtonDisabled ? '#d1d5db' : '#222222'
               }
-              textColor={state.isDonateButtonDisabled ? '#gray-800' : '#f0f0f0'}
+              textColor={state.isDonateButtonDisabled ? '#gray-800' : '#FFFFFF'}
             >
               DONATE
             </GradientButton>
