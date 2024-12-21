@@ -17,7 +17,7 @@ const VerticalSocialIcons: React.FC<VerticalSocialIconsProps> = ({
 }) => {
   return (
     <div
-      className="fixed right-0 z-50 hidden transform space-x-[70px] lg:block"
+      className="fixed right-0 z-50 hidden transform space-x-[65px] lg:block"
       style={{ top: topOffset, transform: 'translateY(-50%)' }}
     >
       <a
@@ -25,7 +25,7 @@ const VerticalSocialIcons: React.FC<VerticalSocialIconsProps> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaTwitter className="h-[30px] w-[30px] transition-transform duration-200 ease-in-out hover:translate-y-[-4px]" />
+        <FaXTwitter className="h-[30px] w-[30px] transition-transform duration-200 ease-in-out hover:translate-y-[-4px]" />
       </a>
       <a
         href="https://reddit.com/r/litecoin"
@@ -34,13 +34,13 @@ const VerticalSocialIcons: React.FC<VerticalSocialIconsProps> = ({
       >
         <FaRedditAlien className="h-[30px] w-[30px] transition-transform duration-200 ease-in-out hover:translate-y-[-4px]" />
       </a>
-      <a
+      {/* <a
         href="https://facebook.com/LitecoinFoundation/"
         target="_blank"
         rel="noopener noreferrer"
       >
         <FaFacebookF className="h-[30px] w-[30px] transition-transform duration-200 ease-in-out hover:translate-y-[-4px]" />
-      </a>
+      </a> */}
       <a
         href="https://github.com/litecoin-foundation/"
         target="_blank"
