@@ -592,13 +592,16 @@ const Navigation = () => {
                                 </a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.com/financials">
-                                  Financials
+                                <a href="https://litecoin.com/litecoin-foundation#contact">
+                                  Contact
                                 </a>
                               </li>
                               <li className="py-1">
-                                <a href="https://litecoin.com/litecoin-foundation#contact">
-                                  Contact
+                                <a href="https://litecoin.com/donate">Donate</a>
+                              </li>
+                              <li className="py-1">
+                                <a href="https://litecoin.com/financials">
+                                  Financials
                                 </a>
                               </li>
                             </>
