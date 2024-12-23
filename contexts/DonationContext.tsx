@@ -173,8 +173,8 @@ const initialState: DonationState = {
   // Initialize new state properties
   selectedCurrencyCode: 'LTC',
   selectedCurrencyName: 'Litecoin',
-  usdInput: '100',
-  cryptoInput: '',
+  usdInput: '0',
+  cryptoInput: '0',
 }
 
 const DonationContext = createContext<{
@@ -234,8 +234,8 @@ const donationReducer = (
         selectedCurrency: 'LTC', // Reset selected currency
         selectedCurrencyCode: 'LTC', // Reset currency code
         selectedCurrencyName: 'Litecoin', // Reset currency name
-        usdInput: '100', // Reset USD input
-        cryptoInput: '', // Reset crypto input
+        usdInput: '0', // Reset USD input
+        cryptoInput: '0', // Reset crypto input
         image: state.image,
       }
     // New cases for persisting selected currency and inputs

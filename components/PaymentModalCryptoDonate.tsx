@@ -1,4 +1,4 @@
-//components/PaymentModalCryptoDonate
+// components/PaymentModalCryptoDonate.tsx
 
 import React, { useState, useCallback } from 'react'
 import { useDonation } from '../contexts/DonationContext'
@@ -26,7 +26,7 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
     amount: false,
   })
 
-  const formatPledgeAmount = (amount) => {
+  const formatPledgeAmount = (amount: string) => {
     // Ensure the amount has exactly 8 decimal places
     let formattedAmount = parseFloat(amount).toFixed(8)
 
@@ -119,9 +119,11 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
               bgColor="#000"
               fgColor="#f2f2f2"
             />
-            <p className="text-[#000]">
-              Scan the QR code above to donate {formattedPledgeAmount}{' '}
-              {pledgeCurrency}.
+            {/* NEW REMINDER MESSAGE */}
+            <p className="mt-2 text-sm font-semibold text-[#000]">
+              IMPORTANT: Please only send exactly {formattedPledgeAmount}{' '}
+              {pledgeCurrency}. Sending a different amount could cause issues
+              when verifying your donation.
             </p>
           </>
         ) : qrCode ? (
@@ -136,9 +138,11 @@ const PaymentModalCryptoDonate: React.FC<PaymentModalCryptoDonateProps> = ({
                 height: 'auto',
               }}
             />
-            <p className="text-[#000]">
-              Scan the QR code above to donate {formattedPledgeAmount}{' '}
-              {pledgeCurrency}.
+            {/* NEW REMINDER MESSAGE */}
+            <p className="mt-2 text-sm font-semibold text-[#000]">
+              IMPORTANT: Please only send exactly {formattedPledgeAmount}{' '}
+              {pledgeCurrency}. Sending a different amount could cause issues
+              when verifying your donation.
             </p>
           </>
         ) : null}

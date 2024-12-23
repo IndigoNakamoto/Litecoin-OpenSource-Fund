@@ -135,7 +135,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                   pledgeAmount: value.toString(),
                 },
               })
-              dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
             }}
           />
         )

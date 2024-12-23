@@ -30,9 +30,8 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
   const [usdValue, setUsdValue] = useState<string>(usdInput || '100') // Calculated USD value
   const [cryptoValue, setCryptoValue] = useState<string>(cryptoInput || '') // Calculated crypto value
   const [minDonation, setMinDonation] = useState<number>(0.001)
-  const [isLoadingRate, setIsLoadingRate] = useState<boolean>(false) // Loading state for fetching rate
+  const [isLoadingRate, setIsLoadingRate] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
-  const [minError, setMinError] = useState<string | null>(null) // New state for min donation error
 
   // Utility functions to calculate values
   const calculateCryptoValue = useCallback((usd: number, rate: number) => {
@@ -49,13 +48,14 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
       try {
         setIsLoadingRate(true)
         setError(null)
+
         const response = await axios.get(
           `/api/getCryptoRate?currency=${currencyCode}`
         )
         const rate = response.data.data.rate
         if (rate) {
           setCryptoRate(rate)
-          setMinDonation(2.5 / rate) // Update min donation based on rate
+          setMinDonation(2.5 / rate) // Update crypto min donation based on rate
 
           // Update values based on existing inputs
           if (usdInput) {
@@ -129,12 +129,6 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
             assetName: selectedCurrencyName || '',
           },
         })
-        // Validate USD input against minimum
-        if (numericUsd < 2.5) {
-          dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true }) // Disable if below min
-        } else {
-          dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false }) // Enable if valid
-        }
       } else {
         setCryptoValue('')
       }
@@ -148,7 +142,6 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
     dispatch,
     selectedCurrencyCode,
     selectedCurrencyName,
-    minDonation,
   ])
 
   // Update usdValue when cryptoInput changes
@@ -179,7 +172,6 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
     dispatch,
     selectedCurrencyCode,
     selectedCurrencyName,
-    minDonation,
   ])
 
   // Handle USD input changes
@@ -188,21 +180,21 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
     const regex = /^\d{0,10}(\.\d{0,2})?$/
     if (regex.test(usd) || usd === '') {
       dispatch({ type: 'SET_USD_INPUT', payload: usd })
-      dispatch({ type: 'SET_CRYPTO_INPUT', payload: '' }) // Clear crypto input when user is typing in USD
-      setCryptoValue('') // Clear local cryptoValue to allow manual input
+      dispatch({ type: 'SET_CRYPTO_INPUT', payload: '' })
+      setCryptoValue('')
       setError(null)
     }
   }
 
   // Handle Crypto input changes
   const handleCryptoChange = (crypto: string) => {
+    // Allow up to 9 decimals in crypto
     const regex = /^(\d+)?(\.\d{0,9})?$/
-
     if (regex.test(crypto) || crypto === '') {
       dispatch({ type: 'SET_CRYPTO_INPUT', payload: crypto })
       dispatch({ type: 'SET_USD_INPUT', payload: '' })
       setUsdValue('')
-      setError(null) // Clear format error when input is valid
+      setError(null)
     } else {
       setError('Invalid format. Please enter a valid number.')
     }
@@ -224,6 +216,18 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
     usdInput !== '' &&
     !isNaN(parseFloat(usdInput)) &&
     parseFloat(usdInput) < 2.5
+
+  // ----------------------------
+  // NEW useEffect for toggling the donate button
+  // ----------------------------
+  useEffect(() => {
+    // If either input is below min, disable the donate button
+    if (isBelowMin || isUsdBelowMin) {
+      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: true })
+    } else {
+      dispatch({ type: 'SET_DONATE_BUTTON_DISABLED', payload: false })
+    }
+  }, [isBelowMin, isUsdBelowMin, dispatch])
 
   return (
     <div className="flex flex-col justify-between pt-4">
@@ -255,7 +259,7 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         <input
           type="text"
           name="cryptoInput"
-          className={`h-12 w-full border-none pl-8 font-space-grotesk text-[16px] ${
+          className={`h-12 w-full border-none bg-[#c6d3d6] pl-8 font-space-grotesk text-[16px] ${
             isLoadingRate
               ? 'loading-gradient'
               : isBelowMin
@@ -270,9 +274,8 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         />
       </div>
 
-      {/* Display min donation error */}
       {isBelowMin && (
-        <p className="mt-1  text-sm font-[600] text-red-500">
+        <p className="mt-1 text-sm font-[600] text-red-500">
           Minimum donation is {minDonation.toFixed(8)} {selectedCurrencyCode}
         </p>
       )}
@@ -293,8 +296,10 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         <input
           type="text"
           name="usdInput"
-          className={`w-full border-none pl-8 text-[16px] ${
-            isUsdBelowMin ? '' : 'bg-[#c6d3d6]'
+          className={`w-full border-none bg-[#c6d3d6] pl-8 text-[16px] ${
+            isUsdBelowMin
+              ? 'border-red-500 ring-1 ring-red-500'
+              : 'bg-[#c6d3d6]'
           } rounded-r-3xl transition-colors duration-300`}
           value={usdInput !== '' ? usdInput : usdValue}
           onChange={(e) => handleUsdChange(e.target.value)}
@@ -302,7 +307,6 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         />
       </div>
 
-      {/* Display USD min donation error or static message */}
       {isUsdBelowMin ? (
         <p className="mt-1 text-sm font-[600] text-red-500">
           Minimum donation is $2.50
@@ -311,7 +315,6 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
         <p className="mt-1 text-sm text-gray-600">Minimum donation is $2.50</p>
       )}
 
-      {/* Existing error messages */}
       {error && <p className="mt-1 text-sm font-[600] text-red-500">{error}</p>}
 
       {/* Styles for Gradient Animation */}
@@ -327,7 +330,7 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
       `}</style>
 
       <style jsx>{`
-        .loading-gradient {
+        /* .loading-gradient {
           background: linear-gradient(
             70deg,
             #c6d3d6,
@@ -345,7 +348,7 @@ const ConversionRateCalculator: React.FC<ConversionRateCalculatorProps> = ({
           );
           background-size: 200% 100%;
           animation: gradient-animation 7s infinite;
-        }
+        } */
       `}</style>
     </div>
   )
