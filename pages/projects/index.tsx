@@ -166,7 +166,7 @@ const AllProjects: NextPage = () => {
               slug: project.fieldData.slug,
               title: project.fieldData.name,
               summary: project.fieldData.summary,
-              coverImage: project.fieldData['cover-image'].url,
+              coverImage: project.fieldData['cover-image']?.url || '', // Fallback image
               telegramLink: project.fieldData['telegram-link'] || '',
               redditLink: project.fieldData['reddit-link'] || '',
               facebookLink: project.fieldData['facebook-link'] || '',

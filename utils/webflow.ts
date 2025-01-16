@@ -807,9 +807,8 @@ export const getProjectBySlug = async (
 
   const project = projectResponse.data.items[0]
 
-  if (!project) {
-    // No project found with the given slug
-    return undefined
+  if (!project || project.isDraft) {
+    return undefined // Exclude draft or archived projects
   }
 
   // Fetch the status label by mapping the ID
@@ -933,7 +932,7 @@ export const getAllActiveContributors = async (): Promise<Contributor[]> => {
  * @returns An array of ProjectSummaryLite objects.
  */
 export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
-  const cacheKey = 'projects:all'
+  const cacheKey = 'projects:all3'
   const cachedProjects = await kv.get<ProjectSummaryLite[]>(cacheKey)
 
   if (cachedProjects) {
@@ -942,11 +941,12 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
 
   // Fetch projects from Webflow API
   const projects = await listCollectionItems<Project>(COLLECTION_ID_PROJECTS)
+  const filteredProjects = projects.filter((project) => !project.isDraft)
   // console.log('utils/webflow/gtAllProjects: ', projects)
 
   // Process projects
   const projectSummaries = await Promise.all(
-    projects.map(async (project) => {
+    filteredProjects.map(async (project) => {
       // Map status ID to label
       const statusLabel = await getLabel(
         COLLECTION_ID_PROJECTS,
