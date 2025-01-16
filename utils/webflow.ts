@@ -180,6 +180,7 @@ interface ProjectSummaryLiteFieldData {
 }
 
 interface ProjectSummaryLite {
+  isDraft: boolean
   id: string
   lastUpdated: string
   createdOn: string
@@ -932,7 +933,7 @@ export const getAllActiveContributors = async (): Promise<Contributor[]> => {
  * @returns An array of ProjectSummaryLite objects.
  */
 export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
-  const cacheKey = 'projects:all2'
+  const cacheKey = 'projects:all'
   const cachedProjects = await kv.get<ProjectSummaryLite[]>(cacheKey)
 
   if (cachedProjects) {
@@ -957,6 +958,7 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
         id: project.id,
         lastUpdated: project.lastUpdated,
         createdOn: project.createdOn,
+        isDraft: project.isDraft,
         fieldData: {
           summary: project.fieldData.summary,
           name: project.fieldData.name,
