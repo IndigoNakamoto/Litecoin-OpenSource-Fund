@@ -44,10 +44,30 @@ Open prisma studio
 Go to the matching donation log table
 Update matchedAmount for the donation to 0
 
-### Github
+### Github lite-space/applicants repo
 
 Token Expires on Sat, Dec 13 2025.
-lite-space/applicants
+
+### Fix Unmatched Donations
+
+1. **Open Prisma**  
+   Access the Prisma database to inspect donation records.
+
+2. **Identify and Update Unmatched Donations**
+
+   - Look up the `MatchingDonationLog` and `Donations` tables using the **donation ID**.
+   - For any donations that were **not properly processed** and **are not present in the `MatchingDonationLog`**, update their `processed` status to `false` in the `Donations` table.
+
+3. **Start the Next.js Server**  
+   Run the Next.js server to ensure the application is active.
+
+4. **Trigger the Matching Donation Process**  
+   In a separate terminal, execute the following cURL command to reprocess the donations:
+
+   ```sh
+   curl -v -X POST http://localhost:3001/api/process-matching \
+        -H "Content-Type: application/json"
+   ```
 
 # TODO:
 
