@@ -477,12 +477,6 @@ const AllProjects: NextPage = () => {
           </h1>
           <SectionContributors />
         </div>
-        <div className="flex flex-col items-center pb-8 pt-8">
-          <h1 className="w-full pb-8 pt-8 font-space-grotesk !text-[30px] font-semibold leading-tight tracking-tight text-black">
-            Donors
-          </h1>
-          <SectionDonors />
-        </div>
       </SectionWhite>
 
       <PaymentModal
