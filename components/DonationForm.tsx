@@ -145,7 +145,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </h3>
           <input
             type="email"
-            placeholder={`donate@litecoin.net`}
+            placeholder={`donate@litecoin.com`}
             className={` mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
               emailError ? 'border-red-500' : ''
             }`}

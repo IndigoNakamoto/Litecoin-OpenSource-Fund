@@ -552,10 +552,10 @@ const PaymentModalPersonalInfo: React.FC<
                 <p className="mt-2 text-[14px] text-black">
                   Feature available soon. Please email
                   <a
-                    href="mailto:donate@litecoin.net"
+                    href="mailto:donate@litecoin.com"
                     className="ml-1 text-blue-500 underline"
                   >
-                    donate@litecoin.net
+                    donate@litecoin.com
                   </a>
                   &nbsp;to request your X profile to be added.
                 </p>

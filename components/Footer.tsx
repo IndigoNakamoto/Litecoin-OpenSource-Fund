@@ -123,11 +123,11 @@ export default function Footer() {
                 </h1>
                 <p className="pt-4 text-sm">
                   <a
-                    href="mailto:contact@litecoin.net"
+                    href="mailto:contact@litecoin.com"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    contact@litecoin.net
+                    contact@litecoin.com
                   </a>
                 </p>
               </div>
