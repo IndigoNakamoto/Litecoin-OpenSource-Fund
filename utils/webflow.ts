@@ -660,7 +660,7 @@ export const getFAQsByProjectId = async (
     .sort((a, b) => (a.fieldData.order || 0) - (b.fieldData.order || 0)) // Optional sorting
 
   // Cache the FAQs
-  await kv.set(cacheKey, projectFAQs, { ex: 600 })
+  await kv.set(cacheKey, projectFAQs, { ex: 259200 })
 
   return projectFAQs
 }
@@ -860,7 +860,7 @@ export const getProjectBySlug = async (
   }
 
   // Cache the result with an appropriate TTL (e.g., 1 hour)
-  await kv.set(cacheKey, projectWithContributors, { ex: 600 })
+  await kv.set(cacheKey, projectWithContributors, { ex: 259200 })
 
   return projectWithContributors
 }
@@ -910,7 +910,7 @@ export const getAllContributors = async (): Promise<Contributor[]> => {
   )
 
   // Cache the result with an appropriate TTL (e.g., 10 minutes)
-  await kv.set(cacheKey, contributors, { ex: 600 })
+  await kv.set(cacheKey, contributors, { ex: 259200 })
 
   return contributors
 }
@@ -972,7 +972,7 @@ export const getAllProjects = async (): Promise<ProjectSummaryLite[]> => {
   )
 
   // Cache the result
-  await kv.set(cacheKey, projectSummaries, { ex: 60000 }) // 1 hour cache
+  await kv.set(cacheKey, projectSummaries, { ex: 259200 }) // 1 hour cache
 
   return projectSummaries
 }
@@ -992,7 +992,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
   const posts = await listCollectionItems<Post>(COLLECTION_ID_POSTS)
 
   // Cache the posts
-  await kv.set(cacheKey, posts, { ex: 600 })
+  await kv.set(cacheKey, posts, { ex: 259200 })
 
   return posts
 }
@@ -1012,7 +1012,7 @@ export const getAllUpdates = async (): Promise<Update[]> => {
   const updates = await listCollectionItems<Update>(COLLECTION_ID_UPDATES)
 
   // Cache the updates
-  await kv.set(cacheKey, updates, { ex: 600 })
+  await kv.set(cacheKey, updates, { ex: 259200 })
 
   return updates
 }
@@ -1102,7 +1102,7 @@ const initializeProjectsMap = async () => {
   })
 
   // Cache the map
-  await kv.set(cacheKey, projectsMap, { ex: 600 })
+  await kv.set(cacheKey, projectsMap, { ex: 259200 })
   cachedProjectsMap = projectsMap
 }
 
