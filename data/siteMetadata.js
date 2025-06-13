@@ -10,7 +10,7 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://litecoin.com',
-  siteRepo: 'https://github.com/IndigoNakamoto/foss-ltc',
+  siteRepo: 'https://github.com/IndigoNakamoto/Litecoin-OpenSource-Fund',
   siteLogo: '/static/images/twitter.png',
   image: '/static/images/twitter.png',
   socialBanner: '/static/images/twitter.png',

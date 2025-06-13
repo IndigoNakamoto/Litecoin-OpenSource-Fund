@@ -1,6 +1,6 @@
-# Lite.Space
+# Litecoin OpenSource Fund
 
-This is the codebase behind [Lite.Space](https://Lite.Space).
+This is the codebase behind the Litecoin OpenSource Fund website.
 
 ## Getting started
 
@@ -26,7 +26,7 @@ If you start the website (either in development or production mode), you can acc
 
 ## Contributing to the project
 
-PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request on [github.com/OpenSats/website/pulls](github.com/OpenSats/website/pulls).
+PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request.
 
 Thanks for supporting OpenSats!
 
