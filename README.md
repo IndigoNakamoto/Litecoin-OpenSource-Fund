@@ -1,14 +1,36 @@
 # Litecoin OpenSource Fund
 
+Powering open-source Litecoin development. Contribute to innovative FOSS projects and help grow the ecosystem.
+
+![Litecoin OpenSource Fund Logo](/Lite.Space%20Logo.png)
+
+See it live: [litecoin.com/projects](https://litecoin.com/projects)
+
 This is the codebase behind the Litecoin OpenSource Fund website.
 
 ## Getting started
 
 The website is a simple [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). To run it locally you'll need Node.js 14.6.0 or newer. After cloning repository try following 3 commands in terminal:
 
-- `npm run dev` for running a development instance with hot-reloading, file watching and task re-running
-- `npm run build` for compiling the project.
-- `npm start` for starting your app in production mode
+```bash
+npm run dev
+```
+
+for running a development instance with hot-reloading, file watching and task re-running
+
+```bash
+npm run build
+```
+
+for compiling the project.
+
+```bash
+npm start
+```
+
+for starting your app in production mode
+
+Before running the project, copy the `.env.example` file to `.env.local` and provide the necessary environment variables for BTCPay and Stripe.
 
 If you start the website (either in development or production mode), you can access it on http://localhost:3000
 
@@ -26,54 +48,6 @@ If you start the website (either in development or production mode), you can acc
 
 ## Contributing to the project
 
-PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request.
+PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request on github.com/IndigoNakamoto/Litecoin-OpenSource-Fund/pulls.
 
-Thanks for supporting OpenSats!
-
-## Clear community twitter image cache
-
-search and uncomment //&clearCache=true
-
-## Start prisma
-
-npx prisma studio
-
-### Remove matched donation
-
-Open prisma studio
-Go to the matching donation log table
-Update matchedAmount for the donation to 0
-
-### Github lite-space/applicants repo
-
-Token Expires on Sat, Dec 13 2025.
-
-### Fix Unmatched Donations
-
-1. **Open Prisma**  
-   Access the Prisma database to inspect donation records.
-
-2. **Identify and Update Unmatched Donations**
-
-   - Look up the `MatchingDonationLog` and `Donations` tables using the **donation ID**.
-   - For any donations that were **not properly processed** and **are not present in the `MatchingDonationLog`**, update their `processed` status to `false` in the `Donations` table.
-
-3. **Start the Next.js Server**  
-   Run the Next.js server to ensure the application is active.
-
-4. **Trigger the Matching Donation Process**  
-   In a separate terminal, execute the following cURL command to reprocess the donations:
-
-   ```sh
-   curl -v -X POST http://localhost:3001/api/process-matching \
-        -H "Content-Type: application/json"
-   ```
-
-# TODO:
-
-[ ] Button text should be consistent with the paragraph text in payment modal
-[X] All text on light backgrounds should be black (not grey)
-[X] The transparent orange/pink colour shouldn't be used as a background. White or light blue/grey only
-[X] The letterspacing for headings should follow the rest of the site (slightly condensed rather than slightly extended). There are also many heading sizes on this page, it should be consisted with the headings sizes for the rest of the site.
-[ ] Refactor contributors and not use /api/getTwitterUsers.
-[ ] Contributors on projects missing twitter profile pics
+Thanks for supporting open-source Litecoin development!
